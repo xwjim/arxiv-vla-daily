@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HazardArena: Evaluating Semantic Safety in Vision-Language-Action Models · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>HazardArena: Evaluating Semantic Safety in Vision-Language-Action Models</h1>
+    <div class="muted">现有 VLA 可能“动作做对了，但语义上依然危险”，HazardArena 正是用来系统揭露这一类 semantic safety 漏洞的 benchmark。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-14</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.12447v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">语义安全</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span><span class="tag-mini">多模态</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.12447v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/HazardArena Evaluating Semantic Safety in Vision-Language-Action Models.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <h3>一、论文元数据</h3><ul><li><strong>标题：</strong> HazardArena: Evaluating Semantic Safety in Vision-Language-Action Models</li><li><strong>核心机构：</strong> 论文摘要未明确披露机构，属于多作者合作工作。</li><li><strong>一句话本质：</strong> 现有 VLA 可能“动作做对了，但语义上依然危险”，HazardArena 正是用来系统揭露这一类 <strong>semantic safety</strong> 漏洞的 benchmark。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 当前对 VLA 的评测大多聚焦于任务是否成功完成，默认“成功执行动作”就意味着“行为合理”。</li><li><strong>核心痛点：</strong> 动作策略与视觉-语言语义之间可能是松耦合的，因此模型即便执行了看似正确的动作，也可能在特定语义上下文中造成危险后果。</li><li><strong>本文切入点：</strong> 作者通过构造 <strong>safe/unsafe twin scenarios</strong>，让场景中的物体、布局与动作需求保持一致，仅改变“决定是否危险的语义上下文”，从而单独测 semantic safety。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> VLA 在成对安全/危险场景中执行同类任务 -&gt; 评估其是否能根据语义上下文采取安全行为。</li><li><strong>关键模块 1：</strong> <strong>HazardArena Benchmark</strong>：包含 2000+ 资产、40 个风险敏感任务、7 类真实风险情境，覆盖更接近部署场景的危险语义条件。</li><li><strong>关键模块 2：</strong> <strong>Twin Scenario Design</strong>：通过“安全/危险双胞胎场景”严格控制变量，使测试重点从动作能力转到语义风险理解能力。</li><li><strong>关键模块 3：</strong> <strong>Safety Option Layer</strong>：训练外、可插拔的安全层，利用语义属性或 vision-language judge 约束动作执行。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>VLA 的安全短板不在动作执行，而在语义耦合：</strong> 模型在安全场景学到的技能，迁移到对应危险场景时并不会自然地变“更谨慎”。</li><li><strong>现有 benchmark 可能高估了部署可靠性：</strong> 如果只看成功率，很多 VLA 会显得很强；但一旦加入风险语义条件，真实可用性会明显下降。</li><li><strong>安全层是现实主义方案：</strong> 训练外的 Safety Option Layer 已经能显著减少危险行为，说明在短期内给 VLA 外挂安全约束层是有价值的工程路径。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>仍是受控 benchmark：</strong> 虽然比传统任务更强调风险语义，但本质上仍属于精心构造的对照测试，和开放环境中的复杂安全问题仍有差距。</li><li><strong>安全层偏“外置约束”：</strong> Safety Option Layer 解决的是执行时约束问题，并不代表模型本体真正学会了语义安全理解。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要强调 unsafe behavior 显著减少，但未在摘要层面交代安全层在不同任务类别上的代价分布，例如是否在某些任务上显著压制了正常动作能力。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>从评测扩展到训练：</strong> 把 semantic safety 显式纳入 VLA 的训练目标，而不是只在部署阶段外挂约束层。</li><li><strong>构建更开放的风险语义集：</strong> 将当前 twin scenario 设计推广到更复杂、更开放世界的危险推理场景中。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>论文摘要未明确披露机构，属于多作者合作工作。</li>
+          <li><strong>一句话本质：</strong>现有 VLA 可能“动作做对了，但语义上依然危险”，HazardArena 正是用来系统揭露这一类 semantic safety 漏洞的 benchmark。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Zixing Chen, Yifeng Gao, Li Wang, Yunhan Zhao, Yi Liu, Jiayu Li, Xiang Zheng, Zuxuan Wu, Cong Wang, Xingjun Ma, Yu-Gang Jiang</li>
+          <li><strong>PDF：</strong>HazardArena Evaluating Semantic Safety in Vision-Language-Action Models.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 语义安全, 评测基准, 策略学习, 多模态</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前对 VLA 的评测大多聚焦于任务是否成功完成，默认“成功执行动作”就意味着“行为合理”。</li><li>核心痛点： 动作策略与视觉-语言语义之间可能是松耦合的，因此模型即便执行了看似正确的动作，也可能在特定语义上下文中造成危险后果。</li><li>本文切入点： 作者通过构造 safe/unsafe twin scenarios，让场景中的物体、布局与动作需求保持一致，仅改变“决定是否危险的语义上下文”，从而单独测 semantic safety。</li></ul></section><section><h3>Key Insights</h3><ul><li>VLA 的安全短板不在动作执行，而在语义耦合： 模型在安全场景学到的技能，迁移到对应危险场景时并不会自然地变“更谨慎”。</li><li>现有 benchmark 可能高估了部署可靠性： 如果只看成功率，很多 VLA 会显得很强；但一旦加入风险语义条件，真实可用性会明显下降。</li><li>安全层是现实主义方案： 训练外的 Safety Option Layer 已经能显著减少危险行为，说明在短期内给 VLA 外挂安全约束层是有价值的工程路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>从评测扩展到训练： 把 semantic safety 显式纳入 VLA 的训练目标，而不是只在部署阶段外挂约束层。</li><li>构建更开放的风险语义集： 将当前 twin scenario 设计推广到更复杂、更开放世界的危险推理场景中。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-14 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-04-14.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

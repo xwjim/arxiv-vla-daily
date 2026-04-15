@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aligning Agentic World Models via Knowledgeable Experience Learning · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Aligning Agentic World Models via Knowledgeable Experience Learning</h1>
+    <div class="muted">让智能体从交互失败中自主学习物理规则，无需重训即可避免“物理幻觉”。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-01-20</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CL, cs.AI, cs.CV, cs.LG, cs.MM</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2601.13247v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">策略学习</span><span class="tag-mini">自然语言</span><span class="tag-mini">人工智能</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2601.13247v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为顶尖学术研究员，我将为您精准拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Aligning Agentic World Models via Knowledgeable Experience Learning (通过知识化经验学习对齐智能体世界模型)</li><li><strong>核心机构：</strong> 浙江大学</li><li><strong>一句话本质：</strong> 让智能体从交互失败中自主学习物理规则，无需重训即可避免“物理幻觉”。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 通过微调或强化学习，将环境的物理规律<strong>强行压缩到模型静态参数</strong>中。</li><li><strong>核心痛点：</strong> 这种“参数化封装”方法<strong>刚性且昂贵</strong>，无法适应动态、开放的环境变化，一遇新规就需重训。</li><li><strong>本文切入点：</strong> 灵感源于认知科学的<strong>预测编码理论 (Predictive Coding)</strong>，将执行失败视为宝贵的“预测错误”信号，用于在线、无训练地修正智能体的世界认知。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> (当前观测 <code>o_t</code> + 任务目标 <code>g</code> + 知识库 <code>W</code>) -&gt; (动作 <code>a_t</code> + <strong>预测的下一状态</strong> <code>ŝ_{t+1}</code>)</li></ul><ul><li><strong>关键模块 1：</strong> <strong>过程经验 (Process Experience)</strong> - 通过“预测-行动-验证”循环，从<strong>预测失败</strong>中提炼出物理因果规则（如“不拿起刀就无法切东西”），用于<strong>保证物理可行性</strong>。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>目标经验 (Goal Experience)</strong> - 从<strong>成功轨迹</strong>中蒸馏出高效的任务策略和启发式知识（如“要开灯，先找开关”），用于<strong>指导任务最优性</strong>。</li></ul><p>*这两个模块共同构成了可插拔、可迁移的<strong>世界知识库 (World Knowledge Repository)</strong>。*</p><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li><strong>知识解耦与迁移性：</strong></li><li>智能体学到的<strong>世界知识是符号化的、通用的</strong>，可以从模型参数中解耦出来。实验证明，从 GPT-4.1-mini 学习的知识库可以<strong>直接迁移给 GPT-3.5-turbo 使用</strong>，并显著提升其性能，反之亦然。这揭示了构建<strong>通用、可共享世界模型</strong>的可能性。</li></ul><ul><li><strong>对齐的双重性：</strong></li><li>智能体对齐现实世界包含两个正交的维度。<strong>过程经验</strong>（来自失败）主要防止物理上致命的错误，显著提升<strong>最终成功率 (SR)</strong>。<strong>目标经验</strong>（来自成功）主要提供正确的子任务路径，显著提升<strong>过程正确性 (GC)</strong>。这说明<strong>“不出错”和“走对路”是两种不同的能力</strong>，需要从不同来源学习。</li></ul><ul><li><strong>失败模式的转变：</strong></li><li>该框架并非简单地消除错误，而是将<strong>致命的“物理违规”错误转化为了非致命的“规划超时”错误</strong>。这意味着智能体不再因为愚蠢的物理幻觉而“速死”，而是进入了更长时间的探索，面临更复杂的规划挑战。这是一种<strong>从“执行失败”到“规划难题”的进化</strong>。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>依赖底层感知能力：</strong> 该框架修正的是<strong>高层推理与物理规律的对齐</strong>，但无法纠正底层视觉语言模型（VLM）的<strong>基础感知错误</strong>（如将苹果识别为土豆）。</li><li><strong>对齐机制的黑盒：</strong> 论文证明了符号知识库可以约束智能体行为，但<strong>其如何精确重塑模型内部隐式世界模型的决策边界</strong>，其数学机制尚不明确。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li><strong>状态抽象的鲁棒性未知：</strong> “预测-行动-验证”循环依赖于将真实环境状态<strong>抽象</strong>为高层描述 (<code>Abstract(s_{t+1})</code>)。论文未详细说明此抽象过程的实现方式及其对噪声、变化的鲁棒性，这是一个<strong>潜在的、未被充分控制的变量</strong>。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>构建动态共享世界模型：</strong> 既然知识是可迁移的，下一步应研究如何让<strong>多个智能体实时向一个共享的知识库贡献和学习</strong>，并解决知识冲突、融合与共识问题，构建一个群体智能的“蜂巢思维”。</li><li><strong>符号与亚符号的混合对齐：</strong> 探索如何利用本文提出的<strong>显式符号知识（知识库）</strong>，去<strong>指导或正则化模型参数的隐式学习（微调）</strong>。这种混合对齐有望结合两种范式的优点，实现更快速、更稳健的泛化。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>浙江大学</li>
+          <li><strong>一句话本质：</strong>让智能体从交互失败中自主学习物理规则，无需重训即可避免“物理幻觉”。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Baochang Ren, Yunzhi Yao, Rui Sun, Shuofei Qiao, Ningyu Zhang, Huajun Chen</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 策略学习, 自然语言, 人工智能</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过微调或强化学习，将环境的物理规律强行压缩到模型静态参数中。</li><li>核心痛点： 这种“参数化封装”方法刚性且昂贵，无法适应动态、开放的环境变化，一遇新规就需重训。</li><li>本文切入点： 灵感源于认知科学的预测编码理论 (Predictive Coding)，将执行失败视为宝贵的“预测错误”信号，用于在线、无训练地修正智能体的世界认知。</li></ul></section><section><h3>Key Insights</h3><ul><li>知识解耦与迁移性：</li><li>智能体学到的世界知识是符号化的、通用的，可以从模型参数中解耦出来。实验证明，从 GPT-4.1-mini 学习的知识库可以直接迁移给 GPT-3.5-turbo 使用，并显著提升其性能，反之亦然。这揭示了构建通用、可共享世界模型的可能性。</li><li>对齐的双重性：</li><li>智能体对齐现实世界包含两个正交的维度。过程经验（来自失败）主要防止物理上致命的错误，显著提升最终成功率 (SR)。目标经验（来自成功）主要提供正确的子任务路径，显著提升过程正确性 (GC)。这说明“不出错”和“走对路”是两种不同的能力，需要从不同来源学习。</li><li>失败模式的转变：</li></ul></section><section><h3>Next Steps</h3><ul><li>构建动态共享世界模型： 既然知识是可迁移的，下一步应研究如何让多个智能体实时向一个共享的知识库贡献和学习，并解决知识冲突、融合与共识问题，构建一个群体智能的“蜂巢思维”。</li><li>符号与亚符号的混合对齐： 探索如何利用本文提出的显式符号知识（知识库），去指导或正则化模型参数的隐式学习（微调）。这种混合对齐有望结合两种范式的优点，实现更快速、更稳健的泛化。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-01-20 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-01-20.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hierarchical Vision Language Action Model Using Success and Failure Demonstrations · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Hierarchical Vision Language Action Model Using Success and Failure Demonstrations</h1>
+    <div class="muted">利用成功与失败数据，让机器人规划时能预判并规避高风险路径。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-12-03</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2512.03913v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">策略学习</span><span class="tag-mini">多模态</span><span class="tag-mini">机器人</span><span class="tag-mini">人工智能</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2512.03913v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Hierarchical Vision Language Action Model Using Success and Failure Demonstrations.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一位顶尖的学术研究员，我已深度阅读并拆解了这篇论文。以下是严格按照您要求提取的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Hierarchical Vision Language Action Model Using Success and Failure Demonstrations (VINE)</li><li><strong>核心机构：</strong> Korea University, KAIST</li><li><strong>一句话本质：</strong> 利用成功与失败数据，让机器人规划时能预判并规避高风险路径。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 过去的视觉-语言-动作 (VLA) 模型主要依赖于人类遥操作的<strong>成功演示</strong>数据进行训练。</li><li><strong>核心痛点：</strong> 丢弃失败数据导致模型<strong>无法预见潜在的失败</strong>，在面对新场景时鲁棒性差，泛化能力不足。</li><li><strong>本文切入点：</strong> 将失败数据视为一种<strong>结构化的负向学习信号</strong>，而非噪声。通过分层架构，让高层规划器专门学习“什么可行，什么不可行”，从而在执行前就剪除“不靠谱”的计划。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 视觉 + 语言指令 -&gt; 底层连续动作</li><li><strong>关键模块 1：</strong> <strong>System 2 (高层规划器)</strong> - 利用成功与失败数据进行<strong>树搜索</strong>，预测并选择<strong>成功率最高</strong>的子目标序列。</li><li><strong>关键模块 2：</strong> <strong>System 1 (底层控制器)</strong> - 接收高层规划的子目标，执行具体的、连续的底层动作，完成任务。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[数据价值]：</strong> <strong>失败数据不是噪声，而是提升模型鲁棒性的关键信号。</strong> 它能帮助模型学习到决策边界，有效区分“可行”与“不可行”的动作序列，尤其是在新场景下，这种“失败感知”能力是泛化的核心。</li></ul><ul><li><strong>[架构解耦]：</strong> <strong>将高层规划（System 2）与底层控制（System 1）分离是高效利用失败数据的有效架构。</strong> 这种分层结构允许在高层进行复杂的、基于可行性评估的树搜索，而底层执行器则保持其核心技能的稳定性，避免了用负样本污染底层策略。</li></ul><ul><li><strong>[推理与泛化]：</strong> <strong>增加推理时的计算量（如扩大树搜索宽度）可以直接提升模型在未知场景下的成功率。</strong> 这表明，模型的鲁棒性不仅取决于训练，还可以在部署时通过动态调整“思考深度”来增强，实现了性能与延迟的权衡。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>开环执行：</strong> 规划与执行是分离的。一旦高层规划确定，底层执行器在执行一个子目标的过程中不进行实时反馈和重规划，容易因环境的微小扰动累积而偏离预定轨迹。</li><li><strong>底层策略的脆弱性：</strong> 底层控制器（System 1）仅用成功数据训练，缺乏从扰动中恢复的能力。一旦偏离了理想轨迹，它很难自我纠正，只能“一条道走到黑”。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li><strong>重规划模块的有效性论证不足。</strong> 论文在附录中提出的即时重规划模块（VI-C）虽能提升性能，但其触发不确定性的阈值是<strong>手动设置且任务相关的</strong>，缺乏对该模块泛化性和自动校准能力的系统性实验验证。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>闭环的层级规划与控制：</strong> 研究如何在底层动作执行（System 1）过程中，将实时的状态偏差或不确定性信号反馈给高层规划器（System 2），实现<strong>动态的、即时的计划调整与修正</strong>。</li><li><strong>将失败感知能力注入底层策略：</strong> 不仅让高层规划器理解失败，也让底层控制器（System 1）学习<strong>从失败或扰动中恢复的技能</strong>。这可能需要设计新的损失函数或强化学习目标，使其具备纠错能力。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>Korea University, KAIST</li>
+          <li><strong>一句话本质：</strong>利用成功与失败数据，让机器人规划时能预判并规避高风险路径。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Jeongeun Park, Jihwan Yoon, Byungwoo Jeon, Juhan Park, Jinwoo Shin, Namhoon Cho, Kyungjae Lee, Sangdoo Yun, Sungjoon Choi</li>
+          <li><strong>PDF：</strong>Hierarchical Vision Language Action Model Using Success and Failure Demonstrations.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 多模态, 机器人, 人工智能</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 过去的视觉-语言-动作 (VLA) 模型主要依赖于人类遥操作的成功演示数据进行训练。</li><li>核心痛点： 丢弃失败数据导致模型无法预见潜在的失败，在面对新场景时鲁棒性差，泛化能力不足。</li><li>本文切入点： 将失败数据视为一种结构化的负向学习信号，而非噪声。通过分层架构，让高层规划器专门学习“什么可行，什么不可行”，从而在执行前就剪除“不靠谱”的计划。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据价值]： 失败数据不是噪声，而是提升模型鲁棒性的关键信号。 它能帮助模型学习到决策边界，有效区分“可行”与“不可行”的动作序列，尤其是在新场景下，这种“失败感知”能力是泛化的核心。</li><li>[架构解耦]： 将高层规划（System 2）与底层控制（System 1）分离是高效利用失败数据的有效架构。 这种分层结构允许在高层进行复杂的、基于可行性评估的树搜索，而底层执行器则保持其核心技能的稳定性，避免了用负样本污染底层策略。</li><li>[推理与泛化]： 增加推理时的计算量（如扩大树搜索宽度）可以直接提升模型在未知场景下的成功率。 这表明，模型的鲁棒性不仅取决于训练，还可以在部署时通过动态调整“思考深度”来增强，实现了性能与延迟的权衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环的层级规划与控制： 研究如何在底层动作执行（System 1）过程中，将实时的状态偏差或不确定性信号反馈给高层规划器（System 2），实现动态的、即时的计划调整与修正。</li><li>将失败感知能力注入底层策略： 不仅让高层规划器理解失败，也让底层控制器（System 1）学习从失败或扰动中恢复的技能。这可能需要设计新的损失函数或强化学习目标，使其具备纠错能力。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-12-03 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-12-03.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

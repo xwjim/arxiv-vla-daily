@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnySafe: Adapting Latent Safety Filters at Runtime via Safety Constraint Parameterization in the Latent Space · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>AnySafe: Adapting Latent Safety Filters at Runtime via Safety Constraint Parameterization in the Latent Space</h1>
+    <div class="muted">让机器人安全策略实时适应任意图像定义的新约束，无需重新训练。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-09-24</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.LG</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2509.19555v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">标定</span><span class="tag-mini">鲁棒性</span><span class="tag-mini">策略学习</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2509.19555v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/AnySafe Adapting Latent Safety Filters at Runtime via Safety Constraint Parameterization in the Latent Space.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖学术研究员，我已完成对论文《AnySafe》的深度拆解。以下是严格按照您要求格式输出的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> AnySafe: Adapting Latent Safety Filters at Runtime via Safety Constraint Parameterization in the Latent Space</li><li><strong>核心机构：</strong> 卡内基梅隆大学 (CMU), 俄亥俄州立大学, 加州大学伯克利分校, NVIDIA</li><li><strong>一句话本质：</strong> 让机器人安全策略实时适应任意图像定义的新约束，无需重新训练。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有的安全过滤器（如基于HJ可达性分析）在世界模型的<strong>隐空间</strong>中运行良好，但只能应对<strong>预先定义且固定</strong>的安全约束。</li><li><strong>核心痛点：</strong> <strong>适应性差</strong>。一旦部署环境或用户需求发生变化（例如，避障区域改变），整个安全系统便失效，无法在运行时动态调整。</li><li><strong>本文切入点：</strong> 将“安全”的定义从一个<strong>固定的分类问题</strong>（是否进入危险区）转变为一个<strong>可变的相似度问题</strong>。作者的直觉是，可以通过计算当前状态与用户指定的“约束图像”在隐空间中的<strong>相似度</strong>来动态定义危险。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong></li><li><strong>输入：</strong> 当前观测图像 + 用户指定的<strong>约束图像</strong> (<code>o_c</code>)</li><li><strong>输出：</strong> 安全的机器人动作 (<code>a_exec</code>)</li></ul><ul><li><strong>关键模块 1：</strong> <strong>Failure Projector (失败投影器 ℰ̃)</strong> - 将世界模型的原始隐空间 <code>z</code> 映射到一个<strong>失败相关的度量空间 <code>z̃</code></strong>。其核心作用是<strong>对齐隐空间</strong>，使得空间中的“距离”或“相似度”能真实反映任务相关的“危险程度”。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>Constraint-Parameterized Safety Filter (约束参数化的安全过滤器 V(z; zc))</strong> - 这是一个以<strong>约束表征 <code>zc</code></strong> 为条件的安全价值函数。它在世界模型的“想象”中训练，学会了如何泛化地躲避<strong>任意给定</strong>的约束目标。</li></ul><ul><li><strong>关键模块 3：</strong> <strong>Conformal Calibration (保形校准)</strong> - 一种统计方法，用于系统性地确定一个<strong>相似度阈值 <code>δ</code></strong>。它将“多相似才算危险”这个问题与用户的语义理解对齐，并允许在运行时调整系统的<strong>保守程度</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[范式转变]：</strong> 核心突破在于从<strong>“为固定规则训练分类器”</strong>转向<strong>“为可变参数训练条件函数”</strong>。通过将安全约束<strong>参数化</strong>为一个图像表征 <code>zc</code>，系统获得了前所未有的运行时适应能力，能泛化到训练时未明确定义的组合或中间状态约束。</li></ul><ul><li><strong>[空间对齐]：</strong> <strong>世界模型的原始隐空间对于下游任务（如安全）并非最优</strong>。直接使用原始隐空间的相似度效果很差。必须引入<strong>Failure Projector</strong>来“重塑”这个空间，使其度量标准（距离）与物理世界的安全语义（如位置接近）对齐，这是方法成功的关键。</li></ul><ul><li><strong>[解耦设计]：</strong> <strong>安全逻辑（价值函数）与保守程度（阈值）可以解耦</strong>。价值函数 <code>V</code> 学习一个连续的“危险相似度”地形图，而<strong>保形校准</strong>独立地确定一个阈值 <code>δ</code> 来划定“不可接受”的区域。这意味着用户可以<strong>在不重训模型的情况下，仅通过调整 <code>α</code> 参数来改变安全策略的保守性</strong>，极具实用价值。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>泛化边界模糊：</strong> 方法假设测试时的约束图像与世界模型训练数据分布相似。对于<strong>分布外（OOD）的全新场景或物体</strong>作为约束，其泛化能力是未知的。</li><li><strong>依赖密集标注：</strong> 核心的 <strong>Failure Projector</strong> 需要<strong>密集的监督信号</strong>（如物体像素坐标）来学习有意义的相似度度量，这带来了巨大的数据标注成本，与追求灵活适应的目标存在一定矛盾。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文中将为<strong>相似度度量</strong>校准出的阈值 <code>δ</code>，直接应用于<strong>近似求解的价值函数 <code>V</code></strong> 上，并假设“近似误差是微不足道的”。这是一个较强的假设，因为价值函数的RL求解器本身会引入误差，导致校准提供的统计保证在理论上无法完美传递。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>数据高效的度量学习：</strong> 研究如何使用<strong>自监督、弱监督或少样本学习</strong>来训练Failure Projector，从而摆脱对密集标注的依赖，使整个框架更加自动化和可扩展。</li><li><strong>组合式与逻辑性约束：</strong> 探索如何将安全约束从单个图像扩展到<strong>多个图像的逻辑组合</strong>。例如，实现“避开A区域 <strong>并且</strong> 避开B区域”或“只有当物体X存在时，才避开Y区域”这类更复杂的、组合式的安全指令。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>卡内基梅隆大学 (CMU), 俄亥俄州立大学, 加州大学伯克利分校, NVIDIA</li>
+          <li><strong>一句话本质：</strong>让机器人安全策略实时适应任意图像定义的新约束，无需重新训练。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Sankalp Agrawal, Junwon Seo, Kensuke Nakamura, Ran Tian, Andrea Bajcsy</li>
+          <li><strong>PDF：</strong>AnySafe Adapting Latent Safety Filters at Runtime via Safety Constraint Parameterization in the Latent Space.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 标定, 鲁棒性, 策略学习, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的安全过滤器（如基于HJ可达性分析）在世界模型的隐空间中运行良好，但只能应对预先定义且固定的安全约束。</li><li>核心痛点： 适应性差。一旦部署环境或用户需求发生变化（例如，避障区域改变），整个安全系统便失效，无法在运行时动态调整。</li><li>本文切入点： 将“安全”的定义从一个固定的分类问题（是否进入危险区）转变为一个可变的相似度问题。作者的直觉是，可以通过计算当前状态与用户指定的“约束图像”在隐空间中的相似度来动态定义危险。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转变]： 核心突破在于从“为固定规则训练分类器”转向“为可变参数训练条件函数”。通过将安全约束参数化为一个图像表征 zc，系统获得了前所未有的运行时适应能力，能泛化到训练时未明确定义的组合或中间状态约束。</li><li>[空间对齐]： 世界模型的原始隐空间对于下游任务（如安全）并非最优。直接使用原始隐空间的相似度效果很差。必须引入Failure Projector来“重塑”这个空间，使其度量标准（距离）与物理世界的安全语义（如位置接近）对齐，这是方法成功的关键。</li><li>[解耦设计]： 安全逻辑（价值函数）与保守程度（阈值）可以解耦。价值函数 V 学习一个连续的“危险相似度”地形图，而保形校准独立地确定一个阈值 δ 来划定“不可接受”的区域。这意味着用户可以在不重训模型的情况下，仅通过调整 α 参数来改变安全策略的保守性，极具实用价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>数据高效的度量学习： 研究如何使用自监督、弱监督或少样本学习来训练Failure Projector，从而摆脱对密集标注的依赖，使整个框架更加自动化和可扩展。</li><li>组合式与逻辑性约束： 探索如何将安全约束从单个图像扩展到多个图像的逻辑组合。例如，实现“避开A区域 并且 避开B区域”或“只有当物体X存在时，才避开Y区域”这类更复杂的、组合式的安全指令。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-09-24 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-09-24.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

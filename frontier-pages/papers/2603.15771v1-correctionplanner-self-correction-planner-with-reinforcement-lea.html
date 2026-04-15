@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CorrectionPlanner: Self-Correction Planner with Reinforcement Learning in Autonomous Driving · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>CorrectionPlanner: Self-Correction Planner with Reinforcement Learning in Autonomous Driving</h1>
+    <div class="muted">赋予了自动驾驶规划器一种类似“三思而后行”的机制，在执行前主动发现并修正不安全的驾驶动作。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-17</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.15771v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">自动驾驶</span><span class="tag-mini">规划</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.15771v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我已完成对论文《CorrectionPlanner》的深度拆解。</p><p>以下是严格按照您要求输出的核心信息。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> CorrectionPlanner: Self-Correction Planner with Reinforcement Learning in Autonomous Driving</li><li><strong>核心机构：</strong> <strong>小鹏汽车 (XPENG Motors)</strong>、约翰斯·霍普金斯大学 (Johns Hopkins University)</li><li><strong>一句话本质：</strong> 赋予了自动驾驶规划器一种类似“三思而后行”的机制，在执行前主动发现并修正不安全的驾驶动作。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 学习型规划器通常直接从场景信息中“一站式”预测出未来轨迹。</li><li><strong>核心痛点：</strong> 缺乏<strong>显式的自我纠错能力</strong>。一旦模型生成了一个危险的动作，没有内部机制在执行前进行评估和修正。</li><li><strong>本文切入点：</strong> 借鉴大语言模型的“推理链”思想，将这种反思和修正过程从<strong>语言空间</strong>迁移到了<strong>运动 Token 空间</strong>。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 场景信息 (历史轨迹、地图、导航) -&gt; <strong>安全的 ego 运动 Token</strong></li></ul><ul><li><strong>关键模块 1：</strong> <strong>Policy Network</strong> - 根据当前场景，自回归地“提议”一个候选运动 Token。</li><li><strong>关键模块 2：</strong> <strong>Collision Critic</strong> - 快速“评估”该候选 Token 在未来短时间内是否会导致碰撞。</li><li><strong>关键模块 3：</strong> <strong>Correction Trace</strong> - 若评估为不安全，则将该 Token 存入一个名为“<strong>纠错轨迹</strong>”的序列中，并基于这个“错误历史”重新生成下一个 Token，循环往复直至安全。</li></ul><p>| 循环步骤 | 动作 | 核心机制 | | :--- | :--- | :--- | | <strong>Step 1: Propose</strong> | 规划器生成一个动作 Token | <strong>Policy Network</strong> | | <strong>Step 2: Evaluate</strong> | 评估该 Token 的未来碰撞风险 | <strong>Collision Critic</strong> | | <strong>Step 3: Correct</strong> | 若有风险，将该 Token 记为“错误经验” | <strong>Correction Trace</strong> | | <strong>Step 4: Re-propose</strong> | 基于“错误经验”生成新 Token，返回 Step 2 | <strong>Policy Network + Correction Trace</strong> | | <strong>Step 5: Execute</strong> | 若无风险，执行该 Token | - |</p><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[纠错机制的本质]：</strong> <strong>自我纠错并非简单的“拒绝重采样”</strong>。通过将不安全动作（<strong>Correction Trace</strong>）作为条件输入，模型能主动调整后续动作的生成分布，从而跳出局部不安全区域，这比在原有分布上反复尝试更高效。</li></ul><ul><li><strong>[训练范式的价值]：</strong> <strong>模仿学习（IL）只能学会“做对”，而基于世界模型的强化学习（RL）才能教会模型如何“改错”</strong>。RL 通过模拟交互和碰撞反馈，专门训练了模型在给定不安全历史（Correction Trace）后生成安全动作的能力。</li></ul><ul><li><strong>[性能的权衡]：</strong> <strong>安全性提升伴随着必然的效率折衷</strong>。引入自我纠错机制会使规划器在复杂场景下更倾向于减速或让行，这虽然显著降低了碰撞率，但也可能轻微牺牲了行驶效率（<strong>Progression</strong>）。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>依赖于 Critic 的准确性：</strong> 整个纠错环路完全依赖 <strong>Collision Critic</strong> 的判断。如果 Critic 出现漏报（False Negative），危险动作依然会被执行；如果误报过多（False Positive），则会频繁触发不必要的纠错，影响行驶效率。</li><li><strong>推理延迟增加：</strong> 每次纠错都需要一次额外的模型前向传播，在需要多次纠错的极端场景下，<strong>会显著增加决策的计算延迟</strong>，对实时系统构成挑战。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验对 <strong>World Model 的真实性</strong> 依赖过高。RL 阶段的训练完全在预训练的世界模型中进行，如果该模型对 ego 车辆“纠错”时产生的非典型行为的反应不够真实，那么学到的纠错策略泛化到真实世界的效果可能打折扣。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>从二元 Critic 到连续/多维度的安全评估器：</strong> 将当前的“碰撞/不碰撞”二元判断，升级为能输出连续风险评分、或预测碰撞类型/严重程度的评估器，从而实现更精细、更智能的纠错策略。</li><li><strong>将隐式的“运动纠错”升级为显式的“因果推理”：</strong> 让模型在生成 <strong>Correction Trace</strong> 的同时，也生成一个低维的“原因”向量来解释为何前一个动作是危险的（如“速度过快”、“距离太近”），使纠错过程更具可解释性和指导性。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>小鹏汽车 (XPENG Motors)、约翰斯·霍普金斯大学 (Johns Hopkins University)</li>
+          <li><strong>一句话本质：</strong>赋予了自动驾驶规划器一种类似“三思而后行”的机制，在执行前主动发现并修正不安全的驾驶动作。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Yihong Guo, Dongqiangzi Ye, Sijia Chen, Anqi Liu, Xianming Liu</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 自动驾驶, 规划, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 学习型规划器通常直接从场景信息中“一站式”预测出未来轨迹。</li><li>核心痛点： 缺乏显式的自我纠错能力。一旦模型生成了一个危险的动作，没有内部机制在执行前进行评估和修正。</li><li>本文切入点： 借鉴大语言模型的“推理链”思想，将这种反思和修正过程从语言空间迁移到了运动 Token 空间。</li></ul></section><section><h3>Key Insights</h3><ul><li>[纠错机制的本质]： 自我纠错并非简单的“拒绝重采样”。通过将不安全动作（Correction Trace）作为条件输入，模型能主动调整后续动作的生成分布，从而跳出局部不安全区域，这比在原有分布上反复尝试更高效。</li><li>[训练范式的价值]： 模仿学习（IL）只能学会“做对”，而基于世界模型的强化学习（RL）才能教会模型如何“改错”。RL 通过模拟交互和碰撞反馈，专门训练了模型在给定不安全历史（Correction Trace）后生成安全动作的能力。</li><li>[性能的权衡]： 安全性提升伴随着必然的效率折衷。引入自我纠错机制会使规划器在复杂场景下更倾向于减速或让行，这虽然显著降低了碰撞率，但也可能轻微牺牲了行驶效率（Progression）。</li></ul></section><section><h3>Next Steps</h3><ul><li>从二元 Critic 到连续/多维度的安全评估器： 将当前的“碰撞/不碰撞”二元判断，升级为能输出连续风险评分、或预测碰撞类型/严重程度的评估器，从而实现更精细、更智能的纠错策略。</li><li>将隐式的“运动纠错”升级为显式的“因果推理”： 让模型在生成 Correction Trace 的同时，也生成一个低维的“原因”向量来解释为何前一个动作是危险的（如“速度过快”、“距离太近”），使纠错过程更具可解释性和指导性。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-17 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-17.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

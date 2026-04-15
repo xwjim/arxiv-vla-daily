@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning in 8 Tokens: A Compact Discrete Tokenizer for Latent World Model · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Planning in 8 Tokens: A Compact Discrete Tokenizer for Latent World Model</h1>
+    <div class="muted">提出 CompACT 离散分词器，将图像压缩至 8个Token，大幅加速世界模型规划。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-06</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV, cs.AI, cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.05438v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">规划</span><span class="tag-mini">策略学习</span><span class="tag-mini">计算机视觉</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.05438v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Planning in 8 Tokens: A Compact Discrete Tokenizer for Latent World Model</li><li><strong>核心机构：</strong> <strong>KAIST</strong>，<strong>POSTECH</strong>，<strong>RLWRLD</strong></li><li><strong>一句话本质：</strong> 提出 <strong>CompACT</strong> 离散分词器，将图像压缩至 <strong>8个Token</strong>，大幅加速世界模型规划。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 世界模型通过模拟环境动态，支持动作规划和策略学习。</li><li><strong>核心痛点：</strong> 现有模型为追求像素级真实感，使用数百个Token编码图像，导致规划 <strong>计算成本高昂</strong>，难以实时部署。</li><li><strong>本文切入点：</strong> 假设极端压缩能迫使模型学习 <strong>抽象、规划相关的语义表示</strong>，而非保留所有感知细节，从而打破计算瓶颈。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 图像 (Observation) + 动作 (Action) -&gt; 未来状态的 <strong>紧凑离散Token</strong>。</li></ul><ul><li><strong>关键模块 1：CompACT 编码器 (Semantic Encoding)</strong></li><li><strong>核心作用：</strong> 将图像编码为 <strong>极少（8-16个）离散Token</strong>，只保留 <strong>规划关键的语义信息</strong>。</li><li>具体实现：利用 <strong>冻结的DINOv3</strong> 提取语义特征，通过 <strong>潜在重采样器</strong> 和 <strong>有限标量量化</strong> 获得紧凑离散Token。</li></ul><ul><li><strong>关键模块 2：CompACT 解码器 (Generative Decoding)</strong></li><li><strong>核心作用：</strong> 从紧凑语义Token <strong>生成具有感知细节的图像</strong>。</li><li>具体实现：不直接重建像素，而是以紧凑Token为条件，通过 <strong>掩码生成模型</strong> 预测 <strong>目标分词器（如MaskGIT VQGAN）的潜空间Token</strong>，再由目标解码器生成图像。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>极端压缩的有效性：</strong> 仅用 <strong>8个Token</strong> 即可保留足够的规划关键信息，实现与数百Token模型相当的规划性能。</li><li><strong>语义优先的表示学习：</strong> 借助 <strong>冻结的视觉基础模型</strong> 和有针对性的压缩，模型能学习到对规划更重要的 <strong>抽象高层语义表示</strong>。</li><li><strong>计算效率与性能的平衡：</strong> 极度压缩的离散Token空间使世界模型规划速度 <strong>提升高达40倍</strong>，同时保持甚至超越基线性能，为实时部署提供了可能。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>极端压缩必然牺牲图像的 <strong>像素级重建保真度</strong>，可能不适用于需要高保真视觉输出的应用。</li><li>编码器和解码器性能高度依赖于 <strong>冻结的预训练基础模型</strong>，其通用性和鲁棒性受限于这些模型的特性。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文提及 <strong>IS指标</strong> 优于MaskGIT-VQGAN，但该指标可能无法直接反映对 <strong>规划任务</strong> 真正重要的信息保留情况。</li><li>缺乏对 <strong>不同中间Token数量</strong>（例如，介于16和784之间）对规划性能和计算效率影响的系统性消融实验。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>自适应 Token 长度：</strong> 探索根据任务复杂性或环境动态 <strong>动态调整 Token 数量</strong> 的机制，以平衡效率与精度。</li><li><strong>多模态信息融合：</strong> 将紧凑视觉Token与其它模态（如触觉、语言）的紧凑表示融合，构建更通用的 <strong>多模态世界模型</strong>。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>KAIST，POSTECH，RLWRLD</li>
+          <li><strong>一句话本质：</strong>提出 CompACT 离散分词器，将图像压缩至 8个Token，大幅加速世界模型规划。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Dongwon Kim, Gawon Seo, Jinsung Lee, Minsu Cho, Suha Kwak</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 规划, 策略学习, 计算机视觉</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型通过模拟环境动态，支持动作规划和策略学习。</li><li>核心痛点： 现有模型为追求像素级真实感，使用数百个Token编码图像，导致规划 计算成本高昂，难以实时部署。</li><li>本文切入点： 假设极端压缩能迫使模型学习 抽象、规划相关的语义表示，而非保留所有感知细节，从而打破计算瓶颈。</li></ul></section><section><h3>Key Insights</h3><ul><li>极端压缩的有效性： 仅用 8个Token 即可保留足够的规划关键信息，实现与数百Token模型相当的规划性能。</li><li>语义优先的表示学习： 借助 冻结的视觉基础模型 和有针对性的压缩，模型能学习到对规划更重要的 抽象高层语义表示。</li><li>计算效率与性能的平衡： 极度压缩的离散Token空间使世界模型规划速度 提升高达40倍，同时保持甚至超越基线性能，为实时部署提供了可能。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应 Token 长度： 探索根据任务复杂性或环境动态 动态调整 Token 数量 的机制，以平衡效率与精度。</li><li>多模态信息融合： 将紧凑视觉Token与其它模态（如触觉、语言）的紧凑表示融合，构建更通用的 多模态世界模型。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-06 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-06.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

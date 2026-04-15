@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model</h1>
+    <div class="muted">通过联合建模动作与视频，让AI学会了隐式的物理规律，能生成精准受控的人-物交互视频。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-29</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.27449v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">机器人操作</span><span class="tag-mini">三维表征</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2603.27449v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名资深科学家，我将为你深度拆解这篇关于人-物交互视频生成的论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model</li><li><strong>核心机构：</strong> University of Southern California (南加州大学)</li><li><strong>一句话本质：</strong> 通过联合建模动作与视频，让AI学会了<strong>隐式的物理规律</strong>，能生成精准受控的人-物交互视频。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 使用物理引擎模拟，或用标准的文/图生视频模型（T2V/I2V）来生成交互。</li><li><strong>核心痛点：</strong> 现有视频模型<strong>无法精确控制动作</strong>，且生成的物体响应<strong>不符合物理规律</strong>，缺乏因果一致性。</li><li><strong>本文切入点：</strong> 作者的核心直觉是：<strong>不应将动作视为简单的外部条件</strong>，而应将其与视频内容<strong>在降噪过程中联合建模</strong>，强迫模型学习动作（因）与物理结果（果）的内在关联。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> <strong>初始图像 + 文本描述 + 逐帧动作序列 (2D姿态图)</strong> -&gt; <strong>人-物交互视频</strong></li></ul><ul><li><strong>关键模块 1：</strong> <strong>空间动作图 (Action Maps)</strong> - 将3D人体关键点投影为2D图像，为模型提供<strong>像素级的、无歧义的空间控制信号</strong>。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>联合降噪建模 (Joint Denoising)</strong> - 将动作图和视频的隐变量<strong>在时序上拼接后一同去噪</strong>，迫使模型学习二者间的<strong>内在一致性与因果关联</strong>。</li></ul><p>| 模块 | 核心作用 | | :--- | :--- | | <strong>输入处理</strong> | 初始图像作为场景基准，文本提供高级语义，<strong>动作图</strong>提供逐帧的低级空间控制。 | | <strong>联合建模</strong> | 将<strong>视频隐变量</strong>和<strong>动作图隐变量</strong>拼接，让扩散模型同时预测两者的噪声。 | | <strong>修改版引导</strong> | 调整采样策略，确保模型在生成视频时，<strong>严格遵循</strong>了同时被去噪的动作信号。 | | <strong>输出解码</strong> | 仅解码去噪后的视频部分隐变量，丢弃动作部分，得到最终的交互视频。 |</p><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[控制的本质]：</strong> <strong>精确的视频动作控制</strong>，不能只靠外部条件注入。必须将<strong>控制信号（动作）与生成内容（视频）视为一个联合分布</strong>进行端到端建模，才能实现真正的因果对齐。</li></ul><ul><li><strong>[物理的涌现]：</strong> 视频扩散模型在<strong>大规模数据和强动作约束</strong>下，能够<strong>自发学习到世界的部分物理规则</strong>（如流体、刚体运动）。这证明了无需显式物理引擎，模型也能通过观察学会一个<strong>隐式的世界模型</strong>。</li></ul><ul><li><strong>[表征的选择]：</strong> 相比于光流等直接定义物体运动的信号，<strong>只约束“因”（人的动作）的2D空间图</strong>是更优的控制信号。它能让模型<strong>自主推理出“果”（物体的响应）</strong>，从而实现更真实的物理交互，而不是简单的像素级模仿。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[依赖上游位姿估计精度]：</strong> 生成的动作准确性受限于输入的3D人体和相机位姿估计的质量，<strong>上游的噪声会直接传递到最终视频</strong>。</li><li><strong>[复杂多物体交互困难]：</strong> 模型在处理<strong>涉及多个物体的协调操作</strong>时表现不佳，难以理解复杂的任务逻辑和目标关系（如论文中的倒冰块失败案例）。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>缺乏对<strong>不同类型动作控制信号（如骨骼点 vs. 密集手部mask）的系统性消融实验</strong>，未能完全证明其使用的2D投影图是最佳表征形式。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[自回归式世界模型]：</strong> 将模型扩展为<strong>自回归生成模式</strong>。使其能根据初始状态和一系列动作规划，<strong>连续预测长时序的交互结果</strong>，成为真正的动态世界模型。</li><li><strong>[从高级指令到视频]：</strong> 研究如何<strong>仅用高级语言指令（如“倒一杯水”）</strong>，让模型<strong>自主规划并生成底层的动作序列和最终的交互视频</strong>，打通从意图到执行的端到端生成。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>University of Southern California (南加州大学)</li>
+          <li><strong>一句话本质：</strong>通过联合建模动作与视频，让AI学会了隐式的物理规律，能生成精准受控的人-物交互视频。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Quankai Gao, Jiawei Yang, Qiangeng Xu, Le Chen, Yue Wang</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 机器人操作, 三维表征, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用物理引擎模拟，或用标准的文/图生视频模型（T2V/I2V）来生成交互。</li><li>核心痛点： 现有视频模型无法精确控制动作，且生成的物体响应不符合物理规律，缺乏因果一致性。</li><li>本文切入点： 作者的核心直觉是：不应将动作视为简单的外部条件，而应将其与视频内容在降噪过程中联合建模，强迫模型学习动作（因）与物理结果（果）的内在关联。</li></ul></section><section><h3>Key Insights</h3><ul><li>[控制的本质]： 精确的视频动作控制，不能只靠外部条件注入。必须将控制信号（动作）与生成内容（视频）视为一个联合分布进行端到端建模，才能实现真正的因果对齐。</li><li>[物理的涌现]： 视频扩散模型在大规模数据和强动作约束下，能够自发学习到世界的部分物理规则（如流体、刚体运动）。这证明了无需显式物理引擎，模型也能通过观察学会一个隐式的世界模型。</li><li>[表征的选择]： 相比于光流等直接定义物体运动的信号，只约束“因”（人的动作）的2D空间图是更优的控制信号。它能让模型自主推理出“果”（物体的响应），从而实现更真实的物理交互，而不是简单的像素级模仿。</li></ul></section><section><h3>Next Steps</h3><ul><li>[自回归式世界模型]： 将模型扩展为自回归生成模式。使其能根据初始状态和一系列动作规划，连续预测长时序的交互结果，成为真正的动态世界模型。</li><li>[从高级指令到视频]： 研究如何仅用高级语言指令（如“倒一杯水”），让模型自主规划并生成底层的动作序列和最终的交互视频，打通从意图到执行的端到端生成。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-29 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-29.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

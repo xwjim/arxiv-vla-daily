@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk-Controllable Multi-View Diffusion for Driving Scenario Generation · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Risk-Controllable Multi-View Diffusion for Driving Scenario Generation</h1>
+    <div class="muted">将驾驶风险从被动标签变为主动控制旋钮，可按需生成指定危险等级的多视角驾驶场景。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-12</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.11534v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">自动驾驶</span><span class="tag-mini">多传感器融合</span><span class="tag-mini">三维表征</span><span class="tag-mini">视频生成</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.11534v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我已完成对该论文的深度剖析。以下是为您提取的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Risk-Controllable Multi-View Diffusion for Driving Scenario Generation (用于驾驶场景生成的可控风险多视角扩散模型)</li><li><strong>核心机构：</strong> 清华大学、麻省理工学院 (MIT)</li><li><strong>一句话本质：</strong> 将驾驶风险从被动标签变为主动控制旋钮，可按需生成指定危险等级的多视角驾驶场景。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 通过大数据生成或手动设计来创建驾驶场景，以测试自动驾驶系统。</li><li><strong>核心痛点：</strong> 难以高效生成<strong>长尾高风险</strong>场景，且多视角视频的<strong>几何一致性</strong>难以保证。</li><li><strong>本文切入点：</strong> 直觉：将<strong>风险</strong>与<strong>生成</strong>解耦。先用物理风险模型生成<strong>可控风险的3D轨迹</strong>，再以此为<strong>强几何约束</strong>指导多视角视频生成。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> <strong>目标风险等级</strong> + 场景上下文 (地图/文本) -&gt; <strong>符合该风险等级</strong>的多视角视频。</li></ul><ul><li><strong>关键模块 1：</strong> <strong>风险控制运动生成模块 (Risk-Controlled Motion Generation)</strong> - 将用户指定的<strong>风险等级</strong>转化为符合物理规律的<strong>动态3D轨迹与包围盒</strong>。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>几何对齐与区域偏好优化模块 (Geometry-Appearance Alignment &amp; RA-DPO)</strong> - 利用<strong>3D几何先验</strong>约束多视角一致性，并用<strong>RA-DPO</strong>让模型<strong>聚焦于动态区域</strong>的生成质量。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[风险的可控性]：</strong> <strong>驾驶风险</strong>可以被量化并解耦，作为一种<strong>前置控制信号</strong>（而非后验标签），主动引导生成模型合成<strong>指定危险程度</strong>的场景。</li></ul><ul><li><strong>[几何与表观的对齐]：</strong> 显式地将<strong>3D几何特征</strong>（来自预训练模型）与扩散模型内部的<strong>视觉表观特征</strong>进行对齐，能显著增强生成视频的<strong>跨视角几何一致性</strong>与3D真实感。</li></ul><ul><li><strong>[生成模型的注意力引导]：</strong> 通过<strong>运动感知掩码</strong>和<strong>区域偏好优化 (RA-DPO)</strong>，可以让生成模型将“注意力”和学习资源<strong>集中在关键的动态区域</strong>，从而高效提升场景的动态真实感。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>当前的<strong>物理风险模型</strong>主要覆盖典型交互，对更复杂、非结构化的真实世界风险模式<strong>覆盖不足</strong>。</li><li>最终视频质量<strong>强依赖于上游运动生成模块</strong>的输出。若轨迹生成不佳，下游视频生成也无法弥补。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文的风险模型基于<strong>动态交互</strong>，缺乏对<strong>静态环境风险</strong>（如遮挡、恶劣天气）的量化与生成控制能力的验证。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>从物理公式到数据驱动的风险模型：</strong> 训练一个能从大规模数据中学习<strong>隐式、多模态风险表征</strong>的端到端模型，捕捉更微妙的危险信号。</li><li><strong>构建生成-评估闭环系统：</strong> 将生成的场景反馈给一个<strong>自动驾驶规划/决策模型</strong>，用其<strong>失效或不确定性</strong>作为新的奖励信号，反过来指导更高价值的风险场景生成。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>清华大学、麻省理工学院 (MIT)</li>
+          <li><strong>一句话本质：</strong>将驾驶风险从被动标签变为主动控制旋钮，可按需生成指定危险等级的多视角驾驶场景。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Hongyi Lin, Wenxiu Shi, Heye Huang, Dingyi Zhuang, Song Zhang, Yang Liu, Xiaobo Qu, Jinhua Zhao</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 自动驾驶, 多传感器融合, 三维表征, 视频生成</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过大数据生成或手动设计来创建驾驶场景，以测试自动驾驶系统。</li><li>核心痛点： 难以高效生成长尾高风险场景，且多视角视频的几何一致性难以保证。</li><li>本文切入点： 直觉：将风险与生成解耦。先用物理风险模型生成可控风险的3D轨迹，再以此为强几何约束指导多视角视频生成。</li></ul></section><section><h3>Key Insights</h3><ul><li>[风险的可控性]： 驾驶风险可以被量化并解耦，作为一种前置控制信号（而非后验标签），主动引导生成模型合成指定危险程度的场景。</li><li>[几何与表观的对齐]： 显式地将3D几何特征（来自预训练模型）与扩散模型内部的视觉表观特征进行对齐，能显著增强生成视频的跨视角几何一致性与3D真实感。</li><li>[生成模型的注意力引导]： 通过运动感知掩码和区域偏好优化 (RA-DPO)，可以让生成模型将“注意力”和学习资源集中在关键的动态区域，从而高效提升场景的动态真实感。</li></ul></section><section><h3>Next Steps</h3><ul><li>从物理公式到数据驱动的风险模型： 训练一个能从大规模数据中学习隐式、多模态风险表征的端到端模型，捕捉更微妙的危险信号。</li><li>构建生成-评估闭环系统： 将生成的场景反馈给一个自动驾驶规划/决策模型，用其失效或不确定性作为新的奖励信号，反过来指导更高价值的风险场景生成。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-12 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-12.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

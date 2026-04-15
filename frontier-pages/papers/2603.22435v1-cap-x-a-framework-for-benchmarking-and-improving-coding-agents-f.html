@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation</h1>
+    <div class="muted">构建了一套标准框架，证明了「代码即策略」的脆弱性，并展示了如何通过增强测试时计算来弥补其与人类专家的差距。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-24</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.22435v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">机器人操作</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span><span class="tag-mini">多模态</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.22435v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖学术研究员，我将为你深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> CaP-X: 一个用于机器人操作编码智能体的基准测试与改进框架</li><li><strong>核心机构：</strong> 斯坦福大学、加州大学伯克利分校、英伟达等</li><li><strong>一句话本质：</strong> 构建了一套标准框架，证明了「代码即策略」的脆弱性，并展示了如何通过增强<strong>测试时计算</strong>来弥补其与人类专家的差距。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 使用大语言模型生成代码（<strong>Code-as-Policy, CaP</strong>）来控制机器人，但这通常依赖于高级、封装好的函数。</li><li><strong>核心痛点：</strong> 现有方法的成功，<strong>高度依赖人类工程师预先设计的、任务特定的高级指令</strong>，这掩盖了模型在底层真实控制能力上的不足，使其成功更像是“幻觉”。</li><li><strong>本文切入点：</strong> 通过<strong>系统性地降低指令的抽象层级</strong>（从高级到低级），来量化评估智能体对人类先验知识的依赖程度，并探索如何通过<strong>增强测试时计算</strong>来弥补能力差距。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 任务指令 + 环境反馈（代码执行结果、<strong>视觉差异文本</strong>） -&gt; <strong>可执行的 Python 代码</strong>（调用底层感知与控制原语）</li></ul><ul><li><strong>关键模块 1：</strong> <strong>CaP-Bench (评估框架)</strong> - 提供了一个<strong>分层（S1-S4, M1-M4）的评估体系</strong>，用于解耦和衡量智能体在不同<strong>抽象级别</strong>、<strong>交互模式</strong>和<strong>感知模态</strong>下的真实能力。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>CaP-Agent0 (智能体框架)</strong> - 一个<strong>无需训练</strong>的解决方案，通过集成<strong>多轮交互</strong>、<strong>视觉文本化反馈</strong>、<strong>自动合成技能库</strong>和<strong>并行推理</strong>来提升在底层原语上的性能。</li></ul><p>| 评估层级 | 抽象级别 | 交互模式 | 核心目的                               | | :------- | :------- | :------- | :------------------------------------- | | <strong>S1/S2</strong>  | <strong>高</strong>     | 单轮     | 模拟现有 CaP 方法，依赖人类设计的 API    | | <strong>S3/S4</strong>  | <strong>低</strong>     | 单轮     | <strong>暴露模型在底层原子指令上的真实能力</strong> | | <strong>M1-M4</strong>  | 高/低    | <strong>多轮</strong>   | <strong>验证通过反馈和调试进行自我修正的能力</strong> |</p><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[抽象的代价]：</strong> <strong>人类设计的高级 API</strong> 是一把双刃剑。它能显著提升任务成功率，但本质上是<strong>将智能转嫁给了 API 设计者</strong>，限制了智能体的表达能力和泛化潜力。</li></ul><ul><li><strong>[测试时计算的价值]：</strong> 智能体的<strong>鲁棒性可以通过增加测试时的计算量来合成</strong>。通过<strong>多轮交互、代码调试、视觉反馈和集成推理</strong>，即使在底层原子指令上操作，也能达到甚至超越高级 API 的性能。</li></ul><ul><li><strong>[跨模态对齐的鸿沟]：</strong> 直接向代码生成模型输入<strong>原始图像（RGB）反而会降低性能</strong>。将视觉信息<strong>预处理为结构化文本（如 VDM 模块）</strong> 是更有效的视觉-代码对齐方式，能显著提升智能体的物理世界理解力。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>对接触密集型任务处理能力弱：</strong> 如插孔、倾倒等任务需要高频、连续的视觉伺服闭环控制，而非离散的代码生成与执行。</li><li><strong>测试时计算成本高昂：</strong> 多轮交互、多模型集成推理等策略虽然有效，但显著增加了<strong>延迟和计算开销</strong>，限制了在实时场景的应用。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>自动合成的<strong>技能库可能存在泛化性偏差</strong>。论文未详细说明构建该库所用的任务分布，可能导致技能库对 CaP-Bench 内的任务<strong>过拟合</strong>，其在全新任务上的真实泛化能力有待验证。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>混合策略 (Hybrid Policy)：</strong> 将 <strong>CaP 的长时程规划、推理能力</strong>与 <strong>VLA (Vision-Language-Action) 的密集、反应式控制能力</strong>相结合。例如，用 CaP 生成高层逻辑框架，并调用预训练的 VLA 策略来执行接触密集的子任务。</li><li><strong>在线技能发现与演化：</strong> 让智能体在与环境的持续交互中<strong>自主学习、提炼和更新其技能库</strong>，从“使用固定的技能”演进为“动态生成和优化技能”，实现真正的终身学习。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>斯坦福大学、加州大学伯克利分校、英伟达等</li>
+          <li><strong>一句话本质：</strong>构建了一套标准框架，证明了「代码即策略」的脆弱性，并展示了如何通过增强测试时计算来弥补其与人类专家的差距。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Max Fu, Justin Yu, Karim El-Refai, Ethan Kou, Haoru Xue, Huang Huang, Wenli Xiao, Guanzhi Wang, Fei-Fei Li, Guanya Shi, Jiajun Wu, Shankar Sastry, Yuke Zhu, Ken Goldberg, Linxi &quot;Jim&quot; Fan</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 机器人操作, 评测基准, 策略学习, 多模态</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用大语言模型生成代码（Code-as-Policy, CaP）来控制机器人，但这通常依赖于高级、封装好的函数。</li><li>核心痛点： 现有方法的成功，高度依赖人类工程师预先设计的、任务特定的高级指令，这掩盖了模型在底层真实控制能力上的不足，使其成功更像是“幻觉”。</li><li>本文切入点： 通过系统性地降低指令的抽象层级（从高级到低级），来量化评估智能体对人类先验知识的依赖程度，并探索如何通过增强测试时计算来弥补能力差距。</li></ul></section><section><h3>Key Insights</h3><ul><li>[抽象的代价]： 人类设计的高级 API 是一把双刃剑。它能显著提升任务成功率，但本质上是将智能转嫁给了 API 设计者，限制了智能体的表达能力和泛化潜力。</li><li>[测试时计算的价值]： 智能体的鲁棒性可以通过增加测试时的计算量来合成。通过多轮交互、代码调试、视觉反馈和集成推理，即使在底层原子指令上操作，也能达到甚至超越高级 API 的性能。</li><li>[跨模态对齐的鸿沟]： 直接向代码生成模型输入原始图像（RGB）反而会降低性能。将视觉信息预处理为结构化文本（如 VDM 模块） 是更有效的视觉-代码对齐方式，能显著提升智能体的物理世界理解力。</li></ul></section><section><h3>Next Steps</h3><ul><li>混合策略 (Hybrid Policy)： 将 CaP 的长时程规划、推理能力与 VLA (Vision-Language-Action) 的密集、反应式控制能力相结合。例如，用 CaP 生成高层逻辑框架，并调用预训练的 VLA 策略来执行接触密集的子任务。</li><li>在线技能发现与演化： 让智能体在与环境的持续交互中自主学习、提炼和更新其技能库，从“使用固定的技能”演进为“动态生成和优化技能”，实现真正的终身学习。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-24 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-24.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

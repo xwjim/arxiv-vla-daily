@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adaptive SINDy: Residual Force System Identification Based UAV Disturbance Rejection · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Adaptive SINDy: Residual Force System Identification Based UAV Disturbance Rejection</h1>
+    <div class="muted">发现并用简洁数学公式描述未知风力，让无人机实时自适应抵消它。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-10</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.08863v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">UAV</span><span class="tag-mini">策略学习</span><span class="tag-mini">方程发现</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.08863v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名资深科学家，我将为您「降维」拆解这篇论文，提取其核心洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Adaptive SINDy: 基于残余力系统辨识的无人机扰动抑制</li><li><strong>核心机构：</strong> 斯科尔科沃科技学院 (Skolkovo Institute of Science and Technology)</li><li><strong>一句话本质：</strong> 发现并用<strong>简洁数学公式</strong>描述未知风力，让无人机<strong>实时自适应</strong>抵消它。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 使用传统控制器（如 PID）或黑箱学习方法（如神经网络）来抵抗风扰。</li><li><strong>核心痛点：</strong> 传统方法难以应对<strong>高度非线性的强风</strong>；学习方法像个黑箱，<strong>缺乏物理解释</strong>且需要海量数据。</li><li><strong>本文切入点：</strong> 作者观察到无人机抗风时会<strong>本能地向来风方向倾斜</strong>。这个物理直觉启发他们用 <strong>SINDy</strong> 这种能发现<strong>可解释</strong>物理方程的数据驱动方法，来专门建模这种“倾斜-受力”关系。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 无人机实时状态（姿态、速度等） -&gt; <strong>估算的未知风力</strong> -&gt; 补偿后的控制指令。</li></ul><p>| 关键模块 | 核心作用 | | :--- | :--- | | <strong>SINDy 系统辨识</strong> | (离线) 从少量飞行数据中，自动发现一个描述<strong>残余风力</strong>的<strong>稀疏、可解释的数学方程</strong>。 | | <strong>RLS 自适应控制</strong> | (在线) 在飞行中，根据 SINDy 提供的方程<strong>结构</strong>，<strong>实时微调</strong>方程的系数，以适应<strong>动态变化</strong>的风。 |</p><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[模型的可解释性]：</strong> 复杂的风力扰动，其核心效应可以被一个由<strong>无人机自身姿态（横滚角、俯仰角）和推力</strong>构成的<strong>稀疏、简洁的物理方程</strong>来近似。这证明了无需复杂的黑箱模型，也能抓住扰动本质。</li></ul><ul><li><strong>[解耦的混合智能]：</strong> 提出了一种“<strong>离线发现规律 + 在线调整参数</strong>”的高效框架。<strong>SINDy</strong> 负责发现风力作用的<strong>底层结构性规律</strong>（what），<strong>RLS 自适应控制器</strong>负责实时调整该规律的<strong>强度参数</strong>（how much），实现了数据效率和实时性的统一。</li></ul><ul><li><strong>[物理直觉的价值]：</strong> 将“无人机抗风会倾斜”这一<strong>物理直觉</strong>作为先验知识，指导 SINDy 的基函数库选择，是成功的关键。这表明在数据驱动方法中<strong>注入简单的物理洞察</strong>，能极大提升模型的性能和收敛速度。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>模型结构固化：</strong> SINDy 发现的扰动模型<strong>结构是离线确定的</strong>。如果无人机遇到训练数据中未见的全新扰动模式（如挂载了新负载），仅在线调整参数可能不足以应对。</li><li><strong>依赖先验知识：</strong> SINDy 的基函数库选择依赖于研究人员的<strong>物理直觉和经验</strong>。如果先验知识有误或不全面，将直接影响模型发现的质量。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文缺乏对 <strong>SINDy 基函数库的消融实验</strong>。未能定量证明其核心物理直觉（即基于姿态角的函数）到底比其他通用函数（如纯多项式）优越多少。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>在线结构辨识：</strong> 研究<strong>在线 SINDy 算法</strong>，使无人机不仅能在线调整参数，还能在飞行中<strong>实时更新和发现新的扰动方程结构</strong>，实现真正的自主进化。</li><li><strong>多模态物理建模：</strong> 将<strong>视觉（光流）或听觉（风噪）</strong>等传感器信息作为新的变量，融入 SINDy 的基函数库。这能让模型从“被动感知扰动”升级为“<strong>提前预测扰动</strong>”。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>斯科尔科沃科技学院 (Skolkovo Institute of Science and Technology)</li>
+          <li><strong>一句话本质：</strong>发现并用简洁数学公式描述未知风力，让无人机实时自适应抵消它。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Fawad Mehboob, Amir Atef Habel, Roohan Ahmed Khan, Mikhail Derevianchenko, Clement Fortin, Dzmitry Tsetserukou</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, UAV, 策略学习, 方程发现, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用传统控制器（如 PID）或黑箱学习方法（如神经网络）来抵抗风扰。</li><li>核心痛点： 传统方法难以应对高度非线性的强风；学习方法像个黑箱，缺乏物理解释且需要海量数据。</li><li>本文切入点： 作者观察到无人机抗风时会本能地向来风方向倾斜。这个物理直觉启发他们用 SINDy 这种能发现可解释物理方程的数据驱动方法，来专门建模这种“倾斜-受力”关系。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型的可解释性]： 复杂的风力扰动，其核心效应可以被一个由无人机自身姿态（横滚角、俯仰角）和推力构成的稀疏、简洁的物理方程来近似。这证明了无需复杂的黑箱模型，也能抓住扰动本质。</li><li>[解耦的混合智能]： 提出了一种“离线发现规律 + 在线调整参数”的高效框架。SINDy 负责发现风力作用的底层结构性规律（what），RLS 自适应控制器负责实时调整该规律的强度参数（how much），实现了数据效率和实时性的统一。</li><li>[物理直觉的价值]： 将“无人机抗风会倾斜”这一物理直觉作为先验知识，指导 SINDy 的基函数库选择，是成功的关键。这表明在数据驱动方法中注入简单的物理洞察，能极大提升模型的性能和收敛速度。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线结构辨识： 研究在线 SINDy 算法，使无人机不仅能在线调整参数，还能在飞行中实时更新和发现新的扰动方程结构，实现真正的自主进化。</li><li>多模态物理建模： 将视觉（光流）或听觉（风噪）等传感器信息作为新的变量，融入 SINDy 的基函数库。这能让模型从“被动感知扰动”升级为“提前预测扰动”。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-10 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-10.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

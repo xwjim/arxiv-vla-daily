@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Great March 100: 100 Detail-oriented Tasks for Evaluating Embodied AI Agents · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>The Great March 100: 100 Detail-oriented Tasks for Evaluating Embodied AI Agents</h1>
+    <div class="muted">提出了一个包含100个细粒度长尾任务的机器人评测基准，旨在更全面、真实地衡量具身智能体的泛化与操控能力。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-01-17</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2601.11421v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span><span class="tag-mini">时序预测</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2601.11421v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，我将以顶尖学术研究员的视角，对这篇论文进行深度拆解。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> The Great March 100: 100 Detail-oriented Tasks for Evaluating Embodied AI Agents (GM-100: 用于评估具身智能体的100个细节导向任务)</li><li><strong>核心机构：</strong> 上海交通大学 (SJTU), 上海人工智能实验室 (SII)</li><li><strong>一句话本质：</strong> 提出了一个包含100个细粒度长尾任务的机器人评测基准，旨在更全面、真实地衡量具身智能体的泛化与操控能力。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有机器人学习数据集（如 Open X-Embodiment）通过汇集海量数据来训练和评估模型。</li><li><strong>核心痛点：</strong> 数据集中的任务高度同质化，集中于“抓取-放置”等简单行为，无法有效区分模型的<strong>细粒度操控</strong>和<strong>长尾任务泛化</strong>能力，造成“看似强大”的假象。</li><li><strong>本文切入点：</strong> 作者认为，任务的多样性和挑战性比单纯的数据规模更重要。他们从<strong>人类与物体交互的基本原语 (human-object interaction primitives)</strong> 和<strong>物体功能可供性 (object affordances)</strong> 出发，系统性地生成了一系列看似简单但对机器人极具挑战性的任务。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><p>（注：本文核心机制是<strong>评测基准的设计流程</strong>，而非一个新模型）</p><ul><li><strong>输入 -&gt; 输出：</strong> <code>现有任务分析 + 人类交互原语 + 物体功能可供性</code> -&gt; <code><strong>GM-100 任务列表</strong>及配套的遥操作轨迹数据集</code></li></ul><ul><li><strong>关键模块 1：</strong> <strong>任务生成 (Task Generation)</strong> - 利用大语言模型（LLM）结合<strong>动作原语</strong>和<strong>物体语义</strong>，自动化地生成大量候选任务，突破了人类设计的思维局限。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>任务筛选 (Task Filtering)</strong> - 通过 LLM 评估<strong>可执行性</strong>，再由人类专家进行最终筛选，确保任务在当前硬件上可行，且能有效评估模型的关键能力。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li><strong>[评测盲区]：</strong> 当前主流评测存在<strong>“高频任务偏见”</strong>。模型在“抓取”等常见任务上的高成功率，掩盖了其在更广泛、更精细的真实世界交互中的脆弱性。<strong>GM-100</strong> 证明了现有SOTA模型在这些长尾任务上表现普遍不佳。</li></ul><ul><li><strong>[任务设计]：</strong> 成功的机器人任务设计应回归物理本质，而非人类的主观“实用性”。通过系统性地组合<strong>“动作原语”</strong>（如拧、撕、刮）和<strong>“物体 affordance”</strong>，可以构建出一个能有效暴露模型能力短板的<strong>“照妖镜”式</strong>任务集。</li></ul><ul><li><strong>[离线与在线]：</strong> 在这些具有挑战性的细粒度任务上，模型的<strong>离线预测精度</strong>（Action Prediction Error）与<strong>在线物理成功率</strong>（Partial Success Rate）呈现出强烈的<strong>负相关</strong>。这表明，对于复杂任务，单纯模仿轨迹的表面分布已不足够，<strong>高精度的动作建模</strong>是实现物理成功的关键前提。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>规模与多样性有限：</strong> 13k 的轨迹数据量属于“中等规模”，且主要在两个平台上收集。这可能不足以训练出能泛化到全新环境的强大模型，其作为“评测集”的价值大于“训练集”。</li><li><strong>评估主观性：</strong> 引入的<strong>部分成功率 (PSR)</strong> 依赖于人工定义的子任务，这在任务之间难以标准化，可能引入评估者偏见，影响结果的绝对公平性。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验设置主要评估模型在 <strong>“给定任务数据下的学习能力”</strong>（fine-tuning），而非大模型时代更关键的 <strong>“零样本/少样本泛化能力”</strong>。现有实验无法直接证明一个在海量数据上预训练的 VLA 能否直接泛化到 GM-100 的新任务上。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>零样本泛化能力测试：</strong> 将 GM-100 作为纯粹的 <strong>Zero-Shot Benchmark</strong>，直接评估各类预训练 VLA 基础模型在不经过任何任务微调的情况下，解决这些复杂任务的能力。这将是衡量其“真通用性”的试金石。</li><li><strong>自动化评估指标开发：</strong> 利用多模态大模型（VLM）替代人工来判断<strong>部分成功率 (PSR)</strong>。例如，让 VLM 直接“看”视频判断“瓶盖是否被拧开”，从而实现对复杂任务更客观、可扩展的自动化评估。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>上海交通大学 (SJTU), 上海人工智能实验室 (SII)</li>
+          <li><strong>一句话本质：</strong>提出了一个包含100个细粒度长尾任务的机器人评测基准，旨在更全面、真实地衡量具身智能体的泛化与操控能力。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Ziyu Wang, Chenyuan Liu, Yushun Xiang, Runhao Zhang, Qingbo Hao, Hongliang Lu, Houyu Chen, Zhizhong Feng, Kaiyue Zheng, Dehao Ye, Xianchao Zeng, Xinyu Zhou, Boran Wen, Jiaxin Li, Mingyu Zhang, Kecheng Zheng, Qian Zhu, Ran Cheng, Yong-Lu Li</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 评测基准, 策略学习, 时序预测, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有机器人学习数据集（如 Open X-Embodiment）通过汇集海量数据来训练和评估模型。</li><li>核心痛点： 数据集中的任务高度同质化，集中于“抓取-放置”等简单行为，无法有效区分模型的细粒度操控和长尾任务泛化能力，造成“看似强大”的假象。</li><li>本文切入点： 作者认为，任务的多样性和挑战性比单纯的数据规模更重要。他们从人类与物体交互的基本原语 (human-object interaction primitives) 和物体功能可供性 (object affordances) 出发，系统性地生成了一系列看似简单但对机器人极具挑战性的任务。</li></ul></section><section><h3>Key Insights</h3><ul><li>[评测盲区]： 当前主流评测存在“高频任务偏见”。模型在“抓取”等常见任务上的高成功率，掩盖了其在更广泛、更精细的真实世界交互中的脆弱性。GM-100 证明了现有SOTA模型在这些长尾任务上表现普遍不佳。</li><li>[任务设计]： 成功的机器人任务设计应回归物理本质，而非人类的主观“实用性”。通过系统性地组合“动作原语”（如拧、撕、刮）和“物体 affordance”，可以构建出一个能有效暴露模型能力短板的“照妖镜”式任务集。</li><li>[离线与在线]： 在这些具有挑战性的细粒度任务上，模型的离线预测精度（Action Prediction Error）与在线物理成功率（Partial Success Rate）呈现出强烈的负相关。这表明，对于复杂任务，单纯模仿轨迹的表面分布已不足够，高精度的动作建模是实现物理成功的关键前提。</li></ul></section><section><h3>Next Steps</h3><ul><li>零样本泛化能力测试： 将 GM-100 作为纯粹的 Zero-Shot Benchmark，直接评估各类预训练 VLA 基础模型在不经过任何任务微调的情况下，解决这些复杂任务的能力。这将是衡量其“真通用性”的试金石。</li><li>自动化评估指标开发： 利用多模态大模型（VLM）替代人工来判断部分成功率 (PSR)。例如，让 VLM 直接“看”视频判断“瓶盖是否被拧开”，从而实现对复杂任务更客观、可扩展的自动化评估。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-01-17 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-01-17.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

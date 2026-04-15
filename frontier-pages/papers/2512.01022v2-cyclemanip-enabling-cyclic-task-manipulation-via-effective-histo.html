@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CycleManip: Enabling Cyclic Task Manipulation via Effective Historical Perception and Understanding · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>CycleManip: Enabling Cyclic Task Manipulation via Effective Historical Perception and Understanding</h1>
+    <div class="muted">通过高效感知和理解历史，让机器人能准确执行指定次数的循环任务。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-12-01</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2512.01022v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">机器人操作</span><span class="tag-mini">策略学习</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2512.01022v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/CycleManip Enabling Cyclic Task Manipulation via Effective Historical Perception and Understanding.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一位顶尖的学术研究员，我已经完成了对论文《CycleManip》的深度拆解。以下是严格按照您要求格式输出的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> CycleManip: Enabling Cyclic Task Manipulation via Effective Historical Perception and Understanding</li><li><strong>核心机构：</strong> 中山大学 (Sun Yat-sen University)</li><li><strong>一句话本质：</strong> 通过高效感知和理解历史，让机器人能准确执行指定次数的循环任务。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有的模仿学习策略主要依赖<strong>短时间窗口</strong>的观测来预测动作。</li><li><strong>核心痛点：</strong> 由于<strong>历史信息利用不充分</strong>，模型在相似观测下无法区分循环阶段，导致提前终止或无限循环。</li><li><strong>本文切入点：</strong> 作者的直觉是，通过<strong>低成本地感知更长的历史</strong>，并用一个辅助任务<strong>强制模型理解当前所处的循环阶段</strong>，即可解决该问题。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> <strong>历史观测序列</strong> (高维视觉+低维本体感知) + <strong>语言指令</strong> -&gt; <strong>机器人动作</strong></li></ul><ul><li><strong>关键模块 1：</strong> <strong>有效历史感知 (Effective Historical Perception)</strong> - 通过<strong>成本感知采样策略</strong>，对高成本的视觉信息进行<strong>稀疏采样</strong>，对低成本的本体感知信息进行<strong>密集采样</strong>，以极低开销扩展有效感知范围。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>有效历史理解 (Effective Historical Understanding)</strong> - 引入一个<strong>预测任务进度</strong>的辅助任务，通过<strong>多任务学习</strong>迫使模型学习能区分不同循环阶段的特征表示。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li><strong>历史信息的不对称价值：</strong> 对于循环任务，<strong>密集的低维本体感知历史</strong>（如末端执行器位姿）比密集的视觉历史，对判断循环阶段<strong>更关键且成本效益更高</strong>。这揭示了不同模态信息在长时序任务中的价值差异。</li></ul><ul><li><strong>从“感知”到“理解”的必要性：</strong> 仅扩大历史观测窗口（感知）不足以让模型自发理解循环进度。必须引入<strong>显式的监督信号</strong>（如预测进度的辅助任务），才能迫使模型<strong>从“感知历史”升级为“理解历史”</strong>。</li></ul><ul><li><strong>框架的解耦与通用性：</strong> 本文提出的<strong>历史感知与理解框架</strong>是<strong>模型无关 (model-agnostic)</strong> 的。它可以作为<strong>即插即用模块</strong>，显著提升多种现有模仿学习策略（包括VLA模型）执行循环任务的能力，证明了其高度的解耦和通用性。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>评估依赖人工先验：</strong> 自动评估系统依赖<strong>预定义的任务特征</strong>（如接触信号、姿态峰值）来计数。对于<strong>循环特征不明显</strong>或定义模糊的新任务，该评估方法可能失效。</li><li><strong>进度监督过于理想化：</strong> 任务进度的真值（Ground Truth）是基于<strong>时间步线性划分</strong>的，这<strong>假设了任务匀速进行</strong>。对于循环速度不均或包含非循环阶段的复杂任务，这种监督信号可能不准确甚至产生误导。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验中缺乏一个<strong>“朴素长窗口”基线</strong>，即同时对<strong>高维视觉和低维本体感知</strong>进行密集采样。这使得<strong>“成本感知”策略的效率优势</strong>（在保持性能的同时降低计算成本）未能得到最直接的量化证明。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>循环概念的自监督发现：</strong> 研究<strong>无需人工定义循环特征</strong>的自监督计数方法。模型应能从数据中<strong>自动发现和表征“一次循环”</strong>的构成，从而适应更泛化的重复性任务。</li><li><strong>基于反馈的动态循环控制：</strong> 探索<strong>在线调整循环行为</strong>的能力。例如，根据实时物理反馈（如液体混合程度、钉子敲入深度）<strong>动态改变循环的频率、幅度或终止条件</strong>，而不仅仅是执行预设次数。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>中山大学 (Sun Yat-sen University)</li>
+          <li><strong>一句话本质：</strong>通过高效感知和理解历史，让机器人能准确执行指定次数的循环任务。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Yi-Lin Wei, Haoran Liao, Yuhao Lin, Pengyue Wang, Zhizhao Liang, Guiliang Liu, Wei-Shi Zheng</li>
+          <li><strong>PDF：</strong>CycleManip Enabling Cyclic Task Manipulation via Effective Historical Perception and Understanding.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 机器人操作, 策略学习, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的模仿学习策略主要依赖短时间窗口的观测来预测动作。</li><li>核心痛点： 由于历史信息利用不充分，模型在相似观测下无法区分循环阶段，导致提前终止或无限循环。</li><li>本文切入点： 作者的直觉是，通过低成本地感知更长的历史，并用一个辅助任务强制模型理解当前所处的循环阶段，即可解决该问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>历史信息的不对称价值： 对于循环任务，密集的低维本体感知历史（如末端执行器位姿）比密集的视觉历史，对判断循环阶段更关键且成本效益更高。这揭示了不同模态信息在长时序任务中的价值差异。</li><li>从“感知”到“理解”的必要性： 仅扩大历史观测窗口（感知）不足以让模型自发理解循环进度。必须引入显式的监督信号（如预测进度的辅助任务），才能迫使模型从“感知历史”升级为“理解历史”。</li><li>框架的解耦与通用性： 本文提出的历史感知与理解框架是模型无关 (model-agnostic) 的。它可以作为即插即用模块，显著提升多种现有模仿学习策略（包括VLA模型）执行循环任务的能力，证明了其高度的解耦和通用性。</li></ul></section><section><h3>Next Steps</h3><ul><li>循环概念的自监督发现： 研究无需人工定义循环特征的自监督计数方法。模型应能从数据中自动发现和表征“一次循环”的构成，从而适应更泛化的重复性任务。</li><li>基于反馈的动态循环控制： 探索在线调整循环行为的能力。例如，根据实时物理反馈（如液体混合程度、钉子敲入深度）动态改变循环的频率、幅度或终止条件，而不仅仅是执行预设次数。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-12-01 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-12-01.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robust Distributed Cooperative Path-Following and Local Replanning for Multi-UAVs Under Differentiated Low-Altitude Paths · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Robust Distributed Cooperative Path-Following and Local Replanning for Multi-UAVs Under Differentiated Low-Altitude Paths</h1>
+    <div class="muted">提出一种分布式协同策略，让各自飞行的多架无人机能抗风、躲障碍，并准时同步到达。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-25</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.23968v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">UAV</span><span class="tag-mini">导航</span><span class="tag-mini">鲁棒性</span><span class="tag-mini">规划</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.23968v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我将为您深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> Robust Distributed Cooperative Path-Following and Local Replanning for Multi-UAVs Under Differentiated Low-Altitude Paths (面向差异化低空路径的多无人机鲁棒分布式协同路径跟踪与局部重规划)</li><li>  <strong>核心机构：</strong> 西北工业大学 (Northwestern Polytechnical University)</li><li>  <strong>一句话本质：</strong> 提出一种分布式协同策略，让各自飞行的多架无人机能抗风、躲障碍，并准时同步到达。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 多无人机协同主要依赖<strong>中心化调度</strong>，或在简单环境下执行<strong>相同路径</strong>的编队控制。</li><li>  <strong>核心痛点：</strong> 现有分布式方法难以处理<strong>差异化三维路径</strong>的<strong>时间同步</strong>问题，且普遍缺乏抗风扰动和在线避障能力。</li><li>  <strong>本文切入点：</strong> 将复杂的时空协同问题，<strong>降维</strong>为一个<strong>一维时间指标 <code>θ</code> 的同步问题</strong>，通过分布式协议拉齐各自的“进度条”，从而解耦了路径跟踪与时间协同。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> 无人机自身状态、邻居节点信息、预设路径点、障碍物信息 -&gt; <strong>滚转角、过载、地速</strong>等底层控制指令。</li></ul><ul><li>  <strong>关键模块 1：</strong> [<strong>鲁棒路径跟踪</strong>] - 通过调整<strong>纵向-横向的前视角 (<code>η_i</code>)</strong>，结合鲁棒制导律，在有风扰动下也能<strong>有限时间</strong>内消除路径跟踪误差。</li></ul><ul><li>  <strong>关键模块 2：</strong> [<strong>局部路径重规划</strong>] - 遇到障碍物时，在前方可行域内进行<strong>随机采样</strong>，快速找到一条<strong>时间成本最小</strong>的新路径点以绕开障碍。</li></ul><ul><li>  <strong>关键模块 3：</strong> [<strong>分布式时间协同</strong>] - 每个无人机通过与邻居通信，不断调整自身的<strong>时间指标 <code>θ_i</code></strong>，使其与群体保持一致，从而间接调整飞行速度实现<strong>同步到达</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li>  <strong>[协同与控制的解耦]：</strong> 多无人机复杂的<strong>时空协同</strong>问题，可以被<strong>解耦</strong>为两个子问题：1) 各自独立的<strong>鲁棒路径跟踪</strong>（空间问题）；2) 一个共享的<strong>一维时间指标 <code>θ</code> 的对齐</strong>（时间问题）。这种解耦大大降低了系统设计的复杂度。</li></ul><ul><li>  <strong>[误差收敛的鲁棒性]：</strong> 路径跟踪的<strong>最终位置误差</strong>能否收敛为零，不要求制导律中的<strong>前视角误差 (<code>η_i</code>)</strong> 精确为零。只要前视角误差被<strong>约束在一定范围</strong> (<code>|η_i| ≤ δ</code>) 内，系统就能在有限时间内实现<strong>路径误差的完全消除</strong>，这揭示了该制导律的内在鲁棒边界。</li></ul><ul><li>  <strong>[分布式架构的可扩展性]：</strong> 基于<strong>局部通信</strong>的时间指标协同协议具有<strong>良好的可扩展性</strong>。随着无人机数量增加，系统的平均跟踪误差（AE）和时间同步偏差（MD）<strong>没有出现显著恶化</strong>，证明了该分布式架构避免了中心化节点的计算和通信瓶颈。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>通信依赖性强：</strong> 算法高度依赖邻居节点间的持续通信来同步<strong>时间指标 <code>θ_i</code></strong>。在长时间通信中断或强电磁干扰下，协同机制会失效。</li><li>  <strong>避障的局部性：</strong> 局部路径重规划<strong>只考虑眼前障碍</strong>，缺乏全局视野。面对大型或“U”型陷阱类障碍物时，可能导致<strong>路径非最优</strong>甚至规划失败。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  <strong>可扩展性实验的变量控制不足</strong>。不同数量无人机的实验中，路径的复杂度和初始分布是随机的，这可能影响<strong>AE</strong>和<strong>MD</strong>指标的公平比较，未能完全排除场景差异对结果的影响。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  研究<strong>通信受限下的协同策略</strong>。设计一种<strong>预测-补偿机制</strong>，当无人机与邻居失联时，能根据历史数据<strong>预测</strong>群体时间指标 <code>θ</code> 的演化，维持短期的协同飞行能力。</li><li>  探索<strong>全局-局部混合路径规划</strong>。将本文高效的局部避障方法，与一个更高层级的全局路径规划器结合，当局部规划成本过高或陷入困境时，触发<strong>全局路径的重协商</strong>。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>西北工业大学 (Northwestern Polytechnical University)</li>
+          <li><strong>一句话本质：</strong>提出一种分布式协同策略，让各自飞行的多架无人机能抗风、躲障碍，并准时同步到达。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Zimao Sheng, Zirui Yu, Hong&#x27;an Yang</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, UAV, 导航, 鲁棒性, 规划</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 多无人机协同主要依赖中心化调度，或在简单环境下执行相同路径的编队控制。</li><li>核心痛点： 现有分布式方法难以处理差异化三维路径的时间同步问题，且普遍缺乏抗风扰动和在线避障能力。</li><li>本文切入点： 将复杂的时空协同问题，降维为一个一维时间指标 θ 的同步问题，通过分布式协议拉齐各自的“进度条”，从而解耦了路径跟踪与时间协同。</li></ul></section><section><h3>Key Insights</h3><ul><li>[协同与控制的解耦]： 多无人机复杂的时空协同问题，可以被解耦为两个子问题：1) 各自独立的鲁棒路径跟踪（空间问题）；2) 一个共享的一维时间指标 θ 的对齐（时间问题）。这种解耦大大降低了系统设计的复杂度。</li><li>[误差收敛的鲁棒性]： 路径跟踪的最终位置误差能否收敛为零，不要求制导律中的前视角误差 (η_i) 精确为零。只要前视角误差被约束在一定范围 (|η_i| ≤ δ) 内，系统就能在有限时间内实现路径误差的完全消除，这揭示了该制导律的内在鲁棒边界。</li><li>[分布式架构的可扩展性]： 基于局部通信的时间指标协同协议具有良好的可扩展性。随着无人机数量增加，系统的平均跟踪误差（AE）和时间同步偏差（MD）没有出现显著恶化，证明了该分布式架构避免了中心化节点的计算和通信瓶颈。</li></ul></section><section><h3>Next Steps</h3><ul><li>研究通信受限下的协同策略。设计一种预测-补偿机制，当无人机与邻居失联时，能根据历史数据预测群体时间指标 θ 的演化，维持短期的协同飞行能力。</li><li>探索全局-局部混合路径规划。将本文高效的局部避障方法，与一个更高层级的全局路径规划器结合，当局部规划成本过高或陷入困境时，触发全局路径的重协商。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-25 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-25.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drive My Way: Preference Alignment of Vision-Language-Action Model for Personalized Driving · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Drive My Way: Preference Alignment of Vision-Language-Action Model for Personalized Driving</h1>
+    <div class="muted">它让自动驾驶模型能学习并模仿特定用户的长期驾驶习惯，并实时响应其语言指令，实现真正的个性化驾驶。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-27</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.AI, cs.CV, cs.LG, cs.MA</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.25740v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">自动驾驶</span><span class="tag-mini">鲁棒性</span><span class="tag-mini">策略学习</span><span class="tag-mini">多模态</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.25740v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我将为您深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Drive My Way: Preference Alignment of Vision-Language-Action Model for Personalized Driving</li><li><strong>核心机构：</strong> University of California, Riverside</li><li><strong>一句话本质：</strong> 它让自动驾驶模型能学习并模仿特定用户的长期驾驶习惯，并实时响应其语言指令，实现真正的个性化驾驶。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有的自动驾驶系统要么追求通用目标，要么提供少数几个预设的驾驶模式（如“运动”、“舒适”）。</li><li><strong>核心痛点：</strong> 预设模式<strong>无法捕捉个体细微的、长期的驾驶习惯</strong>，也<strong>无法理解实时的、模糊的自然语言指令</strong>（如“我有点累”）。</li><li><strong>本文切入点：</strong> 将驾驶个性化拆解为 <strong>「长期习惯」</strong> 和 <strong>「短期意图」</strong> 两个维度。分别用 <strong>用户画像嵌入 (User Embedding)</strong> 锚定基础风格，再用 <strong>实时语言指令</strong> 进行动态微调。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> <code>[多模态感官数据 + 用户画像 + 语言指令] -&gt; 连续驾驶动作 (油门/刹车/转向)</code></li></ul><ul><li><strong>关键模块 1：</strong> <strong>长时偏好编码器 (Long-term Preference Encoder)</strong> - 通过<strong>对比学习</strong>，将用户的<strong>文本画像</strong>与其<strong>真实驾驶行为轨迹</strong>进行对齐，生成一个代表其长期习惯的<strong>用户嵌入向量</strong>。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>风格感知奖励自适应 (Style-aware Reward Adaptation)</strong> - 根据实时语言指令，<strong>动态调整</strong>强化学习中<strong>安全、效率、舒适度</strong>的奖励权重和参数，将模糊的语言意图转化为<strong>精确的优化目标</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><p>| 洞察方向 | 具体结论 | | :--- | :--- | | <strong>个性化建模的解耦</strong> | <strong>成功的个性化驾驶需要解耦「长期不变的习惯」和「短期变化的意图」</strong>。使用<strong>用户嵌入 (Embedding)</strong> 锚定基础风格，再用<strong>实时指令</strong>进行动态微调，比单一方法更有效。 | | <strong>语义与行为的对齐</strong> | <strong>通过对比学习，可以有效打通用户「我是谁」（文本画像）和「我怎么做」（驾驶数据）之间的壁垒</strong>。这使得模型能从抽象描述中泛化出具体的行为模式，而不仅仅是死记硬背轨迹。 | | <strong>语言指令的量化</strong> | <strong>自然语言指令的价值在于其能被「翻译」为动态的奖励函数</strong>。将“我赶时间”这类模糊指令映射为<strong>效率权重更高</strong>的优化目标，是实现语言控制驾驶的关键。 |</p><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>严重依赖模拟器 (Simulator Dependency)：</strong> 所有数据收集和验证都在 <strong>CARLA 模拟器</strong>中完成，<strong>缺乏真实世界数据的验证</strong>，存在巨大的 <strong>Sim-to-Real Gap</strong>。</li><li><strong>数据规模与多样性有限 (Limited Data Scale &amp; Diversity)：</strong> 仅 30 名驾驶员的数据可能<strong>不足以覆盖广泛的人群特征</strong>，模型对<strong>分布外 (OOD) 用户</strong>的泛化能力存疑。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li><strong>个性化效果的衡量标准不够直接</strong>。采用<strong>基于聚类的对齐分数 (Alignment Score)</strong> 来评估个性化，其有效性依赖于聚类算法的质量，可能<strong>不如更直接的用户盲测对比</strong>（例如，让用户在多个匿名轨迹中识别自己的轨迹）有说服力。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>真实世界部署与在线学习 (Real-World Deployment &amp; Online Learning)：</strong> 将模型安全地迁移到真实车辆，并设计一个<strong>能够在线收集用户反馈、持续迭代个性化偏好</strong>的闭环系统。</li><li><strong>隐式意图推断 (Implicit Intent Inference)：</strong> 从<strong>车内多模态信号（如驾驶员的视线、语音语调、生理信号）中隐式推断短期意图</strong>，实现更无缝、更主动的个性化交互，摆脱对明确语言指令的依赖。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>University of California, Riverside</li>
+          <li><strong>一句话本质：</strong>它让自动驾驶模型能学习并模仿特定用户的长期驾驶习惯，并实时响应其语言指令，实现真正的个性化驾驶。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Zehao Wang, Huaide Jiang, Shuaiwu Dong, Yuping Wang, Hang Qiu, Jiachen Li</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 自动驾驶, 鲁棒性, 策略学习, 多模态</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的自动驾驶系统要么追求通用目标，要么提供少数几个预设的驾驶模式（如“运动”、“舒适”）。</li><li>核心痛点： 预设模式无法捕捉个体细微的、长期的驾驶习惯，也无法理解实时的、模糊的自然语言指令（如“我有点累”）。</li><li>本文切入点： 将驾驶个性化拆解为 「长期习惯」 和 「短期意图」 两个维度。分别用 用户画像嵌入 (User Embedding) 锚定基础风格，再用 实时语言指令 进行动态微调。</li></ul></section><section><h3>Next Steps</h3><ul><li>真实世界部署与在线学习 (Real-World Deployment &amp; Online Learning)： 将模型安全地迁移到真实车辆，并设计一个能够在线收集用户反馈、持续迭代个性化偏好的闭环系统。</li><li>隐式意图推断 (Implicit Intent Inference)： 从车内多模态信号（如驾驶员的视线、语音语调、生理信号）中隐式推断短期意图，实现更无缝、更主动的个性化交互，摆脱对明确语言指令的依赖。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-27 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-27.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

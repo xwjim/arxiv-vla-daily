@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CtrlAttack: A Unified Attack on World-Model Control in Diffusion Models · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>CtrlAttack: A Unified Attack on World-Model Control in Diffusion Models</h1>
+    <div class="muted">发现并利用运动轨迹这一新攻击面，通过时序结构化扰动，系统性地破坏视频生成模型的动态过程。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-13</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV, cs.AI, cs.CR</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.13435v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">多传感器融合</span><span class="tag-mini">视频生成</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.13435v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖学术研究员，我将为您精准拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> CtrlAttack: A Unified Attack on World-Model Control in Diffusion Models (对扩散模型中世界模型控制的统一攻击)</li><li><strong>核心机构：</strong> 武汉大学、南洋理工大学</li><li><strong>一句话本质：</strong> 发现并利用<strong>运动轨迹</strong>这一新攻击面，通过时序结构化扰动，系统性地破坏视频生成模型的动态过程。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 对抗攻击主要集中在扰动静态输入，如<strong>图像像素</strong>、<strong>文本提示</strong>或<strong>隐空间编码</strong>。</li><li><strong>核心痛点：</strong> 现有攻击无法有效干预视频生成的<strong>时序动态过程</strong>，难以系统性地篡改物体的运动逻辑。</li><li><strong>本文切入点：</strong> 将<strong>轨迹控制信号</strong>本身视为一个全新的、直接影响模型内部<strong>状态转移</strong>的动态攻击面。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> (原始图像 + 目标轨迹) + <strong>低维时序扰动参数</strong> -&gt; <strong>运动被精准篡改</strong>的高清视频。</li></ul><ul><li><strong>关键模块 1：</strong> <strong>低维速度场 (Low-dimensional Velocity Field)</strong></li><li>将攻击扰动参数化为一个<strong>平滑、低维</strong>的速度场，而非逐帧的独立噪声。这确保了攻击在时间维度上的<strong>连续性和结构性</strong>。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>时序积分 (Temporal Integration)</strong></li><li>将速度场随时间积分，生成一个<strong>累积的、连续的位移场</strong>。该位移场被用于系统性地、持续地扭曲模型对运动的理解。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[新攻击维度]：</strong> 首次揭示了 I2V 模型中的<strong>轨迹控制机制</strong>是一个根本性的、区别于内容攻击的<strong>新攻击维度</strong>。攻击者可以直接操纵模型的<strong>动态生成逻辑</strong>，而非仅仅是视觉内容。</li></ul><ul><li><strong>[结构化扰动有效性]：</strong> <strong>时序上平滑、结构化</strong>的扰动远比离散、独立的噪声更具破坏力。这是因为视频模型本身依赖于<strong>平滑的状态转移</strong>假设，一个“连贯的谎言”能更有效地欺骗它。</li></ul><ul><li><strong>[机制普适性]：</strong> 这种脆弱性是<strong>模型内在的</strong>，而非特定实现的缺陷。无论在能获取梯度的<strong>白盒</strong>场景，还是只能观察输出的<strong>黑盒</strong>场景，该攻击都同样有效，证明了其普适性。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>单目标局限：</strong> 攻击目前仅针对<strong>单个物体的轨迹</strong>，未扩展到多物体交互或更复杂的场景动态。</li><li><strong>依赖外部评估器：</strong> 黑盒攻击的效果依赖于<strong>外部追踪器</strong>的准确性，追踪器的误差会影响攻击优化的效率和精度。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>缺乏与“朴素基线”的对比，例如直接对整个目标轨迹进行<strong>简单的平移或缩放</strong>。这使得“时序结构化”的真正增益不够突出。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>多智能体交互攻击：</strong> 设计能同时操纵<strong>多个物体轨迹</strong>及其相互关系的协同攻击策略，探索模型对复杂场景动力学的理解漏洞。</li><li><strong>时序鲁棒性防御：</strong> 基于本文发现的攻击范式，开发针对性的<strong>防御机制</strong>。例如，通过对抗性训练，让模型学会辨别和抵抗这种<strong>平滑的恶意控制信号</strong>。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>武汉大学、南洋理工大学</li>
+          <li><strong>一句话本质：</strong>发现并利用运动轨迹这一新攻击面，通过时序结构化扰动，系统性地破坏视频生成模型的动态过程。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Shuhan Xu, Siyuan Liang, Hongling Zheng, Yong Luo, Han Hu, Lefei Zhang, Dacheng Tao</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 多传感器融合, 视频生成, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 对抗攻击主要集中在扰动静态输入，如图像像素、文本提示或隐空间编码。</li><li>核心痛点： 现有攻击无法有效干预视频生成的时序动态过程，难以系统性地篡改物体的运动逻辑。</li><li>本文切入点： 将轨迹控制信号本身视为一个全新的、直接影响模型内部状态转移的动态攻击面。</li></ul></section><section><h3>Key Insights</h3><ul><li>[新攻击维度]： 首次揭示了 I2V 模型中的轨迹控制机制是一个根本性的、区别于内容攻击的新攻击维度。攻击者可以直接操纵模型的动态生成逻辑，而非仅仅是视觉内容。</li><li>[结构化扰动有效性]： 时序上平滑、结构化的扰动远比离散、独立的噪声更具破坏力。这是因为视频模型本身依赖于平滑的状态转移假设，一个“连贯的谎言”能更有效地欺骗它。</li><li>[机制普适性]： 这种脆弱性是模型内在的，而非特定实现的缺陷。无论在能获取梯度的白盒场景，还是只能观察输出的黑盒场景，该攻击都同样有效，证明了其普适性。</li></ul></section><section><h3>Next Steps</h3><ul><li>多智能体交互攻击： 设计能同时操纵多个物体轨迹及其相互关系的协同攻击策略，探索模型对复杂场景动力学的理解漏洞。</li><li>时序鲁棒性防御： 基于本文发现的攻击范式，开发针对性的防御机制。例如，通过对抗性训练，让模型学会辨别和抵抗这种平滑的恶意控制信号。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-13 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-13.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

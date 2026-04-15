@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Convex Decomposition via Feature Fields · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Learning Convex Decomposition via Feature Fields</h1>
+    <div class="muted">将三维形状的凸分解问题，创新性地转化为一个可学习的、自监督的 连续特征场聚类问题，实现了首个开放世界模型。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-10</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.09285v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">三维表征</span><span class="tag-mini">策略学习</span><span class="tag-mini">计算机视觉</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.09285v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，请看以下对论文《Learning Convex Decomposition via Feature Fields》的深度认知与洞察提取。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> Learning Convex Decomposition via Feature Fields (通过特征场学习凸分解)</li><li>  <strong>核心机构：</strong> NVIDIA, The University of Texas at Austin</li><li>  <strong>一句话本质：</strong> 将三维形状的凸分解问题，创新性地转化为一个可学习的、自监督的 <strong>连续特征场聚类问题</strong>，实现了首个开放世界模型。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 传统方法依赖计算几何的搜索算法，而早期学习方法则局限于特定类别物体的形状重建。</li><li>  <strong>核心痛点：</strong> 传统方法<strong>计算成本极高</strong>，而现有学习方法<strong>泛化能力差</strong>，无法处理开放世界（多样、未知）的三维模型。</li><li>  <strong>本文切入点：</strong> 核心直觉是放弃直接优化离散的几何块，转而学习一个<strong>连续的特征场</strong>。如果两个点在几何上“应该”属于同一个凸体，那么它们在特征空间中的距离就应该很近。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> 3D 形状 (点云) -&gt; <strong>连续特征场</strong> -&gt; 递归聚类 -&gt; <strong>一组凸包</strong></li><li>  <strong>关键模块 1：</strong> <strong>对比特征学习 (Contrastive Feature Learning)</strong> - 基于凸性的几何定义（两点连线是否在物体内部）构建自监督信号，<strong>拉近“凸点对”的特征，推远“非凸点对”的特征</strong>。</li><li>  <strong>关键模块 2：</strong> <strong>递归分解 (Recursive Decomposition)</strong> - 对学到的特征场进行递归二分聚类，直到每个子块的<strong>凹度</strong>低于用户设定的阈值，从而灵活控制分解的粒度。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li>  <strong>问题重构 (Problem Reframing)：</strong> 证明了<strong>凸分解这个纯几何优化问题，可以成功转化为一个特征学习问题</strong>。通过基于几何先验的自监督损失，模型绕开了对标注数据的依赖和传统方法的组合爆炸，开辟了新范式。</li><li>  <strong>表征解耦 (Representation Decoupling)：</strong> 学到的<strong>特征场是一种与输入表征无关的中间层</strong>。这使得在点云上训练的模型，能直接泛化到网格、CAD 模型甚至高斯泼溅（Gaussian Splats）等多种数据格式，实现了真正的“开放世界”能力。</li><li>  <strong>粒度解耦 (Granularity Decoupling)：</strong> <strong>特征学习过程与最终分解的精细度完全分离</strong>。同一套学好的特征，可以在推理阶段通过调整<strong>凹度阈值</strong>，生成从粗到细任意粒度的分解结果，无需重新训练。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  对<strong>复杂的薄壁结构</strong>（如风扇框架）处理效果不佳，容易产生破碎的分解。</li><li>  模型在干净的单个物体上训练，对于<strong>大规模场景或有严重残缺的几何体</strong>，其泛化能力未经证实。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  论文缺乏对<strong>核心损失函数设计的消融实验</strong>。例如，没有与其他可能的自监督几何损失（如回归损失）进行对比，来证明其对比学习框架的优越性。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>场景级分解 (Scene-Level Decomposition)：</strong> 如何将特征场方法从单个物体扩展到包含遮挡和交互的<strong>复杂三维场景</strong>？这需要模型具备处理不完整信息和多实例关联的能力。</li><li>  <strong>语义感知分解 (Semantics-Aware Decomposition)：</strong> 如何将<strong>语义或物理功能先验</strong>（如物体的关节、运动部件）融入特征学习中？这将使分解结果不仅在几何上是凸的，在功能上也更有意义。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>NVIDIA, The University of Texas at Austin</li>
+          <li><strong>一句话本质：</strong>将三维形状的凸分解问题，创新性地转化为一个可学习的、自监督的 连续特征场聚类问题，实现了首个开放世界模型。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Yuezhi Yang, Qixing Huang, Mikaela Angelina Uy, Nicholas Sharp</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 三维表征, 策略学习, 计算机视觉</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统方法依赖计算几何的搜索算法，而早期学习方法则局限于特定类别物体的形状重建。</li><li>核心痛点： 传统方法计算成本极高，而现有学习方法泛化能力差，无法处理开放世界（多样、未知）的三维模型。</li><li>本文切入点： 核心直觉是放弃直接优化离散的几何块，转而学习一个连续的特征场。如果两个点在几何上“应该”属于同一个凸体，那么它们在特征空间中的距离就应该很近。</li></ul></section><section><h3>Key Insights</h3><ul><li>问题重构 (Problem Reframing)： 证明了凸分解这个纯几何优化问题，可以成功转化为一个特征学习问题。通过基于几何先验的自监督损失，模型绕开了对标注数据的依赖和传统方法的组合爆炸，开辟了新范式。</li><li>表征解耦 (Representation Decoupling)： 学到的特征场是一种与输入表征无关的中间层。这使得在点云上训练的模型，能直接泛化到网格、CAD 模型甚至高斯泼溅（Gaussian Splats）等多种数据格式，实现了真正的“开放世界”能力。</li><li>粒度解耦 (Granularity Decoupling)： 特征学习过程与最终分解的精细度完全分离。同一套学好的特征，可以在推理阶段通过调整凹度阈值，生成从粗到细任意粒度的分解结果，无需重新训练。</li></ul></section><section><h3>Next Steps</h3><ul><li>场景级分解 (Scene-Level Decomposition)： 如何将特征场方法从单个物体扩展到包含遮挡和交互的复杂三维场景？这需要模型具备处理不完整信息和多实例关联的能力。</li><li>语义感知分解 (Semantics-Aware Decomposition)： 如何将语义或物理功能先验（如物体的关节、运动部件）融入特征学习中？这将使分解结果不仅在几何上是凸的，在功能上也更有意义。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-10 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-10.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

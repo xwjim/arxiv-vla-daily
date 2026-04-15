@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC-World: In-Context Generation for Shared World Modeling · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>IC-World: In-Context Generation for Shared World Modeling</h1>
+    <div class="muted">用上下文生成方法，让多视角视频描绘同一个一致的世界。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-12-02</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2512.02793v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">三维表征</span><span class="tag-mini">策略学习</span><span class="tag-mini">计算机视觉</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2512.02793v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/IC-World In-Context Generation for Shared World Modeling.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一位资深科学家，我将为你拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> IC-World: In-Context Generation for Shared World Modeling (IC-World：基于上下文生成的共享世界建模)</li><li><strong>核心机构：</strong> 南洋理工大学、Tencent</li><li><strong>一句话本质：</strong> 用<strong>上下文生成</strong>方法，让多视角视频描绘同一个一致的世界。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有视频模型一次只从<strong>单个视角</strong>生成一个视频。</li><li><strong>核心痛点：</strong> <strong>独立、串行</strong>地生成多视角视频，会导致场景在<strong>几何</strong>和<strong>动态</strong>上严重不一致。</li><li><strong>本文切入点：</strong> 直觉上，大型模型可能已具备理解“共享上下文”的潜能。作者通过将多张输入图<strong>拼接成一张网格图</strong>，来“激活”这种<strong>上下文生成能力</strong>，从而实现并行、一致的生成。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong></li><li><strong>输入：</strong> 多张不同视角的图片 + 共享文本提示</li><li><strong>输出：</strong> 多个在几何与动态上<strong>一致</strong>的视频</li></ul><ul><li><strong>关键模块 1：</strong> <strong>In-Context Generation (上下文生成框架)</strong></li><li>将多个输入图像<strong>拼接成一个网格图像</strong>，并搭配特定指令，诱导模型<strong>并行生成</strong>所有视频，从而共享上下文信息。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>Shared World Reward Models (共享世界奖励模型)</strong></li><li>设计两个奖励模型（基于 <strong>3D 重建</strong>的几何一致性 + 基于 <strong>3D 点云追踪</strong>的动态一致性），通过<strong>强化学习 (GRPO)</strong> 精调模型，强制增强视频间的一致性。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><p>| 洞察方向 | 具体结论 | | :--- | :--- | | <strong>模型潜能</strong> | 大型视频模型已内蕴<strong>“上下文生成”</strong>能力。通过<strong>拼接输入（网格图）</strong>和特定指令即可激活，无需改变模型结构。 | | <strong>一致性量化</strong> | 视频间的“一致性”这一模糊概念，可通过<strong>3D重建（几何）</strong>和<strong>3D点云追踪（动态）</strong>进行量化，并转化为可优化的<strong>奖励信号</strong>。 | | <strong>优化范式</strong> | 对于“一致性”这类涌现属性，基于奖励信号的<strong>强化学习（GRPO）</strong>比监督微调（SFT）<strong>更具数据效率</strong>，能用少量数据实现目标。 |</p><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[分辨率损失]</strong> 将多图拼接成网格会降低单张图片的有效分辨率，导致生成视频的<strong>清晰度下降</strong>。</li><li><strong>[可扩展性瓶颈]</strong> 随着视角数量（N）增加，维持所有视频间的一致性变得极具挑战，模型性能会<strong>显著下降</strong>。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>缺乏对视角数量（N）增加后<strong>性能衰减</strong>的系统性测试，目前仅验证了 N=2 的最简情况。</li><li>未分析奖励模型（Pi3, SpatialTracker）自身误差对强化学习过程的<strong>潜在负面影响</strong>。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[更优的上下文融合]</strong> 探索<strong>非像素级拼接</strong>的上下文融合机制（如交叉注意力），在不牺牲分辨率的前提下实现多视角信息交互。</li><li><strong>[交互式世界模型]</strong> 从被动生成演进到主动交互，研究如何在生成后对共享世界进行<strong>动态干预</strong>（如控制特定视角或物体）。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>南洋理工大学、Tencent</li>
+          <li><strong>一句话本质：</strong>用上下文生成方法，让多视角视频描绘同一个一致的世界。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Fan Wu, Jiacheng Wei, Ruibo Li, Yi Xu, Junyou Li, Deheng Ye, Guosheng Lin</li>
+          <li><strong>PDF：</strong>IC-World In-Context Generation for Shared World Modeling.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 三维表征, 策略学习, 计算机视觉</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有视频模型一次只从单个视角生成一个视频。</li><li>核心痛点： 独立、串行地生成多视角视频，会导致场景在几何和动态上严重不一致。</li><li>本文切入点： 直觉上，大型模型可能已具备理解“共享上下文”的潜能。作者通过将多张输入图拼接成一张网格图，来“激活”这种上下文生成能力，从而实现并行、一致的生成。</li></ul></section><section><h3>Next Steps</h3><ul><li>[更优的上下文融合] 探索非像素级拼接的上下文融合机制（如交叉注意力），在不牺牲分辨率的前提下实现多视角信息交互。</li><li>[交互式世界模型] 从被动生成演进到主动交互，研究如何在生成后对共享世界进行动态干预（如控制特定视角或物体）。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-12-02 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-12-02.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

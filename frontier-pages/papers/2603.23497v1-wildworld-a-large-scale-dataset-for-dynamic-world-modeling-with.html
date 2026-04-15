@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WildWorld: A Large-Scale Dataset for Dynamic World Modeling with Actions and Explicit State toward Generative ARPG · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>WildWorld: A Large-Scale Dataset for Dynamic World Modeling with Actions and Explicit State toward Generative ARPG</h1>
+    <div class="muted">通过采集游戏中的显式状态与复杂动作，构建新数据集，推动世界模型从像素预测走向结构化动力学学习。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-03-25</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2603.23497v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">数据集</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.23497v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一位顶尖学术研究员，我已完成对论文《WildWorld》的深度拆解。以下是核心信息的提取与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> WildWorld: A Large-Scale Dataset for Dynamic World Modeling with Actions and Explicit State toward Generative ARPG</li><li>  <strong>核心机构：</strong> 盛趣游戏 (Shanda Games) / Alaya Studio</li><li>  <strong>一句话本质：</strong> 通过采集游戏中的<strong>显式状态</strong>与<strong>复杂动作</strong>，构建新数据集，推动世界模型从像素预测走向结构化动力学学习。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 现有世界模型通过<strong>视频数据</strong>学习<strong>动作条件下的动态变化</strong>。</li><li>  <strong>核心痛点：</strong> 现有数据集的<strong>动作简单</strong>且与<strong>像素变化强耦合</strong>，导致模型难以学习<strong>世界内在状态</strong>的演化规律。</li><li>  <strong>本文切入点：</strong> 世界演化由<strong>动作驱动状态</strong>，状态再决定观测。从游戏引擎中直接提取<strong>显式状态数据</strong>，可以解耦状态与像素，让模型学习更本质的动态。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> AAA 游戏《怪物猎人：荒野》的<strong>实时运行数据</strong> -&gt; 包含<strong>视频、动作、角色骨骼、世界状态、相机位姿、深度图</strong>的<strong>多模态同步数据集 (WildWorld)</strong>。</li><li>  <strong>关键模块 1：</strong> <strong>数据采集平台 (Data Acquisition Platform)</strong> - 从游戏引擎和渲染管线中，<strong>同步记录</strong>玩家动作、世界状态（如HP、位置）和视觉观测（RGB、深度图）等多源数据。</li><li>  <strong>关键模块 2：</strong> <strong>WildBench 评估基准 (WildBench Benchmark)</strong> - 提出<strong>动作跟随度 (Action Following)</strong> 和 <strong>状态对齐度 (State Alignment)</strong> 两个新指标，量化模型对复杂动作的响应和对世界状态演化的预测准确性。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li>  <strong>[评估指标]：</strong> 传统的视频质量指标（如 VBench）在<strong>复杂交互场景下已饱和</strong>，无法区分模型在<strong>遵循指令</strong>和<strong>维持状态一致性</strong>上的核心能力差异。</li><li>  <strong>[控制方式]：</strong> <strong>显式的视觉信号</strong>（如骨骼视频）作为控制输入，能<strong>更强地约束模型的交互行为</strong>（动作/状态对齐度高），但可能<strong>牺牲生成视频的视觉质量</strong>。</li><li>  <strong>[长期一致性]：</strong> <strong>自回归式地预测未来状态</strong>是实现真正世界模型的关键，但实验表明<strong>误差会随时间累积</strong>，显著降低模型在长时序任务中<strong>动作跟随的准确性</strong>。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>[领域单一性]</strong> 数据完全来源于<strong>单一游戏《怪物猎人》</strong>，其物理规律和交互范式固定，模型学到的动态知识可能<strong>难以泛化到现实世界</strong>。</li><li>  <strong>[智能体行为局限]</strong> 游戏玩法由<strong>内置的 NPC AI</strong> 驱动，其行为模式可能相对<strong>固定或可预测</strong>，缺乏人类玩家的创造性，可能导致数据集中的<strong>行为分布存在偏差</strong>。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  在提出 <code>StateCtrl</code> 模型时，<strong>缺乏充分的消融实验</strong>来验证其状态编码模块（如实体级建模、预测器损失函数）各组件的<strong>独立有效性</strong>。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>[因果建模]</strong> 探索<strong>结构化因果模型</strong>，显式建模“<strong>动作-&gt;状态-&gt;像素</strong>”的因果链条，强制状态成为视觉变化的<strong>唯一媒介</strong>，以提升泛化与可解释性。</li><li>  <strong>[通用状态表征]</strong> 研究如何从<strong>纯视觉数据中学习出类似 WildWorld 的、解耦且有意义的状态表征</strong>，将本文的洞见推广到无需游戏引擎的更广泛场景。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>盛趣游戏 (Shanda Games) / Alaya Studio</li>
+          <li><strong>一句话本质：</strong>通过采集游戏中的显式状态与复杂动作，构建新数据集，推动世界模型从像素预测走向结构化动力学学习。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Zhen Li, Zian Meng, Shuwei Shi, Wenshuo Peng, Yuwei Wu, Bo Zheng, Chuanhao Li, Kaipeng Zhang</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 数据集, 评测基准, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有世界模型通过视频数据学习动作条件下的动态变化。</li><li>核心痛点： 现有数据集的动作简单且与像素变化强耦合，导致模型难以学习世界内在状态的演化规律。</li><li>本文切入点： 世界演化由动作驱动状态，状态再决定观测。从游戏引擎中直接提取显式状态数据，可以解耦状态与像素，让模型学习更本质的动态。</li></ul></section><section><h3>Key Insights</h3><ul><li>[评估指标]： 传统的视频质量指标（如 VBench）在复杂交互场景下已饱和，无法区分模型在遵循指令和维持状态一致性上的核心能力差异。</li><li>[控制方式]： 显式的视觉信号（如骨骼视频）作为控制输入，能更强地约束模型的交互行为（动作/状态对齐度高），但可能牺牲生成视频的视觉质量。</li><li>[长期一致性]： 自回归式地预测未来状态是实现真正世界模型的关键，但实验表明误差会随时间累积，显著降低模型在长时序任务中动作跟随的准确性。</li></ul></section><section><h3>Next Steps</h3><ul><li>[因果建模] 探索结构化因果模型，显式建模“动作-&gt;状态-&gt;像素”的因果链条，强制状态成为视觉变化的唯一媒介，以提升泛化与可解释性。</li><li>[通用状态表征] 研究如何从纯视觉数据中学习出类似 WildWorld 的、解耦且有意义的状态表征，将本文的洞见推广到无需游戏引擎的更广泛场景。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-03-25 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-03-25.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

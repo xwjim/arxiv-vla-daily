@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H-WM: Robotic Task and Motion Planning Guided by Hierarchical World Model · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>H-WM: Robotic Task and Motion Planning Guided by Hierarchical World Model</h1>
+    <div class="muted">通过分层世界模型，融合符号逻辑与视觉预测，为机器人长时程任务提供稳定引导。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-02-12</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2602.11291v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">规划</span><span class="tag-mini">策略学习</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2602.11291v2" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名资深科学家，我将为你深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> H-WM: 由分层世界模型引导的机器人任务与运动规划</li><li>  <strong>核心机构：</strong> 华为诺亚方舟实验室</li><li>  <strong>一句话本质：</strong> 通过分层世界模型，融合<strong>符号逻辑</strong>与<strong>视觉预测</strong>，为机器人长时程任务提供稳定引导。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 现有机器人控制多采用<strong>端到端 VLA 模型</strong>（视觉-语言-动作），或用 <strong>LLM 进行任务分解</strong>。</li><li>  <strong>核心痛点：</strong> 在<strong>长时程任务</strong>中，端到端模型会因<strong>误差累积</strong>而失败；纯语言规划则<strong>缺乏物理世界的视觉接地</strong>。</li><li>  <strong>本文切入点：</strong> 作者认为，将<strong>符号规划的长期稳定性</strong>与<strong>视觉预测的感知接地能力</strong>进行分层结合，能打破僵局。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong></li><li>  输入：<strong>当前观测</strong> + <strong>机器人状态</strong> + <strong>任务指令</strong></li><li>  输出：<strong>下一步逻辑动作/状态</strong> + <strong>下一步视觉子目标特征</strong>，并最终指导 VLA 输出<strong>底层动作</strong>。</li></ul><ul><li>  <strong>关键模块 1：</strong> [<strong>逻辑世界模型 (Logical World Model)</strong>] - 基于 LLM，预测<strong>未来一系列符号化的逻辑状态和动作</strong>，提供全局一致的任务规划骨架。</li><li>  <strong>关键模块 2：</strong> [<strong>视觉世界模型 (Visual World Model)</strong>] - 将抽象的逻辑规划<strong>接地到视觉空间</strong>，预测出符合逻辑状态的<strong>潜在视觉子目标特征 (latent feature)</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li>  <strong>[分层引导的协同效应]：</strong> <strong>符号逻辑规划</strong>为长时程任务提供了<strong>稳定的结构性骨架</strong>，防止低级策略漂移。而<strong>视觉子目标</strong>则将抽象的逻辑<strong>有效接地</strong>到物理世界，确保规划的可执行性。</li></ul><ul><li>  <strong>[引导表征的抽象层级]：</strong> 在视觉引导中，预测<strong>紧凑的潜在特征 (latent features)</strong> 比生成<strong>像素级图像</strong>更有效。像素生成会引入不必要的细节和噪声，而<strong>潜在特征</strong>更能直击 VLA 策略所需的核心状态信息。</li></ul><ul><li>  <strong>[规划语言的结构性]：</strong> <strong>结构化的符号逻辑</strong>作为中间表示，比<strong>非结构化的自然语言</strong>能更<strong>精确、无歧义</strong>地指导下游策略。这减少了语义理解的模糊性，提升了任务执行的可靠性。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>[数据标注成本高]</strong>：需要将机器人轨迹数据与<strong>符号化的逻辑状态</strong>进行对齐和标注，这个过程依赖大量人工，扩展性受限。</li><li>  <strong>[系统复杂性增加]</strong>：相比端到端模型，H-WM 引入了<strong>多个独立训练的模块</strong>（逻辑模型、视觉模型、VLA策略），增加了训练和部署的复杂度。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  论文中用于“视觉到符号”转换的 VLM 模块是系统的关键入口，但其<strong>性能瓶颈和错误率对整个系统的影响</strong>缺乏深入分析。</li><li>  真实世界实验的<strong>场景单一且规模有限</strong>（仅一个8步任务），不足以充分证明模型在复杂动态环境中的泛化性和鲁棒性。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>[端到端学习逻辑表征]</strong>：探索如何让模型<strong>自动从原始多模态数据中涌现出符号化的逻辑表征和规则</strong>，摆脱对预定义逻辑和人工标注的依赖。</li><li>  <strong>[统一世界模型]</strong>：将当前分离的逻辑和视觉世界模型融合成一个<strong>统一的、跨模态的分层生成模型</strong>，在不同抽象层级上联合预测未来，实现更紧密的协同。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>华为诺亚方舟实验室</li>
+          <li><strong>一句话本质：</strong>通过分层世界模型，融合符号逻辑与视觉预测，为机器人长时程任务提供稳定引导。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Jinbang Huang, Wenyuan Chen, Zhiyuan Li, Oscar Pang, Xiao Hu, Lingfeng Zhang, Yuanzhao Hu, Zhanguang Zhang, Mark Coates, Tongtong Cao, Xingyue Quan, Yingxue Zhang</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 规划, 策略学习, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有机器人控制多采用端到端 VLA 模型（视觉-语言-动作），或用 LLM 进行任务分解。</li><li>核心痛点： 在长时程任务中，端到端模型会因误差累积而失败；纯语言规划则缺乏物理世界的视觉接地。</li><li>本文切入点： 作者认为，将符号规划的长期稳定性与视觉预测的感知接地能力进行分层结合，能打破僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[分层引导的协同效应]： 符号逻辑规划为长时程任务提供了稳定的结构性骨架，防止低级策略漂移。而视觉子目标则将抽象的逻辑有效接地到物理世界，确保规划的可执行性。</li><li>[引导表征的抽象层级]： 在视觉引导中，预测紧凑的潜在特征 (latent features) 比生成像素级图像更有效。像素生成会引入不必要的细节和噪声，而潜在特征更能直击 VLA 策略所需的核心状态信息。</li><li>[规划语言的结构性]： 结构化的符号逻辑作为中间表示，比非结构化的自然语言能更精确、无歧义地指导下游策略。这减少了语义理解的模糊性，提升了任务执行的可靠性。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端学习逻辑表征]：探索如何让模型自动从原始多模态数据中涌现出符号化的逻辑表征和规则，摆脱对预定义逻辑和人工标注的依赖。</li><li>[统一世界模型]：将当前分离的逻辑和视觉世界模型融合成一个统一的、跨模态的分层生成模型，在不同抽象层级上联合预测未来，实现更紧密的协同。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-02-12 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-02-12.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

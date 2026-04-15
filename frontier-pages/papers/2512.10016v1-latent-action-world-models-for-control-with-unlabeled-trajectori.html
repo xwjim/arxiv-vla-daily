@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latent Action World Models for Control with Unlabeled Trajectories · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Latent Action World Models for Control with Unlabeled Trajectories</h1>
+    <div class="muted">用统一的潜动作空间，让世界模型能同时从少量带动作和大量无动作的数据中学习。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-12-11</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.LG</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2512.10016v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">动作表示</span><span class="tag-mini">策略学习</span><span class="tag-mini">时序预测</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2512.10016v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Latent Action World Models for Control with Unlabeled Trajectories.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖学术研究员，我将为你深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Latent Action World Models for Control with Unlabeled Trajectories (用于无标签轨迹控制的潜动作世界模型)</li><li><strong>核心机构：</strong> Technical University of Munich, Volkswagen Group</li><li><strong>一句话本质：</strong> 用统一的<strong>潜动作空间</strong>，让世界模型能同时从少量带动作和大量无动作的数据中学习。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 传统的离线强化学习和世界模型，严重依赖带有<strong>动作标签</strong>的轨迹数据进行训练。</li><li><strong>核心痛点：</strong> 现实世界中，获取带<strong>动作标签</strong>的数据成本高昂且稀缺，而无标签的视频数据却海量存在。</li><li><strong>本文切入点：</strong> 模仿人类既能通过互动学习，也能通过观察学习。作者构想了一个<strong>共享的潜动作空间</strong>，将真实动作和从无标签视频中“推断”出的动作进行对齐。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 混合数据集（少量<strong>带动作标签</strong>的轨迹 + 大量<strong>无动作标签</strong>的轨迹） -&gt; 一个能在<strong>潜动作空间</strong>中进行规划的<strong>世界模型</strong>和<strong>控制策略</strong>。</li></ul><p>| 数据类型 | 核心操作 | 目标 | | :--- | :--- | :--- | | <strong>带动作标签数据</strong> | <code>(状态, 真实动作)</code> -&gt; <code>潜动作</code> | 学习一个从真实动作到潜动作的映射。 | | <strong>无动作标签数据</strong> | <code>(当前状态, 下一帧观测)</code> -&gt; <code>潜动作</code> | 通过<strong>逆动力学模型</strong>，从状态变化中反推出应有的潜动作。 |</p><ul><li><strong>关键模块 1：</strong> <strong>共享动力学模型 (Shared Dynamics Model)</strong> - 无论潜动作来自哪种数据，该模型都负责在<strong>潜动作空间</strong>中预测未来的状态，从而统一了两种数据源的学习过程。</li><li><strong>关键模块 2：</strong> <strong>双路潜动作编码器 (Dual-Path Latent Action Encoder)</strong> - 这是一个条件化的编码器，根据输入数据是否包含<strong>动作标签</strong>，灵活选择上述表格中的一种方式来推断<strong>潜动作</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[数据桥梁]：</strong> <strong>潜动作空间</strong>是连接“直接互动经验”（有动作）和“被动观察经验”（无动作）的关键桥梁。它使得模型能用一个统一的动力学模型，消化来源和形式完全不同的数据。</li><li><strong>[效率飞跃]：</strong> 显式地利用无标签数据进行世界模型训练，能极大提升样本效率。模型仅用约 <strong>1/10 的动作标签数据</strong>，就能达到甚至超越纯靠标签数据训练的基线模型性能。</li><li><strong>[表征优势]：</strong> 直接在<strong>潜动作空间</strong>中学习策略，比“先用逆动力学模型给无标签数据打上伪标签，再进行学习”的方式更有效。因为<strong>潜动作</strong>为策略学习提供了更平滑、更具结构性的<strong>归纳偏置</strong>。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[行为多样性难题]</strong> 当无标签数据中包含多种风格迥异（例如：专家、新手、探索）的行为时，训练一个<strong>统一的逆动力学模型</strong>来准确推断潜动作变得极其困难。</li><li><strong>[奖励信号依赖]</strong> 整个框架依然依赖奖励信号进行最终的策略学习，未能完全实现从纯粹的、无奖励的观察视频中学习到有意义的控制能力。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文固定使用 <strong>5%</strong> 的有标签数据进行实验，但缺乏对<strong>这一比例变化</strong>的消融研究。因此，我们无法得知模型性能对有标签数据的依赖度曲线，即在标签数据极少（如&lt;1%）或更多时，该方法的鲁棒性如何。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[解耦行为表征]</strong> 能否设计一种更高级的<strong>潜动作空间</strong>，使其能够解耦出“做了什么”（what）和“怎么做”（how），从而更好地融合来自不同行为模式的数据？</li><li><strong>[无监督预训练]</strong> 能否将此框架扩展为一个两阶段过程：首先在海量无奖励视频上预训练一个通用的<strong>世界模型</strong>和<strong>潜动作空间</strong>，然后再用少量带奖励和动作的数据进行微调，以解决特定任务？</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>Technical University of Munich, Volkswagen Group</li>
+          <li><strong>一句话本质：</strong>用统一的潜动作空间，让世界模型能同时从少量带动作和大量无动作的数据中学习。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Marvin Alles, Xingyuan Zhang, Patrick van der Smagt, Philip Becker-Ehmck</li>
+          <li><strong>PDF：</strong>Latent Action World Models for Control with Unlabeled Trajectories.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 动作表示, 策略学习, 时序预测</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的离线强化学习和世界模型，严重依赖带有动作标签的轨迹数据进行训练。</li><li>核心痛点： 现实世界中，获取带动作标签的数据成本高昂且稀缺，而无标签的视频数据却海量存在。</li><li>本文切入点： 模仿人类既能通过互动学习，也能通过观察学习。作者构想了一个共享的潜动作空间，将真实动作和从无标签视频中“推断”出的动作进行对齐。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据桥梁]： 潜动作空间是连接“直接互动经验”（有动作）和“被动观察经验”（无动作）的关键桥梁。它使得模型能用一个统一的动力学模型，消化来源和形式完全不同的数据。</li><li>[效率飞跃]： 显式地利用无标签数据进行世界模型训练，能极大提升样本效率。模型仅用约 1/10 的动作标签数据，就能达到甚至超越纯靠标签数据训练的基线模型性能。</li><li>[表征优势]： 直接在潜动作空间中学习策略，比“先用逆动力学模型给无标签数据打上伪标签，再进行学习”的方式更有效。因为潜动作为策略学习提供了更平滑、更具结构性的归纳偏置。</li></ul></section><section><h3>Next Steps</h3><ul><li>[解耦行为表征] 能否设计一种更高级的潜动作空间，使其能够解耦出“做了什么”（what）和“怎么做”（how），从而更好地融合来自不同行为模式的数据？</li><li>[无监督预训练] 能否将此框架扩展为一个两阶段过程：首先在海量无奖励视频上预训练一个通用的世界模型和潜动作空间，然后再用少量带奖励和动作的数据进行微调，以解决特定任务？</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-12-11 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-12-11.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

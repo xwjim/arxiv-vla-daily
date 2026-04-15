@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VideoVerse: Does Your T2V Generator Have World Model Capability to Synthesize Videos? · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>VideoVerse: Does Your T2V Generator Have World Model Capability to Synthesize Videos?</h1>
+    <div class="muted">提出了一个评测 T2V 模型世界模型能力的新基准，通过“隐藏语义”任务，揭示了当前模型在因果推理上的核心短板。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-10-10</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2510.08398v3</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">视频生成</span><span class="tag-mini">策略学习</span><span class="tag-mini">计算机视觉</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2510.08398v3" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/VideoVerse Does Your T2V Generator Have World Model Capability to Synthesize Videos.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我已完成对论文《VideoVerse》的深度拆解。以下是提取的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> VideoVerse: Does Your T2V Generator Have World Model Capability to Synthesize Videos?</li><li><strong>核心机构：</strong> 北京大学、国际数字经济研究院 (IDEA) 等</li><li><strong>一句话本质：</strong> 提出了一个评测 T2V 模型世界模型能力的新基准，通过<strong>“隐藏语义”</strong>任务，揭示了当前模型在<strong>因果推理</strong>上的核心短板。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有 T2V 评测主要关注视频的<strong>美学质量</strong>和<strong>文本-视频内容的一致性</strong>。</li><li><strong>核心痛点：</strong> 这些评测已饱和，无法区分顶尖模型，且完全忽视了视频核心的<strong>事件级时序因果关系</strong>和<strong>世界知识</strong>的理解能力。</li><li><strong>本文切入点：</strong> 作者的核心直觉是，真正强大的 T2V 模型不应只复现文本，而应能基于物理和常识<strong>推理出文本中未明确描述的“隐藏”后果</strong>。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出 (评测流程)：</strong> <strong>生成的视频 + 维度特定的二元问题</strong> -&gt; <strong>VLM 判断的“是/否”答案 + 累积得分</strong>。</li></ul><ul><li><strong>关键模块 1：</strong> <strong>隐藏语义提示 (Hidden Semantics Prompts)</strong> - 设计仅描述“原因”而不描述“结果”的文本提示（例如，只说“软橡皮鸭掉到地上”，而不说“它会弹起来”），迫使模型进行物理或常识推理。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>VLM 驱动的 QA 评测流水线 (VLM-based QA Pipeline)</strong> - 使用强大的视觉语言模型（VLM）代替人类，回答关于视频内容是否符合特定维度（如物理规律、常识）的二元问题，实现自动化、可扩展的评测。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[能力鸿沟]：</strong> 当前 T2V 模型在<strong>基础能力</strong>（如物体属性、2D 布局）上表现尚可，但在<strong>世界模型能力</strong>（如物理交互、因果事件链）上存在<strong>巨大差距</strong>。闭源模型（Sora, Veo）在后者上显著优于所有开源模型。</li></ul><ul><li><strong>[瓶颈辨析]：</strong> 影响模型生成复杂事件链（Event Following）的关键瓶颈<strong>不是视频生成时长</strong>，而是模型<strong>对时序因果的内在理解能力</strong>。更短但更强的模型，其事件遵循度反而优于更长但更弱的模型。</li></ul><ul><li><strong>[“表面”与“深层”理解]：</strong> T2V 模型普遍倾向于生成<strong>文本中明确描述的“表面”语义</strong>，而对需要基于世界知识进行推理的<strong>“隐藏”语义</strong>（如物体材质属性导致的动态变化）理解和生成能力非常有限。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>评测代理风险：</strong> 评测结果的<strong>可靠性高度依赖于 VLM 的能力</strong>。如果 VLM 本身对物理或因果的理解有偏差，评测结果就会失真，相当于用一个不完美的“世界模型”去评测另一个。</li><li><strong>知识覆盖有限：</strong> 尽管定义了 10 个维度，“世界知识”的范畴依然极其广阔。目前的 Prompt 集合<strong>可能仍无法全面覆盖</strong>所有真实世界的复杂交互和知识类型。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文在论证 VLM 评测与人类一致性时，仅使用了 15 个视频和 11 位志愿者，<strong>验证样本量较小</strong>，其结论（&gt;90% 一致性）的普适性有待更大规模的交叉验证。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>可控的世界模型干预：</strong> 如何不仅是评测，而是<strong>主动引导 T2V 模型</strong>生成符合特定物理规律或因果链的视频？（例如，将物理参数或因果图作为额外输入）</li><li><strong>动态世界的自洽性模拟：</strong> 如何让模型在生成<strong>长视频</strong>时，不仅遵循初始 Prompt，还能在整个视频中保持<strong>物理和逻辑的自洽性</strong>，模拟一个微型世界在无人干预下的动态演化？</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>北京大学、国际数字经济研究院 (IDEA) 等</li>
+          <li><strong>一句话本质：</strong>提出了一个评测 T2V 模型世界模型能力的新基准，通过“隐藏语义”任务，揭示了当前模型在因果推理上的核心短板。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Zeqing Wang, Xinyu Wei, Bairui Li, Zhen Guo, Jinrui Zhang, Hongyang Wei, Keze Wang, Lei Zhang</li>
+          <li><strong>PDF：</strong>VideoVerse Does Your T2V Generator Have World Model Capability to Synthesize Videos.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 视频生成, 策略学习, 计算机视觉</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有 T2V 评测主要关注视频的美学质量和文本-视频内容的一致性。</li><li>核心痛点： 这些评测已饱和，无法区分顶尖模型，且完全忽视了视频核心的事件级时序因果关系和世界知识的理解能力。</li><li>本文切入点： 作者的核心直觉是，真正强大的 T2V 模型不应只复现文本，而应能基于物理和常识推理出文本中未明确描述的“隐藏”后果。</li></ul></section><section><h3>Key Insights</h3><ul><li>[能力鸿沟]： 当前 T2V 模型在基础能力（如物体属性、2D 布局）上表现尚可，但在世界模型能力（如物理交互、因果事件链）上存在巨大差距。闭源模型（Sora, Veo）在后者上显著优于所有开源模型。</li><li>[瓶颈辨析]： 影响模型生成复杂事件链（Event Following）的关键瓶颈不是视频生成时长，而是模型对时序因果的内在理解能力。更短但更强的模型，其事件遵循度反而优于更长但更弱的模型。</li><li>[“表面”与“深层”理解]： T2V 模型普遍倾向于生成文本中明确描述的“表面”语义，而对需要基于世界知识进行推理的“隐藏”语义（如物体材质属性导致的动态变化）理解和生成能力非常有限。</li></ul></section><section><h3>Next Steps</h3><ul><li>可控的世界模型干预： 如何不仅是评测，而是主动引导 T2V 模型生成符合特定物理规律或因果链的视频？（例如，将物理参数或因果图作为额外输入）</li><li>动态世界的自洽性模拟： 如何让模型在生成长视频时，不仅遵循初始 Prompt，还能在整个视频中保持物理和逻辑的自洽性，模拟一个微型世界在无人干预下的动态演化？</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-10-10 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-10-10.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Efficient On-Board Processing of Oblique UAV Video for Rapid Flood Extent Mapping · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Efficient On-Board Processing of Oblique UAV Video for Rapid Flood Extent Mapping</h1>
+    <div class="muted">通过复用视频中静止区域的特征，大幅加速无人机载分割模型，实现实时洪水监测。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-01-16</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2601.11290v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">UAV</span><span class="tag-mini">鲁棒性</span><span class="tag-mini">视频生成</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2601.11290v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我将为您深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> 高效处理无人机倾斜视频以快速绘制洪水范围图 (Efficient On-Board Processing of Oblique UAV Video for Rapid Flood Extent Mapping)</li><li><strong>核心机构：</strong> 根特大学 - imec, VITO (佛兰德技术研究院)</li><li><strong>一句话本质：</strong> 通过复用视频中静止区域的特征，大幅加速无人机载分割模型，实现实时洪水监测。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 视频分割模型通常对每一帧图像进行完整、独立的计算。</li><li><strong>核心痛点：</strong> 在无人机等边缘设备上，对高时空冗余的视频进行全量计算，<strong>功耗高、延迟大</strong>。</li><li><strong>本文切入点：</strong> 视频中大部分区域是静止的，其深度特征可以<strong>跨时间帧复用</strong>，无需重复计算。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 连续视频帧 (I&lt;sub&gt;t&lt;/sub&gt;, I&lt;sub&gt;t-1&lt;/sub&gt;) -&gt; 当前帧的语义分割掩码</li><li><strong>关键模块 1：</strong> <strong>动态决策模块 (Dynamic Decision Module)</strong> - 利用<strong>余弦相似度</strong>比较前后帧的图像块(Token)，生成一个<strong>稀疏计算掩码 (SparsityMask)</strong>，标记出静止区域。</li><li><strong>关键模块 2：</strong> <strong>特征复用模块 (Feature Reuse Module)</strong> - 对于被标记为静止的区域，直接从<strong>前一帧的特征缓存 (Feature Cache)</strong> 中读取各层特征，跳过主干网络的计算。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[计算与精度的帕累托边界]：</strong> 视频理解任务中存在巨大的<strong>时空冗余</strong>。通过牺牲可忽略的精度（&lt;0.5% mIoU），复用静止区域特征，可换取显著的计算效率提升（~30%），从而<strong>重塑了边缘设备上的性能-功耗帕累托边界</strong>。</li></ul><ul><li><strong>[轻量级变化感知的有效性]：</strong> 简单的<strong>图像块余弦相似度</strong>，足以作为复杂<strong>光流</strong>的廉价替代品，来有效衡量场景的动态性。该指标与模型的实际计算负载（FLOPs）<strong>高度相关 (r &gt; 0.8)</strong>，证明了其作为动态计算调度依据的可靠性。</li></ul><ul><li><strong>[方法泛化性与场景动态自适应]：</strong> 该<strong>时序Token复用</strong>机制具有普适性。无论是在慢速航拍（高冗余）还是快速地面移动（低冗余）场景，系统都能<strong>自适应地调整计算量</strong>，有效利用任何存在的时序一致性，而非仅限于特定类型的视频。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[缺乏地理空间上下文]：</strong> 输出结果是<strong>基于图像平面的分割掩码</strong>，缺乏地理空间坐标，无法直接用于路径规划或精确的灾害面积评估。</li><li><strong>[静态决策阈值]：</strong> 采用<strong>固定的相似度阈值 (τ)</strong>，无法根据光照、天气或飞行高度等环境变化自适应调整，可能导致在复杂场景下决策失误（过于保守或激进）。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>缺乏对<strong>变化检测机制</strong>的消融研究。例如，未将<strong>余弦相似度</strong>与其它轻量级指标（如 SSIM, L1/L2 距离）进行对比，以证明其在鲁棒性和计算成本上的最优性。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[端到端的实时地理配准]：</strong> 将分割结果与无人机遥测数据（IMU/GPS）和数字高程模型（DEM）融合，在边缘端直接生成<strong>地理坐标化的灾情地图</strong>，实现从“看到”到“定位”的跨越。</li><li><strong>[可学习的计算调度策略]：</strong> 用一个轻量级的策略网络替代固定阈值，使其能够<strong>根据场景内容和历史信息动态决策</strong>哪些区域需要重计算，实现更智能的资源分配。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>根特大学 - imec, VITO (佛兰德技术研究院)</li>
+          <li><strong>一句话本质：</strong>通过复用视频中静止区域的特征，大幅加速无人机载分割模型，实现实时洪水监测。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Vishisht Sharma, Sam Leroux, Lisa Landuyt, Nick Witvrouwen, Pieter Simoens</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, UAV, 鲁棒性, 视频生成, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 视频分割模型通常对每一帧图像进行完整、独立的计算。</li><li>核心痛点： 在无人机等边缘设备上，对高时空冗余的视频进行全量计算，功耗高、延迟大。</li><li>本文切入点： 视频中大部分区域是静止的，其深度特征可以跨时间帧复用，无需重复计算。</li></ul></section><section><h3>Key Insights</h3><ul><li>[计算与精度的帕累托边界]： 视频理解任务中存在巨大的时空冗余。通过牺牲可忽略的精度（&lt;0.5% mIoU），复用静止区域特征，可换取显著的计算效率提升（~30%），从而重塑了边缘设备上的性能-功耗帕累托边界。</li><li>[轻量级变化感知的有效性]： 简单的图像块余弦相似度，足以作为复杂光流的廉价替代品，来有效衡量场景的动态性。该指标与模型的实际计算负载（FLOPs）高度相关 (r &gt; 0.8)，证明了其作为动态计算调度依据的可靠性。</li><li>[方法泛化性与场景动态自适应]： 该时序Token复用机制具有普适性。无论是在慢速航拍（高冗余）还是快速地面移动（低冗余）场景，系统都能自适应地调整计算量，有效利用任何存在的时序一致性，而非仅限于特定类型的视频。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端的实时地理配准]： 将分割结果与无人机遥测数据（IMU/GPS）和数字高程模型（DEM）融合，在边缘端直接生成地理坐标化的灾情地图，实现从“看到”到“定位”的跨越。</li><li>[可学习的计算调度策略]： 用一个轻量级的策略网络替代固定阈值，使其能够根据场景内容和历史信息动态决策哪些区域需要重计算，实现更智能的资源分配。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-01-16 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-01-16.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compose Your Policies! Improving Diffusion-based or Flow-based Robot Policies via Test-time Distribution-level Composition · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Compose Your Policies! Improving Diffusion-based or Flow-based Robot Policies via Test-time Distribution-level Composition</h1>
+    <div class="muted">无需额外训练，通过在测试时凸性组合多个预训练策略的得分函数，即可创造出性能超越任何单个父策略的机器人策略。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-10-02</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.LG</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2510.01068v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">多传感器融合</span><span class="tag-mini">视频生成</span><span class="tag-mini">策略学习</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2510.01068v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Compose Your Policies! Improving Diffusion-based or Flow-based Robot Policies via Test-time Distribution-level Composition.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我已完成对该论文的深度拆解。以下是核心信息的提取与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Compose Your Policies! Improving Diffusion-based or Flow-based Robot Policies via Test-time Distribution-level Composition (组合你的策略！通过测试时分布级组合改进基于扩散或流的机器人策略)</li><li><strong>核心机构：</strong> The University of Hong Kong (香港大学)</li><li><strong>一句话本质：</strong> 无需额外训练，通过在测试时凸性组合多个预训练策略的得分函数，即可创造出性能超越任何单个父策略的机器人策略。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 提升机器人策略（尤其是扩散模型策略）的性能，依赖于扩大模型规模和收集更大规模的交互数据。</li><li><strong>核心痛点：</strong> 进一步提升策略性能的<strong>成本极高</strong>，包括昂贵的数据采集、复杂的强化学习调优或监督微调。</li><li><strong>本文切入点：</strong> 作者的直觉是，不同的预训练策略各有优劣，其<strong>误差方向也不同</strong>。通过将它们的“决策依据”（即得分函数）进行加权组合，可以<strong>相互抵消误差</strong>，从而在不训练的情况下获得一个更优的组合策略。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong></li><li><strong>输入：</strong> 机器人当前状态 (如图像、点云)、多个异构的预训练策略 (Policy A, Policy B, ...)、一组组合权重 <code>w</code></li><li><strong>输出：</strong> 一个经过组合优化的<strong>机器人动作序列</strong></li></ul><ul><li><strong>关键模块 1：</strong> <strong>凸性得分组合 (Convex Score Composition)</strong></li><li>在每个去噪步骤中，将多个策略生成的<strong>得分函数 (score function)</strong> 进行凸性组合（即加权求和，权重和为1）。</li><li><code>s_composed = w * s_policy_A + (1-w) * s_policy_B</code></li></ul><ul><li><strong>关键模块 2：</strong> <strong>测试时权重搜索 (Test-time Weight Search)</strong></li><li>这是一个<strong>免训练 (training-free)</strong> 的过程，通过在测试环境中对不同的组合权重 <code>w</code> 进行网格搜索，找到在特定任务上成功率最高的权重配置。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li><strong>[理论根基]：</strong></li><li>策略组合的有效性有<strong>坚实的数学保证</strong>。论文证明，两个得分函数的<strong>凸性组合</strong>存在一个最优权重，其均方误差必然小于或等于两个原始函数中较好的那一个。这种单步的误差降低可以通过稳定的采样动力学<strong>传播到整个动作序列</strong>，带来系统性的性能提升。</li></ul><ul><li><strong>[组合效能]：</strong></li><li>组合的收益并非简单的“1+1=2”，而是<strong>协同增效</strong>。组合策略不仅能融合不同模态（如图像+点云）或不同架构（如 VLA+VA）的优势，还能平滑和稳定单一策略生成的动作分布，<strong>减少决策噪声和误差累积</strong>，最终产生更鲁棒、更精确的动作序列。</li></ul><ul><li><strong>[权重规律]：</strong></li><li>最优组合权重是<strong>任务高度相关</strong>且<strong>与策略性能正相关</strong>的。实验发现，当两个基础策略性能都较好时，组合效果最显著；而要最大化组合收益，通常需要给<strong>性能更强的那个基础策略分配更大的权重</strong>，而不是简单地取平均。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>搜索成本高：</strong> <strong>测试时权重搜索</strong>本质上是重复评估，虽然免于训练，但当策略数量增多或任务评估周期长时，搜索最优权重的过程仍然耗时。</li><li><strong>组合规模受限：</strong> 当前方法主要验证了2-3个策略的组合。随着策略数量增加，<strong>推理延迟会线性增长</strong>，且权重搜索空间会呈指数级扩大，可扩展性不足。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文提出的“优化搜索策略”（即偏向更强的模型分配权重）存在一个前提，即<strong>需要预先知道哪个模型在当前任务上更强</strong>。这本身可能就需要一轮初步评估，削弱了其“高效”的论证。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>动态权重预测 (Dynamic Weighting)：</strong></li><li>研究一个轻量级的“元控制器”网络，使其能够根据当前<strong>状态(state)或任务指令(instruction)</strong>，实时、动态地预测出最优的组合权重 <code>w</code>，从而替代固定的、离线搜索的权重。</li><li><strong>策略知识蒸馏 (Policy Knowledge Distillation)：</strong></li><li>将多个专家策略组合后的“决策逻辑”<strong>蒸馏</strong>到一个单一的、更强大的学生模型中。这既能保留组合带来的性能增益，又能将推理成本降回到单个模型的水平，解决可扩展性问题。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>The University of Hong Kong (香港大学)</li>
+          <li><strong>一句话本质：</strong>无需额外训练，通过在测试时凸性组合多个预训练策略的得分函数，即可创造出性能超越任何单个父策略的机器人策略。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Jiahang Cao, Yize Huang, Hanzhong Guo, Rui Zhang, Mu Nan, Weijian Mai, Jiaxu Wang, Hao Cheng, Jingkai Sun, Gang Han, Wen Zhao, Qiang Zhang, Yijie Guo, Qihao Zheng, Chunfeng Song, Xiao Li, Ping Luo, Andrew F. Luo</li>
+          <li><strong>PDF：</strong>Compose Your Policies! Improving Diffusion-based or Flow-based Robot Policies via Test-time Distribution-level Composition.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 多传感器融合, 视频生成, 策略学习, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 提升机器人策略（尤其是扩散模型策略）的性能，依赖于扩大模型规模和收集更大规模的交互数据。</li><li>核心痛点： 进一步提升策略性能的成本极高，包括昂贵的数据采集、复杂的强化学习调优或监督微调。</li><li>本文切入点： 作者的直觉是，不同的预训练策略各有优劣，其误差方向也不同。通过将它们的“决策依据”（即得分函数）进行加权组合，可以相互抵消误差，从而在不训练的情况下获得一个更优的组合策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>[理论根基]：</li><li>策略组合的有效性有坚实的数学保证。论文证明，两个得分函数的凸性组合存在一个最优权重，其均方误差必然小于或等于两个原始函数中较好的那一个。这种单步的误差降低可以通过稳定的采样动力学传播到整个动作序列，带来系统性的性能提升。</li><li>[组合效能]：</li><li>组合的收益并非简单的“1+1=2”，而是协同增效。组合策略不仅能融合不同模态（如图像+点云）或不同架构（如 VLA+VA）的优势，还能平滑和稳定单一策略生成的动作分布，减少决策噪声和误差累积，最终产生更鲁棒、更精确的动作序列。</li><li>[权重规律]：</li></ul></section><section><h3>Next Steps</h3><ul><li>动态权重预测 (Dynamic Weighting)：</li><li>研究一个轻量级的“元控制器”网络，使其能够根据当前状态(state)或任务指令(instruction)，实时、动态地预测出最优的组合权重 w，从而替代固定的、离线搜索的权重。</li><li>策略知识蒸馏 (Policy Knowledge Distillation)：</li><li>将多个专家策略组合后的“决策逻辑”蒸馏到一个单一的、更强大的学生模型中。这既能保留组合带来的性能增益，又能将推理成本降回到单个模型的水平，解决可扩展性问题。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-10-02 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-10-02.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

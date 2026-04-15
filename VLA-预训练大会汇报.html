@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VLA 预训练大会汇报</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: rgba(255, 255, 255, 0.9);
+      --card-strong: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #d9e2ef;
+      --primary: #1d4ed8;
+      --primary-soft: #dbeafe;
+      --accent: #0f766e;
+      --warn: #b45309;
+      --danger: #b91c1c;
+      --shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --slide-pad: clamp(28px, 3vw, 44px);
+      --max-width: 1440px;
+      --title-size: clamp(34px, 4vw, 56px);
+      --h1-size: clamp(28px, 3vw, 42px);
+      --h2-size: clamp(22px, 2vw, 30px);
+      --body-size: clamp(16px, 1.15vw, 21px);
+      --small-size: clamp(13px, 0.9vw, 16px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      font-kerning: normal;
+      background:
+        radial-gradient(circle at top right, rgba(29, 78, 216, 0.11), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(15, 118, 110, 0.08), transparent 30%),
+        var(--bg);
+    }
+
+    .deck {
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      height: 100%;
+      width: 100%;
+      padding: var(--slide-pad);
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide-frame {
+      position: relative;
+      height: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 22px 24px 26px;
+      border: 1px solid rgba(217, 226, 239, 0.85);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.96));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(29, 78, 216, 0.05), transparent 24%),
+        linear-gradient(315deg, rgba(15, 118, 110, 0.04), transparent 24%);
+      pointer-events: none;
+    }
+
+    .slide-header,
+    .slide-footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .slide-header {
+      min-height: 48px;
+      margin-bottom: 18px;
+    }
+
+    .slide-footer {
+      margin-top: 16px;
+      font-size: var(--small-size);
+      color: var(--muted);
+    }
+
+    .badge,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-size: var(--small-size);
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--muted);
+      backdrop-filter: blur(8px);
+    }
+
+    .badge strong,
+    .pill strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .slide-main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+    }
+
+    .slide-main::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .slide-main::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .slide-main::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      font-size: var(--title-size);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    h2 {
+      font-size: var(--h1-size);
+      line-height: 1.14;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+
+    h3 {
+      font-size: var(--h2-size);
+      line-height: 1.18;
+    }
+
+    .subtitle,
+    .lead,
+    .body-text,
+    .small-text {
+      color: var(--muted);
+    }
+
+    .lead strong,
+    .body-text strong,
+    .small-text strong,
+    .list-item strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .subtitle {
+      font-size: clamp(18px, 1.5vw, 24px);
+      line-height: 1.45;
+    }
+
+    .lead {
+      font-size: clamp(19px, 1.45vw, 24px);
+      line-height: 1.55;
+    }
+
+    .body-text {
+      font-size: var(--body-size);
+      line-height: 1.62;
+      text-wrap: pretty;
+    }
+
+    .small-text {
+      font-size: var(--small-size);
+      line-height: 1.58;
+      text-wrap: pretty;
+    }
+
+    .hero-grid,
+    .two-col,
+    .three-col,
+    .four-col,
+    .split-40,
+    .split-45,
+    .split-55 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: stretch;
+      flex: 1;
+    }
+
+    .two-col {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .three-col {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .four-col {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .split-40 {
+      grid-template-columns: 0.4fr 0.6fr;
+    }
+
+    .split-45 {
+      grid-template-columns: 0.45fr 0.55fr;
+    }
+
+    .split-55 {
+      grid-template-columns: 0.55fr 0.45fr;
+    }
+
+    .card,
+    .panel,
+    .quote-box,
+    .mini-card,
+    .paper-card {
+      min-width: 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .card,
+    .panel,
+    .quote-box,
+    .paper-card {
+      padding: 20px 22px;
+    }
+
+    .mini-card {
+      padding: 16px 18px;
+    }
+
+    .card,
+    .panel,
+    .quote-box,
+    .highlight-box,
+    .judge-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: clamp(19px, 1.35vw, 24px);
+      line-height: 1.26;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-wrap: balance;
+    }
+
+    .section-kicker {
+      font-size: var(--small-size);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      padding: 22px 24px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(29, 78, 216, 0.1), rgba(255, 255, 255, 0.82));
+      border: 1px solid rgba(29, 78, 216, 0.18);
+    }
+
+    .highlight-box strong,
+    .ink {
+      color: var(--primary);
+    }
+
+    .keyline {
+      height: 5px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      font-size: var(--body-size);
+      line-height: 1.45;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text);
+      line-height: 1.54;
+      text-wrap: pretty;
+    }
+
+    .list-item::before {
+      content: "";
+      margin-top: 0.55em;
+      width: 8px;
+      min-width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    .metric-strip,
+    .evolution-chain,
+    .loop-grid,
+    .paper-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .metric-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .metric {
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .metric-label {
+      font-size: var(--small-size);
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: clamp(19px, 1.45vw, 24px);
+      font-weight: 700;
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    .evolution-chain {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .chain-step {
+      position: relative;
+      padding: 18px 18px 18px 20px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .chain-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -17px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      background: white;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    .chain-label {
+      font-size: var(--small-size);
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .chain-title {
+      font-size: clamp(18px, 1.35vw, 23px);
+      line-height: 1.3;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-wrap: balance;
+    }
+
+    .funnel {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+      padding-top: 4px;
+    }
+
+    .funnel-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .funnel-bar {
+      text-align: center;
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(29, 78, 216, 0.12), rgba(15, 118, 110, 0.08));
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+
+    .w-100 { width: 100%; }
+    .w-78 { width: 78%; }
+    .w-56 { width: 56%; }
+    .w-42 { width: 42%; }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .paper-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .paper-name {
+      font-size: clamp(17px, 1.18vw, 21px);
+      line-height: 1.34;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+
+    .paper-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .loop-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .loop-node {
+      position: relative;
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.86);
+      text-align: center;
+    }
+
+    .loop-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 26px;
+    }
+
+    .loop-node strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: clamp(18px, 1.35vw, 22px);
+    }
+
+    .quote-box {
+      background: linear-gradient(135deg, rgba(29, 78, 216, 0.09), rgba(15, 118, 110, 0.08));
+      border-color: rgba(29, 78, 216, 0.15);
+    }
+
+    .big-quote {
+      font-size: clamp(23px, 2.15vw, 34px);
+      line-height: 1.35;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .judge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .judge-card {
+      padding: 18px 20px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .judge-number {
+      font-size: clamp(22px, 1.9vw, 32px);
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .status-bar {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .status-pill,
+    .controls {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(217, 226, 239, 0.9);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      font-size: var(--small-size);
+      color: var(--muted);
+      backdrop-filter: blur(8px);
+    }
+
+    .progress-wrap {
+      flex: 1;
+      max-width: 440px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(217, 226, 239, 0.9);
+      overflow: hidden;
+      border: 1px solid rgba(217, 226, 239, 1);
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 240ms ease;
+    }
+
+    .nav-btn {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      font-size: var(--small-size);
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .dense .card,
+    .dense .panel,
+    .dense .paper-card {
+      padding: 16px 18px;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-grid,
+      .split-40,
+      .split-45,
+      .split-55,
+      .three-col,
+      .four-col,
+      .metric-strip,
+      .evolution-chain,
+      .evidence-grid,
+      .loop-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-frame {
+        overflow-y: auto;
+      }
+
+      .slide-main {
+        flex: 1 1 auto;
+        overflow-y: visible;
+      }
+
+      html,
+      body {
+        overflow: auto;
+      }
+
+      .slide {
+        height: auto;
+        min-height: 100%;
+      }
+    }
+
+    @media print {
+      html,
+      body {
+        overflow: visible;
+        background: white;
+      }
+
+      .slide {
+        display: block !important;
+        height: auto;
+        page-break-after: always;
+        padding: 10mm;
+      }
+
+      .slide-frame {
+        height: auto;
+        box-shadow: none;
+      }
+
+      .status-bar {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    <section class="slide active" data-title="封面">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Embodied AI</strong> VLA 预训练范式演进</div>
+          <div class="pill">Semantic → Action → World Dynamics</div>
+        </div>
+        <div class="slide-main">
+          <div class="hero-grid">
+            <div class="panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
+              <div class="section-kicker">Main Thesis</div>
+              <div>
+                <h1>VLA 预训练到底在预训练什么</h1>
+                <p class="subtitle" style="margin-top:16px;">从语义表征，到动作先验，再到世界动态与后训练闭环</p>
+              </div>
+              <div class="highlight-box">
+                <p class="big-quote">核心判断：<span class="ink">VLA 不是把 VLM 接上 action head</span>，而是在不断寻找一种既能承载语义、又能支撑控制的<strong>中间表征与接口</strong>。</p>
+              </div>
+              <div class="metric-strip">
+                <div class="metric">
+                  <div class="metric-label">主线演进</div>
+                  <div class="metric-value">语义 → 动作 → 世界动态</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">核心瓶颈</div>
+                  <div class="metric-value">action / world interface</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">下一阶段</div>
+                  <div class="metric-value">post-train + online adapt</div>
+                </div>
+              </div>
+            </div>
+            <div class="panel" style="display:flex; flex-direction:column; gap:18px; justify-content:space-between;">
+              <div>
+                <div class="card-title">核心问题空间</div>
+                <div class="list">
+                  <div class="list-item"><strong>难点定义</strong>：VLA 的困难来自多模态融合，还是来自理解与控制错配？</div>
+                  <div class="list-item"><strong>对象演进</strong>：预训练重点正在从语义迁移到动作，再迁移到世界动态。</div>
+                  <div class="list-item"><strong>扩展瓶颈</strong>：真正限制 scaling 的更像是 action/world interface，而不只是 backbone。</div>
+                </div>
+              </div>
+              <div class="quote-box">
+                <div class="card-title">核心问题</div>
+                <p class="body-text"><strong>VLA 预训练到底在预训练什么？</strong> 这比“最近有哪些论文”更能决定我们对下一阶段技术路线的判断。</p>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="padding:18px 20px;">
+            <div class="card-title">主线演进</div>
+            <div class="evolution-chain">
+              <div class="chain-step">
+                <div class="chain-label">Step 1</div>
+                <div class="chain-title">语义预训练</div>
+                <p class="small-text">先复用 VLM 的理解能力</p>
+              </div>
+              <div class="chain-step">
+                <div class="chain-label">Step 2</div>
+                <div class="chain-title">动作预训练</div>
+                <p class="small-text">把重点转向动作变化与先验</p>
+              </div>
+              <div class="chain-step">
+                <div class="chain-label">Step 3</div>
+                <div class="chain-title">世界动态预训练</div>
+                <p class="small-text">学习动作之后世界如何演化</p>
+              </div>
+              <div class="chain-step">
+                <div class="chain-label">Step 4</div>
+                <div class="chain-title">后训练与在线适应</div>
+                <p class="small-text">能力形成走向闭环系统</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>VLA 预训练的主线判断</div>
+          <div class="footer-right"><span>1 / 9</span><span class="tiny">方向键翻页，F 全屏</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="问题定义">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Part I</strong> 关键问题</div>
+          <div class="pill">Data · Objective · Interface</div>
+        </div>
+        <div class="slide-main">
+          <div class="panel">
+            <div class="section-kicker">Three Questions</div>
+            <h2>VLA 预训练当前面临三类根问题</h2>
+          </div>
+          <div class="three-col">
+            <div class="card">
+              <div class="card-title">难点定义</div>
+              <p class="body-text">为什么 <strong>VLA 预训练</strong> 比普通 <strong>VLM 预训练</strong> 更难？难点到底来自多模态，还是来自理解与控制之间的错配？</p>
+            </div>
+            <div class="card">
+              <div class="card-title">对象演进</div>
+              <p class="body-text">VLA 预训练的对象，究竟是在学 <strong>语义</strong>、<strong>动作</strong>，还是更深一层的 <strong>世界动态</strong>？</p>
+            </div>
+            <div class="card">
+              <div class="card-title">扩展瓶颈</div>
+              <p class="body-text">真正限制 VLA scaling 的瓶颈，究竟在 <strong>backbone</strong>，还是在 <strong>action/world interface</strong>？</p>
+            </div>
+          </div>
+          <div class="split-45">
+            <div class="quote-box">
+              <div class="card-title">全场收束句</div>
+              <p class="big-quote">真正贯穿这条演进链的，不是“模型越做越大”，而是两个接口问题：<br><span class="ink">语义如何变成可执行动作；动作如何与未来世界变化建立稳定关联。</span></p>
+            </div>
+            <div class="panel">
+              <div class="card-title">这三问分别对应</div>
+              <div class="list">
+                <div class="list-item">对<strong>数据稀缺与任务目标</strong>的重新定义。</div>
+                <div class="list-item">对<strong>预训练表征对象</strong>的演进理解。</div>
+                <div class="list-item">对<strong>未来系统路线</strong>的判断：继续堆 backbone，还是重写 interface 与 data engine。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>三问对应三条研究主线</div>
+          <div>2 / 9</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="为什么更难">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Part II</strong> VLA 预训练为何更难</div>
+          <div class="pill">难点不是多模态本身，而是理解与控制的错配</div>
+        </div>
+        <div class="slide-main">
+          <div class="split-40">
+            <div class="quote-box">
+              <div class="card-title">核心论点</div>
+              <p class="big-quote">VLA 的难点，本质上不是“看懂世界”，而是要把<strong>理解性表征</strong>稳定地转化为<strong>控制性表征</strong>。</p>
+            </div>
+            <div class="panel">
+              <div class="card-title">对应证据</div>
+              <div class="paper-card" style="height:100%;">
+                <span class="paper-tag">Evidence</span>
+                <div class="paper-name">VLM4VLA</div>
+                <p class="body-text">VLM4VLA 用<strong>少于 1% 新参数</strong>适配 24 个 VLM，并在 3 个 benchmark 上发现：<strong>VLM 初始化有益，但通用能力并不能稳定预测控制性能</strong>。</p>
+                <p class="small-text"><strong>论据：</strong>作者进一步做模态消融后指出，主要瓶颈在<strong>视觉编码器</strong>而非语言模块；向视觉侧注入 control-relevant supervision 能稳定提升下游控制。</p>
+              </div>
+            </div>
+          </div>
+          <div class="three-col">
+            <div class="card">
+              <div class="card-title">数据矛盾</div>
+              <div class="list">
+                <div class="list-item">互联网图文很多，但机器人闭环交互数据稀缺且昂贵。</div>
+                <div class="list-item">人类视频很多，但真正可执行、可泛化的动作轨迹很少。</div>
+                <div class="list-item">VLA 需要的是高价值轨迹，不是普通语义样本。</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">目标矛盾</div>
+              <div class="list">
+                <div class="list-item">VLM 的优化目标是“看懂”和“说对”。</div>
+                <div class="list-item">VLA 的目标是“做对”，且必须闭环成功。</div>
+                <div class="list-item"><strong>语义能力强，不等于控制能力强。</strong></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">接口矛盾</div>
+              <div class="list">
+                <div class="list-item">语言是离散 token，动作是连续控制量。</div>
+                <div class="list-item">世界状态又具有动态、时序与物理约束。</div>
+                <div class="list-item">因此难点集中在 <strong>中间接口设计</strong>。</div>
+              </div>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <p class="lead"><strong>关键前提：</strong>VLA 的问题不是“VLM 能不能迁移到机器人”，而是 <strong>VLM 学到的表征能否被转化为控制所需的表征</strong>。</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>理解与控制的错配，是后续演进的起点</div>
+          <div>3 / 9</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="预训练对象演进">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Part III</strong> 预训练对象在演进</div>
+          <div class="pill">主线不是模型做大，而是表征对象迁移</div>
+        </div>
+        <div class="slide-main dense">
+          <div class="panel">
+            <div class="section-kicker">Evolution</div>
+            <h2>VLA 预训练的主线：从语义表征，走向动作表征，再走向世界动态表征</h2>
+          </div>
+          <div class="three-col">
+            <div class="paper-card">
+              <span class="paper-tag">Stage 1</span>
+              <div class="paper-name">语义预训练</div>
+              <p class="body-text"><strong>主要结论：</strong>VLM 预训练为 VLA 提供稳定起点，但它带来的是<strong>理解先验</strong>，不是可直接执行的控制先验。</p>
+              <p class="small-text"><strong>论据：</strong>VLM4VLA 显示：VLM 初始化整体优于从零训练，但标准 VLM 能力和控制表现相关性弱；问题集中在视觉表征与控制需求之间的 domain gap。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Stage 2</span>
+              <div class="paper-name">动作预训练</div>
+              <p class="body-text"><strong>主要结论：</strong>动作预训练的关键不是直接重建视频变化，而是从人类视频中提取<strong>可执行的动作先验</strong>。</p>
+              <p class="small-text"><strong>论据：</strong>CLAP 用对比学习把视频 latent 对齐到机器人 proprioceptive latent 与量化 codebook，显式过滤 visual entanglement；其 CLAP-RF 还能以 <strong>183ms</strong> 推理实现高频精细操作。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Stage 3</span>
+              <div class="paper-name">世界动态预训练</div>
+              <p class="body-text"><strong>主要结论：</strong>更高层次的预训练对象不再只是动作本身，而是<strong>动作如何驱动未来状态演化</strong>。</p>
+              <p class="small-text"><strong>论据：</strong>VideoVLA 联合预测动作与未来视频，并观察到 imagined future 质量与动作可靠性强相关；VLA-JEPA 则用 leakage-free latent prediction 学到对 camera motion 与背景扰动更鲁棒的 dynamics abstraction。</p>
+            </div>
+          </div>
+          <div class="evolution-chain">
+            <div class="chain-step">
+              <div class="chain-label">Semantic</div>
+              <div class="chain-title">VLM4VLA</div>
+              <p class="small-text">证明“VLM 强”不等于“VLA 强”</p>
+            </div>
+            <div class="chain-step">
+              <div class="chain-label">Action</div>
+              <div class="chain-title">CLAP</div>
+              <p class="small-text">把人类视频压到可对齐的动作先验空间</p>
+            </div>
+            <div class="chain-step">
+              <div class="chain-label">Dynamics</div>
+              <div class="chain-title">VideoVLA</div>
+              <p class="small-text">生成式动态先验比纯理解先验更利于泛化</p>
+            </div>
+            <div class="chain-step">
+              <div class="chain-label">Latent WM</div>
+              <div class="chain-title">VLA-JEPA</div>
+              <p class="small-text">在潜空间预测未来，避免像素噪声与信息泄漏</p>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <p class="lead"><strong>核心结论：</strong>VLA 预训练的主线，不是单纯把 backbone 做大，而是预训练对象从语义表征逐步迁移到动作表征，再迁移到世界动态表征。</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>预训练对象的迁移，决定了领域演进方向</div>
+          <div>4 / 9</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="世界动态证据">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Part IV</strong> 为什么世界模型开始变重要</div>
+          <div class="pill">动作学习进一步走向 dynamics learning</div>
+        </div>
+        <div class="slide-main">
+          <div class="split-55">
+            <div class="panel">
+              <div class="section-kicker">Two Representative Routes</div>
+              <h2>世界模型的价值，不一定在生成逼真视频，而在学到更控制友好的动态表征</h2>
+              <div class="evidence-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top:16px;">
+                <div class="paper-card">
+                  <span class="paper-tag">Video Generator Route</span>
+                  <div class="paper-name">VideoVLA</div>
+                  <p class="body-text"><strong>主要结论：</strong>视频生成器中学到的物理动态先验，可以直接转化为机器人操控的泛化能力。</p>
+                  <p class="small-text"><strong>论据：</strong>论文明确指出，高质量 imagined futures 与 reliable action prediction、task success 强相关；其泛化能力来自<strong>预训练视频生成模型 + 动作/视觉双预测</strong>的共同约束。</p>
+                </div>
+                <div class="paper-card">
+                  <span class="paper-tag">Latent World Model Route</span>
+                  <div class="paper-name">VLA-JEPA</div>
+                  <p class="body-text"><strong>主要结论：</strong>对控制更有价值的不是未来像素，而是 future latent states 中蕴含的 action-relevant transition semantics。</p>
+                  <p class="small-text"><strong>论据：</strong>VLA-JEPA 明确分析了 pixel tethering、nuisance motion 与 information leakage 三类失真来源，并用 leakage-free JEPA 预训练在 LIBERO、SimplerEnv 与真实操作中获得一致鲁棒增益。</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="card-title">从动作表征到世界-动作耦合表征</div>
+              <div class="funnel" style="margin-top:6px;">
+                <div class="funnel-row"><div class="funnel-bar w-100">理解当前场景</div></div>
+                <div class="funnel-row"><div class="funnel-bar w-78">预测动作会怎样改变状态</div></div>
+                <div class="funnel-row"><div class="funnel-bar w-56">学习 future state 的演化规律</div></div>
+                <div class="funnel-row"><div class="funnel-bar w-42">形成可控的 dynamics prior</div></div>
+              </div>
+              <div class="quote-box" style="margin-top:18px;">
+                <p class="lead">这一步意味着：VLA 预训练开始不再只关心“当前帧里看到了什么”，而开始关心<strong>动作与未来世界变化之间的稳定关联</strong>。</p>
+              </div>
+              <div class="panel" style="margin-top:18px; padding:16px 18px;">
+                <div class="card-title">核心判断</div>
+                <div class="list">
+                  <div class="list-item">VideoVLA 说明：<strong>joint video-action forecasting</strong> 可以把“想象力”变成动作可靠性的内在指标。</div>
+                  <div class="list-item">VLA-JEPA 说明：<strong>latent-state prediction</strong> 比 pixel reconstruction 更接近控制所需的动态语义。</div>
+                  <div class="list-item">因此 world model 的价值开始从“可视化未来”转向“提供可控的 dynamics prior”。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>世界模型的价值，从生成能力转向 dynamics representation</div>
+          <div>5 / 9</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="真正瓶颈">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Part V</strong> 真正的瓶颈在 action/world interface</div>
+          <div class="pill">不是模型不够大，而是接口吃不下更多信息</div>
+        </div>
+        <div class="slide-main dense">
+          <div class="split-45">
+            <div class="panel">
+              <div class="section-kicker">Bottleneck Thesis</div>
+              <h2>当前最核心的扩展瓶颈，越来越不像是 backbone 本身，而像是动作表征与生成接口</h2>
+              <div class="funnel" style="margin-top:16px;">
+                <div class="funnel-row"><div class="funnel-bar w-100">视觉编码器越来越强</div></div>
+                <div class="funnel-row"><div class="funnel-bar w-78">动作信息必须经过 tokenizer / codebook</div></div>
+                <div class="funnel-row"><div class="funnel-bar w-56">动作生成还要满足实时延迟与内存约束</div></div>
+                <div class="funnel-row"><div class="funnel-bar w-42">最终可扩展性被 interface 锁死</div></div>
+              </div>
+            </div>
+            <div class="quote-box">
+              <div class="card-title">一句话结论</div>
+              <p class="big-quote">真正的瓶颈不是“模型不够大”，而是 <span class="ink">action interface 既决定模型能学到什么，也决定模型最终能跑到什么程度</span>。</p>
+            </div>
+          </div>
+          <div class="evidence-grid">
+            <div class="paper-card">
+              <span class="paper-tag">Information Bottleneck</span>
+              <div class="paper-name">The Compression Gap</div>
+              <p class="body-text"><strong>主要结论：</strong>离散动作 tokenization 会把 encoder scaling 的收益截断在 codebook 处。</p>
+              <p class="small-text"><strong>论据：</strong>同样升级视觉编码器时，Diffusion Policy 在 LIBERO 上提升<strong>超过 21 个百分点</strong>，而 OAT 增益明显受抑；放大 codebook 容量后，encoder sensitivity 才部分恢复。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Training Friendliness</span>
+              <div class="paper-name">ActionCodec</div>
+              <p class="body-text"><strong>主要结论：</strong>好 tokenizer 的标准不在重建误差，而在是否让 VLA 更容易学、更不易过拟合。</p>
+              <p class="small-text"><strong>论据：</strong>ActionCodec 提出 temporal overlap、词表去冗余、增强多模态互信息、token 独立性四个原则；在 LIBERO 上，SmolVLM2-2.2B 可达到<strong>95.5%</strong>，强化版达<strong>97.4%</strong>，且无需 robotics pre-training。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Systems Constraint</span>
+              <div class="paper-name">Characterizing VLA Models</div>
+              <p class="body-text"><strong>主要结论：</strong>action generation 是边缘 VLA 落地的主瓶颈，而且瓶颈属性是 memory-bound，不是 compute-bound。</p>
+              <p class="small-text"><strong>论据：</strong>论文测得动作生成占端到端延迟<strong>最高 75%</strong>；当前平台距离 10Hz 实时控制仍有<strong>200-300 倍</strong>差距，5 倍算力提升只带来约 <strong>1.4 倍</strong>延迟改善。</p>
+            </div>
+          </div>
+          <div class="metric-strip">
+            <div class="metric">
+              <div class="metric-label">表征层问题</div>
+              <div class="metric-value">离散化压缩损失信息</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">训练层问题</div>
+              <div class="metric-value">token 稳定性决定优化难度</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">系统层问题</div>
+              <div class="metric-value">动作生成延迟卡住实时部署</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>瓶颈正在从模型规模转向接口设计</div>
+          <div>6 / 9</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="闭环系统">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Part VI</strong> 预训练不是终点，而是闭环系统起点</div>
+          <div class="pill">pretrain → post-train → online adapt</div>
+        </div>
+        <div class="slide-main dense">
+          <div class="quote-box">
+            <p class="big-quote">未来真正有效的 VLA 体系，不是单点式预训练，而是 <span class="ink">表征学习 + 世界模型 + 后训练 + 数据引擎 + 在线适应</span> 的闭环协同。</p>
+          </div>
+          <div class="loop-grid">
+            <div class="loop-node">
+              <strong>表征学习</strong>
+              <p class="small-text">先把语义、动作、世界动态的中间表征学起来</p>
+            </div>
+            <div class="loop-node">
+              <strong>世界模型</strong>
+              <p class="small-text">提供未来状态、短时模拟与 latent dynamics</p>
+            </div>
+            <div class="loop-node">
+              <strong>后训练</strong>
+              <p class="small-text">对策略进行 RL 或 latent alignment 强化</p>
+            </div>
+            <div class="loop-node">
+              <strong>数据引擎</strong>
+              <p class="small-text">自动生产、筛选、回流高价值轨迹</p>
+            </div>
+            <div class="loop-node">
+              <strong>在线适应</strong>
+              <p class="small-text">部署后持续修正，不再假设模型静态不变</p>
+            </div>
+          </div>
+          <div class="evidence-grid">
+            <div class="paper-card">
+              <span class="paper-tag">RL Post-Training</span>
+              <div class="paper-name">WoVR</div>
+              <p class="small-text"><strong>结论：</strong>不必假设世界模型完美，只要显式控制 hallucination，WM 就能成为可靠 simulator。<br><strong>论据：</strong>LIBERO 从 <strong>39.95%</strong> 提升到 <strong>69.2%</strong>，真实机器人从 <strong>61.7%</strong> 提升到 <strong>91.7%</strong>。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Latent Post-Training</span>
+              <div class="paper-name">World2Act</div>
+              <p class="small-text"><strong>结论：</strong>WM→VLA 的 post-training 不应依赖 pixel-space supervision，而应对齐 latent dynamics。<br><strong>论据：</strong>其 LLM skill decomposition 支撑任意长度 rollout，真实世界性能提升 <strong>6.7%</strong>。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Subgoal Guidance</span>
+              <div class="paper-name">AtomVLA</div>
+              <p class="small-text"><strong>结论：</strong>长任务失败的核心在 instruction grounding gap，需要子任务级检查点。<br><strong>论据：</strong>LLM 分解 atomic subtasks，latent world model 对 action chunk 打分；LIBERO 达 <strong>97.0%</strong>，LIBERO-PRO 达 <strong>48.0%</strong>。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Continual Learning</span>
+              <div class="paper-name">Simple Recipe Works</div>
+              <p class="small-text"><strong>结论：</strong>大模型时代的 VLA 可能天然具备 continual learning 属性。<br><strong>论据：</strong>论文发现简单的 Seq. FT + LoRA + on-policy RL 就能同时保持 plasticity、低遗忘与 zero-shot generalization。</p>
+            </div>
+            <div class="paper-card">
+              <span class="paper-tag">Sim + Data Engine</span>
+              <div class="paper-name">Simulation Distillation / Seed2Scale</div>
+              <p class="small-text"><strong>结论：</strong>未来 scaling 不只是模型训练，还包括 simulator 与 data engine 的协同。<br><strong>论据：</strong>SimDist 只微调 dynamics，<strong>15-30 分钟</strong>真实数据即可快速适应；Seed2Scale 仅用 <strong>4 条</strong>示教启动，目标模型相对提升 <strong>209.15%</strong>（22.18%→68.57%）。</p>
+            </div>
+          </div>
+          <div class="split-45">
+            <div class="panel">
+              <div class="card-title">这一组论文共同说明</div>
+              <div class="list">
+                <div class="list-item">世界模型的价值越来越像<strong>训练基础设施</strong>，其核心作用是提供 latent rollout、reward、subgoal 或 dynamics prior。</div>
+                <div class="list-item">能力形成机制正在从一次性 pretrain 转向 <strong>post-train + simulator + online update</strong> 的组合。</div>
+                <div class="list-item">数据引擎开始从“被动数据集”转向“主动生产、主动验证、主动回流”的闭环部件。</div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="card-title">对未来路线的直接判断</div>
+              <div class="list">
+                <div class="list-item">不是简单的 end-to-end real-world scaling。</div>
+                <div class="list-item">更可能是 <strong>simulation pretraining + world model adaptation + real-world correction</strong>。</div>
+                <div class="list-item">再叠加自进化数据引擎，形成持续提升的系统级增长机制。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>下一阶段能力提升将更多来自系统闭环</div>
+          <div>7 / 9</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="四个判断">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Part VII</strong> 四个核心判断</div>
+          <div class="pill">Evidence-backed Conclusions</div>
+        </div>
+        <div class="slide-main">
+          <div class="judge-grid">
+            <div class="judge-card">
+              <div class="judge-number">01</div>
+              <h3>VLM 的语义能力，不能直接等价为 VLA 的控制能力</h3>
+              <p class="body-text" style="margin-top:10px;">代表证据：<strong>VLM4VLA</strong>。24 个 VLM、3 个 benchmark 的结果共同表明：VLM 能力分数不是控制表现的可靠预测器，视觉编码器才是主要瓶颈。</p>
+            </div>
+            <div class="judge-card">
+              <div class="judge-number">02</div>
+              <h3>VLA 预训练主线，是从语义预训练走向动作预训练，再走向世界动态预训练</h3>
+              <p class="body-text" style="margin-top:10px;">代表证据：<strong>CLAP、VideoVLA、VLA-JEPA</strong>。从 executable latent actions 到 joint video-action forecasting，再到 leakage-free latent state prediction，预训练对象在持续升级。</p>
+            </div>
+            <div class="judge-card">
+              <div class="judge-number">03</div>
+              <h3>当前最核心的扩展瓶颈，不只是模型规模，而是 action/world interface</h3>
+              <p class="body-text" style="margin-top:10px;">代表证据：<strong>The Compression Gap、ActionCodec、Characterizing VLA Models</strong>。离散 codebook、token 稳定性与 memory-bound generation 共同构成了学习与部署的双重上限。</p>
+            </div>
+            <div class="judge-card">
+              <div class="judge-number">04</div>
+              <h3>下一阶段的能力提升，主要来自系统级闭环，而不只是一次性预训练</h3>
+              <p class="body-text" style="margin-top:10px;">代表证据：<strong>WoVR、World2Act、AtomVLA、Simple Recipe Works、Simulation Distillation、Seed2Scale</strong>。world model、post-training、continual adaptation 与 data engine 正在形成闭环系统。</p>
+            </div>
+          </div>
+          <div class="split-45">
+            <div class="quote-box">
+              <div class="card-title">结尾版核心表述</div>
+              <p class="big-quote">未来更强的 VLA，不会只是一个更大的模型，而会是一个<span class="ink">更完整的系统</span>。</p>
+            </div>
+            <div class="panel">
+              <div class="card-title">三个值得继续讨论的问题</div>
+              <div class="list">
+                <div class="list-item">下一代控制友好表征到底应该是离散、连续，还是混合式接口？</div>
+                <div class="list-item">世界模型更适合做推理模块、训练基础设施，还是两者兼具？</div>
+                <div class="list-item">数据引擎会不会成为比 backbone 更关键的 scaling 变量？</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>四个判断概括当前领域的主要方向变化</div>
+          <div>8 / 9</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="结束页">
+      <div class="slide-frame">
+        <div class="slide-header">
+          <div class="badge"><strong>Closing</strong> Outlook</div>
+          <div class="pill">interface · world model · data engine</div>
+        </div>
+        <div class="slide-main" style="justify-content:center;">
+          <div class="panel" style="padding:34px 36px;">
+            <div class="section-kicker">Closing Statement</div>
+            <h1 style="font-size: clamp(38px, 4.6vw, 68px);">谢谢各位专家</h1>
+            <p class="subtitle" style="margin-top:18px;">核心判断归结为一个范式转移：</p>
+            <div class="highlight-box" style="margin-top:20px;">
+              <p class="big-quote">VLA 领域正在经历一个明确的范式转移：<br><span class="ink">预训练对象从语义扩展到动作，再扩展到世界动态；能力形成机制从一次性预训练，走向 world model、post-training、data engine 和 online adaptation 协同的闭环体系。</span></p>
+            </div>
+            <div class="two-col" style="margin-top:20px;">
+              <div class="card">
+                <div class="card-title">可以继续讨论的问题</div>
+                <div class="list">
+                  <div class="list-item">哪一种 action interface 最有可能突破 scaling 瓶颈？</div>
+                  <div class="list-item">世界模型应该如何嵌入后训练管线？</div>
+                  <div class="list-item">数据引擎怎样与真实机器人闭环结合？</div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-title">本稿涵盖的关键材料</div>
+                <p class="body-text">VLM4VLA、CLAP、VideoVLA、VLA-JEPA、The Compression Gap、ActionCodec、Characterizing VLA Models、WoVR、World2Act、AtomVLA、Simple Recipe Works、Simulation Distillation、Seed2Scale。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div>单文件 HTML，可直接浏览器打开投屏</div>
+          <div>9 / 9</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-pill"><span id="slideIndex">1 / 9</span></div>
+    <div class="progress-wrap" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="controls">
+      <button class="nav-btn" id="prevBtn" type="button">上一页</button>
+      <span>·</span>
+      <button class="nav-btn" id="nextBtn" type="button">下一页</button>
+      <span>·</span>
+      <button class="nav-btn" id="fullscreenBtn" type="button">全屏</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const progressBar = document.getElementById("progressBar");
+    const slideIndex = document.getElementById("slideIndex");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
+    let current = 0;
+
+    function updateSlides(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === current));
+      const ratio = ((current + 1) / slides.length) * 100;
+      progressBar.style.width = `${ratio}%`;
+      slideIndex.textContent = `${current + 1} / ${slides.length}`;
+      document.title = `${slides[current].dataset.title} - VLA 预训练大会汇报`;
+    }
+
+    function nextSlide() {
+      updateSlides(current + 1);
+    }
+
+    function prevSlide() {
+      updateSlides(current - 1);
+    }
+
+    prevBtn.addEventListener("click", prevSlide);
+    nextBtn.addEventListener("click", nextSlide);
+
+    fullscreenBtn.addEventListener("click", async () => {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.key;
+      if (["ArrowRight", "PageDown", " ", "Enter"].includes(key)) {
+        event.preventDefault();
+        nextSlide();
+      } else if (["ArrowLeft", "PageUp", "Backspace"].includes(key)) {
+        event.preventDefault();
+        prevSlide();
+      } else if (key === "Home") {
+        updateSlides(0);
+      } else if (key === "End") {
+        updateSlides(slides.length - 1);
+      } else if (key.toLowerCase() === "f") {
+        fullscreenBtn.click();
+      }
+    });
+
+    slides.forEach((slide, index) => {
+      slide.addEventListener("click", (event) => {
+        if (event.target.closest("button")) {
+          return;
+        }
+        if (event.clientX > window.innerWidth * 0.62) {
+          nextSlide();
+        }
+      });
+      slide.setAttribute("aria-label", `第 ${index + 1} 页`);
+    });
+
+    updateSlides(0);
+  </script>
+</body>
+</html>

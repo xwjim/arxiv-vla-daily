@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time-Scaling Is What Agents Need Now · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Time-Scaling Is What Agents Need Now</h1>
+    <div class="muted">提升AI推理能力的关键不是无限堆积模型参数，而是系统性地扩展和优化其在 时间维度 上的思考过程。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-01-06</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.AI, cs.CL</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2601.02714v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">策略学习</span><span class="tag-mini">人工智能</span><span class="tag-mini">自然语言</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2601.02714v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我将为您深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> Time-Scaling Is What Agents Need Now (智能体当前所需：时间尺度伸缩)</li><li><strong>核心机构：</strong> CareerInternational Research Team</li><li><strong>一句话本质：</strong> 提升AI推理能力的关键不是无限堆积模型参数，而是系统性地扩展和优化其在 <strong>时间维度</strong> 上的思考过程。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 通过 <strong>思维链 (CoT)</strong> 或 <strong>思维树 (ToT)</strong> 等提示工程技术，诱导大模型生成更长的、分步骤的推理文本。</li><li><strong>核心痛点：</strong> 现有方法本质上是 <strong>静态的、一次性的生成</strong>，缺乏对推理过程的动态评估和策略调整，搜索效率与完备性不足。</li><li><strong>本文切入点：</strong> 借鉴人类在有限认知资源下，通过 <strong>投入更多时间</strong> 来进行序列化思考、切换策略和反思的模式，提出AI也应如此。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><p>本文为一篇概念性论文，未提出具体模型，其核心机制是一个理论框架。</p><ul><li><strong>输入 -&gt; 输出：</strong> 复杂问题 -&gt; 通过 <strong>多轮、多策略、可反思的</strong> 推理过程得到的高质量解。</li><li><strong>关键模块 1：</strong> <strong>认知心理学类比 (Analogy to Cognitive Psychology)</strong> - 将人类解决问题的理论（如问题空间、策略切换、元认知）作为AI推理设计的理论基础。</li><li><strong>关键模块 2：</strong> <strong>时间尺度伸缩 (Time-Scaling)</strong> - 主张智能体应具备系统性地延长、组织和利用推理时间的能力，以实现更深度的搜索和动态策略调整。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[能力增长范式]：</strong></li></ul><p>相较于通过 <strong>增加模型参数</strong> 来提升智能，<strong>增加有效推理时间</strong> (即计算量) 是一条被忽视但可能更高效的路径。这揭示了模型能力存在 <strong>“空间换时间”</strong> 的可能性。</p><ul><li><strong>[语言的双重角色]：</strong></li></ul><p>语言不仅是思维的 <strong>表达工具</strong>，更是思维的 <strong>建构轨道</strong>。其 <strong>线性、序列化</strong> 的特性为复杂的、并行的思考过程提供了可控的、可回溯的 <strong>时间脚手架</strong>，这是CoT类方法有效的根本原因。</p><ul><li><strong>[策略的动态调度]：</strong></li></ul><p>高级问题求解并非依赖单一最优策略，而是在于根据 <strong>问题结构</strong> 和 <strong>时间预算</strong>，对多种基础策略（如试错、逆向推理）进行 <strong>动态组合与切换</strong>。这是一种元认知能力。</p><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[缺乏实证]</strong></li></ul><p>全文为 <strong>理论思辨和概念倡导</strong>，未提出任何可验证的计算模型或实验结果来支撑“时间尺度伸缩”框架的有效性。</p><ul><li><strong>[机制模糊]</strong></li></ul><p>对于如何实现“时间尺度伸缩”的核心难题——即智能体 <strong>如何自主判断“何时”需要延长思考、“如何”选择最优策略</strong>——文章没有给出具体的技术路径。</p><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>论文引用 <strong>DeepSeek-R1</strong> 的推理过程作为证据，但其策略标签（如<code>[MEA]</code>, <code>[G&amp;T]</code>）是作者 <strong>事后标注和解读</strong> 的，这并不能证明模型在内部真实地执行了这些认知策略。这是一种将人类认知框架 <strong>投射</strong> 到模型输出上的做法，论证强度较弱。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>构建元认知控制器 (Meta-Cognitive Controller)：</strong></li></ul><p>如何设计一个能 <strong>学习“何时停止思考”与“何时继续探索”</strong> 的强化学习或监督学习模型？该模型的目标是优化“思考时间”这一成本与“答案质量”这一收益之间的平衡。</p><ul><li><strong>模块化策略工具箱 (Modular Strategy Toolbox)：</strong></li></ul><p>能否将不同的推理策略（如演绎、归纳、类比）实现为 <strong>独立的神经网络模块</strong>？然后训练一个更高阶的路由模型，学习在解决问题时 <strong>动态调用和组合</strong> 这些策略模块。</p>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>CareerInternational Research Team</li>
+          <li><strong>一句话本质：</strong>提升AI推理能力的关键不是无限堆积模型参数，而是系统性地扩展和优化其在 时间维度 上的思考过程。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Zhi Liu, Guangzhi Wang</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 人工智能, 自然语言</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过 思维链 (CoT) 或 思维树 (ToT) 等提示工程技术，诱导大模型生成更长的、分步骤的推理文本。</li><li>核心痛点： 现有方法本质上是 静态的、一次性的生成，缺乏对推理过程的动态评估和策略调整，搜索效率与完备性不足。</li><li>本文切入点： 借鉴人类在有限认知资源下，通过 投入更多时间 来进行序列化思考、切换策略和反思的模式，提出AI也应如此。</li></ul></section><section><h3>Key Insights</h3><ul><li>[能力增长范式]： 相较于通过 增加模型参数 来提升智能，增加有效推理时间 (即计算量) 是一条被忽视但可能更高效的路径。这揭示了模型能力存在 “空间换时间” 的可能性。</li><li>[语言的双重角色]： 语言不仅是思维的 表达工具，更是思维的 建构轨道。其 线性、序列化 的特性为复杂的、并行的思考过程提供了可控的、可回溯的 时间脚手架，这是CoT类方法有效的根本原因。</li><li>[策略的动态调度]： 高级问题求解并非依赖单一最优策略，而是在于根据 问题结构 和 时间预算，对多种基础策略（如试错、逆向推理）进行 动态组合与切换。这是一种元认知能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建元认知控制器 (Meta-Cognitive Controller)：</li><li>模块化策略工具箱 (Modular Strategy Toolbox)：</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-01-06 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-01-06.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

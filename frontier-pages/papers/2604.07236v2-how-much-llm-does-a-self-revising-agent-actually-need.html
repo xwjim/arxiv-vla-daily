@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Much LLM Does a Self-Revising Agent Actually Need? · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>How Much LLM Does a Self-Revising Agent Actually Need?</h1>
+    <div class="muted">通过结构化拆解，量化了智能体中LLM的真实边际贡献。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-09</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.AI, cs.CL</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.07236v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">策略学习</span><span class="tag-mini">人工智能</span><span class="tag-mini">自然语言</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.07236v2" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一位顶尖学术研究员，我已经完成了对论文《How Much LLM Does a Self-Revising Agent Actually Need?》的深度拆解。</p><p>以下是严格按照您要求格式输出的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> How Much LLM Does a Self-Revising Agent Actually Need? (一个自我修正的智能体到底需要多少LLM？)</li><li>  <strong>核心机构：</strong> Manifesto AI (根据代码库推断)</li><li>  <strong>一句话本质：</strong> 通过结构化拆解，量化了智能体中LLM的真实边际贡献。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 将世界建模、规划和反思等能力都打包在一个<strong>单一的LLM循环</strong>中。</li><li>  <strong>核心痛点：</strong> 无法分清智能体的能力增益究竟来自<strong>LLM本身</strong>，还是来自其<strong>外部的显式结构</strong>，两者贡献被混淆。</li><li>  <strong>本文切入点：</strong> 设计一个“<strong>声明式反思运行时 (Declared Reflective Runtime)</strong>”协议，将智能体内部状态和决策过程<strong>外化</strong>，使其可被独立测量和分析。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> <strong>游戏状态</strong> (观测、历史) -&gt; <strong>游戏动作</strong> (射击或提问)</li><li>  <strong>关键模块 1：</strong> <strong>声明式反思运行时 (Declared Reflective Runtime Protocol)</strong> - 将智能体的信念、规划、反思等内部状态<strong>外化为可观测、可干预的结构化数据</strong>。</li><li>  <strong>关键模块 2：</strong> <strong>分层智能体设计 (Layered Agent Design)</strong> - 通过逐步增加<strong>显式世界模型</strong>、<strong>符号化反思</strong>和<strong>稀疏LLM修正</strong>等模块，来<strong>隔离和测量</strong>每个组件的边际贡献。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li>  <strong>显式规划的价值：</strong></li></ul><p>一个<strong>良好的结构化规划器</strong>是智能体能力的基础。实验中，仅增加<strong>显式世界模型和规划模块</strong>（WMA）带来的胜率提升（+24.1pp），远超后续引入LLM修正带来的微小变化。</p><ul><li>  <strong>反思能力的可剥离性：</strong></li></ul><p><strong>不依赖LLM的符号化反思机制是可行的</strong>。该机制能在特定场景下产生决定性作用，证明了<strong>“反思”这一元认知能力可以从LLM的黑盒中剥离出来</strong>，并用显式的、可诊断的符号规则来实现。</p><ul><li>  <strong>LLM的边际效应：</strong></li></ul><p>在一个已有良好规划和反思结构的智能体中，<strong>稀疏地调用LLM进行修正，其边际效益非常有限，甚至是负向的（胜率下降）</strong>。这表明LLM并非万能灵药，其价值在于弥补<strong>显式结构无法解决的特定“残差”问题</strong>，而非作为核心驱动。</p><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>单一领域验证：</strong> 所有结论仅基于“协同战舰”这一个游戏环境，其<strong>普适性未经证实</strong>。</li><li>  <strong>统计功效不足：</strong> 54局游戏的样本量较小，结论更多是<strong>定性模式的揭示</strong>，而非统计上非常稳健的定量结果。</li><li>  <strong>符号规则粗糙：</strong> 当前的符号化修正规则集是手动预设的，且<strong>整体效果并非正向</strong>，这可能低估了“符号化反思”模块的真实潜力。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  基线模型（greedy+MCMC）不提问，而引入规划的WMA模型会提问。这使得<strong>“提问”本身成为一个潜在的混淆变量</strong>，难以完全将性能提升归因于“规划能力”。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>学习LLM调用策略：</strong> 基于本文的<strong>可观测反思结构</strong>（如置信度、预测误差），训练一个元控制器（meta-controller）来<strong>学习何时调用LLM才是最高效的</strong>，从而实现动态、智能的资源分配。</li><li>  <strong>自动化符号规则生成：</strong> 将LLM的角色从“在线修正者”转变为“离线规则生成器”。利用LLM的推理能力，<strong>自动生成或优化符号化的反思和修正规则集</strong>，以提升符号化模块的性能和泛化能力。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>Manifesto AI (根据代码库推断)</li>
+          <li><strong>一句话本质：</strong>通过结构化拆解，量化了智能体中LLM的真实边际贡献。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Sungwoo Jung, Seonil Son</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 人工智能, 自然语言</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 将世界建模、规划和反思等能力都打包在一个单一的LLM循环中。</li><li>核心痛点： 无法分清智能体的能力增益究竟来自LLM本身，还是来自其外部的显式结构，两者贡献被混淆。</li><li>本文切入点： 设计一个“声明式反思运行时 (Declared Reflective Runtime)”协议，将智能体内部状态和决策过程外化，使其可被独立测量和分析。</li></ul></section><section><h3>Key Insights</h3><ul><li>显式规划的价值： 一个良好的结构化规划器是智能体能力的基础。实验中，仅增加显式世界模型和规划模块（WMA）带来的胜率提升（+24.1pp），远超后续引入LLM修正带来的微小变化。</li><li>反思能力的可剥离性： 不依赖LLM的符号化反思机制是可行的。该机制能在特定场景下产生决定性作用，证明了“反思”这一元认知能力可以从LLM的黑盒中剥离出来，并用显式的、可诊断的符号规则来实现。</li><li>LLM的边际效应： 在一个已有良好规划和反思结构的智能体中，稀疏地调用LLM进行修正，其边际效益非常有限，甚至是负向的（胜率下降）。这表明LLM并非万能灵药，其价值在于弥补显式结构无法解决的特定“残差”问题，而非作为核心驱动。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习LLM调用策略： 基于本文的可观测反思结构（如置信度、预测误差），训练一个元控制器（meta-controller）来学习何时调用LLM才是最高效的，从而实现动态、智能的资源分配。</li><li>自动化符号规则生成： 将LLM的角色从“在线修正者”转变为“离线规则生成器”。利用LLM的推理能力，自动生成或优化符号化的反思和修正规则集，以提升符号化模块的性能和泛化能力。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-09 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-04-09.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

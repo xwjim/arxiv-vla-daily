@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can LLMs See Without Pixels? Benchmarking Spatial Intelligence from Textual Descriptions · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Can LLMs See Without Pixels? Benchmarking Spatial Intelligence from Textual Descriptions</h1>
+    <div class="muted">通过纯文本描述来评测大模型的空间推理能力，剥离视觉感知的影响。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-01-07</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2601.03590v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span><span class="tag-mini">计算机视觉</span><span class="tag-mini">人工智能</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2601.03590v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我将为您深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> LLM 能否脱离像素看世界？基于文本描述的空间智能基准测试</li><li>  <strong>核心机构：</strong> 北京理工大学 (Beijing Institute of Technology)</li><li>  <strong>一句话本质：</strong> 通过纯文本描述来评测大模型的<strong>空间推理能力</strong>，剥离视觉感知的影响。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> VLM 的空间智能评估依赖于<strong>图文联合输入</strong>。</li><li>  <strong>核心痛点：</strong> 无法区分空间能力是来自<strong>视觉编码器</strong>（感知）还是<strong>语言推理主干</strong>（认知）。</li><li>  <strong>本文切入点：</strong> 真正的空间智能应是<strong>模态无关的符号推理</strong>。作者通过将视觉场景<strong>“编译”成坐标感知的文本描述</strong>，直接测试 LLM 的核心推理能力。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> <strong>坐标感知的场景文本描述</strong> -&gt; <strong>空间推理任务的答案</strong> (选择题或结构化 JSON)</li><li>  <strong>关键模块 1：</strong> <strong>SiT-Bench (基准构建)</strong> - 将视觉基准和真实场景转化为<strong>高保真、坐标感知的纯文本问题集</strong>，以此解耦视觉与推理。</li><li>  <strong>关键模块 2：</strong> <strong>Vision-Ablated Evaluation (视觉剥离评测)</strong> - 在无像素输入的环境下，系统性地<strong>量化并诊断 LLM 的内在空间智能</strong>，识别其能力边界。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li>  <strong>多模态训练的反哺效应：</strong> 即使在纯文本任务上，<strong>VLM 也优于其对应的 LLM 底座</strong>。这表明视觉训练将<strong>空间先验知识“烘焙”</strong>进了语言模型，提升了其对空间概念的理解。</li><li>  <strong>显式推理 vs. 暴力缩放：</strong> 激活<strong>链式思考（CoT）</strong>带来的性能提升远超单纯增加模型参数。这证明对于复杂空间任务，<strong>“如何思考”比“模型多大”更重要</strong>。</li><li>  <strong>通用模型 vs. 领域模型：</strong> 专门为空间任务微调的模型，其表现<strong>并未超越顶尖的通用大模型</strong>。这可能因为狭窄的训练数据<strong>损害了模型解决多样化问题所需的通用推理和语言理解能力</strong>。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>离散快照 vs. 连续动态：</strong> 基准测试基于离散的场景快照，无法完全模拟真实世界中<strong>连续、高频的动态时空信息</strong>。</li><li>  <strong>推理的计算开销：</strong> 性能更强的“思考模式”（CoT）带来了<strong>巨大的计算开销和延迟</strong>，难以直接应用于需要实时交互的具身智能任务。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  <strong>文本描述的“保真度”问题：</strong> 将视觉场景“编译”为文本，可能引入<strong>有利于 LLM 解析的结构化偏见</strong>，而这种描述方式与人类自然语言描述存在差异，可能高估了模型在处理非结构化输入时的能力。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>流式空间推理：</strong> 开发基于<strong>流式文本描述（Streaming Text）</strong>的动态基准，测试模型在连续变化信息下<strong>实时更新其内部世界模型</strong>的能力。</li><li>  <strong>推理能力内化：</strong> 研究如何<strong>“编译”或“蒸馏”显式推理链</strong>，将 CoT 的逻辑能力内化到模型权重中，以实现<strong>“直觉式”的快速空间判断</strong>，兼顾性能与效率。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>北京理工大学 (Beijing Institute of Technology)</li>
+          <li><strong>一句话本质：</strong>通过纯文本描述来评测大模型的空间推理能力，剥离视觉感知的影响。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Zhongbin Guo, Zhen Yang, Yushan Li, Xinyue Zhang, Wenyu Gao, Jiacheng Wang, Chengzhi Li, Xiangrui Liu, Ping Jian</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 评测基准, 策略学习, 计算机视觉, 人工智能</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： VLM 的空间智能评估依赖于图文联合输入。</li><li>核心痛点： 无法区分空间能力是来自视觉编码器（感知）还是语言推理主干（认知）。</li><li>本文切入点： 真正的空间智能应是模态无关的符号推理。作者通过将视觉场景“编译”成坐标感知的文本描述，直接测试 LLM 的核心推理能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>多模态训练的反哺效应： 即使在纯文本任务上，VLM 也优于其对应的 LLM 底座。这表明视觉训练将空间先验知识“烘焙”进了语言模型，提升了其对空间概念的理解。</li><li>显式推理 vs. 暴力缩放： 激活链式思考（CoT）带来的性能提升远超单纯增加模型参数。这证明对于复杂空间任务，“如何思考”比“模型多大”更重要。</li><li>通用模型 vs. 领域模型： 专门为空间任务微调的模型，其表现并未超越顶尖的通用大模型。这可能因为狭窄的训练数据损害了模型解决多样化问题所需的通用推理和语言理解能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>流式空间推理： 开发基于流式文本描述（Streaming Text）的动态基准，测试模型在连续变化信息下实时更新其内部世界模型的能力。</li><li>推理能力内化： 研究如何“编译”或“蒸馏”显式推理链，将 CoT 的逻辑能力内化到模型权重中，以实现“直觉式”的快速空间判断，兼顾性能与效率。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-01-07 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-01-07.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

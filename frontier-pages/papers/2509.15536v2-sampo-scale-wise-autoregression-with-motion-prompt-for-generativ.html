@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAMPO:Scale-wise Autoregression with Motion PrOmpt for generative world models · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>SAMPO:Scale-wise Autoregression with Motion PrOmpt for generative world models</h1>
+    <div class="muted">提出一种分尺度自回归结合运动提示的世界模型，提升视频预测的时空一致性和效率。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-09-19</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV, cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2509.15536v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">轨迹优化</span><span class="tag-mini">策略学习</span><span class="tag-mini">计算机视觉</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2509.15536v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/SAMPO Scale-wise Autoregression with Motion PrOmpt for generative world models.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖学术研究员，我已完成对论文《SAMPO: Scale-wise Autoregression with Motion PrOmpt for generative world models》的深度拆解。以下是核心信息提取：</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> SAMPO: Scale-wise Autoregression with Motion PrOmpt for generative world models</li><li><strong>核心机构：</strong> 西安交通大学</li><li><strong>一句话本质：</strong> 提出一种<strong>分尺度自回归</strong>结合<strong>运动提示</strong>的世界模型，提升视频预测的时空一致性和效率。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 主流做法是使用<strong>自回归模型</strong>，按光栅扫描顺序（raster-scan）逐个 token 预测未来视频帧。</li><li><strong>核心痛点：</strong> 这种逐 token 生成方式<strong>破坏了图像空间结构</strong>，导致生成效率低、错误累积，且<strong>动态物体建模能力不足</strong>。</li><li><strong>本文切入点：</strong> 改变生成顺序。将帧内生成从<strong>一维逐像素</strong>改为<strong>二维由粗到细的分尺度</strong>并行生成，并用<strong>显式的运动轨迹</strong>作为先验提示。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong></li><li><strong>输入：</strong> 历史观测帧 + 历史/未来动作序列 + 运动提示</li><li><strong>输出：</strong> 未来多帧画面的分层级 Token Map</li></ul><ul><li><strong>关键模块 1：</strong> <strong>混合自回归框架 (Hybrid Autoregressive Framework)</strong></li><li>在<strong>时间上</strong>进行帧间自回归，保证时序因果性。</li><li>在<strong>空间上</strong>进行尺度内并行、尺度间自回归的<strong>由粗到细（coarse-to-fine）</strong>生成，保护了空间结构并提速。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>轨迹感知运动提示 (Trajectory-aware Motion Prompt)</strong></li><li>提取观测帧中物体/机器臂的<strong>运动轨迹</strong>作为显式先验。</li><li>引导模型<strong>关注动态区域</strong>，显著提升对物体交互和物理动态的建模能力。</li></ul><ul><li><strong>关键模块 3：</strong> <strong>非对称多尺度 Tokenizer (Asymmetric Multi-scale Tokenizer)</strong></li><li>对<strong>观测帧</strong>用精细 Tokenizer 保留静态细节。</li><li>对<strong>未来帧</strong>用稀疏 Tokenizer 聚焦动态变化，优化了计算效率和表征。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>生成范式：</strong></li><li>世界模型的视频生成瓶颈不仅在于时序建模，更在于<strong>空间结构的保持</strong>。将帧内生成从一维光栅扫描改为<strong>二维分尺度</strong>，能同时提升<strong>生成质量</strong>和<strong>解码效率（4.4倍）</strong>。</li></ul><ul><li><strong>动态建模：</strong></li><li>对于复杂的动态场景，模型隐式学习物理规律是困难且低效的。提供<strong>显式的运动轨迹先验（Motion Prompt）</strong>能作为一种强约束，有效引导模型注意力，显著改善<strong>物体交互的连贯性</strong>和<strong>物理真实感</strong>。</li></ul><ul><li><strong>表征学习：</strong></li><li>在世界模型中，<strong>观测帧</strong>和<strong>未来预测帧</strong>的信息密度是<strong>非对称</strong>的。对观测帧进行<strong>密集编码</strong>（保留静态背景）和对未来帧进行<strong>稀疏编码</strong>（聚焦动态变化），是一种更高效、更符合机器人交互场景的表征策略。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>误差累积：</strong> 模型本质上仍是自回归的，在<strong>长期预测（long-horizon）</strong>中会产生<strong>误差累积</strong>问题，导致画面质量下降或物理规律偏离。</li><li><strong>外部依赖：</strong> <strong>依赖外部的轨迹跟踪模型（CoTracker3）</strong>来生成运动提示，这增加了系统的复杂性，且跟踪器的误差会直接传递并影响生成质量。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验验证了运动提示的有效性，但<strong>缺乏对运动提示质量的敏感性分析</strong>。例如，稀疏/稠密轨迹、高/低精度轨迹对最终生成效果的影响有多大，并未深入探讨。</li><li>非对称 Tokenizer 的设计基于“未来帧动态稀疏”的假设，但该假设在<strong>相机剧烈运动</strong>或<strong>全局场景变化</strong>时可能不成立。缺乏在此类场景下的消融实验来验证其泛化性。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>端到端学习运动先验：</strong> 将运动提示的提取过程<strong>内化到模型中</strong>，让模型自主学习识别和预测关键点的轨迹，摆脱对外部跟踪器的依赖。</li><li><strong>分层状态与记忆机制：</strong> 引入<strong>分层状态空间</strong>或<strong>外部记忆模块</strong>来建模长期依赖关系，缓解单步自回归带来的误差累积，提升长视频生成的<strong>一致性</strong>和<strong>鲁棒性</strong>。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>西安交通大学</li>
+          <li><strong>一句话本质：</strong>提出一种分尺度自回归结合运动提示的世界模型，提升视频预测的时空一致性和效率。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Sen Wang, Jingyi Tian, Le Wang, Zhimin Liao, Jiayi Li, Huaiyi Dong, Kun Xia, Sanping Zhou, Wei Tang, Hua Gang</li>
+          <li><strong>PDF：</strong>SAMPO Scale-wise Autoregression with Motion PrOmpt for generative world models.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 轨迹优化, 策略学习, 计算机视觉</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流做法是使用自回归模型，按光栅扫描顺序（raster-scan）逐个 token 预测未来视频帧。</li><li>核心痛点： 这种逐 token 生成方式破坏了图像空间结构，导致生成效率低、错误累积，且动态物体建模能力不足。</li><li>本文切入点： 改变生成顺序。将帧内生成从一维逐像素改为二维由粗到细的分尺度并行生成，并用显式的运动轨迹作为先验提示。</li></ul></section><section><h3>Key Insights</h3><ul><li>生成范式：</li><li>世界模型的视频生成瓶颈不仅在于时序建模，更在于空间结构的保持。将帧内生成从一维光栅扫描改为二维分尺度，能同时提升生成质量和解码效率（4.4倍）。</li><li>动态建模：</li><li>对于复杂的动态场景，模型隐式学习物理规律是困难且低效的。提供显式的运动轨迹先验（Motion Prompt）能作为一种强约束，有效引导模型注意力，显著改善物体交互的连贯性和物理真实感。</li><li>表征学习：</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端学习运动先验： 将运动提示的提取过程内化到模型中，让模型自主学习识别和预测关键点的轨迹，摆脱对外部跟踪器的依赖。</li><li>分层状态与记忆机制： 引入分层状态空间或外部记忆模块来建模长期依赖关系，缓解单步自回归带来的误差累积，提升长视频生成的一致性和鲁棒性。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-09-19 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-09-19.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafePred: A Predictive Guardrail for Computer-Using Agents via World Models · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>SafePred: A Predictive Guardrail for Computer-Using Agents via World Models</h1>
+    <div class="muted">通过世界模型预测未来风险，将安全决策从“被动反应”升级为“主动预判”。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-02-02</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CL, cs.AI, cs.LG</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2602.01725v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">策略学习</span><span class="tag-mini">RIS</span><span class="tag-mini">时序预测</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2602.01725v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖学术研究员，我已阅读完毕。以下是为您提取的论文核心信息与深度洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> SafePred: A Predictive Guardrail for Computer-Using Agents via World Models (SafePred: 一种通过世界模型为计算机操作智能体设计的预测性安全护栏)</li><li><strong>核心机构：</strong> 论文中未明确标注作者单位。</li><li><strong>一句话本质：</strong> 通过世界模型预测未来风险，将安全决策从“被动反应”升级为“主动预判”。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有的安全护栏是<strong>反应式 (reactive)</strong>的，仅在执行前，基于当前状态评估单个动作的即时风险。</li><li><strong>核心痛点：</strong> 反应式方法无法识别<strong>长时程风险 (long-term risks)</strong>。一个当前看似无害的动作，可能在未来引发严重且不可逆的后果（如修改系统环境导致依赖崩溃）。</li><li><strong>本文切入点：</strong> 模仿人类的<strong>预判能力</strong>，利用<strong>世界模型 (world model)</strong> 预测一个动作可能导致的未来状态，从而将<strong>对未来风险的预测</strong>与<strong>当前的动作决策对齐</strong>。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong></li><li><strong>输入：</strong> 当前UI状态、候选动作、任务意图、安全策略集、近期历史轨迹。</li><li><strong>输出：</strong> 短期/长期风险的<strong>自然语言描述</strong>、违反的策略、统一的<strong>风险信号</strong>及<strong>决策指导</strong>。</li></ul><ul><li><strong>关键模块 1：风险预测 (Risk Prediction)</strong></li><li>利用一个<strong>LLM作为世界模型</strong>，对一个动作同时进行两种预测：</li><li><strong>短期预测：</strong> 预测下一时刻<strong>具体的UI状态变化</strong>。</li><li><strong>长期预测：</strong> 预测该动作对<strong>任务最终成败的抽象影响</strong>（如是否偏离目标、是否引入不可逆障碍），而非推演具体的多步状态。</li><li>最终基于预定义的<strong>安全策略</strong>评估风险。</li></ul><ul><li><strong>关键模块 2：决策优化 (Decision Optimization)</strong></li><li>将预测出的风险转化为<strong>分层级的决策指导</strong>，主动干预智能体。</li><li><strong>步骤级指导 (Risk Guidance)：</strong> 当动作有风险时，生成反馈，让智能体<strong>反思并重新生成</strong>当前动作。</li><li><strong>任务级指导 (Plan Guidance)：</strong> 当持续出现高风险动作时，修正智能体的<strong>高层任务规划</strong>，从根源上改变其行为路径。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[范式转变]：</strong></li></ul><p><strong>预测式护栏</strong>的本质，是将安全决策从对“<strong>危险动作的被动过滤</strong>”，转变为对“<strong>安全路径的主动探索</strong>”。这种范式使其在处理具有延迟效应的<strong>长时程风险</strong>时，远优于反应式护栏。</p><ul><li><strong>[预测机制]：</strong></li></ul><p>有效的<strong>长时程风险预测</strong>，并不需要进行不可靠的、具体的多步状态推演。通过让世界模型直接预测动作对<strong>任务目标的抽象高级影响</strong>（如“引入不可逆障碍”），可以更鲁棒、更高效地评估其远期后果。</p><ul><li><strong>[决策干预]：</strong></li></ul><p>将风险信号转化为<strong>分层指导</strong>是实现有效规避的关键。消融实验证明，修正智能体<strong>高层策略的规划指导 (Plan Guidance)</strong>，比仅纠正单步行为的<strong>风险指导 (Risk Guidance)</strong>，对提升安全性和任务成功率的贡献更大，说明<strong>从策略上进行约束比在操作上进行补救更根本</strong>。</p><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[能力天花板]</strong></li></ul><p>护栏的有效性完全取决于其<strong>世界模型的推理能力</strong>和<strong>安全策略的完备性</strong>。如果世界模型预测不准，或策略本身有漏洞，整个安全框架就会失效。</p><ul><li><strong>[效率与成本]</strong></li></ul><p>引入世界模型进行预测，相当于在智能体决策的每一步（或关键步）都增加了一次<strong>额外的LLM调用</strong>。这带来了显著的<strong>推理延迟和计算成本</strong>，尤其是在需要评估多个候选动作时。</p><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验中对<strong>“长时程风险”的定义和划分可能存在主观性</strong>。虽然论文提及附录中有详细说明，但如何确保所选任务能全面、公正地代表所有长时程风险类型，是论证强度的一个潜在弱点。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[策略的自主演进]</strong></li></ul><p>当前安全策略依赖人工定义。未来的高价值方向是让系统能够<strong>从交互失败的轨迹、系统文档或用户反馈中，自动学习和归纳出新的安全策略</strong>，实现护栏的自适应与自完善。</p><ul><li><strong>[多模态风险预测]</strong></li></ul><p>当前预测的输出是文本描述。下一步可以探索<strong>多模态的世界模型</strong>，使其能直接预测<strong>未来的UI截图或界面布局</strong>等视觉状态，从而实现更精准、更细粒度的风险评估。</p>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>论文中未明确标注作者单位。</li>
+          <li><strong>一句话本质：</strong>通过世界模型预测未来风险，将安全决策从“被动反应”升级为“主动预判”。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Yurun Chen, Zeyi Liao, Ping Yin, Taotao Xie, Keting Yin, Shengyu Zhang</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 策略学习, RIS, 时序预测</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的安全护栏是反应式 (reactive)的，仅在执行前，基于当前状态评估单个动作的即时风险。</li><li>核心痛点： 反应式方法无法识别长时程风险 (long-term risks)。一个当前看似无害的动作，可能在未来引发严重且不可逆的后果（如修改系统环境导致依赖崩溃）。</li><li>本文切入点： 模仿人类的预判能力，利用世界模型 (world model) 预测一个动作可能导致的未来状态，从而将对未来风险的预测与当前的动作决策对齐。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转变]： 预测式护栏的本质，是将安全决策从对“危险动作的被动过滤”，转变为对“安全路径的主动探索”。这种范式使其在处理具有延迟效应的长时程风险时，远优于反应式护栏。</li><li>[预测机制]： 有效的长时程风险预测，并不需要进行不可靠的、具体的多步状态推演。通过让世界模型直接预测动作对任务目标的抽象高级影响（如“引入不可逆障碍”），可以更鲁棒、更高效地评估其远期后果。</li><li>[决策干预]： 将风险信号转化为分层指导是实现有效规避的关键。消融实验证明，修正智能体高层策略的规划指导 (Plan Guidance)，比仅纠正单步行为的风险指导 (Risk Guidance)，对提升安全性和任务成功率的贡献更大，说明从策略上进行约束比在操作上进行补救更根本。</li></ul></section><section><h3>Next Steps</h3><ul><li>[策略的自主演进]</li><li>[多模态风险预测]</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-02-02 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-02-02.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

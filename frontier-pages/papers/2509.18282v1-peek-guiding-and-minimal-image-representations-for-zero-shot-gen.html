@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEEK: Guiding and Minimal Image Representations for Zero-Shot Generalization of Robot Manipulation Policies · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>PEEK: Guiding and Minimal Image Representations for Zero-Shot Generalization of Robot Manipulation Policies</h1>
+    <div class="muted">通过VLM预测路径和掩码，将复杂视觉场景简化为“做什么”和“看哪里”的极简引导，赋能机器人策略。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-09-23</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO, cs.AI, cs.LG</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2509.18282v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">机器人操作</span><span class="tag-mini">鲁棒性</span><span class="tag-mini">三维表征</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2509.18282v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖的学术研究员，我已完成对论文《PEEK》的深度拆解。以下是为您提取的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> PEEK: Guiding and Minimal Image Representations for Zero-Shot Generalization of Robot Manipulation Policies (为机器人操作策略的零样本泛化提供引导性与极简的图像表示)</li><li><strong>核心机构：</strong> 华盛顿大学、NVIDIA、南加州大学</li><li><strong>一句话本质：</strong> 通过VLM预测<strong>路径</strong>和<strong>掩码</strong>，将复杂视觉场景简化为“做什么”和“看哪里”的极简引导，赋能机器人策略。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 端到端的模仿学习策略试图从原始图像和指令中同时学会<strong>感知、推理和控制</strong> (where, what, how)。</li><li><strong>核心痛点：</strong> 这种“一锅端”的模式导致策略在面对<strong>新物体、新场景（杂乱）或新语义指令</strong>时，泛化能力极差。</li><li><strong>本文切入点：</strong> 核心直觉是<strong>“责任分离”</strong>。将高层推理（<strong>what</strong> &amp; <strong>where</strong>）交给强大的 <strong>VLM</strong>，让底层操作策略只专注于解决<strong>“how”</strong>（如何执行动作）。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> (机器人视角图像 + 语言指令) -&gt; <strong>PEEK VLM</strong> -&gt; (带有<strong>路径</strong>和<strong>掩码</strong>标注的图像) -&gt; <strong>下游机器人策略</strong></li><li><strong>关键模块 1：</strong> <strong>PEEK VLM</strong> - 一个经过微调的视觉语言模型，负责接收原始图像和指令，预测出两组关键点。</li><li><strong>关键模块 2：</strong> <strong>统一的点基表示 (Unified Point-based Representation)</strong> - 将VLM的预测结果结构化为两种视觉提示，并直接绘制在图像上：</li><li><strong>末端执行器路径 (End-effector Paths):</strong> 一系列点构成的轨迹，告诉策略<strong>“做什么” (what)</strong>。</li><li><strong>任务相关掩码 (Task-relevant Masks):</strong> 圈出关键物体和区域的点，告诉策略<strong>“看哪里” (where)</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li><strong>任务解耦的有效性：</strong> 将高阶的<strong>语义和视觉理解</strong>（由VLM处理）与低阶的<strong>电机控制</strong>（由策略处理）分离开，是解决机器人泛化难题的<strong>关键杠杆</strong>。这极大地降低了操作策略的学习负担。</li><li><strong>引导与简化的协同效应：</strong> 单独使用<strong>路径（引导）</strong>或<strong>掩码（简化）</strong>均存在明显短板。路径在<strong>视觉干扰（杂波）</strong>下会失效，而掩码无法解决<strong>语义模糊性</strong>。<strong>两者的结合</strong>才能同时应对视觉和语义的双重挑战，产生1+1&gt;2的效果。</li><li><strong>策略无关的通用性：</strong> PEEK生成的<strong>“标注后图像”</strong>是一种标准化的中间表示。实验证明，它可以作为即插即用的增强模块，无缝适配并显著提升<strong>多种不同架构</strong>（2D/3D策略、大/小模型）的机器人策略性能，验证了其高度的<strong>通用性和可移植性</strong>。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>继承VLM的短板：</strong> PEEK的性能上限受制于其底座VLM。如果VLM在<strong>分布外（OOD）</strong>的场景中产生错误或幻觉，会直接误导下游策略。</li><li><strong>2D表示的局限：</strong> 当前的路径和掩码都是<strong>2D像素空间</strong>的表示，对于需要复杂<strong>三维空间推理</strong>的任务（如精细的嵌入、旋转对齐）可能信息不足。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li><strong>数据标注的鲁棒性：</strong> 自动标注流程依赖于<strong>视觉点追踪模型</strong>来生成训练数据。该追踪模型的<strong>潜在失败模式</strong>（如在快速运动、遮挡或纹理缺失时失效）未被充分讨论，这可能引入<strong>标签噪声</strong>，影响VLM的微调质量。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>探索更丰富的3D表示：</strong> 将2D点基表示升级为<strong>3D路径点、体素化掩码或3D高斯泼溅</strong>，为策略提供更丰富的空间几何信息，以应对更复杂的物理交互任务。</li><li><strong>拥抱无结构视频数据：</strong> 摆脱对机器人数据集的依赖，研究如何从<strong>海量的互联网视频</strong>中自监督地学习“what”和“where”的表示，从而构建一个真正意义上的<strong>机器人视觉世界模型</strong>。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>华盛顿大学、NVIDIA、南加州大学</li>
+          <li><strong>一句话本质：</strong>通过VLM预测路径和掩码，将复杂视觉场景简化为“做什么”和“看哪里”的极简引导，赋能机器人策略。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Jesse Zhang, Marius Memmel, Kevin Kim, Dieter Fox, Jesse Thomason, Fabio Ramos, Erdem Bıyık, Abhishek Gupta, Anqi Li</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 机器人操作, 鲁棒性, 三维表征, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端的模仿学习策略试图从原始图像和指令中同时学会感知、推理和控制 (where, what, how)。</li><li>核心痛点： 这种“一锅端”的模式导致策略在面对新物体、新场景（杂乱）或新语义指令时，泛化能力极差。</li><li>本文切入点： 核心直觉是“责任分离”。将高层推理（what &amp; where）交给强大的 VLM，让底层操作策略只专注于解决“how”（如何执行动作）。</li></ul></section><section><h3>Key Insights</h3><ul><li>任务解耦的有效性： 将高阶的语义和视觉理解（由VLM处理）与低阶的电机控制（由策略处理）分离开，是解决机器人泛化难题的关键杠杆。这极大地降低了操作策略的学习负担。</li><li>引导与简化的协同效应： 单独使用路径（引导）或掩码（简化）均存在明显短板。路径在视觉干扰（杂波）下会失效，而掩码无法解决语义模糊性。两者的结合才能同时应对视觉和语义的双重挑战，产生1+1&gt;2的效果。</li><li>策略无关的通用性： PEEK生成的“标注后图像”是一种标准化的中间表示。实验证明，它可以作为即插即用的增强模块，无缝适配并显著提升多种不同架构（2D/3D策略、大/小模型）的机器人策略性能，验证了其高度的通用性和可移植性。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索更丰富的3D表示： 将2D点基表示升级为3D路径点、体素化掩码或3D高斯泼溅，为策略提供更丰富的空间几何信息，以应对更复杂的物理交互任务。</li><li>拥抱无结构视频数据： 摆脱对机器人数据集的依赖，研究如何从海量的互联网视频中自监督地学习“what”和“where”的表示，从而构建一个真正意义上的机器人视觉世界模型。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-09-23 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-09-23.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

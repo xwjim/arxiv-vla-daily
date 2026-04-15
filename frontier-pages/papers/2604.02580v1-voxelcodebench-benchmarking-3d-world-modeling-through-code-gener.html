@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoxelCodeBench: Benchmarking 3D World Modeling Through Code Generation · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>VoxelCodeBench: Benchmarking 3D World Modeling Through Code Generation</h1>
+    <div class="muted">提出一种新范式：通过评测模型生成3D构建代码的能力，来量化其空间推理水平。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-03</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.LG</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.02580v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">三维表征</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.02580v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名顶尖学术研究员，我已阅读完毕。以下是为您提取的论文核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> VoxelCodeBench: 通过代码生成来评测3D世界建模能力</li><li><strong>核心机构：</strong> FAIR at Meta</li><li><strong>一句话本质：</strong> 提出一种新范式：通过评测模型<strong>生成3D构建代码</strong>的能力，来<strong>量化其空间推理水平</strong>。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有评测要么关注算法代码生成，要么直接评估端到端文本到3D模型的视觉效果。</li><li><strong>核心痛点：</strong> 无法<strong>评估和解释</strong>模型在3D任务中的<strong>空间推理过程</strong>，尤其是组合与几何构建能力。</li><li><strong>本文切入点：</strong> 将<strong>代码生成</strong>作为中间步骤，使得模型的3D空间推理过程被<strong>显式化、符号化</strong>，从而变得可分析、可解释。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> <strong>自然语言指令 + API文档 -&gt; Python代码 -&gt; 3D体素模型</strong></li><li><strong>关键模块 1：</strong> <strong>VoxelCode 平台</strong> - 一个基于虚幻引擎的执行环境，负责接收并执行Python代码，将其渲染为3D体素世界。</li><li><strong>关键模块 2：</strong> <strong>VoxelCodeBench 基准</strong> - 一套精心设计的任务集，系统性地覆盖了从简单到复杂的三种推理维度：<strong>符号、几何、艺术</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>推理难度分化：</strong> 模型的<strong>几何构建能力</strong>（如布尔运算、参数化曲面）是最大的短板，远比符号理解困难；而<strong>艺术创作</strong>因其任务的开放性和对精确性的要求较低，成功率反而最高。</li><li><strong>代码正确性 ≠ 空间正确性：</strong> 模型生成<strong>语法可执行</strong>的代码相对容易，但生成<strong>空间逻辑正确</strong>（即符合预期的形状、位置、关系）的代码则困难得多。这揭示了模型在<strong>API语法模仿</strong>和<strong>深层空间语义理解</strong>之间的巨大鸿沟。</li><li><strong>模型能力异构：</strong> 不同模型家族在几何推理上表现出<strong>策略分化</strong>。例如，GPT-5更擅长处理物体间的<strong>关系推理</strong>（如布尔运算），而Claude系列则在<strong>单个物体的参数化</strong>上表现更佳，这暗示了它们可能形成了不同的空间知识表征。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>任务泛化性有限：</strong> 评测基于一个特定的、封闭的Voxel API，其结论<strong>未必能直接泛化到其他3D建模软件（如Blender）或更广泛的3D空间推理场景</strong>。</li><li><strong>表征局限：</strong> <strong>体素（Voxel）是一种离散化、非真实的3D表示</strong>，与连续、平滑的真实世界建模（如Mesh、NeRF）存在本质差异，限制了其在精细、真实场景的应用。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验发现，同一个模型在<strong>措辞或参数略有不同的相似任务上表现不一致</strong>（例如，有时能生成“新月形”，有时则失败）。这表明评测结果可能受到<strong>提示词敏感性</strong>的显著干扰，未能完全反映模型稳健的几何理解能力。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>构建视觉反馈与代码修正闭环：</strong> 研究如何让模型不仅能生成代码，还能“看”懂渲染出的3D结果，并根据视觉偏差<strong>自我debug和迭代优化代码</strong>。</li><li><strong>探索更高效的API学习机制：</strong> 如何让模型从少量文档和示例中<strong>更稳健、更深刻地理解API的约束和语义</strong>，以克服当前普遍存在的<strong>API“幻觉”调用</strong>问题。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>FAIR at Meta</li>
+          <li><strong>一句话本质：</strong>提出一种新范式：通过评测模型生成3D构建代码的能力，来量化其空间推理水平。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Yan Zheng, Florian Bordes</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 三维表征, 评测基准, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有评测要么关注算法代码生成，要么直接评估端到端文本到3D模型的视觉效果。</li><li>核心痛点： 无法评估和解释模型在3D任务中的空间推理过程，尤其是组合与几何构建能力。</li><li>本文切入点： 将代码生成作为中间步骤，使得模型的3D空间推理过程被显式化、符号化，从而变得可分析、可解释。</li></ul></section><section><h3>Key Insights</h3><ul><li>推理难度分化： 模型的几何构建能力（如布尔运算、参数化曲面）是最大的短板，远比符号理解困难；而艺术创作因其任务的开放性和对精确性的要求较低，成功率反而最高。</li><li>代码正确性 ≠ 空间正确性： 模型生成语法可执行的代码相对容易，但生成空间逻辑正确（即符合预期的形状、位置、关系）的代码则困难得多。这揭示了模型在API语法模仿和深层空间语义理解之间的巨大鸿沟。</li><li>模型能力异构： 不同模型家族在几何推理上表现出策略分化。例如，GPT-5更擅长处理物体间的关系推理（如布尔运算），而Claude系列则在单个物体的参数化上表现更佳，这暗示了它们可能形成了不同的空间知识表征。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建视觉反馈与代码修正闭环： 研究如何让模型不仅能生成代码，还能“看”懂渲染出的3D结果，并根据视觉偏差自我debug和迭代优化代码。</li><li>探索更高效的API学习机制： 如何让模型从少量文档和示例中更稳健、更深刻地理解API的约束和语义，以克服当前普遍存在的API“幻觉”调用问题。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-03 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-04-03.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

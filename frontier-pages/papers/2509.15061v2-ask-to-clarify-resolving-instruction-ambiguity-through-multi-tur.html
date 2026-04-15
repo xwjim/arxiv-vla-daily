@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask-to-Clarify: Resolving Instruction Ambiguity through Multi-turn Dialogue · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Ask-to-Clarify: Resolving Instruction Ambiguity through Multi-turn Dialogue</h1>
+    <div class="muted">通过多轮对话主动澄清模糊指令，让具身智能体从被动执行者变为主动协作者。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-09-18</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2509.15061v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">多传感器融合</span><span class="tag-mini">视频生成</span><span class="tag-mini">策略学习</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2509.15061v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Ask-to-Clarify Resolving Instruction Ambiguity through Multi-turn Dialogue.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一位顶尖的学术研究员，我已经完成了对这篇论文的深度拆解。以下是提取的核心信息与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> Ask-to-Clarify: Resolving Instruction Ambiguity through Multi-turn Dialogue (通过多轮对话解决指令模糊性)</li><li>  <strong>核心机构：</strong> 复旦大学、加州大学伯克利分校</li><li>  <strong>一句话本质：</strong> 通过<strong>多轮对话主动澄清模糊指令</strong>，让具身智能体从被动执行者变为主动协作者。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 现有的视觉-语言-动作模型 (VLA) 遵循单向模式，被动接收指令并直接执行。</li><li>  <strong>核心痛点：</strong> 当人类指令存在<strong>模糊性</strong>时（例如场景中有多个同类物体），现有模型无法主动求助，导致执行失败或随机猜测。</li><li>  <strong>本文切入点：</strong> 直觉上，应将<strong>“沟通协作”与“动作执行”解耦</strong>。作者让智能体先通过对话（问问题）搞清楚“做什么”，再执行具体动作。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> <strong>模糊指令</strong> + <strong>视觉观察</strong> -&gt; <strong>多轮澄清式问答</strong> -&gt; <strong>低阶机器人动作序列</strong>。</li></ul><ul><li>  <strong>关键模块 1：</strong> <strong>协作组件 (Collaboration Component - VLM)</strong> - 负责<strong>识别指令模糊性</strong>，生成澄清问题，并整合对话历史以推断出明确指令。</li></ul><ul><li>  <strong>关键模块 2：</strong> <strong>动作组件 (Action Component - Diffusion Model)</strong> - 接收VLM输出的<strong>明确指令</strong>和视觉观察，<strong>端到端生成低阶机器人动作序列</strong>。</li></ul><ul><li>  <strong>关键模块 3：</strong> <strong>连接模块 (Connection Module)</strong> - 作为VLM和Diffusion模型间的桥梁，用语言指令<strong>调整(modulate)视觉特征</strong>，为动作生成提供更可靠、更具区分度的条件。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li>  <strong>[训练策略]：</strong> <strong>“知识绝缘” (Knowledge Insulation) 训练策略</strong>是实现“先问后做”的关键。通过分阶段训练并<strong>冻结协作模块(VLM)</strong>，可以有效保留其对话能力，避免在学习动作生成时被“灾难性遗忘”。</li></ul><ul><li>  <strong>[架构设计]：</strong> 在分层VLA架构中，一个显式的<strong>连接模块</strong>至关重要。它通过语言指令<strong>调整视觉表征</strong>，为下游的动作模型（Diffusion）生成<strong>具有区分度的条件</strong>，解决了高级语义无法有效指导低级动作的难题。</li></ul><ul><li>  <strong>[交互模式]：</strong> 引入<strong>特殊信号Token</strong> (<code>&lt;AMBG&gt;</code>, <code>&lt;ACT&gt;</code>) 和一个<strong>信号检测器</strong>，可构建一个轻量级的“路由器”。这使得智能体能在<strong>“提问澄清”和“执行动作”</strong>两种模式间无缝切换，实现了从被动执行到主动协作的根本转变。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>对话能力泛化性弱：</strong> 对话能力依赖于LLM生成的合成数据，主要针对“多选一”这类特定模糊场景，可能无法泛化到更<strong>开放、复杂的真实世界对话</strong>中。</li><li>  <strong>静态世界假设：</strong> 模型在<strong>执行前</strong>完成所有澄清。它无法处理在执行过程中出现的新模糊性，或在对话期间环境发生变化的情况。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  实验对比的公平性存疑。本文模型通过提问获得了额外信息，而基线模型直接接收明确指令。这未能完全隔离和公平比较<strong>底层动作生成模块</strong>本身的性能。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>执行中的动态澄清 (Dynamic Clarification)：</strong> 研究智能体在<strong>任务执行过程中暂停、提问并恢复</strong>的能力。这能应对执行期间才出现的意外或模糊情况，更贴近真实协作。</li><li>  <strong>从对话中学习 (Learning from Dialogue)：</strong> 将对话从简单的“信息获取”升级为“知识学习”。让智能体不仅能澄清指令，还能从用户的回答中<strong>学习新的概念、偏好或技能</strong>，并用于未来的交互。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>复旦大学、加州大学伯克利分校</li>
+          <li><strong>一句话本质：</strong>通过多轮对话主动澄清模糊指令，让具身智能体从被动执行者变为主动协作者。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Xingyao Lin, Xinghao Zhu, Tianyi Lu, Sicheng Xie, Hui Zhang, Xipeng Qiu, Zuxuan Wu, Yu-Gang Jiang</li>
+          <li><strong>PDF：</strong>Ask-to-Clarify Resolving Instruction Ambiguity through Multi-turn Dialogue.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 多传感器融合, 视频生成, 策略学习, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的视觉-语言-动作模型 (VLA) 遵循单向模式，被动接收指令并直接执行。</li><li>核心痛点： 当人类指令存在模糊性时（例如场景中有多个同类物体），现有模型无法主动求助，导致执行失败或随机猜测。</li><li>本文切入点： 直觉上，应将“沟通协作”与“动作执行”解耦。作者让智能体先通过对话（问问题）搞清楚“做什么”，再执行具体动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练策略]： “知识绝缘” (Knowledge Insulation) 训练策略是实现“先问后做”的关键。通过分阶段训练并冻结协作模块(VLM)，可以有效保留其对话能力，避免在学习动作生成时被“灾难性遗忘”。</li><li>[架构设计]： 在分层VLA架构中，一个显式的连接模块至关重要。它通过语言指令调整视觉表征，为下游的动作模型（Diffusion）生成具有区分度的条件，解决了高级语义无法有效指导低级动作的难题。</li><li>[交互模式]： 引入特殊信号Token (&lt;AMBG&gt;, &lt;ACT&gt;) 和一个信号检测器，可构建一个轻量级的“路由器”。这使得智能体能在“提问澄清”和“执行动作”两种模式间无缝切换，实现了从被动执行到主动协作的根本转变。</li></ul></section><section><h3>Next Steps</h3><ul><li>执行中的动态澄清 (Dynamic Clarification)： 研究智能体在任务执行过程中暂停、提问并恢复的能力。这能应对执行期间才出现的意外或模糊情况，更贴近真实协作。</li><li>从对话中学习 (Learning from Dialogue)： 将对话从简单的“信息获取”升级为“知识学习”。让智能体不仅能澄清指令，还能从用户的回答中学习新的概念、偏好或技能，并用于未来的交互。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-09-18 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-09-18.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

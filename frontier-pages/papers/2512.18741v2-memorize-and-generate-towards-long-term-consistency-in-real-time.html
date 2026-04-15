@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memorize-and-Generate: Towards Long-Term Consistency in Real-Time Video Generation · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Memorize-and-Generate: Towards Long-Term Consistency in Real-Time Video Generation</h1>
+    <div class="muted">通过解耦记忆压缩与生成，实现实时长视频的长期一致性。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-12-21</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2512.18741v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">视频生成</span><span class="tag-mini">策略学习</span><span class="tag-mini">计算机视觉</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2512.18741v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Memorize-and-Generate Towards Long-Term Consistency in Real-Time Video Generation.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，请看我对这篇论文的深度拆解与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> Memorize-and-Generate: Towards Long-Term Consistency in Real-Time Video Generation</li><li>  <strong>核心机构：</strong> 清华大学深圳国际研究生院</li><li>  <strong>一句话本质：</strong> 通过解耦记忆压缩与生成，实现实时长视频的长期一致性。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 主流实时长视频生成采用<strong>逐帧自回归 (frame-AR)</strong> 配合<strong>窗口注意力 (window attention)</strong> 机制。</li><li>  <strong>核心痛点：</strong> <strong>窗口注意力</strong>会丢弃窗口外的历史信息，导致<strong>灾难性遗忘</strong>和场景不一致；而保留全部历史则有<strong>无法承受的内存成本</strong>。</li><li>  <strong>本文切入点：</strong> 将<strong>记忆压缩</strong>和<strong>帧生成</strong>解耦为两个独立任务，用专门的模型分别处理，从而打破记忆保真度与计算成本之间的权衡。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> <strong>压缩后的历史 KV 缓存</strong> + (可选) 文本提示 -&gt; <strong>下一段视频帧</strong></li><li>  <strong>关键模块 1：</strong> <strong>记忆模型 (Memory Model)</strong> - 负责将一段历史视频帧的信息<strong>无损压缩</strong>到一个紧凑的 <strong>KV 缓存</strong>中，并确保该缓存可以重建原始像素。</li><li>  <strong>关键模块 2：</strong> <strong>生成模型 (Generator Model)</strong> - 利用记忆模型提供的<strong>压缩历史缓存</strong>来合成后续视频帧，专注于生成任务本身。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li>  <strong>[优化视角]：</strong> 标准长视频训练存在<strong>“简并解” (degenerate solution)</strong>。模型会倾向于依赖<strong>文本提示</strong>而忽略<strong>历史上下文</strong>，因为教师模型无法提供历史一致性的监督信号。通过引入<strong>空文本条件</strong>的训练，可以强制模型学习从历史中推理。</li></ul><ul><li>  <strong>[架构视角]：</strong> <strong>“记忆”与“生成”的分离</strong>是解决长程依赖问题的有效策略。让一个模型专职做<strong>高保真记忆压缩</strong>（类似 KV 缓存的自编码器），另一个模型专职做<strong>条件生成</strong>，比单一模型试图同时兼顾两者更高效、更稳定。</li></ul><ul><li>  <strong>[表征视角]：</strong> 视频序列的<strong>KV 缓存</strong>中存在大量冗余。一个视频块（block）的信息可以被高度压缩到<strong>仅最后一帧的 KV 缓存</strong>中，并足以近乎无损地重建整个视频块。这证明了为实现长期一致性，我们无需保留所有历史帧的完整信息。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>记忆利用不充分：</strong> 模型虽然保留了长程记忆，但缺乏<strong>主动选择和利用</strong>这些海量历史信息的机制。生成器只是被动地接收压缩后的历史，可能无法智能地聚焦于最关键的过去片段。</li><li>  <strong>对教师模型的依赖：</strong> 整个框架依赖 <strong>DMD 蒸馏</strong>，这意味着它需要一个强大但昂贵的<strong>预训练教师模型</strong>。这限制了其向新领域（如基于动作的世界模型）的直接扩展能力。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  其自建的评测基准 <strong>MAG-Bench</strong> 使用“最佳匹配 LPIPS”指标。该指标会为预测帧匹配最相似的真实帧再计算损失，这可能<strong>掩盖了视频在时序上的细微漂移或运动速度不一致</strong>等问题，对时序一致性的评估可能过于宽松。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  为生成器设计<strong>显式的历史检索或注意力机制</strong>。使其能主动查询压缩的记忆库，动态聚焦于对当前生成最关键的遥远历史信息。</li><li>  探索<strong>无教师模型 (teacher-free) 的蒸馏或自学习框架</strong>。摆脱对大型预训练教师模型的依赖，使模型能直接从数据中学习世界规则，从而成为更通用的世界模型基础。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>清华大学深圳国际研究生院</li>
+          <li><strong>一句话本质：</strong>通过解耦记忆压缩与生成，实现实时长视频的长期一致性。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Tianrui Zhu, Shiyi Zhang, Zhirui Sun, Jingqi Tian, Yansong Tang</li>
+          <li><strong>PDF：</strong>Memorize-and-Generate Towards Long-Term Consistency in Real-Time Video Generation.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 视频生成, 策略学习, 计算机视觉</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流实时长视频生成采用逐帧自回归 (frame-AR) 配合窗口注意力 (window attention) 机制。</li><li>核心痛点： 窗口注意力会丢弃窗口外的历史信息，导致灾难性遗忘和场景不一致；而保留全部历史则有无法承受的内存成本。</li><li>本文切入点： 将记忆压缩和帧生成解耦为两个独立任务，用专门的模型分别处理，从而打破记忆保真度与计算成本之间的权衡。</li></ul></section><section><h3>Key Insights</h3><ul><li>[优化视角]： 标准长视频训练存在“简并解” (degenerate solution)。模型会倾向于依赖文本提示而忽略历史上下文，因为教师模型无法提供历史一致性的监督信号。通过引入空文本条件的训练，可以强制模型学习从历史中推理。</li><li>[架构视角]： “记忆”与“生成”的分离是解决长程依赖问题的有效策略。让一个模型专职做高保真记忆压缩（类似 KV 缓存的自编码器），另一个模型专职做条件生成，比单一模型试图同时兼顾两者更高效、更稳定。</li><li>[表征视角]： 视频序列的KV 缓存中存在大量冗余。一个视频块（block）的信息可以被高度压缩到仅最后一帧的 KV 缓存中，并足以近乎无损地重建整个视频块。这证明了为实现长期一致性，我们无需保留所有历史帧的完整信息。</li></ul></section><section><h3>Next Steps</h3><ul><li>为生成器设计显式的历史检索或注意力机制。使其能主动查询压缩的记忆库，动态聚焦于对当前生成最关键的遥远历史信息。</li><li>探索无教师模型 (teacher-free) 的蒸馏或自学习框架。摆脱对大型预训练教师模型的依赖，使模型能直接从数据中学习世界规则，从而成为更通用的世界模型基础。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-12-21 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-12-21.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

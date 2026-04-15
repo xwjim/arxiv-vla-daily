@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic-Contact Fields for Category-Level Generalizable Tactile Tool Manipulation · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Semantic-Contact Fields for Category-Level Generalizable Tactile Tool Manipulation</h1>
+    <div class="muted">通过「模拟预训练+真实数据对齐」学习统一的接触场，让机器人能泛化使用从未见过的新工具。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-02-15</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2602.13833v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">机器人操作</span><span class="tag-mini">多传感器融合</span><span class="tag-mini">三维表征</span><span class="tag-mini">视频生成</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2602.13833v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一位顶尖学术研究员，我将为你深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> Semantic-Contact Fields for Category-Level Generalizable Tactile Tool Manipulation (用于类别级可泛化触觉工具操作的语义-接触场)</li><li>  <strong>核心机构：</strong> 新加坡国立大学 (NUS)</li><li>  <strong>一句话本质：</strong> 通过「模拟预训练+真实数据对齐」学习统一的接触场，让机器人能泛化使用从未见过的新工具。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 纯视觉策略缺乏物理感知，而纯触觉策略难以泛化到不同外形的工具上。</li><li>  <strong>核心痛点：</strong> 真实世界中大规模、多样化的触觉数据收集成本极高，且触觉传感器的 <strong>Sim-to-Real 迁移差距巨大</strong>。</li><li>  <strong>本文切入点：</strong> 将复杂的触觉学习问题分解为两个子问题：1) 在模拟中学习 <strong>通用的接触物理规律</strong>；2) 在现实中用少量数据校准 <strong>传感器本身的特性</strong>。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> (工具/环境点云 + 原始触觉信号) -&gt; (工具表面每一点的 <strong>接触概率</strong> + <strong>三维接触力向量</strong>)。</li></ul><ul><li>  <strong>关键模块 1：</strong> <strong>两阶段接触学习管道 (Sim-to-Real Contact Learning Pipeline)</strong></li><li>  <strong>阶段一 (模拟预训练):</strong> 在大规模模拟数据上训练模型，学习跨越不同工具几何形状的 <strong>通用物理先验</strong>。</li><li>  <strong>阶段二 (真实世界对齐):</strong> 使用少量、通过几何启发式和力学优化生成的 <strong>伪标签真实数据</strong> 进行微调，专门弥合模拟与真实传感器之间的差距。</li></ul><ul><li>  <strong>关键模块 2：</strong> <strong>语义-接触场 (SCFields)</strong></li><li>  这是一个统一的 3D 状态表示，将模块 1 输出的 <strong>物理接触场</strong> (力和概率) 与预训练视觉模型提取的 <strong>3D 语义场</strong> (如“刀刃”、“手柄”) 融合。</li><li>  该融合表示作为 <strong>扩散策略 (Diffusion Policy)</strong> 的输入，指导机器人生成既懂功能又懂物理的动作。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li>  <strong>[Sim-to-Real 范式]：</strong> 纯模拟训练的触觉模型在现实中几乎完全失效。<strong>“模拟预训练 + 少量真实数据对齐”</strong> 的范式是解决触觉泛化问题的关键，它用模拟的广度解决了数据稀疏问题，用真实的精度解决了领域鸿沟问题。</li></ul><ul><li>  <strong>[接触表征的必要性]：</strong> 仅有接触位置或概率信息不足以完成精细操作。实验证明，必须显式地估计 <strong>接触力向量的大小和方向</strong>，策略才能有效调节物理交互，避免“悬空”或“用力过猛”等问题。</li></ul><ul><li>  <strong>[物理知识的可迁移性]：</strong> 接触物理知识是可以解耦和迁移的。在一个简单任务（如平面刮削）上对齐的传感器模型，能直接泛化用于一个全新、复杂的任务（如削胡萝卜皮），证明了 <strong>通用物理先验</strong> 与 <strong>传感器特性</strong> 可以被成功解耦学习。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>[依赖模仿学习]：</strong> 策略的上限被人类示教数据锁定，机器人只能泛化已知的操作方式，无法自主发现工具的 <strong>新用法</strong> 或创造性地解决问题。</li><li>  <strong>[伪标签的局限性]：</strong> 真实世界对齐阶段的伪标签生成，依赖于特定任务的几何约束（如刮一个平面）。这种方法在更复杂、非结构化的交互场景中可能难以应用。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  论文缺乏对 <strong>伪标签质量</strong> 的敏感性分析。伪标签的准确度如何影响最终策略的性能，以及该方法的鲁棒性边界在哪里，并未得到充分探讨。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>[探索式学习]：</strong> 结合 <strong>强化学习</strong> 或 <strong>世界模型</strong>，利用 SCFields 提供的丰富物理反馈作为奖励信号或状态表示，让机器人自主探索并发现工具的 <strong>新功能性示能 (novel functional affordances)</strong>。</li><li>  <strong>[在线自校准]：</strong> 研究更通用的 <strong>自监督伪标签生成方法</strong>，摆脱对特定任务几何的依赖，使机器人能够在与环境的持续交互中，进行在线的、任务无关的传感器自校准。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>新加坡国立大学 (NUS)</li>
+          <li><strong>一句话本质：</strong>通过「模拟预训练+真实数据对齐」学习统一的接触场，让机器人能泛化使用从未见过的新工具。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Kevin Yuchen Ma, Heng Zhang, Weisi Lin, Mike Zheng Shou, Yan Wu</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 机器人操作, 多传感器融合, 三维表征, 视频生成</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 纯视觉策略缺乏物理感知，而纯触觉策略难以泛化到不同外形的工具上。</li><li>核心痛点： 真实世界中大规模、多样化的触觉数据收集成本极高，且触觉传感器的 Sim-to-Real 迁移差距巨大。</li><li>本文切入点： 将复杂的触觉学习问题分解为两个子问题：1) 在模拟中学习 通用的接触物理规律；2) 在现实中用少量数据校准 传感器本身的特性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[Sim-to-Real 范式]： 纯模拟训练的触觉模型在现实中几乎完全失效。“模拟预训练 + 少量真实数据对齐” 的范式是解决触觉泛化问题的关键，它用模拟的广度解决了数据稀疏问题，用真实的精度解决了领域鸿沟问题。</li><li>[接触表征的必要性]： 仅有接触位置或概率信息不足以完成精细操作。实验证明，必须显式地估计 接触力向量的大小和方向，策略才能有效调节物理交互，避免“悬空”或“用力过猛”等问题。</li><li>[物理知识的可迁移性]： 接触物理知识是可以解耦和迁移的。在一个简单任务（如平面刮削）上对齐的传感器模型，能直接泛化用于一个全新、复杂的任务（如削胡萝卜皮），证明了 通用物理先验 与 传感器特性 可以被成功解耦学习。</li></ul></section><section><h3>Next Steps</h3><ul><li>[探索式学习]： 结合 强化学习 或 世界模型，利用 SCFields 提供的丰富物理反馈作为奖励信号或状态表示，让机器人自主探索并发现工具的 新功能性示能 (novel functional affordances)。</li><li>[在线自校准]： 研究更通用的 自监督伪标签生成方法，摆脱对特定任务几何的依赖，使机器人能够在与环境的持续交互中，进行在线的、任务无关的传感器自校准。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-02-15 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-02-15.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

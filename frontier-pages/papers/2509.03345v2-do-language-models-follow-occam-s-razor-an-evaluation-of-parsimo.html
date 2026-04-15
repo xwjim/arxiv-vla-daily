@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do Language Models Follow Occam&#x27;s Razor? An Evaluation of Parsimony in Inductive and Abductive Reasoning · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Do Language Models Follow Occam&#x27;s Razor? An Evaluation of Parsimony in Inductive and Abductive Reasoning</h1>
+    <div class="muted">发现大模型在推理时，倾向于生成冗余复杂的解释，而非最简洁的那个。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-09-03</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.AI, cs.CL</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2509.03345v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span><span class="tag-mini">人工智能</span><span class="tag-mini">自然语言</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2509.03345v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Do Language Models Follow Occam&#x27;s Razor An Evaluation of Parsimony in Inductive and Abductive Reasoning.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为一名资深科学家，我将为你拆解这篇关于语言模型与奥卡姆剃刀原则的论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> 语言模型遵循奥卡姆剃刀吗？归纳与溯因推理中的简约性评估 (Do Language Models Follow Occam&#x27;s Razor? An Evaluation of Parsimony in Inductive and Abductive Reasoning)</li><li><strong>核心机构：</strong> 普渡大学 (Purdue University)</li><li><strong>一句话本质：</strong> 发现大模型在推理时，<strong>倾向于生成冗余复杂的解释</strong>，而非最简洁的那个。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有工作主要评估大模型的演绎推理，或只关注非演绎推理的<strong>答案正确性</strong>。</li><li><strong>核心痛点：</strong> 忽略了非演绎推理（归纳、溯因）的一个核心特质：在多个合理解释中，<strong>最简洁的解释通常是最好的</strong>（即奥卡姆剃刀原则）。</li><li><strong>本文切入点：</strong> 创造一个可量化评估<strong>「解释简洁度」</strong>的框架，从根本上衡量模型是否具备遵循奥卡姆剃刀的“科学精神”。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong></li><li><strong>输入：</strong> 一段自然语言，包含一个<strong>不完整的世界模型</strong>（本体论树）和一系列<strong>待解释的观测现象</strong>。</li><li><strong>输出：</strong> 一组能够解释所有观测现象的<strong>假说 (Hypotheses)</strong>。</li></ul><ul><li><strong>关键模块 1：</strong> <strong>InAbHyD 评测集生成框架</strong> - 通过程序化地构建<strong>本体论树</strong>、隐藏关键规则（即<strong>答案假说</strong>）、并生成相应观测，来<strong>合成可控难度的推理问题</strong>。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>假说质量 (Hypothesis Quality) 度量</strong> - 提出一个量化公式，通过对比<strong>生成假说的数量和有效性</strong>与<strong>最简假说（标准答案）</strong>，来计算一个<strong>简约性得分</strong>，从而衡量其是否遵循奥卡姆剃刀。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li><strong>认知鸿沟：</strong></li><li><strong>模型能找到“合理解释”，但找不到“最佳解释”</strong>。在<strong>弱正确率</strong>（能解释现象）和<strong>强正确率</strong>（解释得最简洁）之间存在巨大差距。这表明模型缺乏内在的简约性偏好。</li></ul><ul><li><strong>复杂度诅咒：</strong></li><li><strong>模型推理能力随问题复杂度急剧衰减</strong>。当世界模型（本体论树）的层级加深，或需要同时提出多个假说时，模型的表现断崖式下跌，即使是 <strong>GPT-4o</strong> 等顶尖模型也不例外。</li></ul><ul><li><strong>增强技术失效：</strong></li><li><strong>现有推理增强技术（如 ICL, RLVR）收效甚微</strong>。这些主要为演绎推理设计的技术，并未能根本性解决模型在归纳/溯因推理中<strong>违反奥卡M剃刀</strong>的问题，说明这可能是当前模型架构的深层缺陷。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[合成数据]</strong> 评测集是<strong>完全人工合成</strong>的，与真实世界的复杂、模糊、充满噪声的推理场景存在差距。</li><li><strong>[逻辑限制]</strong> 整个框架基于<strong>一阶逻辑 (FOL)</strong>，无法表达更复杂的概念关系和推理模式（如高阶逻辑）。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验问题的自然语言描述由 <strong>GPT-4o 进行转述 (paraphrase)</strong>，这可能引入了<strong>有利于特定模型架构的偏见</strong>，未能完全隔离模型能力与数据生成工具的耦合。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[训练简约性]</strong> 利用本文提出的<strong>假说质量度量作为奖励信号</strong>，通过强化学习等方法，<strong>直接训练模型生成更简约、更符合奥卡姆剃刀原则的假说</strong>。</li><li><strong>[迈向高阶逻辑]</strong> 将世界模型从一阶逻辑扩展到<strong>高阶逻辑 (HOL)</strong>，以构建更复杂、更贴近科学发现等真实场景的推理挑战。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>普渡大学 (Purdue University)</li>
+          <li><strong>一句话本质：</strong>发现大模型在推理时，倾向于生成冗余复杂的解释，而非最简洁的那个。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Yunxin Sun, Abulhair Saparov</li>
+          <li><strong>PDF：</strong>Do Language Models Follow Occam&#x27;s Razor An Evaluation of Parsimony in Inductive and Abductive Reasoning.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 评测基准, 策略学习, 人工智能, 自然语言</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有工作主要评估大模型的演绎推理，或只关注非演绎推理的答案正确性。</li><li>核心痛点： 忽略了非演绎推理（归纳、溯因）的一个核心特质：在多个合理解释中，最简洁的解释通常是最好的（即奥卡姆剃刀原则）。</li><li>本文切入点： 创造一个可量化评估「解释简洁度」的框架，从根本上衡量模型是否具备遵循奥卡姆剃刀的“科学精神”。</li></ul></section><section><h3>Key Insights</h3><ul><li>认知鸿沟：</li><li>模型能找到“合理解释”，但找不到“最佳解释”。在弱正确率（能解释现象）和强正确率（解释得最简洁）之间存在巨大差距。这表明模型缺乏内在的简约性偏好。</li><li>复杂度诅咒：</li><li>模型推理能力随问题复杂度急剧衰减。当世界模型（本体论树）的层级加深，或需要同时提出多个假说时，模型的表现断崖式下跌，即使是 GPT-4o 等顶尖模型也不例外。</li><li>增强技术失效：</li></ul></section><section><h3>Next Steps</h3><ul><li>[训练简约性] 利用本文提出的假说质量度量作为奖励信号，通过强化学习等方法，直接训练模型生成更简约、更符合奥卡姆剃刀原则的假说。</li><li>[迈向高阶逻辑] 将世界模型从一阶逻辑扩展到高阶逻辑 (HOL)，以构建更复杂、更贴近科学发现等真实场景的推理挑战。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-09-03 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-09-03.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

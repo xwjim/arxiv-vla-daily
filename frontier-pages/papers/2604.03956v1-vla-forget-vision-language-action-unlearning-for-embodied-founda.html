@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLA-Forget: Vision-Language-Action Unlearning for Embodied Foundation Models · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>VLA-Forget: Vision-Language-Action Unlearning for Embodied Foundation Models</h1>
+    <div class="muted">为具身大模型实现精准、分模块、无损的“行为遗忘”。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-05</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.CV, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.03956v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">策略学习</span><span class="tag-mini">多模态</span><span class="tag-mini">计算机视觉</span><span class="tag-mini">人工智能</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.03956v1" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为顶尖学术研究员，我已完成对论文《VLA-Forget》的深度拆解。以下是核心信息的提取与洞察。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> VLA-Forget: Vision-Language-Action Unlearning for Embodied Foundation Models</li><li><strong>核心机构：</strong> Florida International University</li><li><strong>一句话本质：</strong> 为具身大模型实现精准、分模块、无损的“行为遗忘”。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有的机器遗忘算法主要为<strong>单一模态</strong>（纯视觉或纯语言）模型设计。</li><li><strong>核心痛点：</strong> 在VLA（视觉-语言-行动）模型中，有害知识<strong>分布</strong>在感知、对齐、行动等多个模块，单独修改任一模块效果差且损伤模型通用能力。</li><li><strong>本文切入点：</strong> 既然问题是<strong>分布式</strong>的，解决方案也必须是<strong>分布式</strong>的。作者提出一种<strong>组件感知 (component-aware)</strong> 的混合遗忘框架，对不同模块“对症下药”。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 原始VLA模型 + 遗忘/保留数据集 -&gt; 已移除特定行为的VLA新模型</li><li><strong>关键模块 1：</strong> <strong>Ratio-aware Selective Editing</strong> - 针对<strong>视觉编码器</strong>和<strong>跨模态投影器</strong>，通过计算遗忘/保留梯度的比率，精准定位并修改与“坏知识”强相关、与“好知识”弱相关的参数。</li><li><strong>关键模块 2：</strong> <strong>Layer-selective Reasoning/Action Unlearning</strong> - 针对<strong>语言-行动骨干网络</strong>，通过重要性评分选择性地更新顶层Transformer块，在抑制错误行动指令的同时，最大限度保留通用推理能力。</li><li><strong>关键模块 3：</strong> <strong>Staged, Adapter-first Updates</strong> - 整个遗忘过程<strong>分三步</strong>（先视觉、再对齐、后行动）进行，且所有修改都通过<strong>LoRA适配器</strong>完成，易于部署、合并和回滚。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>[知识分布特性]：</strong> VLA模型中的有害知识（如不安全行为）并非存储于单一模块，而是<strong>弥散性地分布</strong>在<strong>视觉感知、跨模态对齐和行动推理</strong>的全链路中。单一模块的“手术”无法根除问题。</li><li><strong>[遗忘机制有效性]：</strong> 高效的具身模型遗忘必须采用<strong>分阶段、分模块</strong>的混合策略。必须先解耦底层的<strong>视觉触发器</strong>，再打破中层的<strong>模态错误绑定</strong>，最后抑制顶层的<strong>行动指令先验</strong>，层层递进才能实现“标本兼治”。</li><li><strong>[模型部署鲁棒性]：</strong> 相比于全局更新的遗忘方法，本文提出的<strong>基于适配器（Adapter）的局部、选择性编辑</strong>方法能更好地抵抗<strong>模型量化</strong>带来的性能衰减。这使得遗忘效果在资源受限的真实机器人部署后依然稳定。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[近似遗忘]：</strong> 该方法属于<strong>近似遗忘 (approximate unlearning)</strong>，无法提供数据被完全擦除的<strong>数学保证</strong>，仍存在被攻击恢复的理论风险。</li><li><strong>[数据依赖]：</strong> 方法的有效性高度依赖于高质量的<strong>遗忘集 (Df)</strong> 和<strong>保留集 (Dr)</strong> 的构建，这在现实场景中可能成本高昂且难以定义。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验中对<strong>边界集 (Dm)</strong> 的作用和构建敏感性缺乏消融分析，该数据集对于防止“过度遗忘”至关重要，但其影响未被充分论证。</li><li>用于选择语言模型更新层级的<strong>重要性比率 (Significance Ratio)</strong> 是一种启发式方法，其在不同架构或更复杂任务上的普适性有待验证。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[迈向可验证遗忘]：</strong> 研究如何在VLA模型中实现具有<strong>形式化安全保证</strong>的“可验证遗忘”，彻底消除隐私或安全风险。</li><li><strong>[自动化遗忘诊断]：</strong> 开发能让模型<strong>自主检测</strong>并提出“待遗忘”行为（如 spurious shortcuts 或不安全动作）的机制，从“被动接受指令”演进为“主动自我修正”。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>Florida International University</li>
+          <li><strong>一句话本质：</strong>为具身大模型实现精准、分模块、无损的“行为遗忘”。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Ravi Ranjan, Agoritsa Polyzou</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 多模态, 计算机视觉, 人工智能</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的机器遗忘算法主要为单一模态（纯视觉或纯语言）模型设计。</li><li>核心痛点： 在VLA（视觉-语言-行动）模型中，有害知识分布在感知、对齐、行动等多个模块，单独修改任一模块效果差且损伤模型通用能力。</li><li>本文切入点： 既然问题是分布式的，解决方案也必须是分布式的。作者提出一种组件感知 (component-aware) 的混合遗忘框架，对不同模块“对症下药”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[知识分布特性]： VLA模型中的有害知识（如不安全行为）并非存储于单一模块，而是弥散性地分布在视觉感知、跨模态对齐和行动推理的全链路中。单一模块的“手术”无法根除问题。</li><li>[遗忘机制有效性]： 高效的具身模型遗忘必须采用分阶段、分模块的混合策略。必须先解耦底层的视觉触发器，再打破中层的模态错误绑定，最后抑制顶层的行动指令先验，层层递进才能实现“标本兼治”。</li><li>[模型部署鲁棒性]： 相比于全局更新的遗忘方法，本文提出的基于适配器（Adapter）的局部、选择性编辑方法能更好地抵抗模型量化带来的性能衰减。这使得遗忘效果在资源受限的真实机器人部署后依然稳定。</li></ul></section><section><h3>Next Steps</h3><ul><li>[迈向可验证遗忘]： 研究如何在VLA模型中实现具有形式化安全保证的“可验证遗忘”，彻底消除隐私或安全风险。</li><li>[自动化遗忘诊断]： 开发能让模型自主检测并提出“待遗忘”行为（如 spurious shortcuts 或不安全动作）的机制，从“被动接受指令”演进为“主动自我修正”。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-05 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-04-05.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

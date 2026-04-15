@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unifying Deep Predicate Invention with Pre-trained Foundation Models · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Unifying Deep Predicate Invention with Pre-trained Foundation Models</h1>
+    <div class="muted">结合大模型先验与数据反馈，让机器人更高效、更准确地学习符号化世界模型。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-12-20</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2512.17992v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">策略学习</span><span class="tag-mini">机器人</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2512.17992v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Unifying Deep Predicate Invention with Pre-trained Foundation Models.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，我将以资深科学家的视角，为您深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> 融合预训练基础模型的深度谓词发现 (Unifying Deep Predicate Invention with Pre-trained Foundation Models)</li><li><strong>核心机构：</strong> 卡内基梅隆大学 (Carnegie Mellon University)</li><li><strong>一句话本质：</strong> 结合大模型先验与数据反馈，让机器人更高效、更准确地学习符号化世界模型。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 机器人学习符号谓词依赖两种独立范式：<strong>纯自上而下</strong>（大模型零样本生成）或<strong>纯自下而上</strong>（从演示数据中搜索）。</li><li><strong>核心痛点：</strong> <strong>自上而下</strong>的方法缺乏数据验证，<strong>不稳定</strong>；<strong>自下而上</strong>的方法搜索空间巨大，<strong>效率极低</strong>。</li><li><strong>本文切入点：</strong> 将两者结合。用 <strong>LLM</strong> 作为<strong>高层先验</strong>提出谓词假设，用<strong>底层数据学习</strong>的反馈来<strong>迭代修正</strong>这个假设，形成一个高效的闭环。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> <strong>机器人演示数据</strong> + <strong>任务描述</strong> -&gt; 一套<strong>已学习的符号谓词</strong>及其<strong>分类器</strong>。</li></ul><ul><li><strong>关键模块 1：</strong> <strong>统一双层学习框架 (Unified Bilevel Learning Framework)</strong> - LLM 提出谓词-效应分布的假设，底层神经分类器从数据中学习并提供损失作为反馈，<strong>形成闭环迭代</strong>。</li></ul><ul><li><strong>关键模块 2：</strong> <strong>派生谓词感知选择 (Derived-aware Predicate Selection)</strong> - 区分<strong>基础谓词</strong>和<strong>派生谓词</strong>，在规划评估中将派生谓词作为约束处理，从而支持 <strong>Non-STRIPS</strong> 复杂任务。</li></ul><p>| 模块 | 核心功能 | | :--- | :--- | | <strong>LLM Proposer</strong> | 基于任务描述和少量演示，生成<strong>谓词及其效应</strong>的初始假设。 | | <strong>Neural Classifier</strong> | 基于 LLM 的假设，从<strong>视觉特征</strong>中学习谓词的分类器，并计算学习<strong>损失</strong>。 | | <strong>Feedback Loop</strong> | 将分类器的<strong>学习损失</strong>作为反馈信号，指导 LLM <strong>修正或提出新</strong>的谓词假设。 | | <strong>Predicate Selector</strong> | 在规划层面评估谓词价值，<strong>区别对待</strong>基础谓词和派生谓词，选出最优组合。 |</p><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li><strong>[协同效应]：</strong> <strong>大模型的符号先验</strong>（来自 LLM）和<strong>物理世界的数据反馈</strong>（来自底层学习）是<strong>互补且可统一</strong>的。前者提供高效的搜索方向，后者提供事实基础，两者结合能实现<strong>1+1&gt;2</strong>的效果。</li></ul><ul><li><strong>[范式转变]：</strong> 在机器人符号学习中，将 LLM 用作一个<strong>迭代的、可修正的假设生成器</strong>，其效果远胜于将其用作<strong>一次性的零样本规划器或代码生成器</strong>。<strong>闭环反馈</strong>是释放其潜力的关键。</li></ul><ul><li><strong>[符号层级]：</strong> 符号谓词存在<strong>内在层级</strong>（基础 vs. 派生）。必须在学习和规划中<strong>区别对待</strong>它们（如将派生谓词视为约束），才能正确建模具有<strong>全局/量化条件</strong>的复杂任务。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>[数据依赖]</strong> 强依赖于<strong>高质量的离线演示数据集</strong>，无法进行在线的、探索性的谓词发现。</li><li><strong>[感知瓶颈]</strong> 整个框架建立在<strong>准确的、以对象为中心的感知</strong>之上。如果前期物体检测或特征提取失败，整个系统会失效。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>缺乏对<strong>视觉基础模型（VFM）质量</strong>的消融实验。目前尚不清楚当底层视觉特征<strong>不够强大</strong>时，该框架的性能会如何下降。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>[在线学习]</strong> 从<strong>离线学习</strong>走向<strong>在线、交互式学习</strong>。让机器人能够在执行任务中<strong>主动探索和发现</strong>新的、有用的谓词。</li><li><strong>[突破对象中心]</strong> 突破<strong>“以对象为中心”</strong>的限制。研究如何在<strong>非结构化场景</strong>（如一堆沙子、一滩水）中学习和定义谓词，实现更广泛的泛化。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>卡内基梅隆大学 (Carnegie Mellon University)</li>
+          <li><strong>一句话本质：</strong>结合大模型先验与数据反馈，让机器人更高效、更准确地学习符号化世界模型。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Qianwei Wang, Bowen Li, Zhanpeng Luo, Yifan Xu, Alexander Gray, Tom Silver, Sebastian Scherer, Katia Sycara, Yaqi Xie</li>
+          <li><strong>PDF：</strong>Unifying Deep Predicate Invention with Pre-trained Foundation Models.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 机器人</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人学习符号谓词依赖两种独立范式：纯自上而下（大模型零样本生成）或纯自下而上（从演示数据中搜索）。</li><li>核心痛点： 自上而下的方法缺乏数据验证，不稳定；自下而上的方法搜索空间巨大，效率极低。</li><li>本文切入点： 将两者结合。用 LLM 作为高层先验提出谓词假设，用底层数据学习的反馈来迭代修正这个假设，形成一个高效的闭环。</li></ul></section><section><h3>Key Insights</h3><ul><li>[协同效应]： 大模型的符号先验（来自 LLM）和物理世界的数据反馈（来自底层学习）是互补且可统一的。前者提供高效的搜索方向，后者提供事实基础，两者结合能实现1+1&gt;2的效果。</li><li>[范式转变]： 在机器人符号学习中，将 LLM 用作一个迭代的、可修正的假设生成器，其效果远胜于将其用作一次性的零样本规划器或代码生成器。闭环反馈是释放其潜力的关键。</li><li>[符号层级]： 符号谓词存在内在层级（基础 vs. 派生）。必须在学习和规划中区别对待它们（如将派生谓词视为约束），才能正确建模具有全局/量化条件的复杂任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>[在线学习] 从离线学习走向在线、交互式学习。让机器人能够在执行任务中主动探索和发现新的、有用的谓词。</li><li>[突破对象中心] 突破“以对象为中心”的限制。研究如何在非结构化场景（如一堆沙子、一滩水）中学习和定义谓词，实现更广泛的泛化。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-12-20 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-12-20.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

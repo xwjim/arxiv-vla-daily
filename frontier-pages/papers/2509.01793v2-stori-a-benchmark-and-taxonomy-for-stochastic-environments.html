@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STORI: A Benchmark and Taxonomy for Stochastic Environments · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>STORI: A Benchmark and Taxonomy for Stochastic Environments</h1>
+    <div class="muted">定义了环境随机性的分类，并构建基准证明了顶尖AI模型在不确定世界中的脆弱性。</div>
+    <div class="meta">
+      <span class="chip">日期 2025-09-02</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.LG, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2509.01793v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span><span class="tag-mini">机器学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2509.01793v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/STORI A Benchmark and Taxonomy for Stochastic Environments.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，我将以资深科学家的视角，为您深度拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li>  <strong>标题：</strong> STORI: 一个针对随机环境的基准和分类法</li><li>  <strong>核心机构：</strong> 新加坡国立大学 (National University of Singapore)</li><li>  <strong>一句话本质：</strong> 定义了环境随机性的分类，并构建基准证明了顶尖AI模型在不确定世界中的脆弱性。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li>  <strong>已有共识/做法：</strong> 在确定性或弱随机性环境（如标准Atari游戏）中评测强化学习（RL）算法。</li><li>  <strong>核心痛点：</strong> 现有算法在真实世界的<strong>随机性</strong>面前表现很差，且学术界缺乏对<strong>随机性</strong>的系统性分类和评测标准。</li><li>  <strong>本文切入点：</strong> 与其模糊地谈论鲁棒性，不如<strong>主动构建一个包含各类随机性的“靶场”</strong>，并提出一个<strong>分类框架</strong>来精确打击和度量。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li>  <strong>输入 -&gt; 输出：</strong> <strong>标准RL环境</strong> + <strong>随机性类型与强度</strong> -&gt; <strong>可控的随机环境</strong>。</li><li>  <strong>关键模块 1：</strong> <strong>随机性分类法 (Taxonomy)</strong> - 将环境随机性系统地划分为<strong>五种核心类型</strong>，为“不确定性”提供了清晰的定义和画像。</li><li>  <strong>关键模块 2：</strong> <strong>STORI基准测试集</strong> - 在Atari游戏中<strong>实例化</strong>这五种随机性，从而创造出一个可量化、可复现的评估框架。</li></ul><p>| 随机性类型 | 核心描述 | 现实世界类比 | | :--- | :--- | :--- | | <strong>Type 1</strong> | 动作不确定：智能体的<strong>指令</strong>可能被干扰或篡改。 | 机器人手臂因电压不稳而抖动。 | | <strong>Type 2.1</strong> | 环境突变：与智能体无关的<strong>外部事件</strong>随机发生。 | 开车时突然冲出一只野猫。 | | <strong>Type 2.2</strong> | 规则渐变：环境的<strong>内在规律</strong>随时间缓慢或突然改变。 | 游戏难度随关卡提升；市场风格切换。 | | <strong>Type 3.1</strong> | 观测模糊：能看到<strong>全部信息</strong>，但需要学习才能理解。 | 新手司机看仪表盘，信息都在但抓不住重点。 | | <strong>Type 3.2</strong> | 信息缺失：部分关键信息<strong>完全不可见</strong>。 | 在大雾中驾驶，部分视野完全丢失。 |</p><h3>四、 💡 核心认知与发现 (Key Insights)</h3><ul><li>  <strong>[模型对不确定性的感知]：SOTA世界模型（World Model）严重低估了环境的真实随机性。</strong></li></ul><p>当环境真实方差（Type 2.1）增加近 <strong>300倍</strong> 时，模型的预测方差几乎不变，表现出极端的 <strong>“虚假自信”</strong>。这揭示了模型在认知层面存在根本缺陷。</p><ul><li>  <strong>[高分与鲁棒性的脱钩]：算法的高分可能来自于“钻空子”而非真正的鲁棒性。</strong></li></ul><p>在BankHeist任务中，DreamerV3通过利用环境结构<strong>规避随机区域</strong>来获得高分；而STORM因直面随机性而失败。这证明了<strong>高分不等于高鲁棒性</strong>。</p><ul><li>  <strong>[世界模型的内在脆弱性]：任务性能与世界模型的动态稳健性并不等价。</strong></li></ul><p>在部分可观测场景下，DreamerV3虽然任务得分高，但其世界模型在<strong>信息缺失</strong>时比STORM更脆弱。当从模糊观测开始时，它的预测误差显著增高，表明其<strong>内部表征依赖于完美的初始信息</strong>。</p><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li>  <strong>[算法覆盖面窄]</strong> 评估的算法<strong>数量有限</strong>（仅2个），且都属于<strong>模型驱动（Model-Based）</strong>类型，缺乏对模型无关（Model-Free）等更广泛算法的检验。</li><li>  <strong>[比较的非正交性]</strong> 不同类型的随机性<strong>难以进行公平的横向比较</strong>，其影响程度和难度没有归一化的衡量标准。比如“10%的动作噪声”和“25%的屏幕遮挡”哪个更难？</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>  Gopher环境中的<strong>异常高分</strong>（归因于奖励抵消动态）未被深入剖析。这表明基准本身可能存在<strong>未预见的捷径（loopholes）</strong>，算法的成功可能利用了基准的“Bug”而非真正解决了随机性问题。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li>  <strong>开发能感知和量化不确定性的世界模型</strong>：既然现有模型会“虚假自信”，下一步应设计能明确<strong>表征和预测环境方差</strong>的新模型架构，使其具备真正的“自知之明”。</li><li>  <strong>在线识别并适应随机性类型</strong>：设计一个“元控制器”，使其能<strong>在线判断</strong>当前环境属于哪种随机性（如Type 1或Type 2.2），并调用<strong>相应的策略或模型</strong>进行动态适应。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>新加坡国立大学 (National University of Singapore)</li>
+          <li><strong>一句话本质：</strong>定义了环境随机性的分类，并构建基准证明了顶尖AI模型在不确定世界中的脆弱性。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Aryan Amit Barsainyan, Jing Yu Lim, Dianbo Liu</li>
+          <li><strong>PDF：</strong>STORI A Benchmark and Taxonomy for Stochastic Environments.pdf</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 评测基准, 策略学习, 机器学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 在确定性或弱随机性环境（如标准Atari游戏）中评测强化学习（RL）算法。</li><li>核心痛点： 现有算法在真实世界的随机性面前表现很差，且学术界缺乏对随机性的系统性分类和评测标准。</li><li>本文切入点： 与其模糊地谈论鲁棒性，不如主动构建一个包含各类随机性的“靶场”，并提出一个分类框架来精确打击和度量。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型对不确定性的感知]：SOTA世界模型（World Model）严重低估了环境的真实随机性。 当环境真实方差（Type 2.1）增加近 300倍 时，模型的预测方差几乎不变，表现出极端的 “虚假自信”。这揭示了模型在认知层面存在根本缺陷。</li><li>[高分与鲁棒性的脱钩]：算法的高分可能来自于“钻空子”而非真正的鲁棒性。 在BankHeist任务中，DreamerV3通过利用环境结构规避随机区域来获得高分；而STORM因直面随机性而失败。这证明了高分不等于高鲁棒性。</li><li>[世界模型的内在脆弱性]：任务性能与世界模型的动态稳健性并不等价。 在部分可观测场景下，DreamerV3虽然任务得分高，但其世界模型在信息缺失时比STORM更脆弱。当从模糊观测开始时，它的预测误差显著增高，表明其内部表征依赖于完美的初始信息。</li></ul></section><section><h3>Next Steps</h3><ul><li>开发能感知和量化不确定性的世界模型：既然现有模型会“虚假自信”，下一步应设计能明确表征和预测环境方差的新模型架构，使其具备真正的“自知之明”。</li><li>在线识别并适应随机性类型：设计一个“元控制器”，使其能在线判断当前环境属于哪种随机性（如Type 1或Type 2.2），并调用相应的策略或模型进行动态适应。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2025-09-02 · VLA</span><a href="../../Interpretation/arxiv-vla-2025-09-02.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

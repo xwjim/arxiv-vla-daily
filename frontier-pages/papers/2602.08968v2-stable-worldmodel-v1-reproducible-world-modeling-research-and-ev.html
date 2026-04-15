@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>stable-worldmodel-v1: Reproducible World Modeling Research and Evaluation · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>stable-worldmodel-v1: Reproducible World Modeling Research and Evaluation</h1>
+    <div class="muted">打造了一个标准化的世界模型研究工具箱，以解决领域内实现混乱、评估不一的困境。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-02-10</span>
+      <span class="chip">主题 VLA</span>
+      <span class="chip">分类 cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2602.08968v2</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">世界模型</span><span class="tag-mini">鲁棒性</span><span class="tag-mini">评测基准</span><span class="tag-mini">策略学习</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2602.08968v2" target="_blank" rel="noreferrer">arXiv</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <p>好的，作为顶尖学术研究员，我将为您精准拆解这篇论文。</p><h3>一、 📌 论文元数据</h3><ul><li><strong>标题：</strong> stable-worldmodel-v1: 可复现的世界模型研究与评估</li><li><strong>核心机构：</strong> Mila, 纽约大学 (NYU), 布朗大学, 三星 SAIL</li><li><strong>一句话本质：</strong> 打造了一个标准化的世界模型研究工具箱，以解决领域内实现混乱、评估不一的困境。</li></ul><h3>二、 🎯 破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 世界模型（World Models）是构建通用智能体的重要路径，但各研究的实现和评估都是孤立的。</li><li><strong>核心痛点：</strong> 研究实现<strong>不可复用</strong>、<strong>bug 风险高</strong>、<strong>评估标准不统一</strong>，严重阻碍了方法间的公平比较和领域进展。</li><li><strong>本文切入点：</strong> 与其提出新模型，不如构建一个公共“实验平台”。作者的直觉是，一个<strong>模块化、标准化的研究生态系统</strong>本身就是加速科学发现的关键基础设施。</li></ul><h3>三、 ⚙️ 核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> <strong>World 配置</strong> (环境、策略等) -&gt; <strong>标准化的数据集</strong> 或 <strong>可复现的评估报告</strong>。</li></ul><ul><li><strong>关键模块 1：</strong> <strong><code>World</code> 接口</strong> - 核心抽象层，将环境模拟、数据收集和评估流程统一起来，实现了<strong>环境与控制策略的解耦</strong>。</li><li><strong>关键模块 2：</strong> <strong>变化因子 (FoV)</strong> - 一套可控的环境参数（如颜色、物理属性），用于<strong>系统性地测试模型的鲁棒性与泛化能力</strong>。</li></ul><h3>四、 💡 核心认知与发现 (Key Insights) 🌟重点</h3><ul><li><strong>模型泛化能力：</strong> 世界模型对<strong>训练数据的分布极度敏感</strong>。实验表明，DINO-WM 在专家数据上成功率达 94%，但在随机策略数据上骤降至 12%，揭示了其<strong>严重的过拟合问题</strong>。</li></ul><ul><li><strong>零样本鲁棒性：</strong> 现有世界模型<strong>对未见过的环境变化缺乏鲁棒性</strong>。即便任务核心动力学不变，仅改变背景、颜色等次要因素，模型的性能也会<strong>持续性地大幅下降</strong>，说明模型学到的是表面相关性而非物理本质。</li></ul><ul><li><strong>研究范式：</strong> <strong>标准化的研究基础设施是推动领域发展的关键杠杆</strong>。通过 SWM 框架，可以轻松、系统地发现模型的脆弱性，证明了统一的基准和工具对于进行<strong>严谨的科学探究至关重要</strong>。</li></ul><h3>五、 🧐 致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>生态初期：</strong> 作为一个新框架，其内置的<strong>环境和基线模型数量有限</strong>，尚未覆盖世界模型研究的所有场景。</li><li><strong>Sim-to-Real 鸿沟：</strong> 框架目前完全基于<strong>模拟环境</strong>，并未提供解决“模拟到现实”迁移这一核心挑战的方案。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>实验部分仅用 <strong>DINO-WM</strong> 一个模型作为案例来展示框架的有效性，缺乏<strong>多种模型在该框架下的横向对比</strong>，使得其对“标准化评估”的论证略显单薄。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>OOD 泛化算法基准：</strong> 利用 SWM 的 <strong>变化因子 (FoV)</strong> 功能，系统性地开发和评测<strong>专门用于提升分布外 (OOD) 泛化能力</strong>的新算法。</li><li><strong>模型可解释性集成：</strong> 将<strong>机制可解释性工具</strong>集成到 SWM 中，例如，通过控制 FoV 变量来可视化世界模型<strong>潜在空间的结构性变化</strong>，从而理解模型“脑中”的世界是如何表征的。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>Mila, 纽约大学 (NYU), 布朗大学, 三星 SAIL</li>
+          <li><strong>一句话本质：</strong>打造了一个标准化的世界模型研究工具箱，以解决领域内实现混乱、评估不一的困境。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Lucas Maes, Quentin Le Lidec, Dan Haramati, Nassim Massaudi, Damien Scieur, Yann LeCun, Randall Balestriero</li>
+          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>标签：</strong>VLA, 具身智能, 世界模型, 鲁棒性, 评测基准, 策略学习</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型（World Models）是构建通用智能体的重要路径，但各研究的实现和评估都是孤立的。</li><li>核心痛点： 研究实现不可复用、bug 风险高、评估标准不统一，严重阻碍了方法间的公平比较和领域进展。</li><li>本文切入点： 与其提出新模型，不如构建一个公共“实验平台”。作者的直觉是，一个模块化、标准化的研究生态系统本身就是加速科学发现的关键基础设施。</li></ul></section><section><h3>Key Insights</h3><ul><li>模型泛化能力： 世界模型对训练数据的分布极度敏感。实验表明，DINO-WM 在专家数据上成功率达 94%，但在随机策略数据上骤降至 12%，揭示了其严重的过拟合问题。</li><li>零样本鲁棒性： 现有世界模型对未见过的环境变化缺乏鲁棒性。即便任务核心动力学不变，仅改变背景、颜色等次要因素，模型的性能也会持续性地大幅下降，说明模型学到的是表面相关性而非物理本质。</li><li>研究范式： 标准化的研究基础设施是推动领域发展的关键杠杆。通过 SWM 框架，可以轻松、系统地发现模型的脆弱性，证明了统一的基准和工具对于进行严谨的科学探究至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>OOD 泛化算法基准： 利用 SWM 的 变化因子 (FoV) 功能，系统性地开发和评测专门用于提升分布外 (OOD) 泛化能力的新算法。</li><li>模型可解释性集成： 将机制可解释性工具集成到 SWM 中，例如，通过控制 FoV 变量来可视化世界模型潜在空间的结构性变化，从而理解模型“脑中”的世界是如何表征的。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-02-10 · VLA</span><a href="../../Interpretation/arxiv-vla-2026-02-10.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>
