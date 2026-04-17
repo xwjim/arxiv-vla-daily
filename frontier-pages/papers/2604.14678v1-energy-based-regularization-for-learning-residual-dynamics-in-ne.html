@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy-based Regularization for Learning Residual Dynamics in Neural MPC for Omnidirectional Aerial Robots · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Energy-based Regularization for Learning Residual Dynamics in Neural MPC for Omnidirectional Aerial Robots</h1>
+    <div class="muted">这篇论文想解决的不是“再加一个神经网络进 MPC”，而是让 residual dynamics 学习过程带上 能量稳定性偏置，减少 neural MPC 常见的“点上更准、飞起来更飘”问题。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-16</span>
+      <span class="chip">主题 UAV</span>
+      <span class="chip">分类 eess.SY, cs.RO</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.14678v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">UAV</span><span class="tag-mini">Neural MPC</span><span class="tag-mini">残差动力学</span><span class="tag-mini">能量正则化</span><span class="tag-mini">飞行控制</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.14678v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Energy-based Regularization for Learning Residual Dynamics in Neural MPC for Omnidirectional Aerial Robots.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <h3>摘要（自动抓取）</h3><p>Data-driven Model Predictive Control (MPC) has lately been the core research subject in the field of control theory. The combination of an optimal control framework with deep learning paradigms opens up the possibility to accurately track control tasks without the need for complex analytical models. However, the system dynamics are often nuanced and the neural model lacks the potential to understand physical properties such as inertia and conservation of energy. In this work, we propose a novel energy-based regularization loss function which is applied to the training of a neural model that learns the residual dynamics of an omnidirectional aerial robot. Our energy-based regularization encourages the neural network to cause control corrections that stabilize the energy of the system. The residual dynamics are integrated into the MPC framework and improve the positional mean absolute error (MAE) over three real-world experiments by 23% compared to an analytical MPC. We also compare our method to a standard neural MPC implementation without regularization and primarily achieve a significantly increased flight stability implicitly due to the energy regularization and up to 15% lower MAE. Our code is available under: https://github.com/johanneskbl/jsk_aerial_robot/tree/develop/neural_MPC.</p><h3>一、论文元数据</h3><ul><li><strong>标题：</strong> Energy-based Regularization for Learning Residual Dynamics in Neural MPC for Omnidirectional Aerial Robots</li><li><strong>核心机构：</strong> 东京大学</li><li><strong>一句话本质：</strong> 这篇论文想解决的不是“再加一个神经网络进 MPC”，而是让 residual dynamics 学习过程带上 <strong>能量稳定性偏置</strong>，减少 neural MPC 常见的“点上更准、飞起来更飘”问题。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 把学习模型融进 MPC 已经成为提升复杂系统控制精度的重要路线，尤其适用于难以精确解析建模的飞行器。</li><li><strong>核心痛点：</strong> 纯数据驱动残差模型虽然可能降低 tracking error，但常常忽略惯性、能量守恒等物理属性，导致飞行稳定性变差。</li><li><strong>本文切入点：</strong> 作者提出 energy-based regularization，让神经网络学习 residual dynamics 时，不只是拟合数据，还要倾向于输出能稳定系统能量的修正项。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> analytical model + neural residual model + 训练数据 -&gt; 带能量正则的残差动力学学习 -&gt; 集成进 MPC 的更稳定轨迹跟踪控制器。</li><li><strong>关键模块 1：</strong> <strong>Residual Dynamics Learning</strong>：神经网络学习解析模型未覆盖的复杂动力学残差。</li><li><strong>关键模块 2：</strong> <strong>Energy-based Loss</strong>：通过对预测状态的动能/势能变化施加约束，让网络输出更符合物理稳定趋势。</li><li><strong>关键模块 3：</strong> <strong>Hybrid Prediction</strong>：用 analytical model 与 neural residual 共同推进状态，而不是完全丢掉物理模型。</li><li><strong>关键模块 4：</strong> <strong>Real-world MPC Integration</strong>：把学到的残差模块真正放回在线 MPC 闭环中，而非只做离线拟合比较。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>更准的 residual 不一定更稳：</strong> 控制系统里，点对点误差下降并不能保证闭环行为更好，物理先验必须显式进入训练目标。</li><li><strong>能量是很有效的物理归纳偏置：</strong> 相比只用 L2 loss，energy regularization 直接约束“网络输出对系统状态演化的物理后果”。</li><li><strong>hybrid control 仍然很有生命力：</strong> 论文不是抛弃解析模型，而是强调“解析模型打底 + 学习补残差”的折中路线。</li><li><strong>真实实验结果比离线指标更关键：</strong> 23% MAE 改善和更高 flight stability 说明该方法不是纸面上的 loss trick。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>物理先验选择具有任务相关性：</strong> 能量正则适合这类飞行系统，但不一定能无缝迁移到所有带耗散、碰撞或强外界耦合的机器人。</li><li><strong>仍依赖解析模型打底：</strong> 如果 analytical model 太差，残差学习与能量约束的收益都会受限。</li><li><strong>验证平台仍较专用：</strong> 当前结果主要针对 omnidirectional aerial robot，对常规多旋翼或更复杂飞行平台的泛化尚需验证。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要强调 MAE 与稳定性提升，但没有在摘要层面进一步展示正则项与控制性能之间的灵敏度关系，也未说明不同轨迹任务上的一致性。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>结合更多物理守恒量或约束：</strong> 例如动量、功率限制和接近地面效应等更丰富先验。</li><li><strong>做不确定性与鲁棒 MPC 联动：</strong> 让残差模型在面对外界扰动时能给出置信度。</li><li><strong>扩展到更多飞行平台与任务：</strong> 比如高速机动、近地飞行和载荷扰动场景。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>东京大学</li>
+          <li><strong>一句话本质：</strong>这篇论文想解决的不是“再加一个神经网络进 MPC”，而是让 residual dynamics 学习过程带上 能量稳定性偏置，减少 neural MPC 常见的“点上更准、飞起来更飘”问题。</li>
+          <li><strong>自动抓取摘要：</strong>Data-driven Model Predictive Control (MPC) has lately been the core research subject in the field of control theory. The combination of an optimal control framework with deep learning paradigms opens up the possibility to accurately track control tasks without the need for complex analytical models. However, the system dynamics are often nuanced and the neural model lacks the potential to understand physical properties such as inertia and conservation of energy. In this work, we propose a novel energy-based regularization loss function which is applied to the training of a neural model that learns the residual dynamics of an omnidirectional aerial robot. Our energy-based regularization encourages the neural network to cause control corrections that stabilize the energy of the system. The residual dynamics are integrated into the MPC framework and improve the positional mean absolute error (MAE) over three real-world experiments by 23% compared to an analytical MPC. We also compare our method to a standard neural MPC implementation without regularization and primarily achieve a significantly increased flight stability implicitly due to the energy regularization and up to 15% lower MAE. Our code is available under: https://github.com/johanneskbl/jsk_aerial_robot/tree/develop/neural_MPC.</li>
+          <li><strong>作者：</strong>Johannes Kübel, Henrik Krauss, Jinjie Li, Moju Zhao</li>
+          <li><strong>PDF：</strong>Energy-based Regularization for Learning Residual Dynamics in Neural MPC for Omnidirectional Aerial Robots.pdf</li>
+          <li><strong>标签：</strong>UAV, Neural MPC, 残差动力学, 能量正则化, 飞行控制</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 把学习模型融进 MPC 已经成为提升复杂系统控制精度的重要路线，尤其适用于难以精确解析建模的飞行器。</li><li>核心痛点： 纯数据驱动残差模型虽然可能降低 tracking error，但常常忽略惯性、能量守恒等物理属性，导致飞行稳定性变差。</li><li>本文切入点： 作者提出 energy-based regularization，让神经网络学习 residual dynamics 时，不只是拟合数据，还要倾向于输出能稳定系统能量的修正项。</li></ul></section><section><h3>Key Insights</h3><ul><li>更准的 residual 不一定更稳： 控制系统里，点对点误差下降并不能保证闭环行为更好，物理先验必须显式进入训练目标。</li><li>能量是很有效的物理归纳偏置： 相比只用 L2 loss，energy regularization 直接约束“网络输出对系统状态演化的物理后果”。</li><li>hybrid control 仍然很有生命力： 论文不是抛弃解析模型，而是强调“解析模型打底 + 学习补残差”的折中路线。</li><li>真实实验结果比离线指标更关键： 23% MAE 改善和更高 flight stability 说明该方法不是纸面上的 loss trick。</li></ul></section><section><h3>Next Steps</h3><ul><li>结合更多物理守恒量或约束： 例如动量、功率限制和接近地面效应等更丰富先验。</li><li>做不确定性与鲁棒 MPC 联动： 让残差模型在面对外界扰动时能给出置信度。</li><li>扩展到更多飞行平台与任务： 比如高速机动、近地飞行和载荷扰动场景。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-16 · UAV</span><a href="../../Interpretation/arxiv-uav-2026-04-16.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

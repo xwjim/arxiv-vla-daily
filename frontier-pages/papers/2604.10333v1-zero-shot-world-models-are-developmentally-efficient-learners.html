@@ -44,16 +44,16 @@ a:hover { text-decoration:underline; }
 <div class="shell">
   <div class="hero">
     <h1>Zero-shot World Models Are Developmentally Efficient Learners</h1>
-    <div class="muted">Young children demonstrate early abilities to understand their physical world, estimating depth, motion, object coherence, interactions, and many other aspects of physical scene understanding. Children are both data-effi</div>
+    <div class="muted">作者提出 Zero-shot Visual World Model，试图说明只要模型具备合适的时序分解和近似因果推断结构，就能像儿童一样用极少数据形成物理世界理解能力。</div>
     <div class="meta">
       <span class="chip">日期 2026-04-12</span>
       <span class="chip">主题 World Model</span>
       <span class="chip">分类 cs.AI, cs.CV</span>
-      <span class="chip pending">解读状态 待补写</span>
+      <span class="chip">解读状态 已总结</span>
       <span class="chip">ID 2604.10333v1</span>
     </div>
     <div class="tag-row">
-      <span class="tag-mini">benchmark</span>
+      <span class="tag-mini">世界模型</span><span class="tag-mini">儿童认知</span><span class="tag-mini">数据效率</span><span class="tag-mini">因果推断</span><span class="tag-mini">物理理解</span>
     </div>
     <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.10333v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Zero-shot World Models Are Developmentally Efficient Learners.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
   </div>
@@ -61,23 +61,23 @@ a:hover { text-decoration:underline; }
   <div class="grid">
     <div class="card summary">
       <h2>论文解读</h2>
-      <h3>摘要（自动抓取）</h3><p>Young children demonstrate early abilities to understand their physical world, estimating depth, motion, object coherence, interactions, and many other aspects of physical scene understanding. Children are both data-efficient and flexible cognitive systems, creating competence despite extremely limited training data, while generalizing to myriad untrained tasks -- a major challenge even for today&#x27;s best AI systems. Here we introduce a novel computational hypothesis for these abilities, the Zero-shot Visual World Model (ZWM). ZWM is based on three principles: a sparse temporally-factored predictor that decouples appearance from dynamics; zero-shot estimation through approximate causal inference; and composition of inferences to build more complex abilities. We show that ZWM can be learned from the first-person experience of a single child, rapidly generating competence across multiple physical understanding benchmarks. It also broadly recapitulates behavioral signatures of child development and builds brain-like internal representations. Our work presents a blueprint for efficient and flexible learning from human-scale data, advancing both a computational account for children&#x27;s early physical understanding and a path toward data-efficient AI systems.</p><h3>解读状态</h3><ul><li>当前模式：半自动无 API。</li><li>深度中文解读：待补写。</li><li>后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。</li></ul>
+      <h3>一、论文元数据</h3><ul><li><strong>标题：</strong> Zero-shot World Models Are Developmentally Efficient Learners</li><li><strong>核心机构：</strong> 斯坦福大学</li><li><strong>一句话本质：</strong> 作者提出 Zero-shot Visual World Model，试图说明只要模型具备合适的时序分解和近似因果推断结构，就能像儿童一样用极少数据形成物理世界理解能力。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 当代 AI 往往依赖海量数据训练，而儿童却能在极有限的一手经验中迅速掌握深度、运动和物体交互等物理直觉。</li><li><strong>核心痛点：</strong> 现有模型很难同时做到数据高效、跨任务泛化和符合认知发展规律，因此难以解释儿童早期世界理解从何而来。</li><li><strong>本文切入点：</strong> 作者提出一个计算假说 ZWM，把儿童式高效学习归因于稀疏时序分解预测、近似因果推断以及多能力组合式推理。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 单个儿童第一视角经验 -&gt; 稀疏时序世界模型学习 -&gt; 多项物理理解 benchmark 能力。</li><li><strong>关键模块 1：</strong> <strong>sparse temporally-factored predictor</strong>：将外观与动力学解耦，避免模型把全部变化都挤进单一表征里。</li><li><strong>关键模块 2：</strong> <strong>zero-shot estimation via approximate causal inference</strong>：不依赖针对每个任务单独监督，而是通过近似因果推断从已有表征中直接推断结果。</li><li><strong>关键模块 3：</strong> <strong>组合式能力构建</strong>：把基础推断结果复用并组合，形成更复杂的物理理解和更接近儿童行为的发展轨迹。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>正确结构可能比大数据更关键：</strong> 摘要最强的信息是，world model 若具备合适归纳偏置，可以在 human-scale data 上快速获得广泛能力。</li><li><strong>认知一致性被当作有效检验标准：</strong> 模型不仅在 benchmark 上有效，还能复现儿童发展行为特征与 brain-like internal representations，这让论文不只是工程提分。</li><li><strong>零样本推断是核心卖点：</strong> 作者强调复杂能力并非靠每项任务单独训练学出来，而是通过已有因果结构的组合自然涌现。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>“像儿童”仍主要体现在行为层面：</strong> 摘要展示的是发展签名和内部表征相似性，但离真正解释儿童认知机制还有距离。</li><li><strong>依赖单一数据来源假设：</strong> 从单个儿童第一视角经验学习很有冲击力，但其数据采集条件、覆盖范围和偏差是否足够代表真实发展环境仍待核实。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要同时强调 benchmark competence、developmental signatures 和 brain-like representations，但没有在摘要层面说明三者之间的因果关系是如何建立的，容易给人“多个好现象同时出现就等于机制正确”的印象。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>扩展到更开放、更长期的发展数据：</strong> 检验 ZWM 在更复杂环境和更长时程经验上是否仍保持数据效率。</li><li><strong>把认知假说和工程系统闭环起来：</strong> 将 ZWM 的结构性设计迁移到机器人或多模态 agent 中，验证它是否真的能减少现实系统的数据需求。</li></ul>
     </div>
 
     <div class="card sidebar">
       <section>
         <h3>基础信息</h3>
         <ul>
-          <li><strong>解读状态：</strong>待补写</li>
-          <li><strong>机构：</strong>未提取</li>
-          <li><strong>一句话本质：</strong>未提取</li>
-          <li><strong>自动抓取摘要：</strong>Young children demonstrate early abilities to understand their physical world, estimating depth, motion, object coherence, interactions, and many other aspects of physical scene understanding. Children are both data-efficient and flexible cognitive systems, creating competence despite extremely limited training data, while generalizing to myriad untrained tasks -- a major challenge even for today&#x27;s best AI systems. Here we introduce a novel computational hypothesis for these abilities, the Zero-shot Visual World Model (ZWM). ZWM is based on three principles: a sparse temporally-factored predictor that decouples appearance from dynamics; zero-shot estimation through approximate causal inference; and composition of inferences to build more complex abilities. We show that ZWM can be learned from the first-person experience of a single child, rapidly generating competence across multiple physical understanding benchmarks. It also broadly recapitulates behavioral signatures of child development and builds brain-like internal representations. Our work presents a blueprint for efficient and flexible learning from human-scale data, advancing both a computational account for children&#x27;s early physical understanding and a path toward data-efficient AI systems.</li>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>斯坦福大学</li>
+          <li><strong>一句话本质：</strong>作者提出 Zero-shot Visual World Model，试图说明只要模型具备合适的时序分解和近似因果推断结构，就能像儿童一样用极少数据形成物理世界理解能力。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
           <li><strong>作者：</strong>Khai Loong Aw, Klemen Kotar, Wanhee Lee, Seungwoo Kim, Khaled Jedoui, Rahul Venkatesh, Lilian Naing Chen, Michael C. Frank, Daniel L. K. Yamins</li>
           <li><strong>PDF：</strong>Zero-shot World Models Are Developmentally Efficient Learners.pdf</li>
-          <li><strong>标签：</strong>world-model, benchmark, cs.AI, cs.CV</li>
+          <li><strong>标签：</strong>世界模型, 儿童认知, 数据效率, 因果推断, 物理理解</li>
         </ul>
       </section>
-      
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 当代 AI 往往依赖海量数据训练，而儿童却能在极有限的一手经验中迅速掌握深度、运动和物体交互等物理直觉。</li><li>核心痛点： 现有模型很难同时做到数据高效、跨任务泛化和符合认知发展规律，因此难以解释儿童早期世界理解从何而来。</li><li>本文切入点： 作者提出一个计算假说 ZWM，把儿童式高效学习归因于稀疏时序分解预测、近似因果推断以及多能力组合式推理。</li></ul></section><section><h3>Key Insights</h3><ul><li>正确结构可能比大数据更关键： 摘要最强的信息是，world model 若具备合适归纳偏置，可以在 human-scale data 上快速获得广泛能力。</li><li>认知一致性被当作有效检验标准： 模型不仅在 benchmark 上有效，还能复现儿童发展行为特征与 brain-like internal representations，这让论文不只是工程提分。</li><li>零样本推断是核心卖点： 作者强调复杂能力并非靠每项任务单独训练学出来，而是通过已有因果结构的组合自然涌现。</li></ul></section><section><h3>Next Steps</h3><ul><li>扩展到更开放、更长期的发展数据： 检验 ZWM 在更复杂环境和更长时程经验上是否仍保持数据效率。</li><li>把认知假说和工程系统闭环起来： 将 ZWM 的结构性设计迁移到机器人或多模态 agent 中，验证它是否真的能减少现实系统的数据需求。</li></ul></section>
       <section>
         <h3>来源笔记</h3>
         <ul class="note-list">

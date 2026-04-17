@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComSim: Building Scalable Real-World Robot Data Generation via Compositional Simulation · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>ComSim: Building Scalable Real-World Robot Data Generation via Compositional Simulation</h1>
+    <div class="muted">ComSim 的核心不是再做一个更真模拟器，而是把经典仿真的动作一致性和神经仿真的真实外观拼接起来，用少量真实数据撬动大规模可训练机器人数据。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-13</span>
+      <span class="chip">主题 World Model</span>
+      <span class="chip">分类 cs.RO, cs.CV</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.11386v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">世界模型</span><span class="tag-mini">机器人数据</span><span class="tag-mini">仿真到现实</span><span class="tag-mini">数据生成</span><span class="tag-mini">神经模拟</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.11386v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/ComSim Building Scalable Real-World Robot Data Generation via Compositional Simulation.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <h3>一、论文元数据</h3><ul><li><strong>标题：</strong> ComSim: Building Scalable Real-World Robot Data Generation via Compositional Simulation</li><li><strong>核心机构：</strong> 香港中文大学（深圳）；中山大学；上海交通大学；中国科学技术大学；香港大学；牛津大学；哈佛大学</li><li><strong>一句话本质：</strong> ComSim 的核心不是再做一个更真模拟器，而是把经典仿真的动作一致性和神经仿真的真实外观拼接起来，用少量真实数据撬动大规模可训练机器人数据。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 机器人训练越来越依赖大规模 video-action 数据，但真实采集成本高、覆盖范围窄。</li><li><strong>核心痛点：</strong> 经典模拟器动作和物理一致性强却不够真实，神经模拟器更接近真实观感却常常牺牲 action-video consistency，两者各自都有明显短板。</li><li><strong>本文切入点：</strong> 作者提出 compositional simulation，用 closed-loop real-sim-real pipeline 把两类模拟优势拼接起来。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 少量真实数据 + 经典仿真轨迹 -&gt; 神经模拟转换 -&gt; 更贴近真实的 action-video pairs -&gt; 用于训练 policy。</li><li><strong>关键模块 1：</strong> <strong>经典仿真生成轨迹</strong>：利用 MuJoCo、Isaac 等环境稳定生成可控、带动作标签的多样轨迹。</li><li><strong>关键模块 2：</strong> <strong>神经模拟做真实化映射</strong>：训练 neural simulator 把经典仿真视频变换成更符合真实环境分布的表示。</li><li><strong>关键模块 3：</strong> <strong>real-sim-real 闭环增强</strong>：用少量真实数据校准模拟生成过程，不断缩小 sim2real gap。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>机器人数据扩展不必在“真实”与“可控”之间二选一：</strong> 经典仿真和神经仿真是互补关系，而不是替代关系。</li><li><strong>少量真实数据也能产生杠杆效应：</strong> 关键不是先收很多真实数据，而是把这些真实数据放在最能校准模拟失真的位置上。</li><li><strong>数据管线本身就是能力来源：</strong> 摘要显示 real-world policy success rate 得到显著提升，说明好数据生成系统可以直接转化为下游控制能力。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>仍依赖初始真实数据与模拟器质量：</strong> 如果小规模真实数据本身偏窄，或者经典仿真缺少关键接触动力学，生成数据的上限会被锁死。</li><li><strong>主要贡献在数据生成而非控制算法：</strong> 它解决的是训练素材瓶颈，但不直接回答 policy architecture 或规划机制如何改进。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要强调显著缩小 sim2real gap，但没有在摘要层面区分收益更多来自 appearance realism、physics consistency，还是数据规模扩张。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>让 compositional simulation 走向在线自适应：</strong> 根据真实部署失败样本动态修正数据生成管线。</li><li><strong>扩展到更复杂交互场景：</strong> 尤其是接触丰富、遮挡严重和长时程任务，检验该数据管线的泛化极限。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>香港中文大学（深圳）；中山大学；上海交通大学；中国科学技术大学；香港大学；牛津大学；哈佛大学</li>
+          <li><strong>一句话本质：</strong>ComSim 的核心不是再做一个更真模拟器，而是把经典仿真的动作一致性和神经仿真的真实外观拼接起来，用少量真实数据撬动大规模可训练机器人数据。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Yiran Qin, Jiahua Ma, Li Kang, Wenzhan Li, Yihang Jiao, Xin Wen, Xiufeng Song, Heng Zhou, Jiwen Yu, Zhenfei Yin, Xihui Liu, Philip Torr, Yilun Du, Ruimao Zhang</li>
+          <li><strong>PDF：</strong>ComSim Building Scalable Real-World Robot Data Generation via Compositional Simulation.pdf</li>
+          <li><strong>标签：</strong>世界模型, 机器人数据, 仿真到现实, 数据生成, 神经模拟</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人训练越来越依赖大规模 video-action 数据，但真实采集成本高、覆盖范围窄。</li><li>核心痛点： 经典模拟器动作和物理一致性强却不够真实，神经模拟器更接近真实观感却常常牺牲 action-video consistency，两者各自都有明显短板。</li><li>本文切入点： 作者提出 compositional simulation，用 closed-loop real-sim-real pipeline 把两类模拟优势拼接起来。</li></ul></section><section><h3>Key Insights</h3><ul><li>机器人数据扩展不必在“真实”与“可控”之间二选一： 经典仿真和神经仿真是互补关系，而不是替代关系。</li><li>少量真实数据也能产生杠杆效应： 关键不是先收很多真实数据，而是把这些真实数据放在最能校准模拟失真的位置上。</li><li>数据管线本身就是能力来源： 摘要显示 real-world policy success rate 得到显著提升，说明好数据生成系统可以直接转化为下游控制能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>让 compositional simulation 走向在线自适应： 根据真实部署失败样本动态修正数据生成管线。</li><li>扩展到更复杂交互场景： 尤其是接触丰富、遮挡严重和长时程任务，检验该数据管线的泛化极限。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-13 · World Model</span><a href="../../Interpretation/arxiv-world-model-2026-04-13.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

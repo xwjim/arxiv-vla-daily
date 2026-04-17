@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D-Anchored Lookahead Planning for Persistent Robotic Scene Memory via World-Model-Based MCTS · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>3D-Anchored Lookahead Planning for Persistent Robotic Scene Memory via World-Model-Based MCTS</h1>
+    <div class="muted">3D-ALP 用持久化 3D 锚点把“物体被遮挡后还记得它在哪里”这件事显式塞回规划系统，从而让 world-model-based MCTS 真正具备场景记忆能力。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-13</span>
+      <span class="chip">主题 World Model</span>
+      <span class="chip">分类 cs.RO, cs.AI</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.11302v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">世界模型</span><span class="tag-mini">MCTS</span><span class="tag-mini">三维记忆</span><span class="tag-mini">机器人规划</span><span class="tag-mini">空间推理</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.11302v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/3D-Anchored Lookahead Planning for Persistent Robotic Scene Memory via World-Model-Based MCTS.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <h3>一、论文元数据</h3><ul><li><strong>标题：</strong> 3D-Anchored Lookahead Planning for Persistent Robotic Scene Memory via World-Model-Based MCTS</li><li><strong>核心机构：</strong> 华为以色列研发中心</li><li><strong>一句话本质：</strong> 3D-ALP 用持久化 3D 锚点把“物体被遮挡后还记得它在哪里”这件事显式塞回规划系统，从而让 world-model-based MCTS 真正具备场景记忆能力。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 许多 VLA 或 reactive policy 只基于当前帧做动作决策，在单步任务上表现不错。</li><li><strong>核心痛点：</strong> 一旦任务需要多步操作和遮挡后重访，reactive agent 缺乏 object permanence，无法记住当前视野之外物体的历史位置。</li><li><strong>本文切入点：</strong> 作者把 persistent camera-to-world anchor 作为显式记忆状态，并结合 MCTS 与 3D-consistent world model 做前瞻规划。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 当前观测 + 持久化 c2w 锚点 + 候选动作 -&gt; imagined rollouts -&gt; 选择具备长期成功率的动作。</li><li><strong>关键模块 1：</strong> <strong>persistent 3D anchor</strong>：在动作执行后持续更新 camera-to-world 锚点，即使目标被遮挡也保留场景几何记忆。</li><li><strong>关键模块 2：</strong> <strong>world-model-based MCTS</strong>：用 3D-consistent world model 作为 rollout oracle，在想象空间中评估未来动作序列。</li><li><strong>关键模块 3：</strong> <strong>hybrid geometric-semantic scorer</strong>：将视觉预测与几何约束结合，纠正纯 VLM 打分的深度盲区，并修复 UCT-MCTS 在连续操作中的结构性失败模式。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>显式三维记忆是性能跃迁的主因：</strong> ablation 显示 82% 的增益来自 tree search spatial memory，而不是单纯更深 lookahead。</li><li><strong>reactive policy 在 memory-required task 上几乎失效：</strong> 论文给出的 0.650 对 0.006 差距非常大，说明“记忆缺失”不是小缺陷，而是架构级瓶颈。</li><li><strong>world model 的价值在于支撑可查询的空间状态：</strong> 真正有用的不只是预测未来图像，而是能围绕任意 c2w query 做可重规划的三维推演。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>依赖高精度几何与运动学更新：</strong> 如果锚点更新或世界模型渲染误差过大，持久记忆很可能迅速漂移失真。</li><li><strong>实验任务仍偏受控：</strong> 论文重点展示 5-step reach memory task，对更复杂操作、接触不确定性和真实感知噪声下的表现还未充分展开。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要强调解决了四类 UCT-MCTS failure modes，但没有在摘要层面说明这些 failure modes 分别是什么，以及它们在真实机器人任务中的普遍性如何。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>把持久 3D 记忆推广到更复杂 manipulation：</strong> 例如多物体重排、遮挡下抓取和长时程装配。</li><li><strong>结合不确定性建模：</strong> 让 MCTS 不仅在单一几何假设上规划，也能考虑锚点和世界模型的不确定度传播。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>华为以色列研发中心</li>
+          <li><strong>一句话本质：</strong>3D-ALP 用持久化 3D 锚点把“物体被遮挡后还记得它在哪里”这件事显式塞回规划系统，从而让 world-model-based MCTS 真正具备场景记忆能力。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
+          <li><strong>作者：</strong>Bronislav Sidik, Dror Mizrahi</li>
+          <li><strong>PDF：</strong>3D-Anchored Lookahead Planning for Persistent Robotic Scene Memory via World-Model-Based MCTS.pdf</li>
+          <li><strong>标签：</strong>世界模型, MCTS, 三维记忆, 机器人规划, 空间推理</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 许多 VLA 或 reactive policy 只基于当前帧做动作决策，在单步任务上表现不错。</li><li>核心痛点： 一旦任务需要多步操作和遮挡后重访，reactive agent 缺乏 object permanence，无法记住当前视野之外物体的历史位置。</li><li>本文切入点： 作者把 persistent camera-to-world anchor 作为显式记忆状态，并结合 MCTS 与 3D-consistent world model 做前瞻规划。</li></ul></section><section><h3>Key Insights</h3><ul><li>显式三维记忆是性能跃迁的主因： ablation 显示 82% 的增益来自 tree search spatial memory，而不是单纯更深 lookahead。</li><li>reactive policy 在 memory-required task 上几乎失效： 论文给出的 0.650 对 0.006 差距非常大，说明“记忆缺失”不是小缺陷，而是架构级瓶颈。</li><li>world model 的价值在于支撑可查询的空间状态： 真正有用的不只是预测未来图像，而是能围绕任意 c2w query 做可重规划的三维推演。</li></ul></section><section><h3>Next Steps</h3><ul><li>把持久 3D 记忆推广到更复杂 manipulation： 例如多物体重排、遮挡下抓取和长时程装配。</li><li>结合不确定性建模： 让 MCTS 不仅在单一几何假设上规划，也能考虑锚点和世界模型的不确定度传播。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-13 · World Model</span><a href="../../Interpretation/arxiv-world-model-2026-04-13.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

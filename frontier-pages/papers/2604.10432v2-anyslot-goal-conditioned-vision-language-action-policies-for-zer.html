@@ -44,16 +44,16 @@ a:hover { text-decoration:underline; }
 <div class="shell">
   <div class="hero">
     <h1>AnySlot: Goal-Conditioned Vision-Language-Action Policies for Zero-Shot Slot-Level Placement</h1>
-    <div class="muted">Vision-Language-Action (VLA) policies have emerged as a versatile paradigm for generalist robotic manipulation. However, precise object placement under compositional language instructions remains a major challenge for mo</div>
+    <div class="muted">AnySlot 把语言指令先转成显式空间视觉目标，再交给 goal-conditioned VLA 执行，从而把“选哪个槽位”和“如何精确放进去”这两个难题拆开解决。</div>
     <div class="meta">
       <span class="chip">日期 2026-04-12</span>
       <span class="chip">主题 VLA</span>
       <span class="chip">分类 cs.RO</span>
-      <span class="chip pending">解读状态 待补写</span>
+      <span class="chip">解读状态 已总结</span>
       <span class="chip">ID 2604.10432v2</span>
     </div>
     <div class="tag-row">
-      <span class="tag-mini">benchmark</span><span class="tag-mini">robustness</span><span class="tag-mini">policy</span>
+      <span class="tag-mini">VLA</span><span class="tag-mini">具身操作</span><span class="tag-mini">空间目标</span><span class="tag-mini">插槽放置</span><span class="tag-mini">零样本泛化</span>
     </div>
     <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.10432v2" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/AnySlot Goal-Conditioned Vision-Language-Action Policies for Zero-Shot Slot-Level Placement.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
   </div>
@@ -61,23 +61,23 @@ a:hover { text-decoration:underline; }
   <div class="grid">
     <div class="card summary">
       <h2>论文解读</h2>
-      <h3>摘要（自动抓取）</h3><p>Vision-Language-Action (VLA) policies have emerged as a versatile paradigm for generalist robotic manipulation. However, precise object placement under compositional language instructions remains a major challenge for modern monolithic VLA policies. Slot-level tasks require both reliable slot grounding and sub-centimeter execution accuracy. To this end, we propose AnySlot, a framework that reduces compositional complexity by introducing an explicit spatial visual goal as an intermediate representation between language grounding and control. AnySlot turns language into an explicit visual goal by generating a scene marker, then executes this goal with a goal-conditioned VLA policy. This hierarchical design effectively decouples high-level slot selection from low-level execution, ensuring both semantic accuracy and spatial robustness. Furthermore, recognizing the lack of existing benchmarks for such precision-demanding tasks, we introduce SlotBench, a comprehensive simulation benchmark featuring nine task categories tailored to evaluate structured spatial reasoning in slot-level placement. Extensive experiments show that AnySlot significantly outperforms flat VLA baselines and previous modular grounding methods in zero-shot slot-level placement.</p><h3>解读状态</h3><ul><li>当前模式：半自动无 API。</li><li>深度中文解读：待补写。</li><li>后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。</li></ul>
+      <h3>一、论文元数据</h3><ul><li><strong>标题：</strong> AnySlot: Goal-Conditioned Vision-Language-Action Policies for Zero-Shot Slot-Level Placement</li><li><strong>核心机构：</strong> 石溪大学；卡内基梅隆大学；穆罕默德-本-扎耶德人工智能大学（MBZUAI）；北京大学</li><li><strong>一句话本质：</strong> AnySlot 把语言指令先转成显式空间视觉目标，再交给 goal-conditioned VLA 执行，从而把“选哪个槽位”和“如何精确放进去”这两个难题拆开解决。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 现有 VLA 往往采用单体式端到端策略，试图直接从视觉和语言生成操作动作。</li><li><strong>核心痛点：</strong> 对 slot-level placement 这类高精度任务来说，模型既要理解复合语言里描述的目标槽位，又要做到亚厘米级执行，单一路径很容易把语义 grounding 误差放大成执行偏差。</li><li><strong>本文切入点：</strong> 作者引入一个显式的中间表示，把语言先变成“可见的空间目标标记”，再用 goal-conditioned policy 去执行，从结构上降低组合复杂度。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 场景观测 + 语言指令 -&gt; 显式视觉目标 -&gt; goal-conditioned VLA 动作序列。</li><li><strong>关键模块 1：</strong> <strong>视觉目标生成</strong>：根据语言指令在场景中生成 marker，把“第二大槽位”“左侧空位”这类关系性描述转成可感知的空间锚点。</li><li><strong>关键模块 2：</strong> <strong>分层执行策略</strong>：高层负责 slot grounding，低层 goal-conditioned VLA 只专注于跟随目标执行精确放置。</li><li><strong>关键模块 3：</strong> <strong>SlotBench</strong>：构建包含 9 类任务的仿真 benchmark，专门测试结构化空间推理与精密插槽放置能力。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>显式空间中介很关键：</strong> 对需要精确落点的 manipulation，先把语言约束外显成视觉目标，比让 VLA 隐式同时学语义和控制更稳。</li><li><strong>分而治之优于平铺式 VLA：</strong> 将槽位选择和动作执行解耦后，模型在 zero-shot slot-level placement 上明显优于 flat baseline 和已有 modular grounding 方法。</li><li><strong>benchmark 也是贡献的一部分：</strong> SlotBench 补上了“精细空间放置”这一长期缺失的评测空白，使此类能力不再被粗粒度 pick-place 成功率掩盖。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>仍依赖目标生成质量：</strong> 如果视觉目标生成阶段出现错位或歧义，下游 goal-conditioned policy 很难自发纠正。</li><li><strong>结果主要来自仿真 benchmark：</strong> 摘要强调的是仿真和 zero-shot placement 优势，真实机器人中的感知噪声、夹爪误差和接触不确定性仍待验证。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要说明显著优于 flat 和 modular baseline，但没有在摘要层面交代不同任务类别上收益是否均衡，例如语义推理难任务与纯几何精度难任务谁贡献更大。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>把显式目标扩展到更长时程任务：</strong> 例如多阶段装配、连续插接或需要中途重规划的任务。</li><li><strong>将 marker 中介与真实闭环反馈结合：</strong> 让系统在执行过程中利用视觉误差实时修正目标和轨迹，而不是只靠初始目标生成。</li></ul>
     </div>
 
     <div class="card sidebar">
       <section>
         <h3>基础信息</h3>
         <ul>
-          <li><strong>解读状态：</strong>待补写</li>
-          <li><strong>机构：</strong>未提取</li>
-          <li><strong>一句话本质：</strong>未提取</li>
-          <li><strong>自动抓取摘要：</strong>Vision-Language-Action (VLA) policies have emerged as a versatile paradigm for generalist robotic manipulation. However, precise object placement under compositional language instructions remains a major challenge for modern monolithic VLA policies. Slot-level tasks require both reliable slot grounding and sub-centimeter execution accuracy. To this end, we propose AnySlot, a framework that reduces compositional complexity by introducing an explicit spatial visual goal as an intermediate representation between language grounding and control. AnySlot turns language into an explicit visual goal by generating a scene marker, then executes this goal with a goal-conditioned VLA policy. This hierarchical design effectively decouples high-level slot selection from low-level execution, ensuring both semantic accuracy and spatial robustness. Furthermore, recognizing the lack of existing benchmarks for such precision-demanding tasks, we introduce SlotBench, a comprehensive simulation benchmark featuring nine task categories tailored to evaluate structured spatial reasoning in slot-level placement. Extensive experiments show that AnySlot significantly outperforms flat VLA baselines and previous modular grounding methods in zero-shot slot-level placement.</li>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>石溪大学；卡内基梅隆大学；穆罕默德-本-扎耶德人工智能大学（MBZUAI）；北京大学</li>
+          <li><strong>一句话本质：</strong>AnySlot 把语言指令先转成显式空间视觉目标，再交给 goal-conditioned VLA 执行，从而把“选哪个槽位”和“如何精确放进去”这两个难题拆开解决。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
           <li><strong>作者：</strong>Zhaofeng Hu, Sifan Zhou, Qinbo Zhang, Rongtao Xu, Qi Su, Ci-Jyun Liang</li>
           <li><strong>PDF：</strong>AnySlot Goal-Conditioned Vision-Language-Action Policies for Zero-Shot Slot-Level Placement.pdf</li>
-          <li><strong>标签：</strong>vla, benchmark, robustness, policy, cs.RO</li>
+          <li><strong>标签：</strong>VLA, 具身操作, 空间目标, 插槽放置, 零样本泛化</li>
         </ul>
       </section>
-      
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有 VLA 往往采用单体式端到端策略，试图直接从视觉和语言生成操作动作。</li><li>核心痛点： 对 slot-level placement 这类高精度任务来说，模型既要理解复合语言里描述的目标槽位，又要做到亚厘米级执行，单一路径很容易把语义 grounding 误差放大成执行偏差。</li><li>本文切入点： 作者引入一个显式的中间表示，把语言先变成“可见的空间目标标记”，再用 goal-conditioned policy 去执行，从结构上降低组合复杂度。</li></ul></section><section><h3>Key Insights</h3><ul><li>显式空间中介很关键： 对需要精确落点的 manipulation，先把语言约束外显成视觉目标，比让 VLA 隐式同时学语义和控制更稳。</li><li>分而治之优于平铺式 VLA： 将槽位选择和动作执行解耦后，模型在 zero-shot slot-level placement 上明显优于 flat baseline 和已有 modular grounding 方法。</li><li>benchmark 也是贡献的一部分： SlotBench 补上了“精细空间放置”这一长期缺失的评测空白，使此类能力不再被粗粒度 pick-place 成功率掩盖。</li></ul></section><section><h3>Next Steps</h3><ul><li>把显式目标扩展到更长时程任务： 例如多阶段装配、连续插接或需要中途重规划的任务。</li><li>将 marker 中介与真实闭环反馈结合： 让系统在执行过程中利用视觉误差实时修正目标和轨迹，而不是只靠初始目标生成。</li></ul></section>
       <section>
         <h3>来源笔记</h3>
         <ul class="note-list">

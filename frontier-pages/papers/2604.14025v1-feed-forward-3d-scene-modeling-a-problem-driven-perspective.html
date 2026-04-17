@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed-Forward 3D Scene Modeling: A Problem-Driven Perspective · Arxiv Frontier</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#fff; --text:#172033; --muted:#64748b; --border:#dbe5f0;
+  --primary:#2563eb; --primary-light:#dbeafe; --accent:#059669; --warn:#d97706; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei UI","PingFang SC","Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.72; }
+a { color:var(--primary); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.shell { max-width:1120px; margin:0 auto; padding:32px 20px 60px; }
+.hero { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; border-radius:24px; padding:32px; box-shadow:var(--shadow); }
+.hero h1 { margin:0 0 12px; font-size:clamp(28px,4vw,42px); line-height:1.25; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.14); font-size:13px; }
+.chip.pending { background:rgba(251,191,36,.22); color:#fff7d6; }
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 8px; }
+.tag-mini { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); font-size:12px; }
+.links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.pill-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:999px; background:#fff; color:var(--primary); font-weight:600; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:24px; }
+.card { background:var(--card); border-radius:20px; padding:24px; box-shadow:var(--shadow); }
+.card h2 { margin:0 0 16px; font-size:22px; color:var(--primary); }
+.summary h2, .summary h3 { color:var(--primary); }
+.summary p { margin:0 0 12px; text-align:justify; }
+.summary ul { margin:0 0 14px 0; padding-left:18px; }
+.summary li { margin-bottom:8px; }
+.sidebar section + section { margin-top:18px; }
+.sidebar h3 { margin:0 0 10px; font-size:16px; color:var(--accent); }
+.sidebar ul { margin:0; padding-left:18px; }
+.sidebar li { margin-bottom:8px; }
+.sidebar .note-list { list-style:none; padding:0; }
+.sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.muted { color:var(--muted); }
+@media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <h1>Feed-Forward 3D Scene Modeling: A Problem-Driven Perspective</h1>
+    <div class="muted">这不是一篇再提新模型的论文，而是一篇试图把 feed-forward 3D scene modeling 从“按表示分类”改写成“按核心问题分类”的综述，为后续世界模型与三维重建研究提供新的理解坐标系。</div>
+    <div class="meta">
+      <span class="chip">日期 2026-04-16</span>
+      <span class="chip">主题 World Model</span>
+      <span class="chip">分类 cs.CV, cs.AI, cs.GR</span>
+      <span class="chip">解读状态 已总结</span>
+      <span class="chip">ID 2604.14025v1</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-mini">三维重建</span><span class="tag-mini">综述</span><span class="tag-mini">前馈建模</span><span class="tag-mini">几何表征</span><span class="tag-mini">世界模型</span>
+    </div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.14025v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/Feed-Forward 3D Scene Modeling A Problem-Driven Perspective.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
+  </div>
+
+  <div class="grid">
+    <div class="card summary">
+      <h2>论文解读</h2>
+      <h3>摘要（自动抓取）</h3><p>Reconstructing 3D representations from 2D inputs is a fundamental task in computer vision and graphics, serving as a cornerstone for understanding and interacting with the physical world. While traditional methods achieve high fidelity, they are limited by slow per-scene optimization or category-specific training, which hinders their practical deployment and scalability. Hence, generalizable feed-forward 3D reconstruction has witnessed rapid development in recent years. By learning a model that maps images directly to 3D representations in a single forward pass, these methods enable efficient reconstruction and robust cross-scene generalization. Our survey is motivated by a critical observation: despite the diverse geometric output representations, ranging from implicit fields to explicit primitives, existing feed-forward approaches share similar high-level architectural patterns, such as image feature extraction backbones, multi-view information fusion mechanisms, and geometry-aware design principles. Consequently, we abstract away from these representation differences and instead focus on model design, proposing a novel taxonomy centered on model design strategies that are agnostic to the output format. Our proposed taxonomy organizes the research directions into five key problems that drive recent research development: feature enhancement, geometry awareness, model efficiency, augmentation strategies and temporal-aware models. To support this taxonomy with empirical grounding and standardized evaluation, we further comprehensively review related benchmarks and datasets, and extensively discuss and categorize real-world applications based on feed-forward 3D models. Finally, we outline future directions to address open challenges such as scalability, evaluation standards, and world modeling.</p><h3>一、论文元数据</h3><ul><li><strong>标题：</strong> Feed-Forward 3D Scene Modeling: A Problem-Driven Perspective</li><li><strong>核心机构：</strong> 浙江大学；南洋理工大学；莫纳什大学；苏黎世联邦理工学院；图宾根大学 AI Center</li><li><strong>一句话本质：</strong> 这不是一篇再提新模型的论文，而是一篇试图把 feed-forward 3D scene modeling 从“按表示分类”改写成“按核心问题分类”的综述，为后续世界模型与三维重建研究提供新的理解坐标系。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 近年的 feed-forward 3D 重建快速发展，但社区常按 NeRF、3DGS、mesh、occupancy 等表示方式切分方法谱系。</li><li><strong>核心痛点：</strong> 这种表示中心的组织方式容易掩盖不同方法在 feature extraction、multi-view fusion、geometry priors 和效率设计上的共性。</li><li><strong>本文切入点：</strong> 作者不再以输出表示为主轴，而是提出一个 <strong>problem-driven taxonomy</strong>，按模型设计问题重新整理整个赛道。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 大量已有 feed-forward 3D 方法与 benchmark -&gt; 按问题驱动重新归类 -&gt; 提炼统一研究图谱、评测资源与应用场景。</li><li><strong>关键模块 1：</strong> <strong>五类核心问题划分</strong>：feature enhancement、geometry awareness、model efficiency、augmentation strategies、temporal-aware models。</li><li><strong>关键模块 2：</strong> <strong>Representation-agnostic View</strong>：有意弱化 NeRF / 3DGS / mesh 等表示差异，转而比较模型设计思想。</li><li><strong>关键模块 3：</strong> <strong>Datasets and Benchmarks Review</strong>：系统整理支撑该领域发展的评测资源。</li><li><strong>关键模块 4：</strong> <strong>Applications + Future Directions</strong>：从自动驾驶、机器人、SLAM 到视频生成，连接方法设计与实际落地需求。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>很多方法的真正差异不在“输出什么”，而在“如何建模几何”：</strong> 这篇综述把 attention 从表示形式转回了模型归纳偏置与信息流设计。</li><li><strong>problem-driven taxonomy 更有利于找研究空白：</strong> 当你按问题而不是按表示看领域时，更容易发现哪些能力已经饱和，哪些问题还没被系统解决。</li><li><strong>world modeling 被自然吸纳进 3D 建模脉络：</strong> 论文把 world modeling 视作未来方向之一，说明三维重建与世界模型正在靠拢。</li><li><strong>标准化评测仍是瓶颈：</strong> 综述之所以强调 benchmark，是因为当前很多结果并不容易横向公平比较。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>综述本身不提供新的算法突破：</strong> 它更像是认知框架重组，而不是直接推进 SOTA 指标。</li><li><strong>taxonomy 具有主观性：</strong> 五类问题虽然清晰，但并不代表是唯一合理划分，某些方法跨类严重。</li><li><strong>领域变化太快：</strong> 这类综述很容易被高速演化的新模型、新 benchmark 快速冲刷。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要强调 problem-driven 视角优于 representation-driven 视角，但这种“更好”的价值更多体现在组织和理解层，而不是可直接量化的实验优势。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>把 taxonomy 进一步工具化：</strong> 比如形成更统一的 benchmark protocol 与任务拆解框架。</li><li><strong>加强 4D / dynamic world modeling 讨论：</strong> 让综述更好覆盖未来动态场景建模方向。</li><li><strong>推动跨表示公平比较：</strong> 尽量让 NeRF、3DGS、pointmap 等方法在相近条件下被系统评估。</li></ul>
+    </div>
+
+    <div class="card sidebar">
+      <section>
+        <h3>基础信息</h3>
+        <ul>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>浙江大学；南洋理工大学；莫纳什大学；苏黎世联邦理工学院；图宾根大学 AI Center</li>
+          <li><strong>一句话本质：</strong>这不是一篇再提新模型的论文，而是一篇试图把 feed-forward 3D scene modeling 从“按表示分类”改写成“按核心问题分类”的综述，为后续世界模型与三维重建研究提供新的理解坐标系。</li>
+          <li><strong>自动抓取摘要：</strong>Reconstructing 3D representations from 2D inputs is a fundamental task in computer vision and graphics, serving as a cornerstone for understanding and interacting with the physical world. While traditional methods achieve high fidelity, they are limited by slow per-scene optimization or category-specific training, which hinders their practical deployment and scalability. Hence, generalizable feed-forward 3D reconstruction has witnessed rapid development in recent years. By learning a model that maps images directly to 3D representations in a single forward pass, these methods enable efficient reconstruction and robust cross-scene generalization. Our survey is motivated by a critical observation: despite the diverse geometric output representations, ranging from implicit fields to explicit primitives, existing feed-forward approaches share similar high-level architectural patterns, such as image feature extraction backbones, multi-view information fusion mechanisms, and geometry-aware design principles. Consequently, we abstract away from these representation differences and instead focus on model design, proposing a novel taxonomy centered on model design strategies that are agnostic to the output format. Our proposed taxonomy organizes the research directions into five key problems that drive recent research development: feature enhancement, geometry awareness, model efficiency, augmentation strategies and temporal-aware models. To support this taxonomy with empirical grounding and standardized evaluation, we further comprehensively review related benchmarks and datasets, and extensively discuss and categorize real-world applications based on feed-forward 3D models. Finally, we outline future directions to address open challenges such as scalability, evaluation standards, and world modeling.</li>
+          <li><strong>作者：</strong>Weijie Wang, Qihang Cao, Sensen Gao, Donny Y. Chen, Haofei Xu, Wenjing Bian, Songyou Peng, Tat-Jen Cham, Chuanxia Zheng, Andreas Geiger, Jianfei Cai, Jia-Wang Bian, Bohan Zhuang</li>
+          <li><strong>PDF：</strong>Feed-Forward 3D Scene Modeling A Problem-Driven Perspective.pdf</li>
+          <li><strong>标签：</strong>三维重建, 综述, 前馈建模, 几何表征, 世界模型</li>
+        </ul>
+      </section>
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 近年的 feed-forward 3D 重建快速发展，但社区常按 NeRF、3DGS、mesh、occupancy 等表示方式切分方法谱系。</li><li>核心痛点： 这种表示中心的组织方式容易掩盖不同方法在 feature extraction、multi-view fusion、geometry priors 和效率设计上的共性。</li><li>本文切入点： 作者不再以输出表示为主轴，而是提出一个 problem-driven taxonomy，按模型设计问题重新整理整个赛道。</li></ul></section><section><h3>Key Insights</h3><ul><li>很多方法的真正差异不在“输出什么”，而在“如何建模几何”： 这篇综述把 attention 从表示形式转回了模型归纳偏置与信息流设计。</li><li>problem-driven taxonomy 更有利于找研究空白： 当你按问题而不是按表示看领域时，更容易发现哪些能力已经饱和，哪些问题还没被系统解决。</li><li>world modeling 被自然吸纳进 3D 建模脉络： 论文把 world modeling 视作未来方向之一，说明三维重建与世界模型正在靠拢。</li><li>标准化评测仍是瓶颈： 综述之所以强调 benchmark，是因为当前很多结果并不容易横向公平比较。</li></ul></section><section><h3>Next Steps</h3><ul><li>把 taxonomy 进一步工具化： 比如形成更统一的 benchmark protocol 与任务拆解框架。</li><li>加强 4D / dynamic world modeling 讨论： 让综述更好覆盖未来动态场景建模方向。</li><li>推动跨表示公平比较： 尽量让 NeRF、3DGS、pointmap 等方法在相近条件下被系统评估。</li></ul></section>
+      <section>
+        <h3>来源笔记</h3>
+        <ul class="note-list">
+          <li><span>2026-04-16 · World Model</span><a href="../../Interpretation/arxiv-world-model-2026-04-16.md">原始 Markdown</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

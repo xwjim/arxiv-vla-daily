@@ -44,16 +44,16 @@ a:hover { text-decoration:underline; }
 <div class="shell">
   <div class="hero">
     <h1>AWARE: Adaptive Whole-body Active Rotating Control for Enhanced LiDAR-Inertial Odometry under Human-in-the-Loop Interaction</h1>
-    <div class="muted">Human-in-the-loop (HITL) UAV operation is essential in complex and safety-critical aerial surveying environments, where human operators provide navigation intent while onboard autonomy must maintain accurate and robust s</div>
+    <div class="muted">AWARE 的核心思想不是给 UAV 加更多传感器，而是主动利用机体偏航旋转来扩大窄视场 LiDAR 的可观测性，从而稳住人在环飞行中的状态估计。</div>
     <div class="meta">
       <span class="chip">日期 2026-04-12</span>
       <span class="chip">主题 UAV</span>
       <span class="chip">分类 cs.RO</span>
-      <span class="chip pending">解读状态 待补写</span>
+      <span class="chip">解读状态 已总结</span>
       <span class="chip">ID 2604.10598v1</span>
     </div>
     <div class="tag-row">
-      <span class="tag-mini">robustness</span><span class="tag-mini">navigation</span>
+      <span class="tag-mini">UAV</span><span class="tag-mini">LiDAR里程计</span><span class="tag-mini">MPC</span><span class="tag-mini">强化学习</span><span class="tag-mini">人在环控制</span>
     </div>
     <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://export.arxiv.org/abs/2604.10598v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/AWARE Adaptive Whole-body Active Rotating Control for Enhanced LiDAR-Inertial Odometry under Human-in-the-Loop Interaction.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
   </div>
@@ -61,23 +61,23 @@ a:hover { text-decoration:underline; }
   <div class="grid">
     <div class="card summary">
       <h2>论文解读</h2>
-      <h3>摘要（自动抓取）</h3><p>Human-in-the-loop (HITL) UAV operation is essential in complex and safety-critical aerial surveying environments, where human operators provide navigation intent while onboard autonomy must maintain accurate and robust state estimation. A key challenge in this setting is that resource-constrained UAV platforms are often limited to narrow-field-of-view LiDAR sensors. In geometrically degenerate or feature-sparse scenes, limited sensing coverage often weakens LiDAR Inertial Odometry (LIO)&#x27;s observability, causing drift accumulation, degraded geometric accuracy, and unstable state estimation, which directly compromise safe and effective HITL operation and the reliability of downstream surveying products. To overcome this limitation, we present AWARE, a bio-inspired whole-body active yawing framework that exploits the UAV&#x27;s own rotational agility to extend the effective sensor horizon and improve LIO&#x27;s observability without additional mechanical actuation. The core of AWARE is a differentiable Model Predictive Control (MPC) framework embedded in a Reinforcement Learning (RL) loop. It first identifies the viewing direction that maximizes information gain across the full yaw space, and a lightweight RL agent then adjusts the MPC cost weights online according to the current environmental context, enabling an adaptive balance between estimation accuracy and flight stability. A Safe Flight Corridor mechanism further ensures operational safety within this HITL paradigm by decoupling the operator&#x27;s navigational intent from autonomous yaw optimization to enable safe and efficient cooperative control. We validate AWARE through extensive experiments in diverse simulated and real-world environments.</p><h3>解读状态</h3><ul><li>当前模式：半自动无 API。</li><li>深度中文解读：待补写。</li><li>后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。</li></ul>
+      <h3>一、论文元数据</h3><ul><li><strong>标题：</strong> AWARE: Adaptive Whole-body Active Rotating Control for Enhanced LiDAR-Inertial Odometry under Human-in-the-Loop Interaction</li><li><strong>核心机构：</strong> 武汉大学；南洋理工大学</li><li><strong>一句话本质：</strong> AWARE 的核心思想不是给 UAV 加更多传感器，而是主动利用机体偏航旋转来扩大窄视场 LiDAR 的可观测性，从而稳住人在环飞行中的状态估计。</li></ul><h3>二、破局点 (The Gap)</h3><ul><li><strong>已有共识/做法：</strong> 在复杂测绘和巡检场景中，HITL UAV 往往由人给高层导航意图，机载系统负责定位和稳定控制。</li><li><strong>核心痛点：</strong> 轻量级 UAV 常受载荷限制，只能使用窄视场 LiDAR；一旦进入几何退化或特征稀疏环境，LIO 可观测性下降，漂移会直接破坏安全性和测绘质量。</li><li><strong>本文切入点：</strong> 作者把“机体主动旋转”视为一种可控 sensing 资源，通过主动 yawing 扩展有效视野，而不是被动接受当前传感器视角。</li></ul><h3>三、核心机制 (How it works)</h3><ul><li><strong>输入 -&gt; 输出：</strong> 操作者导航意图 + 当前环境状态 -&gt; 自适应 yaw 优化控制 -&gt; 更稳健的 LiDAR-inertial odometry 与飞行执行。</li><li><strong>关键模块 1：</strong> <strong>全身主动旋转策略</strong>：在完整 yaw 空间中寻找信息增益最大的观测方向，主动改善 LIO 可观测性。</li><li><strong>关键模块 2：</strong> <strong>differentiable MPC + RL</strong>：MPC 负责可微分的优化控制，轻量 RL agent 在线调整代价权重，在估计精度和飞行稳定性之间自适应平衡。</li><li><strong>关键模块 3：</strong> <strong>Safe Flight Corridor</strong>：将人的导航意图与自主 yaw 优化解耦，保证人在环协同下的安全飞行边界。</li></ul><h3>四、核心认知与发现 (Key Insights)</h3><ul><li><strong>姿态机动本身可以成为感知增强手段：</strong> 论文把 UAV 的旋转灵活性从“控制副产物”转成“主动感知资源”，这是很有价值的视角转换。</li><li><strong>人在环场景需要的是估计鲁棒性而不只是路径跟随：</strong> 当操作员持续介入时，定位质量直接决定高层意图能否安全落地。</li><li><strong>轻量自适应比堆硬件更现实：</strong> 摘要显示 AWARE 在仿真和真实环境中都优于被动扫描和静态优化基线，说明软件层主动感知设计对资源受限平台特别有效。</li></ul><h3>五、致命弱点与演进方向 (Critical Analysis)</h3><p><strong>🛑 核心局限 (Limitations)：</strong></p><ul><li><strong>收益依赖 UAV 的机动余量：</strong> 主动 yawing 会占用姿态调整能力，在强风、狭窄空间或高动态任务中未必总能安全执行。</li><li><strong>对任务层影响尚未完全展开：</strong> 摘要重点证明的是 LIO 与飞行稳定性的提升，但对任务完成效率、操作者负担和长期能耗代价讨论有限。</li></ul><p><strong>⚠️ 论证瑕疵：</strong></p><ul><li>摘要强调 diverse simulated and real-world environments 下效果更好，但没有在摘要层面区分收益主要来自哪些场景，例如特征稀疏、退化几何还是遮挡严重环境。</li></ul><p><strong>🚀 下一步高价值方向 (Next Steps)：</strong></p><ul><li><strong>把主动观测与任务规划联动：</strong> 让 yaw 优化不仅服务里程计，还能与目标搜索、测绘覆盖或避障任务共同优化。</li><li><strong>显式纳入能耗与操控负担：</strong> 建立信息增益、飞行稳定性、功耗和人机协作体验之间的统一权衡模型。</li></ul>
     </div>
 
     <div class="card sidebar">
       <section>
         <h3>基础信息</h3>
         <ul>
-          <li><strong>解读状态：</strong>待补写</li>
-          <li><strong>机构：</strong>未提取</li>
-          <li><strong>一句话本质：</strong>未提取</li>
-          <li><strong>自动抓取摘要：</strong>Human-in-the-loop (HITL) UAV operation is essential in complex and safety-critical aerial surveying environments, where human operators provide navigation intent while onboard autonomy must maintain accurate and robust state estimation. A key challenge in this setting is that resource-constrained UAV platforms are often limited to narrow-field-of-view LiDAR sensors. In geometrically degenerate or feature-sparse scenes, limited sensing coverage often weakens LiDAR Inertial Odometry (LIO)&#x27;s observability, causing drift accumulation, degraded geometric accuracy, and unstable state estimation, which directly compromise safe and effective HITL operation and the reliability of downstream surveying products. To overcome this limitation, we present AWARE, a bio-inspired whole-body active yawing framework that exploits the UAV&#x27;s own rotational agility to extend the effective sensor horizon and improve LIO&#x27;s observability without additional mechanical actuation. The core of AWARE is a differentiable Model Predictive Control (MPC) framework embedded in a Reinforcement Learning (RL) loop. It first identifies the viewing direction that maximizes information gain across the full yaw space, and a lightweight RL agent then adjusts the MPC cost weights online according to the current environmental context, enabling an adaptive balance between estimation accuracy and flight stability. A Safe Flight Corridor mechanism further ensures operational safety within this HITL paradigm by decoupling the operator&#x27;s navigational intent from autonomous yaw optimization to enable safe and efficient cooperative control. We validate AWARE through extensive experiments in diverse simulated and real-world environments.</li>
+          <li><strong>解读状态：</strong>已总结</li>
+          <li><strong>机构：</strong>武汉大学；南洋理工大学</li>
+          <li><strong>一句话本质：</strong>AWARE 的核心思想不是给 UAV 加更多传感器，而是主动利用机体偏航旋转来扩大窄视场 LiDAR 的可观测性，从而稳住人在环飞行中的状态估计。</li>
+          <li><strong>自动抓取摘要：</strong>无</li>
           <li><strong>作者：</strong>Yizhe Zhang, Jianping Li, Liangliang Yin, Zhen Dong, Bisheng Yang</li>
           <li><strong>PDF：</strong>AWARE Adaptive Whole-body Active Rotating Control for Enhanced LiDAR-Inertial Odometry under Human-in-the-Loop Interaction.pdf</li>
-          <li><strong>标签：</strong>uav, robustness, navigation, cs.RO</li>
+          <li><strong>标签：</strong>UAV, LiDAR里程计, MPC, 强化学习, 人在环控制</li>
         </ul>
       </section>
-      
+      <section><h3>The Gap</h3><ul><li>已有共识/做法： 在复杂测绘和巡检场景中，HITL UAV 往往由人给高层导航意图，机载系统负责定位和稳定控制。</li><li>核心痛点： 轻量级 UAV 常受载荷限制，只能使用窄视场 LiDAR；一旦进入几何退化或特征稀疏环境，LIO 可观测性下降，漂移会直接破坏安全性和测绘质量。</li><li>本文切入点： 作者把“机体主动旋转”视为一种可控 sensing 资源，通过主动 yawing 扩展有效视野，而不是被动接受当前传感器视角。</li></ul></section><section><h3>Key Insights</h3><ul><li>姿态机动本身可以成为感知增强手段： 论文把 UAV 的旋转灵活性从“控制副产物”转成“主动感知资源”，这是很有价值的视角转换。</li><li>人在环场景需要的是估计鲁棒性而不只是路径跟随： 当操作员持续介入时，定位质量直接决定高层意图能否安全落地。</li><li>轻量自适应比堆硬件更现实： 摘要显示 AWARE 在仿真和真实环境中都优于被动扫描和静态优化基线，说明软件层主动感知设计对资源受限平台特别有效。</li></ul></section><section><h3>Next Steps</h3><ul><li>把主动观测与任务规划联动： 让 yaw 优化不仅服务里程计，还能与目标搜索、测绘覆盖或避障任务共同优化。</li><li>显式纳入能耗与操控负担： 建立信息增益、飞行稳定性、功耗和人机协作体验之间的统一权衡模型。</li></ul></section>
       <section>
         <h3>来源笔记</h3>
         <ul class="note-list">
