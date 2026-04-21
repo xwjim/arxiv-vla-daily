@@ -36,6 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+.custom-tag-form { display:flex; gap:8px; }
+.custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
+.custom-tag-form button { border:0; border-radius:12px; padding:10px 14px; background:var(--primary); color:#fff; cursor:pointer; font-weight:700; }
 .muted { color:var(--muted); }
 @media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
 </style>
@@ -77,6 +87,16 @@ a:hover { text-decoration:underline; }
           <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 多模态, 机器学习, 机器人</li>
         </ul>
       </section>
+      <section id="frontendTagPanel" data-entry-id="2603.19131v1">
+        <h3>前端标签</h3>
+        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+        <div id="frontendTagList" class="user-tag-list"></div>
+        <div id="frontendPresetTagList" class="preset-tag-list"></div>
+        <form id="frontendTagForm" class="custom-tag-form">
+          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+          <button type="submit">添加</button>
+        </form>
+      </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学界普遍使用参数量、计算量 (FLOPs) 等「推理效率」指标来评估和优化 VLA 模型。</li><li>核心痛点： 这些计算指标无法反映机器人在物理世界中的实际执行质量，导致模型在模拟器或真实环境中动作笨拙、耗时长、能耗高。</li><li>本文切入点： 作者洞察到，模型推理能耗与机器人物理执行能耗同等重要。因此，必须引入衡量物理行为的指标，才能全面评估一个模型的优劣。</li></ul></section><section><h3>Key Insights</h3><ul><li>效率悖论 (Efficiency Paradox)： 提升「推理效率」的常用方法（如剪枝、量化）反而会显著损害「具身效率」。模型虽然变小了，但机器人的动作路径更长、完成任务更慢、动作更抖动，即便任务成功率几乎不变。</li><li>指标盲区 (Metric Blind Spot)： 传统指标掩盖了策略的真实行为差异。两个在成功率和吞吐量上看似相同的模型，在运动平滑度、能耗等具身指标上可能存在巨大鸿沟，导致错误的模型选型。</li><li>适应性局限 (Adaptation Limitation)： 简单的微调方法（如上下文学习、增加辅助损失）对提升具身效率效果有限且存在权衡。例如，通过微调降低了动作的抖动 (Jerk)，却可能导致任务完成时间变长。</li></ul></section><section><h3>Next Steps</h3><ul><li>开发「具身效率感知」的优化算法： 将具身效率指标（或其可微代理）直接纳入模型训练或压缩的优化目标中，从源头解决效率悖论。</li><li>探索「推理效率」与「具身效率」的帕累托前沿 (Pareto Frontier)： 系统性研究两者间的 trade-off 关系，为特定硬件和任务找到最优的模型配置点。</li></ul></section>
       <section>
         <h3>来源笔记</h3>
@@ -87,5 +107,118 @@ a:hover { text-decoration:underline; }
     </div>
   </div>
 </div>
+<script>
+const PRESET_FRONTEND_TAGS = ["已阅读", "重要", "待精读", "待跟进", "复现相关"];
+const FRONTEND_TAG_STORAGE_KEY = 'arxiv-frontier-user-tags-v1';
+const detailEntryId = "2603.19131v1";
+const detailTagList = document.getElementById('frontendTagList');
+const detailPresetList = document.getElementById('frontendPresetTagList');
+const detailTagForm = document.getElementById('frontendTagForm');
+const detailTagInput = document.getElementById('frontendTagInput');
+
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  })[char]);
+}
+
+function normalizeFrontendTag(tag) {
+  return String(tag || '').trim().replace(/\s+/g, ' ');
+}
+
+function dedupeFrontendTags(tags) {
+  const seen = new Set();
+  const out = [];
+  tags.forEach((tag) => {
+    const normalized = normalizeFrontendTag(tag);
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) return;
+    seen.add(key);
+    out.push(normalized);
+  });
+  return out;
+}
+
+function loadFrontendTagState() {
+  try {
+    const raw = localStorage.getItem(FRONTEND_TAG_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return {};
+    return parsed;
+  } catch {
+    return {};
+  }
+}
+
+function saveFrontendTagState(state) {
+  localStorage.setItem(FRONTEND_TAG_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getDetailTags() {
+  const state = loadFrontendTagState();
+  return dedupeFrontendTags(Array.isArray(state[detailEntryId]) ? state[detailEntryId] : []);
+}
+
+function setDetailTags(tags) {
+  const state = loadFrontendTagState();
+  const deduped = dedupeFrontendTags(tags);
+  if (deduped.length) {
+    state[detailEntryId] = deduped;
+  } else {
+    delete state[detailEntryId];
+  }
+  saveFrontendTagState(state);
+  renderDetailTagPanel();
+}
+
+function renderDetailTagPanel() {
+  const tags = getDetailTags();
+  detailTagList.innerHTML = tags.length
+    ? tags.map((tag) => `<span class="user-tag-chip">${escapeHtml(tag)}<button type="button" data-remove-tag="${escapeHtml(tag)}">×</button></span>`).join('')
+    : '<span class="muted">当前还没有前端标签。</span>';
+  detailPresetList.innerHTML = PRESET_FRONTEND_TAGS.map((tag) => {
+    const active = tags.includes(tag) ? ' active' : '';
+    return `<button type="button" class="preset-tag-btn${active}" data-preset-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`;
+  }).join('');
+}
+
+detailPresetList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-preset-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.presetTag || '');
+  const current = getDetailTags();
+  if (current.includes(tag)) {
+    setDetailTags(current.filter((item) => item !== tag));
+  } else {
+    setDetailTags([...current, tag]);
+  }
+});
+
+detailTagList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-remove-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.removeTag || '');
+  setDetailTags(getDetailTags().filter((item) => item !== tag));
+});
+
+detailTagForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const tag = normalizeFrontendTag(detailTagInput.value);
+  if (!tag) return;
+  setDetailTags([...getDetailTags(), tag]);
+  detailTagInput.value = '';
+});
+
+window.addEventListener('storage', (event) => {
+  if (event.key === FRONTEND_TAG_STORAGE_KEY) renderDetailTagPanel();
+});
+
+renderDetailTagPanel();
+</script>
 </body>
 </html>

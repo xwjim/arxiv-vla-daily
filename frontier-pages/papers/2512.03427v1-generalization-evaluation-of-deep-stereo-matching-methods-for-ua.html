@@ -36,6 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+.custom-tag-form { display:flex; gap:8px; }
+.custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
+.custom-tag-form button { border:0; border-radius:12px; padding:10px 14px; background:var(--primary); color:#fff; cursor:pointer; font-weight:700; }
 .muted { color:var(--muted); }
 @media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
 </style>
@@ -77,6 +87,16 @@ a:hover { text-decoration:underline; }
           <li><strong>标签：</strong>VLA, 具身智能, UAV, 三维表征, 数据集, 评测基准</li>
         </ul>
       </section>
+      <section id="frontendTagPanel" data-entry-id="2512.03427v1">
+        <h3>前端标签</h3>
+        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+        <div id="frontendTagList" class="user-tag-list"></div>
+        <div id="frontendPresetTagList" class="preset-tag-list"></div>
+        <form id="frontendTagForm" class="custom-tag-form">
+          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+          <button type="submit">添加</button>
+        </form>
+      </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 深度立体匹配模型的评估主要依赖于城市（KITTI）和室内（ETH3D）等标准数据集。</li><li>核心痛点： 已有评估无法反映模型在植被茂密的林业场景下的真实泛化能力，而为新场景微调模型又掩盖了其固有鲁棒性。</li><li>本文切入点： 通过严格的零样本（Zero-shot）跨域评估，对比不同架构范式（迭代优化、基础模型等）在全新、高难度林业数据集上的表现，从而发现其内在的泛化规律。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构-场景依赖性： 模型的泛化能力存在明显的场景依赖模式。</li><li>基础模型 (Foundation Models) 如 DEFOM 和 BridgeDepth，因利用了大规模预训练的单目深度先验，在结构化场景（如ETH3D, KITTI）中表现最佳。</li><li>迭代优化模型 (Iterative Methods) 如 IGEV++，虽然在结构化场景非最优，但展现出更均衡的跨域鲁棒性，在不同场景下性能波动较小。</li><li>脆弱性暴露： 单一基准测试会掩盖模型的灾难性失效风险。</li><li>RAFT-Stereo 在 KITTI 上表现正常，但在 ETH3D 数据集上出现高达 98% 的错误率，暴露出其在处理特定视差范围或坐标系时的致命缺陷。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建量化林业基准： 利用本文选出的 DEFOM 模型生成伪真值，发布首个可进行量化评估的林业立体匹配基准数据集，推动领域发展。</li><li>不确定性感知的深度估计： 针对林业等复杂场景，开发不仅能预测深度，还能量化其预测不确定性的模型。这对于无人机安全导航和决策至关重要。</li></ul></section>
       <section>
         <h3>来源笔记</h3>
@@ -87,5 +107,118 @@ a:hover { text-decoration:underline; }
     </div>
   </div>
 </div>
+<script>
+const PRESET_FRONTEND_TAGS = ["已阅读", "重要", "待精读", "待跟进", "复现相关"];
+const FRONTEND_TAG_STORAGE_KEY = 'arxiv-frontier-user-tags-v1';
+const detailEntryId = "2512.03427v1";
+const detailTagList = document.getElementById('frontendTagList');
+const detailPresetList = document.getElementById('frontendPresetTagList');
+const detailTagForm = document.getElementById('frontendTagForm');
+const detailTagInput = document.getElementById('frontendTagInput');
+
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  })[char]);
+}
+
+function normalizeFrontendTag(tag) {
+  return String(tag || '').trim().replace(/\s+/g, ' ');
+}
+
+function dedupeFrontendTags(tags) {
+  const seen = new Set();
+  const out = [];
+  tags.forEach((tag) => {
+    const normalized = normalizeFrontendTag(tag);
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) return;
+    seen.add(key);
+    out.push(normalized);
+  });
+  return out;
+}
+
+function loadFrontendTagState() {
+  try {
+    const raw = localStorage.getItem(FRONTEND_TAG_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return {};
+    return parsed;
+  } catch {
+    return {};
+  }
+}
+
+function saveFrontendTagState(state) {
+  localStorage.setItem(FRONTEND_TAG_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getDetailTags() {
+  const state = loadFrontendTagState();
+  return dedupeFrontendTags(Array.isArray(state[detailEntryId]) ? state[detailEntryId] : []);
+}
+
+function setDetailTags(tags) {
+  const state = loadFrontendTagState();
+  const deduped = dedupeFrontendTags(tags);
+  if (deduped.length) {
+    state[detailEntryId] = deduped;
+  } else {
+    delete state[detailEntryId];
+  }
+  saveFrontendTagState(state);
+  renderDetailTagPanel();
+}
+
+function renderDetailTagPanel() {
+  const tags = getDetailTags();
+  detailTagList.innerHTML = tags.length
+    ? tags.map((tag) => `<span class="user-tag-chip">${escapeHtml(tag)}<button type="button" data-remove-tag="${escapeHtml(tag)}">×</button></span>`).join('')
+    : '<span class="muted">当前还没有前端标签。</span>';
+  detailPresetList.innerHTML = PRESET_FRONTEND_TAGS.map((tag) => {
+    const active = tags.includes(tag) ? ' active' : '';
+    return `<button type="button" class="preset-tag-btn${active}" data-preset-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`;
+  }).join('');
+}
+
+detailPresetList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-preset-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.presetTag || '');
+  const current = getDetailTags();
+  if (current.includes(tag)) {
+    setDetailTags(current.filter((item) => item !== tag));
+  } else {
+    setDetailTags([...current, tag]);
+  }
+});
+
+detailTagList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-remove-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.removeTag || '');
+  setDetailTags(getDetailTags().filter((item) => item !== tag));
+});
+
+detailTagForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const tag = normalizeFrontendTag(detailTagInput.value);
+  if (!tag) return;
+  setDetailTags([...getDetailTags(), tag]);
+  detailTagInput.value = '';
+});
+
+window.addEventListener('storage', (event) => {
+  if (event.key === FRONTEND_TAG_STORAGE_KEY) renderDetailTagPanel();
+});
+
+renderDetailTagPanel();
+</script>
 </body>
 </html>

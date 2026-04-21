@@ -36,6 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+.custom-tag-form { display:flex; gap:8px; }
+.custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
+.custom-tag-form button { border:0; border-radius:12px; padding:10px 14px; background:var(--primary); color:#fff; cursor:pointer; font-weight:700; }
 .muted { color:var(--muted); }
 @media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
 </style>
@@ -77,6 +87,16 @@ a:hover { text-decoration:underline; }
           <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 机器学习</li>
         </ul>
       </section>
+      <section id="frontendTagPanel" data-entry-id="2509.24559v1">
+        <h3>前端标签</h3>
+        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+        <div id="frontendTagList" class="user-tag-list"></div>
+        <div id="frontendPresetTagList" class="preset-tag-list"></div>
+        <form id="frontendTagForm" class="custom-tag-form">
+          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+          <button type="submit">添加</button>
+        </form>
+      </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉语言动作模型 (VLA) 通常被认为是纯策略驱动的（Model-Free），不显式学习世界模型。</li><li>核心痛点： 不清楚这类模型是否在内部隐式地学习了世界动态，其决策过程如同黑箱，缺乏可信的可解释性。</li><li>本文切入点： 猜想模型内部的激活值可能蕴含了状态变迁的信息。作者没有构建新模型，而是选择用探针 (probe) 去“窥探”和验证现有 SOTA 模型 OpenVLA 的内部。</li></ul></section><section><h3>Key Insights</h3><ul><li>[涌现的世界模型]： 纯策略训练的 OpenVLA 确实隐式地学习了一个世界模型。其内部激活值比原始输入包含了更多关于未来状态变化的预测信息（探针在激活值上的表现显著优于在嵌入基线上的表现）。</li><li>[模型表征分布]： 世界模型的表征并非均匀分布。它主要涌现并集中在模型的中间层（如第15层），而末端层更关注具体动作的输出（logits）。这揭示了模型内部的功能分区。</li><li>[模型涌现规律]： 世界模型的形成是一个涌现过程，它随着模型预训练的深入而增强。相较于早期的模型检查点 (v01)，成熟的 OpenVLA 展现出更强的世界模型表征。这再次印证了规模和数据多样性是催生复杂能力的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>[细粒度可解释性] 移除平均池化，训练能够处理 Patch 级别特征的探针。这将能实现对状态变化的可视化和定位（例如，“预测到杯子会从桌子移动到机械臂上”），真正落地可解释性。</li><li>[语义化规划验证] 基于本文发现，实际训练一个稀疏自编码器 (SAE)，将预测的状态变迁向量分解为人类可理解的语义特征（如“物体移动”、“颜色变化”），并验证其在高风险任务的规划和决策否决中的应用价值。</li></ul></section>
       <section>
         <h3>来源笔记</h3>
@@ -87,5 +107,118 @@ a:hover { text-decoration:underline; }
     </div>
   </div>
 </div>
+<script>
+const PRESET_FRONTEND_TAGS = ["已阅读", "重要", "待精读", "待跟进", "复现相关"];
+const FRONTEND_TAG_STORAGE_KEY = 'arxiv-frontier-user-tags-v1';
+const detailEntryId = "2509.24559v1";
+const detailTagList = document.getElementById('frontendTagList');
+const detailPresetList = document.getElementById('frontendPresetTagList');
+const detailTagForm = document.getElementById('frontendTagForm');
+const detailTagInput = document.getElementById('frontendTagInput');
+
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  })[char]);
+}
+
+function normalizeFrontendTag(tag) {
+  return String(tag || '').trim().replace(/\s+/g, ' ');
+}
+
+function dedupeFrontendTags(tags) {
+  const seen = new Set();
+  const out = [];
+  tags.forEach((tag) => {
+    const normalized = normalizeFrontendTag(tag);
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) return;
+    seen.add(key);
+    out.push(normalized);
+  });
+  return out;
+}
+
+function loadFrontendTagState() {
+  try {
+    const raw = localStorage.getItem(FRONTEND_TAG_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return {};
+    return parsed;
+  } catch {
+    return {};
+  }
+}
+
+function saveFrontendTagState(state) {
+  localStorage.setItem(FRONTEND_TAG_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getDetailTags() {
+  const state = loadFrontendTagState();
+  return dedupeFrontendTags(Array.isArray(state[detailEntryId]) ? state[detailEntryId] : []);
+}
+
+function setDetailTags(tags) {
+  const state = loadFrontendTagState();
+  const deduped = dedupeFrontendTags(tags);
+  if (deduped.length) {
+    state[detailEntryId] = deduped;
+  } else {
+    delete state[detailEntryId];
+  }
+  saveFrontendTagState(state);
+  renderDetailTagPanel();
+}
+
+function renderDetailTagPanel() {
+  const tags = getDetailTags();
+  detailTagList.innerHTML = tags.length
+    ? tags.map((tag) => `<span class="user-tag-chip">${escapeHtml(tag)}<button type="button" data-remove-tag="${escapeHtml(tag)}">×</button></span>`).join('')
+    : '<span class="muted">当前还没有前端标签。</span>';
+  detailPresetList.innerHTML = PRESET_FRONTEND_TAGS.map((tag) => {
+    const active = tags.includes(tag) ? ' active' : '';
+    return `<button type="button" class="preset-tag-btn${active}" data-preset-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`;
+  }).join('');
+}
+
+detailPresetList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-preset-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.presetTag || '');
+  const current = getDetailTags();
+  if (current.includes(tag)) {
+    setDetailTags(current.filter((item) => item !== tag));
+  } else {
+    setDetailTags([...current, tag]);
+  }
+});
+
+detailTagList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-remove-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.removeTag || '');
+  setDetailTags(getDetailTags().filter((item) => item !== tag));
+});
+
+detailTagForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const tag = normalizeFrontendTag(detailTagInput.value);
+  if (!tag) return;
+  setDetailTags([...getDetailTags(), tag]);
+  detailTagInput.value = '';
+});
+
+window.addEventListener('storage', (event) => {
+  if (event.key === FRONTEND_TAG_STORAGE_KEY) renderDetailTagPanel();
+});
+
+renderDetailTagPanel();
+</script>
 </body>
 </html>

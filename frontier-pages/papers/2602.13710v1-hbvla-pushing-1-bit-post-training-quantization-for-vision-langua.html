@@ -36,6 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+.custom-tag-form { display:flex; gap:8px; }
+.custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
+.custom-tag-form button { border:0; border-radius:12px; padding:10px 14px; background:var(--primary); color:#fff; cursor:pointer; font-weight:700; }
 .muted { color:var(--muted); }
 @media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
 </style>
@@ -77,6 +87,16 @@ a:hover { text-decoration:underline; }
           <li><strong>标签：</strong>VLA, 具身智能, 策略学习, 多模态, 机器学习</li>
         </ul>
       </section>
+      <section id="frontendTagPanel" data-entry-id="2602.13710v1">
+        <h3>前端标签</h3>
+        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+        <div id="frontendTagList" class="user-tag-list"></div>
+        <div id="frontendPresetTagList" class="preset-tag-list"></div>
+        <form id="frontendTagForm" class="custom-tag-form">
+          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+          <button type="submit">添加</button>
+        </form>
+      </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用通用的后训练量化（PTQ）方法，如基于 Hessian 矩阵评估权重重要性，来压缩大模型。</li><li>核心痛点： VLA 模型中，微小的量化误差会在 闭环控制 中被放大和累积，导致动作灾难性失败；且标准 Hessian 指标被 海量无关紧要的视觉 Token 淹没，无法识别真正影响动作的权重。</li><li>本文切入点： 作者洞察到，权重的「重要性」不应是通用的统计指标，而必须与最终的 「策略/动作」输出 强相关。他们提出了一种「策略感知」的重要性评估方法来打破僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[VLA 模块的量化敏感度异质性]：</li><li>VLA 模型不同模块对量化误差的容忍度差异巨大。视觉编码器 最为鲁棒，而直接生成动作的 投影头 (Projector) 和动作头 (Action Head) 极其敏感，微小扰动即可导致任务失败。这揭示了对 VLA 模型进行量化必须采用 非均匀、差异化 的策略。</li><li>[权重重要性的重新定义：从统计显著到策略攸关]：</li><li>传统基于激活值大小或标准 Hessian 的重要性评估方法在 VLA 中是失效的。本文证明了，一个权重是否重要，根本上取决于它对 最终策略输出的因果影响，而非其自身的数值或统计特征。策略感知 Hessian 是实现这一目标的关键机制。</li><li>[权重几何与变换对齐：通过重排提升能量压缩效率]：</li></ul></section><section><h3>Next Steps</h3><ul><li>[权值与激活联合二值化]：</li><li>本文仅将权重压缩至 1-bit，激活值仍为高精度。下一步的终极挑战是实现 权重和激活的全二值化，以在硬件上利用最高效的 XNOR 运算，但这将对信息流造成巨大瓶颈，需要全新的网络结构或量化算法设计。</li><li>[在线自适应量化]：</li><li>当前方法是一次性的离线量化。一个更有价值的方向是研究 在线自适应量化，使模型在机器人终身学习过程中，能够根据新任务动态、高效地 更新其关键权重划分，而无需完全重新量化。</li></ul></section>
       <section>
         <h3>来源笔记</h3>
@@ -87,5 +107,118 @@ a:hover { text-decoration:underline; }
     </div>
   </div>
 </div>
+<script>
+const PRESET_FRONTEND_TAGS = ["已阅读", "重要", "待精读", "待跟进", "复现相关"];
+const FRONTEND_TAG_STORAGE_KEY = 'arxiv-frontier-user-tags-v1';
+const detailEntryId = "2602.13710v1";
+const detailTagList = document.getElementById('frontendTagList');
+const detailPresetList = document.getElementById('frontendPresetTagList');
+const detailTagForm = document.getElementById('frontendTagForm');
+const detailTagInput = document.getElementById('frontendTagInput');
+
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  })[char]);
+}
+
+function normalizeFrontendTag(tag) {
+  return String(tag || '').trim().replace(/\s+/g, ' ');
+}
+
+function dedupeFrontendTags(tags) {
+  const seen = new Set();
+  const out = [];
+  tags.forEach((tag) => {
+    const normalized = normalizeFrontendTag(tag);
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) return;
+    seen.add(key);
+    out.push(normalized);
+  });
+  return out;
+}
+
+function loadFrontendTagState() {
+  try {
+    const raw = localStorage.getItem(FRONTEND_TAG_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return {};
+    return parsed;
+  } catch {
+    return {};
+  }
+}
+
+function saveFrontendTagState(state) {
+  localStorage.setItem(FRONTEND_TAG_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getDetailTags() {
+  const state = loadFrontendTagState();
+  return dedupeFrontendTags(Array.isArray(state[detailEntryId]) ? state[detailEntryId] : []);
+}
+
+function setDetailTags(tags) {
+  const state = loadFrontendTagState();
+  const deduped = dedupeFrontendTags(tags);
+  if (deduped.length) {
+    state[detailEntryId] = deduped;
+  } else {
+    delete state[detailEntryId];
+  }
+  saveFrontendTagState(state);
+  renderDetailTagPanel();
+}
+
+function renderDetailTagPanel() {
+  const tags = getDetailTags();
+  detailTagList.innerHTML = tags.length
+    ? tags.map((tag) => `<span class="user-tag-chip">${escapeHtml(tag)}<button type="button" data-remove-tag="${escapeHtml(tag)}">×</button></span>`).join('')
+    : '<span class="muted">当前还没有前端标签。</span>';
+  detailPresetList.innerHTML = PRESET_FRONTEND_TAGS.map((tag) => {
+    const active = tags.includes(tag) ? ' active' : '';
+    return `<button type="button" class="preset-tag-btn${active}" data-preset-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`;
+  }).join('');
+}
+
+detailPresetList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-preset-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.presetTag || '');
+  const current = getDetailTags();
+  if (current.includes(tag)) {
+    setDetailTags(current.filter((item) => item !== tag));
+  } else {
+    setDetailTags([...current, tag]);
+  }
+});
+
+detailTagList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-remove-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.removeTag || '');
+  setDetailTags(getDetailTags().filter((item) => item !== tag));
+});
+
+detailTagForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const tag = normalizeFrontendTag(detailTagInput.value);
+  if (!tag) return;
+  setDetailTags([...getDetailTags(), tag]);
+  detailTagInput.value = '';
+});
+
+window.addEventListener('storage', (event) => {
+  if (event.key === FRONTEND_TAG_STORAGE_KEY) renderDetailTagPanel();
+});
+
+renderDetailTagPanel();
+</script>
 </body>
 </html>

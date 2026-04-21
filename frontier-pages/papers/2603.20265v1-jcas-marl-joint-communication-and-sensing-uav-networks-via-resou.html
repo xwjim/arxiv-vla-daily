@@ -36,6 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+.custom-tag-form { display:flex; gap:8px; }
+.custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
+.custom-tag-form button { border:0; border-radius:12px; padding:10px 14px; background:var(--primary); color:#fff; cursor:pointer; font-weight:700; }
 .muted { color:var(--muted); }
 @media (max-width: 900px) { .grid { grid-template-columns:1fr; } .sidebar .note-list li { display:block; } }
 </style>
@@ -55,7 +65,7 @@ a:hover { text-decoration:underline; }
     <div class="tag-row">
       <span class="tag-mini">VLA</span><span class="tag-mini">具身智能</span><span class="tag-mini">UAV</span><span class="tag-mini">SLAM</span><span class="tag-mini">三维表征</span><span class="tag-mini">策略学习</span>
     </div>
-    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.20265v1" target="_blank" rel="noreferrer">arXiv</a></div>
+    <div class="links"><a class="pill-btn" href="../../Arxiv-Frontier-研究看板.html">返回总览</a><a class="pill-btn" href="https://arxiv.org/abs/2603.20265v1" target="_blank" rel="noreferrer">arXiv</a><a class="pill-btn" href="../../pdfs/JCAS-MARL Joint Communication and Sensing UAV Networks via Resource-Constrained Multi-Agent Reinforcement Learning.pdf" target="_blank" rel="noreferrer">本地 PDF</a></div>
   </div>
 
   <div class="grid">
@@ -73,9 +83,19 @@ a:hover { text-decoration:underline; }
           <li><strong>一句话本质：</strong>通过多智能体强化学习，让无人机群自主学会如何动态权衡 感知精度 与 通信带宽，以最高效地协同完成探测任务。</li>
           <li><strong>自动抓取摘要：</strong>无</li>
           <li><strong>作者：</strong>Islam Guven, Mehmet Parlak</li>
-          <li><strong>PDF：</strong>无本地 PDF，仅保留 arXiv 链接</li>
+          <li><strong>PDF：</strong>JCAS-MARL Joint Communication and Sensing UAV Networks via Resource-Constrained Multi-Agent Reinforcement Learning.pdf</li>
           <li><strong>标签：</strong>VLA, 具身智能, UAV, SLAM, 三维表征, 策略学习</li>
         </ul>
+      </section>
+      <section id="frontendTagPanel" data-entry-id="2603.20265v1">
+        <h3>前端标签</h3>
+        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+        <div id="frontendTagList" class="user-tag-list"></div>
+        <div id="frontendPresetTagList" class="preset-tag-list"></div>
+        <form id="frontendTagForm" class="custom-tag-form">
+          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+          <button type="submit">添加</button>
+        </form>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的无人机 MARL 模型通常将感知和通信能力视为固定的、解耦的参数进行建模。</li><li>核心痛点： 忽略了在物理层上，感知与通信 使用同一波形（OFDM）时存在的 资源竞争 关系，导致策略无法实现真正的端到端优化。</li><li>本文切入点： 将 OFDM 导频密度 (pilot density) 这一物理层参数直接作为智能体的 可学习动作，让 MARL 策略直接控制感知与通信的动态平衡点。</li></ul></section><section><h3>Key Insights</h3><ul><li>动态资源分配的价值： 学会 自适应调整导频密度 的策略显著优于固定策略。这证明在任务的不同阶段（如大范围搜索、抵近确认、信息同步），对感知和通信的资源需求是 动态变化且非对称的。</li><li>感知-通信的内在约束： 感知可靠性（需要高导频）与 通信效率（需要低导频）存在根本性的 零和博弈。智能体学会了在需要高精度探测时主动牺牲通信，在需要高效信息共享时反之，从而优化全局任务效率。</li><li>群体智能的涌现与扩展性： 随着无人机数量增加，任务完成时间 非线性减少，而总能耗 亚线性增长。这表明系统具备良好的 可扩展性，且群体能够自发形成有效的 分工协作 模式（如部分探测、部分中继），避免了冗余行动。</li></ul></section><section><h3>Next Steps</h3><ul><li>更精细的波形控制： 将动作空间从单一的导频密度扩展到 OFDM 子载波分配、功率控制 等更复杂的物理层参数，探索更深层次的 JCAS 优化潜力。</li><li>异构与不可靠通信： 研究在 通信延迟、丢包和带宽不均 的网络条件下，MARL 策略的鲁棒性。这更贴近真实场景，对知识传播机制提出了更高要求。</li></ul></section>
       <section>
@@ -87,5 +107,118 @@ a:hover { text-decoration:underline; }
     </div>
   </div>
 </div>
+<script>
+const PRESET_FRONTEND_TAGS = ["已阅读", "重要", "待精读", "待跟进", "复现相关"];
+const FRONTEND_TAG_STORAGE_KEY = 'arxiv-frontier-user-tags-v1';
+const detailEntryId = "2603.20265v1";
+const detailTagList = document.getElementById('frontendTagList');
+const detailPresetList = document.getElementById('frontendPresetTagList');
+const detailTagForm = document.getElementById('frontendTagForm');
+const detailTagInput = document.getElementById('frontendTagInput');
+
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  })[char]);
+}
+
+function normalizeFrontendTag(tag) {
+  return String(tag || '').trim().replace(/\s+/g, ' ');
+}
+
+function dedupeFrontendTags(tags) {
+  const seen = new Set();
+  const out = [];
+  tags.forEach((tag) => {
+    const normalized = normalizeFrontendTag(tag);
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) return;
+    seen.add(key);
+    out.push(normalized);
+  });
+  return out;
+}
+
+function loadFrontendTagState() {
+  try {
+    const raw = localStorage.getItem(FRONTEND_TAG_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return {};
+    return parsed;
+  } catch {
+    return {};
+  }
+}
+
+function saveFrontendTagState(state) {
+  localStorage.setItem(FRONTEND_TAG_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getDetailTags() {
+  const state = loadFrontendTagState();
+  return dedupeFrontendTags(Array.isArray(state[detailEntryId]) ? state[detailEntryId] : []);
+}
+
+function setDetailTags(tags) {
+  const state = loadFrontendTagState();
+  const deduped = dedupeFrontendTags(tags);
+  if (deduped.length) {
+    state[detailEntryId] = deduped;
+  } else {
+    delete state[detailEntryId];
+  }
+  saveFrontendTagState(state);
+  renderDetailTagPanel();
+}
+
+function renderDetailTagPanel() {
+  const tags = getDetailTags();
+  detailTagList.innerHTML = tags.length
+    ? tags.map((tag) => `<span class="user-tag-chip">${escapeHtml(tag)}<button type="button" data-remove-tag="${escapeHtml(tag)}">×</button></span>`).join('')
+    : '<span class="muted">当前还没有前端标签。</span>';
+  detailPresetList.innerHTML = PRESET_FRONTEND_TAGS.map((tag) => {
+    const active = tags.includes(tag) ? ' active' : '';
+    return `<button type="button" class="preset-tag-btn${active}" data-preset-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`;
+  }).join('');
+}
+
+detailPresetList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-preset-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.presetTag || '');
+  const current = getDetailTags();
+  if (current.includes(tag)) {
+    setDetailTags(current.filter((item) => item !== tag));
+  } else {
+    setDetailTags([...current, tag]);
+  }
+});
+
+detailTagList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-remove-tag]');
+  if (!button) return;
+  const tag = normalizeFrontendTag(button.dataset.removeTag || '');
+  setDetailTags(getDetailTags().filter((item) => item !== tag));
+});
+
+detailTagForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const tag = normalizeFrontendTag(detailTagInput.value);
+  if (!tag) return;
+  setDetailTags([...getDetailTags(), tag]);
+  detailTagInput.value = '';
+});
+
+window.addEventListener('storage', (event) => {
+  if (event.key === FRONTEND_TAG_STORAGE_KEY) renderDetailTagPanel();
+});
+
+renderDetailTagPanel();
+</script>
 </body>
 </html>

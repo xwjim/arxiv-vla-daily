@@ -1,0 +1,2064 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇航员在太空中如何生活 - 大会汇报版</title>
+  <style>
+    :root {
+      --bg: #050b16;
+      --bg-2: #0b1630;
+      --panel: rgba(11, 20, 41, 0.82);
+      --panel-2: rgba(17, 30, 56, 0.94);
+      --line: rgba(255, 255, 255, 0.1);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --text: #f4f8ff;
+      --muted: #b8c7df;
+      --gold: #f7b44a;
+      --cyan: #75d8ff;
+      --red: #ff765e;
+      --mint: #8fe2bb;
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+      --radius: 30px;
+      --radius-sm: 20px;
+      --display-font: "STZhongsong", "Microsoft YaHei", serif;
+      --body-font: "Microsoft YaHei", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--body-font);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(117, 216, 255, 0.12), transparent 26%),
+        radial-gradient(circle at 84% 16%, rgba(247, 180, 74, 0.12), transparent 20%),
+        radial-gradient(circle at 78% 80%, rgba(255, 118, 94, 0.08), transparent 18%),
+        linear-gradient(180deg, #040812 0%, #07111f 44%, #040813 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    body::before {
+      background-image:
+        radial-gradient(circle at 8% 18%, rgba(255,255,255,0.95) 0 1px, transparent 2px),
+        radial-gradient(circle at 18% 76%, rgba(255,255,255,0.8) 0 1px, transparent 2px),
+        radial-gradient(circle at 42% 28%, rgba(255,255,255,0.85) 0 1.2px, transparent 2px),
+        radial-gradient(circle at 58% 84%, rgba(255,255,255,0.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 74% 12%, rgba(255,255,255,0.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 86% 42%, rgba(255,255,255,0.82) 0 1.3px, transparent 2px),
+        radial-gradient(circle at 92% 70%, rgba(255,255,255,0.7) 0 1px, transparent 2px);
+      opacity: 0.7;
+    }
+
+    body::after {
+      background:
+        linear-gradient(105deg, rgba(255, 118, 94, 0.08), transparent 24%),
+        linear-gradient(290deg, rgba(117, 216, 255, 0.05), transparent 22%);
+      mix-blend-mode: screen;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    main {
+      scroll-snap-type: y mandatory;
+    }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      z-index: 60;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--gold), var(--red), var(--cyan));
+      box-shadow: 0 0 24px rgba(247, 180, 74, 0.45);
+      transition: width 0.2s ease;
+    }
+
+    .nav-rail {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 55;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 12px;
+      border-radius: 999px;
+      background: rgba(7, 13, 26, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-rail a {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-rail a.active {
+      transform: scale(1.25);
+      background: linear-gradient(135deg, var(--gold), var(--cyan));
+      box-shadow: 0 0 18px rgba(117, 216, 255, 0.46);
+    }
+
+    .slide {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 72px min(5vw, 64px) 68px;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .slide::after {
+      content: attr(data-step);
+      position: absolute;
+      right: min(5vw, 60px);
+      top: 28px;
+      font-size: clamp(72px, 8vw, 140px);
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.05);
+      letter-spacing: 0.05em;
+      z-index: 1;
+    }
+
+    .wrap {
+      width: min(1380px, 100%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slide-shell {
+      border-radius: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(16, 29, 54, 0.94), rgba(8, 16, 30, 0.94)),
+        radial-gradient(circle at 12% 12%, rgba(117, 216, 255, 0.08), transparent 25%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(247, 180, 74, 0.1), transparent 28%),
+        linear-gradient(180deg, transparent 68%, rgba(255,255,255,0.04));
+    }
+
+    .shell-body {
+      padding: clamp(28px, 3.6vw, 44px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .kicker-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #ffd997);
+      box-shadow: 0 0 18px rgba(247, 180, 74, 0.55);
+    }
+
+    .pace {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(117, 216, 255, 0.08);
+      border: 1px solid rgba(117, 216, 255, 0.16);
+      color: #dff6ff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      line-height: 1.12;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--display-font);
+    }
+
+    h1 {
+      font-size: clamp(42px, 5.8vw, 82px);
+      max-width: 9.8em;
+    }
+
+    h2 {
+      font-size: clamp(30px, 3.7vw, 56px);
+      max-width: 12em;
+    }
+
+    h3 {
+      font-size: clamp(20px, 1.7vw, 28px);
+      color: #f8fbff;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.82;
+      font-size: clamp(15px, 1.08vw, 18px);
+    }
+
+    .lede {
+      margin-top: 18px;
+      font-size: clamp(17px, 1.4vw, 22px);
+      max-width: 48em;
+      color: #e8f1ff;
+    }
+
+    .subnote {
+      margin-top: 10px;
+      color: #9bb0cf;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-layout,
+    .two-col,
+    .two-col-strong,
+    .three-col,
+    .gallery-grid,
+    .agenda-grid,
+    .matrix,
+    .cards,
+    .milestone-grid,
+    .foot-grid,
+    .timeline,
+    .compare-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .hero-layout {
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: stretch;
+    }
+
+    .two-col {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .two-col-strong {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .three-col {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .gallery-grid.tight {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .agenda-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 26px;
+    }
+
+    .matrix,
+    .cards,
+    .milestone-grid,
+    .foot-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+
+    .timeline {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+
+    .compare-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 22px;
+    }
+
+    .card,
+    .metric,
+    .note-card,
+    .agenda-card,
+    .timeline-card,
+    .compare-card {
+      padding: 22px 22px 20px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+    }
+
+    .card::before,
+    .metric::before,
+    .note-card::before,
+    .agenda-card::before,
+    .timeline-card::before,
+    .compare-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--red), var(--cyan), transparent);
+      opacity: 0.9;
+    }
+
+    .card p + p,
+    .note-card p + p,
+    .metric p + p {
+      margin-top: 8px;
+    }
+
+    .card-label,
+    .tiny-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      padding: clamp(28px, 3vw, 40px);
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      background:
+        radial-gradient(circle at 0 0, rgba(247, 180, 74, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(16, 29, 54, 0.92), rgba(8, 16, 30, 0.92));
+      border-radius: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -80px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(117, 216, 255, 0.18), transparent 70%);
+    }
+
+    .hero-copy strong {
+      color: var(--gold);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #eff6ff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      color: #0d1830;
+      background: linear-gradient(135deg, var(--gold), #ffd895);
+      box-shadow: 0 14px 30px rgba(247, 180, 74, 0.32);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-stack {
+      display: grid;
+      grid-template-rows: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .image-panel,
+    .image-stack,
+    .image-card {
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .image-panel::after,
+    .image-stack::after,
+    .image-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 45%, rgba(4, 9, 19, 0.74));
+    }
+
+    .image-panel .caption,
+    .image-stack .caption,
+    .image-card .caption {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      z-index: 2;
+      color: #f7fbff;
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    .image-stack {
+      min-height: 360px;
+    }
+
+    .image-stack img {
+      height: 100%;
+    }
+
+    .stack-note {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 18px;
+      min-height: 240px;
+    }
+
+    .quote-box {
+      padding: 24px;
+      border-radius: 32px;
+      background:
+        linear-gradient(180deg, rgba(16, 30, 56, 0.95), rgba(9, 16, 29, 0.94));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-box blockquote {
+      margin: 0;
+      color: #f5f9ff;
+      font-family: var(--display-font);
+      font-size: clamp(22px, 2vw, 32px);
+      line-height: 1.45;
+    }
+
+    .quote-box p {
+      margin-top: 18px;
+      font-size: 15px;
+    }
+
+    .agenda-card strong,
+    .timeline-card strong,
+    .metric strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 16px;
+      color: #0d1a31;
+      background: linear-gradient(135deg, var(--gold), #ffe3a6);
+      box-shadow: 0 10px 22px rgba(247, 180, 74, 0.26);
+      margin-bottom: 14px;
+    }
+
+    .agenda-card h3,
+    .timeline-card h3,
+    .metric h3 {
+      margin-bottom: 10px;
+    }
+
+    .agenda-meta {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(117, 216, 255, 0.09);
+      border: 1px solid rgba(117, 216, 255, 0.14);
+      color: #d9f7ff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .figure {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 100%;
+    }
+
+    .figure-frame {
+      flex: 1;
+      min-height: 360px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      background: #081120;
+    }
+
+    .figure-frame.contain-frame {
+      padding: 14px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(117, 216, 255, 0.08), transparent 26%),
+        linear-gradient(180deg, rgba(8, 16, 31, 0.98), rgba(6, 11, 22, 0.98));
+    }
+
+    .figure-frame.contain-frame img {
+      object-fit: contain;
+      object-position: center center;
+    }
+
+    .figure-frame.tall {
+      min-height: 520px;
+    }
+
+    .figure-frame.short {
+      min-height: 250px;
+    }
+
+    .figure-caption {
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #dfe9f7;
+      font-size: 14px;
+      line-height: 1.72;
+    }
+
+    .figure-caption strong {
+      color: var(--gold);
+    }
+
+    .list,
+    .mini-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .list li,
+    .mini-list li {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #dce6f5;
+      line-height: 1.72;
+    }
+
+    .list li strong,
+    .mini-list li strong {
+      color: #ffffff;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .highlight {
+      margin-top: 20px;
+      padding: 20px 22px;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(247, 180, 74, 0.12), rgba(117, 216, 255, 0.08));
+      border: 1px solid rgba(247, 180, 74, 0.16);
+      color: #edf6ff;
+      font-size: 17px;
+      line-height: 1.75;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    .eyeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .eyeline .line {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .eyeline .line strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+      background: rgba(117, 216, 255, 0.16);
+      color: #ebfaff;
+      font-size: 14px;
+    }
+
+    .timeline-card {
+      min-height: 220px;
+    }
+
+    .timeline-card .year {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 118, 94, 0.1);
+      border: 1px solid rgba(255, 118, 94, 0.15);
+      color: #ffd7cf;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .duo-figure {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .duo-figure .figure-frame {
+      min-height: 300px;
+    }
+
+    .milestone-grid {
+      align-items: stretch;
+    }
+
+    .compact-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .compact-grid .timeline-card {
+      min-height: 186px;
+      padding: 18px 18px 16px;
+    }
+
+    .compact-grid .timeline-card h3 {
+      font-size: clamp(18px, 1.45vw, 24px);
+      margin-bottom: 8px;
+    }
+
+    .compact-grid .timeline-card p {
+      font-size: 15px;
+      line-height: 1.66;
+    }
+
+    .compact-duo {
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .compact-duo .figure-frame {
+      min-height: 230px;
+    }
+
+    .compact-duo .figure-caption {
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+
+    .source-strip {
+      margin-top: 20px;
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      color: #b4c5de;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .slide--hero .slide-shell,
+    .slide--closing .slide-shell {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.04);
+      box-shadow: none;
+    }
+
+    .hero-bg,
+    .closing-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+    }
+
+    .hero-bg::after,
+    .closing-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(3, 8, 17, 0.88) 12%, rgba(3, 8, 17, 0.56) 58%, rgba(3, 8, 17, 0.8) 100%),
+        linear-gradient(180deg, rgba(247, 180, 74, 0.07), transparent 28%);
+    }
+
+    .hero-bg {
+      background-image: url("space_report_assets/selected/launch-photo.jpg");
+    }
+
+    .closing-bg {
+      background-image: url("space_report_assets/selected/china-launch-poster.jpg");
+      background-position: center center;
+    }
+
+    .closing-panel {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      padding: clamp(30px, 5vw, 56px);
+      border-radius: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(180deg, rgba(8, 14, 28, 0.76), rgba(8, 14, 28, 0.88));
+      box-shadow: var(--shadow);
+    }
+
+    .takeaways {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .takeaway {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .takeaway h3 {
+      margin-bottom: 10px;
+    }
+
+    .ref-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .ref-list span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #e4eefb;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      color: #a8bbd8;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .hero-tip {
+      margin-top: 18px;
+      color: #cfe2ff;
+      font-size: 14px;
+      opacity: 0.84;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-layout,
+      .two-col,
+      .two-col-strong,
+      .agenda-grid,
+      .timeline,
+      .compare-grid,
+      .takeaways {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid,
+      .milestone-grid,
+      .compact-grid,
+      .cards,
+      .matrix,
+      .foot-grid,
+      .duo-figure,
+      .compact-duo,
+      .stack-note,
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-rail {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .slide {
+        padding: 44px 18px 46px;
+      }
+
+      .shell-body,
+      .hero-copy,
+      .closing-panel {
+        padding: 24px;
+      }
+
+      .gallery-grid,
+      .milestone-grid,
+      .compact-grid,
+      .cards,
+      .matrix,
+      .foot-grid,
+      .duo-figure,
+      .compact-duo,
+      .stack-note,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .figure-frame,
+      .figure-frame.tall,
+      .figure-frame.short,
+      .image-stack {
+        min-height: 240px;
+      }
+
+      .slide::after {
+        top: 18px;
+        right: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <nav class="nav-rail" aria-label="章节导航">
+    <a href="#cover" class="active" aria-label="封面"></a>
+    <a href="#agenda" aria-label="议程"></a>
+    <a href="#system" aria-label="全局"></a>
+    <a href="#selection" aria-label="选拔"></a>
+    <a href="#training" aria-label="训练"></a>
+    <a href="#station" aria-label="空间站"></a>
+    <a href="#food" aria-label="饮食"></a>
+    <a href="#sleep" aria-label="洗漱与睡眠"></a>
+    <a href="#exercise" aria-label="运动"></a>
+    <a href="#health" aria-label="健康"></a>
+    <a href="#day" aria-label="一天"></a>
+    <a href="#tasks" aria-label="工作"></a>
+    <a href="#experiment" aria-label="实验"></a>
+    <a href="#eva" aria-label="出舱"></a>
+    <a href="#return" aria-label="返回"></a>
+    <a href="#reentry" aria-label="再入"></a>
+    <a href="#recovery" aria-label="恢复"></a>
+    <a href="#history" aria-label="航天历史"></a>
+    <a href="#milestones" aria-label="中国载人航天"></a>
+    <a href="#spirit" aria-label="载人航天精神"></a>
+    <a href="#lineage" aria-label="精神谱系"></a>
+    <a href="#closing" aria-label="结尾"></a>
+  </nav>
+
+  <main>
+    <section id="cover" class="slide slide--hero" data-step="01">
+      <div class="hero-bg"></div>
+      <div class="wrap">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <div class="kicker-row">
+              <span class="kicker">载人航天专题</span>
+              <span class="pace">主题导览</span>
+            </div>
+            <h1>宇航员在太空中如何生活</h1>
+            <p class="lede">从一次载人发射出发，沿着<strong>“送上去、住下来、做任务、平安回来”</strong>四条主线，理解太空生活到底是怎样被设计出来的。</p>
+            <div class="chip-row">
+              <span class="chip">载人飞船</span>
+              <span class="chip">空间站</span>
+              <span class="chip">微重力</span>
+              <span class="chip">生命保障</span>
+              <span class="chip">返回地球</span>
+            </div>
+            <div class="hero-actions">
+              <a class="button primary" href="#agenda">查看目录</a>
+              <a class="button secondary" href="#history">航天历史</a>
+            </div>
+            <p class="hero-tip">支持键盘翻页与章节跳转，可按章节顺序完整浏览。</p>
+          </div>
+
+          <div class="hero-stack">
+            <div class="image-stack">
+              <img src="space_report_assets/selected/orbit-mission.jpg" alt="空间站与地球上空任务示意图">
+              <div class="caption">宇航员不是“去太空旅游”，而是进入一个极端环境中的长期任务现场。</div>
+            </div>
+            <div class="stack-note">
+              <div class="quote-box">
+                <blockquote>太空生活的本质，不是浪漫漂浮，而是把日常的“吃住行和健康”全部重做一遍。</blockquote>
+                <p>从火箭起飞到返回回收，载人航天把人体适应、生命保障、在轨任务和地面支持连接成一条完整链路。</p>
+              </div>
+              <div class="image-card">
+                <img src="space_report_assets/selected/china-launch-poster.jpg" alt="中国载人发射主题海报">
+                <div class="caption">内容主线：任务起点 → 训练准备 → 在轨生活 → 返回恢复 → 历史与精神。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="agenda" class="slide" data-step="02">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">内容框架</span>
+            <span class="pace">六个问题</span>
+          </div>
+          <h2>40 分钟，分成 6 个问题来讲</h2>
+          <p class="lede"><strong>载人航天不是“飞上去”那么简单，而是一整套极端环境中的系统工程。</strong>把任务拆开之后，可以看到它同时涉及历史积累、工程能力、人体适应和团队协同。</p>
+
+          <div class="agenda-grid">
+            <article class="agenda-card">
+              <strong>01</strong>
+              <h3>先把人安全送上去</h3>
+              <p>火箭、飞船、逃逸系统和地面支持，决定了任务能不能开始。</p>
+              <span class="agenda-meta">任务起点</span>
+            </article>
+            <article class="agenda-card">
+              <strong>02</strong>
+              <h3>为什么要经过高强度选拔与训练</h3>
+              <p>上天前必须把风险尽可能消灭在地面，把动作练成条件反射。</p>
+              <span class="agenda-meta">训练体系</span>
+            </article>
+            <article class="agenda-card">
+              <strong>03</strong>
+              <h3>在轨“衣食住行”如何重新设计</h3>
+              <p>吃饭、喝水、睡觉、如厕、锻炼，在微重力下都不再是地面版本。</p>
+              <span class="agenda-meta">在轨生活</span>
+            </article>
+            <article class="agenda-card">
+              <strong>04</strong>
+              <h3>宇航员在太空里究竟忙什么</h3>
+              <p>科学实验、站务维护、出舱准备、天地协同，决定这趟飞行的价值。</p>
+              <span class="agenda-meta">任务执行</span>
+            </article>
+            <article class="agenda-card">
+              <strong>05</strong>
+              <h3>回来为什么也很难</h3>
+              <p>再入大气层、开伞减速、着陆回收，以及重新适应地球重力。</p>
+              <span class="agenda-meta">返回恢复</span>
+            </article>
+            <article class="agenda-card">
+              <strong>06</strong>
+              <h3>航天历史与精神谱系</h3>
+              <p>从火箭起源到空间站时代，再到航天精神的形成，看到这条道路如何延展。</p>
+              <span class="agenda-meta">历史与精神</span>
+            </article>
+          </div>
+
+          <div class="highlight">整场汇报的核心不是罗列知识点，而是用一条完整任务链解释：人类为什么能够安全进入太空、在太空工作，并把人平安带回地球。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="system" class="slide" data-step="03">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">任务全景</span>
+            <span class="pace">四大环节</span>
+          </div>
+          <div class="two-col-strong">
+            <div>
+              <h2>先看全局：一次载人飞行至少要同时解决四件事</h2>
+              <div class="metric-grid">
+                <article class="metric">
+                  <strong>1</strong>
+                  <h3>把人送上去</h3>
+                  <p>运载火箭负责推力，逃逸系统负责最坏情况下的“兜底”。</p>
+                </article>
+                <article class="metric">
+                  <strong>2</strong>
+                  <h3>让人在轨活下来</h3>
+                  <p>飞船和空间站要提供氧气、水、热控、电力、通信与基本居住条件。</p>
+                </article>
+                <article class="metric">
+                  <strong>3</strong>
+                  <h3>让任务真正有产出</h3>
+                  <p>科学实验、设备维护、出舱作业和数据回传，都是任务价值所在。</p>
+                </article>
+                <article class="metric">
+                  <strong>4</strong>
+                  <h3>把人平安带回来</h3>
+                  <p>返回舱、防热、降落伞和回收系统共同构成最后一道关键链路。</p>
+                </article>
+              </div>
+              <div class="source-strip">载人任务真正考验的，不是某一个单点设备，而是从发射到回收的整条任务链能否闭环运行。</div>
+            </div>
+
+            <div class="figure">
+              <div class="figure-frame contain-frame">
+                <img src="space_report_assets/selected/shenzhou-cutaway.jpg" alt="神舟飞船剖面示意图">
+              </div>
+              <div class="figure-caption"><strong>飞船不是一个“太空胶囊”那么简单。</strong>推进舱、返回舱、轨道舱各自承担能源、控制、居住和返回职责，真正让“人”变成可以在轨工作的人。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="selection" class="slide" data-step="04">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">选拔标准</span>
+            <span class="pace">综合素质</span>
+          </div>
+          <div class="two-col">
+            <div>
+              <h2>宇航员选拔看重的，不是单项最强，而是综合最稳</h2>
+              <div class="cards">
+                <article class="card">
+                  <span class="card-label">专业背景</span>
+                  <h3>工程、飞行、医学、科研</h3>
+                  <p>宇航员要理解设备、看懂流程、执行实验，专业基础决定理解上限。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">身体条件</span>
+                  <h3>抗加速度、抗失重、抗封闭</h3>
+                  <p>火箭发射、长期在轨、再入着陆，对心肺、前庭和平衡系统都有挑战。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">心理素质</span>
+                  <h3>稳定、冷静、可长期协作</h3>
+                  <p>密闭空间里最怕情绪失控，真正重要的是能不能在压力下持续稳定工作。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">团队协同</span>
+                  <h3>服从流程，也能互相补位</h3>
+                  <p>在轨任务没有“单打独斗”，每一次操作都需要与同伴和地面形成闭环。</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="figure">
+              <div class="figure-frame">
+                <img src="space_report_assets/selected/crew-training-standup.jpg" alt="宇航员训练准备场景">
+              </div>
+              <div class="figure-caption"><strong>选拔的终点不是“能不能飞”，而是“飞上去之后能不能稳定地完成任务”。</strong>这和普通探险最大的区别，是任务属性远大于个人英雄主义。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="training" class="slide" data-step="05">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">训练体系</span>
+            <span class="pace">地面验证</span>
+          </div>
+          <div class="two-col-strong">
+            <div>
+              <h2>真正难的是训练：把尽可能多的问题留在地面解决</h2>
+              <div class="eyeline">
+                <div class="line">
+                  <strong>1</strong>
+                  <div><p><strong>舱外服与设备训练：</strong>宇航员不仅要会穿、会用，还要把每一个动作练到“几乎不用思考”。</p></div>
+                </div>
+                <div class="line">
+                  <strong>2</strong>
+                  <div><p><strong>座椅与发射适应：</strong>发射和返回都伴随强加速度，姿态、呼吸和操作要提前适应。</p></div>
+                </div>
+                <div class="line">
+                  <strong>3</strong>
+                  <div><p><strong>失重环境熟悉：</strong>真正上站前，必须先理解身体和物体在失重中的反应方式。</p></div>
+                </div>
+                <div class="line">
+                  <strong>4</strong>
+                  <div><p><strong>应急预案演练：</strong>火灾、失压、设备故障、医疗急救，都要先练成流程再上天。</p></div>
+                </div>
+              </div>
+              <div class="highlight">训练的目标不是“把动作做对一次”，而是把错误率压到最低，并让人在压力下仍然能保持流程意识。</div>
+            </div>
+
+            <div class="gallery-grid">
+              <div class="figure">
+                <div class="figure-frame short">
+                  <img src="space_report_assets/selected/spacesuit-training.jpg" alt="宇航服训练服展示">
+                </div>
+                <div class="figure-caption">舱外服本身就是一套复杂生命保障系统。</div>
+              </div>
+              <div class="figure">
+                <div class="figure-frame short">
+                  <img src="space_report_assets/selected/crew-training-seat.jpg" alt="宇航员座椅适应训练">
+                </div>
+                <div class="figure-caption">发射与返回阶段，人体姿态和负荷都必须提前适应。</div>
+              </div>
+              <div class="figure">
+                <div class="figure-frame short">
+                  <img src="space_report_assets/selected/zero-g-plane.jpg" alt="失重飞行训练场景">
+                </div>
+                <div class="figure-caption">失重训练的重点，是熟悉“动作失去地面直觉”后的新规则。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="station" class="slide" data-step="06">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">空间站生活</span>
+            <span class="pace">生命保障</span>
+          </div>
+          <div class="two-col-strong">
+            <div class="figure">
+              <div class="figure-frame">
+                <img src="space_report_assets/selected/interior-working.jpg" alt="宇航员在空间站内部工作">
+              </div>
+              <div class="duo-figure">
+                <div class="figure-frame short">
+                  <img src="space_report_assets/selected/module-interior.jpg" alt="空间站舱内环境">
+                </div>
+                <div class="figure-caption"><strong>空间站首先是一套生命保障系统。</strong>只有空气、水、电、热控、通信稳定工作，后续的实验和生活才有可能展开。</div>
+              </div>
+            </div>
+
+            <div>
+              <h2>到站后先解决的，不是浪漫感，而是“家”如何稳定运转</h2>
+              <ul class="list">
+                <li><strong>居住区：</strong>睡袋、个人物品、私密空间都要重新定义，因为“墙”和“天花板”在失重中没有固定意义。</li>
+                <li><strong>工作区：</strong>电脑、实验机柜、操作台和工具都必须可固定、可回收、可快速切换任务。</li>
+                <li><strong>运动区：</strong>跑步机、自行车和抗阻装置不是福利，而是日常健康维护的核心设备。</li>
+                <li><strong>医疗与应急区：</strong>药品、监测设备、应急预案必须随时可用，不能等到出问题再找。</li>
+              </ul>
+              <div class="source-strip">空间站的“家居感”来自严密的生命保障与资源管理，而不是地面意义上的舒适装修。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="food" class="slide" data-step="07">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">饮食系统</span>
+            <span class="pace">补给与营养</span>
+          </div>
+          <div class="two-col">
+            <div class="figure">
+              <div class="figure-frame contain-frame">
+                <img src="space_report_assets/selected/space-food.jpg" alt="太空餐示意图">
+              </div>
+              <div class="figure-caption"><strong>太空餐首先要解决安全，再去追求丰富。</strong>不能掉渣、不能乱漂、便于复水加热、利于长期保存，都是设计前提。</div>
+            </div>
+
+            <div>
+              <h2>吃什么：太空餐并不神秘，但每一口都经过“环境重写”</h2>
+              <div class="cards">
+                <article class="card">
+                  <span class="card-label">复水</span>
+                  <h3>食物要便于加水恢复</h3>
+                  <p>因为在轨储运和处理空间有限，复水食品比“现场烹饪”更可控。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">加热</span>
+                  <h3>流程简单、步骤固定</h3>
+                  <p>宇航员不是厨师，太空餐的设计重点是快速、安全、少失误。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">营养</span>
+                  <h3>长期任务必须讲均衡</h3>
+                  <p>高强度任务和失重环境下，能量、蛋白质、微量元素都不能随意波动。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">情绪</span>
+                  <h3>食物也是心理支持的一部分</h3>
+                  <p>任务周期越长，食物的口味、熟悉感和仪式感越重要。</p>
+                </article>
+              </div>
+              <div class="highlight">在地面我们觉得“吃饭”是本能；在太空，吃饭是一套被工程化和流程化的动作系统。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sleep" class="slide" data-step="08">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">日常细节</span>
+            <span class="pace">洗漱睡眠</span>
+          </div>
+          <div class="two-col">
+            <div>
+              <h2>洗漱、如厕、睡眠都要重新发明</h2>
+              <ul class="list">
+                <li><strong>洗漱：</strong>用水量受限，动作要防止液滴漂浮，很多步骤要借助纸巾、湿巾和专门容器完成。</li>
+                <li><strong>如厕：</strong>依赖气流导向和收集系统，而不是地面靠重力的自然下落逻辑。</li>
+                <li><strong>睡眠：</strong>睡袋固定在舱壁，重点不是“躺平”，而是防止身体无控制漂移和碰撞。</li>
+                <li><strong>节律：</strong>航天员需要依靠灯光、任务安排和天地协同保持稳定作息，不能让生物钟散掉。</li>
+              </ul>
+              <div class="highlight">微重力环境会把最平凡的日常变成一个个“小工程问题”。也正因此，太空生活最能说明航天是系统工程。</div>
+            </div>
+
+            <div class="figure">
+              <div class="figure-frame tall contain-frame">
+                <img src="space_report_assets/selected/space-toilet.jpg" alt="太空如厕原理示意图">
+              </div>
+              <div class="figure-caption"><strong>如厕系统最能说明太空生活的工程化特征。</strong>在地面依赖重力完成的动作，在轨道上要靠气流、结构和流程共同接管。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="exercise" class="slide" data-step="09">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">健康维护</span>
+            <span class="pace">在轨锻炼</span>
+          </div>
+          <div class="two-col">
+            <div>
+              <h2>每天都要运动，因为失重会悄悄改造身体</h2>
+              <div class="cards">
+                <article class="card">
+                  <span class="card-label">有氧</span>
+                  <h3>维持心肺耐力</h3>
+                  <p>发射、在轨工作和返回后的恢复，都要求航天员保持基础耐力。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">抗阻</span>
+                  <h3>对抗肌肉与骨骼退化</h3>
+                  <p>失重意味着“身体不用托着自己”，久而久之肌肉和骨量都会下降。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">柔韧</span>
+                  <h3>让动作保持可控</h3>
+                  <p>在狭小舱内工作，动作控制和关节状态都要保持在稳定区间。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">心理</span>
+                  <h3>运动也是情绪管理</h3>
+                  <p>长期封闭环境里，运动能帮助恢复节律，减轻疲劳和心理压力。</p>
+                </article>
+              </div>
+              <div class="source-strip">运动、营养、作息和医学监测共同构成在轨健康维护闭环，任何一环缺失都会放大失重带来的影响。</div>
+            </div>
+
+            <div class="quote-box">
+              <blockquote>在太空里，运动不是加分项，而是维持工作能力和返回能力的生命线。</blockquote>
+              <p>失重减少了肌肉和骨骼承受的机械刺激，因此必须通过制度化训练，把地面环境中天然存在的负荷补回来。</p>
+              <div class="hero-tip">长期任务越长，越能看出日常锻炼、稳定作息和身体监测的重要性。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="health" class="slide" data-step="10">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">微重力影响</span>
+            <span class="pace">人体变化</span>
+          </div>
+          <h2>失重带来的，不是轻松，而是另一套生理学</h2>
+          <div class="compare-grid">
+            <article class="compare-card">
+              <span class="tiny-label">体液分布</span>
+              <h3>脸更肿、头更胀</h3>
+              <p>失重会让体液向上半身重新分布，人的感觉与地面完全不同。</p>
+            </article>
+            <article class="compare-card">
+              <span class="tiny-label">肌肉骨骼</span>
+              <h3>不用力，反而更危险</h3>
+              <p>长期失去负重刺激，肌肉会萎缩，骨量会流失，这也是为何锻炼要制度化。</p>
+            </article>
+            <article class="compare-card">
+              <span class="tiny-label">视觉与平衡</span>
+              <h3>身体感知会重写</h3>
+              <p>空间定向、平衡感和视觉体验都要重新适应，返回地球后也需要恢复时间。</p>
+            </article>
+          </div>
+          <div class="cards">
+            <article class="card">
+              <span class="card-label">辐射</span>
+              <h3>空间环境比地面更“硬”</h3>
+              <p>辐射监测、防护材料和任务窗口选择，都是长期在轨绕不开的问题。</p>
+            </article>
+            <article class="card">
+              <span class="card-label">心理</span>
+              <h3>封闭环境会放大情绪</h3>
+              <p>航天员既要执行技术任务，也要管理自己的情绪和团队关系。</p>
+            </article>
+          </div>
+          <div class="highlight">所以“宇航员在太空中如何生活”并不是一个轻松的科普题，而是关于人体、环境和工程如何互相适配的问题。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day" class="slide" data-step="11">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">在轨日程</span>
+            <span class="pace">一天流程</span>
+          </div>
+          <div class="two-col-strong">
+            <div>
+              <h2>宇航员的一天，高度程式化，但每一分钟都很贵</h2>
+              <div class="timeline">
+                <article class="timeline-card">
+                  <span class="year">晨间</span>
+                  <h3>状态检查</h3>
+                  <p>先看身体、看任务计划、看设备状态，一天从检查开始。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">上午</span>
+                  <h3>实验与操作</h3>
+                  <p>执行当天的实验方案、站务维护和设备切换。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">中段</span>
+                  <h3>天地沟通</h3>
+                  <p>和地面团队对表、汇报问题、更新后续步骤。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">下午</span>
+                  <h3>整理与复核</h3>
+                  <p>把样品、工具和记录重新固定，避免下一轮任务受影响。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">固定</span>
+                  <h3>锻炼</h3>
+                  <p>再忙也要挪出专门时间运动，这属于必须完成的任务。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">夜间</span>
+                  <h3>休息与节律维持</h3>
+                  <p>睡眠并不是“放空”，而是为第二天继续高强度任务做准备。</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="figure">
+              <div class="figure-frame contain-frame">
+                <img src="space_report_assets/selected/orbit-mission.jpg" alt="空间任务示意图">
+              </div>
+              <div class="figure-caption"><strong>太空生活的关键字是“计划性”。</strong>在轨道上，每一次任务变更都会影响系统资源、时间窗口和地面协同。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tasks" class="slide" data-step="12">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">任务执行</span>
+            <span class="pace">科学与维护</span>
+          </div>
+          <div class="two-col">
+            <div>
+              <h2>宇航员在太空里不是“待着”，而是在持续工作</h2>
+              <div class="cards">
+                <article class="card">
+                  <span class="card-label">实验研究</span>
+                  <h3>把轨道变成实验室</h3>
+                  <p>微重力条件下，一些流体、材料和生命现象与地面完全不同。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">设备维护</span>
+                  <h3>空间站也要“物业管理”</h3>
+                  <p>滤芯、电路、计算设备、机柜和接口都要定期检查和更换。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">物资转运</span>
+                  <h3>每一件东西都要有去处</h3>
+                  <p>货物上行、样品回收、垃圾处理，都在空间受限条件下进行。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">天地协同</span>
+                  <h3>宇航员从不脱离地面团队</h3>
+                  <p>地面控制、科研团队和工程团队始终在线，形成完整的任务闭环。</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="figure">
+              <div class="figure-frame">
+                <img src="space_report_assets/selected/interior-working.jpg" alt="宇航员在空间站工作">
+              </div>
+              <div class="figure-caption"><strong>航天员是空间站里的“综合岗位操作员”。</strong>他既要像工程师一样可靠，也要像实验员一样细致，还要有极强的流程纪律。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiment" class="slide" data-step="13">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">科研价值</span>
+            <span class="pace">为什么上天做</span>
+          </div>
+          <h2>为什么一些实验非得搬到太空里做</h2>
+          <div class="compare-grid">
+            <article class="compare-card">
+              <span class="tiny-label">流体与燃烧</span>
+              <h3>少了重力干扰，现象会“露出原形”</h3>
+              <p>地面很多现象总被对流和沉降掩盖，而在轨道上能看到更纯粹的物理过程。</p>
+            </article>
+            <article class="compare-card">
+              <span class="tiny-label">材料与结晶</span>
+              <h3>微结构更值得研究</h3>
+              <p>材料形成过程对重力很敏感，轨道环境能提供不同的生长与分层条件。</p>
+            </article>
+            <article class="compare-card">
+              <span class="tiny-label">生命与医学</span>
+              <h3>人体响应本身就是研究对象</h3>
+              <p>宇航员如何适应失重，也反过来帮助我们理解人体机制和地面医学问题。</p>
+            </article>
+          </div>
+          <div class="highlight">如果把空间站只理解为“住人的地方”，就低估了它。它更像一个把极端环境转化为科研条件的轨道实验平台。</div>
+          <div class="source-strip">空间站的价值不仅在于“有人驻留”，更在于它把极端环境转化为可持续、可重复、可积累的数据平台。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="eva" class="slide" data-step="14">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">舱外作业</span>
+            <span class="pace">风险控制</span>
+          </div>
+          <div class="two-col">
+            <div class="figure">
+              <div class="figure-frame tall">
+                <img src="space_report_assets/selected/spacesuit-training.jpg" alt="舱外航天服训练展示">
+              </div>
+              <div class="figure-caption"><strong>舱外服本身就是“个人飞船”。</strong>它要提供气密、供氧、散热、通信和操作自由度，宇航员出舱其实是在穿着一套生命保障系统工作。</div>
+            </div>
+
+            <div>
+              <h2>最硬核的任务：出舱活动与应急处置</h2>
+              <ul class="list">
+                <li><strong>出舱活动：</strong>维修、更换、安装或测试舱外设备，对动作精度和时间窗口要求极高。</li>
+                <li><strong>任务清单：</strong>每一步几乎都要按预案执行，因为舱外没有“试试看”的空间。</li>
+                <li><strong>应急处置：</strong>失压、火灾、设备故障或身体异常，都必须按地面演练过的步骤快速响应。</li>
+                <li><strong>天地协同：</strong>宇航员在前端执行，真正支撑他的是后方完整的工程团队和地面判断链路。</li>
+              </ul>
+              <div class="highlight">越是高风险环节，越看不见“个人即兴发挥”，看见的更多是训练、制度、流程和团队支持。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="return" class="slide" data-step="15">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">返回流程</span>
+            <span class="pace">分离再入</span>
+          </div>
+          <div class="two-col-strong">
+            <div class="figure">
+              <div class="figure-frame contain-frame">
+                <img src="space_report_assets/selected/shenzhou-return-flow.jpg" alt="神舟飞船返回流程示意图">
+              </div>
+              <div class="figure-caption"><strong>返回不是“掉下来”，而是一整套精密受控的减速与分离流程。</strong>只要有一步处理不好，前面所有任务成果都可能失去意义。</div>
+            </div>
+
+            <div>
+              <h2>回来为什么也很难：真正的关键在系统协同</h2>
+              <div class="eyeline">
+                <div class="line">
+                  <strong>1</strong>
+                  <div><p><strong>撤离与准备：</strong>整理样品和设备，进入返回状态，确认返回舱工作正常。</p></div>
+                </div>
+                <div class="line">
+                  <strong>2</strong>
+                  <div><p><strong>分离与再入：</strong>服务舱分离后，返回舱按预定姿态切入大气层。</p></div>
+                </div>
+                <div class="line">
+                  <strong>3</strong>
+                  <div><p><strong>高热与黑障：</strong>再入阶段既要承受极高热流，也要经历短时通信受限。</p></div>
+                </div>
+                <div class="line">
+                  <strong>4</strong>
+                  <div><p><strong>开伞与着陆：</strong>速度要多级减下来，着陆后还要迅速展开回收和医学检查。</p></div>
+                </div>
+              </div>
+              <div class="source-strip">返回任务把轨道飞行转换成地面安全着陆，真正考验的是轨道控制、热防护、减速和回收的全过程协同。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reentry" class="slide" data-step="16">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">再入减速</span>
+            <span class="pace">高热防护</span>
+          </div>
+          <div class="two-col">
+            <div class="duo-figure">
+              <div class="figure">
+                <div class="figure-frame contain-frame">
+                  <img src="space_report_assets/selected/reentry-heating.jpg" alt="返回舱再入大气层高热示意图">
+                </div>
+                <div class="figure-caption">再入阶段最大的关键词是<strong>高热</strong>。</div>
+              </div>
+              <div class="figure">
+                <div class="figure-frame contain-frame">
+                  <img src="space_report_assets/selected/parachute-descent.jpg" alt="返回舱降落伞减速示意图">
+                </div>
+                <div class="figure-caption">开伞阶段最大的关键词是<strong>减速</strong>。</div>
+              </div>
+            </div>
+
+            <div>
+              <h2>真正的硬仗在再入：高温、姿态控制、减速一环都不能少</h2>
+              <div class="cards">
+                <article class="card">
+                  <span class="card-label">防热</span>
+                  <h3>返回舱要扛住高热冲刷</h3>
+                  <p>大气再入时的热环境极端，防热结构和材料设计是保命底线。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">姿态</span>
+                  <h3>不是随便“烧回来”</h3>
+                  <p>返回姿态一旦偏差过大，热流分布和减速过程都会变得危险。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">降落伞</span>
+                  <h3>减速要分级完成</h3>
+                  <p>不是一把伞解决全部问题，而是一套次序严密的减速逻辑。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">回收</span>
+                  <h3>落地后立刻进入回收链路</h3>
+                  <p>地面搜救和医学保障必须迅速跟上，把“安全返回”真正闭环完成。</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recovery" class="slide" data-step="17">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">返回恢复</span>
+            <span class="pace">重力再适应</span>
+          </div>
+          <div class="two-col">
+            <div>
+              <h2>落地不等于结束：重新适应地球，也是任务的一部分</h2>
+              <ul class="list">
+                <li><strong>重力再适应：</strong>在轨长期微重力后，重新面对地球重力，航天员可能会出现眩晕、乏力和不适。</li>
+                <li><strong>医学观察：</strong>心血管、肌肉骨骼、前庭平衡和睡眠状态都要持续评估。</li>
+                <li><strong>任务收口：</strong>除了照顾人本身，还要及时转运样品、回收数据、复盘操作记录。</li>
+                <li><strong>心理切换：</strong>从高度紧张的任务状态回到地面生活，同样需要一个过渡过程。</li>
+              </ul>
+              <div class="highlight">重新适应地球重力的过程，说明载人航天并不是一次简单往返，而是一场跨环境的人体适应实验。</div>
+            </div>
+
+            <div class="duo-figure">
+              <div class="figure">
+                <div class="figure-frame">
+                  <img src="space_report_assets/selected/capsule-landing-1.jpg" alt="返回舱着陆后现场照片">
+                </div>
+                <div class="figure-caption">着陆后，返回舱并不是“终点”，而是回收工作的起点。</div>
+              </div>
+              <div class="figure">
+                <div class="figure-frame">
+                  <img src="space_report_assets/selected/capsule-landing-2.jpg" alt="返回舱回收现场照片">
+                </div>
+                <div class="figure-caption">回收、体检、恢复，是“安全返回”的完整闭环。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="history" class="slide" data-step="18">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">航天历史</span>
+            <span class="pace">世界航天</span>
+          </div>
+          <div class="two-col">
+            <div>
+              <h2>航天史的主线，是不断突破“更快、更远、更稳”的能力边界</h2>
+              <div class="cards">
+                <article class="card">
+                  <span class="card-label">起源</span>
+                  <h3>从火药火箭到现代航天</h3>
+                  <p>古代火箭解决了“喷气推进”的原始想象，现代液体火箭才真正打开了航天时代的大门。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">起点</span>
+                  <h3>卫星上天改写了人类尺度</h3>
+                  <p>第一颗人造卫星进入轨道，意味着人类开始具备稳定抵达太空的能力。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">跨越</span>
+                  <h3>载人飞行把“机器飞”变成“人能去”</h3>
+                  <p>从加加林进入太空，到登月成功，航天史开始同时面对人体适应与工程控制两条难线。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">延展</span>
+                  <h3>空间站时代强调长期任务</h3>
+                  <p>真正的成熟不是飞一次，而是能够长期运营、持续补给、稳定执行实验并安全返回。</p>
+                </article>
+              </div>
+              <div class="highlight">航天历史真正改变的，不只是飞行高度，而是人类把短时抵达太空逐步发展成长期利用太空的能力。</div>
+            </div>
+
+            <div class="figure">
+              <div class="gallery-grid tight">
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/history-origin-slide.png" alt="火箭起源参考页截图">
+                  </div>
+                  <div class="figure-caption">火箭起源：从古代火药火箭到现代航天理论，推进方式不断演化。</div>
+                </div>
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/history-satellite-slide.png" alt="人造卫星历史参考页截图">
+                  </div>
+                  <div class="figure-caption">第一颗人造卫星：把“进入轨道”变成人类工程能力的一部分。</div>
+                </div>
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/history-gagarin-slide.png" alt="首次载人航天参考页截图">
+                  </div>
+                  <div class="figure-caption">首次载人飞行：航天从无人探测迈向人体参与的新时代。</div>
+                </div>
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/history-moon-slide.png" alt="人类登月参考页截图">
+                  </div>
+                  <div class="figure-caption">登月任务：展示了推进、导航、返回与组织能力的综合跃升。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="milestones" class="slide" data-step="19">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">中国载人航天</span>
+            <span class="pace">稳定运营</span>
+          </div>
+          <div class="two-col-strong">
+            <div>
+              <h2>中国载人航天，正在把“能飞”升级为“长期稳定在轨运行”</h2>
+              <div class="milestone-grid compact-grid">
+                <article class="timeline-card">
+                  <span class="year">1970</span>
+                  <h3>东方红一号</h3>
+                  <p>中国第一颗人造卫星发射成功，航天工程迈出标志性一步。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">2003</span>
+                  <h3>神舟五号</h3>
+                  <p>首次载人飞行成功，独立开展载人航天能力形成。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">2008</span>
+                  <h3>神舟七号</h3>
+                  <p>首次空间出舱活动，把任务推进到“在轨作业”。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">2012</span>
+                  <h3>神舟九号</h3>
+                  <p>首次载人交会对接成功，组合体运行取得关键突破。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">2022</span>
+                  <h3>空间站建成</h3>
+                  <p>天和、问天、梦天形成基本构型，长期在轨平台落地。</p>
+                </article>
+                <article class="timeline-card">
+                  <span class="year">持续推进</span>
+                  <h3>常态化运营</h3>
+                  <p>轮换、补给、出舱和实验任务进入稳定阶段。</p>
+                </article>
+              </div>
+              <div class="source-strip">从“能飞一次”到“能稳定运营空间站”，背后提升的不只是装备，还有流程成熟度、组织能力与任务体系。</div>
+            </div>
+
+            <div class="figure">
+              <div class="duo-figure compact-duo">
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/milestone-panel.png" alt="中国载人航天里程碑参考页截图">
+                  </div>
+                  <div class="figure-caption">中国载人航天关键节点串联起来，可以看到能力从飞船到空间站持续扩展。</div>
+                </div>
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/rocket-family.jpg" alt="中国火箭家族示意图">
+                  </div>
+                  <div class="figure-caption">运载能力的持续升级，是长期载人任务、深空探测和大规模在轨工程的底座。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="spirit" class="slide" data-step="20">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">航天精神</span>
+            <span class="pace">载人任务</span>
+          </div>
+          <div class="two-col">
+            <div class="figure">
+              <div class="figure-frame contain-frame">
+                <img src="space_report_assets/selected/spirit-panel.png" alt="载人航天精神参考页截图">
+              </div>
+              <div class="figure-caption"><strong>载人航天精神通常概括为四个“特别能”。</strong>这不是抽象口号，而是高风险任务对团队能力、组织纪律和长期投入的真实要求。</div>
+            </div>
+
+            <div>
+              <h2>载人航天精神，强调的是在极端任务中把难事做成的能力</h2>
+              <div class="cards">
+                <article class="card">
+                  <span class="card-label">特别能吃苦</span>
+                  <h3>长期准备，不靠一时兴奋</h3>
+                  <p>载人航天没有“临场发挥式成功”，只有年复一年的积累和打磨。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">特别能战斗</span>
+                  <h3>关键窗口不允许掉链子</h3>
+                  <p>发射、对接、出舱、返回，每一个关键时刻都需要团队顶得上。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">特别能攻关</span>
+                  <h3>真正的难题总在边界处出现</h3>
+                  <p>极端环境中的工程，几乎注定会碰到新问题，攻关能力决定天花板。</p>
+                </article>
+                <article class="card">
+                  <span class="card-label">特别能奉献</span>
+                  <h3>载人航天从来不是某一个人的胜利</h3>
+                  <p>看见的是航天员，背后站着的是无数工程师、科研人员和保障团队。</p>
+                </article>
+              </div>
+              <div class="highlight">宇航员在太空中的生活方式，最终反映的不是个人技巧，而是一个任务体系能否长期稳定地支撑人进入太空、利用太空、返回地球。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lineage" class="slide" data-step="21">
+      <div class="wrap slide-shell">
+        <div class="shell-body">
+          <div class="kicker-row">
+            <span class="kicker">精神谱系</span>
+            <span class="pace">传承延展</span>
+          </div>
+          <div class="two-col-strong">
+            <div>
+              <h2>中国航天的发展，也形成了随着任务升级不断延展的精神谱系</h2>
+              <ul class="list">
+                <li><strong>两弹一星精神：</strong>热爱祖国、无私奉献、自力更生、艰苦奋斗，为中国航天打下早期精神底色。</li>
+                <li><strong>载人航天精神：</strong>特别能吃苦、特别能战斗、特别能攻关、特别能奉献，把高风险任务的组织要求沉淀成系统方法。</li>
+                <li><strong>探月精神：</strong>追逐梦想、勇于探索、协同攻坚、合作共赢，把中国航天从近地轨道推向更远空间。</li>
+                <li><strong>新时代北斗精神：</strong>自主创新、开放融合、万众一心、追求卓越，体现航天能力向国家基础设施和社会应用延展。</li>
+              </ul>
+              <div class="highlight">精神谱系不是孤立背诵的口号，而是不同时代在面对不同任务时形成的共同价值取向和工作作风。</div>
+            </div>
+
+            <div class="figure">
+              <div class="gallery-grid tight">
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/spirit-two-bombs-slide.png" alt="两弹一星精神参考页截图">
+                  </div>
+                  <div class="figure-caption"><strong>两弹一星精神：</strong>国家起步阶段的奠基力量。</div>
+                </div>
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/spirit-panel.png" alt="载人航天精神参考页截图">
+                  </div>
+                  <div class="figure-caption"><strong>载人航天精神：</strong>高风险任务中的团队纪律与攻关能力。</div>
+                </div>
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/spirit-lunar-slide.png" alt="探月精神参考页截图">
+                  </div>
+                  <div class="figure-caption"><strong>探月精神：</strong>面向深空目标的探索气质。</div>
+                </div>
+                <div class="figure">
+                  <div class="figure-frame short contain-frame">
+                    <img src="space_report_assets/selected/spirit-beidou-slide.png" alt="北斗精神参考页截图">
+                  </div>
+                  <div class="figure-caption"><strong>新时代北斗精神：</strong>把航天能力转化为国家级基础设施。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="source-strip">从两弹一星到载人航天、探月工程和北斗系统，航天精神并不是单一口号，而是一条随着任务升级不断扩展的精神谱系。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="closing" class="slide slide--closing" data-step="22">
+      <div class="closing-bg"></div>
+      <div class="closing-panel">
+        <div class="kicker-row">
+          <span class="kicker">总结</span>
+          <span class="pace">三点结论</span>
+        </div>
+        <h2>三点结论</h2>
+        <div class="takeaways">
+          <article class="takeaway">
+            <h3>1. 宇航员不是“漂在天上的人”</h3>
+            <p>他们是极端环境里的系统操作员，必须靠训练、流程和装备一起工作。</p>
+          </article>
+          <article class="takeaway">
+            <h3>2. 太空生活的本质是重新设计日常</h3>
+            <p>吃饭、睡觉、如厕、锻炼、实验和返回，每一项都需要围绕微重力重做一遍。</p>
+          </article>
+          <article class="takeaway">
+            <h3>3. 每一次平安往返，背后都是国家能力</h3>
+            <p>从火箭到飞船，从空间站到回收体系，再到团队精神，这是一整套系统工程。</p>
+          </article>
+        </div>
+        <div class="ref-list">
+          <span>参考：宇航员在太空中如何生活.pptx</span>
+          <span>参考：钱航-载人航天工程(公开).ppt</span>
+          <span>参考：探索航天奥秘 弘扬航天精神.pptx</span>
+        </div>
+        <p class="footer-note">从火箭起飞到返回回收，从航天历史到精神谱系，载人航天展示的是一种把高风险任务长期、稳定、成体系完成的能力。</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const sections = [...document.querySelectorAll("main .slide")];
+    const navLinks = [...document.querySelectorAll(".nav-rail a")];
+    const progressBar = document.querySelector(".progress span");
+
+    const sectionByHash = (hash) => sections.find((section) => `#${section.id}` === hash);
+
+    const syncState = () => {
+      const checkpoint = window.innerHeight * 0.45;
+      let activeIndex = 0;
+
+      sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= checkpoint && rect.bottom >= checkpoint) {
+          activeIndex = index;
+        }
+      });
+
+      navLinks.forEach((link, index) => {
+        link.classList.toggle("active", index === activeIndex);
+      });
+
+      const percent = ((activeIndex + 1) / sections.length) * 100;
+      progressBar.style.width = `${percent}%`;
+    };
+
+    const scrollToIndex = (index) => {
+      const clamped = Math.max(0, Math.min(index, sections.length - 1));
+      sections[clamped].scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    document.addEventListener("keydown", (event) => {
+      const activeIndex = navLinks.findIndex((link) => link.classList.contains("active"));
+      if (["ArrowDown", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        scrollToIndex(activeIndex + 1);
+      }
+      if (["ArrowUp", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        scrollToIndex(activeIndex - 1);
+      }
+      if (event.key === "Home") {
+        event.preventDefault();
+        scrollToIndex(0);
+      }
+      if (event.key === "End") {
+        event.preventDefault();
+        scrollToIndex(sections.length - 1);
+      }
+    });
+
+    window.addEventListener("scroll", syncState, { passive: true });
+    window.addEventListener("resize", syncState);
+    window.addEventListener("load", () => {
+      syncState();
+      const target = sectionByHash(window.location.hash);
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: "auto", block: "start" });
+          syncState();
+        }, 300);
+      }
+    });
+  </script>
+</body>
+</html>

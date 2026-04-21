@@ -1,9 +1,2118 @@
 {
-  "generated_at": "2026-04-17T02:45:18.241902+00:00",
+  "generated_at": "2026-04-21T15:01:13.546883+00:00",
   "report_root": "D:\\files\\Obsidian\\2_Research\\arxiv-files",
   "interpretation_dir": "D:\\files\\Obsidian\\2_Research\\arxiv-files\\Interpretation",
-  "paper_count": 1504,
+  "paper_count": 1532,
   "papers": [
+    {
+      "entry_id": "2604.18564v1",
+      "slug": "2604.18564v1-multiworld-scalable-multi-agent-multi-view-video-world-models",
+      "title": "MultiWorld: Scalable Multi-Agent Multi-View Video World Models",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18564v1",
+      "date": "2026-04-21",
+      "dates": [
+        "2026-04-21"
+      ],
+      "track_keys": [
+        "world-model"
+      ],
+      "track_names": [
+        "World Model"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "authors": [
+        "Haoyu Wu",
+        "Jiwen Yu",
+        "Yingtian Zou",
+        "Xihui Liu"
+      ],
+      "summary_status": "已总结",
+      "institution": "The University of Hong Kong; Sreal AI",
+      "essence": "这篇论文把传统单智能体视频 world model 扩展成一个可同时控制多主体、并保持多视角一致性的统一生成框架，目标是让 world model 真正贴近真实多体系统。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 现有视频 world model 往往假设单智能体与单视角，擅长生成“一个 agent 在一个视角下的未来”。",
+        "核心痛点： 现实环境中的交互常常是多智能体、多视角且强耦合的，单视角模型既难描述交互，也难保证不同相机视角的全局一致性。",
+        "本文切入点： 用统一框架同时建模多 agent 条件控制和多 view 全局状态，把“可控性”与“跨视角一致性”一起作为世界建模目标。"
+      ],
+      "insight_points": [
+        "world model 的真实难点在交互而不只是预测： 一旦进入多主体场景，模型不仅要会“看见未来”，还要会区分是谁影响了谁。",
+        "多视角一致性是走向可用仿真的关键约束： 如果不同视角互相矛盾，再高的单视角清晰度也无法支撑规划和评测。",
+        "这条路线很适合多机器人与博弈环境： 它把视频生成、交互建模和控制条件统一起来，应用边界明显比传统单体模型更广。"
+      ],
+      "next_steps": [
+        "引入更强结构先验： 结合场景图、对象状态或物理约束，进一步提升多主体交互的可解释性和稳定性。",
+        "走向真实多传感器系统： 把多视角视频 world model 扩展到真实机器人群体、车路协同或多机协同感知场景。"
+      ],
+      "label_tags": [
+        "世界模型",
+        "多智能体",
+        "多视角视频",
+        "动作条件生成",
+        "机器人操作"
+      ],
+      "tags": [
+        "世界模型",
+        "多智能体",
+        "多视角视频",
+        "动作条件生成",
+        "机器人操作",
+        "world-model",
+        "video",
+        "cs.CV"
+      ],
+      "pdf_name": "MultiWorld Scalable Multi-Agent Multi-View Video World Models.pdf",
+      "pdf_path": "pdfs/MultiWorld Scalable Multi-Agent Multi-View Video World Models.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-21",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-21.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** MultiWorld: Scalable Multi-Agent Multi-View Video World Models\n- **核心机构：** The University of Hong Kong; Sreal AI\n- **一句话本质：** 这篇论文把传统单智能体视频 world model 扩展成一个可同时控制多主体、并保持多视角一致性的统一生成框架，目标是让 world model 真正贴近真实多体系统。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 现有视频 world model 往往假设单智能体与单视角，擅长生成“一个 agent 在一个视角下的未来”。\n- **核心痛点：** 现实环境中的交互常常是多智能体、多视角且强耦合的，单视角模型既难描述交互，也难保证不同相机视角的全局一致性。\n- **本文切入点：** 用统一框架同时建模多 agent 条件控制和多 view 全局状态，把“可控性”与“跨视角一致性”一起作为世界建模目标。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 历史帧 + 当前多主体动作 + 视角条件 -> 并行生成多个未来视角视频 -> 供控制与仿真使用。\n- **关键模块 1：** **Multi-Agent Condition Module**：显式编码多个 agent 的动作条件，提升多主体行为控制精度。\n- **关键模块 2：** **Global State Encoder**：抽取跨视角共享的全局状态，使不同视角的生成结果保持语义和几何一致。\n- **关键模块 3：** **可扩展并行视图合成**：支持 agent 数量和 view 数量扩展，并通过并行合成提升生成效率。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **world model 的真实难点在交互而不只是预测：** 一旦进入多主体场景，模型不仅要会“看见未来”，还要会区分是谁影响了谁。\n- **多视角一致性是走向可用仿真的关键约束：** 如果不同视角互相矛盾，再高的单视角清晰度也无法支撑规划和评测。\n- **这条路线很适合多机器人与博弈环境：** 它把视频生成、交互建模和控制条件统一起来，应用边界明显比传统单体模型更广。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **规模扩展后的训练成本可能很高：** 多主体和多视角同时增长时，模型容量、数据量和计算量都可能迅速膨胀。\n- **当前验证仍偏受控环境：** 摘要提到多人游戏与多机器人操作，但未说明在开放真实场景中能否保持同样稳定的控制效果。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调优于 baseline，但没有拆解是视频保真度、动作跟随还是跨视角一致性哪个因素贡献最大。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **引入更强结构先验：** 结合场景图、对象状态或物理约束，进一步提升多主体交互的可解释性和稳定性。\n- **走向真实多传感器系统：** 把多视角视频 world model 扩展到真实机器人群体、车路协同或多机协同感知场景。\n\n\n---",
+      "summary_preview": "这篇论文把传统单智能体视频 world model 扩展成一个可同时控制多主体、并保持多视角一致性的统一生成框架，目标是让 world model 真正贴近真实多体系统。"
+    },
+    {
+      "entry_id": "2604.18486v1",
+      "slug": "2604.18486v1-onevl-one-step-latent-reasoning-and-planning-with-vision-languag",
+      "title": "OneVL: One-Step Latent Reasoning and Planning with Vision-Language Explanation",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18486v1",
+      "date": "2026-04-21",
+      "dates": [
+        "2026-04-21"
+      ],
+      "track_keys": [
+        "vla",
+        "world-model"
+      ],
+      "track_names": [
+        "VLA",
+        "World Model"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.CL",
+        "cs.RO"
+      ],
+      "authors": [
+        "Jinghui Lu",
+        "Jiayi Guan",
+        "Zhijian Huang",
+        "Jinlong Li",
+        "Guang Li",
+        "Lingdong Kong",
+        "Yingyan Li",
+        "Han Wang",
+        "Shaoqing Xu",
+        "Yuechen Luo",
+        "Fang Li",
+        "Chenxu Dang",
+        "Junli Wang",
+        "Tao Xu",
+        "Jing Wu",
+        "Jianhua Wu",
+        "Xiaoshuai Hao",
+        "Wen Zhang",
+        "Tianyi Jiang",
+        "Lingfeng Zhang",
+        "Lei Zhou",
+        "Yingbo Tang",
+        "Jie Wang",
+        "Yinfeng Gao",
+        "Xizhou Bu",
+        "Haochen Tian",
+        "Yihang Qiu",
+        "Feiyang Jia",
+        "Lin Liu",
+        "Yigu Ge",
+        "Hanbing Li",
+        "Yuannan Shen",
+        "Jianwei Cui",
+        "Hongwei Xie",
+        "Bing Wang",
+        "Haiyang Sun",
+        "Jingwei Zhao",
+        "Jiahui Huang",
+        "Pei Liu",
+        "Zeyu Zhu",
+        "Yuncheng Jiang",
+        "Zibin Guo",
+        "Chuhong Gong",
+        "Hanchao Leng",
+        "Kun Ma",
+        "Naiyang Wang",
+        "Guang Chen",
+        "Kuiyuan Yang",
+        "Hangjun Ye",
+        "Long Chen"
+      ],
+      "summary_status": "已总结",
+      "institution": "Xiaomi EV; Xiaomi Embodied Intelligence Team",
+      "essence": "这篇论文把自动驾驶中的显式 CoT 压缩为一次性生成的潜在推理 token，并用语言解释与未来视觉预测双重监督，让低时延 VLA 也能保留 world-model 级别的因果建模能力。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 显式 CoT 能提升驾驶轨迹预测和决策质量，但逐 token 自回归推理带来的时延很难满足实时部署。",
+        "核心痛点： 现有 latent CoT 往往只压缩语言解释，压掉了真正决定驾驶行为的道路几何、交通参与者运动和环境变化等因果动态。",
+        "本文切入点： 同时用语言 decoder 和视觉 world model decoder 监督 latent reasoning，让紧凑 latent 不只是“语言摘要”，而是可用于规划的动态环境表征。"
+      ],
+      "insight_points": [
+        "latent reasoning 不是越短越好，而是要压对信息： 如果 latent 中没有道路与交互动力学，再快也只是把错误更快地产生出来。",
+        "world-model 监督能显著提升 latent CoT 质量： 这说明显式语言推理和环境动态建模并不是替代关系，而是可互补的两条监督信号。",
+        "这条路线很适合实时自动驾驶： 它试图把“显式推理的精度”与“answer-only 推理的速度”同时拿到，是自动驾驶 VLA 很有价值的折中点。"
+      ],
+      "next_steps": [
+        "让 latent 具备更强可控性： 探索可解释的 latent editing 或显式安全约束，避免潜在推理在关键场景下失真。",
+        "扩展到更一般的 embodied planning： 将这套“语言解释 + world-model”双监督框架迁移到机器人操作和多智能体交互场景。"
+      ],
+      "label_tags": [
+        "VLA",
+        "世界模型",
+        "潜在推理",
+        "自动驾驶",
+        "低时延规划"
+      ],
+      "tags": [
+        "VLA",
+        "世界模型",
+        "潜在推理",
+        "自动驾驶",
+        "低时延规划",
+        "vla",
+        "world-model",
+        "planning",
+        "benchmark",
+        "cs.CV",
+        "cs.CL",
+        "cs.RO"
+      ],
+      "pdf_name": "OneVL One-Step Latent Reasoning and Planning with Vision-Language Explanation.pdf",
+      "pdf_path": "pdfs/OneVL One-Step Latent Reasoning and Planning with Vision-Language Explanation.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-21",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-21.md"
+        },
+        {
+          "date": "2026-04-21",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-21.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** OneVL: One-Step Latent Reasoning and Planning with Vision-Language Explanation\n- **核心机构：** Xiaomi EV; Xiaomi Embodied Intelligence Team\n- **一句话本质：** 这篇论文把自动驾驶中的显式 CoT 压缩为一次性生成的潜在推理 token，并用语言解释与未来视觉预测双重监督，让低时延 VLA 也能保留 world-model 级别的因果建模能力。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 显式 CoT 能提升驾驶轨迹预测和决策质量，但逐 token 自回归推理带来的时延很难满足实时部署。\n- **核心痛点：** 现有 latent CoT 往往只压缩语言解释，压掉了真正决定驾驶行为的道路几何、交通参与者运动和环境变化等因果动态。\n- **本文切入点：** 同时用语言 decoder 和视觉 world model decoder 监督 latent reasoning，让紧凑 latent 不只是“语言摘要”，而是可用于规划的动态环境表征。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 场景观测 + 驾驶任务 -> 一次性并行预填 latent reasoning tokens -> 轨迹规划输出；训练阶段同时重建文本 CoT 和未来视觉 token。\n- **关键模块 1：** **双辅助解码器**：一个解码语言 explanation，一个预测未来帧 token，把 latent space 同时绑定到解释性和环境动力学。\n- **关键模块 2：** **三阶段训练流程**：逐步对齐轨迹、语言和视觉目标，避免多目标联合训练不稳定。\n- **关键模块 3：** **并行 latent 推理**：推理时丢弃辅助 decoder，仅保留一次性 latent prefilling，以接近 answer-only 的延迟输出规划结果。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **latent reasoning 不是越短越好，而是要压对信息：** 如果 latent 中没有道路与交互动力学，再快也只是把错误更快地产生出来。\n- **world-model 监督能显著提升 latent CoT 质量：** 这说明显式语言推理和环境动态建模并不是替代关系，而是可互补的两条监督信号。\n- **这条路线很适合实时自动驾驶：** 它试图把“显式推理的精度”与“answer-only 推理的速度”同时拿到，是自动驾驶 VLA 很有价值的折中点。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **强依赖训练期辅助监督质量：** 若未来帧 token 预测本身不足够稳定，latent 可能学到的是近似视觉压缩，而不是真正可迁移的因果结构。\n- **当前结论主要集中在驾驶 benchmark：** 是否能迁移到开放具身操作、长时程交互和更强分布偏移场景，摘要里没有给出证据。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调首次超过显式 CoT，但没有展开说明不同任务难度、长尾场景和极端交通状态下的收益是否稳定存在。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **让 latent 具备更强可控性：** 探索可解释的 latent editing 或显式安全约束，避免潜在推理在关键场景下失真。\n- **扩展到更一般的 embodied planning：** 将这套“语言解释 + world-model”双监督框架迁移到机器人操作和多智能体交互场景。\n\n\n---",
+      "summary_preview": "这篇论文把自动驾驶中的显式 CoT 压缩为一次性生成的潜在推理 token，并用语言解释与未来视觉预测双重监督，让低时延 VLA 也能保留 world-model 级别的因果建模能力。"
+    },
+    {
+      "entry_id": "2604.18484v1",
+      "slug": "2604.18484v1-xembodied-a-foundation-model-with-enhanced-geometric-and-physica",
+      "title": "XEmbodied: A Foundation Model with Enhanced Geometric and Physical Cues for Large-Scale Embodied Environments",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18484v1",
+      "date": "2026-04-21",
+      "dates": [
+        "2026-04-21"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.MM",
+        "cs.RO"
+      ],
+      "authors": [
+        "Kangan Qian",
+        "ChuChu Xie",
+        "Yang Zhong",
+        "Jingrui Pang",
+        "Siwen Jiao",
+        "Sicong Jiang",
+        "Zilin Huang",
+        "Yunlong Wang",
+        "Kun Jiang",
+        "Mengmeng Yang",
+        "Hao Ye",
+        "Guanghao Zhang",
+        "Hangjun Ye",
+        "Guang Chen",
+        "Long Chen",
+        "Diange Yang"
+      ],
+      "summary_status": "已总结",
+      "institution": "Tsinghua University; Automotive and Robotics, Xiaomi Corporation; National University of Singapore; McGill University; University of Wisconsin-Madison",
+      "essence": "这篇论文不是直接改机器人控制器，而是打造一个具备三维几何和物理感知的云端基础模型，用来提升大规模 embodied 数据挖掘、自动标注和场景理解质量。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 复杂 embodied 环境的数据生产和场景挖掘越来越依赖云端 VLM，但通用 2D 图文预训练模型通常缺乏真正可用的几何与物理理解。",
+        "核心痛点： 这类模型能看懂图像语义，却很难可靠判断占据关系、三维布局、物体交互和真实场景中的可行动性。",
+        "本文切入点： 把 3D 几何表征和物理线索直接编进基础模型输入，而不是把几何当作额外后处理特征，从根上提升其 embodied 语义能力。"
+      ],
+      "insight_points": [
+        "云端基础模型是 embodied 数据生产链的关键一环： 这类模型越懂几何，后面的自动标注、场景筛选和知识蒸馏就越可靠。",
+        "几何与物理不该只做外挂特征： 论文强调把它们结构化注入模型，而不是只在末端拼接，这对真正形成空间语义很关键。",
+        "这条路线更像“基础设施升级”： 它不一定直接提高单一 policy 分数，却可能显著改善整个 VLA 数据飞轮的上限。"
+      ],
+      "next_steps": [
+        "打通到 policy 训练链路： 评估 XEmbodied 生成的高质量标签能否稳定提升下游 VLA 和 world model。",
+        "增强物理一致性建模： 从几何理解继续走向接触、可达性和动力学约束，使其更贴近真实 embodied 决策需求。"
+      ],
+      "label_tags": [
+        "VLA",
+        "三维几何",
+        "物理线索",
+        "云端基础模型",
+        "场景挖掘"
+      ],
+      "tags": [
+        "VLA",
+        "三维几何",
+        "物理线索",
+        "云端基础模型",
+        "场景挖掘",
+        "vla",
+        "world-model",
+        "benchmark",
+        "policy",
+        "cs.CV",
+        "cs.MM",
+        "cs.RO"
+      ],
+      "pdf_name": "XEmbodied A Foundation Model with Enhanced Geometric and Physical Cues for Large-Scale Embodied Environments.pdf",
+      "pdf_path": "pdfs/XEmbodied A Foundation Model with Enhanced Geometric and Physical Cues for Large-Scale Embodied Environments.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-21",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-21.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** XEmbodied: A Foundation Model with Enhanced Geometric and Physical Cues for Large-Scale Embodied Environments\n- **核心机构：** Tsinghua University; Automotive and Robotics, Xiaomi Corporation; National University of Singapore; McGill University; University of Wisconsin-Madison\n- **一句话本质：** 这篇论文不是直接改机器人控制器，而是打造一个具备三维几何和物理感知的云端基础模型，用来提升大规模 embodied 数据挖掘、自动标注和场景理解质量。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 复杂 embodied 环境的数据生产和场景挖掘越来越依赖云端 VLM，但通用 2D 图文预训练模型通常缺乏真正可用的几何与物理理解。\n- **核心痛点：** 这类模型能看懂图像语义，却很难可靠判断占据关系、三维布局、物体交互和真实场景中的可行动性。\n- **本文切入点：** 把 3D 几何表征和物理线索直接编进基础模型输入，而不是把几何当作额外后处理特征，从根上提升其 embodied 语义能力。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 图像/场景观测 + 几何与物理信号 -> 云端 foundation model 编码 -> 用于 embodied VQA、场景挖掘和自动标注的更强语义输出。\n- **关键模块 1：** **Structured 3D Adapter**：把几何表示系统注入模型，使其获得更内生的三维空间理解。\n- **关键模块 2：** **Efficient Image-Embodied Adapter**：把 occupancy grid、3D box 等物理信号蒸馏为上下文 token，增强对交互与可行动性的建模。\n- **关键模块 3：** **渐进式课程 + RL 后训练**：在保留通用能力的同时，逐步提升模型在 embodied 场景下的空间语义和外部分布泛化能力。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **云端基础模型是 embodied 数据生产链的关键一环：** 这类模型越懂几何，后面的自动标注、场景筛选和知识蒸馏就越可靠。\n- **几何与物理不该只做外挂特征：** 论文强调把它们结构化注入模型，而不是只在末端拼接，这对真正形成空间语义很关键。\n- **这条路线更像“基础设施升级”：** 它不一定直接提高单一 policy 分数，却可能显著改善整个 VLA 数据飞轮的上限。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **更偏云端认知层而非执行层：** 摘要证明的是理解、挖掘与问答能力增强，但对最终闭环控制收益仍缺少直接因果证据。\n- **对高质量 3D/物理信号有依赖：** 如果输入几何本身噪声大，模型可能把错误结构进一步内化。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调 18 个 benchmark 上表现稳健，但没有拆解不同任务类型中，几何增强究竟主要改善了什么能力。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **打通到 policy 训练链路：** 评估 XEmbodied 生成的高质量标签能否稳定提升下游 VLA 和 world model。\n- **增强物理一致性建模：** 从几何理解继续走向接触、可达性和动力学约束，使其更贴近真实 embodied 决策需求。\n\n\n---",
+      "summary_preview": "这篇论文不是直接改机器人控制器，而是打造一个具备三维几何和物理感知的云端基础模型，用来提升大规模 embodied 数据挖掘、自动标注和场景理解质量。"
+    },
+    {
+      "entry_id": "2604.18319v1",
+      "slug": "2604.18319v1-overcoming-selection-bias-in-statistical-studies-with-amortized",
+      "title": "Overcoming Selection Bias in Statistical Studies With Amortized Bayesian Inference",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18319v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "world-model"
+      ],
+      "track_names": [
+        "World Model"
+      ],
+      "categories": [
+        "stat.ML",
+        "cs.LG",
+        "stat.ME"
+      ],
+      "authors": [
+        "Jonas Arruda",
+        "Sophie Chervet",
+        "Paula Staudt",
+        "Andreas Wieser",
+        "Michael Hoelscher",
+        "Isabelle Sermet-Gaudelus",
+        "Nadine Binder",
+        "Lulla Opatowski",
+        "Jan Hasenauer"
+      ],
+      "summary_status": "已总结",
+      "institution": "University of Bonn; Institut Pasteur; Université Paris-Saclay; University of Freiburg; LMU University Hospital Munich; German Center for Infection Research; Fraunhofer ITMP; Helmholtz Zentrum München; Hôpital Necker Enfants Malades; Université de Paris; European Rare Disease Network-Lung",
+      "essence": "这篇论文把传统统计中的选择偏差问题改写成“带偏差机制的 simulator”，从而在无显式似然的前提下仍能做可扩展、可诊断的摊销贝叶斯推断。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 经典偏差校正方法依赖可解析似然或明确的选择模型，而 simulation-based inference 通常又默认 missingness at random。",
+        "核心痛点： 一旦数据是否被观测到依赖于潜变量、结果变量或复杂随机动力学，传统 likelihood-based 修正和常规 SBI 都会失效。",
+        "本文切入点： 把 selection mechanism 直接嵌入生成 simulator，让“偏差校正”成为 simulator 的一部分，而不是额外补丁。"
+      ],
+      "insight_points": [
+        "选择偏差本质上是生成过程的一部分： 不是后验阶段补一个权重就完事，而要在 simulator 层面显式建模谁会被看见。",
+        "SBI 在偏差场景下仍可用，但前提是把偏差也一起模拟： 这使得无似然方法在复杂现实数据场景中更有落地空间。",
+        "可诊断性很关键： 论文不仅追求去偏，还强调检测偏差是否存在以及 posterior 是否校准，这比单纯出一个数值更实用。"
+      ],
+      "next_steps": [
+        "迁移到时序 world model： 把这套 bias-aware simulation 思路用于部分可观测具身系统、医疗时序或传感器缺失场景。",
+        "提升机制鲁棒性： 研究当 selection model 本身有错时，posterior 能否保持可接受的稳健性。"
+      ],
+      "label_tags": [
+        "贝叶斯推断",
+        "选择偏差",
+        "仿真推断",
+        "SBI",
+        "校准诊断"
+      ],
+      "tags": [
+        "贝叶斯推断",
+        "选择偏差",
+        "仿真推断",
+        "SBI",
+        "校准诊断",
+        "world-model",
+        "robustness",
+        "stat.ML",
+        "cs.LG",
+        "stat.ME"
+      ],
+      "pdf_name": "Overcoming Selection Bias in Statistical Studies With Amortized Bayesian Inference.pdf",
+      "pdf_path": "pdfs/Overcoming Selection Bias in Statistical Studies With Amortized Bayesian Inference.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Overcoming Selection Bias in Statistical Studies With Amortized Bayesian Inference\n- **核心机构：** University of Bonn; Institut Pasteur; Université Paris-Saclay; University of Freiburg; LMU University Hospital Munich; German Center for Infection Research; Fraunhofer ITMP; Helmholtz Zentrum München; Hôpital Necker Enfants Malades; Université de Paris; European Rare Disease Network-Lung\n- **一句话本质：** 这篇论文把传统统计中的选择偏差问题改写成“带偏差机制的 simulator”，从而在无显式似然的前提下仍能做可扩展、可诊断的摊销贝叶斯推断。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 经典偏差校正方法依赖可解析似然或明确的选择模型，而 simulation-based inference 通常又默认 missingness at random。\n- **核心痛点：** 一旦数据是否被观测到依赖于潜变量、结果变量或复杂随机动力学，传统 likelihood-based 修正和常规 SBI 都会失效。\n- **本文切入点：** 把 selection mechanism 直接嵌入生成 simulator，让“偏差校正”成为 simulator 的一部分，而不是额外补丁。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 参数先验 + 含选择偏差的生成过程 -> 神经后验估计 -> 去偏的 posterior 与偏差存在性诊断。\n- **关键模块 1：** **bias-aware SBI**：在神经 posterior estimation 中显式编码 selection process，允许在无 tractable likelihood 时完成推断。\n- **关键模块 2：** **诊断机制**：比较模拟数据与观测数据的一致性，并检查 posterior calibration，避免“看似收敛但其实偏了”。\n- **关键模块 3：** **多应用验证**：在三类选择机制不同的统计任务上验证该方法的去偏与校准能力。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **选择偏差本质上是生成过程的一部分：** 不是后验阶段补一个权重就完事，而要在 simulator 层面显式建模谁会被看见。\n- **SBI 在偏差场景下仍可用，但前提是把偏差也一起模拟：** 这使得无似然方法在复杂现实数据场景中更有落地空间。\n- **可诊断性很关键：** 论文不仅追求去偏，还强调检测偏差是否存在以及 posterior 是否校准，这比单纯出一个数值更实用。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **依赖选择机制建模质量：** 若 simulator 对 selection process 的设定本身不对，神经后验再强也只是把错误系统化。\n- **与 frontier 主题相关性偏弱：** 这篇论文更偏统计推断方法，对典型视觉/控制 world model 的直接启发主要在“带偏观测的生成建模”层面。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要展示了三类应用上的效果，但没有说明在更高维、更强 misspecification 或更弱先验条件下是否依旧稳定。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **迁移到时序 world model：** 把这套 bias-aware simulation 思路用于部分可观测具身系统、医疗时序或传感器缺失场景。\n- **提升机制鲁棒性：** 研究当 selection model 本身有错时，posterior 能否保持可接受的稳健性。\n\n\n---",
+      "summary_preview": "这篇论文把传统统计中的选择偏差问题改写成“带偏差机制的 simulator”，从而在无显式似然的前提下仍能做可扩展、可诊断的摊销贝叶斯推断。"
+    },
+    {
+      "entry_id": "2604.18289v1",
+      "slug": "2604.18289v1-relative-state-estimation-using-event-based-propeller-sensing",
+      "title": "Relative State Estimation using Event-Based Propeller Sensing",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18289v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.CV",
+        "eess.SY"
+      ],
+      "authors": [
+        "Ravi Kumar Thakur",
+        "Luis Granados Segura",
+        "Jan Klivan",
+        "Radim Špetlík",
+        "Tobiáš Vinklárek",
+        "Matouš Vrba",
+        "Martin Saska"
+      ],
+      "summary_status": "已总结",
+      "institution": "Czech Technical University in Prague",
+      "essence": "这篇论文利用事件相机直接感知无人机螺旋桨频率与几何形态，从而在复杂视觉条件下实现低时延的相对状态估计，服务多机协同定位。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 单目帧相机相对定位在理想条件下可用，但速度慢、尺度模糊，且在强动态范围和复杂背景下表现不稳。",
+        "核心痛点： 多 UAV 协同场景需要极低时延、高鲁棒性的相对状态估计，传统帧式视觉方案往往难以兼顾。",
+        "本文切入点： 把事件流中的螺旋桨频率和几何轮廓当作可感知物理信号，用于驱动运动学状态估计。"
+      ],
+      "insight_points": [
+        "事件相机特别适合高速旋转目标： 螺旋桨本身既是干扰源，也可以变成状态估计的有效信号。",
+        "相对定位可以借助机体动力学侧信息： 频率测量让视觉估计不再只依赖图像外观。",
+        "这对分布式无人机群很有价值： 低时延和去中心化特性非常适合 swarm 场景。"
+      ],
+      "next_steps": [
+        "扩展到更多机型与多机遮挡场景： 检验方法对不同桨叶形态和密集机群的泛化能力。",
+        "融合其他机载传感器： 与 IMU、毫米波或 UWB 结合，构建更稳健的相对定位系统。"
+      ],
+      "label_tags": [
+        "UAV",
+        "事件相机",
+        "相对定位",
+        "群体协同",
+        "螺旋桨感知"
+      ],
+      "tags": [
+        "UAV",
+        "事件相机",
+        "相对定位",
+        "群体协同",
+        "螺旋桨感知",
+        "uav",
+        "robustness",
+        "cs.RO",
+        "cs.CV",
+        "eess.SY"
+      ],
+      "pdf_name": "Relative State Estimation using Event-Based Propeller Sensing.pdf",
+      "pdf_path": "pdfs/Relative State Estimation using Event-Based Propeller Sensing.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Relative State Estimation using Event-Based Propeller Sensing\n- **核心机构：** Czech Technical University in Prague\n- **一句话本质：** 这篇论文利用事件相机直接感知无人机螺旋桨频率与几何形态，从而在复杂视觉条件下实现低时延的相对状态估计，服务多机协同定位。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 单目帧相机相对定位在理想条件下可用，但速度慢、尺度模糊，且在强动态范围和复杂背景下表现不稳。\n- **核心痛点：** 多 UAV 协同场景需要极低时延、高鲁棒性的相对状态估计，传统帧式视觉方案往往难以兼顾。\n- **本文切入点：** 把事件流中的螺旋桨频率和几何轮廓当作可感知物理信号，用于驱动运动学状态估计。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 事件相机流 -> 螺旋桨 ROI 检测与时间块处理 -> 频率与姿态估计 -> 相对位置/姿态状态更新。\n- **关键模块 1：** **per-propeller frequency estimation**：从事件流中估计各螺旋桨频率，作为推力相关输入。\n- **关键模块 2：** **camera position update**：结合相机位置测量与运动学模型融合更新状态。\n- **关键模块 3：** **ellipse backprojection**：通过拟合螺旋桨椭圆恢复机体倾斜轴，估计姿态方向。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **事件相机特别适合高速旋转目标：** 螺旋桨本身既是干扰源，也可以变成状态估计的有效信号。\n- **相对定位可以借助机体动力学侧信息：** 频率测量让视觉估计不再只依赖图像外观。\n- **这对分布式无人机群很有价值：** 低时延和去中心化特性非常适合 swarm 场景。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **对螺旋桨可见性有依赖：** 遮挡、距离过远或事件噪声过强时，核心信号可能不稳定。\n- **验证规模仍有限：** 摘要只提到五段真实飞行数据，离复杂多机实战场景还有距离。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调频率误差低于 3%，但没有进一步说明最终相对位姿误差在不同机动状态下的变化。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **扩展到更多机型与多机遮挡场景：** 检验方法对不同桨叶形态和密集机群的泛化能力。\n- **融合其他机载传感器：** 与 IMU、毫米波或 UWB 结合，构建更稳健的相对定位系统。\n\n\n---",
+      "summary_preview": "这篇论文利用事件相机直接感知无人机螺旋桨频率与几何形态，从而在复杂视觉条件下实现低时延的相对状态估计，服务多机协同定位。"
+    },
+    {
+      "entry_id": "2604.18207v1",
+      "slug": "2604.18207v1-a-novel-piecewise-atmospheric-attenuation-model-for-free-space-o",
+      "title": "A Novel Piecewise Atmospheric Attenuation Model for Free Space Optical Links in Vertical Heterogeneous Networks",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18207v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "eess.SP"
+      ],
+      "authors": [
+        "Eylem Erdogan",
+        "Mohammed Elamassie",
+        "Ibrahim Altunbas",
+        "Gunes Karabulut Kurt",
+        "Murat Uysal",
+        "Halim Yanikomeroglu"
+      ],
+      "summary_status": "已总结",
+      "institution": "Izmir Institute of Technology; Ozyegin University; Istanbul Technical University; York University; Carleton University",
+      "essence": "这篇论文为星地空垂直异构网络中的自由空间光通信提出分段大气衰减模型，试图更准确估计跨多层天气条件的累计链路损耗。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 传统 Beer-Lambert 类模型通常用单一衰减系数描述链路损耗，往往分别处理雾、雨、云或气溶胶。",
+        "核心痛点： 垂直或斜向 FSO 链路会穿过多个气象层，单一系数模型难以刻画层间条件叠加造成的真实损耗。",
+        "本文切入点： 建立统一的分段衰减模型，把多种天气因素和天顶角共同纳入累计功率损耗估计。"
+      ],
+      "insight_points": [
+        "UAV 空天地光链路的瓶颈很多时候是传播几何和天气耦合： 不是简单地增加发射功率就能解决。",
+        "分层模型比单层经验式更适合 VHetNet： 因为链路实际穿过的是连续但性质不同的大气层。",
+        "这类模型对系统规划很重要： 它直接影响 UAV/HAPS/卫星节点部署和回传链路冗余设计。"
+      ],
+      "next_steps": [
+        "接入自适应链路控制： 将分层衰减估计与 UAV/HAPS 的动态功率和路由调整结合。",
+        "面向实时气象数据融合： 用在线天气感知更新链路预算，实现真正的自适应 FSO 网络。"
+      ],
+      "label_tags": [
+        "UAV",
+        "光通信",
+        "大气衰减",
+        "垂直异构网络",
+        "链路预算"
+      ],
+      "tags": [
+        "UAV",
+        "光通信",
+        "大气衰减",
+        "垂直异构网络",
+        "链路预算",
+        "uav",
+        "eess.SP"
+      ],
+      "pdf_name": "A Novel Piecewise Atmospheric Attenuation Model for Free Space Optical Links in Vertical Heterogeneous Networks.pdf",
+      "pdf_path": "pdfs/A Novel Piecewise Atmospheric Attenuation Model for Free Space Optical Links in Vertical Heterogeneous Networks.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** A Novel Piecewise Atmospheric Attenuation Model for Free Space Optical Links in Vertical Heterogeneous Networks\n- **核心机构：** Izmir Institute of Technology; Ozyegin University; Istanbul Technical University; York University; Carleton University\n- **一句话本质：** 这篇论文为星地空垂直异构网络中的自由空间光通信提出分段大气衰减模型，试图更准确估计跨多层天气条件的累计链路损耗。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 传统 Beer-Lambert 类模型通常用单一衰减系数描述链路损耗，往往分别处理雾、雨、云或气溶胶。\n- **核心痛点：** 垂直或斜向 FSO 链路会穿过多个气象层，单一系数模型难以刻画层间条件叠加造成的真实损耗。\n- **本文切入点：** 建立统一的分段衰减模型，把多种天气因素和天顶角共同纳入累计功率损耗估计。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 垂直网络节点关系 + 分层大气条件 + 天顶角 -> 各层衰减累积 -> FSO 链路预算损耗估计。\n- **关键模块 1：** **piecewise attenuation modeling**：针对不同大气层使用分段建模，而不是用单一衰减常数粗糙近似。\n- **关键模块 2：** **multi-weather integration**：统一考虑 aerosol、fog、rain、cloud 和 drizzle 等因素。\n- **关键模块 3：** **MODTRAN 对照验证**：用层解析仿真结果验证模型误差控制在 1 dB 内。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **UAV 空天地光链路的瓶颈很多时候是传播几何和天气耦合：** 不是简单地增加发射功率就能解决。\n- **分层模型比单层经验式更适合 VHetNet：** 因为链路实际穿过的是连续但性质不同的大气层。\n- **这类模型对系统规划很重要：** 它直接影响 UAV/HAPS/卫星节点部署和回传链路冗余设计。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **偏链路级建模，不涉及闭环网络调度：** 真正系统收益还要靠上层资源分配与路由策略共同兑现。\n- **对实时天气剖面获取有依赖：** 若环境参数估计不准，分层模型优势会被削弱。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要只给出与 MODTRAN 的误差对照，没有说明模型在在线估计、简化计算和实时部署方面的代价。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **接入自适应链路控制：** 将分层衰减估计与 UAV/HAPS 的动态功率和路由调整结合。\n- **面向实时气象数据融合：** 用在线天气感知更新链路预算，实现真正的自适应 FSO 网络。\n\n\n---",
+      "summary_preview": "这篇论文为星地空垂直异构网络中的自由空间光通信提出分段大气衰减模型，试图更准确估计跨多层天气条件的累计链路损耗。"
+    },
+    {
+      "entry_id": "2604.18156v1",
+      "slug": "2604.18156v1-geometry-aware-networking-for-low-altitude-economy-movable-anten",
+      "title": "Geometry-Aware Networking for Low-Altitude Economy: Movable Antennas in Space-Air-Ground Integrated Systems",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18156v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "eess.SP"
+      ],
+      "authors": [
+        "Heyou Liu",
+        "Bang Huang",
+        "Mohamed-Slim Alouini"
+      ],
+      "summary_status": "已总结",
+      "institution": "King Abdullah University of Science and Technology",
+      "essence": "这篇论文认为低空经济场景下的网络瓶颈正在从“资源分配”转向“空间几何维护”，并提出用可移动天线把几何适应能力直接做进空天地一体网络。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： SAGIN/NTN 研究多从频谱、功率和波束赋形角度优化链路性能。",
+        "核心痛点： 在低空高密度运行环境中，节点相对几何、遮挡关系和观测可视性变化太快，单靠传统资源调度难以及时适应。",
+        "本文切入点： 把 movable antenna 视作新的空间自由度，让网络能直接调节局部几何，而不只被动响应信道变化。"
+      ],
+      "insight_points": [
+        "低空经济是强几何系统： 链路质量、遮挡与感知可视性都深受空间布局影响。",
+        "MA 不是传统 beamforming 的替代，而是补充： 它提供的是物理空间层面的微调自由度。",
+        "UAV 是几何适应的关键层： 既受局部信道变化影响最大，又最能从精细几何调控中获益。"
+      ],
+      "next_steps": [
+        "做端到端系统评估： 结合真实低空网络仿真，量化 MA 对吞吐、覆盖和鲁棒性的净收益。",
+        "与 UAV 路径规划联动： 把平台位姿调整与天线位移协同优化，形成完整几何控制框架。"
+      ],
+      "label_tags": [
+        "UAV",
+        "低空经济",
+        "可移动天线",
+        "空天地一体",
+        "几何感知网络"
+      ],
+      "tags": [
+        "UAV",
+        "低空经济",
+        "可移动天线",
+        "空天地一体",
+        "几何感知网络",
+        "uav",
+        "robustness",
+        "eess.SP"
+      ],
+      "pdf_name": "Geometry-Aware Networking for Low-Altitude Economy Movable Antennas in Space-Air-Ground Integrated Systems.pdf",
+      "pdf_path": "pdfs/Geometry-Aware Networking for Low-Altitude Economy Movable Antennas in Space-Air-Ground Integrated Systems.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Geometry-Aware Networking for Low-Altitude Economy: Movable Antennas in Space-Air-Ground Integrated Systems\n- **核心机构：** King Abdullah University of Science and Technology\n- **一句话本质：** 这篇论文认为低空经济场景下的网络瓶颈正在从“资源分配”转向“空间几何维护”，并提出用可移动天线把几何适应能力直接做进空天地一体网络。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** SAGIN/NTN 研究多从频谱、功率和波束赋形角度优化链路性能。\n- **核心痛点：** 在低空高密度运行环境中，节点相对几何、遮挡关系和观测可视性变化太快，单靠传统资源调度难以及时适应。\n- **本文切入点：** 把 movable antenna 视作新的空间自由度，让网络能直接调节局部几何，而不只被动响应信道变化。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 多层节点几何关系 + 网络目标 -> 分层 SAGIN 架构中的几何控制策略 -> 更稳的通信/感知/控制协同能力。\n- **关键模块 1：** **geometry-aware layered architecture**：区分 LEO、HAPS、UAV 和地面层在不同尺度上的作用。\n- **关键模块 2：** **movable antenna adaptation**：在 UAV 和地面层引入细粒度天线位移，直接优化局部几何。\n- **关键模块 3：** **多功能协同视角**：将通信、感知、控制和导航一并纳入几何优化收益中。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **低空经济是强几何系统：** 链路质量、遮挡与感知可视性都深受空间布局影响。\n- **MA 不是传统 beamforming 的替代，而是补充：** 它提供的是物理空间层面的微调自由度。\n- **UAV 是几何适应的关键层：** 既受局部信道变化影响最大，又最能从精细几何调控中获益。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **偏架构愿景型：** 摘要强调设计理念和潜力，但缺少大规模系统级实证。\n- **硬件与控制复杂度高：** 可移动天线本身会引入机械控制、校准和可靠性问题。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要没有说明在不同层级中，几何适应带来的收益是否足以覆盖新增硬件与控制成本。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **做端到端系统评估：** 结合真实低空网络仿真，量化 MA 对吞吐、覆盖和鲁棒性的净收益。\n- **与 UAV 路径规划联动：** 把平台位姿调整与天线位移协同优化，形成完整几何控制框架。\n\n\n---",
+      "summary_preview": "这篇论文认为低空经济场景下的网络瓶颈正在从“资源分配”转向“空间几何维护”，并提出用可移动天线把几何适应能力直接做进空天地一体网络。"
+    },
+    {
+      "entry_id": "2604.18107v1",
+      "slug": "2604.18107v1-test-time-perturbation-learning-with-delayed-feedback-for-vision",
+      "title": "Test-Time Perturbation Learning with Delayed Feedback for Vision-Language-Action Models",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18107v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "authors": [
+        "Zehua Zang",
+        "Xi Wang",
+        "Fuchun Sun",
+        "Xiao Xu",
+        "Lixiang Lium",
+        "Jiahuan Zhou",
+        "Jiangmeng Li"
+      ],
+      "summary_status": "已总结",
+      "institution": "Institute of Software, Chinese Academy of Sciences; University of Chinese Academy of Sciences; Tsinghua University; Wangxuan Institute of Computer Technology, Peking University; National Defense University",
+      "essence": "这篇论文不改动基座 VLA 参数，而是在测试时通过扰动增强、动作投票和延迟反馈校正来抵消分布偏移下的轨迹过拟合。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： VLA 在标准基准上表现很强，但遇到物体姿态微小变化、环境轻微扰动时往往会突然失效。",
+        "核心痛点： 模型会把动作与场景中偶然共现的实体关系记死，导致一旦环境略变就重复错误的记忆化动作模式。",
+        "本文切入点： 通过 verifier-free 的测试时适应框架，在不微调基座模型的情况下动态提升鲁棒性。"
+      ],
+      "insight_points": [
+        "测试时适应对 VLA 很有价值： 相比重新训练或在线微调，这种轻量补偿更接近真实部署需求。",
+        "延迟反馈能补上短视决策的盲点： 论文强调不是马上知道对错，而是允许系统在后验上修正动作置信。",
+        "鲁棒性问题本质上是伪相关问题： 这为后续 VLA 研究提供了更清晰的失效诊断视角。"
+      ],
+      "next_steps": [
+        "做自适应早停： 在高置信简单场景减少增强次数，把预算集中到真正困难的状态。",
+        "接入真实机器人反馈： 验证该框架在含传感噪声、执行滞后和物理接触误差的场景中是否同样有效。"
+      ],
+      "label_tags": [
+        "VLA",
+        "测试时适应",
+        "延迟反馈",
+        "动作投票",
+        "鲁棒控制"
+      ],
+      "tags": [
+        "VLA",
+        "测试时适应",
+        "延迟反馈",
+        "动作投票",
+        "鲁棒控制",
+        "vla",
+        "robustness",
+        "cs.CV"
+      ],
+      "pdf_name": "Test-Time Perturbation Learning with Delayed Feedback for Vision-Language-Action Models.pdf",
+      "pdf_path": "pdfs/Test-Time Perturbation Learning with Delayed Feedback for Vision-Language-Action Models.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Test-Time Perturbation Learning with Delayed Feedback for Vision-Language-Action Models\n- **核心机构：** Institute of Software, Chinese Academy of Sciences; University of Chinese Academy of Sciences; Tsinghua University; Wangxuan Institute of Computer Technology, Peking University; National Defense University\n- **一句话本质：** 这篇论文不改动基座 VLA 参数，而是在测试时通过扰动增强、动作投票和延迟反馈校正来抵消分布偏移下的轨迹过拟合。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** VLA 在标准基准上表现很强，但遇到物体姿态微小变化、环境轻微扰动时往往会突然失效。\n- **核心痛点：** 模型会把动作与场景中偶然共现的实体关系记死，导致一旦环境略变就重复错误的记忆化动作模式。\n- **本文切入点：** 通过 verifier-free 的测试时适应框架，在不微调基座模型的情况下动态提升鲁棒性。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 当前观测 -> 不确定性感知扰动增强 + 多候选动作投票 -> 延迟反馈驱动 logits 校正 -> 更稳的执行动作。\n- **关键模块 1：** **uncertainty-based augmentation**：在测试时生成多种扰动视角，减少模型对伪相关线索的依赖。\n- **关键模块 2：** **action voting + adaptive scheduler**：根据场景难度分配增强预算，在精度和延迟之间做动态折中。\n- **关键模块 3：** **lightweight perturbation module**：利用延迟反馈回看动作分布，修正过度自信的 logits。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **测试时适应对 VLA 很有价值：** 相比重新训练或在线微调，这种轻量补偿更接近真实部署需求。\n- **延迟反馈能补上短视决策的盲点：** 论文强调不是马上知道对错，而是允许系统在后验上修正动作置信。\n- **鲁棒性问题本质上是伪相关问题：** 这为后续 VLA 研究提供了更清晰的失效诊断视角。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **额外推理开销不可忽略：** 扰动增强和动作投票会显著增加测试时计算量。\n- **仍依赖反馈信号质量：** 若延迟反馈稀疏或不可靠，校正模块很难稳定发挥作用。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要报告了 LIBERO 和 Atari 上的整体增益，但没有细分不同扰动类型和任务难度下收益来源。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **做自适应早停：** 在高置信简单场景减少增强次数，把预算集中到真正困难的状态。\n- **接入真实机器人反馈：** 验证该框架在含传感噪声、执行滞后和物理接触误差的场景中是否同样有效。\n\n\n---",
+      "summary_preview": "这篇论文不改动基座 VLA 参数，而是在测试时通过扰动增强、动作投票和延迟反馈校正来抵消分布偏移下的轨迹过拟合。"
+    },
+    {
+      "entry_id": "2604.18088v1",
+      "slug": "2604.18088v1-autonomous-unmanned-aircraft-systems-for-enhanced-search-and-res",
+      "title": "Autonomous Unmanned Aircraft Systems for Enhanced Search and Rescue of Drowning Swimmers: Image-Based Localization and Mission Simulation",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18088v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "stat.AP"
+      ],
+      "authors": [
+        "Sascha Emanuel Zell",
+        "Toni Schneidereit",
+        "Armin Fügenschuh",
+        "Michael Breuß"
+      ],
+      "summary_status": "已总结",
+      "institution": "Brandenburg University",
+      "essence": "这篇论文把无人机搜救系统视为“感知模型 + 机库布设 + 响应流程”的联合设计问题，既做落水者检测，也用离散事件仿真评估整体响应时间收益。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 水域搜救通常依赖人工监控和标准救援装备，覆盖范围有限且响应时间长。",
+        "核心痛点： 溺水救援最关键的是抢时间，但广阔无人监管水域中，目标定位、人员运输和设备部署都很慢。",
+        "本文切入点： 采用 drone-in-a-box 无人机系统，在固定机库附近自动起飞执行搜索、定位和投放浮具。"
+      ],
+      "insight_points": [
+        "UAV 搜救的价值不只在视觉检测： 真正影响救援效果的是“模型、平台数量、机库位置”共同形成的系统响应时间。",
+        "小规模系统也可能有巨大收益： 摘要显示仅 2 个机库、各 1 架 UAV 就能把响应时间缩短到传统方案的五分之一。",
+        "任务级仿真很必要： 单看 mAP 无法回答实际救援会快多少，必须联动 mission simulation。"
+      ],
+      "next_steps": [
+        "加入多传感器与夜间场景： 结合热成像或多模态检测，提高复杂水面条件下的可靠性。",
+        "做更真实的应急联动仿真： 把空中搜索、地面/水面救援协同与法规约束一起纳入系统评估。"
+      ],
+      "label_tags": [
+        "UAV",
+        "搜救",
+        "YOLO",
+        "任务仿真",
+        "应急响应"
+      ],
+      "tags": [
+        "UAV",
+        "搜救",
+        "YOLO",
+        "任务仿真",
+        "应急响应",
+        "uav",
+        "dataset",
+        "cs.CV",
+        "cs.AI",
+        "stat.AP"
+      ],
+      "pdf_name": "Autonomous Unmanned Aircraft Systems for Enhanced Search and Rescue of Drowning Swimmers Image-Based Localization and Mission Simulation.pdf",
+      "pdf_path": "pdfs/Autonomous Unmanned Aircraft Systems for Enhanced Search and Rescue of Drowning Swimmers Image-Based Localization and Mission Simulation.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Autonomous Unmanned Aircraft Systems for Enhanced Search and Rescue of Drowning Swimmers: Image-Based Localization and Mission Simulation\n- **核心机构：** Brandenburg University\n- **一句话本质：** 这篇论文把无人机搜救系统视为“感知模型 + 机库布设 + 响应流程”的联合设计问题，既做落水者检测，也用离散事件仿真评估整体响应时间收益。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 水域搜救通常依赖人工监控和标准救援装备，覆盖范围有限且响应时间长。\n- **核心痛点：** 溺水救援最关键的是抢时间，但广阔无人监管水域中，目标定位、人员运输和设备部署都很慢。\n- **本文切入点：** 采用 drone-in-a-box 无人机系统，在固定机库附近自动起飞执行搜索、定位和投放浮具。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 水域图像流 -> YOLO 检测落水者位置 -> 自动搜救任务执行；同时用 DES 模拟不同机库与机群配置下的响应时间。\n- **关键模块 1：** **drowning swimmer dataset + YOLO training**：构建任务专用数据集并比较多代 YOLO 架构。\n- **关键模块 2：** **fully automated S&R mission**：在紧急情况中自动搜索、定位并投放救生设备。\n- **关键模块 3：** **discrete-event simulation**：把检测模型能力与系统部署策略联系起来，估算相对传统救援的时间收益。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **UAV 搜救的价值不只在视觉检测：** 真正影响救援效果的是“模型、平台数量、机库位置”共同形成的系统响应时间。\n- **小规模系统也可能有巨大收益：** 摘要显示仅 2 个机库、各 1 架 UAV 就能把响应时间缩短到传统方案的五分之一。\n- **任务级仿真很必要：** 单看 mAP 无法回答实际救援会快多少，必须联动 mission simulation。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **场景特异性较强：** 模型和仿真配置高度依赖测试水域环境，跨地区泛化仍需验证。\n- **实战复杂度更高：** 天气、遮挡、波浪、法规和协同救援链条都可能削弱理想仿真收益。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要给出了显著时间缩短，但没有说明误检、漏检和飞行失败对实际搜救流程的影响。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **加入多传感器与夜间场景：** 结合热成像或多模态检测，提高复杂水面条件下的可靠性。\n- **做更真实的应急联动仿真：** 把空中搜索、地面/水面救援协同与法规约束一起纳入系统评估。\n\n\n---",
+      "summary_preview": "这篇论文把无人机搜救系统视为“感知模型 + 机库布设 + 响应流程”的联合设计问题，既做落水者检测，也用离散事件仿真评估整体响应时间收益。"
+    },
+    {
+      "entry_id": "2604.18058v1",
+      "slug": "2604.18058v1-sonata-a-hybrid-world-model-for-inertial-kinematics-under-clinic",
+      "title": "Sonata: A Hybrid World Model for Inertial Kinematics under Clinical Data Scarcity",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18058v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "world-model"
+      ],
+      "track_names": [
+        "World Model"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "authors": [
+        "Blaise Delaney",
+        "Salil Patel",
+        "Yuji Xing",
+        "Dominic Dootson",
+        "Karin Sevegnani"
+      ],
+      "summary_status": "已总结",
+      "institution": "TimeTrace Labs; NVIDIA",
+      "essence": "这篇论文面向临床小样本 IMU 数据，提出一个轻量级 latent world model，通过预测未来运动状态而非重建原始信号，学习更有临床判别力的表征。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 可穿戴传感器表征学习常借鉴大规模自监督套路，如 masked reconstruction 或自回归预测。",
+        "核心痛点： 临床数据通常只有几十到几百个受试者，数据规模远不够支撑 web-scale 式预训练，重建目标也未必对临床判别最有用。",
+        "本文切入点： 采用 world-model 式未来状态预测目标，让模型直接学习“运动会如何演化”，而不是仅仅记忆传感器波形。"
+      ],
+      "insight_points": [
+        "临床场景更需要“有用表征”而不是“大表征”： 数据少时，训练目标是否贴近临床任务比参数规模更关键。",
+        "world-model 目标很适合运动学信号： 预测未来状态天然鼓励模型抓住 gait 和 trunk dynamics 的可迁移结构。",
+        "轻量化是实用价值的重要部分： 3.77M 参数意味着模型不仅能在 benchmark 上跑，还可能真正在 wearable 端部署。"
+      ],
+      "next_steps": [
+        "加入多模态生理信号： 将 IMU 与压力、视频或 EMG 结合，形成更完整的人体运动 world model。",
+        "从表征走向生成与干预： 探索该 latent world model 是否能支持个体化风险模拟、康复干预或异常轨迹预警。"
+      ],
+      "label_tags": [
+        "世界模型",
+        "IMU表征",
+        "临床数据",
+        "小样本学习",
+        "可穿戴推理"
+      ],
+      "tags": [
+        "世界模型",
+        "IMU表征",
+        "临床数据",
+        "小样本学习",
+        "可穿戴推理",
+        "world-model",
+        "benchmark",
+        "cs.LG"
+      ],
+      "pdf_name": "Sonata A Hybrid World Model for Inertial Kinematics under Clinical Data Scarcity.pdf",
+      "pdf_path": "pdfs/Sonata A Hybrid World Model for Inertial Kinematics under Clinical Data Scarcity.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Sonata: A Hybrid World Model for Inertial Kinematics under Clinical Data Scarcity\n- **核心机构：** TimeTrace Labs; NVIDIA\n- **一句话本质：** 这篇论文面向临床小样本 IMU 数据，提出一个轻量级 latent world model，通过预测未来运动状态而非重建原始信号，学习更有临床判别力的表征。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 可穿戴传感器表征学习常借鉴大规模自监督套路，如 masked reconstruction 或自回归预测。\n- **核心痛点：** 临床数据通常只有几十到几百个受试者，数据规模远不够支撑 web-scale 式预训练，重建目标也未必对临床判别最有用。\n- **本文切入点：** 采用 world-model 式未来状态预测目标，让模型直接学习“运动会如何演化”，而不是仅仅记忆传感器波形。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 六轴躯干 IMU 序列 -> latent world model 表征 -> 用于临床分类、跌倒风险预测和跨队列迁移。\n- **关键模块 1：** **compact hybrid backbone**：仅 3.77M 参数，适配穿戴式设备和小数据场景。\n- **关键模块 2：** **future-state objective**：预测未来运动状态而非重建原始轨迹，鼓励 latent 学到动力学结构。\n- **关键模块 3：** **跨数据集 harmonised pretraining**：在 9 个公开数据集上统一预训练，再用 frozen probe 评估下游临床效用。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **临床场景更需要“有用表征”而不是“大表征”：** 数据少时，训练目标是否贴近临床任务比参数规模更关键。\n- **world-model 目标很适合运动学信号：** 预测未来状态天然鼓励模型抓住 gait 和 trunk dynamics 的可迁移结构。\n- **轻量化是实用价值的重要部分：** 3.77M 参数意味着模型不仅能在 benchmark 上跑，还可能真正在 wearable 端部署。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **任务域较窄：** 当前聚焦躯干 IMU 与神经系统临床评估，离更通用的人体世界模型仍有明显距离。\n- **依赖预训练数据对齐质量：** 多数据集 harmonisation 若处理不好，latent 也可能学到设备偏差或采集协议差异。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调 14 项评测中整体更强，但未详细说明哪些临床任务最受益、哪些任务提升有限。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **加入多模态生理信号：** 将 IMU 与压力、视频或 EMG 结合，形成更完整的人体运动 world model。\n- **从表征走向生成与干预：** 探索该 latent world model 是否能支持个体化风险模拟、康复干预或异常轨迹预警。\n\n\n---",
+      "summary_preview": "这篇论文面向临床小样本 IMU 数据，提出一个轻量级 latent world model，通过预测未来运动状态而非重建原始信号，学习更有临床判别力的表征。"
+    },
+    {
+      "entry_id": "2604.18000v1",
+      "slug": "2604.18000v1-unmasking-the-illusion-of-embodied-reasoning-in-vision-language",
+      "title": "Unmasking the Illusion of Embodied Reasoning in Vision-Language-Action Models",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.18000v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "authors": [
+        "Haiweng Xu",
+        "Sipeng Zheng",
+        "Hao Luo",
+        "Wanpeng Zhang",
+        "Ziheng Xi",
+        "Zongqing Lu"
+      ],
+      "summary_status": "已总结",
+      "institution": "Peking University; Tsinghua University",
+      "essence": "这篇论文通过 BeTTER 诊断基准说明，很多 VLA 的高分并不代表真正具身推理，而是静态基准下对传感运动先验与捷径线索的过拟合。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 研究社区常把 benchmark 成功率直接视为 VLA 具身推理能力增强的证据。",
+        "核心痛点： 标准基准很难把高层 reasoning failure 和低层执行失败区分开，导致“会做题”被误判成“真的会想”。",
+        "本文切入点： 设计带因果干预的诊断 benchmark，在运动学隔离条件下专门测高层推理是否真的成立。"
+      ],
+      "insight_points": [
+        "VLA 高分不等于真推理： 在动态和反事实场景中，当前方法可能比公开 leaderboard 所暗示的更脆弱。",
+        "评测协议本身会塑造研究结论： 如果 benchmark 太静态，它会掩盖语义表征退化并鼓励策略过拟合。",
+        "高频控制与高层推理存在结构张力： 这说明未来 VLA 设计不能只堆统一大模型，还要考虑信息保真与控制带宽之间的冲突。"
+      ],
+      "next_steps": [
+        "把诊断信号引入训练： 将 BeTTER 式反事实干预转化为训练期 curriculum 或 regularizer。",
+        "设计更分层的 VLA 架构： 缓解高频控制压缩高层语义表征的问题。"
+      ],
+      "label_tags": [
+        "VLA",
+        "具身推理",
+        "诊断基准",
+        "因果干预",
+        "机器人评测"
+      ],
+      "tags": [
+        "VLA",
+        "具身推理",
+        "诊断基准",
+        "因果干预",
+        "机器人评测",
+        "vla",
+        "benchmark",
+        "cs.RO"
+      ],
+      "pdf_name": "Unmasking the Illusion of Embodied Reasoning in Vision-Language-Action Models.pdf",
+      "pdf_path": "pdfs/Unmasking the Illusion of Embodied Reasoning in Vision-Language-Action Models.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Unmasking the Illusion of Embodied Reasoning in Vision-Language-Action Models\n- **核心机构：** Peking University; Tsinghua University\n- **一句话本质：** 这篇论文通过 BeTTER 诊断基准说明，很多 VLA 的高分并不代表真正具身推理，而是静态基准下对传感运动先验与捷径线索的过拟合。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 研究社区常把 benchmark 成功率直接视为 VLA 具身推理能力增强的证据。\n- **核心痛点：** 标准基准很难把高层 reasoning failure 和低层执行失败区分开，导致“会做题”被误判成“真的会想”。\n- **本文切入点：** 设计带因果干预的诊断 benchmark，在运动学隔离条件下专门测高层推理是否真的成立。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 机器人策略 + 受控干预场景 -> 评估在布局变化、时间外推等条件下的行为崩溃模式。\n- **关键模块 1：** **BeTTER benchmark**：通过 targeted causal interventions 验证策略是否依赖捷径特征。\n- **关键模块 2：** **kinematic isolation**：尽量剥离执行器极限，把失败更明确地归因到推理层。\n- **关键模块 3：** **机制分析**：将行为惯性、词汇-运动捷径和语义坍塌追溯到模型架构瓶颈。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **VLA 高分不等于真推理：** 在动态和反事实场景中，当前方法可能比公开 leaderboard 所暗示的更脆弱。\n- **评测协议本身会塑造研究结论：** 如果 benchmark 太静态，它会掩盖语义表征退化并鼓励策略过拟合。\n- **高频控制与高层推理存在结构张力：** 这说明未来 VLA 设计不能只堆统一大模型，还要考虑信息保真与控制带宽之间的冲突。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **更偏诊断而非修复：** 论文很有说服力地指出问题，但摘要没有给出同样成熟的解决方案。\n- **基准设计仍有诱导偏差风险：** 不同干预方式会强调不同失效模式，结论的普适性还需更多 benchmark 交叉验证。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调“灾难性失败”，但没有量化不同类型 intervention 对各类模型的敏感度排序。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **把诊断信号引入训练：** 将 BeTTER 式反事实干预转化为训练期 curriculum 或 regularizer。\n- **设计更分层的 VLA 架构：** 缓解高频控制压缩高层语义表征的问题。\n\n\n---",
+      "summary_preview": "这篇论文通过 BeTTER 诊断基准说明，很多 VLA 的高分并不代表真正具身推理，而是静态基准下对传感运动先验与捷径线索的过拟合。"
+    },
+    {
+      "entry_id": "2604.17960v1",
+      "slug": "2604.17960v1-the-umwelt-representation-hypothesis-rethinking-universality",
+      "title": "The Umwelt Representation Hypothesis: Rethinking Universality",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17960v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "world-model"
+      ],
+      "track_names": [
+        "World Model"
+      ],
+      "categories": [
+        "q-bio.NC",
+        "cs.LG"
+      ],
+      "authors": [
+        "Victoria Bosch",
+        "Rowan Sommers",
+        "Adrien Doerig",
+        "Tim C Kietzmann"
+      ],
+      "summary_status": "已总结",
+      "institution": "Institute of Cognitive Science, University of Osnabrück; Freie Universität Berlin; Bernstein Center for Computational Neuroscience",
+      "essence": "这篇论文反对“强系统最终都会收敛到统一世界表征”的乐观假设，主张表征对齐更多来自相似生态约束，而不是单一 universality。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 近年的脑-模型对齐研究常把 ANN 与生物脑的表征相似性解释为“现实存在一个通用最优表征”。",
+        "核心痛点： 这种 universality 叙事忽略了不同物种、个体和模型在任务需求、身体结构和环境压力上的系统性差异。",
+        "本文切入点： 提出 Umwelt Representation Hypothesis，把对齐理解为生态约束重叠下形成的局部相似，而不是全球唯一最优解。"
+      ],
+      "insight_points": [
+        "表征对齐不等于世界观统一： 两个系统在部分任务上行为相似，未必意味着它们内部真的拥有同一种世界模型。",
+        "身体与环境塑造表征： 生态位、传感器形态和行动闭环约束本身就是决定 representation geometry 的核心变量。",
+        "这对 world model 研究有提醒意义： 我们不该默认所有具身系统都需要学成同一个 latent universe。"
+      ],
+      "next_steps": [
+        "把约束空间形式化： 建立能量化身体、任务和环境约束的指标，用于更严谨地解释跨系统对齐。",
+        "反馈到 world model 设计： 针对不同 embodied agent 定制表征目标，而不是默认追求一个统一 latent standard。"
+      ],
+      "label_tags": [
+        "表征学习",
+        "世界模型",
+        "生态约束",
+        "神经对齐",
+        "理论观点"
+      ],
+      "tags": [
+        "表征学习",
+        "世界模型",
+        "生态约束",
+        "神经对齐",
+        "理论观点",
+        "world-model",
+        "q-bio.NC",
+        "cs.LG"
+      ],
+      "pdf_name": "The Umwelt Representation Hypothesis Rethinking Universality.pdf",
+      "pdf_path": "pdfs/The Umwelt Representation Hypothesis Rethinking Universality.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** The Umwelt Representation Hypothesis: Rethinking Universality\n- **核心机构：** Institute of Cognitive Science, University of Osnabrück; Freie Universität Berlin; Bernstein Center for Computational Neuroscience\n- **一句话本质：** 这篇论文反对“强系统最终都会收敛到统一世界表征”的乐观假设，主张表征对齐更多来自相似生态约束，而不是单一 universality。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 近年的脑-模型对齐研究常把 ANN 与生物脑的表征相似性解释为“现实存在一个通用最优表征”。\n- **核心痛点：** 这种 universality 叙事忽略了不同物种、个体和模型在任务需求、身体结构和环境压力上的系统性差异。\n- **本文切入点：** 提出 Umwelt Representation Hypothesis，把对齐理解为生态约束重叠下形成的局部相似，而不是全球唯一最优解。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 跨物种、跨个体、跨 ANN 的表征对齐证据 -> 生态约束视角下的理论重解释 -> 更审慎的模型比较框架。\n- **关键模块 1：** **URH 假说**：表征相似性由共享的感知-行动约束驱动，而非普适现实表征。\n- **关键模块 2：** **差异证据回顾**：强调不同系统间的表征差异是系统性且适应性的，不应被看成简单噪声。\n- **关键模块 3：** **constraint-space mapping**：把模型比较目标从“找唯一最优 world model”改成“识别在哪些生态约束簇中出现对齐”。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **表征对齐不等于世界观统一：** 两个系统在部分任务上行为相似，未必意味着它们内部真的拥有同一种世界模型。\n- **身体与环境塑造表征：** 生态位、传感器形态和行动闭环约束本身就是决定 representation geometry 的核心变量。\n- **这对 world model 研究有提醒意义：** 我们不该默认所有具身系统都需要学成同一个 latent universe。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **偏理论观点而非方法论文：** 它主要重塑认知框架，没有给出可直接训练的新型 world model。\n- **可检验性仍需加强：** 如何定量定义 ecological constraint space，以及如何比较不同系统在该空间中的距离，摘要没有展开。\n\n**⚠️ 论证瑕疵：**\n\n- 论文提出 universality 过早，但没有在摘要中说明哪些经验结果最能区分“共享约束”与“共享真表征”两种解释。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **把约束空间形式化：** 建立能量化身体、任务和环境约束的指标，用于更严谨地解释跨系统对齐。\n- **反馈到 world model 设计：** 针对不同 embodied agent 定制表征目标，而不是默认追求一个统一 latent standard。\n\n\n---",
+      "summary_preview": "这篇论文反对“强系统最终都会收敛到统一世界表征”的乐观假设，主张表征对齐更多来自相似生态约束，而不是单一 universality。"
+    },
+    {
+      "entry_id": "2604.17915v1",
+      "slug": "2604.17915v1-onedrive-unified-multi-paradigm-driving-with-vision-language-act",
+      "title": "OneDrive: Unified Multi-Paradigm Driving with Vision-Language-Action Models",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17915v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "authors": [
+        "Yiwei Zhang",
+        "Xuesong Chen",
+        "Jin Gao",
+        "Hanshi Wang",
+        "Fudong Ge",
+        "Weiming Hu",
+        "Shaoshuai Shi",
+        "Zhipeng Zhang"
+      ],
+      "summary_status": "已总结",
+      "institution": "State Key Laboratory of Multimodal Artificial Intelligence Systems, CASIA; University of Chinese Academy of Sciences; Shanghai Jiao Tong University; Voyager Research, Didi Chuxing; ShanghaiTech University",
+      "essence": "这篇论文试图用单一因果 decoder 同时承载自动驾驶中的语言生成、目标检测和轨迹规划，解决多 decoder 系统碎片化的问题。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 端到端自动驾驶通常把语言、检测和规划拆到不同 decoder 或级联模块中实现。",
+        "核心痛点： 这种拆分造成 backbone 复用不足、训练目标割裂、系统复杂且延迟偏高。",
+        "本文切入点： 在预训练 VLM 基础上，把结构化 query 和文本 token 统一放进同一个 causal transformer decoder 中。"
+      ],
+      "insight_points": [
+        "预训练 VLM 的注意力可以跨任务迁移： 不只会说话，也能服务于结构化感知和规划。",
+        "统一架构减少了自动驾驶系统的接口损耗： 检测、理解和规划共享同一表示空间，更利于联合优化。",
+        "自动驾驶很适合成为 VLA 落地场景： 因为它天然需要同时处理语言、感知和连续控制输出。"
+      ],
+      "next_steps": [
+        "加入显式安全与因果约束： 避免统一 decoder 在闭环稀有事件中只学到相关性而非可验证规则。",
+        "跨域迁移到更一般 VLA： 检验这种统一 query 机制在机器人操作和多智能体导航中的可复用性。"
+      ],
+      "label_tags": [
+        "VLA",
+        "自动驾驶",
+        "统一解码",
+        "多任务学习",
+        "轨迹规划"
+      ],
+      "tags": [
+        "VLA",
+        "自动驾驶",
+        "统一解码",
+        "多任务学习",
+        "轨迹规划",
+        "vla",
+        "benchmark",
+        "cs.CV"
+      ],
+      "pdf_name": "OneDrive Unified Multi-Paradigm Driving with Vision-Language-Action Models.pdf",
+      "pdf_path": "pdfs/OneDrive Unified Multi-Paradigm Driving with Vision-Language-Action Models.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** OneDrive: Unified Multi-Paradigm Driving with Vision-Language-Action Models\n- **核心机构：** State Key Laboratory of Multimodal Artificial Intelligence Systems, CASIA; University of Chinese Academy of Sciences; Shanghai Jiao Tong University; Voyager Research, Didi Chuxing; ShanghaiTech University\n- **一句话本质：** 这篇论文试图用单一因果 decoder 同时承载自动驾驶中的语言生成、目标检测和轨迹规划，解决多 decoder 系统碎片化的问题。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 端到端自动驾驶通常把语言、检测和规划拆到不同 decoder 或级联模块中实现。\n- **核心痛点：** 这种拆分造成 backbone 复用不足、训练目标割裂、系统复杂且延迟偏高。\n- **本文切入点：** 在预训练 VLM 基础上，把结构化 query 和文本 token 统一放进同一个 causal transformer decoder 中。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 图像观测 + 结构化 query -> 单一 causal decoder -> 文本、检测结果与轨迹规划输出。\n- **关键模块 1：** **统一 decoder 设计**：用同一注意力骨干同时处理语言 token、检测 query 和轨迹 query。\n- **关键模块 2：** **structured trajectory queries**：把规划也写成 decoder 内部的一类结构化输出，而不是额外下游模块。\n- **关键模块 3：** **双模式推理**：既保留多模态生成能力，也支持更高效的 inference mode 降低时延。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **预训练 VLM 的注意力可以跨任务迁移：** 不只会说话，也能服务于结构化感知和规划。\n- **统一架构减少了自动驾驶系统的接口损耗：** 检测、理解和规划共享同一表示空间，更利于联合优化。\n- **自动驾驶很适合成为 VLA 落地场景：** 因为它天然需要同时处理语言、感知和连续控制输出。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **统一不代表所有任务都同样适配：** 检测和轨迹回归的输出结构差异很大，强行统一可能隐藏局部性能折中。\n- **主要证据仍集中在驾驶 benchmark：** 不清楚该统一 decoder 能否外推到更开放的具身操作场景。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要给出了强 benchmark 指标，但没有拆解统一 decoder 相比模块化设计究竟在哪一类子任务上收益最大。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **加入显式安全与因果约束：** 避免统一 decoder 在闭环稀有事件中只学到相关性而非可验证规则。\n- **跨域迁移到更一般 VLA：** 检验这种统一 query 机制在机器人操作和多智能体导航中的可复用性。\n\n\n---",
+      "summary_preview": "这篇论文试图用单一因果 decoder 同时承载自动驾驶中的语言生成、目标检测和轨迹规划，解决多 decoder 系统碎片化的问题。"
+    },
+    {
+      "entry_id": "2604.17896v1",
+      "slug": "2604.17896v1-can-explicit-physical-feasibility-benefit-vla-learning-an-empiri",
+      "title": "Can Explicit Physical Feasibility Benefit VLA Learning? An Empirical Study",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17896v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "authors": [
+        "Yubai Wei",
+        "Chen Wu",
+        "Hashem Haghbayan"
+      ],
+      "summary_status": "已总结",
+      "institution": "University of Turku",
+      "essence": "这篇论文验证了一个直观但常被忽略的观点：仅靠模仿学习让 VLA 自己悟出物理可行性不够稳，显式几何可行性监督可以明显提升可靠性。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 主流 VLA 主要靠大规模模仿学习从演示中隐式吸收动作规律。",
+        "核心痛点： 障碍避让、运动学可达性等硬约束只被间接学习，一旦数据不足或场景略变，策略容易输出物理上不合理的动作。",
+        "本文切入点： 把 geometry-grounded feasibility objective 显式加进 diffusion-based VLA 的训练目标。"
+      ],
+      "insight_points": [
+        "物理可靠性值得被单独监督： 不能默认大模型看了足够多演示就会自然学会所有硬约束。",
+        "低数据场景尤其受益： 当演示覆盖不足时，显式约束更像先验，能有效减少无效探索和错误泛化。",
+        "这类约束很适合做通用补丁： 不需要彻底重做 VLA 架构，就能提升实用鲁棒性。"
+      ],
+      "next_steps": [
+        "扩展约束类型： 从几何可行性继续延伸到接触稳定性、力约束和任务安全约束。",
+        "做训练期与测试期结合： 把显式 feasibility 学习和在线安全过滤结合成双保险框架。"
+      ],
+      "label_tags": [
+        "VLA",
+        "可行性约束",
+        "几何监督",
+        "扩散策略",
+        "低数据学习"
+      ],
+      "tags": [
+        "VLA",
+        "可行性约束",
+        "几何监督",
+        "扩散策略",
+        "低数据学习",
+        "vla",
+        "robustness",
+        "cs.LG",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "pdf_name": "Can Explicit Physical Feasibility Benefit VLA Learning An Empirical Study.pdf",
+      "pdf_path": "pdfs/Can Explicit Physical Feasibility Benefit VLA Learning An Empirical Study.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Can Explicit Physical Feasibility Benefit VLA Learning? An Empirical Study\n- **核心机构：** University of Turku\n- **一句话本质：** 这篇论文验证了一个直观但常被忽略的观点：仅靠模仿学习让 VLA 自己悟出物理可行性不够稳，显式几何可行性监督可以明显提升可靠性。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 主流 VLA 主要靠大规模模仿学习从演示中隐式吸收动作规律。\n- **核心痛点：** 障碍避让、运动学可达性等硬约束只被间接学习，一旦数据不足或场景略变，策略容易输出物理上不合理的动作。\n- **本文切入点：** 把 geometry-grounded feasibility objective 显式加进 diffusion-based VLA 的训练目标。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 视觉观测 + 语言指令 + 可行性监督 -> 训练期联合优化 -> 输出更符合几何约束的连续动作。\n- **关键模块 1：** **显式 feasibility objective**：把障碍感知和运动学可行性变成直接监督信号。\n- **关键模块 2：** **受控 probe 任务**：用 obstacle-aware manipulation 系统性检验几何约束对策略学习的贡献。\n- **关键模块 3：** **与 diffusion VLA 联合训练**：证明该监督能与现有强策略骨干兼容。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **物理可靠性值得被单独监督：** 不能默认大模型看了足够多演示就会自然学会所有硬约束。\n- **低数据场景尤其受益：** 当演示覆盖不足时，显式约束更像先验，能有效减少无效探索和错误泛化。\n- **这类约束很适合做通用补丁：** 不需要彻底重做 VLA 架构，就能提升实用鲁棒性。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **验证场景较受控：** 障碍感知 manipulation 很适合作为 probe，但离真实开放环境仍有差距。\n- **监督信号获取成本未展开：** 如果现实系统难以稳定提供 feasibility label，方法落地会受到限制。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要说明性能和可靠性都提升，但没有拆解不同类型约束对结果的相对贡献。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **扩展约束类型：** 从几何可行性继续延伸到接触稳定性、力约束和任务安全约束。\n- **做训练期与测试期结合：** 把显式 feasibility 学习和在线安全过滤结合成双保险框架。\n\n\n---",
+      "summary_preview": "这篇论文验证了一个直观但常被忽略的观点：仅靠模仿学习让 VLA 自己悟出物理可行性不够稳，显式几何可行性监督可以明显提升可靠性。"
+    },
+    {
+      "entry_id": "2604.17887v1",
+      "slug": "2604.17887v1-stableidm-stabilizing-inverse-dynamics-model-against-manipulator",
+      "title": "StableIDM: Stabilizing Inverse Dynamics Model against Manipulator Truncation via Spatio-Temporal Refinement",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17887v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "authors": [
+        "Kerui Li",
+        "Zhe Jing",
+        "Xiaofeng Wang",
+        "Zheng Zhu",
+        "Yukun Zhou",
+        "Guan Huang",
+        "Dongze Li",
+        "Qingkai Yang",
+        "Huaibo Huang"
+      ],
+      "summary_status": "已总结",
+      "institution": "GigaAI; Institute of Automation, Chinese Academy of Sciences; Beijing Institute of Technology",
+      "essence": "这篇论文聚焦一个非常实际的问题：当机械臂在画面里被截断或遮挡时，逆动力学模型会迅速崩掉，因此作者用时空特征精炼来提升 IDM 的可恢复性与下游标注价值。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： IDM 常被用作动作标注器或策略执行器，是 embodied 数据生成链条中的关键部件。",
+        "核心痛点： 一旦机械臂只部分可见，视觉到动作的逆映射会变成病态问题，导致动作预测极不稳定。",
+        "本文切入点： 用机器人中心 masking、方向特征聚合和时序平滑联合建模，专门提升截断场景下的稳定性。"
+      ],
+      "insight_points": [
+        "IDM 鲁棒性会直接影响 VLA 数据质量： 如果标注器本身不稳，后续大模型学习到的就是噪声动作分布。",
+        "部分可观测不是边角问题： 在真实机器人视角里，机械臂截断和遮挡是高频现象，必须正面处理。",
+        "这类方法兼具“执行价值”和“数据价值”： 既能改善直接控制，也能提升视频计划解码和 VLA 自动标注质量。"
+      ],
+      "next_steps": [
+        "融合显式机器人状态： 将关节编码、末端位姿或 proprioception 融入 StableIDM，进一步减少纯视觉歧义。",
+        "面向更复杂视角泛化： 在第一视角、移动相机和多臂系统中检验该方法是否仍然稳健。"
+      ],
+      "label_tags": [
+        "VLA",
+        "逆动力学",
+        "遮挡鲁棒",
+        "时空精炼",
+        "自动标注"
+      ],
+      "tags": [
+        "VLA",
+        "逆动力学",
+        "遮挡鲁棒",
+        "时空精炼",
+        "自动标注",
+        "vla",
+        "robustness",
+        "cs.RO"
+      ],
+      "pdf_name": "StableIDM Stabilizing Inverse Dynamics Model against Manipulator Truncation via Spatio-Temporal Refinement.pdf",
+      "pdf_path": "pdfs/StableIDM Stabilizing Inverse Dynamics Model against Manipulator Truncation via Spatio-Temporal Refinement.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** StableIDM: Stabilizing Inverse Dynamics Model against Manipulator Truncation via Spatio-Temporal Refinement\n- **核心机构：** GigaAI; Institute of Automation, Chinese Academy of Sciences; Beijing Institute of Technology\n- **一句话本质：** 这篇论文聚焦一个非常实际的问题：当机械臂在画面里被截断或遮挡时，逆动力学模型会迅速崩掉，因此作者用时空特征精炼来提升 IDM 的可恢复性与下游标注价值。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** IDM 常被用作动作标注器或策略执行器，是 embodied 数据生成链条中的关键部件。\n- **核心痛点：** 一旦机械臂只部分可见，视觉到动作的逆映射会变成病态问题，导致动作预测极不稳定。\n- **本文切入点：** 用机器人中心 masking、方向特征聚合和时序平滑联合建模，专门提升截断场景下的稳定性。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 部分可见的机器人观测 -> 时空特征精炼 -> 更稳定的低层动作预测。\n- **关键模块 1：** **robot-centric masking**：压制背景干扰，把视觉注意力集中到机械臂相关区域。\n- **关键模块 2：** **Directional Feature Aggregation**：沿可见机械臂推断的方向抽取各向异性空间特征，增强几何推理。\n- **关键模块 3：** **Temporal Dynamics Refinement**：利用动作连续性对瞬时误差做时序修正和平滑。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **IDM 鲁棒性会直接影响 VLA 数据质量：** 如果标注器本身不稳，后续大模型学习到的就是噪声动作分布。\n- **部分可观测不是边角问题：** 在真实机器人视角里，机械臂截断和遮挡是高频现象，必须正面处理。\n- **这类方法兼具“执行价值”和“数据价值”：** 既能改善直接控制，也能提升视频计划解码和 VLA 自动标注质量。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **仍依赖机械臂可见线索：** 若机械臂严重遮挡甚至完全离开视野，基于方向估计的增强可能仍会失效。\n- **方法更像 patch 而非根本替代：** 它提升了逆动力学稳健性，但没有改变视觉到动作逆问题本身的多解性。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要展示了多项增益，但没有分离说明三个模块中哪一个对性能贡献最大。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **融合显式机器人状态：** 将关节编码、末端位姿或 proprioception 融入 StableIDM，进一步减少纯视觉歧义。\n- **面向更复杂视角泛化：** 在第一视角、移动相机和多臂系统中检验该方法是否仍然稳健。\n\n\n---",
+      "summary_preview": "这篇论文聚焦一个非常实际的问题：当机械臂在画面里被截断或遮挡时，逆动力学模型会迅速崩掉，因此作者用时空特征精炼来提升 IDM 的可恢复性与下游标注价值。"
+    },
+    {
+      "entry_id": "2604.17883v1",
+      "slug": "2604.17883v1-scaling-human-ai-coding-collaboration-requires-a-governable-cons",
+      "title": "Scaling Human-AI Coding Collaboration Requires a Governable Consensus Layer",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17883v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "world-model"
+      ],
+      "track_names": [
+        "World Model"
+      ],
+      "categories": [
+        "cs.SE",
+        "cs.HC",
+        "cs.LG"
+      ],
+      "authors": [
+        "Tianfu Wang",
+        "Zhezheng Hao",
+        "Yin Wu",
+        "Wei Wu",
+        "Qiang Lin",
+        "Hande Dong",
+        "Nicholas Jing Yuan",
+        "Hui Xiong"
+      ],
+      "summary_status": "已总结",
+      "institution": "Hong Kong University of Science and Technology (Guangzhou); Zhejiang University; University of Science and Technology of China; Tencent",
+      "essence": "这篇论文认为 AI 编程的根本问题不是代码生成不够强，而是缺少一个可审计、可同步、可治理的“共识世界模型”来承载结构性决策。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 当前 AI 编程工作流的主产物仍是代码与聊天记录，评估也多聚焦代码是否能跑通。",
+        "核心痛点： 代码与对话会把系统拓扑、依赖关系和设计承诺压扁成低维文本，导致审阅者难以追踪为什么这么改、系统依赖了哪些隐含假设。",
+        "本文切入点： 提出 Agentic Consensus，用一个 typed property graph 形式的 operable world model 作为工程主工件，代码变成它的派生产物。"
+      ],
+      "insight_points": [
+        "AI 编程首先是控制问题而不只是生成问题： 模型会写代码不代表团队知道系统正在变成什么。",
+        "把世界模型显式化有助于治理： 一旦结构承诺能被链接到证据和变更，回归分析与责任归因就不再完全依赖聊天上下文。",
+        "这篇论文与 world model 的联系在于“工程世界模型”： 它把 world model 从物理环境扩展到软件系统协作对象本身。"
+      ],
+      "next_steps": [
+        "把共识层做成可渐进接入的工具： 优先服务于架构变更、跨模块重构和高风险改动，而不是一上来覆盖全部开发流程。",
+        "连接真实工程数据： 验证 consensus entropy 是否真能预测回归风险、审查成本和人工干预量。"
+      ],
+      "label_tags": [
+        "世界模型",
+        "AI编程",
+        "共识图谱",
+        "可治理工程",
+        "人机协同"
+      ],
+      "tags": [
+        "世界模型",
+        "AI编程",
+        "共识图谱",
+        "可治理工程",
+        "人机协同",
+        "world-model",
+        "benchmark",
+        "cs.SE",
+        "cs.HC",
+        "cs.LG"
+      ],
+      "pdf_name": "Scaling Human-AI Coding Collaboration Requires a Governable Consensus Layer.pdf",
+      "pdf_path": "pdfs/Scaling Human-AI Coding Collaboration Requires a Governable Consensus Layer.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Scaling Human-AI Coding Collaboration Requires a Governable Consensus Layer\n- **核心机构：** Hong Kong University of Science and Technology (Guangzhou); Zhejiang University; University of Science and Technology of China; Tencent\n- **一句话本质：** 这篇论文认为 AI 编程的根本问题不是代码生成不够强，而是缺少一个可审计、可同步、可治理的“共识世界模型”来承载结构性决策。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 当前 AI 编程工作流的主产物仍是代码与聊天记录，评估也多聚焦代码是否能跑通。\n- **核心痛点：** 代码与对话会把系统拓扑、依赖关系和设计承诺压扁成低维文本，导致审阅者难以追踪为什么这么改、系统依赖了哪些隐含假设。\n- **本文切入点：** 提出 Agentic Consensus，用一个 typed property graph 形式的 operable world model 作为工程主工件，代码变成它的派生产物。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 人机协同设计决策与证据 -> typed property graph 共识层 C -> 通过同步算子生成或回灌可执行代码工件。\n- **关键模块 1：** **consensus layer C**：显式表示结构承诺、依赖关系和证据链接，使工程知识可审计。\n- **关键模块 2：** **Phi / Psi 同步机制**：`Phi` 负责从共识层落地到可执行工件，`Psi` 负责从代码回灌共识层保持对应关系。\n- **关键模块 3：** **新评测指标**：从代码正确性转向 alignment fidelity、consensus entropy 和 intervention distance。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **AI 编程首先是控制问题而不只是生成问题：** 模型会写代码不代表团队知道系统正在变成什么。\n- **把世界模型显式化有助于治理：** 一旦结构承诺能被链接到证据和变更，回归分析与责任归因就不再完全依赖聊天上下文。\n- **这篇论文与 world model 的联系在于“工程世界模型”：** 它把 world model 从物理环境扩展到软件系统协作对象本身。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **落地成本可能很高：** 如果维护共识图谱本身需要大量额外人力，它可能在真实团队中难以被长期坚持。\n- **从研究原型到工业流程仍有距离：** 摘要提出了很强的范式，但没有说明具体工具链与现有版本控制、CI、代码审查如何集成。\n\n**⚠️ 论证瑕疵：**\n\n- 论文提出新的 benchmark family，但摘要没有给出这些指标与实际工程效率、缺陷率之间的实证关联。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **把共识层做成可渐进接入的工具：** 优先服务于架构变更、跨模块重构和高风险改动，而不是一上来覆盖全部开发流程。\n- **连接真实工程数据：** 验证 consensus entropy 是否真能预测回归风险、审查成本和人工干预量。\n\n\n---",
+      "summary_preview": "这篇论文认为 AI 编程的根本问题不是代码生成不够强，而是缺少一个可审计、可同步、可治理的“共识世界模型”来承载结构性决策。"
+    },
+    {
+      "entry_id": "2604.17880v1",
+      "slug": "2604.17880v1-st-structured-spatiotemporal-vla-for-robotic-manipulation",
+      "title": "ST-$π$: Structured SpatioTemporal VLA for Robotic Manipulation",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17880v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "authors": [
+        "Chuanhao Ma",
+        "Hanyu Zhou",
+        "Shihan Peng",
+        "Yan Li",
+        "Tao Gu",
+        "Luxin Yan"
+      ],
+      "summary_status": "已总结",
+      "institution": "Huazhong University of Science and Technology; National University of Singapore; Macquarie University",
+      "essence": "这篇论文把操作任务中的时空推理显式结构化为“分块子任务 + 空间定位 + 时间边界”，让 VLA 不再只靠隐式表征硬学整段连续动作。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 现有 VLA 多数直接把视觉和语言映射到逐步动作，时空知识只是隐式地藏在特征里。",
+        "核心痛点： 当任务包含多个连续行为、明确的阶段边界和复杂空间关系时，隐式时空推理往往不够稳。",
+        "本文切入点： 先让高层 VLM 生成 chunk-level action prompts，再让低层 action expert 负责局部控制细化。"
+      ],
+      "insight_points": [
+        "长序列操作需要显式阶段结构： 让模型直接预测整段连续动作，往往会把阶段切换和局部控制混成一团。",
+        "高层规划与低层执行分工明确更有效： 把全局时空组织交给 VLM，把局部连续控制交给 action expert，是一种自然分层。",
+        "标注体系本身也很关键： 没有结构化时空标注，模型很难稳定学到可解释的分块行为。"
+      ],
+      "next_steps": [
+        "降低对人工结构标注的依赖： 研究自动分段、无监督 temporal grounding 或弱监督方式。",
+        "加入闭环反馈： 让高层分块提示能根据执行结果实时重写，而不是只做一次离线分解。"
+      ],
+      "label_tags": [
+        "VLA",
+        "时空规划",
+        "分块动作",
+        "操作数据集",
+        "机器人操作"
+      ],
+      "tags": [
+        "VLA",
+        "时空规划",
+        "分块动作",
+        "操作数据集",
+        "机器人操作",
+        "vla",
+        "cs.RO",
+        "cs.CV"
+      ],
+      "pdf_name": "ST-$π$ Structured SpatioTemporal VLA for Robotic Manipulation.pdf",
+      "pdf_path": "pdfs/ST-$π$ Structured SpatioTemporal VLA for Robotic Manipulation.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** ST-$π$: Structured SpatioTemporal VLA for Robotic Manipulation\n- **核心机构：** Huazhong University of Science and Technology; National University of Singapore; Macquarie University\n- **一句话本质：** 这篇论文把操作任务中的时空推理显式结构化为“分块子任务 + 空间定位 + 时间边界”，让 VLA 不再只靠隐式表征硬学整段连续动作。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 现有 VLA 多数直接把视觉和语言映射到逐步动作，时空知识只是隐式地藏在特征里。\n- **核心痛点：** 当任务包含多个连续行为、明确的阶段边界和复杂空间关系时，隐式时空推理往往不够稳。\n- **本文切入点：** 先让高层 VLM 生成 chunk-level action prompts，再让低层 action expert 负责局部控制细化。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 4D 观测 + 任务指令 -> chunk-level 时空 action prompts -> step-level 连续动作参数。\n- **关键模块 1：** **Spatiotemporal VLM**：生成含子任务、空间 grounding 与时间 grounding 的高层提示序列。\n- **关键模块 2：** **spatiotemporal action expert**：用结构化双生成器同时建模空间依赖与时间因果。\n- **关键模块 3：** **结构化标注数据集**：提供真实机器人时空标注以支持 fine-tuning。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **长序列操作需要显式阶段结构：** 让模型直接预测整段连续动作，往往会把阶段切换和局部控制混成一团。\n- **高层规划与低层执行分工明确更有效：** 把全局时空组织交给 VLM，把局部连续控制交给 action expert，是一种自然分层。\n- **标注体系本身也很关键：** 没有结构化时空标注，模型很难稳定学到可解释的分块行为。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **对结构化标注依赖较强：** 如果真实数据难以提供高质量 chunk-level 标签，扩展成本会比较高。\n- **两阶段结构可能带来误差传递：** 高层提示一旦错了，低层再强也只能在错误子任务里精细执行。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要没有说明不同任务类型下，是时间分块还是空间 grounding 对提升贡献更大。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **降低对人工结构标注的依赖：** 研究自动分段、无监督 temporal grounding 或弱监督方式。\n- **加入闭环反馈：** 让高层分块提示能根据执行结果实时重写，而不是只做一次离线分解。\n\n\n---",
+      "summary_preview": "这篇论文把操作任务中的时空推理显式结构化为“分块子任务 + 空间定位 + 时间边界”，让 VLA 不再只靠隐式表征硬学整段连续动作。"
+    },
+    {
+      "entry_id": "2604.17876v1",
+      "slug": "2604.17876v1-oflow-injecting-object-aware-temporal-flow-matching-for-robust-r",
+      "title": "OFlow: Injecting Object-Aware Temporal Flow Matching for Robust Robotic Manipulation",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17876v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "authors": [
+        "Kuanning Wang",
+        "Ke Fan",
+        "Chenhao Qiu",
+        "Zeyu Shangguan",
+        "Yuqian Fu",
+        "Yanwei Fu",
+        "Daniel Seita",
+        "Xiangyang Xue"
+      ],
+      "summary_status": "已总结",
+      "institution": "Fudan University; University of Southern California; King Abdullah University of Science and Technology",
+      "essence": "这篇论文把“未来场景前瞻”和“任务相关物体感知”合并进一个共享 latent 空间，用 object-aware temporal flow matching 提升 VLA 在分布偏移下的操作鲁棒性。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 不少 VLA 主要依赖当前帧做动作决策，而对象感知和未来预测常分散在不同模块或不同 latent 空间里。",
+        "核心痛点： 如果模型既看不清哪些物体重要，又不理解场景接下来会怎么变，遇到干扰或分布偏移时就很容易失手。",
+        "本文切入点： 在同一语义 latent 空间里同时预测未来和提取 object-aware 表征，让前瞻能力直接服务动作生成。"
+      ],
+      "insight_points": [
+        "鲁棒操作需要“看未来”也要“看对对象”： 仅做时序预测或仅做对象感知都不够，关键在于两者要耦合。",
+        "shared latent 是设计重点： 当预测和控制基于同一 latent，对下游动作的支持更直接。",
+        "这条路线很适合处理分布偏移： 因为它增强的是物理相关结构，而不是表面图像统计。"
+      ],
+      "next_steps": [
+        "加入显式对象状态监督： 让 object-aware latent 与检测、分割或 3D tracking 信息更强耦合。",
+        "扩展到长时程任务： 验证 OFlow 在多阶段规划和真实接触丰富任务中的滚动误差表现。"
+      ],
+      "label_tags": [
+        "VLA",
+        "前瞻预测",
+        "目标感知",
+        "flow matching",
+        "鲁棒操作"
+      ],
+      "tags": [
+        "VLA",
+        "前瞻预测",
+        "目标感知",
+        "flow matching",
+        "鲁棒操作",
+        "vla",
+        "benchmark",
+        "robustness",
+        "cs.RO"
+      ],
+      "pdf_name": "OFlow Injecting Object-Aware Temporal Flow Matching for Robust Robotic Manipulation.pdf",
+      "pdf_path": "pdfs/OFlow Injecting Object-Aware Temporal Flow Matching for Robust Robotic Manipulation.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** OFlow: Injecting Object-Aware Temporal Flow Matching for Robust Robotic Manipulation\n- **核心机构：** Fudan University; University of Southern California; King Abdullah University of Science and Technology\n- **一句话本质：** 这篇论文把“未来场景前瞻”和“任务相关物体感知”合并进一个共享 latent 空间，用 object-aware temporal flow matching 提升 VLA 在分布偏移下的操作鲁棒性。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 不少 VLA 主要依赖当前帧做动作决策，而对象感知和未来预测常分散在不同模块或不同 latent 空间里。\n- **核心痛点：** 如果模型既看不清哪些物体重要，又不理解场景接下来会怎么变，遇到干扰或分布偏移时就很容易失手。\n- **本文切入点：** 在同一语义 latent 空间里同时预测未来和提取 object-aware 表征，让前瞻能力直接服务动作生成。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 当前观测 -> temporal flow matching 预测未来 latent -> object-aware factorization -> 连续动作生成。\n- **关键模块 1：** **future latent forecasting**：先预测未来演化，而不是只基于当前快照反应式出手。\n- **关键模块 2：** **object-aware decomposition**：显式强调物理上相关的对象与交互线索，滤掉任务无关变化。\n- **关键模块 3：** **shared semantic latent space**：把前瞻预测和对象推理统一到同一空间中，减少模块割裂。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **鲁棒操作需要“看未来”也要“看对对象”：** 仅做时序预测或仅做对象感知都不够，关键在于两者要耦合。\n- **shared latent 是设计重点：** 当预测和控制基于同一 latent，对下游动作的支持更直接。\n- **这条路线很适合处理分布偏移：** 因为它增强的是物理相关结构，而不是表面图像统计。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **latent 分解是否稳定仍是问题：** 如果 object-aware 因子没学准，统一 latent 反而可能把噪声一起传播到控制端。\n- **未来预测误差会传递到动作：** 一旦前瞻 latent 偏掉，后续控制也可能跟着系统性偏离。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要给出多个 benchmark 上的一致提升，但没有说明不同类型对象复杂度或遮挡程度下效果差异。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **加入显式对象状态监督：** 让 object-aware latent 与检测、分割或 3D tracking 信息更强耦合。\n- **扩展到长时程任务：** 验证 OFlow 在多阶段规划和真实接触丰富任务中的滚动误差表现。\n\n\n---",
+      "summary_preview": "这篇论文把“未来场景前瞻”和“任务相关物体感知”合并进一个共享 latent 空间，用 object-aware temporal flow matching 提升 VLA 在分布偏移下的操作鲁棒性。"
+    },
+    {
+      "entry_id": "2604.17800v1",
+      "slug": "2604.17800v1-refinevla-multimodal-reasoning-aware-generalist-robotic-policies",
+      "title": "ReFineVLA: Multimodal Reasoning-Aware Generalist Robotic Policies via Teacher-Guided Fine-Tuning",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17800v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "authors": [
+        "Tuan Van Vo",
+        "Tan Q. Nguyen",
+        "Khang Nguyen",
+        "Nhat Xuan Tran",
+        "Duy H. M. Nguyen",
+        "An T. Le",
+        "Ngo Anh Vien",
+        "Minh Nhat Vu"
+      ],
+      "summary_status": "已总结",
+      "institution": "VinRobotics; University of Texas at Arlington; Max Planck Research School for Intelligent Systems; Intelligent Autonomous Systems Lab, TU Darmstadt; TU Wien; Austrian Institute of Technology; Mohamed bin Zayed University of Artificial Intelligence",
+      "essence": "这篇论文通过教师模型生成推理 rationale，再用这些理由去微调 VLA，试图把“会做”升级成“边做边能解释为什么这么做”。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 很多 VLA 能学到输入到动作的函数映射，但中间推理过程不显式，导致可解释性和长时程泛化受限。",
+        "核心痛点： 当任务更复杂、链条更长时，只靠隐式映射容易漏掉关键逻辑步骤，也不利于诊断失败原因。",
+        "本文切入点： 用教师模型先为机器人数据补上 reasoning rationales，再进行 reasoning-aware fine-tuning。"
+      ],
+      "insight_points": [
+        "推理监督能提升通用策略： 至少在模拟 manipulation 中，显式理由并不是多余附属品，而能帮助动作决策更稳。",
+        "解释性与性能未必冲突： 论文表明添加 rationale 后不只是更可解释，也可能得到更强泛化。",
+        "teacher-generated supervision 是一条高性价比路线： 不必完全重写模型架构，就能为现有 VLA 注入 reasoning 信号。"
+      ],
+      "next_steps": [
+        "引入可验证 rationale： 把解释与状态变化、子目标达成情况绑定，减少纯语言层面的伪解释。",
+        "扩展到真实长时程任务： 检验 reasoning-aware fine-tuning 在真实机器人连续任务中的稳健性。"
+      ],
+      "label_tags": [
+        "VLA",
+        "显式推理",
+        "教师蒸馏",
+        "长时程操作",
+        "可解释性"
+      ],
+      "tags": [
+        "VLA",
+        "显式推理",
+        "教师蒸馏",
+        "长时程操作",
+        "可解释性",
+        "vla",
+        "planning",
+        "dataset",
+        "cs.RO",
+        "cs.CV"
+      ],
+      "pdf_name": "ReFineVLA Multimodal Reasoning-Aware Generalist Robotic Policies via Teacher-Guided Fine-Tuning.pdf",
+      "pdf_path": "pdfs/ReFineVLA Multimodal Reasoning-Aware Generalist Robotic Policies via Teacher-Guided Fine-Tuning.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** ReFineVLA: Multimodal Reasoning-Aware Generalist Robotic Policies via Teacher-Guided Fine-Tuning\n- **核心机构：** VinRobotics; University of Texas at Arlington; Max Planck Research School for Intelligent Systems; Intelligent Autonomous Systems Lab, TU Darmstadt; TU Wien; Austrian Institute of Technology; Mohamed bin Zayed University of Artificial Intelligence\n- **一句话本质：** 这篇论文通过教师模型生成推理 rationale，再用这些理由去微调 VLA，试图把“会做”升级成“边做边能解释为什么这么做”。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 很多 VLA 能学到输入到动作的函数映射，但中间推理过程不显式，导致可解释性和长时程泛化受限。\n- **核心痛点：** 当任务更复杂、链条更长时，只靠隐式映射容易漏掉关键逻辑步骤，也不利于诊断失败原因。\n- **本文切入点：** 用教师模型先为机器人数据补上 reasoning rationales，再进行 reasoning-aware fine-tuning。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 观测 + 指令 + 教师生成的推理理由 -> reasoning-enriched dataset -> 微调后的通用 VLA 策略。\n- **关键模块 1：** **teacher-guided rationale generation**：把专家模型生成的解释性文本作为额外监督。\n- **关键模块 2：** **reasoning-aware fine-tuning**：在保留原有泛化能力的前提下，让 VLA 学习更显式的决策逻辑。\n- **关键模块 3：** **attention visualization**：分析视觉、语言与动作之间的对齐是否更合理。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **推理监督能提升通用策略：** 至少在模拟 manipulation 中，显式理由并不是多余附属品，而能帮助动作决策更稳。\n- **解释性与性能未必冲突：** 论文表明添加 rationale 后不只是更可解释，也可能得到更强泛化。\n- **teacher-generated supervision 是一条高性价比路线：** 不必完全重写模型架构，就能为现有 VLA 注入 reasoning 信号。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **高度依赖教师质量：** 若 teacher rationale 本身存在幻想或偏差，学生模型可能学到更“像解释”的错误逻辑。\n- **解释是否真实仍存疑：** 模型可能学会复述训练中常见 rationale，而不是形成可迁移的因果推理能力。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调 state-of-the-art，但没有说明 reasoning 监督在不同任务复杂度上的边际收益。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **引入可验证 rationale：** 把解释与状态变化、子目标达成情况绑定，减少纯语言层面的伪解释。\n- **扩展到真实长时程任务：** 检验 reasoning-aware fine-tuning 在真实机器人连续任务中的稳健性。\n\n\n---",
+      "summary_preview": "这篇论文通过教师模型生成推理 rationale，再用这些理由去微调 VLA，试图把“会做”升级成“边做边能解释为什么这么做”。"
+    },
+    {
+      "entry_id": "2604.17787v1",
+      "slug": "2604.17787v1-anchorrefine-synergy-manipulation-based-on-trajectory-anchor-and",
+      "title": "AnchorRefine: Synergy-Manipulation Based on Trajectory Anchor and Residual Refinement for Vision-Language-Action Models",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17787v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "authors": [
+        "Tingzheng Jia",
+        "Kan Guo",
+        "Lanping Qian",
+        "Yongli Hu",
+        "Daxin Tian",
+        "Guixian Qu",
+        "Chunmian Lin",
+        "Baocai Yin",
+        "Jiapu Wang"
+      ],
+      "summary_status": "已总结",
+      "institution": "Beijing University; Beihang University; Nanjing University",
+      "essence": "这篇论文把精密操作拆成“粗轨迹锚点 + 局部残差修正”，避免单一动作空间里大动作掩盖掉决定成败的细微校正。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 大多数 VLA 在一个统一动作空间里同时学习大范围搬运和末端精细修正。",
+        "核心痛点： 宏观运动幅度大、梯度强，容易压制那些幅度小但对接触成功率极关键的微调信号。",
+        "本文切入点： 用分层动作建模把全局轨迹组织和局部执行校正显式拆开。"
+      ],
+      "insight_points": [
+        "精密操作天然是分层问题： 人类操作也是先走到大致位置，再根据接触情况微调。",
+        "夹爪控制不应被当成普通连续变量： 其离散决策属性值得单独建模。",
+        "这种结构能兼容多种 VLA backbone： 无论是回归式还是 diffusion 式策略，都能从动作分解中获益。"
+      ],
+      "next_steps": [
+        "引入动态层级切换： 根据任务阶段自动调节 anchor 与 refine 的主导权。",
+        "结合触觉或接触反馈： 让局部修正更直接地对真实物理接触作出响应。"
+      ],
+      "label_tags": [
+        "VLA",
+        "分层动作",
+        "轨迹锚点",
+        "残差修正",
+        "夹爪控制"
+      ],
+      "tags": [
+        "VLA",
+        "分层动作",
+        "轨迹锚点",
+        "残差修正",
+        "夹爪控制",
+        "vla",
+        "planning",
+        "cs.RO",
+        "cs.AI"
+      ],
+      "pdf_name": "AnchorRefine Synergy-Manipulation Based on Trajectory Anchor and Residual Refinement for Vision-Language-Action Models.pdf",
+      "pdf_path": "pdfs/AnchorRefine Synergy-Manipulation Based on Trajectory Anchor and Residual Refinement for Vision-Language-Action Models.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** AnchorRefine: Synergy-Manipulation Based on Trajectory Anchor and Residual Refinement for Vision-Language-Action Models\n- **核心机构：** Beijing University; Beihang University; Nanjing University\n- **一句话本质：** 这篇论文把精密操作拆成“粗轨迹锚点 + 局部残差修正”，避免单一动作空间里大动作掩盖掉决定成败的细微校正。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 大多数 VLA 在一个统一动作空间里同时学习大范围搬运和末端精细修正。\n- **核心痛点：** 宏观运动幅度大、梯度强，容易压制那些幅度小但对接触成功率极关键的微调信号。\n- **本文切入点：** 用分层动作建模把全局轨迹组织和局部执行校正显式拆开。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 观测 + 指令 -> anchor planner 生成粗轨迹骨架 -> refinement 模块输出残差修正 -> 最终精细动作。\n- **关键模块 1：** **trajectory anchor planner**：负责给出全局移动 scaffold，先把大方向走对。\n- **关键模块 2：** **residual refinement**：针对执行偏差做局部几何和接触精修。\n- **关键模块 3：** **decision-aware gripper refinement**：专门处理夹爪这种离散且边界敏感的控制信号。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **精密操作天然是分层问题：** 人类操作也是先走到大致位置，再根据接触情况微调。\n- **夹爪控制不应被当成普通连续变量：** 其离散决策属性值得单独建模。\n- **这种结构能兼容多种 VLA backbone：** 无论是回归式还是 diffusion 式策略，都能从动作分解中获益。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **层级之间仍可能误差传递：** 若 anchor 规划偏差太大，refine 模块可能没有足够自由度补回来。\n- **分层增益依赖任务结构：** 对极短时或几乎不需要局部精修的任务，优势可能有限。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要没有说明 anchor 与 residual 之间的责任边界如何设定，以及不同任务中该边界是否需要自适应调整。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **引入动态层级切换：** 根据任务阶段自动调节 anchor 与 refine 的主导权。\n- **结合触觉或接触反馈：** 让局部修正更直接地对真实物理接触作出响应。\n\n\n---",
+      "summary_preview": "这篇论文把精密操作拆成“粗轨迹锚点 + 局部残差修正”，避免单一动作空间里大动作掩盖掉决定成败的细微校正。"
+    },
+    {
+      "entry_id": "2604.17706v1",
+      "slug": "2604.17706v1-omnivla-rl-a-vision-language-action-model-with-spatial-understan",
+      "title": "OmniVLA-RL: A Vision-Language-Action Model with Spatial Understanding and Online RL",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17706v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla"
+      ],
+      "track_names": [
+        "VLA"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "authors": [
+        "Haoxiang Jie",
+        "Yaoyuan Yan",
+        "Xiangyu Wei",
+        "Kailin Wang",
+        "Hongjie Yan",
+        "Zhiyou Heng",
+        "Daocheng Chen"
+      ],
+      "summary_status": "已总结",
+      "institution": "AI Lab, Country Garden Services; Omni AI; VBot; East China Normal University",
+      "essence": "这篇论文把空间理解、推理和动作控制拆成 MoT 专家模块，并用面向 flow matching 的在线 RL 优化来提升动作精度与训练稳定性。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： VLA 已经能处理多模态输入，但常在空间感知不准、模态融合松散以及 RL 训练不稳定之间相互掣肘。",
+        "核心痛点： 如果空间理解不到位，再强的动作优化也会建立在错误世界表征上；反过来，纯监督训练又难以在闭环控制中持续提升。",
+        "本文切入点： 用 MoT 分离不同能力专家，再用专门适配 flow matching 的在线 RL 机制强化策略。"
+      ],
+      "insight_points": [
+        "VLA 需要显式空间专家： 仅靠通用多模态骨干不一定能保证足够精确的空间理解。",
+        "flow matching 与 RL 可以结合： 这说明生成式动作建模不必停留在离线 imitation 学习。",
+        "从监督到在线优化是自然延伸： 具身系统最终还是要在交互中校正误差，而不是只在数据集上拟合。"
+      ],
+      "next_steps": [
+        "做更稳的离线到在线过渡： 用 uncertainty-aware gating 或安全约束减少在线探索风险。",
+        "扩展到真实机器人持续学习： 检验该框架在长期在线适应中的稳定性与遗忘问题。"
+      ],
+      "label_tags": [
+        "VLA",
+        "在线强化学习",
+        "空间理解",
+        "Mixture-of-Transformers",
+        "Flow-GSPO"
+      ],
+      "tags": [
+        "VLA",
+        "在线强化学习",
+        "空间理解",
+        "Mixture-of-Transformers",
+        "Flow-GSPO",
+        "vla",
+        "policy",
+        "cs.RO"
+      ],
+      "pdf_name": "OmniVLA-RL A Vision-Language-Action Model with Spatial Understanding and Online RL.pdf",
+      "pdf_path": "pdfs/OmniVLA-RL A Vision-Language-Action Model with Spatial Understanding and Online RL.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** OmniVLA-RL: A Vision-Language-Action Model with Spatial Understanding and Online RL\n- **核心机构：** AI Lab, Country Garden Services; Omni AI; VBot; East China Normal University\n- **一句话本质：** 这篇论文把空间理解、推理和动作控制拆成 MoT 专家模块，并用面向 flow matching 的在线 RL 优化来提升动作精度与训练稳定性。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** VLA 已经能处理多模态输入，但常在空间感知不准、模态融合松散以及 RL 训练不稳定之间相互掣肘。\n- **核心痛点：** 如果空间理解不到位，再强的动作优化也会建立在错误世界表征上；反过来，纯监督训练又难以在闭环控制中持续提升。\n- **本文切入点：** 用 MoT 分离不同能力专家，再用专门适配 flow matching 的在线 RL 机制强化策略。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 观测 + 指令 -> reasoning / spatial / action experts 协同编码 -> flow-based policy 输出动作，并在线 RL 优化。\n- **关键模块 1：** **Mix-of-Transformers**：将推理、空间和动作处理分配给不同专家，减少单塔模型内耗。\n- **关键模块 2：** **Flow-GSPO**：把 flow matching 重新表述为 SDE 过程，并结合 GSPO 做更稳定的策略优化。\n- **关键模块 3：** **在线闭环强化**：用 RL 进一步修正监督学习阶段无法覆盖的空间与控制误差。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **VLA 需要显式空间专家：** 仅靠通用多模态骨干不一定能保证足够精确的空间理解。\n- **flow matching 与 RL 可以结合：** 这说明生成式动作建模不必停留在离线 imitation 学习。\n- **从监督到在线优化是自然延伸：** 具身系统最终还是要在交互中校正误差，而不是只在数据集上拟合。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **系统复杂度显著提升：** MoT 加在线 RL 会带来更高的训练和部署成本。\n- **在线 RL 的安全性仍未解决：** 在真实机器人上大规模在线更新仍有风险，摘要没有说明保护机制。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要突出整体超越 SOTA，但没有拆解 MoT 与 Flow-GSPO 各自带来的增益占比。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **做更稳的离线到在线过渡：** 用 uncertainty-aware gating 或安全约束减少在线探索风险。\n- **扩展到真实机器人持续学习：** 检验该框架在长期在线适应中的稳定性与遗忘问题。\n\n\n---",
+      "summary_preview": "这篇论文把空间理解、推理和动作控制拆成 MoT 专家模块，并用面向 flow matching 的在线 RL 优化来提升动作精度与训练稳定性。"
+    },
+    {
+      "entry_id": "2604.17651v1",
+      "slug": "2604.17651v1-infrastructure-centric-world-models-bridging-temporal-depth-and",
+      "title": "Infrastructure-Centric World Models: Bridging Temporal Depth and Spatial Breadth for Roadside Perception",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17651v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "vla",
+        "world-model"
+      ],
+      "track_names": [
+        "VLA",
+        "World Model"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "authors": [
+        "Siyuan Meng",
+        "Chengbo Ai"
+      ],
+      "summary_status": "已总结",
+      "institution": "Department of Civil and Environmental Engineering, University of Massachusetts Amherst",
+      "essence": "这篇论文主张把 world model 从车载 ego-view 扩展到路侧基础设施视角，利用固定多传感器在时间深度上的优势，构建面向车路协同的环境生成与控制底座。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 自动驾驶 world model 目前几乎都围绕车端自车视角展开，强调车载传感器对局部场景的生成与预测。",
+        "核心痛点： 车载视角擅长空间覆盖，却天然缺少长期驻留、跨时段统计和稀有事件积累能力；这使很多安全关键模式难以稳定建模。",
+        "本文切入点： 提出 Infrastructure-centric World Model，把路侧持久观测带来的时间深度，与车端移动感知带来的空间广度结合起来。"
+      ],
+      "insight_points": [
+        "路侧视角补的是“时间深度”： 它长期驻留同一地点，特别适合积累罕见危险事件和交互分布，这恰好是车端短时观测很难获得的。",
+        "车路协同 world model 可能是新增长点： 不再只是预测“我车会怎样”，而是预测整个交叉口、多主体和信号控制联动后的系统演化。",
+        "这篇论文偏愿景型但方向感很强： 它把 world model、V2X 和 I-VLA 连接成一条新的研究路线。"
+      ],
+      "next_steps": [
+        "补齐公开 benchmark： 建立真正针对路侧长期建模、多主体反事实推演和 V2X 协同控制的数据集与评测。",
+        "验证 I-VLA 闭环价值： 证明语言指令驱动的路侧控制与 world model 结合，能否实质改善交通安全与效率。"
+      ],
+      "label_tags": [
+        "世界模型",
+        "路侧感知",
+        "自动驾驶",
+        "V2X",
+        "I-VLA"
+      ],
+      "tags": [
+        "世界模型",
+        "路侧感知",
+        "自动驾驶",
+        "V2X",
+        "I-VLA",
+        "vla",
+        "world-model",
+        "benchmark",
+        "cs.CV",
+        "cs.RO"
+      ],
+      "pdf_name": "Infrastructure-Centric World Models Bridging Temporal Depth and Spatial Breadth for Roadside Perception.pdf",
+      "pdf_path": "pdfs/Infrastructure-Centric World Models Bridging Temporal Depth and Spatial Breadth for Roadside Perception.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-20.md"
+        },
+        {
+          "date": "2026-04-20",
+          "track_key": "vla",
+          "track_name": "VLA",
+          "markdown_path": "Interpretation/arxiv-vla-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Infrastructure-Centric World Models: Bridging Temporal Depth and Spatial Breadth for Roadside Perception\n- **核心机构：** Department of Civil and Environmental Engineering, University of Massachusetts Amherst\n- **一句话本质：** 这篇论文主张把 world model 从车载 ego-view 扩展到路侧基础设施视角，利用固定多传感器在时间深度上的优势，构建面向车路协同的环境生成与控制底座。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 自动驾驶 world model 目前几乎都围绕车端自车视角展开，强调车载传感器对局部场景的生成与预测。\n- **核心痛点：** 车载视角擅长空间覆盖，却天然缺少长期驻留、跨时段统计和稀有事件积累能力；这使很多安全关键模式难以稳定建模。\n- **本文切入点：** 提出 Infrastructure-centric World Model，把路侧持久观测带来的时间深度，与车端移动感知带来的空间广度结合起来。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 路侧多模态传感器观测 + 长时行为数据 -> 生成式场景理解与多主体动力学预测 -> 面向 V2X 与交通控制的协同 world model。\n- **关键模块 1：** **三阶段路线图**：从生成式场景理解，到物理约束下的预测动力学，再到通过 latent alignment 支持 V2X 协作 world model。\n- **关键模块 2：** **双层架构**：底层以 annotation-free perception 形成多模态数据引擎，上层连接端到端 generative world model。\n- **关键模块 3：** **I-VLA 概念**：把路侧感知、语言指令和交通控制动作统一起来，扩展 VLA 的作用主体。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **路侧视角补的是“时间深度”：** 它长期驻留同一地点，特别适合积累罕见危险事件和交互分布，这恰好是车端短时观测很难获得的。\n- **车路协同 world model 可能是新增长点：** 不再只是预测“我车会怎样”，而是预测整个交叉口、多主体和信号控制联动后的系统演化。\n- **这篇论文偏愿景型但方向感很强：** 它把 world model、V2X 和 I-VLA 连接成一条新的研究路线。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **更像 roadmap 而不是已闭环验证的系统：** 摘要给出的是阶段性蓝图，离大规模真实部署仍有明显工程距离。\n- **强依赖基础设施建设：** 多模态路侧传感器、长时数据和协同协议的成本都不低，推广门槛远高于纯车端方案。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要提出了多阶段规划，但没有说明各阶段最关键的数据瓶颈、评测标准和失败模式。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **补齐公开 benchmark：** 建立真正针对路侧长期建模、多主体反事实推演和 V2X 协同控制的数据集与评测。\n- **验证 I-VLA 闭环价值：** 证明语言指令驱动的路侧控制与 world model 结合，能否实质改善交通安全与效率。\n\n\n---",
+      "summary_preview": "这篇论文主张把 world model 从车载 ego-view 扩展到路侧基础设施视角，利用固定多传感器在时间深度上的优势，构建面向车路协同的环境生成与控制底座。"
+    },
+    {
+      "entry_id": "2604.17527v1",
+      "slug": "2604.17527v1-safer-trajectory-planning-with-cbf-guided-diffusion-model-for-un",
+      "title": "Safer Trajectory Planning with CBF-guided Diffusion Model for Unmanned Aerial Vehicles",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17527v1",
+      "date": "2026-04-20",
+      "dates": [
+        "2026-04-20"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "authors": [
+        "Peiwen Yang",
+        "Shiyu Bai",
+        "Weisong Wen",
+        "Yixin Gao",
+        "Jiahao Hu"
+      ],
+      "summary_status": "已总结",
+      "institution": "The Hong Kong Polytechnic University",
+      "essence": "这篇论文把控制障碍函数的安全约束直接嵌入扩散采样过程，让生成式 UAV 轨迹既保持机动性，又显著降低碰撞风险。",
+      "abstract_text": null,
+      "gap_points": [
+        "已有共识/做法： 扩散模型在轨迹生成上很灵活，但生成结果带有随机性，安全性难以天然保证。",
+        "核心痛点： UAV 高机动飞行尤其在障碍密集环境中，单靠离线安全示范数据很难覆盖所有危险情况。",
+        "本文切入点： 在反向扩散采样中注入 CBF 梯度，把安全约束直接当成生成过程的引导信号。"
+      ],
+      "insight_points": [
+        "生成式规划也可以显式安全化： 不必在生成后再做硬过滤，安全约束可以直接参与采样。",
+        "CBF 和扩散模型很互补： 一个提供局部安全梯度，一个提供全局多样性和机动性表达。",
+        "这对 UAV 很关键： 飞行任务往往既要敏捷又要安全，单纯追求轨迹多样性风险很高。"
+      ],
+      "next_steps": [
+        "转向真机闭环测试： 验证 CBF-guided diffusion 在真实飞控系统中的稳定性与实时性。",
+        "结合学习型安全模型： 用数据驱动方式补充人工 barrier function，覆盖更复杂动态约束。"
+      ],
+      "label_tags": [
+        "UAV",
+        "轨迹规划",
+        "扩散模型",
+        "控制障碍函数",
+        "安全飞行"
+      ],
+      "tags": [
+        "UAV",
+        "轨迹规划",
+        "扩散模型",
+        "控制障碍函数",
+        "安全飞行",
+        "uav",
+        "planning",
+        "cs.RO"
+      ],
+      "pdf_name": "Safer Trajectory Planning with CBF-guided Diffusion Model for Unmanned Aerial Vehicles.pdf",
+      "pdf_path": "pdfs/Safer Trajectory Planning with CBF-guided Diffusion Model for Unmanned Aerial Vehicles.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-20",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-20.md"
+        }
+      ],
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** Safer Trajectory Planning with CBF-guided Diffusion Model for Unmanned Aerial Vehicles\n- **核心机构：** The Hong Kong Polytechnic University\n- **一句话本质：** 这篇论文把控制障碍函数的安全约束直接嵌入扩散采样过程，让生成式 UAV 轨迹既保持机动性，又显著降低碰撞风险。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** 扩散模型在轨迹生成上很灵活，但生成结果带有随机性，安全性难以天然保证。\n- **核心痛点：** UAV 高机动飞行尤其在障碍密集环境中，单靠离线安全示范数据很难覆盖所有危险情况。\n- **本文切入点：** 在反向扩散采样中注入 CBF 梯度，把安全约束直接当成生成过程的引导信号。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 历史轨迹 + 障碍物 + 机动风格 + 目标 -> obstacle-aware diffusion transformer -> CBF 引导下的安全轨迹。\n- **关键模块 1：** **CBF-guided sampling**：在 reverse diffusion 中融合 barrier function 梯度与 score function。\n- **关键模块 2：** **multi-modal conditioning**：同时考虑轨迹历史、障碍、机动风格和目标条件。\n- **关键模块 3：** **AeroTrajGen**：面向 14 类特技机动生成平滑且多样的飞行轨迹。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **生成式规划也可以显式安全化：** 不必在生成后再做硬过滤，安全约束可以直接参与采样。\n- **CBF 和扩散模型很互补：** 一个提供局部安全梯度，一个提供全局多样性和机动性表达。\n- **这对 UAV 很关键：** 飞行任务往往既要敏捷又要安全，单纯追求轨迹多样性风险很高。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **CBF 约束设计依赖任务建模：** 如果 barrier function 不能准确描述真实飞行安全边界，生成结果仍可能存在隐患。\n- **目前证据主要来自仿真：** 真机气动不确定性、感知误差和执行滞后可能削弱当前收益。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要强调碰撞率下降 94.7%，但没有说明在极端机动和复杂障碍分布下是否仍保持同样优势。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **转向真机闭环测试：** 验证 CBF-guided diffusion 在真实飞控系统中的稳定性与实时性。\n- **结合学习型安全模型：** 用数据驱动方式补充人工 barrier function，覆盖更复杂动态约束。\n\n\n---",
+      "summary_preview": "这篇论文把控制障碍函数的安全约束直接嵌入扩散采样过程，让生成式 UAV 轨迹既保持机动性，又显著降低碰撞风险。"
+    },
+    {
+      "entry_id": "2604.17473v1",
+      "slug": "2604.17473v1-dual-anchoring-addressing-state-drift-in-vision-language-navigat",
+      "title": "Dual-Anchoring: Addressing State Drift in Vision-Language Navigation",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17473v1",
+      "date": "2026-04-19",
+      "dates": [
+        "2026-04-19"
+      ],
+      "track_keys": [
+        "world-model"
+      ],
+      "track_names": [
+        "World Model"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "authors": [
+        "Kangyi Wu",
+        "Pengna Li",
+        "Kailin Lyu",
+        "Lin Zhao",
+        "Qingrong He",
+        "Jinjun Wang",
+        "Jianyi Liu"
+      ],
+      "summary_status": "待补写",
+      "institution": null,
+      "essence": null,
+      "abstract_text": "Vision-Language Navigation(VLN) requires an agent to navigate through 3D environments by following natural language instructions. While recent Video Large Language Models(Video-LLMs) have largely advanced VLN, they remain highly susceptible to State Drift in long scenarios. In these cases, the agent's internal state drifts away from the true task execution state, leading to aimless wandering and failure to execute essential maneuvers in the instruction. We attribute this failure to two distinct cognitive deficits: Progress Drift, where the agent fails to distinguish completed sub-goals from remaining ones, and Memory Drift, where the agent's history representations degrade, making it lose track of visited landmarks. In this paper, we propose a Dual-Anchoring Framework that explicitly anchors the instruction progress and history representations. First, to address progress drift, we introduce Instruction Progress Anchoring, which supervises the agent to generate structured text tokens that delineate completed versus remaining sub-goals. Second, to mitigate memory drift, we propose Memory Landmark Anchoring, which utilizes a Landmark-Centric World Model to retrospectively predict object-centric embeddings extracted by the Segment Anything Model, compelling the agent to explicitly verify past observations and preserve distinct representations of visited landmarks. Facilitating this framework, we curate two extensive datasets: 3.6 million samples with explicit progress descriptions, and 937k grounded landmark data for retrospective verification. Extensive experiments in both simulation and real-world environments demonstrate the superiority of our method, achieving a 15.2% improvement in Success Rate and a remarkable 24.7% gain on long-horizon trajectories. To facilitate further research, we will release our code, data generation pipelines, and the collected datasets.",
+      "gap_points": [],
+      "insight_points": [],
+      "next_steps": [],
+      "label_tags": [],
+      "tags": [
+        "world-model",
+        "dataset",
+        "navigation",
+        "video",
+        "cs.CV",
+        "cs.AI"
+      ],
+      "pdf_name": "Dual-Anchoring Addressing State Drift in Vision-Language Navigation.pdf",
+      "pdf_path": "pdfs/Dual-Anchoring Addressing State Drift in Vision-Language Navigation.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-19",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-19.md"
+        }
+      ],
+      "summary_markdown": "### 摘要（自动抓取）\n\nVision-Language Navigation(VLN) requires an agent to navigate through 3D environments by following natural language instructions. While recent Video Large Language Models(Video-LLMs) have largely advanced VLN, they remain highly susceptible to State Drift in long scenarios. In these cases, the agent's internal state drifts away from the true task execution state, leading to aimless wandering and failure to execute essential maneuvers in the instruction. We attribute this failure to two distinct cognitive deficits: Progress Drift, where the agent fails to distinguish completed sub-goals from remaining ones, and Memory Drift, where the agent's history representations degrade, making it lose track of visited landmarks. In this paper, we propose a Dual-Anchoring Framework that explicitly anchors the instruction progress and history representations. First, to address progress drift, we introduce Instruction Progress Anchoring, which supervises the agent to generate structured text tokens that delineate completed versus remaining sub-goals. Second, to mitigate memory drift, we propose Memory Landmark Anchoring, which utilizes a Landmark-Centric World Model to retrospectively predict object-centric embeddings extracted by the Segment Anything Model, compelling the agent to explicitly verify past observations and preserve distinct representations of visited landmarks. Facilitating this framework, we curate two extensive datasets: 3.6 million samples with explicit progress descriptions, and 937k grounded landmark data for retrospective verification. Extensive experiments in both simulation and real-world environments demonstrate the superiority of our method, achieving a 15.2% improvement in Success Rate and a remarkable 24.7% gain on long-horizon trajectories. To facilitate further research, we will release our code, data generation pipelines, and the collected datasets.\n\n### 解读状态\n\n- 当前模式：半自动无 API。\n- 深度中文解读：待补写。\n- 后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。\n\n\n---",
+      "summary_preview": "Vision-Language Navigation(VLN) requires an agent to navigate through 3D environments by following natural language instructions. While recent Video Large Language Models(Video-LLMs) have largely advanced VLN, they remai"
+    },
+    {
+      "entry_id": "2604.17190v1",
+      "slug": "2604.17190v1-lookasidevln-direction-aware-aerial-vision-and-language-navigati",
+      "title": "LookasideVLN: Direction-Aware Aerial Vision-and-Language Navigation",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17190v1",
+      "date": "2026-04-19",
+      "dates": [
+        "2026-04-19"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "authors": [
+        "Yuwei Ning",
+        "Ganlong Zhao",
+        "Yipeng Qin",
+        "Si Liu",
+        "Yang Liu",
+        "Liang Lin",
+        "Guanbin Li"
+      ],
+      "summary_status": "待补写",
+      "institution": null,
+      "essence": null,
+      "abstract_text": "Aerial Vision-and-Language Navigation (Aerial VLN) enables unmanned aerial vehicles (UAVs) to follow natural language instructions and navigate complex urban environments. While recent advances have achieved progress through large-scale memory graphs and lookahead path planning, they remain limited by shallow instruction understanding and high computational cost. In particular, existing methods rely primarily on landmark descriptions, overlooking directional cues \"a key source of spatial context in human navigation\". In this work, we propose LookasideVLN, a new paradigm that exploits directional cues in natural language to achieve both more accurate spatial reasoning and greater computational efficiency. LookasideVLN comprises three core components: (1) an Egocentric Lookaside Graph (ELG) that dynamically encodes instruction-relevant landmarks and their directional relationships, (2) a Spatial Landmark Knowledge Base (SLKB) that provides lightweight memory retrieval from prior navigation experiences, and (3) a Lookaside MLLM Navigation Agent that aligns multimodal information from user instructions, visual observations, and landmark-direction information from ELG for path planning. Extensive experiments show that LookasideVLN significantly outperforms the state-of-the-art CityNavAgent, even with a single-level lookahead, demonstrating that leveraging directional cues is a powerful yet efficient strategy for Aerial VLN.",
+      "gap_points": [],
+      "insight_points": [],
+      "next_steps": [],
+      "label_tags": [],
+      "tags": [
+        "uav",
+        "planning",
+        "navigation",
+        "cs.CV"
+      ],
+      "pdf_name": "LookasideVLN Direction-Aware Aerial Vision-and-Language Navigation.pdf",
+      "pdf_path": "pdfs/LookasideVLN Direction-Aware Aerial Vision-and-Language Navigation.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-19",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-19.md"
+        }
+      ],
+      "summary_markdown": "### 摘要（自动抓取）\n\nAerial Vision-and-Language Navigation (Aerial VLN) enables unmanned aerial vehicles (UAVs) to follow natural language instructions and navigate complex urban environments. While recent advances have achieved progress through large-scale memory graphs and lookahead path planning, they remain limited by shallow instruction understanding and high computational cost. In particular, existing methods rely primarily on landmark descriptions, overlooking directional cues \"a key source of spatial context in human navigation\". In this work, we propose LookasideVLN, a new paradigm that exploits directional cues in natural language to achieve both more accurate spatial reasoning and greater computational efficiency. LookasideVLN comprises three core components: (1) an Egocentric Lookaside Graph (ELG) that dynamically encodes instruction-relevant landmarks and their directional relationships, (2) a Spatial Landmark Knowledge Base (SLKB) that provides lightweight memory retrieval from prior navigation experiences, and (3) a Lookaside MLLM Navigation Agent that aligns multimodal information from user instructions, visual observations, and landmark-direction information from ELG for path planning. Extensive experiments show that LookasideVLN significantly outperforms the state-of-the-art CityNavAgent, even with a single-level lookahead, demonstrating that leveraging directional cues is a powerful yet efficient strategy for Aerial VLN.\n\n### 解读状态\n\n- 当前模式：半自动无 API。\n- 深度中文解读：待补写。\n- 后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。\n\n\n---",
+      "summary_preview": "Aerial Vision-and-Language Navigation (Aerial VLN) enables unmanned aerial vehicles (UAVs) to follow natural language instructions and navigate complex urban environments. While recent advances have achieved progress thr"
+    },
+    {
+      "entry_id": "2604.17189v1",
+      "slug": "2604.17189v1-shepherding-uav-swarm-with-action-prediction-based-on-movement-c",
+      "title": "Shepherding UAV Swarm with Action Prediction Based on Movement Constraints",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17189v1",
+      "date": "2026-04-19",
+      "dates": [
+        "2026-04-19"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "authors": [
+        "Yusuke Tsunoda",
+        "Yusuke Goto",
+        "Takao Sato"
+      ],
+      "summary_status": "待补写",
+      "institution": null,
+      "essence": null,
+      "abstract_text": "In this study, we propose a new sheepdog-inspired control method for a swarm of small unmanned aerial vehicles (UAVs), which predicts the swarm behavior while explicitly accounting for the motion constraints of real robots. Sheepdog-inspired guidance control refers to a framework in which a small number of navigator agents (sheepdog agents) indirectly drive a large number of autonomous agents (a flock of sheep agents) so as to steer the group toward a target position. In conventional studies on sheepdog-inspired guidance, both types of agents have typically been modeled as point masses, and the guidance law for the navigator agents has been designed using simple interaction vectors based on the instantaneous relative positions between the agents. However, when implementing such methods on real robots such as drones, it is necessary to consider each agent's motion constraints, including upper bounds on velocity and acceleration. Moreover, we argue that guidance can be made more efficient by predicting the future behavior of the autonomous swarm that is observable to the navigator agents. To this end, we propose a three-dimensional guidance control law based on behavior prediction of autonomous agents under motion constraints, inspired by the Dynamic Window Approach (DWA). At each control cycle, the navigator agent generates a set of feasible motion candidates that satisfy its motion constraints, and predicts the short-horizon swarm evolution using an internal model of the autonomous agents maintained within the navigator agent. The motion candidates are then evaluated according to criteria such as the progress velocity toward the target, the positioning strategy with respect to the swarm, and safety margins, and the optimal motion is selected to achieve safe and efficient guidance. Numerical simulation results demonstrate the effectiveness of the proposed guidance control law.",
+      "gap_points": [],
+      "insight_points": [],
+      "next_steps": [],
+      "label_tags": [],
+      "tags": [
+        "uav",
+        "cs.RO"
+      ],
+      "pdf_name": "Shepherding UAV Swarm with Action Prediction Based on Movement Constraints.pdf",
+      "pdf_path": "pdfs/Shepherding UAV Swarm with Action Prediction Based on Movement Constraints.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-19",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-19.md"
+        }
+      ],
+      "summary_markdown": "### 摘要（自动抓取）\n\nIn this study, we propose a new sheepdog-inspired control method for a swarm of small unmanned aerial vehicles (UAVs), which predicts the swarm behavior while explicitly accounting for the motion constraints of real robots. Sheepdog-inspired guidance control refers to a framework in which a small number of navigator agents (sheepdog agents) indirectly drive a large number of autonomous agents (a flock of sheep agents) so as to steer the group toward a target position. In conventional studies on sheepdog-inspired guidance, both types of agents have typically been modeled as point masses, and the guidance law for the navigator agents has been designed using simple interaction vectors based on the instantaneous relative positions between the agents. However, when implementing such methods on real robots such as drones, it is necessary to consider each agent's motion constraints, including upper bounds on velocity and acceleration. Moreover, we argue that guidance can be made more efficient by predicting the future behavior of the autonomous swarm that is observable to the navigator agents. To this end, we propose a three-dimensional guidance control law based on behavior prediction of autonomous agents under motion constraints, inspired by the Dynamic Window Approach (DWA). At each control cycle, the navigator agent generates a set of feasible motion candidates that satisfy its motion constraints, and predicts the short-horizon swarm evolution using an internal model of the autonomous agents maintained within the navigator agent. The motion candidates are then evaluated according to criteria such as the progress velocity toward the target, the positioning strategy with respect to the swarm, and safety margins, and the optimal motion is selected to achieve safe and efficient guidance. Numerical simulation results demonstrate the effectiveness of the proposed guidance control law.\n\n### 解读状态\n\n- 当前模式：半自动无 API。\n- 深度中文解读：待补写。\n- 后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。\n\n\n---",
+      "summary_preview": "In this study, we propose a new sheepdog-inspired control method for a swarm of small unmanned aerial vehicles (UAVs), which predicts the swarm behavior while explicitly accounting for the motion constraints of real robo"
+    },
+    {
+      "entry_id": "2604.17169v1",
+      "slug": "2604.17169v1-two-tier-high-altitude-platform-stations-haps-for-exploring-wire",
+      "title": "Two-Tier High Altitude Platform Stations (HAPS) for Exploring Wireless Energy Harvesting",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17169v1",
+      "date": "2026-04-19",
+      "dates": [
+        "2026-04-19"
+      ],
+      "track_keys": [
+        "uav"
+      ],
+      "track_names": [
+        "UAV"
+      ],
+      "categories": [
+        "eess.SP"
+      ],
+      "authors": [
+        "Faicel Khennoufa",
+        "Khelil Abdellatif",
+        "Halim Yanikomeroglu",
+        "Safwan Alfattani",
+        "Metin Ozturk",
+        "Ferdi Kara"
+      ],
+      "summary_status": "待补写",
+      "institution": null,
+      "essence": null,
+      "abstract_text": "In sixth-generation (6G) cellular networks and beyond, aerial platforms, such as uncrewed aerial vehicles (UAVs) and high-altitude platform stations (HAPS), are anticipated to play a crucial role in enhancing connectivity, expanding network coverage, and supporting advanced communication services. However, the deployment of energy-efficient onboard communication systems is essential for their widespread adoption and effectiveness. The integration of energy harvesting (EH) into aerial platforms is envisioned to be pivotal in promoting both energy and cost efficiency. In this paper, we propose a new paradigm for aerial platforms in which they can collect energy from the transmitted signals of nearby aerial platforms. The paper employs a two-tier architecture with HAPS super-macro base stations (HAPS-SMBS) system: regular HAPS-SMBS nodes serve as base stations, while a \"mother\" HAPS-SMBS node acts as a manager to coordinate communications between regular HAPS-SMBS and the ground station, thus enabling wireless energy transfer. Specifically, we analyze the characteristics of EH-enabled HAPS-SMBS and compare their performance with those without EH. Additionally, we derive the optimal regular HAPS-SMBS positioning to mitigate signal attenuation and power loss. Subsequently, we formulate a joint optimization problem for regular HAPS-SMBS positioning and the EH factor. We solve the problem using the iterative distance and EH factor algorithm (IDFA); however, we employ $Q$-learning to verify its effectiveness. Our findings indicate that, compared to conventional EH systems, IDFA and $Q$-learning exhibit higher data rate performance. In contrast, $Q$-learning outperforms IDFA systems in linear modelswith intensive training in approximating optimal values. Furthermore, maximizing transmit power achieves higher gains than systems without EH.",
+      "gap_points": [],
+      "insight_points": [],
+      "next_steps": [],
+      "label_tags": [],
+      "tags": [
+        "uav",
+        "eess.SP"
+      ],
+      "pdf_name": "Two-Tier High Altitude Platform Stations (HAPS) for Exploring Wireless Energy Harvesting.pdf",
+      "pdf_path": null,
+      "has_local_pdf": false,
+      "note_refs": [
+        {
+          "date": "2026-04-19",
+          "track_key": "uav",
+          "track_name": "UAV",
+          "markdown_path": "Interpretation/arxiv-uav-2026-04-19.md"
+        }
+      ],
+      "summary_markdown": "### 摘要（自动抓取）\n\nIn sixth-generation (6G) cellular networks and beyond, aerial platforms, such as uncrewed aerial vehicles (UAVs) and high-altitude platform stations (HAPS), are anticipated to play a crucial role in enhancing connectivity, expanding network coverage, and supporting advanced communication services. However, the deployment of energy-efficient onboard communication systems is essential for their widespread adoption and effectiveness. The integration of energy harvesting (EH) into aerial platforms is envisioned to be pivotal in promoting both energy and cost efficiency. In this paper, we propose a new paradigm for aerial platforms in which they can collect energy from the transmitted signals of nearby aerial platforms. The paper employs a two-tier architecture with HAPS super-macro base stations (HAPS-SMBS) system: regular HAPS-SMBS nodes serve as base stations, while a \"mother\" HAPS-SMBS node acts as a manager to coordinate communications between regular HAPS-SMBS and the ground station, thus enabling wireless energy transfer. Specifically, we analyze the characteristics of EH-enabled HAPS-SMBS and compare their performance with those without EH. Additionally, we derive the optimal regular HAPS-SMBS positioning to mitigate signal attenuation and power loss. Subsequently, we formulate a joint optimization problem for regular HAPS-SMBS positioning and the EH factor. We solve the problem using the iterative distance and EH factor algorithm (IDFA); however, we employ $Q$-learning to verify its effectiveness. Our findings indicate that, compared to conventional EH systems, IDFA and $Q$-learning exhibit higher data rate performance. In contrast, $Q$-learning outperforms IDFA systems in linear modelswith intensive training in approximating optimal values. Furthermore, maximizing transmit power achieves higher gains than systems without EH.\n\n### 解读状态\n\n- 当前模式：半自动无 API。\n- 深度中文解读：待补写。\n- 后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。\n\n\n---",
+      "summary_preview": "In sixth-generation (6G) cellular networks and beyond, aerial platforms, such as uncrewed aerial vehicles (UAVs) and high-altitude platform stations (HAPS), are anticipated to play a crucial role in enhancing connectivit"
+    },
+    {
+      "entry_id": "2604.17104v1",
+      "slug": "2604.17104v1-tensorhub-rethinking-ai-model-hub-with-tensor-centric-compressio",
+      "title": "TensorHub: Rethinking AI Model Hub with Tensor-Centric Compression",
+      "arxiv_url": "https://export.arxiv.org/abs/2604.17104v1",
+      "date": "2026-04-19",
+      "dates": [
+        "2026-04-19"
+      ],
+      "track_keys": [
+        "world-model"
+      ],
+      "track_names": [
+        "World Model"
+      ],
+      "categories": [
+        "cs.DC",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "authors": [
+        "Tingfeng Lan",
+        "Zirui Wang",
+        "Yunjia Zheng",
+        "Zhaoyuan Su",
+        "Juncheng Yang",
+        "Yue Cheng"
+      ],
+      "summary_status": "待补写",
+      "institution": null,
+      "essence": null,
+      "abstract_text": "Modern AI models are growing rapidly in size and redundancy, leading to significant storage and distribution challenges in model hubs. We present TensorHub, a tensor-centric system for reducing storage overhead through fine-grained deduplication and compression. TensorHub leverages tensor-level fingerprinting and clustering to identify redundancy across models without requiring annotations. Our design enables efficient storage reduction while preserving model usability and performance. Experiments on real-world model repositories demonstrate substantial storage savings with minimal overhead.",
+      "gap_points": [],
+      "insight_points": [],
+      "next_steps": [],
+      "label_tags": [],
+      "tags": [
+        "world-model",
+        "cs.DC",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "pdf_name": "TensorHub Rethinking AI Model Hub with Tensor-Centric Compression.pdf",
+      "pdf_path": "pdfs/TensorHub Rethinking AI Model Hub with Tensor-Centric Compression.pdf",
+      "has_local_pdf": true,
+      "note_refs": [
+        {
+          "date": "2026-04-19",
+          "track_key": "world-model",
+          "track_name": "World Model",
+          "markdown_path": "Interpretation/arxiv-world-model-2026-04-19.md"
+        }
+      ],
+      "summary_markdown": "### 摘要（自动抓取）\n\nModern AI models are growing rapidly in size and redundancy, leading to significant storage and distribution challenges in model hubs. We present TensorHub, a tensor-centric system for reducing storage overhead through fine-grained deduplication and compression. TensorHub leverages tensor-level fingerprinting and clustering to identify redundancy across models without requiring annotations. Our design enables efficient storage reduction while preserving model usability and performance. Experiments on real-world model repositories demonstrate substantial storage savings with minimal overhead.\n\n### 解读状态\n\n- 当前模式：半自动无 API。\n- 深度中文解读：待补写。\n- 后续操作：在 Cursor 中让我基于这篇论文继续补写结构化总结。\n\n\n---",
+      "summary_preview": "Modern AI models are growing rapidly in size and redundancy, leading to significant storage and distribution challenges in model hubs. We present TensorHub, a tensor-centric system for reducing storage overhead through f"
+    },
     {
       "entry_id": "2604.15168v1",
       "slug": "2604.15168v1-dual-pose-graph-semantic-localization-for-vision-based-autonomou",
@@ -1673,7 +3782,7 @@
         "Yann V. Bellec"
       ],
       "summary_status": "已总结",
-      "institution": null,
+      "institution": "University of California, San Diego",
       "essence": "这篇论文把 UAV 小目标检测当成一个 系统级瓶颈组合问题 来处理，联合改输入分辨率、检测头、冗余剪枝和损失函数，而不是只修某一个局部组件。",
       "abstract_text": null,
       "gap_points": [
@@ -1721,7 +3830,7 @@
           "markdown_path": "Interpretation/arxiv-uav-2026-04-15.md"
         }
       ],
-      "summary_markdown": "### 一、论文元数据\n\n- **标题：** DroneScan-YOLO: Redundancy-Aware Lightweight Detection for Tiny Objects in UAV Imagery\n- **核心机构：** 未提取\n- **一句话本质：** 这篇论文把 UAV 小目标检测当成一个 **系统级瓶颈组合问题** 来处理，联合改输入分辨率、检测头、冗余剪枝和损失函数，而不是只修某一个局部组件。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** YOLO 系列是实时检测主力，但在 UAV 图像里大量目标尺寸极小，常规配置很容易漏检。\n- **核心痛点：** 现有方法分别触及分辨率、特征层、loss 或轻量化中的单个问题，却很少同时处理 stride 过大、tiny box 梯度失效与滤波器冗余这几个耦合瓶颈。\n- **本文切入点：** 作者提出 DroneScan-YOLO，用一个协调化设计包同时提升 tiny object recall、训练稳定性和部署效率。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 高分辨率 UAV 图像 -> 经过改造的 YOLOv8 检测器 -> 输出 tiny object 检测结果，同时兼顾精度与速度。\n- **关键模块 1：** **更高输入分辨率 + P2 分支**：把输入提到 1280x1280，并增加 stride-4 的轻量检测分支 MSFD，以更好保留小目标细节。\n- **关键模块 2：** **RPA-Block**：基于余弦相似度的动态滤波器剪枝，减少特征冗余。\n- **关键模块 3：** **SAL-NWD loss**：把 Normalized Wasserstein Distance 与 size-adaptive CIoU weighting 结合，缓解 tiny box 不重叠时梯度消失问题。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **小目标检测需要端到端协同设计：** 只改 backbone 或只换 loss 都不够，输入尺度、特征分辨率和训练信号必须一起调。\n- **精度提升很显著且代价可控：** 在 VisDrone2019-DET 上相对 YOLOv8s 提升 +16.6 mAP@50、+12.3 mAP@50-95，同时参数仅增加约 4.1%。\n- **收益最集中在真正困难的 tiny classes：** bicycle、awning-tricycle 等小目标类别获得了远高于平均值的提升，说明方法确实打到了问题核心。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **机构信息未在首页明确提取到：** 当前 PDF 首页仅见作者与邮箱，未见可直接确认的单位署名，因此这里按规则保留为 `未提取`。\n- **更高输入分辨率会推高系统负担：** 虽然速度仍高，但 1280 分辨率对更弱机载平台的内存与能耗压力仍需谨慎评估。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要重点展示了 VisDrone 上的结果，但未说明在其他 UAV 数据集或更恶劣天气场景下是否同样稳定。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **做跨数据集泛化验证：** 检验 RPA-Block 与 SAL-NWD 的收益是否能从 VisDrone 迁移到更多空中感知场景。\n- **面向机载部署做能效闭环评估：** 把精度、FPS、显存与功耗一起纳入统一指标，而不是只看算法侧表现。\n\n\n---",
+      "summary_markdown": "### 一、论文元数据\n\n- **标题：** DroneScan-YOLO: Redundancy-Aware Lightweight Detection for Tiny Objects in UAV Imagery\n- **核心机构：** University of California, San Diego\n- **一句话本质：** 这篇论文把 UAV 小目标检测当成一个 **系统级瓶颈组合问题** 来处理，联合改输入分辨率、检测头、冗余剪枝和损失函数，而不是只修某一个局部组件。\n\n### 二、破局点 (The Gap)\n\n- **已有共识/做法：** YOLO 系列是实时检测主力，但在 UAV 图像里大量目标尺寸极小，常规配置很容易漏检。\n- **核心痛点：** 现有方法分别触及分辨率、特征层、loss 或轻量化中的单个问题，却很少同时处理 stride 过大、tiny box 梯度失效与滤波器冗余这几个耦合瓶颈。\n- **本文切入点：** 作者提出 DroneScan-YOLO，用一个协调化设计包同时提升 tiny object recall、训练稳定性和部署效率。\n\n### 三、核心机制 (How it works)\n\n- **输入 -> 输出：** 高分辨率 UAV 图像 -> 经过改造的 YOLOv8 检测器 -> 输出 tiny object 检测结果，同时兼顾精度与速度。\n- **关键模块 1：** **更高输入分辨率 + P2 分支**：把输入提到 1280x1280，并增加 stride-4 的轻量检测分支 MSFD，以更好保留小目标细节。\n- **关键模块 2：** **RPA-Block**：基于余弦相似度的动态滤波器剪枝，减少特征冗余。\n- **关键模块 3：** **SAL-NWD loss**：把 Normalized Wasserstein Distance 与 size-adaptive CIoU weighting 结合，缓解 tiny box 不重叠时梯度消失问题。\n\n### 四、核心认知与发现 (Key Insights)\n\n- **小目标检测需要端到端协同设计：** 只改 backbone 或只换 loss 都不够，输入尺度、特征分辨率和训练信号必须一起调。\n- **精度提升很显著且代价可控：** 在 VisDrone2019-DET 上相对 YOLOv8s 提升 +16.6 mAP@50、+12.3 mAP@50-95，同时参数仅增加约 4.1%。\n- **收益最集中在真正困难的 tiny classes：** bicycle、awning-tricycle 等小目标类别获得了远高于平均值的提升，说明方法确实打到了问题核心。\n\n### 五、致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **机构信息未在首页明确提取到：** 当前 PDF 首页仅见作者与邮箱，未见可直接确认的单位署名，因此这里按规则保留为 `未提取`。\n- **更高输入分辨率会推高系统负担：** 虽然速度仍高，但 1280 分辨率对更弱机载平台的内存与能耗压力仍需谨慎评估。\n\n**⚠️ 论证瑕疵：**\n\n- 摘要重点展示了 VisDrone 上的结果，但未说明在其他 UAV 数据集或更恶劣天气场景下是否同样稳定。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **做跨数据集泛化验证：** 检验 RPA-Block 与 SAL-NWD 的收益是否能从 VisDrone 迁移到更多空中感知场景。\n- **面向机载部署做能效闭环评估：** 把精度、FPS、显存与功耗一起纳入统一指标，而不是只看算法侧表现。\n\n\n---",
       "summary_preview": "这篇论文把 UAV 小目标检测当成一个 系统级瓶颈组合问题 来处理，联合改输入分辨率、检测头、冗余剪枝和损失函数，而不是只修某一个局部组件。"
     },
     {
@@ -26172,8 +28281,8 @@
         "eess.SY"
       ],
       "pdf_name": "JCAS-MARL Joint Communication and Sensing UAV Networks via Resource-Constrained Multi-Agent Reinforcement Learning.pdf",
-      "pdf_path": null,
-      "has_local_pdf": false,
+      "pdf_path": "pdfs/JCAS-MARL Joint Communication and Sensing UAV Networks via Resource-Constrained Multi-Agent Reinforcement Learning.pdf",
+      "has_local_pdf": true,
       "note_refs": [
         {
           "date": "2026-03-13",
@@ -29197,8 +31306,8 @@
         "cs.AI"
       ],
       "pdf_name": "UAV-MARL Multi-Agent Reinforcement Learning for Time-Critical and Dynamic Medical Supply Delivery.pdf",
-      "pdf_path": null,
-      "has_local_pdf": false,
+      "pdf_path": "pdfs/UAV-MARL Multi-Agent Reinforcement Learning for Time-Critical and Dynamic Medical Supply Delivery.pdf",
+      "has_local_pdf": true,
       "note_refs": [
         {
           "date": "2026-03-11",
@@ -35567,7 +37676,7 @@
         "Md Rizwan Parvez"
       ],
       "summary_status": "已总结",
-      "institution": "未明确标出，但为多位研究者合作的学术成果",
+      "institution": "Laboratory (CIOL), Bangladesh Shahjalal University; University (NSU), Dhaka, Bangladesh4Qatar Computing Research",
       "essence": "构建了首个联合时空推理基准 TimeSpot，揭示了 VLM 在时间推断上的严重缺陷。",
       "abstract_text": null,
       "gap_points": [
@@ -35609,8 +37718,8 @@
         "cs.RO"
       ],
       "pdf_name": "TimeSpot Benchmarking Geo-Temporal Understanding in Vision-Language Models in Real-World Settings.pdf",
-      "pdf_path": null,
-      "has_local_pdf": false,
+      "pdf_path": "pdfs/TimeSpot Benchmarking Geo-Temporal Understanding in Vision-Language Models in Real-World Settings.pdf",
+      "has_local_pdf": true,
       "note_refs": [
         {
           "date": "2026-03-04",
@@ -35619,7 +37728,7 @@
           "markdown_path": "Interpretation/arxiv-vla-2026-03-04.md"
         }
       ],
-      "summary_markdown": "好的，作为一名顶尖学术研究员，我将为您深度拆解这篇论文。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** TimeSpot: 在真实世界场景中对视觉语言模型的地理时间理解进行基准测试\n- **核心机构：** 未明确标出，但为多位研究者合作的学术成果\n- **一句话本质：** 构建了首个联合**时空推理基准 TimeSpot**，揭示了 VLM 在**时间推断**上的严重缺陷。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 现有 VLM 地理定位基准主要关注**空间定位**（Where），忽略了**时间推断**（When）。\n- **核心痛点：** 模型缺乏对**时间信号**（如光照、季节）的物理理解，导致时空推理不一致且不准确。\n- **本文切入点：** 真正的物理世界理解需要**时空联合推理**。因此，构建一个强制模型同时预测**时间和地点**并检验其**物理一致性**的基准。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** **单张地面视角图像** -> **结构化的时空属性**（9个字段，如季节、国家、经纬度）。\n- **关键模块 1：** **TimeSpot 数据集** - 提供 1455 张**非标志性**、**无文字**的全球图像，强制模型依赖光影、植被等物理线索进行推理。\n- **关键模块 2：** **结构化评估框架** - 要求模型输出**9个时空字段**，并引入**时空一致性**（如季节与半球匹配）作为关键评估维度。\n\n### 四、 💡 核心认知与发现 (Key Insights) 🌟重点\n\n- **时空能力断裂：**\n  VLM 在**空间定位**（如国家识别）上表现尚可，但在**时间推断**（如具体时刻）上**性能极差**。高空间精度与高时间误差可以并存，揭示了两者能力的严重不匹配。\n\n- **推理机制缺陷：**\n  模型严重依赖**粗略的语义先验**（如建筑风格），而非基于**物理线索**（如光影几何、植被物候）进行推理。这导致其在缺乏明显地标的场景中频繁失效。\n\n- **物理常识缺失：**\n  即便在最先进的模型中，**时空不一致**的预测也普遍存在（例如，时间与日光阶段矛盾）。这表明模型缺乏对**物理世界基本规律**的连贯建模。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **数据集规模有限：** 1455 张图像的规模相对较小，可能限制了评估结论的**统计鲁棒性**和监督微调（SFT）模型的**泛化能力**。\n- **评估范式单一：** 评估仅限于**静态图像**，未能考察模型利用**视频或图像序列**中的动态线索进行时序推理的能力。\n\n**⚠️ 论证瑕疵：**\n\n- SFT 实验仅在**小型模型**（3B）和**少量数据**上进行。其关于“SFT 效果有限”的结论可能不适用于**更大规模的模型和数据**，论证略显不足。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **融合物理先验知识：** 研究如何将**太阳几何模型**、**气象模型**等显式物理约束整合到 VLM 的推理过程中，以提升时空一致性。\n- **面向物理信号的预训练：** 设计新的预训练任务，强制模型关注并理解**光影、天气、物候**等细微的物理信号，而非仅仅依赖高级语义特征。\n\n---",
+      "summary_markdown": "好的，作为一名顶尖学术研究员，我将为您深度拆解这篇论文。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** TimeSpot: 在真实世界场景中对视觉语言模型的地理时间理解进行基准测试\n- **核心机构：** Laboratory (CIOL), Bangladesh Shahjalal University; University (NSU), Dhaka, Bangladesh4Qatar Computing Research\n- **一句话本质：** 构建了首个联合**时空推理基准 TimeSpot**，揭示了 VLM 在**时间推断**上的严重缺陷。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 现有 VLM 地理定位基准主要关注**空间定位**（Where），忽略了**时间推断**（When）。\n- **核心痛点：** 模型缺乏对**时间信号**（如光照、季节）的物理理解，导致时空推理不一致且不准确。\n- **本文切入点：** 真正的物理世界理解需要**时空联合推理**。因此，构建一个强制模型同时预测**时间和地点**并检验其**物理一致性**的基准。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** **单张地面视角图像** -> **结构化的时空属性**（9个字段，如季节、国家、经纬度）。\n- **关键模块 1：** **TimeSpot 数据集** - 提供 1455 张**非标志性**、**无文字**的全球图像，强制模型依赖光影、植被等物理线索进行推理。\n- **关键模块 2：** **结构化评估框架** - 要求模型输出**9个时空字段**，并引入**时空一致性**（如季节与半球匹配）作为关键评估维度。\n\n### 四、 💡 核心认知与发现 (Key Insights) 🌟重点\n\n- **时空能力断裂：**\n  VLM 在**空间定位**（如国家识别）上表现尚可，但在**时间推断**（如具体时刻）上**性能极差**。高空间精度与高时间误差可以并存，揭示了两者能力的严重不匹配。\n\n- **推理机制缺陷：**\n  模型严重依赖**粗略的语义先验**（如建筑风格），而非基于**物理线索**（如光影几何、植被物候）进行推理。这导致其在缺乏明显地标的场景中频繁失效。\n\n- **物理常识缺失：**\n  即便在最先进的模型中，**时空不一致**的预测也普遍存在（例如，时间与日光阶段矛盾）。这表明模型缺乏对**物理世界基本规律**的连贯建模。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **数据集规模有限：** 1455 张图像的规模相对较小，可能限制了评估结论的**统计鲁棒性**和监督微调（SFT）模型的**泛化能力**。\n- **评估范式单一：** 评估仅限于**静态图像**，未能考察模型利用**视频或图像序列**中的动态线索进行时序推理的能力。\n\n**⚠️ 论证瑕疵：**\n\n- SFT 实验仅在**小型模型**（3B）和**少量数据**上进行。其关于“SFT 效果有限”的结论可能不适用于**更大规模的模型和数据**，论证略显不足。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **融合物理先验知识：** 研究如何将**太阳几何模型**、**气象模型**等显式物理约束整合到 VLM 的推理过程中，以提升时空一致性。\n- **面向物理信号的预训练：** 设计新的预训练任务，强制模型关注并理解**光影、天气、物候**等细微的物理信号，而非仅仅依赖高级语义特征。\n\n---",
       "summary_preview": "构建了首个联合时空推理基准 TimeSpot，揭示了 VLM 在时间推断上的严重缺陷。"
     },
     {
@@ -38418,7 +40527,7 @@
         "Xiao Zhou"
       ],
       "summary_status": "已总结",
-      "institution": "未明确标出 (Not explicitly stated)",
+      "institution": "University of Macau Fudan University; University Beijing Institute",
       "essence": "独立训练的 JEPA 模型，会自发涌现出 几何同构（线性可对齐）的表征空间，为去中心化协作提供了新路径。",
       "abstract_text": null,
       "gap_points": [
@@ -38453,8 +40562,8 @@
         "cs.AI"
       ],
       "pdf_name": "Social-JEPA Emergent Geometric Isomorphism.pdf",
-      "pdf_path": null,
-      "has_local_pdf": false,
+      "pdf_path": "pdfs/Social-JEPA Emergent Geometric Isomorphism.pdf",
+      "has_local_pdf": true,
       "note_refs": [
         {
           "date": "2026-02-28",
@@ -38463,7 +40572,7 @@
           "markdown_path": "Interpretation/arxiv-vla-2026-02-28.md"
         }
       ],
-      "summary_markdown": "好的，作为一名顶尖学术研究员，这是我对论文《Social-JEPA: Emergent Geometric Isomorphism》的深度认知与洞察提取。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** Social-JEPA: Emergent Geometric Isomorphism (在独立训练的世界模型中涌现的几何同构)\n- **核心机构：** 未明确标出 (Not explicitly stated)\n- **一句话本质：** 独立训练的 JEPA 模型，会自发涌现出 **几何同构**（线性可对齐）的表征空间，为去中心化协作提供了新路径。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 多智能体或多视角学习，通常依赖 **参数共享** 或 **跨视角耦合训练** 来对齐表征。\n- **核心痛点：** 现有方法 **训练成本高**、**通信带宽大**，且难以应用于隐私敏感或完全独立的去中心化系统。\n- **本文切入点：** 作者的核心直觉是，**JEPA 的预测性学习目标** 本身就足以约束模型学习到环境的内在结构，从而使独立训练的模型能 **自发涌现** 出几何一致性。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** 来自同一环境但 **不同视角** 的观测数据流 -> 一个 **线性对齐矩阵 W**，它可以将一个模型的表征空间映射到另一个 ($z^{(2)} \\approx W z^{(1)}$)。\n\n- **关键模块 1：** **独立 JEPA 预训练 (Independent JEPA Pretraining)** - 两个独立的 Agent 各自使用 JEPA 目标函数，在自己的视角数据上训练世界模型，**不进行任何参数共享或通信**。\n- **关键模块 2：** **事后线性对齐 (Post-hoc Linear Alignment)** - 训练结束后，使用少量成对的样本，通过 **最小化均方误差** 来求解一个线性变换矩阵 **W**，连接两个独立的表征空间。\n\n### 四、 💡 核心认知与发现 (Key Insights) 🌟重点\n\n- **[自发对齐的涌现性]：** 即使没有参数共享或跨视角耦合，仅依靠 **JEPA 预测性目标** 驱动，独立模型就能自发学习到 **几何同构**（近似线性可变换）的表征空间。这种对齐在视角差异巨大、像素重叠极低时依然稳健。\n\n- **[JEPA 的内在机理]：** JEPA 的成功源于其目标的 **预测充分性 (predictive sufficiency)** 和 **线性等价不变性 (linear equivalence invariance)**。该目标迫使模型捕捉环境的核心预测结构，同时对表征空间的线性变换不敏感，导致不同模型收敛到同一个 **线性等价类**。\n\n- **[轻量级协作接口]：** 学习到的线性对齐矩阵 **W** 本身就是一个高效的协作接口。它支持 **零成本** 的知识迁移（如分类器迁移）和 **显著加速** 的表征学习（类似蒸馏），而通信成本极低（仅需传递一个矩阵）。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **被动观测假设**：当前模型仅处理被动观测数据流，未涉及 **智能体与环境的主动交互**。在智能体能够改变环境状态的场景下，对齐的稳定性未知。\n- **需要成对数据**：事后对齐（求解矩阵 W）依赖于一小部分 **同步的、成对的** 跨视角样本。在完全异步或难以获得成对数据的场景下，该方法无法直接应用。\n\n**⚠️ 论证瑕疵：**\n\n- 实验中比较了多种自监督方法（JEPA, MAE, SimCLR 等），但可能未对每种方法的超参数进行 **针对“跨模型对齐”这一特定目标的精细调优**，这可能导致对其他方法对齐潜力的低估。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **主动交互下的对齐**：研究当智能体具备 **主动控制能力**（例如移动相机、与物体交互）时，其独立学习的世界模型是否还能保持几何同构，以及如何利用这种对齐进行 **协同探索与规划**。\n- **异步与无配对对齐**：探索在 **无需严格成对样本** 的情况下实现表征对齐的方法。例如，利用环境中的时间连续性或共享的语义地标，实现 **弱监督或无监督** 的空间对齐。\n\n---",
+      "summary_markdown": "好的，作为一名顶尖学术研究员，这是我对论文《Social-JEPA: Emergent Geometric Isomorphism》的深度认知与洞察提取。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** Social-JEPA: Emergent Geometric Isomorphism (在独立训练的世界模型中涌现的几何同构)\n- **核心机构：** University of Macau Fudan University; University Beijing Institute\n- **一句话本质：** 独立训练的 JEPA 模型，会自发涌现出 **几何同构**（线性可对齐）的表征空间，为去中心化协作提供了新路径。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 多智能体或多视角学习，通常依赖 **参数共享** 或 **跨视角耦合训练** 来对齐表征。\n- **核心痛点：** 现有方法 **训练成本高**、**通信带宽大**，且难以应用于隐私敏感或完全独立的去中心化系统。\n- **本文切入点：** 作者的核心直觉是，**JEPA 的预测性学习目标** 本身就足以约束模型学习到环境的内在结构，从而使独立训练的模型能 **自发涌现** 出几何一致性。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** 来自同一环境但 **不同视角** 的观测数据流 -> 一个 **线性对齐矩阵 W**，它可以将一个模型的表征空间映射到另一个 ($z^{(2)} \\approx W z^{(1)}$)。\n\n- **关键模块 1：** **独立 JEPA 预训练 (Independent JEPA Pretraining)** - 两个独立的 Agent 各自使用 JEPA 目标函数，在自己的视角数据上训练世界模型，**不进行任何参数共享或通信**。\n- **关键模块 2：** **事后线性对齐 (Post-hoc Linear Alignment)** - 训练结束后，使用少量成对的样本，通过 **最小化均方误差** 来求解一个线性变换矩阵 **W**，连接两个独立的表征空间。\n\n### 四、 💡 核心认知与发现 (Key Insights) 🌟重点\n\n- **[自发对齐的涌现性]：** 即使没有参数共享或跨视角耦合，仅依靠 **JEPA 预测性目标** 驱动，独立模型就能自发学习到 **几何同构**（近似线性可变换）的表征空间。这种对齐在视角差异巨大、像素重叠极低时依然稳健。\n\n- **[JEPA 的内在机理]：** JEPA 的成功源于其目标的 **预测充分性 (predictive sufficiency)** 和 **线性等价不变性 (linear equivalence invariance)**。该目标迫使模型捕捉环境的核心预测结构，同时对表征空间的线性变换不敏感，导致不同模型收敛到同一个 **线性等价类**。\n\n- **[轻量级协作接口]：** 学习到的线性对齐矩阵 **W** 本身就是一个高效的协作接口。它支持 **零成本** 的知识迁移（如分类器迁移）和 **显著加速** 的表征学习（类似蒸馏），而通信成本极低（仅需传递一个矩阵）。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **被动观测假设**：当前模型仅处理被动观测数据流，未涉及 **智能体与环境的主动交互**。在智能体能够改变环境状态的场景下，对齐的稳定性未知。\n- **需要成对数据**：事后对齐（求解矩阵 W）依赖于一小部分 **同步的、成对的** 跨视角样本。在完全异步或难以获得成对数据的场景下，该方法无法直接应用。\n\n**⚠️ 论证瑕疵：**\n\n- 实验中比较了多种自监督方法（JEPA, MAE, SimCLR 等），但可能未对每种方法的超参数进行 **针对“跨模型对齐”这一特定目标的精细调优**，这可能导致对其他方法对齐潜力的低估。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **主动交互下的对齐**：研究当智能体具备 **主动控制能力**（例如移动相机、与物体交互）时，其独立学习的世界模型是否还能保持几何同构，以及如何利用这种对齐进行 **协同探索与规划**。\n- **异步与无配对对齐**：探索在 **无需严格成对样本** 的情况下实现表征对齐的方法。例如，利用环境中的时间连续性或共享的语义地标，实现 **弱监督或无监督** 的空间对齐。\n\n---",
       "summary_preview": "独立训练的 JEPA 模型，会自发涌现出 几何同构（线性可对齐）的表征空间，为去中心化协作提供了新路径。"
     },
     {
@@ -55857,7 +57966,7 @@
         "Deyu Zhang"
       ],
       "summary_status": "已总结",
-      "institution": "论文未明确列出，作者为个人署名",
+      "institution": "School of Computer Science, Central South University; Department of Computer Science, City University",
       "essence": "将经典卡尔曼滤波思想引入视觉导航，通过历史观测实时修正无人机的信念状态，从而解决了路径预测中的累积误差问题。",
       "abstract_text": null,
       "gap_points": [
@@ -55910,7 +58019,7 @@
           "markdown_path": "Interpretation/arxiv-vla-2026-01-30.md"
         }
       ],
-      "summary_markdown": "好的，我将以顶尖学术研究员的视角，为您深度拆解这篇论文。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** Mitigating Error Accumulation in Continuous Navigation via Memory-Augmented Kalman Filtering (通过记忆增强卡尔曼滤波缓解连续导航中的误差累积)\n- **核心机构：** 论文未明确列出，作者为个人署名。\n- **一句话本质：** 将经典卡尔曼滤波思想引入视觉导航，通过历史观测实时修正无人机的信念状态，从而解决了路径预测中的**累积误差**问题。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 现有的视觉-语言导航 (VLN) 模型采用**航位推算法 (dead-reckoning)**，即一步步预测下一个航点来构建完整轨迹。\n- **核心痛点：** 这种逐步预测的方式会导致**误差随时间累积**，造成模型内部的信念位置与真实坐标错位，即“**状态漂移** (state drift)”，最终损害长距离导航的准确性。\n- **本文切入点：** 作者从经典控制论中获得灵感，不再将导航视为单纯的序列预测任务，而是将其重新定义为一个**递归的贝叶斯状态估计问题**。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** (当前多模态观测 `o_t`，历史信念状态 `z_{t-1}`) -> **NeuroKalman 框架** -> (修正后的信念状态 `z_t`) -> 下一个航点 `w_t`。\n\n- **关键模块 1：** **预测模块 (Prediction Block)** - 使用一个 **RNN (GRU)** 作为运动模型，根据上一时刻的信念和动作，生成一个“盲目”的**先验预测 `~z_t`**。\n    - *本质是航位推算，负责提供一个基于惯性的初步估计。*\n\n- **关键模块 2：** **更新模块 (Update Block)** - 使用一个**记忆库 (Memory Bank)** 和多模态大模型 (MLLM) 从当前和历史观测中提取**测量证据 `r_t`**。\n    - *本质是外部观测，负责提供一个基于真实世界感知的修正信号。*\n\n- **关键模块 3：** **卡尔曼修正 (Kalman Correction)** - 设计一个**可学习的卡尔曼增益 `K_t`**，动态地融合**先验预测 `~z_t`** 和**测量证据 `r_t`**，得到最终的**后验信念 `z_t`**。\n    - *本质是自适应融合，负责在“惯性”和“观测”之间做出最优权衡。*\n\n### 四、 💡 核心认知与发现 (Key Insights)\n\n- **[架构性洞察]：** 导航任务的核心矛盾在于**内部动力学模型**与**外部观测**的冲突。将导航过程解耦为 **“预测-修正”** 两个独立又互补的阶段，比单一的端到端预测模型具有更强的鲁棒性和纠错能力。\n    - *这证明了**经典控制理论**的范式在现代深度学习导航模型中依然具有强大的生命力和指导意义。*\n\n- **[理论性洞察]：** 本文在数学上建立了**注意力机制**与**核密度估计 (KDE)** 之间的等价性。这意味着从记忆库中检索历史信息，不仅仅是寻找相似特征，而是在进行一次**非参数化的概率密度估计**。\n    - *这为“Attention is all you need”提供了新的统计学解释：Attention 本质上是在用历史样本估计当前输入的**观测似然**，为修正提供了坚实的数学基础。*\n\n- **[机制性洞察]：** **可学习的卡尔曼增益 `K_t`** 是实现自适应修正的关键。它扮演了一个**动态不确定性开关**的角色：当观测可信时，它放大修正信号；当观测模糊或检索到无关记忆时，它更相信平滑的内部运动预测。\n    - *这解释了模型为何在数据稀疏（仅用10%数据微调）和未知环境（Unseen Maps/Objects）中仍能表现优异，因为它学会了**动态地管理和权衡不确定性**，而不是死记硬背。*\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **先验模型过简：** 预测模块使用的 **GRU** 对于超长时序的依赖关系捕捉能力有限，在极端长距离导航中仍可能成为瓶颈。\n- **记忆管理粗糙：** 记忆库采用简单的**置信度阈值**和**固定长度**进行管理，在复杂多变的场景中，可能存入低质量记忆或因容量限制而丢失关键历史信息。\n\n**⚠️ 论证瑕疵：**\n\n- 论文将**注意力检索**等价于 **KDE**，这是一个深刻的理论连接，但实验部分缺乏对此的直接消融验证。例如，未能对比其他非 KDE 的检索方法（如简单 K-NN），以证明性能提升确实来源于这种**概率估计**的本质，而不仅仅是“检索”这一行为本身。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **强化先验模型：** 将预测模块中的 GRU 替换为更强大的序列模型，如**状态空间模型 (SSM, 如 Mamba)**，以更精确地建模长期运动动力学，进一步提升“预测”环节的准确性。\n- **结构化记忆与主动探索：** 将扁平化的记忆库升级为**拓扑图或语义地图**。这不仅能优化检索效率，还能让模型在修正状态的同时构建对环境的结构化理解，甚至可以引出“为了更好地定位而主动探索”等更高级的行为。\n\n---",
+      "summary_markdown": "好的，我将以顶尖学术研究员的视角，为您深度拆解这篇论文。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** Mitigating Error Accumulation in Continuous Navigation via Memory-Augmented Kalman Filtering (通过记忆增强卡尔曼滤波缓解连续导航中的误差累积)\n- **核心机构：** School of Computer Science, Central South University; Department of Computer Science, City University\n- **一句话本质：** 将经典卡尔曼滤波思想引入视觉导航，通过历史观测实时修正无人机的信念状态，从而解决了路径预测中的**累积误差**问题。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 现有的视觉-语言导航 (VLN) 模型采用**航位推算法 (dead-reckoning)**，即一步步预测下一个航点来构建完整轨迹。\n- **核心痛点：** 这种逐步预测的方式会导致**误差随时间累积**，造成模型内部的信念位置与真实坐标错位，即“**状态漂移** (state drift)”，最终损害长距离导航的准确性。\n- **本文切入点：** 作者从经典控制论中获得灵感，不再将导航视为单纯的序列预测任务，而是将其重新定义为一个**递归的贝叶斯状态估计问题**。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** (当前多模态观测 `o_t`，历史信念状态 `z_{t-1}`) -> **NeuroKalman 框架** -> (修正后的信念状态 `z_t`) -> 下一个航点 `w_t`。\n\n- **关键模块 1：** **预测模块 (Prediction Block)** - 使用一个 **RNN (GRU)** 作为运动模型，根据上一时刻的信念和动作，生成一个“盲目”的**先验预测 `~z_t`**。\n    - *本质是航位推算，负责提供一个基于惯性的初步估计。*\n\n- **关键模块 2：** **更新模块 (Update Block)** - 使用一个**记忆库 (Memory Bank)** 和多模态大模型 (MLLM) 从当前和历史观测中提取**测量证据 `r_t`**。\n    - *本质是外部观测，负责提供一个基于真实世界感知的修正信号。*\n\n- **关键模块 3：** **卡尔曼修正 (Kalman Correction)** - 设计一个**可学习的卡尔曼增益 `K_t`**，动态地融合**先验预测 `~z_t`** 和**测量证据 `r_t`**，得到最终的**后验信念 `z_t`**。\n    - *本质是自适应融合，负责在“惯性”和“观测”之间做出最优权衡。*\n\n### 四、 💡 核心认知与发现 (Key Insights)\n\n- **[架构性洞察]：** 导航任务的核心矛盾在于**内部动力学模型**与**外部观测**的冲突。将导航过程解耦为 **“预测-修正”** 两个独立又互补的阶段，比单一的端到端预测模型具有更强的鲁棒性和纠错能力。\n    - *这证明了**经典控制理论**的范式在现代深度学习导航模型中依然具有强大的生命力和指导意义。*\n\n- **[理论性洞察]：** 本文在数学上建立了**注意力机制**与**核密度估计 (KDE)** 之间的等价性。这意味着从记忆库中检索历史信息，不仅仅是寻找相似特征，而是在进行一次**非参数化的概率密度估计**。\n    - *这为“Attention is all you need”提供了新的统计学解释：Attention 本质上是在用历史样本估计当前输入的**观测似然**，为修正提供了坚实的数学基础。*\n\n- **[机制性洞察]：** **可学习的卡尔曼增益 `K_t`** 是实现自适应修正的关键。它扮演了一个**动态不确定性开关**的角色：当观测可信时，它放大修正信号；当观测模糊或检索到无关记忆时，它更相信平滑的内部运动预测。\n    - *这解释了模型为何在数据稀疏（仅用10%数据微调）和未知环境（Unseen Maps/Objects）中仍能表现优异，因为它学会了**动态地管理和权衡不确定性**，而不是死记硬背。*\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **先验模型过简：** 预测模块使用的 **GRU** 对于超长时序的依赖关系捕捉能力有限，在极端长距离导航中仍可能成为瓶颈。\n- **记忆管理粗糙：** 记忆库采用简单的**置信度阈值**和**固定长度**进行管理，在复杂多变的场景中，可能存入低质量记忆或因容量限制而丢失关键历史信息。\n\n**⚠️ 论证瑕疵：**\n\n- 论文将**注意力检索**等价于 **KDE**，这是一个深刻的理论连接，但实验部分缺乏对此的直接消融验证。例如，未能对比其他非 KDE 的检索方法（如简单 K-NN），以证明性能提升确实来源于这种**概率估计**的本质，而不仅仅是“检索”这一行为本身。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **强化先验模型：** 将预测模块中的 GRU 替换为更强大的序列模型，如**状态空间模型 (SSM, 如 Mamba)**，以更精确地建模长期运动动力学，进一步提升“预测”环节的准确性。\n- **结构化记忆与主动探索：** 将扁平化的记忆库升级为**拓扑图或语义地图**。这不仅能优化检索效率，还能让模型在修正状态的同时构建对环境的结构化理解，甚至可以引出“为了更好地定位而主动探索”等更高级的行为。\n\n---",
       "summary_preview": "将经典卡尔曼滤波思想引入视觉导航，通过历史观测实时修正无人机的信念状态，从而解决了路径预测中的累积误差问题。"
     },
     {
@@ -68030,7 +70139,7 @@
         "Nabil Subhan"
       ],
       "summary_status": "已总结",
-      "institution": "未提供（独立学者署名）",
+      "institution": "East West University",
       "essence": "证明了 轻量级骨干网络+双重注意力机制 能以仅 16.3MB 的极小体积，在无人机边缘端实现精准且抗干扰的太阳能板缺陷检测。",
       "abstract_text": null,
       "gap_points": [],
@@ -68051,8 +70160,8 @@
         "cs.CV"
       ],
       "pdf_name": "HybridSolarNet A Lightweight and Explainable EfficientNet-CBAM Architecture for Real-Time Solar Panel Fault Detection.pdf",
-      "pdf_path": null,
-      "has_local_pdf": false,
+      "pdf_path": "pdfs/HybridSolarNet A Lightweight and Explainable EfficientNet-CBAM Architecture for Real-Time Solar Panel Fault Detection.pdf",
+      "has_local_pdf": true,
       "note_refs": [
         {
           "date": "2026-01-06",
@@ -68061,7 +70170,7 @@
           "markdown_path": "Interpretation/arxiv-vla-2026-01-06.md"
         }
       ],
-      "summary_markdown": "### 一、 📌 论文元数据\n\n*   **标题：** HybridSolarNet: A Lightweight and Explainable EfficientNet-CBAM Architecture for Real-Time Solar Panel Fault Detection\n*   **核心机构：** 未提供（独立学者署名）\n*   **一句话本质：** 证明了 **轻量级骨干网络+双重注意力机制** 能以仅 16.3MB 的极小体积，在无人机边缘端实现精准且抗干扰的太阳能板缺陷检测。\n\n### 二、 🎯 破局点 (The Gap)\n\n*   **已有共识/做法：** 工业界普遍依赖 **VGG16/19** 等重型卷积网络进行太阳能板的缺陷分类。\n*   **核心痛点：** 传统大模型 **参数量过大（算力与内存要求高）**，根本无法部署在无人机等边缘设备上；且过往研究存在严重的数据泄露（Data Leakage），准确率存在“虚假繁荣”。\n*   **本文切入点：** 作者敏锐地意识到，轻量化网络容易丢失微小缺陷特征。因此通过 **EfficientNet 保证极致轻量**，并外挂 **CBAM 注意力模块** 强行拉升模型对高频微小缺陷的感知力。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n*   **输入 -> 输出：** **无人机采集的 RGB 图像** -> **6 种太阳能板状态的离散分类标签**（如清洁、积尘、鸟粪、物理损坏等）。\n*   **关键模块 1：** **EfficientNet-B0 骨干网络** - 作为极简特征提取器，用极低的计算代价提取图像的全局与局部视觉特征。\n*   **关键模块 2：** **CBAM 注意力模块 (通道+空间)** - 串联在骨干网络后，先筛选“哪些特征通道最重要”，再定位“缺陷在图像的哪个物理位置”，有效过滤背景噪点。\n*   **关键模块 3：** **Focal Loss 损失函数** - 动态调整训练权重，强迫模型将算力集中在 **样本极少且视觉上难以区分的缺陷类别** 上。\n\n### 四、 💡 核心认知与发现 (Key Insights) 🌟重点\n\n*   **[架构洞察]：注意力机制是轻量化网络的“外挂杠杆”。** 轻量级网络为降参数往往会牺牲空间细节。实验证明，仅增加极小参数量的 **CBAM 模块**，就能将整体准确率硬拉升 **1.53%**，性价比极高。\n*   **[数据洞察]：学术界普遍存在“数据增强陷阱”。** 过去许多论文的高准确率源于数据泄露。必须严格执行 **“先划分数据集，再进行数据增强” (Split-before-augment)** 的协议，否则模型会记住测试集的增强特征，导致真实泛化能力崩塌。\n*   **[可解释性洞察]：注意力机制能主动抑制“视觉伪影”。** 真实工业数据常带有水印或高对比度阴影。**Grad-CAM 可视化** 证实，HybridSolarNet 能主动屏蔽文本伪影等无关变量，真正将感受野聚焦于物理缺陷区域，避免了传统 VGG 容易产生的假阳性（False Positives）。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n*   **模态单一：** 仅验证了 **RGB 图像** 的分类能力。未结合红外热成像 (Thermal) 或电致发光 (EL) 图像，无法检测太阳能板内部的隐裂或热斑。\n*   **任务维度浅：** 仅停留在 **图像级分类 (Classification)**。无法输出缺陷的具体坐标边界框 (Bounding Box)，缺乏工业维修所需的像素级定位能力。\n\n**⚠️ 论证瑕疵：**\n\n*   **硬件测试环境错位：** 论文宣称适用于“无人机实时部署”，但其推理速度 (54.9 FPS) 是在 **桌面级显卡 (RTX 3060)** 上测得的。严重缺乏在真实的边缘计算板（如 **Jetson Nano / 树莓派**）上的功耗、发热与延迟消融实验。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n*   **弱监督目标检测 (WSOD)：** 基于现有的分类标签和 Grad-CAM 热力图，演进出 **无需高成本边界框标注** 即可实现缺陷精准定位的弱监督算法。\n*   **极低算力下的多模态对齐：** 研究如何在无人机有限的算力下，将 **可见光 (RGB) 与红外热成像 (Thermal)** 进行轻量级的特征融合，实现表观与内部缺陷的双盲测。\n\n---",
+      "summary_markdown": "### 一、 📌 论文元数据\n\n*   **标题：** HybridSolarNet: A Lightweight and Explainable EfficientNet-CBAM Architecture for Real-Time Solar Panel Fault Detection\n*   **核心机构：** East West University\n*   **一句话本质：** 证明了 **轻量级骨干网络+双重注意力机制** 能以仅 16.3MB 的极小体积，在无人机边缘端实现精准且抗干扰的太阳能板缺陷检测。\n\n### 二、 🎯 破局点 (The Gap)\n\n*   **已有共识/做法：** 工业界普遍依赖 **VGG16/19** 等重型卷积网络进行太阳能板的缺陷分类。\n*   **核心痛点：** 传统大模型 **参数量过大（算力与内存要求高）**，根本无法部署在无人机等边缘设备上；且过往研究存在严重的数据泄露（Data Leakage），准确率存在“虚假繁荣”。\n*   **本文切入点：** 作者敏锐地意识到，轻量化网络容易丢失微小缺陷特征。因此通过 **EfficientNet 保证极致轻量**，并外挂 **CBAM 注意力模块** 强行拉升模型对高频微小缺陷的感知力。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n*   **输入 -> 输出：** **无人机采集的 RGB 图像** -> **6 种太阳能板状态的离散分类标签**（如清洁、积尘、鸟粪、物理损坏等）。\n*   **关键模块 1：** **EfficientNet-B0 骨干网络** - 作为极简特征提取器，用极低的计算代价提取图像的全局与局部视觉特征。\n*   **关键模块 2：** **CBAM 注意力模块 (通道+空间)** - 串联在骨干网络后，先筛选“哪些特征通道最重要”，再定位“缺陷在图像的哪个物理位置”，有效过滤背景噪点。\n*   **关键模块 3：** **Focal Loss 损失函数** - 动态调整训练权重，强迫模型将算力集中在 **样本极少且视觉上难以区分的缺陷类别** 上。\n\n### 四、 💡 核心认知与发现 (Key Insights) 🌟重点\n\n*   **[架构洞察]：注意力机制是轻量化网络的“外挂杠杆”。** 轻量级网络为降参数往往会牺牲空间细节。实验证明，仅增加极小参数量的 **CBAM 模块**，就能将整体准确率硬拉升 **1.53%**，性价比极高。\n*   **[数据洞察]：学术界普遍存在“数据增强陷阱”。** 过去许多论文的高准确率源于数据泄露。必须严格执行 **“先划分数据集，再进行数据增强” (Split-before-augment)** 的协议，否则模型会记住测试集的增强特征，导致真实泛化能力崩塌。\n*   **[可解释性洞察]：注意力机制能主动抑制“视觉伪影”。** 真实工业数据常带有水印或高对比度阴影。**Grad-CAM 可视化** 证实，HybridSolarNet 能主动屏蔽文本伪影等无关变量，真正将感受野聚焦于物理缺陷区域，避免了传统 VGG 容易产生的假阳性（False Positives）。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n*   **模态单一：** 仅验证了 **RGB 图像** 的分类能力。未结合红外热成像 (Thermal) 或电致发光 (EL) 图像，无法检测太阳能板内部的隐裂或热斑。\n*   **任务维度浅：** 仅停留在 **图像级分类 (Classification)**。无法输出缺陷的具体坐标边界框 (Bounding Box)，缺乏工业维修所需的像素级定位能力。\n\n**⚠️ 论证瑕疵：**\n\n*   **硬件测试环境错位：** 论文宣称适用于“无人机实时部署”，但其推理速度 (54.9 FPS) 是在 **桌面级显卡 (RTX 3060)** 上测得的。严重缺乏在真实的边缘计算板（如 **Jetson Nano / 树莓派**）上的功耗、发热与延迟消融实验。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n*   **弱监督目标检测 (WSOD)：** 基于现有的分类标签和 Grad-CAM 热力图，演进出 **无需高成本边界框标注** 即可实现缺陷精准定位的弱监督算法。\n*   **极低算力下的多模态对齐：** 研究如何在无人机有限的算力下，将 **可见光 (RGB) 与红外热成像 (Thermal)** 进行轻量级的特征融合，实现表观与内部缺陷的双盲测。\n\n---",
       "summary_preview": "证明了 轻量级骨干网络+双重注意力机制 能以仅 16.3MB 的极小体积，在无人机边缘端实现精准且抗干扰的太阳能板缺陷检测。"
     },
     {
@@ -74509,7 +76618,7 @@
         "Xu Chen"
       ],
       "summary_status": "已总结",
-      "institution": "（文中未明确标出作者单位）",
+      "institution": "the School of Computer Science and; Engineering, Sun Yat-sen University; Tao Ouyang was with the School; Sun Yat-sen University; School of Electronic Information, Central South University; Pengcheng Laboratory",
       "essence": "提出一个云-边-端协同计算框架，用分层的基础模型（深度模型、VLM）赋能资源受限的无人机，实现更鲁棒的自主导航。",
       "abstract_text": null,
       "gap_points": [
@@ -74558,7 +76667,7 @@
           "markdown_path": "Interpretation/arxiv-vla-2025-12-22.md"
         }
       ],
-      "summary_markdown": "好的，作为一位顶尖的学术研究员，我将为您精准拆解这篇论文。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** CoDrone: Autonomous Drone Navigation Assisted by Edge and Cloud Foundation Models\n- **核心机构：** （文中未明确标出作者单位）\n- **一句话本质：** 提出一个**云-边-端协同**计算框架，用分层的**基础模型**（深度模型、VLM）赋能资源受限的无人机，实现更鲁棒的自主导航。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 无人机自主导航依赖**端侧轻量级模型**或**边侧计算卸载**。\n- **核心痛点：** 端侧模型在复杂环境中**感知能力不足**；纯边侧卸载**延迟高且不可靠**；强大的基础模型（如VLM）**无法直接部署**在端或边。\n- **本文切入点：** 与其在单点优化，不如构建一个**分层协同架构**。利用一个**智能调度器**，根据实时状态，自适应地在**端、边、云**之间分配最合适的计算任务，实现能力与效率的动态平衡。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** `(摄像头图像, 网络状态, 历史飞行数据) -> 精确的飞行控制指令 (转向角, 速度)`\n\n- **关键模块 1：** **Neural Scheduler Module (基于DRL的神经调度器)** - 作为系统“大脑”，根据实时带宽、碰撞概率等状态，动态决定计算位置（端/边）、数据压缩率以及是否启用深度模型。\n\n- **关键模块 2：** **分层异构模型 (Hierarchical Models)** - 在不同计算层部署能力匹配的模型：\n    - **端侧：** 运行在**灰度图**上的超轻量级导航网络，保证**最低延迟**。\n    - **边侧：** 运行 **Depth Anything V2** 深度估计模型，生成 **1D 占用栅格图**，提供**细粒度**的几何避障。\n    - **云侧：** 运行 **Qwen-VL-Max** 视觉语言模型（VLM），通过**函数调用 (Function Calling)** 实现**语义理解**和复杂场景脱困。\n\n### 四、 💡 核心认知与发现 (Key Insights)\n\n- **分层智能 (Hierarchical Intelligence)：** 单一模型无法兼顾实时性和复杂推理。一个**“反应式(端)+认知式(边)+反思式(云)”** 的分层架构，是实现复杂环境下高级自主性的有效路径。系统的整体智能**涌现**于各层之间的**高效协同**。\n\n- **自适应数据流 (Adaptive Data Stream)：** 输入数据本身是可优化的变量。在端侧使用**灰度图**而非RGB图，极大降低了计算和传输开销，证明了**根据任务需求调整数据模态**是提升端-边-云系统效率的关键手段。\n\n- **语义干预 (Semantic Intervention)：** 几何感知（如深度图）能解决99%的路径规划问题，但会在语义模糊的场景（如误入草丛）中“死锁”。引入**VLM进行语义层面的高级推理**，并结合**函数调用**直接干预飞行控制，是解决这类**长尾疑难场景 (long-tail hard cases)** 的“杀手锏”。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **模拟器依赖：** 所有实验均在 **AirSim** 模拟器中完成。现实世界中更复杂的**物理动力学、传感器噪声和网络抖动**可能会显著影响系统性能，存在巨大的 **Sim-to-Real Gap**。\n- **连接脆弱性：** 系统的核心优势（边和云）**强依赖于网络连接**。在网络完全中断的场景下，系统会降级为最基础的端侧模式，其鲁棒性优势将不复存在。\n\n**⚠️ 论证瑕疵：**\n\n- **VLM调用策略过于启发式：** 触发云端VLM的条件（如“碰撞概率突增”）是**基于规则的硬编码**，而非学习得来。这可能导致调用**不及时**（造成碰撞）或**过于频繁**（成本高、延迟大），缺乏最优性的证明。\n- **调度器对比不足：** 论文将DRL调度器与几个固定策略进行了比较，但**缺乏与更强的非学习型自适应基线**（例如，基于带宽和延迟阈值的PID控制器）的对比，未能充分证明DRL的必要性。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **端到端混合策略学习：** 将导航、调度和求助（调用VLM）等离散模块，统一到一个**端到端的混合动作空间策略网络**中进行学习。该网络能自主决定是输出低阶电机指令，还是发起一个高阶的“边/云服务请求”。\n- **在线模型蒸馏与特化：** 当云端VLM解决一个复杂场景（如“在森林中穿行”）后，能否**即时 (Just-in-Time) 蒸馏**出一个针对该场景的**轻量化专家模型**，并下发到边缘端执行？这能极大减少对云端VLM的持续依赖。\n\n---",
+      "summary_markdown": "好的，作为一位顶尖的学术研究员，我将为您精准拆解这篇论文。\n\n---\n\n### 一、 📌 论文元数据\n\n- **标题：** CoDrone: Autonomous Drone Navigation Assisted by Edge and Cloud Foundation Models\n- **核心机构：** the School of Computer Science and; Engineering, Sun Yat-sen University; Tao Ouyang was with the School; Sun Yat-sen University; School of Electronic Information, Central South University; Pengcheng Laboratory\n- **一句话本质：** 提出一个**云-边-端协同**计算框架，用分层的**基础模型**（深度模型、VLM）赋能资源受限的无人机，实现更鲁棒的自主导航。\n\n### 二、 🎯 破局点 (The Gap)\n\n- **已有共识/做法：** 无人机自主导航依赖**端侧轻量级模型**或**边侧计算卸载**。\n- **核心痛点：** 端侧模型在复杂环境中**感知能力不足**；纯边侧卸载**延迟高且不可靠**；强大的基础模型（如VLM）**无法直接部署**在端或边。\n- **本文切入点：** 与其在单点优化，不如构建一个**分层协同架构**。利用一个**智能调度器**，根据实时状态，自适应地在**端、边、云**之间分配最合适的计算任务，实现能力与效率的动态平衡。\n\n### 三、 ⚙️ 核心机制 (How it works)\n\n- **输入 -> 输出：** `(摄像头图像, 网络状态, 历史飞行数据) -> 精确的飞行控制指令 (转向角, 速度)`\n\n- **关键模块 1：** **Neural Scheduler Module (基于DRL的神经调度器)** - 作为系统“大脑”，根据实时带宽、碰撞概率等状态，动态决定计算位置（端/边）、数据压缩率以及是否启用深度模型。\n\n- **关键模块 2：** **分层异构模型 (Hierarchical Models)** - 在不同计算层部署能力匹配的模型：\n    - **端侧：** 运行在**灰度图**上的超轻量级导航网络，保证**最低延迟**。\n    - **边侧：** 运行 **Depth Anything V2** 深度估计模型，生成 **1D 占用栅格图**，提供**细粒度**的几何避障。\n    - **云侧：** 运行 **Qwen-VL-Max** 视觉语言模型（VLM），通过**函数调用 (Function Calling)** 实现**语义理解**和复杂场景脱困。\n\n### 四、 💡 核心认知与发现 (Key Insights)\n\n- **分层智能 (Hierarchical Intelligence)：** 单一模型无法兼顾实时性和复杂推理。一个**“反应式(端)+认知式(边)+反思式(云)”** 的分层架构，是实现复杂环境下高级自主性的有效路径。系统的整体智能**涌现**于各层之间的**高效协同**。\n\n- **自适应数据流 (Adaptive Data Stream)：** 输入数据本身是可优化的变量。在端侧使用**灰度图**而非RGB图，极大降低了计算和传输开销，证明了**根据任务需求调整数据模态**是提升端-边-云系统效率的关键手段。\n\n- **语义干预 (Semantic Intervention)：** 几何感知（如深度图）能解决99%的路径规划问题，但会在语义模糊的场景（如误入草丛）中“死锁”。引入**VLM进行语义层面的高级推理**，并结合**函数调用**直接干预飞行控制，是解决这类**长尾疑难场景 (long-tail hard cases)** 的“杀手锏”。\n\n### 五、 🧐 致命弱点与演进方向 (Critical Analysis)\n\n**🛑 核心局限 (Limitations)：**\n\n- **模拟器依赖：** 所有实验均在 **AirSim** 模拟器中完成。现实世界中更复杂的**物理动力学、传感器噪声和网络抖动**可能会显著影响系统性能，存在巨大的 **Sim-to-Real Gap**。\n- **连接脆弱性：** 系统的核心优势（边和云）**强依赖于网络连接**。在网络完全中断的场景下，系统会降级为最基础的端侧模式，其鲁棒性优势将不复存在。\n\n**⚠️ 论证瑕疵：**\n\n- **VLM调用策略过于启发式：** 触发云端VLM的条件（如“碰撞概率突增”）是**基于规则的硬编码**，而非学习得来。这可能导致调用**不及时**（造成碰撞）或**过于频繁**（成本高、延迟大），缺乏最优性的证明。\n- **调度器对比不足：** 论文将DRL调度器与几个固定策略进行了比较，但**缺乏与更强的非学习型自适应基线**（例如，基于带宽和延迟阈值的PID控制器）的对比，未能充分证明DRL的必要性。\n\n**🚀 下一步高价值方向 (Next Steps)：**\n\n- **端到端混合策略学习：** 将导航、调度和求助（调用VLM）等离散模块，统一到一个**端到端的混合动作空间策略网络**中进行学习。该网络能自主决定是输出低阶电机指令，还是发起一个高阶的“边/云服务请求”。\n- **在线模型蒸馏与特化：** 当云端VLM解决一个复杂场景（如“在森林中穿行”）后，能否**即时 (Just-in-Time) 蒸馏**出一个针对该场景的**轻量化专家模型**，并下发到边缘端执行？这能极大减少对云端VLM的持续依赖。\n\n---",
       "summary_preview": "提出一个云-边-端协同计算框架，用分层的基础模型（深度模型、VLM）赋能资源受限的无人机，实现更鲁棒的自主导航。"
     },
     {

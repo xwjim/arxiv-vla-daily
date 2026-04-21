@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WALL-OSS 训练细节解析</title>
+  <style>
+    :root {
+      --bg: #f6f2eb;
+      --paper: #fffdf9;
+      --ink: #201b18;
+      --muted: #6f655d;
+      --line: #dfd3c4;
+      --accent: #91481b;
+      --accent-soft: #f5e1d2;
+      --card: #fbf7f1;
+      --shadow: 0 18px 48px rgba(74, 52, 33, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      line-height: 1.72;
+      background:
+        radial-gradient(circle at top left, rgba(145, 72, 27, 0.12), transparent 28%),
+        linear-gradient(180deg, #eee2d4 0%, var(--bg) 18%, #faf7f1 100%);
+    }
+
+    .page {
+      width: min(1140px, calc(100vw - 32px));
+      margin: 28px auto 48px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(145, 72, 27, 0.95), rgba(68, 46, 29, 0.98));
+      color: #fff8f2;
+      border-radius: 28px;
+      padding: 34px 34px 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -76px;
+      bottom: -96px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), rgba(255,255,255,0));
+    }
+
+    .kicker {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      max-width: 920px;
+      margin: 0;
+      font-size: 16px;
+      color: rgba(255,248,242,0.92);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+      font-size: 14px;
+      color: rgba(255,248,242,0.88);
+    }
+
+    .meta span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .card {
+      grid-column: span 12;
+      background: var(--paper);
+      border: 1px solid rgba(166, 138, 106, 0.18);
+      border-radius: 22px;
+      padding: 24px 24px 20px;
+      box-shadow: 0 10px 28px rgba(74, 52, 33, 0.08);
+    }
+
+    .section-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.25;
+    }
+
+    .card h3 {
+      margin: 20px 0 10px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin: 18px 0 8px;
+    }
+
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .metric .value {
+      font-size: 28px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .metric .detail {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .note, .warning, .timeline {
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin: 16px 0;
+    }
+
+    .note {
+      background: #f8f4ed;
+      border: 1px solid var(--line);
+    }
+
+    .warning {
+      background: var(--accent-soft);
+      border: 1px solid rgba(145, 72, 27, 0.22);
+    }
+
+    .timeline {
+      background: #f4eee5;
+      border: 1px solid rgba(114, 83, 56, 0.15);
+    }
+
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    li + li { margin-top: 8px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 14px;
+      background: #fffdfa;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border-bottom: 1px solid #eadfce;
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f2e7da;
+      font-weight: 700;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #f6eee3;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+
+    a { color: #7f4317; }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(1140px, calc(100vw - 20px));
+        margin: 16px auto 28px;
+      }
+
+      .hero, .card {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="kicker">arXiv:2509.11766</div>
+      <h1>Igniting VLMs toward the Embodied Space 训练细节解析</h1>
+      <p class="subtitle">
+        这份整理只聚焦“模型怎么训练”的部分，核心对象是论文提出的 WALL-OSS。内容分成四层：论文明确公开的训练课程、损失与数据；官方开源实现能补充的默认配置；论文与实现之间的对应关系；以及论文没有完全公开的关键训练细节。
+      </p>
+      <div class="meta">
+        <span>核心模型：WALL-OSS</span>
+        <span>主题：从 VLM 到具身 VLA 的 staged curriculum</span>
+        <span>整理时间：2026-04-17</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <span class="section-tag">At A Glance</span>
+        <h2>一句话抓住训练核心</h2>
+        <p>
+          WALL-OSS 的训练主线可以概括成一句话：<strong>先把 VLM 变得“懂具身空间、懂粗粒度动作”，再把它切换到高频连续控制</strong>。论文把这个过程分成
+          <strong>Inspiration Stage</strong> 和 <strong>Integration Stage</strong> 两大阶段，并在其上再叠加
+          <strong>Unified Cross-Level CoT</strong>，把“指令 → 推理 → 子任务 → 连续动作”统一进一个可微的单模型路径。
+        </p>
+        <div class="summary">
+          <div class="metric">
+            <div class="label">主训练范式</div>
+            <div class="value">2 阶段</div>
+            <div class="detail">Inspiration → Integration</div>
+          </div>
+          <div class="metric">
+            <div class="label">动作桥接方式</div>
+            <div class="value">FAST → Flow</div>
+            <div class="detail">先离散动作，再连续控制</div>
+          </div>
+          <div class="metric">
+            <div class="label">结构改动</div>
+            <div class="value">Static-Routed MoE</div>
+            <div class="detail">Action FFN / Vision-Language FFN</div>
+          </div>
+          <div class="metric">
+            <div class="label">训练语料规模</div>
+            <div class="value">&gt;10k 小时</div>
+            <div class="detail">论文别处又写成“tens of thousands of hours”</div>
+          </div>
+          <div class="metric">
+            <div class="label">数据来源</div>
+            <div class="value">3 大类</div>
+            <div class="detail">自采机器人、开源动作、多模态 VQA</div>
+          </div>
+          <div class="metric">
+            <div class="label">论文最关键贡献</div>
+            <div class="value">训练组织</div>
+            <div class="detail">而不是单独一个动作头</div>
+          </div>
+        </div>
+        <div class="note">
+          <strong>最好把它理解成“两次迁移”。</strong>
+          第一次迁移是把 VLM 从互联网视觉语言分布迁到具身空间理解分布；第二次迁移是把已经带具身语义的 VLM，从离散 token 世界迁到连续动作世界。
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Architecture</span>
+        <h2>1. 模型结构与训练对象</h2>
+        <div class="two-col">
+          <div>
+            <h3>1.1 紧耦合 MoE，而不是松耦合 side head</h3>
+            <ul>
+              <li>论文明确强调，WALL-OSS 不是简单“给 VLM 外接一个动作头”，而是一个 <strong>tightly coupled MoE architecture</strong>。</li>
+              <li>其核心思想是在 VLM 主干内部为动作相关信息开专门通路，同时保留视觉语言通路，避免纯 side-branch 设计造成语义和动作绑定过弱。</li>
+              <li>Static router 会把 <strong>action-centric features</strong> 路由到 <strong>Action FFN</strong>，把视觉语言特征路由到 <strong>Vision-Language FFN</strong>。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>1.2 为什么是静态路由</h3>
+            <ul>
+              <li>论文明确写了：这里不是 learned softmax/top-k router，而是 <strong>static routing</strong>。</li>
+              <li>这样做的目的，是让不同模态在不同训练阶段的更新更可控，避免动态门控把训练不稳定性带到动作学习里。</li>
+              <li>官方开源实现也印证了这一点：<code>TokenTypeRouter</code> 直接按 token type 做专家分派，配置里默认 <code>num_experts = 2</code>，并启用 <code>mlp_moe</code>。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline">
+          <strong>训练上的关键含义：</strong>WALL-OSS 的主旨不是“保护 VLM 不被动作破坏”，也不是“让动作头自己学”，而是通过一条受控的 MoE 路由，把语言、视觉、动作绑定在一起，同时保留可训练性。
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Stage 1</span>
+        <h2>2. Inspiration Stage：先把 VLM 点燃到具身空间</h2>
+        <p>
+          这一阶段的目标不是直接做高频控制，而是先让 VLM 学会“看懂具身场景、理解空间关系、知道粗粒度动作在说什么”。论文明确说这一步会重用预训练 VLM 的原始 FFN，同时加入 embodied VQA 和离散动作目标。
+        </p>
+
+        <h3>2.1 这一阶段学什么</h3>
+        <ul>
+          <li><strong>embodied VQA</strong>：增强空间推理、进度理解、任务阶段判断。</li>
+          <li><strong>instruction following</strong>：维持或增强指令遵循能力。</li>
+          <li><strong>temporal order / causality modeling</strong>：补足具身环境里的时序与因果理解。</li>
+          <li><strong>离散动作建模</strong>：把连续动作变成 FAST token，让 VLM 用 next-token 风格先学粗动作先验。</li>
+          <li>论文文字还提到了 <strong>masked language modeling</strong> 和 <strong>image/video-text contrastive learning</strong>，说明这一阶段不是单纯 SFT，而是一个多任务具身预热阶段。</li>
+        </ul>
+
+        <h3>2.2 FAST 离散动作具体怎么接入</h3>
+        <ul>
+          <li>论文在公式里直接写成 <code>z(1:K) = FAST(a)</code>。</li>
+          <li>FAST 的处理路径写得很清楚：<strong>DCT → Quant → BPE</strong>。</li>
+          <li>作者的目的，是把连续动作先变成 VLM 熟悉的离散 token，从而借用 next-token 学习范式建立语言和动作的粗绑定。</li>
+        </ul>
+
+        <h3>2.3 论文明确给出的 Inspiration loss</h3>
+        <ul>
+          <li>VQA / 文本部分是标准自回归 token likelihood。</li>
+          <li>离散动作部分是 FAST token 的自回归 likelihood。</li>
+          <li>论文给出的形式是：<code>L_inspiration = lambda_VQA * L_VQA + lambda_D * L_discrete_action</code>。</li>
+        </ul>
+        <div class="warning">
+          <strong>论文没有公开</strong> <code>lambda_VQA</code> 和 <code>lambda_D</code> 的具体数值，也没有公开不同数据源在这一阶段的精确采样比例。
+        </div>
+        <p>
+          这一阶段训练完成后，作者明确说模型的输出已经可以包含
+          <strong>chain-of-thought reasoning、sub-task prediction、FAST action tokens</strong>。
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Stage 2</span>
+        <h2>3. Integration Stage：从离散动作切换到连续控制</h2>
+        <p>
+          第二阶段开始真正把模型推到机器人控制空间。论文把它显式拆成两个 phase，这是整篇工作最重要的训练组织细节之一。
+        </p>
+
+        <h3>3.1 Phase 1：冻结 VLM，只训练连续动作分支</h3>
+        <ul>
+          <li>作者先 <strong>freeze the VLM</strong>。</li>
+          <li>只训练 Action FFN 下的 <strong>flow head</strong>，先把连续动作建模稳定下来。</li>
+          <li>论文解释，这样可以利用 Inspiration 阶段已经学好的语义和具身理解，把它们当成可靠初始化，而不是直接让动作目标把整个 VLM 拉偏。</li>
+        </ul>
+
+        <h3>3.2 Phase 2：解冻后联合优化</h3>
+        <ul>
+          <li>当 flow head 稳定以后，再 <strong>unfreeze the VLM for joint optimization</strong>。</li>
+          <li>此时视觉、语言和动作表征会通过 attention 交互，静态路由继续把 action-centric 信息和 vision-language 信息分别送到不同 FFN。</li>
+          <li>论文明确写了：第二阶段联合训练时，<code>∂L/∂θ ≠ 0</code> 且 <code>∂L/∂φ ≠ 0</code>，也就是 VLM 和动作分支一起被更新。</li>
+        </ul>
+
+        <h3>3.3 连续动作目标：flow matching</h3>
+        <ul>
+          <li>论文写的是 <strong>flow matching</strong>，不是普通 BC 直接回归。</li>
+          <li>训练时会构造 noisy sample <code>x_t</code>，其中 <code>x_0</code> 是干净动作、<code>ϵ</code> 是高斯噪声、<code>ρ(t)</code> 是 noise schedule。</li>
+          <li>模型学习的是 velocity field <code>v_phi</code>，损失里还包含时间相关权重 <code>w(t)</code> 和一个连续动作损失权重 <code>lambda_C</code>。</li>
+        </ul>
+        <div class="note">
+          这一步的意义可以概括成：<strong>Stage 1 用离散 token 建立语义绑定，Stage 2 用 flow matching 恢复高频连续控制能力</strong>。也就是论文反复强调的 “discrete priors → continuous control”。
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Uni-CoT</span>
+        <h2>4. Unified Cross-Level CoT：把推理、子任务和动作串成一条链</h2>
+        <p>
+          论文的第三个关键点不是再加一个新 backbone，而是在训练目标里把
+          <strong>instruction → CoT → sub-task → continuous action</strong> 做成统一路径。
+        </p>
+        <ul>
+          <li>作者明确反对“一个 VLM 做 planner，再接一个独立 controller”的 pipeline 设计。</li>
+          <li>WALL-OSS 采用单模型 Uni-CoT，让模型同时学会是否使用中间推理、何时生成子任务、以及如何接连续动作。</li>
+          <li>论文公式里引入了 <strong>path-drop objective</strong>，允许模型在训练时“条件化使用”或“绕过”中间推理链。</li>
+        </ul>
+        <div class="warning">
+          论文清楚给出了 path-drop 的思想，但 <strong>没有公开</strong> path-drop 的具体概率、链长策略或不同路径的采样权重。
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Data</span>
+        <h2>5. 训练数据怎么组织</h2>
+        <p>
+          数据是这篇工作的真正底座。论文明确说 corpus 由三个互补部分组成：
+          <strong>自采机器人动作数据、开源动作数据、多模态 VQA 数据</strong>。
+        </p>
+
+        <h3>5.1 总规模</h3>
+        <ul>
+          <li>在数据总览段，论文写的是 <strong>“exceeds 10,000 hours”</strong>。</li>
+          <li>但在数据细节段，论文又写成 <strong>“exceeds tens of thousands of hours”</strong>。</li>
+          <li>比较稳妥的解读是：作者只给了下界，没有给精确总小时数；公开文本本身存在“1 万小时以上”和“数万小时级”两种表述。</li>
+        </ul>
+
+        <h3>5.2 机器人动作数据</h3>
+        <ul>
+          <li>作者强调这部分承担高质量动作监督、复杂任务覆盖和 cross-morphology 泛化。</li>
+          <li>论文举出的代表来源包括：<strong>AgibotWorld、DROID、BC-Z、RH20T、FurnitureBench、BridgeData V2、DobbE、UMI-biarm、Utaustin_mutex、Stanford_hydra、Austin_sailor、Taco_play、Berkeley_autolab_ur5、Berkeley_fanuc_manipulation</strong> 等。</li>
+          <li>作者还提到会把 open-source action data 统一化，用于跨 embodiment、跨环境联合训练。</li>
+        </ul>
+
+        <h3>5.3 General VQA：维持和增强 VLM 能力</h3>
+        <ul>
+          <li>论文明确说这条流主要是为了 <strong>VLM maintenance</strong>，即保住语言视觉能力、避免动作训练把 backbone 拉坏。</li>
+          <li>代表数据源包括：<strong>CapsFusion、Cambrian、PixMo、RoboPoint、Robo2VLM、COCO、VQAv2、VQASynth-SpaceLLaVA、SpaceThinker、OpenSpaces</strong> 等。</li>
+          <li>这些信号与 manipulation 相关性较弱，主要起 regularization 作用，更多约束 vision-language backbone，而不是直接训练 action head。</li>
+        </ul>
+
+        <h3>5.4 Embodied VQA：专门为具身空间推理服务</h3>
+        <ul>
+          <li>作者在自采轨迹上建立自动生成管线，构造专门面向机器人场景的监督。</li>
+          <li>具体包括：<strong>Action Planning VQA</strong>、<strong>Spatial &amp; Temporal QA</strong>、<strong>Perception VQA</strong>、<strong>Cognition &amp; Affordance</strong>。</li>
+          <li>标签统一成结构化格式，例如 <code>&lt;box&gt;[x1,y1,x2,y2]&lt;/box&gt;</code>、<code>&lt;point&gt;[x,y]&lt;/point&gt;</code>，以及可选的 <code>&lt;mask&gt;</code>。</li>
+          <li>论文明确说，这条 supervision 流就是在显式连接“instruction → CoT → sub-task → continuous action”这条链。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Preprocess</span>
+        <h2>6. 数据标准化、采样与增强</h2>
+        <h3>6.1 统一标准化协议</h3>
+        <ul>
+          <li><strong>坐标与单位统一：</strong>位置统一到米，角度统一到弧度。</li>
+          <li><strong>morphology normalization：</strong>用最大表达能力的 DoF 模板统一单臂、双臂、轮式、人形等平台，并对缺失关节做 mask / placeholder。</li>
+          <li><strong>perception alignment：</strong>统一内外参、时间戳、帧率、分辨率和多视角通道。</li>
+          <li><strong>action time-base normalization：</strong>统一控制频率，并把轨迹重采样到 flow-matching 网格。</li>
+        </ul>
+
+        <h3>6.2 数据混合与采样策略</h3>
+        <ul>
+          <li>作者按 <strong>scene / object / task / morphology</strong> 做验证集和测试集分层切分。</li>
+          <li>long-horizon 和 rare skills 会得到 <strong>temperature-controlled resampling</strong> 与 <strong>hard-example upsampling</strong>。</li>
+          <li>两个训练阶段都会做 <strong>source mixing with quota control</strong>，目的是同时保住 VLM 能力并提升连续控制。</li>
+        </ul>
+
+        <h3>6.3 数据增强</h3>
+        <ul>
+          <li>论文明确提到使用 <strong>light domain randomization</strong>。</li>
+          <li>视觉流上还会加入 <strong>occlusion perturbations</strong>，用于提升鲁棒性。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Long Horizon</span>
+        <h2>7. 长时程任务的额外训练信号</h2>
+        <p>
+          长时程任务是论文重点强调的能力来源之一。实验部分明确写到，在 long-horizon fine-tuning 里，WALL-OSS 会
+          <strong>jointly train on action generation and subtask prediction</strong>。
+        </p>
+        <ul>
+          <li>训练时同时监督动作生成和子任务预测。</li>
+          <li>作者特别指出：<strong>只有 1% 的训练数据带 subtasks 标签</strong>，模型依然能学出高质量 subtask 指令。</li>
+          <li>推理时，模型会先生成 subtask instruction，再用它引导动作生成。</li>
+          <li>论文认为，这一步直接提升了阶段感知与任务进展建模能力，尤其对长时程任务有帮助。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Repo Defaults</span>
+        <h2>8. 官方开源实现能补出的默认训练配置</h2>
+        <p>
+          下面这些值来自官方仓库 <code>X-Square-Robot/wall-x</code> 的示例配置和训练代码。
+          <strong>它们不是论文明确写出的正式大规模预训练超参数，而是开源实现默认值。</strong>
+        </p>
+
+        <h3>8.1 FAST / Inspiration 风格示例配置</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>默认值</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>配置文件</td><td><code>config_qact_from_vlm.yml</code></td><td>从 Qwen2.5-VL 起步</td></tr>
+            <tr><td><code>use_fast_tokenizer</code></td><td><code>true</code></td><td>对应离散动作训练</td></tr>
+            <tr><td>learning rate</td><td><code>9e-5</code></td><td>最小学习率 <code>5e-5</code></td></tr>
+            <tr><td>warmup steps</td><td><code>100</code></td><td>示例 warmup 很短</td></tr>
+            <tr><td>num_epoch</td><td><code>100</code></td><td>workspace 示例值</td></tr>
+            <tr><td>batch size / GPU</td><td><code>8</code></td><td>固定在 yaml 里</td></tr>
+            <tr><td>grad accumulation</td><td><code>1</code></td><td>FAST 示例</td></tr>
+            <tr><td>action horizon</td><td><code>32</code></td><td>示例数据配置</td></tr>
+            <tr><td>FSDP2</td><td><code>true</code></td><td>默认开启</td></tr>
+          </tbody>
+        </table>
+
+        <h3>8.2 Flow / Integration 风格示例配置</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>默认值</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>配置文件</td><td><code>config_qact.yml</code></td><td>Wall-X Flow 训练示例</td></tr>
+            <tr><td><code>use_fast_tokenizer</code></td><td><code>false</code></td><td>对应连续动作 flow 训练</td></tr>
+            <tr><td>learning rate</td><td><code>5e-5</code></td><td><code>min_lr</code> 也设为 <code>5e-5</code></td></tr>
+            <tr><td>warmup steps</td><td><code>100</code></td><td>workspace 示例值</td></tr>
+            <tr><td>num_epoch</td><td><code>100</code></td><td>workspace 示例值</td></tr>
+            <tr><td>batch size / GPU</td><td><code>8</code></td><td>与 FAST 示例一致</td></tr>
+            <tr><td>grad accumulation</td><td><code>32</code></td><td>Flow 示例显著更大</td></tr>
+            <tr><td>action horizon</td><td><code>32</code></td><td>workspace 示例值</td></tr>
+            <tr><td>num_training_steps</td><td><code>64,000,000</code></td><td>更像上限保护值，实际停止更可能由 epoch 控制</td></tr>
+          </tbody>
+        </table>
+
+        <h3>8.3 官方代码里明确能确认的训练实现</h3>
+        <ul>
+          <li>训练脚本 <code>train_qact.py</code> 使用 <strong>Accelerate</strong>，并明确开启 <strong>mixed_precision="bf16"</strong>。</li>
+          <li>当配置打开时，训练会使用 <strong>FSDP2</strong>。</li>
+          <li><code>qwen_vl_act_trainer.py</code> 明确导入并使用 <strong>AdamW</strong>。</li>
+          <li>学习率调度明确使用 <strong>get_cosine_with_min_lr_schedule_with_warmup</strong>。</li>
+          <li>代码里默认 <strong>weight_decay = 0.1</strong>。</li>
+        </ul>
+
+        <h3>8.4 官方 Qwen 配置能补出的结构和噪声调度</h3>
+        <ul>
+          <li><code>qwen25_config.json</code> 对应的是 Qwen2.5-VL 家族结构：<strong>36 层、hidden size 2048、bf16、Flash Attention 2</strong>。</li>
+          <li>MoE 相关配置是：<code>num_experts = 2</code>、<code>mlp_moe = true</code>、<code>attention_moe = false</code>。</li>
+          <li>噪声调度配置写的是：<code>beta_alpha = 1.5</code>、<code>beta_beta = 1.0</code>、<code>s = 0.999</code>。</li>
+          <li>推理时间步默认是 <code>num_inference_timesteps = 5</code>。这是推理配置，不是训练步数。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">How To Read It</span>
+        <h2>9. 如果你要复现，这篇工作的训练重点是什么</h2>
+        <ul>
+          <li><strong>先学 embodied VQA，再学动作。</strong> 论文认为动作泛化差，根源之一是 VLM 本身在 embodied scene 上就不够懂。</li>
+          <li><strong>先离散、后连续。</strong> 先用 FAST 离散动作把 VLM 拉近动作空间，再用 flow matching 拉回连续控制。</li>
+          <li><strong>Stage 2 不能只训动作数据。</strong> 论文反复强调 co-training grounding / VQA 数据是为了抑制遗忘并维持 instruction grounding。</li>
+          <li><strong>长时程任务要把 subtask supervision 一起训进去。</strong> 这不是推理时临时加 prompt，而是训练目标的一部分。</li>
+          <li><strong>数据标准化是关键工程。</strong> 坐标、DoF、时间基、相机、分辨率和多源 quota control 都是训练能否稳定的前提。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Missing Pieces</span>
+        <h2>10. 论文没有完全公开的训练细节</h2>
+        <ul>
+          <li>没有一张完整超参数总表，系统列出 <strong>batch size、GPU 数、训练步数、optimizer、weight decay、总算力</strong>。</li>
+          <li>没有公开 <strong>各数据源的精确混合比例</strong>、quota 数值或 temperature 采样参数。</li>
+          <li>没有公开 <strong>Inspiration / Integration / Uni-CoT</strong> 各阶段的准确切换条件和 wall-clock 训练预算。</li>
+          <li>没有公开 <code>lambda_VQA</code>、<code>lambda_D</code>、<code>lambda_C</code> 的具体数值。</li>
+          <li>没有公开 <strong>path-drop</strong> 的概率和策略。</li>
+          <li>数据规模的公开表述本身有轻微不一致：正文一处写“超过 10,000 小时”，另一处写“数万小时级”。</li>
+        </ul>
+        <div class="warning">
+          所以如果你的目标是“理解训练思想”，这篇论文已经够清楚；但如果目标是“逐项严谨复现”，你必须结合官方仓库、后续模型卡和自己的工程假设补全配方。
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="section-tag">Sources</span>
+        <h2>11. 参考来源</h2>
+        <ul>
+          <li><a href="https://arxiv.org/pdf/2509.11766" target="_blank" rel="noreferrer">arXiv PDF: 2509.11766</a></li>
+          <li><a href="https://ar5iv.org/html/2509.11766v1" target="_blank" rel="noreferrer">ar5iv HTML 版论文</a></li>
+          <li><a href="https://github.com/X-Square-Robot/wall-x" target="_blank" rel="noreferrer">官方代码仓库：X-Square-Robot/wall-x</a></li>
+          <li><a href="https://raw.githubusercontent.com/X-Square-Robot/wall-x/main/workspace/lerobot_example/config_qact.yml" target="_blank" rel="noreferrer">官方配置：config_qact.yml</a></li>
+          <li><a href="https://raw.githubusercontent.com/X-Square-Robot/wall-x/main/workspace/lerobot_example/config_qact_from_vlm.yml" target="_blank" rel="noreferrer">官方配置：config_qact_from_vlm.yml</a></li>
+          <li><a href="https://raw.githubusercontent.com/X-Square-Robot/wall-x/main/workspace/lerobot_example/qwen25_config.json" target="_blank" rel="noreferrer">官方配置：qwen25_config.json</a></li>
+          <li><a href="https://raw.githubusercontent.com/X-Square-Robot/wall-x/main/train_qact.py" target="_blank" rel="noreferrer">官方训练脚本：train_qact.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/X-Square-Robot/wall-x/main/wall_x/trainer/qwen_vl_act_trainer.py" target="_blank" rel="noreferrer">官方训练器：qwen_vl_act_trainer.py</a></li>
+        </ul>
+        <p class="small">
+          注：本页中“论文明确公开”的内容优先来自 arXiv / ar5iv；“开源实现默认值”单独放在第 8 节，不混作论文正式预训练超参数。
+        </p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
