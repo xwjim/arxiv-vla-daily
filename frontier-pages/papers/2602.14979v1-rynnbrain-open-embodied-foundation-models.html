@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.14979v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有具身智能研究试图直接应用通用的视觉语言模型（VLM）来解决感知、推理和规划问题。</li><li>核心痛点： VLM 的高阶推理与物理世界脱节，缺乏时空一致性，导致在真实物理约束下容易产生幻觉。</li><li>本文切入点： 将空间坐标和时间帧视为一种特殊的“语言”融入模型。强迫模型的推理过程必须在物理时空中找到可验证的锚点（坐标），从而打破纯文本推理的局限。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征范式]： 物理世界（空间、时间）可以被“Token化”，作为一种原生“语言”融入 LLM。这比单纯的多模态输入更能实现对物理世界的深度、结构化理解。</li><li>[数据飞轮]： 高质量具身数据的瓶颈可通过“大模型先验 + 人工关键点校验”的协同模式打破。这能以低成本、规模化的方式构建包含丰富物理世界知识的训练语料。</li><li>[推理机制]： 有效的具身推理不是纯文本的逻辑链，而是一个“文本推理-物理求证”的闭环。通过交替生成思考和定位坐标，模型能进行自我纠偏，确保规划植根于现实。</li></ul></section><section><h3>Next Steps</h3><ul><li>从规划到控制： 从离散的定位和规划走向连续、动态的底层动作生成。如何将 RynnBrain 的高层物理认知无缝转化为机器人本体的实时、平滑控制信号是一个核心难题。</li><li>长时程记忆与在线学习： 探索长时程记忆与在线学习机制。如何让模型在与环境的持续交互中动态更新其对物理世界的认知，而不仅仅依赖于静态的预训练数据。</li></ul></section>
       <section>

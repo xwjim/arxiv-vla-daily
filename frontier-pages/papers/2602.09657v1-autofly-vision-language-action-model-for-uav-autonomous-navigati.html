@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.09657v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机导航依赖 详细、分步的语言指令 来遵循预设路径。</li><li>核心痛点： 真实世界通常只有 粗粒度的目标指引，现有模型缺乏自主决策和动态避障能力。</li><li>本文切入点： 作者认为，仅靠 RGB 图像不足以进行复杂的 3D 空间推理。他们通过 从单目 RGB 图像中提取「伪深度」信息，来显式增强模型的空间几何感知能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>[显式空间几何]： 相比于仅依赖 RGB 图像进行隐式空间推理，显式地引入伪深度信息 能显著提升 VLA 模型在复杂 3D 环境中的 避障成功率和路径规划效率。</li><li>[多模态表征对齐]： 采用 参数共享的孪生（Siamese）结构 来对齐视觉和深度特征，比独立处理或直接输入 LLM 的效果更好。这强制模型学习到了 跨模态的一致性空间表征。</li><li>[导航任务的数据偏见]： 长时程导航数据存在严重的偏见（多数时间在避障）。通过 对轨迹按行为（避障/寻路）进行切分和重采样，可以显著改善模型的学习效率和最终性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合记忆机制： 将模型与 拓扑地图或世界模型 (World Model) 结合，使其具备长期规划和探索未知环境的能力。</li><li>提升复杂指令理解能力： 研究如何让模型理解和执行 包含多个步骤、带有逻辑条件的复杂任务指令（例如，“先找到A，再绕到B后面”）。</li></ul></section>
       <section>

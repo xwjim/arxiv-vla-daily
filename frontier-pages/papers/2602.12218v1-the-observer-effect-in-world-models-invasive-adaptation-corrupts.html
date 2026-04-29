@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.12218v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过微调或使用高容量探针（如多层感知机）来测试预训练模型是否真正理解了物理。</li><li>核心痛点： 这些“侵入式”的评估方法会改变和破坏模型在预训练阶段学到的原始表征，导致评估结果失真，无法判断模型是真的不懂还是被评估过程搞坏了。</li><li>本文切入点： 受物理学中“观察者效应”的启发，作者假设评估过程本身就是一种干扰。他们提出，应该将模型视为一个固定的测量仪器，使用非侵入式的低容量探针来读取信息，而不是去改变它。</li></ul></section><section><h3>Key Insights</h3><ul><li>[评估方法的观察者效应]： 评估世界模型物理知识的侵入式方法（如微调）本身就是一种破坏性干预。它会主动修改和破坏模型已学到的物理表征，而非客观地测量它们，甚至在模型本未学到知识时“伪造”出能力。</li><li>[物理规律的线性编码]： 当模型通过自监督学习成功捕捉到物理动态（即预测误差低）时，其内部表征会自发地将复杂的物理规律线性化。这使得一个极简的线性探针就能有效提取出这些规律，验证了线性表征假说在物理建模领域的适用性。</li><li>[侵入式破坏的机制]： 微调的破坏是有目标的，而非随机噪声。优化器会选择性地擦除对狭窄下游任务无用的动态变量（如速度、半径），并强化对静态捷径（如质量）的依赖，导致模型丧失物理泛化能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>“无损”自适应算法： 研究子空间约束或正交梯度投影等微调方法，旨在学习新任务的同时，强制保留模型内部已被验证的物理不变量子空间，实现知识的兼容性扩展。</li><li>几何与因果探针： 开发超越线性的非侵入式探针，例如通过测量表征流形的曲率或使用因果干预来探测模型对物理规律的更深层次（非线性、因果）的理解。</li></ul></section>
       <section>

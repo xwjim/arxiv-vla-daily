@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.22796v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统机器人摄影依赖硬编码规则（如三分法）、强化学习或模仿学习。</li><li>核心痛点： LMM 空有美学知识，却无法直接生成稳定、精确的相机物理位姿（6-DoF），存在巨大的语义-几何鸿沟。</li><li>本文切入点： 不让 LMM 直接输出位姿。而是引导其将抽象的美学指令分解为一组可解的、低维度的几何约束，绕开了端到端的黑盒生成。</li></ul></section><section><h3>Key Insights</h3><ul><li>[任务解耦]： LMM 的核心价值在于语义理解与问题分解，而非直接的数值回归。将美学任务分解为几何约束，远比直接生成 6-DoF 位姿更稳定、更有效。</li><li>[世界模型]： 高保真、实时渲染的内部世界模型（3DGS）是实现高效「视觉反思」的关键。它将昂贵的物理试错（ReAct 范式）转变为廉价的内部模拟，极大加速了决策优化。</li><li>[控制参数化]： 优良的控制参数化至关重要。将 6-DoF 位姿探索解耦为距离、方位、俯仰三个独立维度，能有效避免参数耦合导致的优化难题，使 LMM 的推理更具逻辑性。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态场景摄影：将 3DGS 替换为支持实时更新和动态元素的 4D 表示（如动态 NeRF），使 Agent 能够预测和捕捉运动主体的最佳瞬间。</li><li>从几何约束到场景图约束：将 LMM 的推理能力从单一锚点扩展到整个场景图。使其能够理解和执行基于物体间关系、光影、画面平衡等更抽象的全局构图指令。</li></ul></section>
       <section>

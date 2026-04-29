@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.18597v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有检测器（如YOLO, RT-DETR）通过多尺度特征金字塔来融合空间与语义信息。</li><li>核心痛点： 传统方法对频率信息利用不足，且依赖静态卷积，导致对小目标的特征表达能力有限，难以提取有效的深层语义。</li><li>本文切入点： 作者的直觉是，小目标的边缘和纹理等高频信息至关重要。他们通过模拟频域处理来代替昂贵的FFT变换，并设计动态卷积来适应内容变化，从而高效地捕获这些关键特征。</li></ul></section><section><h3>Key Insights</h3><ul><li>[计算范式]： 无需显式傅里叶变换即可利用频率信息。通过简单的平均池化（模拟低通）、恒等映射（全通）和深度卷积（模拟高通），可以高效地模拟频域分解，这比使用计算昂贵的FFT等变换更适合实时部署，为特征增强提供了新的轻量化思路。</li><li>[特征权衡]： 对于小目标检测，浅层高分辨率特征比深层语义特征更具价值。FFR策略的成功表明，刻意牺牲部分顶层语义信息（丢弃F5），以换取对底层空间细节（保留S1, S2）的更好保留，是一种有效的、针对特定任务的架构设计权衡。</li><li>[网络动态性]： 特征提取过程应是内容自适应的，而非静态的。ESFC模块证明，让网络通过注意力机制动态选择“专家”卷积核，比使用固定的单一卷积核能更灵活、更精准地捕捉复杂场景中的多变语义，实现了表征能力与计算效率的平衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>尺度自适应融合机制： 开发一种动态特征选择模块，使其能根据输入图像中目标的尺度分布，自适应地决定融合哪些层级的特征，从而在不牺牲小目标精度的前提下，改善大目标的检测性能。</li><li>探索更优的模拟滤波器： 当前的模拟高/低通滤波器设计较为基础。下一步可以研究更复杂、但依然高效的可学习空间滤波器组，以更精细地解耦和利用不同频带的信息，进一步提升特征表达的丰富度。</li></ul></section>
       <section>

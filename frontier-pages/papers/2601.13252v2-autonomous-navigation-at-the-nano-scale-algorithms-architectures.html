@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.13252v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 标准尺寸的机器人依赖强大的传感器（如激光雷达）和高功耗处理器（如GPU）运行复杂算法（如VSLAM）。</li><li>核心痛点： 纳米无人机（&lt;50g）受限于极端的 尺寸、重量和功耗（SWaP） 约束，其机载计算功耗通常 低于100毫瓦，无法承载传统方案。</li><li>本文切入点： 通过系统性梳理，论证了从经典几何方法向 “边缘AI” 和 软硬件协同设计 的范式转移，是实现纳米级自主导航的唯一出路。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转移]： 纳米无人机的自主导航已从一个纯粹的 算法问题 演变为一个 软硬件协同设计 问题。SWaP约束 成为首要矛盾，算法必须为超低功耗硬件（如PULP架构、神经形态芯片）深度定制。</li><li>[感知补偿]： 存在一个无法用硬件弥补的 “感知鸿沟” (Sensing Gap)。由于无法搭载高精度传感器，系统被迫依赖稀疏、低质量数据，这使得 算法（尤其是学习方法） 承担了从劣质输入中补偿和推断完整世界模型的全部负担。</li><li>[架构融合]： 纯粹的端到端学习方法泛化能力差且难以保证安全，而纯粹的经典方法在复杂动态环境中又显得脆弱。未来的最优解是 混合架构：用 数据驱动的AI 负责复杂的感知，用 轻量级的经典控制 保证飞行的稳定与安全。</li></ul></section><section><h3>Next Steps</h3><ul><li>实用化混合架构： 设计标准化的框架，将 数据驱动的感知模块 与 经过形式化验证的安全控制器（如CBF）进行“即插即用”式融合，兼顾灵活性与安全性。</li><li>端上神经形态系统： 推动 事件相机 与 脉冲神经网络 (SNN) 在真实纳米无人机上的集成与部署，以实现逼近生物级别的 超低延迟 和 超低功耗 反应能力。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.03490v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学界普遍认为，预测性神经网络可以学习形成内部的“世界模型”。</li><li>核心痛点： 这些“世界模型”的内部工作 机制不明，尤其在复杂模型中难以拆解和理解，如同一个黑箱。</li><li>本文切入点： 设计一个 “极简任务”（2D空间中的字母序列预测），剥离所有现实世界的复杂性，从而能精确地探查和验证网络内部涌现出的核心计算机制。</li></ul></section><section><h3>Key Insights</h3><ul><li>[认知结构涌现]： 复杂的认知能力可从极简的预测压力中自发产生。</li><li>模型仅被训练做“预测下一个”这一件事，却自发学会了 路径整合（导航能力）和 物体-位置绑定（记忆能力）两种高级功能。这证明了构建复杂“世界模型”不一定需要复杂的设计，简单的演化压力就足够。</li><li>[内部表征特性]： 模型学到的是一种可组合的、泛化的“绑定”规则，而非死记硬背。</li><li>模型能将任意物体关联到任意位置，即使这种 物体-位置组合 在训练数据中从未出现过（OOD 泛化）。这表明其内部表征是 组合式 的，而非一个简单的查找表。</li><li>[记忆更新机制]： 内部记忆同时具备高可塑性与高稳定性，类似生物记忆。</li></ul></section><section><h3>Next Steps</h3><ul><li>[探索绑定格式]： 采用模型分解技术，检验不同的 向量符号架构 (Vector-Symbolic Architectures) 是否能拟合网络的内部激活，从而揭示“绑定”操作的具体数学形式。</li><li>[构建层级世界模型]： 将任务扩展到包含 物体间抽象关系（如“A在B之上”）或 层级结构 的场景，研究模型是否能自发涌现出对这些 语法结构 的表征。</li></ul></section>
       <section>

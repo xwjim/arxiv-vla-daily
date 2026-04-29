@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.25966v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 智能体导航要么依赖端到端强化学习，要么采用大模型进行高层规划+底层启发式策略。</li><li>核心痛点： 难以定义最优的探索行为，导致无法有效利用包含大量次优或失败轨迹的混合质量数据。</li><li>本文切入点： 直觉上，人类不会记住所有路过的画面，而是形成一张抽象地图。作者借鉴此点，用语义地图统一历史表征，再通过奖励放大从噪声数据中提炼高价值行为。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征的价值： 语义地图是比原始视觉序列（视频）更有效、更鲁棒的历史信息载体。它通过空间抽象过滤了探索过程中的冗余噪声，为决策提供了更稳定和结构化的上下文。</li><li>学习的范式： 序贯的三阶段训练（理解-&gt;模仿-&gt;放大）是高效的。它解耦了空间认知、基础行为和价值优化，使模型能从大规模、混杂的离线数据中稳定学习，避免了端到端训练的崩溃问题。</li><li>数据的提炼： 基于期望回归 (Expectile Regression) 的奖励建模，是从混合质量数据中学习的关键。它能让模型隐式地评估并偏向于数据集中回报更高的轨迹片段，从而让策略超越模仿数据的平均水平，生成更优的探索行为。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端空间记忆： 探索隐式的、端到端的空间记忆机制，让模型自主从原始观测中学习构建抽象的空间表征，摆脱对显式几何建图流程的依赖。</li><li>离线到在线的融合： 研究如何将当前纯离线训练的框架，与在线交互学习 (Online RL/Adaptation) 相结合，使智能体能够在部署后，根据真实环境的反馈持续自我改进和纠错。</li></ul></section>
       <section>

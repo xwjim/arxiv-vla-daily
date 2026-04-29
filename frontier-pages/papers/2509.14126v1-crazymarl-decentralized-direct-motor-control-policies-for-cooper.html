@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.14126v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统方法将无人机与负载间的缆绳简化为刚性杆进行建模和控制。</li><li>核心痛点： 刚性杆模型无法处理缆绳松弛-拉紧的真实物理动态，导致系统在强扰动下鲁棒性差、易失稳。</li><li>本文切入点： 直觉上，无需简化物理模型。让智能体在包含复杂物理（松紧切换）的高保真模拟中直接学习，可以涌现出更鲁棒的控制策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>[控制策略]： 面对缆绳松弛-拉紧的混合动态，端到端的RL策略天然优于依赖简化模型的传统控制器。RL策略能隐式地学习并利用这种非线性动态，而不是回避它。</li><li>[控制粒度]： 直接输出电机PWM指令，绕过传统的分层控制器（姿态环、速度环），能实现更快的系统响应。这对于在极限工况（如大风、低功重比平台）下保持鲁棒性至关重要。</li><li>[泛化能力]： 大规模、多维度的领域随机化（动力学、执行器、观测、扰动）是实现零样本Sim-to-Real迁移的关键。它迫使策略学习一个对模型不确定性和外部干扰不敏感 的通用解，而非过拟合于特定模拟环境。</li></ul></section><section><h3>Next Steps</h3><ul><li>解决扩展瓶颈： 研究基于注意力机制或图神经网络的排列不变性智能体编码，使策略能泛化到任意数量的无人机，并动态关注最重要的协作对象。</li><li>融合在线安全约束： 将障碍物避碰和安全飞行走廊等约束融入学习框架，或结合传统规划方法，提升策略在复杂动态环境中的实用性和安全性。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.13030v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有具身智能模型功能割裂，分别处理理解、规划和控制。</li><li>核心痛点： 模型功能不统一，且无法利用海量无动作标注的视频数据进行大规模预训练。</li><li>本文切入点： 提出两大核心直觉： 1. 用混合专家架构 (MoT) 统一不同模型，实现能力融合而非零散叠加。 2. 用光流 (Optical Flow) 从视频中提取通用的像素级运动信息，作为一种可泛化的「潜动作」。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型统一性]： 统一建模（VLA、世界模型等）并非简单的功能堆砌。通过跨任务的联合训练，不同能力（如预测未来与生成动作）之间形成了知识协同与正则化效应，最终显著提升了单一任务（如策略学习）的泛化能力。</li><li>[动作表征]： 光流是比具体机器人关节指令更通用的跨形态运动先验。将其编码为「潜动作」，成功解锁了在海量无标注、多样化的视频数据上进行大规模动作预训练的能力，解决了机器人领域数据稀缺的核心瓶颈。</li><li>[训练范式]： 强大的具身智能模型依赖于分阶段、分层次的课程学习。Motus 的三阶段训练流程（通用视觉动力学 -&gt; 通用运动模式 -&gt; 特定机器人适配）证明，从普适物理规律到抽象运动，再到具体执行的知识注入顺序，是构建通用模型的关键路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>[超越2D光流的运动表征]： 研究如何从视频中直接学习包含三维结构、接触物理等信息的潜动作，以更本质地表征物理交互，缩小仿真与现实的执行鸿沟。</li><li>[模型的压缩与在线自适应]： 如何将 Motus 这类大型统一模型蒸馏为轻量级、高效率的策略，并使其具备在新环境中快速自我修正和在线学习的能力，是走向实用化的关键。</li></ul></section>
       <section>

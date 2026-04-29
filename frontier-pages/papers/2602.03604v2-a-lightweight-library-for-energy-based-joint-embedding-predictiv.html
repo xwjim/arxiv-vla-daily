@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.03604v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型要么在像素空间进行生成式预测，要么依赖于大规模、复杂的联合嵌入架构（JEPA）实现。</li><li>核心痛点： 现有方法计算成本高、代码库复杂，导致 JEPA 研究的入门门槛极高。</li><li>本文切入点： 作者通过创建一个轻量级、模块化、教育导向的开源库，将复杂的 JEPA 范式分解为可在单 GPU 上数小时内完成训练的简单示例，从而打破了这一僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[正则化的绝对必要性]： 在构建动作条件的世界模型时，多种正则化项（如逆动力学模型 IDM、方差、协方差、时序相似性）缺一不可。消融实验表明，移除任何一项都会导致表征坍塌和规划任务的灾难性失败。</li><li>[训练与推理的对齐]： 采用多步 rollout（在训练中递归预测多步未来）的方式进行训练，能显著减少曝光偏差（Exposure Bias）。这使得模型在长时序自回归预测中的表现更好，因为训练过程与推理过程更加一致。</li><li>[规划成本函数的设计]： 在基于世界模型的规划中，使用覆盖整个轨迹的累积成本（Cumulative Cost），比仅考虑最终状态的成本更有效。这种设计能为规划器提供更密集的引导信号，并鼓励生成更高效的路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>[层级化世界模型 (Hierarchical World Models)]： 扩展 JEPA 架构，使其能在多个时间尺度上进行预测和推理，从而实现对短期精细控制和长期抽象规划的统一。</li><li>[可学习的成本函数 (Learned Cost Functions)]： 摆脱当前在表征空间中使用简单距离作为成本函数的方式，转而研究如何从数据或稀疏奖励中学习任务相关的成本或价值函数，以实现更复杂的规划行为。</li></ul></section>
       <section>

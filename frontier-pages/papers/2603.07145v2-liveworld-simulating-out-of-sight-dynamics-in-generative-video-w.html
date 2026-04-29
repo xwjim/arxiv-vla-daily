@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07145v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有视频世界模型通过缓存历史观测（如 2D 图像或 3D 点云）来维持探索中的场景一致性。</li><li>核心痛点： 它们遵循静态世界假设，一旦物体离开视野，其状态就被“冻结”，无法反映在看不见时本应发生的动态变化，即“视线外动态” (out-of-sight dynamics) 缺失问题。</li><li>本文切入点： 核心直觉是将世界演化与观察渲染解耦。作者不把世界看作是静态的观测记忆，而是将其建模为一个持续演化的全局状态。</li></ul></section><section><h3>Key Insights</h3><ul><li>世界模型解耦： 根本性发现是，将世界演化 (Evolution) 与观察渲染 (Rendering) 解耦，是实现持续动态世界的关键。现有模型将两者耦合在一个黑盒中，是导致物体状态“冻结”的根本原因。</li><li>结构化世界状态： 模拟完整的 4D 世界成本过高，但可以通过将世界状态分解为“时不变的静态 3D 背景”和“稀疏的动态实体”来高效近似。这种结构化表示使得对视线外动态的独立模拟在计算上成为可能。</li><li>生成模型的双重角色： 一个统一的条件视频生成模型，可以通过配置不同的状态输入（局部动态 vs. 全局场景），同时扮演“视线外演化引擎”和“观察者视角渲染器”两种角色。这揭示了生成模型在构建复杂动态系统中的通用性与灵活性。</li></ul></section><section><h3>Next Steps</h3><ul><li>无监督的动态学习： 让模型从海量视频数据中自主学习物理规律和行为模式，从而在没有文本指导的情况下，也能预测和模拟视线外物体的合理动态。</li><li>统一的端到端世界模型： 构建一个端到端的神经世界模型，该模型能在一个框架内同时学习场景几何、物体分割、动态演化和渲染，摆脱对多个独立预训练模块的拼凑式依赖。</li></ul></section>
       <section>

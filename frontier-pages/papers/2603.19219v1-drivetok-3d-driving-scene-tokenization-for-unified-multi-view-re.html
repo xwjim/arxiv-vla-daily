@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.19219v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流视觉Tokenizer在2D图像上独立操作，为每张图生成独立的Token序列。</li><li>核心痛点： 在多视图驾驶场景中，这种做法导致 Token冗余 且 缺乏3D空间一致性，无法形成对世界的统一认知。</li><li>本文切入点： 直觉：所有2D视图都源于同一个3D世界。因此，不应在2D图像上各自为政，而应在统一的3D空间中生成Token。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表示的统一性]： 一个统一的3D场景Token是比多个独立的2D视图Token更高效且一致的场景表示。通过多任务联合训练（重建+理解），可以向这一统一表示中注入丰富的几何、语义和纹理信息。</li><li>[交互的物理性]： 在场景Token和视图Token之间引入物理可见性约束（Visibility Mask）至关重要。它强制模型进行符合物理规律的几何推理，而非仅仅学习表面纹理的“抄近道”模式，从而有效避免了模型在3D理解任务上的过拟合。</li><li>[监督的深入性]： 仅监督最终输出是不够的，在中间的场景Token（Latent Space）上直接施加语义正则化，能有效塑造一个结构化、可解释的隐空间，避免其退化为无序特征。</li></ul></section><section><h3>Next Steps</h3><ul><li>时序Token建模： 将静态的场景Token扩展为时空Token序列，用于预测场景动态、物体轨迹，并构建真正的驾驶世界模型（World Model）。</li><li>与大模型结合的生成式任务： 将DriveTok作为视觉接口，接入VLA（视觉-语言-动作）模型，探索场景编辑、反事实推理（“如果那辆车左转会怎样？”）和闭环决策等高级认知任务。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.01821v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖纯文本描述来微调多模态大语言模型（MLLM），教其理解空间关系。</li><li>核心痛点： 模型患有“视觉文盲症” (visual illiteracy)，只学会了空间概念的文字符号，却不理解其在视觉上的真实表现。</li><li>本文切入点： 模拟人类的空间想象力，引入一个视觉生成器，迫使模型预测出空间变换指令（如“向右转”）对应的视觉结果，从而将符号与感知强行关联。</li></ul></section><section><h3>Key Insights</h3><ul><li>认知闭环的重要性： 真正的空间理解，必须将符号推理（语言）与感知经验（视觉）进行“双向绑定”。仅有“视觉-&gt;语言”的描述式学习不够，引入“语言-&gt;视觉”的生成式预测是建立这种深度理解的关键。</li><li>运动表征的优越性： 对于动态三维场景，对“运动”本身的编码（相对位姿变换）比对“位置”的编码（绝对坐标）更根本、更有效。这揭示了在时序数据中，变化量比绝对量是更具泛化性的学习信号。</li><li>训练范式的演进： MLLM 的空间能力学习存在一个高效范式：先通过“生成式”任务（想象）建立底层的几何直觉，再通过“描述式”任务（问答）学习高层语义表达。这种“先内化、后表达”的顺序，比单一训练模式更符合认知规律。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索“物理世界模型”： 将几何想象升级为物理想象，使模型能预测动作（如推、拉）对物体状态和场景产生的真实物理后果。</li><li>发展“交互式和可纠正的想象”： 构建一个闭环系统，模型不仅能生成预测，还能接收外部反馈（如“不对，它应该向左倒”）并动态修正其内部世界模型，实现持续学习与推理。</li></ul></section>
       <section>

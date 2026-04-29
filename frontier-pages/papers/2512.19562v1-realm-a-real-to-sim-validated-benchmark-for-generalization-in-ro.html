@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.19562v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人模型的泛化能力评估，要么在昂贵且不可复现的真实世界中进行，要么在与现实脱节的低保真模拟器中进行。</li><li>核心痛点： 现有评估方法存在根本矛盾：真实世界成本高、难复现；模拟器则因视觉和控制的“现实鸿沟”导致评估结果不可信。</li><li>本文切入点： 与其弥合训练中的 Sim-to-Real 差距，不如直接创造一个“数字孪生”级的模拟评估环境。通过极致的视觉保真度和控制对齐，让模拟器本身成为真实世界的可靠“代理”。</li></ul></section><section><h3>Key Insights</h3><ul><li>语义脆弱性： VLA 模型在机器人数据上微调后，其 VLM 基座的语言理解能力会“退化”。即使是简单的语义扰动（如更换指令中的同义词），也会导致模型性能大幅下降，这表明当前微调方式可能损害了预训练知识。</li><li>行为泛化是核心瓶颈： 模型最大的失败点在于行为层面的泛化。相比于在已知物体上执行新动作，让模型将已知技能应用到未见过的物体上要困难得多，这揭示了当前模型“知行不一”的本质局限。</li><li>模拟评估的可行性： 本文最核心的方法论贡献是证明了，一个精心校准的高保真模拟器是评估真实世界策略的有效且高效的工具。这为机器人学研究提供了一种摆脱昂贵、低效的物理实验，转向大规模、可复现评估的新范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>诊断并修复语义退化： 既然微调会损害 VLM 的理解力，下一步的核心命题是定位并阻止这种知识遗忘。例如，通过探针实验分析模型内部表征，或开发保护预训练知识的参数高效微调方法。</li><li>从“被动评估”到“主动适应”： REALM 目前用于“找茬”，即发现模型在何种扰动下会失败。一个更高价值的方向是利用这个环境训练模型主动适应扰动，例如将扰动作为一种在线数据增强，或开发能识别环境变化并动态调整策略的模型。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.04581v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 采用孪生网络 (Siamese Network) 架构，通过模板帧与搜索帧的特征互相关来定位目标。</li><li>核心痛点： 标准的注意力机制会引入过多的背景噪声，污染模板特征，导致在处理信号弱、对比度低的红外小目标时，模型无法有效区分目标与干扰物。</li><li>本文切入点： 直觉上，有效的注意力应该是稀疏且聚焦的。作者以此为灵感，设计了一套机制来主动过滤无关信息、动态融合多尺度特征，并让轻量模型学习重量级模型“关注哪里”的模式。</li></ul></section><section><h3>Key Insights</h3><ul><li>注意力稀疏性价值： 在目标跟踪任务中，并非所有上下文信息都有益。通过 STEN 模块 对注意力矩阵进行硬性阈值过滤，强制模型关注高相关性区域，证明了稀疏注意力在抑制弱信号任务的背景噪声方面，比标准的全注意力机制更有效。</li><li>特征融合的适应性： 简单的特征拼接或相加是次优的。本文的 DSFAM 和 DCFAM 模块揭示，必须通过注意力机制动态生成权重，让网络根据当前输入自适应地决定不同来源特征（如局部 vs. 全局，原始 vs. 增强）的贡献度，才能实现真正有效的特征融合。</li><li>知识蒸馏的传递目标： 知识蒸馏的最高效方式不是传递“答案”（如最终的分类得分），而是传递“解题思路”。TCAKD 证明，通过蒸馏教师网络生成的全局注意力图，能让学生网络直接学到如何在高层语义上分离目标与背景的模式，这种“元知识”的传递远比模仿局部响应图更鲁棒、更高效。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合时序信息的在线模板更新： 将本文的 DCFAM 模块与循环神经网络（如 GRU）结合，设计一种能智能过滤噪声的在线模板更新机制。这能让模型在跟踪过程中积累对目标的动态认知，以应对遮挡和外观变化。</li><li>可微分的自适应稀疏注意力： 将 STEN 中的硬阈值替换为端到端可学习的稀疏化策略（如 Entmax 或 Gumbel-Softmax）。这能让网络根据数据自主学习最佳的注意力稀疏度，从而提升模型的自适应能力和鲁棒性。</li></ul></section>
       <section>

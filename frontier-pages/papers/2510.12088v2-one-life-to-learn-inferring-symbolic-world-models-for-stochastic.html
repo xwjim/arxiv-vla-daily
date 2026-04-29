@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.12088v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学习符号世界模型依赖于确定性环境、海量交互数据和人工引导。</li><li>核心痛点： 现有方法无法应对 高随机性、高探索成本 的复杂环境，因为模型结构僵化且学习效率低下。</li><li>本文切入点： 直觉上，世界的规律是 模块化 且 条件触发 的。作者将世界模型拆解为大量独立的 “前置条件-效果” (precondition-effect) 法则，只在特定情况下激活，从而解决了复杂性和随机性问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型结构]： 原子化法则的组合优于单一宏大法则。将复杂的环境动力学 分解 为大量简单的、条件激活的“法则”，并通过学习其权重来组合，是应对复杂和随机环境的有效架构。这避免了让一个庞大模型预测一切，从而实现了 计算上的可扩展性 和 学习上的精确性。</li><li>[随机性建模]： 用“法则的加权投票”来近似随机性。通过为多条可能冲突或互补的法则分配概率权重，模型输出的不是一个确定的未来，而是一个关于未来状态的 概率分布。这成功地将符号模型的确定性范式，扩展到了对 内在随机 现象（如 NPC 移动）的建模。</li><li>[评估范式]： “状态排序”能力比“状态生成”保真度更重要。在随机世界中，评估模型好坏的关键，不是看它能否精确复现某一个未来（State Fidelity），而是看它能否在众多可能性中，准确识别出 哪个未来更“合理”（State Ranking）。这为随机环境下的世界模型评估提供了新的、更本质的视角。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端符号发现： 研究如何将 状态符号化（从像素到对象） 与 动力学法则学习 两个阶段结合起来，实现一个能从原始输入直接逆向工程出世界规则的端到端模型。</li><li>基于不确定性的主动探索： 将智能体从被动观察者变为 主动实验者。智能体可以利用当前世界模型中的不确定性（例如，法则权重较低或冲突的区域），主动设计探索策略去验证或发现新法则，形成 “假设-实验-学习” 的闭环。</li></ul></section>
       <section>

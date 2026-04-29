@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.01747v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 采用解耦的两阶段流程：先用外观特征进行粗略的图像检索，再进行精细的姿态估计。</li><li>核心痛点： 检索和姿态估计使用不同任务的特征，导致信息断裂；模型将视角差异当作外观噪声处理，而非显式的几何变换，难以应对严重的视角扭曲。</li><li>本文切入点： 直觉上，无人机斜拍视角和卫星正交视角间的差异是纯粹的几何问题。作者不试图在2D层面学习不变性，而是升维到3D，构建一个共享的几何表征，再将其投影（降维）到与卫星图对齐的鸟瞰图（BEV）空间。</li></ul></section><section><h3>Key Insights</h3><ul><li>[几何中介体]： 显式3D场景重建是解决跨视角匹配问题的根本手段。通过生成一个虚拟的鸟瞰图（BEV）作为几何中介，模型能将困难的“斜视-正视”匹配问题，转化为简单的“正视-正视”匹配问题，从根本上消除了视角差异。</li><li>[假设隔离原则]： 在多候选目标匹配任务中，抑制候选者之间的信息干扰至关重要。实验证明，让每个候选卫星图独立地与无人机场景进行注意力计算（Satellite-wise Attention），比让所有候选者在同一个注意力空间中“竞争”能产生更清晰的几何对齐信号和更精确的位姿结果。</li><li>[验证信号选择]： 在验证哪个卫星图是正确匹配时，隐式的特征相似度是比显式几何统计量（如点云置信度、位姿距离）更鲁棒、更具区分度的信号。这表明深度模型学到的高维特征本身就蕴含了丰富的、可用于区分真伪匹配的几何与语义一致性信息。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端几何微调： 将整个流程（从特征提取到最终位姿输出）设计为端到端可微的。利用位姿估计的误差作为监督信号，反向传播微调VGGT网络，使其学习到对跨视角地理定位任务最优的几何表征。</li><li>单视角几何“幻觉”： 融合单目深度估计或生成模型，让网络能从单张无人机图像中“脑补”出3D结构并生成BEV。这将极大扩展该框架的应用范围，使其适用于快照式、非连续飞行的定位场景。</li></ul></section>
       <section>

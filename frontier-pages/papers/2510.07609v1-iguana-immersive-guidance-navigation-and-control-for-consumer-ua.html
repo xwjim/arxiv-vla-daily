@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.07609v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统无人机操控依赖 双摇杆手柄 进行手动飞行，或通过 2D 屏幕 进行航点规划。</li><li>核心痛点： 手动操控 不直观、认知负荷高；2D规划 缺乏空间感；用户需在屏幕和无人机之间切换视线，导致 态势感知割裂。</li><li>本文切入点： 利用 MR 头显 的空间计算能力，将控制界面（3D地图、虚拟球）与真实世界叠加，从而 统一规划、操控与态势感知 于同一视野内。</li></ul></section><section><h3>Key Insights</h3><ul><li>[控制抽象层级]： 声明式 的高阶任务规划（如3D地图标点）相比 指令式 的低阶手动操控（如摇杆），能显著降低用户的 心智负荷 与 操作挫败感，并提升飞行路径的一致性。</li><li>[交互隐喻与反馈]： 直观的物理隐喻（如虚拟球）虽易于理解，但 缺乏物理反馈 是其精准操控的致命伤。仅靠视觉与听觉补偿，不足以建立用户的操控信心和精确度。</li><li>[信息融合与感知]： 空间叠加 通过将虚拟信息（无人机位置、路径）锚定在真实世界，从根本上解决了传统操控中 “低头看屏” 与 “抬头看机” 的注意力分裂问题，实现了统一的态势感知。</li></ul></section><section><h3>Next Steps</h3><ul><li>为 虚拟球 界面集成 可穿戴设备的触觉反馈，定量验证其能否弥补操控信心的缺失，并提升首次使用的性能。</li><li>探索不同 抽象层级的3D地图（如真实感渲染 vs. 拓扑结构图 vs. 纯线框）对用户规划策略、效率和认知负荷的影响。</li></ul></section>
       <section>

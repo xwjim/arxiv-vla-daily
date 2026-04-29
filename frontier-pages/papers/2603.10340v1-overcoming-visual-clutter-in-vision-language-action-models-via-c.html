@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.10340v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型能理解开放域指令，在整洁环境中表现出色。</li><li>核心痛点： 在视觉混乱场景中，尤其当干扰物与目标语义或外观相似时，模型的注意力被稀释，导致“精准-推理鸿沟”，操作精度急剧下降。</li><li>本文切入点： 与其修复模型的内部注意力，不如直接净化模型的外部视觉输入。利用语言指令本身作为“门控”，先定义什么是干扰物，再从图像中将其物理移除。</li></ul></section><section><h3>Key Insights</h3><ul><li>[干扰物类型]： 语义相似的干扰物对VLA模型的危害远大于随机干扰物。随机干扰物在某些任务中甚至可能因提供上下文而轻微提升模型性能，这揭示了模型对环境上下文的隐性依赖。</li><li>[干预范式]： 干预像素空间（输入图像）比干预特征空间（模型内部）更有效。在推理时主动移除（减法）无关信息，是解决注意力稀释问题的一条比引导注意力（加法）或微调模型更直接且模型无关的路径。</li><li>[语言指令复杂度]： 标准VLA模型处理复杂属性指令（如“带绿色手柄的勺子”）时存在“词袋”效应，易被干扰。CGVD通过强制属性对齐的分割，能显著提升模型对复杂组合指令的遵从度。</li></ul></section><section><h3>Next Steps</h3><ul><li>研究实时、低延迟的掩码更新机制，以适应干扰物被移动或场景发生动态变化的开放环境。</li><li>探索一种自适应净化策略，让模型根据任务和场景自主决定净化强度，避免在有益的上下文中进行不必要的视觉信息移除。</li></ul></section>
       <section>

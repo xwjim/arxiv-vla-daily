@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.05693v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在大规模、混杂的机器人数据集上预训练一个庞大的通用模型。</li><li>核心痛点： 现有模型直接混合所有数据，但机器人数据异构性极强（如形态、动作空间、控制频率），导致模型难以有效学习，产生“负迁移”效应。</li><li>本文切入点： 作者认为异构性并非铁板一块。他们直觉地将异构性拆分为“硬性”的动作空间差异和“软性”的其他差异，并用不同机制分而治之。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据特性]： 机器人数据中的动作空间异构性是“根本性”的。</li><li>将其与机器人形态、传感器等其他异构性直接混合，会对模型训练造成严重的干扰和性能退化。这两种异构性需要被区别对待。</li><li>[架构设计]： 分层解耦是处理复合异构性的有效策略。</li><li>让网络浅层专家（AS-MoE）处理具体、底层的差异（专精化），让中层专家（HB-MoE）处理抽象、高层的共性（泛化），远比用单一MoE机制“一锅炖”更有效。</li><li>[训练机制]： 可以通过特定正则化目标，主动引导专家网络的分工。</li></ul></section><section><h3>Next Steps</h3><ul><li>元数据驱动的专家路由 (Metadata-Aware Routing)：</li><li>将机器人形态、传感器配置等元数据作为路由网络的显式输入，让模型可以直接根据“身份”来选择专家，而不是完全依赖隐式学习。这能让专家分工更明确、可解释性更强。</li><li>可学习的层次结构 (Learnable Hierarchy)：</li><li>探索自动化、可学习的MoE层次结构。让模型根据数据分布，自适应地决定在哪些网络层级设置“专科专家”，在哪些层级设置“全科专家”，实现架构的动态优化。</li></ul></section>
       <section>

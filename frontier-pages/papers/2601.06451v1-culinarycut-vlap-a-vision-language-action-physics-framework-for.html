@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.06451v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人学习切割主要依赖真实数据（规模小、不安全）或不考虑物理的几何模拟。</li><li>核心痛点： 现有方法无法模拟切割中的非线性形变、断裂和力反馈，导致模型物理真实性差，且无法大规模安全地收集数据。</li><li>本文切入点： 核心直觉是高保真物理模拟是关键。作者采用物质点法 (MPM) 创建了一个能模拟真实物理（包括力）的切割环境，从而生成了大规模、安全且物理一致的训练数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[定量指令的泛化失败]： 现有 VLA 模型在语言-空间定量映射上存在系统性缺陷。模型无法将“切掉 75%”这类连续变化的数值指令准确对应到物理空间，在未经训练的比例或方向上表现会断崖式下跌。</li><li>[物理属性的关键作用]： 模拟实验明确揭示了材料物理属性（杨氏模量 E）与切割力成正比、与切割后速度成反比的线性关系。这证明了忽略物理反馈（力、材质）的机器人策略本质上是盲目的，无法实现安全、高效的真实操作。</li><li>[复杂动作模式的干扰]： 直接用“锯切”这类高频、重复的动作训练 VLA 模型，会严重破坏策略学习的稳定性。这表明复杂精细的动作技能（How）需要与任务目标（What）解耦，不应被简单粗暴地塞进一个端到端的模型中。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线物理参数辨识与自适应控制： 开发能通过少量交互（如触碰、试探）在线估计物体物理属性（硬度、摩擦力）的系统，并自适应地调整切割策略（用力大小、速度）。</li><li>从物理反馈中强化学习： 将实时的力/触觉反馈作为奖励或惩罚信号，利用强化学习让机器人在与真实环境的交互中直接学习和优化切割技能，从而弥合模拟与现实的鸿沟。</li></ul></section>
       <section>

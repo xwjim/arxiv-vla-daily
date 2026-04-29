@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.09859v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 单纯依赖视觉（RGB）的无人机检测方法，在恶劣光照或目标过小时性能会急剧下降。</li><li>核心痛点： 视觉传感器在面对低分辨率的小型无人机时，特征微弱，极易漏检或误检。</li><li>本文切入点： 作者的直觉是，即使无人机在视觉上难以分辨，它独特的声音特征依然显著。将这种非视觉线索注入到视觉检测模型中，可以弥补视觉信息的不足。</li></ul></section><section><h3>Key Insights</h3><ul><li>声学辅助定位： 声音对于检测的增益主要体现在小型无人机上（mAP 提升 11.1% - 15.3%）。这表明，当视觉特征模糊不清时，声学信号起到了“存在性证明”和“注意力引导”的关键作用，帮助模型确认并定位肉眼难以发现的目标。</li><li>融合机制选择： 在多种融合策略（线性、MLP、交叉注意力）中，门控融合 (Gated Fusion) 机制表现最佳。这揭示了一个规律：有效的多模态融合不是简单的信息叠加，而是需要一个智能的仲裁机制，能够根据当前输入动态调节不同模态信息的“话语权”。</li><li>领域知识迁移： 使用在本地无人机数据集上预训练的视觉模型（Local-Init）作为起点，其性能远超直接使用通用 COCO 数据集预训练的模型。这证明了在多模态融合之前，让单模态模型先具备特定领域的先验知识至关重要，能让后续的融合事半功倍。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“有声”到“声在何方”： 引入麦克风阵列替代单麦克风，利用波束成形等技术生成声学热力图 (Acoustic Heatmap)。将这种带有空间方位的声学信息与视觉图像融合，能更精准地指导模型“往哪里看”。</li><li>探索融合的对抗脆弱性： 研究模型在多模态对抗攻击下的表现。例如，使用视觉伪装的无人机（视觉不可见、声学可见）或播放虚假无人机音频（声学欺骗），以探究该融合机制的根本性弱点和失效边界。</li></ul></section>
       <section>

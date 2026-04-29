@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.03913v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 过去的视觉-语言-动作 (VLA) 模型主要依赖于人类遥操作的成功演示数据进行训练。</li><li>核心痛点： 丢弃失败数据导致模型无法预见潜在的失败，在面对新场景时鲁棒性差，泛化能力不足。</li><li>本文切入点： 将失败数据视为一种结构化的负向学习信号，而非噪声。通过分层架构，让高层规划器专门学习“什么可行，什么不可行”，从而在执行前就剪除“不靠谱”的计划。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据价值]： 失败数据不是噪声，而是提升模型鲁棒性的关键信号。 它能帮助模型学习到决策边界，有效区分“可行”与“不可行”的动作序列，尤其是在新场景下，这种“失败感知”能力是泛化的核心。</li><li>[架构解耦]： 将高层规划（System 2）与底层控制（System 1）分离是高效利用失败数据的有效架构。 这种分层结构允许在高层进行复杂的、基于可行性评估的树搜索，而底层执行器则保持其核心技能的稳定性，避免了用负样本污染底层策略。</li><li>[推理与泛化]： 增加推理时的计算量（如扩大树搜索宽度）可以直接提升模型在未知场景下的成功率。 这表明，模型的鲁棒性不仅取决于训练，还可以在部署时通过动态调整“思考深度”来增强，实现了性能与延迟的权衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环的层级规划与控制： 研究如何在底层动作执行（System 1）过程中，将实时的状态偏差或不确定性信号反馈给高层规划器（System 2），实现动态的、即时的计划调整与修正。</li><li>将失败感知能力注入底层策略： 不仅让高层规划器理解失败，也让底层控制器（System 1）学习从失败或扰动中恢复的技能。这可能需要设计新的损失函数或强化学习目标，使其具备纠错能力。</li></ul></section>
       <section>

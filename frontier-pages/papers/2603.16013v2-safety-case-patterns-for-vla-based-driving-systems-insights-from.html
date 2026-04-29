@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.16013v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的自动驾驶安全分析（如 HARA）主要关注系统自身的故障，而非与人类的交互。</li><li>核心痛点： 引入了开放式的自然语言指令后，系统面临全新的、由指令歧义或不当引起的新型风险，现有安全框架无法覆盖。</li><li>本文切入点： 作者洞察到，VLA系统的核心安全问题可被归结为两大对立目标：“拒绝危险指令” 与 “接受安全指令”。整个安全框架围绕这两个核心点展开。</li></ul></section><section><h3>Key Insights</h3><ul><li>[二元安全性]： VLA 这类指令驱动系统的安全性，其本质被简化为一个根本性的二元决策问题：在特定情境下，是该接受指令，还是拒绝指令。这为评估这类复杂AI系统提供了一个极其精炼的切入点。</li><li>[情境依赖性]： 指令的安全性并非绝对，而是高度依赖于车辆所处的具体运行情境 (operational context)。例如，“立即左转”在空旷道路上是安全的，但在十字路口红灯时则是致命的。因此，安全分析的重心必须从指令本身转移到 “指令-情境” 的匹配关系上。</li><li>[安全分析范式扩展]： 传统的风险分析（HARA）是一种“缺陷思维”，只关注可能出错的地方。本文指出，对于与人类交互的AI系统，必须补充 “正确性思维”，即明确定义并论证系统在何种情况下执行指令是绝对安全的。</li></ul></section><section><h3>Next Steps</h3><ul><li>[安全论证的自动化]： 利用大语言模型（LLM）的能力，自动或半自动地从系统日志、代码和场景描述中生成初步的安全论证案例，大幅降低对人类专家的依赖。</li><li>[从仿真到现实世界的迁移]： 研究如何将这套在模拟器中建立的安全框架，有效地迁移和适配到充满不确定性的真实物理世界，特别是处理传感器噪声和意外行为。</li></ul></section>
       <section>

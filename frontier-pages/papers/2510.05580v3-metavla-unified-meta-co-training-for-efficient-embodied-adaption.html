@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.05580v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的视觉-语言-动作 (VLA) 模型需要为每个下游任务进行独立的监督微调 (SFT)。</li><li>核心痛点： 独立微调成本高、效率低、知识难迁移；而朴素地将多任务混合训练，则因数据分布异构导致优化不稳定、性能下降。</li><li>本文切入点： 直觉上，辅助任务的知识能帮助目标任务。作者引入元学习机制，让模型“参考”而非“混合”学习辅助数据，从而稳定地吸收其知识。</li></ul></section><section><h3>Key Insights</h3><ul><li>[优化稳定性]： 简单粗暴地混合多样化任务进行协同训练，会因优化目标冲突而损害模型性能。MetaVLA 的成功证明，通过元学习将辅助数据作为“条件”而非“目标”，可以解耦优化过程，稳定吸收外部知识。</li><li>[泛化新路径]： 模型泛化能力不仅来自更大的主干模型或预训练数据，还可以通过在后训练 (Post-training) 阶段高效整合多样化的辅助任务上下文来获得。这为提升模型能力开辟了一条低成本、高效率的新路径。</li><li>[上下文扩展定律]： 实验揭示了一种潜在的“上下文扩展”规律 (Context Scaling)。在 MetaVLA 框架下，辅助任务的多样性越强、上下文批次越大，目标任务的性能就越好。这表明，上下文信息的丰富度与模型性能正相关。</li></ul></section><section><h3>Next Steps</h3><ul><li>网络级上下文扩展： 将辅助任务的来源从特定数据集扩展到大规模、无结构的网络数据（如视频、文本），探索如何从中自动构建高效的上下文知识库。</li><li>动态上下文课程学习： 研究如何根据目标任务的训练阶段和难度，动态地、自适应地选择最合适的辅助任务上下文，实现一种“上下文课程学习”策略，以最大化训练效率。</li></ul></section>
       <section>

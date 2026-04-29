@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07904v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 为了在机器人上部署大模型，通常采用静态量化技术，即用一个固定的低精度（如 4-bit）来压缩整个模型。</li><li>核心痛点： 一刀切的静态精度是巨大浪费。机器人执行任务时，仅在精细操作（如穿针）时需要高精度，在大幅移动（如挥手）时，低精度就足够。</li><li>本文切入点： 作者的直觉是，模型的“计算敏感度”与机器人的“物理运动状态”高度相关。因此，可以通过监测机器人手臂的运动快慢、抖动等运动学指标，来实时判断模型需要多高的计算精度。</li></ul></section><section><h3>Key Insights</h3><ul><li>时序动态敏感性： 首次揭示了具身智能模型对量化误差的敏感度不是一个恒定值，而是随任务阶段剧烈变化的。在粗略移动阶段，模型对误差容忍度极高；在精细操作阶段，则极其敏感。</li><li>运动学代理指标： 证明了外部物理世界的运动学指标（如速度、加加速度）是模型内部计算敏感度的一个极佳且廉价的实时代理。这为“物理世界”指导“数字世界”的计算开辟了新思路。</li><li>系统设计权衡： 提出了一个在实践中极为有效的范式：权重静态低比特 (W4) + 激活态动态比特 (AX)。这既能享受权重压缩带来的巨大内存节省，又能通过动态调整激活值的精度来保证任务成功率，同时避免了动态切换权重带来的巨大I/O开销。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线自适应阈值： 开发一种在线自适应机制，让系统在执行任务中自动学习和调整精度切换的阈值，从而摆脱对离线校准的依赖，提升泛化能力。</li><li>内外状态融合代理： 将外部运动学指标与模型的内部状态（如注意力分数、激活值分布）进行融合，创造一个更全面的敏感度代理。这有望解决当前机制在机器人“静默思考”阶段的判断盲区。</li></ul></section>
       <section>

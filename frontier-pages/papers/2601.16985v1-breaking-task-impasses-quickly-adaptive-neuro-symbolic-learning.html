@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.16985v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 结合符号规划（Symbolic Planning）与强化学习（RL）的混合方法是应对开放世界挑战的主流思路。</li><li>核心痛点： 现有混合方法在面对未知变化时，存在样本效率低、适应速度慢和灾难性遗忘的问题。</li><li>本文切入点： 并非简单拼接，而是通过分层抽象、符号化目标和好奇心探索，实现规划与学习之间更紧密、更高效的互动。</li></ul></section><section><h3>Key Insights</h3><ul><li>[分层与归因]：</li><li>任务失败并非一概而论，区分失败的层次至关重要。 通过将失败归因于“技能执行”或“原子能力缺失”，系统能进行靶向学习，避免了过去“一失败就全局重学”的低效。</li><li>[目标空间降维]：</li><li>在符号空间中定义RL目标，远比在连续状态空间中更高效。 将目标从高维度的“机器人关节角度”降维到低维度的“is_grasping(object)”等符号状态，极大地简化了学习问题，并使Hindsight Experience Replay (HER) 等技术能更有效地发挥作用。</li><li>[探索的目的性]：</li></ul></section><section><h3>Next Steps</h3><ul><li>融合人类先验知识： 引入模仿学习 (Imitation Learning)，通过人类示教快速初始化技能策略库，将RL从“从零探索”变为“在已有基础上微调”，可大幅缩短冷启动时间。</li><li>嫁接大语言模型 (LLM)： 利用 LLM 强大的常识推理能力作为“符号想象”的外部知识库。当机器人遇到符号层面的规划僵局时（例如，门锁了），可向 LLM 查询可能的解决方案（例如，“找钥匙”、“撬锁”），从而实现零样本的符号级任务泛化。</li></ul></section>
       <section>

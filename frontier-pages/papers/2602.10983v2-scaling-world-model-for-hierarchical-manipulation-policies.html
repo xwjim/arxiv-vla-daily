@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10983v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端的视觉-语言-动作 (VLA) 模型直接将文本指令映射为机器人动作。</li><li>核心痛点： VLA 模型在分布外 (OOD) 场景中泛化能力极差，且高度依赖大规模真实机器人数据。纯文本子任务缺乏精确的物理和空间约束。</li><li>本文切入点： 直觉上，图像比文本更能传递具体的操作目标。作者认为，用世界模型生成视觉子目标 (Goal Images) 作为中间桥梁，可以为底层策略提供更明确、更鲁棒的指导。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征有效性]： 视觉子目标作为任务分解的中间表征，远优于纯文本。它提供了语言无法传达的精确空间和物理约束，是解决 OOD 泛化问题的关键。</li><li>[泛化机理]： 通过世界模型生成视觉子目标，实现了通用物理知识（来自大规模视频预训练）向机器人具体技能（来自少量真实数据）的有效迁移。规划器负责“想象”目标，执行器只需学会“抵达”。</li><li>[数据效率]： 分层框架显著降低了对真实机器人数据的依赖。底层策略只需学习短时程、目标导向的控制，而非端到端的长时程推理，因此仅需 2 小时的真实数据即可高效训练。</li></ul></section><section><h3>Next Steps</h3><ul><li>[闭环反馈与重规划] 当前规划是开环的。下一步应建立闭环反馈机制，允许执行过程中的错误或意外情况反向传递给世界模型，以进行实时的子目标调整或重规划。</li><li>[从静态目标到动态过程] 将子目标从静态图像升级为短时程的动态视频或轨迹。这能为底层策略提供关于物体如何移动、机械臂如何运动的更丰富过程性指导，而不仅仅是最终状态。</li></ul></section>
       <section>

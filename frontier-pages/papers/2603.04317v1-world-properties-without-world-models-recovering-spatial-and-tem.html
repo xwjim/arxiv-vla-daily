@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.04317v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： LLM的内部状态能线性解码出时空信息，这被认为是其构建了“世界模型”的证据。</li><li>核心痛点： 无法确定这种时空结构是LLM涌现出的新能力，还是仅仅继承自文本的统计规律。</li><li>本文切入点： 一个更简单的可能性——这些时空结构早已潜藏于文本自身的共现统计中，用最基础的静态词向量（GloVe, Word2Vec）即可验证。</li></ul></section><section><h3>Key Insights</h3><ul><li>[文本的内在结构]： 词语的共现统计本身就蕴含了丰富的、可解码的物理世界结构（空间、时间、气候），其信息密度远超传统认知。语言并非世界的稀疏符号，而是世界结构的稠密投影。</li><li>[编码的具象机制]： 时空信息并非弥散分布，而是强依赖于可解释的“词汇梯度”。例如，一个城市的地理位置，是由其与国家名、气候相关词汇（如&quot;tropical&quot;, &quot;skiing&quot;）的共现远近决定的。</li><li>[证据标准的重塑]： 仅凭线性探针的可解码性，不足以证明模型超越了文本统计、构建了真正的“世界模型”。这为评估LLM是否具备高级认知能力设立了一个更强的基线 (stronger baseline)。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索组合性结构： 能否从静态向量中解码出更复杂的空间关系（如“A城在B城的北方”），而不仅仅是单个实体的坐标？这将是检验其是否具备组合推理能力的关键。</li><li>寻找超越基线的证据： 设计专门的任务，要求模型进行零样本的空间/时间推理（例如，推断一个虚构城市的气候），这类任务理论上是纯粹的共现统计无法完成的，可用于检验LLM是否真正超越了本文设立的基线。</li></ul></section>
       <section>

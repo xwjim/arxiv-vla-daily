@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.11653v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 序贯微调会导致灾难性遗忘，必须用复杂的持续学习（Continual Learning, CL）方法来解决。</li><li>核心痛点： 现有 CL 方法为了防止遗忘，往往会牺牲学习新任务的能力（可塑性），陷入“稳定-可塑”的困境。</li><li>本文切入点： 作者直觉地认为，大模型（VLA）、参数高效微调（LoRA）和在策略强化学习（On-policy RL）三者结合，可能会产生奇妙的化学反应，颠覆传统认知。</li></ul></section><section><h3>Key Insights</h3><ul><li>[遗忘的消失：三重协同效应]： 灾难性遗忘的消失并非偶然。它是 （1）大模型的高维“祝福”（参数冗余，更新方向天然正交）、（2）LoRA 的低秩约束（限制更新的自由度）与 （3）在策略 RL 的隐式正则化（更新被当前策略分布限制），三者协同作用的结果，缺一不可。</li><li>[可塑性之谜：RL 与 LoRA 的天作之合]： 强化学习（尤其是稀疏奖励）的单次迭代信息量远低于监督学习。LoRA 的低秩“小容量”更新已足够吸收这些信息，因此不会成为学习新知识的瓶颈，完美平衡了稳定与可塑。</li><li>[泛化能力的提升：序贯学习的隐式正则化]： 序贯微调不仅能保留，甚至能略微超越多任务学习的零样本泛化能力。这可能因为任务的依次出现形成了一种隐式正则化，避免了模型对所有任务的联合分布产生过拟合。</li></ul></section><section><h3>Next Steps</h3><ul><li>命题一：量化“可遗忘性”。如何预先判断一个预训练 VLA 模型是否适合这种简单的持续学习？能否设计一个指标来衡量其参数空间的“正交性”或“解耦性”，从而预测其抗遗忘能力。</li><li>命题二：从被动抵抗到主动加速。既然遗忘问题不大，下一个瓶颈是学习效率。能否在序贯学习中，有选择地复用先前任务学到的 LoRA 模块（如通过某种路由机制），以加速新任务的学习，实现正向迁移最大化？</li></ul></section>
       <section>

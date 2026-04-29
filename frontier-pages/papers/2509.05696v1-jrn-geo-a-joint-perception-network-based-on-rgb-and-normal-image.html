@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.05696v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有方法主要依赖 RGB 图像的颜色、纹理等语义信息进行特征匹配。</li><li>核心痛点： 单纯依赖 RGB 图像，其特征在无人机与卫星的巨大视角差异下极不稳定，导致匹配精度低。</li><li>本文切入点： 作者的直觉是，物体的三维几何结构在不同视角下是相对稳定的。因此，引入能代表几何结构的法线图像 (Normal Image) 作为额外信息源，用以约束和补充 RGB 特征。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模态互补性]： 法线图像本身缺乏足够的细节，无法独立完成定位任务。但其提供的几何结构先验能有效稳定 RGB 的语义特征，二者结合实现了 1+1 &gt; 2 的效果，证明了结构信息在跨视角任务中的核心价值。</li><li>[特征融合机制]： 对于 RGB (语义) 和法线 (结构) 这类异构信息，最高效的融合方式不是简单相加或拼接，而是放大并利用它们的“差异”。DAFM 模块证明了，让网络聚焦于各自模态的独特贡献，是实现深度融合的关键。</li><li>[数据驱动的泛化]： 跨视角匹配的性能瓶颈，很大程度上是训练数据中视角多样性的匮乏。通过 3D 重建来“创造”数据，是一种比单纯优化网络结构更直接、更有效的提升模型视角不变性的路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端结构探索： 研究能否将法线估计网络与定位网络进行联合训练，甚至设计一个能从 RGB 图像中隐式提取几何结构特征的单一网络，以摆脱对预处理模块的依赖。</li><li>融合机制的泛化： 将 DAFM 的“放大差异”思想推广到其他异构多模态融合任务中（如 RGB+热红外、图像+文本），验证其作为一种通用融合策略的潜力。</li></ul></section>
       <section>

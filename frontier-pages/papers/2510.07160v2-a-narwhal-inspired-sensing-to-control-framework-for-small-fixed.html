@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.07160v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 小型固定翼无人机的控制依赖于气动模型，但近机身的气流测量极易失真。</li><li>核心痛点： 螺旋桨、机翼和控制舵面会严重干扰和污染近场传感器的压力信号，导致无法准确感知真实来流，模型失准。</li><li>本文切入点： 模仿独角鲸长牙的远距离感知特性，将主传感器（多孔探针）用长杆伸到机体前方未受干扰的流场中去。</li></ul></section><section><h3>Key Insights</h3><ul><li>[传感策略]： “远场+近场”的混合传感是关键。远场的前伸探针捕获干净的全局来流信息（如风速、攻角），而近场的稀疏机翼传感器则提供机翼表面关键的局部流动信息（如气流分离预警），二者结合才能完整刻画复杂流场。</li><li>[模型辨识]： 物理先验是解决“传感器-作动器”混淆的钥匙。直接将机翼压力作为输入，模型会错误地将舵面偏转产生的压力变化归因于传感器读数变化，而非舵面本身。引入对称性正则化这一物理先验，强制模型学习到了正确的因果关系。</li><li>[模型泛化]： 结构化的物理模型比黑箱模型泛化能力更强。与一个通用的多层感知机（MLP）相比，控制仿射结构本身就是一种强大的归纳偏置。它使模型在面对训练数据之外的飞行速度时，性能下降幅度（12%）远小于无结构模型（44%），展现了更强的外推能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入时序动态建模： 将当前的静态模型扩展为时序模型（如使用 RNN 或 Transformer），以捕获和预测非定常气动效应，实现从“反应式”控制到“预测式”控制的跨越。</li><li>开发不确定性感知的自由飞行控制： 量化模型对气动力预测的不确定性，并将其整合到模型预测控制（MPC）等鲁棒控制框架中，以实现在失速边缘或极端阵风等危险条件下的安全自主飞行。</li></ul></section>
       <section>

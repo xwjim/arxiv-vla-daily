@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11612v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 图像压缩为机器（ICM）主要为通用计算机视觉任务（如分割、检测）优化，且在开环模式下评估。</li><li>核心痛点： 具身智能体在闭环、多智能体、带宽极其受限的真实环境中运行，现有 ICM 模型的优化目标与具身任务的成功率完全不匹配。</li><li>本文切入点： 作者意识到，ICM 中的“机器”已从虚拟算法演变为物理世界的机器人。他们直觉地认为，这种机器人视觉系统 (RVS) 对压缩失真的响应模式与传统机器视觉系统 (MVS) 存在本质区别，必须在闭环中重新评估。</li></ul></section><section><h3>Key Insights</h3><ul><li>性能曲线差异： 机器人视觉系统（RVS）的性能曲线呈现独特的 “稳健-悬崖” 模式。在高码率区（&gt;0.06 bpp）性能下降平缓，但在低于某个临界码率（~0.04 bpp）后，任务成功率会突然崩溃，这与人类视觉（HVS）和通用机器视觉（MVS）的线性下降模式完全不同。</li><li>系统评估分歧： RVS 与 MVS 的性能评估标准存在巨大鸿沟，其差异甚至大于 MVS 与 HVS 的差异。为通用分割/检测任务优化的压缩算法，其性能提升无法转化为具身任务的成功率提升。</li><li>先进性悖论： 出现了 “越先进越差” 的悖论。在 HVS/MVS 上表现最优的最新生成式压缩模型（如 DCAE, LichPCM），在具身任务上的表现反而不如一些传统的学习式编解码器（如 Cheng）。这表明它们过拟合了人类或通用机器的感知先验，而这些先验对机器人动作决策是无效甚至有害的。</li></ul></section><section><h3>Next Steps</h3><ul><li>任务感知的压缩 (Task-Aware Compression)： 设计能感知下游具身任务和 VLA 策略的压缩算法。例如，优先保留对“可抓取性”、“物体相对位置”等动作决策至关重要的语义信息，而不是全局的像素保真度。</li><li>具身视频压缩 (Embodied Video Compression)： 将研究从单帧图像扩展到视频流。探索如何在感知-动作的闭环中，利用智能体自身动作可预测下一帧画面的特性，实现极致的时域压缩。</li></ul></section>
       <section>

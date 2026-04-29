@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.02729v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人学习数据主要依赖昂贵且局限的遥操作 (Teleoperation) 或与现实脱节的纯仿真。</li><li>核心痛点： 现有方法数据采集成本高、多样性差，且难以跨越不同机器人形态（跨体态泛化难）。</li><li>本文切入点： 直觉上，海量的人类交互视频是未被开发的宝藏。作者相信通过物理优化可以修复视频重建的噪声，将其转化为通用的、与机器人形态无关的规范化动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据源有效性： 首次量化证明，经过物理优化的人手交互(HOI)视频可以成为机器人学习的有效监督信号，其效果媲美遥操作数据。这为机器人数据来源开辟了全新的、更具扩展性的路径。</li><li>物理合理性是关键： 纯粹的视觉三维重建不足以驱动机器人。引入 RL 优化器来修正手物相对姿态，解决穿模 (interpenetration) 和接触问题，是连接“观察”与“可执行”的关键桥梁。</li><li>泛化能力来源： 机器人策略的鲁棒性主要源于大规模的仿真增强。在保留真实交互核心逻辑的前提下，通过随机化体态、物体、视觉环境，能有效提升模型在未见场景下的泛化能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>复杂交互的闭环优化： 如何将仿真或真实世界中执行失败的信号反馈给上游的重建和重定向模块，形成一个自适应优化的闭环系统，而不仅仅是作为过滤器。</li><li>高维体态的动态重定向： 如何将动作重定向到灵巧手和人形机器人这类高自由度体态上，并同时考虑动力学约束和平衡，而不仅仅是运动学映射。</li></ul></section>
       <section>

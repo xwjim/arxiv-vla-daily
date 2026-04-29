@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.07392v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖端到端的深度学习模型，将传感器输入直接映射为控制指令。</li><li>核心痛点： 决策过程是 黑箱，难以解释，且无法显式保证动作符合 物理约束。</li><li>本文切入点： 直觉上，相似的场景应该有相似的解决方案。作者将环境抽象为结构化的 “事件” 集合，通过 “类案推理” (Case-Based Reasoning) 的方式，从经验库中检索相似场景的解决方案。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征范式]： 将动态环境解构为 “事件” 的集合，比端到端的像素级表征，更能实现决策的 可解释性 和 结构化推理。这为复杂场景的建模提供了一种降维、抓重点的有效思路。</li><li>[决策机制]： 直接对检索出的多个方案进行平均是危险的（“平均主义”导致碰撞）。必须先 聚类（如按方向）再在 最优类别内加权，才能避免生成无效或危险的“中间”动作。</li><li>[物理与学习的融合]： 可以通过设计损失函数和正则项（如 Lyapunov稳定性约束），将 物理先验（如动力学可行性、稳定性）直接 “嵌入” 到潜空间的几何结构和动态演化中，而非作为事后检验的补丁。</li></ul></section><section><h3>Next Steps</h3><ul><li>从单体智能到多体协同： 将“事件”的定义扩展到多智能体，包含对其他智能体意图的预测，并探索基于事件的通信与协同决策机制。</li><li>动态知识库的在线构建与遗忘： 研究如何让智能体自主判断哪些新经验是“有价值的”并加入知识库，同时遗忘冗余或过时的经验，实现知识的 终身学习与自适应演化。</li></ul></section>
       <section>

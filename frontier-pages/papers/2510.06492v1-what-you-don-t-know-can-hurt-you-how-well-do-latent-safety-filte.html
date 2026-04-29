@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.06492v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人安全控制可通过在潜空间 (Latent Space) 中学习世界模型和安全分类器来实现，从而避免手动设计复杂规则。</li><li>核心痛点： 现有方法假设所有安全关键特征（如温度）都能从标准传感器（如RGB图像）中完全观测到，但现实中往往并非如此。</li><li>本文切入点： 作者的直觉是，当安全状态不可直接观测时，模型会学到一种短视 (myopic) 行为：它会避免“看到”失败，而不是避免“导致”失败。</li></ul></section><section><h3>Key Insights</h3><ul><li>[行为模式]： 在部分可观测条件下，基于学习的安全策略会发生行为退化。它不再致力于“避免造成失败”，而是演变成一种“掩耳盗铃”式的“避免观测到失败信号”的短视行为。</li><li>例如，机器人宁愿让蜡锅持续加热导致融化，也不愿抬起锅，因为“抬起”这个动作可能会让它从视觉上“确认”失败。</li><li>[表征学习]： 即使部署时无法使用，仅在训练阶段引入特权传感器（如红外相机）作为监督信号，也能有效“塑造”潜空间。模型能学会从标准传感器（RGB）的动态变化中推断出不可见的物理状态，实现了知识的“蒸馏”。</li><li>[可观测性量化]： 互信息 (Mutual Information) 是一个比分类准确率更深刻、更有效的度量标准。它能更清晰地揭示出不同传感器模态（如 RGB vs. IR）对于安全决策的真实信息含量，并能提前预测安全策略的失效风险。</li></ul></section><section><h3>Next Steps</h3><ul><li>[主动信息获取] 从被动接受观测到主动探索信息。当模型对安全状态不确定时，应学习执行特定动作（如轻微晃动锅）来获取最有利于判断安全状态的观测信息。</li><li>[融合不确定性量化] 将潜空间中的状态不确定性显式地建模并传递。安全策略的触发不应仅基于一个预测值，而应基于失败概率的置信区间，从而实现更鲁棒、更合理的决策。</li></ul></section>
       <section>

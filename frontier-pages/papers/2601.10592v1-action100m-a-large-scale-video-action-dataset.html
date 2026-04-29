@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.10592v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的视频动作数据集规模小、领域窄，且严重依赖昂贵耗时的人工标注。</li><li>核心痛点： 缺乏大规模、多样化、高质量的数据，极大地阻碍了开放域、开放词汇的通用动作识别模型的发展。</li><li>本文切入点： 直觉上，可以用强大的预训练模型作为“教师”，构建一个全自动化的数据标注流水线，以机器之力替代人力，实现数据规模的量级突破。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据规模效应]： 视频动作理解任务存在清晰的 Scaling Law。在 Action100M 上训练的数据量与模型在下游任务上的零样本泛化能力呈现出稳定、显著的正相关，证明了大规模自动标注数据的有效性。</li><li>[标注策略有效性]： “分层描述 + LLM 聚合”的标注策略，显著优于使用单一模型直接生成伪标签。这种“多源证据融合再提炼”的机制，能有效降低单一模型的幻觉与噪声，产出更精准、鲁棒的动作语义标签。</li><li>[数据分布规律]： 源自网络的超大规模视频数据，天然存在严重的长尾分布问题（少数常见动作占据主导）。实验证明，通过语义重采样（对动作文本嵌入进行聚类后均匀采样）能有效缓解数据不平衡，从而提升训练效率和模型性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>动作条件世界模型 (Action-conditioned World Models)： 利用 Action100M 数据中天然的层级化和时序性（步骤A -&gt; 步骤B），训练能够根据当前动作预测未来世界状态变化的模型，是通向物理世界建模的关键一步。</li><li>细粒度物理交互理解： 超越“识别动作”本身，利用数据中的详细描述（如“切番茄” vs “切面包”）来训练模型理解动作背后的物理因果关系，例如工具与物体的交互方式、材质属性对动作的影响等。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.15479v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 顶尖的视频生成系统（如GAIA-1）采用“Tokenizer -&gt; World Model -&gt; Decoder”的三段式架构。</li><li>核心痛点： 此前的先进模型是“黑箱”，依赖私有数据、闭源代码和庞大算力，导致学术界无法复现和跟进。</li><li>本文切入点： 作者的直觉是，无需从零发明，可以通过巧妙地组合、精简并微调现有的强大开源模型（VQGAN, LWM），在公共数据上实现一个“足够好”且完全开放的系统。</li></ul></section><section><h3>Key Insights</h3><ul><li>[领域自适应微调]： 预训练通用模型无法直接胜任特定任务。通过组合多种损失函数（特别是使用 DINOv2 作为教师模型的自监督损失）对 VQGAN 进行微调，是提升特定领域（自动驾驶）视觉词元化质量的关键。</li><li>[生成随机性与真实性]： 视频的未来并非完全确定。在世界模型推理时，采用 Top-k 采样（k=1000）引入受控的随机性，比确定性预测（k=1）能生成感知质量更高（FVD更低）、更自然的视频，这表明一定的“创造空间”对模拟真实世界至关重要。</li><li>[解码器的时序建模]： 解码器不只是被动的渲染器。将原始的图像解码器（逐帧处理）升级为视频解码器（利用3D卷积引入局部时序上下文），能显著改善生成视频的帧间连贯性，即便世界模型是逐帧预测的。</li></ul></section><section><h3>Next Steps</h3><ul><li>[引入可控生成]： 将系统从纯粹的视频续写，升级为可控的场景仿真。例如，将车辆动作（如转向、油门）或高级文本指令（如“前方路口左转”）作为世界模型的条件输入。</li><li>[提升生成效率与分辨率]： 探索更高效的视觉词元化方案（如引入语义压缩）和更强大的开源世界模型，目标是在有限的学术资源下，突破当前低分辨率和低帧率的瓶颈。</li></ul></section>
       <section>

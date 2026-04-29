@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10717v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人主要依赖 VLM (视觉语言模型) 理解高层指令，或用简单的世界模型预测极短期的未来。</li><li>核心痛点： 现有世界模型预测未来太短、太慢，且生成的机器人形态和位置经常出错（空间不一致），无法有效指导精细操作。</li><li>本文切入点： 直觉上，强大的视频生成模型知道世界如何运转。作者的切入点是：将一个强大的视频模型蒸馏加速，并将其生成的未来视频作为“上下文示例”（而非绝对指令）来指导动作模型，让动作模型在“梦境”的启发下，结合现实进行决策。</li></ul></section><section><h3>Key Insights</h3><ul><li>[世界模型保真度]： 机器人动作的成功率与世界模型生成的未来视频质量（尤其是机器人形态和空间位置的准确性）强相关。一个糟糕的“梦”会直接误导行动。</li><li>[预测与控制解耦]： 将长时程的视频预测（Dream）与实时的动作生成（Act）解耦是高效且可行的。机器人不需要为每一步动作都预测一帧，宏观的视觉规划蓝图已足够指导精确的闭环控制。</li><li>[生成模型加速]： 对抗性蒸馏是加速视频世界模型的有效路径。它能在大幅减少生成步数（例如从35+步降至~10步）的同时，基本保留对机器人操作至关重要的时空保真度，实现了速度与质量的平衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>[通用具身世界模型] 研究如何让世界模型泛化到不同形态的机器人（例如轮式、人形）和全新的操作环境，构建一个不依赖特定机器人形态的通用世界模型。</li><li>[与语言规划结合] 将预测性世界模型与更复杂的语言规划模块深度结合。机器人不仅能“梦”到如何完成一个简单指令，还能“梦”到如何分解并执行一个多步骤、组合式的复杂任务（例如“先找到杯子，再倒水，然后端过来”）。</li></ul></section>
       <section>

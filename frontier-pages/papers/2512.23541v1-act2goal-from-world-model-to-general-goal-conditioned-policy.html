@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.23541v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的目标条件策略 (Goal-Conditioned Policies, GCPs) 直接将「当前状态」和「目标图像」映射到「下一步动作」。</li><li>核心痛点： 这种直接映射缺乏对任务进度的中间过程建模，导致在长时程任务中容易累积误差、迷失方向。</li><li>本文切入点： 直觉上，与其直接求解动作，不如先让模型想象出一条从“当前”到“目标”的合理视觉路径。这条想象出的路径为后续的精确控制提供了结构化的蓝图和指导。</li></ul></section><section><h3>Key Insights</h3><ul><li>规划范式： 对于长时程任务，在视觉空间中进行规划（想象中间图像）比直接在动作空间中求解（预测动作）更有效。世界模型提供的视觉规划，为从高级目标到低级控制架起了关键桥梁。</li><li>时序表征： 机器人控制需要多尺度的时序思维。MSTH 机制证明，同时拥有密集的短期规划（应对扰动）和稀疏的长期规划（保持方向）是平衡局部反应性和全局一致性的关键，解决了传统规划“要么太脆，要么太飘”的矛盾。</li><li>自主学习： 高效的在线自适应无需奖励信号。通过事后经验回放 (HER) 将失败经验重新标记为“成功”数据，并结合LoRA进行轻量化微调，模型能够仅靠自我探索就在几分钟内快速适应新任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>物理感知的世界模型： 将物理规律或可学习的动力学模型融入到视觉生成过程中。这能确保世界模型想象出的路径不仅视觉连贯，而且物理可达，从而生成更高质量的规划。</li><li>动态分层子目标规划： 改变一次性生成完整路径的模式。让模型采用层级化策略，先生成一个关键的远期子目标，在达成后再规划下一个，实现更加动态和自适应的规划过程。</li></ul></section>
       <section>

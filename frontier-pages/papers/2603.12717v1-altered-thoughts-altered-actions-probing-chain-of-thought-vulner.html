@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12717v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 最新的机器人VLA（视觉-语言-行动）模型开始引入思维链（CoT），即先生成自然语言计划，再解码动作。</li><li>核心痛点： 这个模型内部的“思考”文本通道是一个全新的、未经审查的攻击面，无人知晓篡改它是否会导致物理世界的失败。</li><li>本文切入点： 作者直觉地发问：行动解码器到底依赖“思考”过程中的哪些信息？通过系统性地、有针对性地破坏思维链的不同语言属性（如物体、顺序、方向），来反向揭示其内在作用机制。</li></ul></section><section><h3>Key Insights</h3><ul><li>选择性因果敏感 (Selective Causal Sensitivity)：</li><li>VLA模型的行动解码器对思维链中的实体指代（即物体名称）完整性表现出极强的依赖性。篡改物体名称会显著降低任务成功率。</li><li>与此同时，它对思维链的逻辑顺序、空间方向、语法结构甚至整体合理性都惊人地不敏感。打乱句子、颠倒方向、甚至用大模型生成看似合理但错误的计划，都几乎不影响结果。</li><li>能力倒挂 (Capability Inversion)：</li><li>一个复杂的、由70B参数大模型精心设计的“欺骗性”思维链，其攻击效果远不如一个简单的、机械地替换物体名称的攻击。</li></ul></section><section><h3>Next Steps</h3><ul><li>轻量级防御机制： 既然漏洞精确地指向实体指代，可以开发简单的运行时检查。例如，验证思维链中提到的物体是否与原始指令中的物体一致，这可能成为一种低成本、高效率的防御手段。</li><li>跨架构泛化验证： 在采用“系统1-系统2”分离式架构（如NVIDIA GR00T）的模型上复现该实验。这对于验证该发现是否为所有“思考-行动”模型的普遍规律至关重要。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.17825v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有研究主要在单一网络域（如地面、卫星或无人机）内进行孤立的能效优化。</li><li>核心痛点： 缺乏一个跨域协同的框架，且优化目标多为能耗而非实时碳强度，无法根据电网清洁程度动态调整网络行为。</li><li>本文切入点： 引入数字孪生 (Digital Twin) 作为虚拟大脑，融合实时电网碳强度数据，将优化目标从“节能”升级为“低碳”，对整个一体化网络进行全局、预测性的编排。</li></ul></section><section><h3>Key Insights</h3><ul><li>[目标差异]： 最小化能耗 ≠ 最小化碳排放。真正的低碳运营不仅要节能，更关键的是具备时间感知能力，即在可再生能源充足（电网碳强度低）的时段执行高负载任务。</li><li>[协同效应]： 一体化网络的碳减排潜力来自于跨域资源的协同调度。例如，将流量从一个由高碳电力驱动的卫星关口站，动态切换到一个由清洁能源驱动的关口站，这种全局优化远超单个子网的优化效果。</li><li>[控制策略]： 混合时间尺度控制是实现兼顾效率与韧性的关键。“天级”的预测性规划 (MPC) 负责设定全局低碳基线，避免频繁剧烈调整；而“秒级”的实时调整 (RL) 则以低开销方式快速响应突发状况，保证服务质量。</li></ul></section><section><h3>Next Steps</h3><ul><li>全生命周期碳优化： 建立包含硬件隐含碳与网络运营碳的全生命周期碳足迹模型，将硬件的制造和生命周期也纳入编排决策的考量范围，实现真正的端到端可持续性。</li><li>跨域市场化协同： 研究网络运营商、电网运营商、频谱监管机构之间的多方协同与激励机制。例如，设计一种能让网络根据实时电价和碳价动态调整资源，并参与电网需求侧响应的框架。</li></ul></section>
       <section>

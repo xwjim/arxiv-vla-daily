@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.13329v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： Vision-Language-Action (VLA) 模型被用于直接将多模态感知输入映射到驾驶动作。</li><li>核心痛点： 现有VLA模型缺乏精细的 3D空间感知 和 时序连贯性，导致生成的轨迹在几何精度和控制平滑度上不足，难以直接用于安全关键场景。</li><li>本文切入点： 与其强求一个庞大的VLA模型直接输出完美轨迹，不如将其 能力解耦。让VLA负责高级语义推理（生成粗略轨迹），再用一个专门的规划器进行低级轨迹优化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构解耦]： 将VLA的 语义推理 (做什么) 与专业规划器的 几何优化 (怎么做) 分离，是实现高精度、可解释的端到端驾驶的有效路径。这种分层思想优于单一的、端到端的暴力拟合。</li><li>[动作空间粒度]： 定义一套精细化的 “元动作”指令 (如“小角度左转”而非“左转”) 作为VLA和规划器之间的桥梁，能显著提升语言指令与物理轨迹的对齐精度。这是打通语义与控制的关键“中间语言”。</li><li>[不确定性利用]： 让VLA模型自我评估其预测轨迹的 置信度(ϵ)，并将其作为下游规划器优化强度的动态依据（置信度低则加强优化），实现了更高效、更具针对性的轨迹精炼。</li></ul></section><section><h3>Next Steps</h3><ul><li>[多智能体交互预测]： 将对其他交通参与者（行人、车辆）的 未来行为预测 显式地融入VLA的推理链和规划器的优化目标中，以应对更复杂的动态博弈场景。</li><li>[端到端反馈闭环]： 建立从分层规划器到上游VLA模型的 反馈机制。让规划的“难易程度”或“优化结果”反过来指导VLA生成更合理、更易于执行的粗略意图。</li></ul></section>
       <section>

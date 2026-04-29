@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.13764v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 采用共享-私有 (shared-private) 架构，冻结通用模型主干，仅微调与特定机器人相关的“私有”小模块。</li><li>核心痛点： 私有模块的容量和表达能力有限，且模型依赖大规模数据进行隐式对齐，缺乏显式的、高效的迁移机制，导致小样本学习效果差。</li><li>本文切入点： 核心直觉是“解耦”。作者认为任何机器人动作都可以被拆分为两部分：① 与机器人无关的通用时空模式（做什么） 和 ② 与机器人相关的具体执行（怎么做）。他们选择去专门学习前者。</li></ul></section><section><h3>Key Insights</h3><ul><li>[解耦的价值]：</li><li>将“做什么”（抽象的动作意图）与“怎么做”（具体的关节控制）进行解耦，是解决跨机器人实体迁移问题的有效范式。动作基元成功扮演了这个解耦后的中间桥梁角色。</li><li>[离散化的优势]：</li><li>将连续、高维、异构的动作空间量化为一套有限的、离散的动作基元，能有效“抹平”不同机器人的运动学底层差异。这为上层策略提供了一个稳定、结构化的通用先验知识库。</li><li>[小样本学习效率]：</li></ul></section><section><h3>Next Steps</h3><ul><li>多模态基元学习： 将视觉或力觉信息融入基元的学习过程中，使其不仅包含运动学模式，还包含交互意图。例如，区分“轻轻放下”的基元和“用力推”的基元。</li><li>动态与组合式基元： 研究可变长度的动作基元，并探索如何在线组合这些基础基元来完成训练数据中未见的、更长周期的复杂任务，实现真正的组合泛化。</li></ul></section>
       <section>

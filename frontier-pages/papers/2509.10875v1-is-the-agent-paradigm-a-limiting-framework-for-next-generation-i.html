@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.10875v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将AI系统构建为在环境中追求目标的自主“代理”，是当前研究（如LLM-Agents）的主流范式。</li><li>核心痛点： “代理”这一核心概念定义模糊、充满拟人偏见，它掩盖了系统底层的计算机制，限制了我们对更通用智能形式的探索。</li><li>本文切入点： 彻底反思“代理”的必要性。作者提出，智能可能并非源于一个独立的“代理”，而是从整个系统的动力学、与环境的持续交互以及物质本身的特性中涌现的。</li></ul></section><section><h3>Key Insights</h3><ul><li>范式危机： 对“代理”范式的批判（如拟人化偏见）在学术上的影响力已超过“代理”这一概念本身。这表明该领域正处于结构性危机中，而非简单的哲学辩论。</li><li>理论与实践脱节： AI领域存在理论批判与工程实践的巨大鸿沟。我们擅长识别“代理”范式的问题（如Goodhart定律），却缺乏将其转化为具体、鲁棒算法的系统性方法。</li><li>智能的本质： 智能不一定是离散“代理”的属性，而更可能是系统动力学、物质性（Embodiment）和持续交互作用的涌现结果。未来的突破可能来自设计“智能系统”而非“智能代理”。</li></ul></section><section><h3>Next Steps</h3><ul><li>开发“系统优先”的强化学习框架。 放弃优化单个代理的奖励函数，转而设计直接优化整个系统动力学（如稳定性、适应性）的算法，让有效行为作为涌现结果产生。</li><li>将“物质智能”形式化为计算模型。 创建一个将基底（substrate）的物理属性作为核心变量的计算框架或仿真环境，用于研究不同物理规则如何催生不同形式的涌现智能，超越纯粹的算法视角。</li></ul></section>
       <section>

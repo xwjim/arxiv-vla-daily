@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.14635v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 森林清查长期依赖树径、高度和 allometric models，但误差传播与校准困难一直存在。</li><li>核心痛点： TLS 精度高但采集慢且受遮挡影响大；UAV-LiDAR、MLS 各有优势，却缺少在长期生态监测站点上的统一标准化参考数据。</li><li>本文切入点： 作者围绕 ICOS 长期生态观测站，构建一个多平台共注册的 LiDAR benchmark，把 canopy、trunk、understory 三层信息放进同一数据资源。</li></ul></section><section><h3>Key Insights</h3><ul><li>单一平台无法完整覆盖森林三维结构： 真正有价值的是 canopy、understory、stem mapping 的互补融合，而不是某一平台单独最强。</li><li>高质量基准数据本身就是基础设施： 对森林点云配准、分割、QSM 和 biomass estimation 而言，参考数据集的价值不亚于单篇算法论文。</li><li>UAV 数据在生态数字孪生里是关键一环： ULS 为大尺度冠层与重复观测提供了高效入口，使森林 monitoring 更容易走向连续化。</li><li>生态监测与机器人感知正在汇流： 这篇论文说明 SLAM-aware workflow、跨平台配准和长期站点观测可以形成新的交叉研究基础。</li></ul></section><section><h3>Next Steps</h3><ul><li>扩展到更多站点与生态类型： 验证该 workflow 在不同森林结构和地形中的泛化性。</li><li>建立统一 benchmark tasks： 例如跨平台配准、树木分割、碳估算与 3D 数字孪生重建。</li><li>加强自动化采集与处理： 让 UAV / MLS / TLS 联合工作流更接近可规模化应用。</li></ul></section>
       <section>

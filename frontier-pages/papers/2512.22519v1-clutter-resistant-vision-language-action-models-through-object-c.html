@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.22519v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的 VLA (视觉-语言-动作) 模型将感知和控制耦合在单一的端到端网络中进行训练。</li><li>核心痛点： 端到端训练导致模型的语言-视觉对齐能力退化，在面对干扰物、背景变化时极易出错，甚至在目标不存在时也会“过度抓取”。</li><li>本文切入点： 作者的直觉是显式解耦感知与动作。先用一个独立的感知模块“净化”视觉输入，只保留任务相关物体，再将“干净”的视图送给VLA模型进行动作决策。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转变]： 感知与动作解耦是提升VLA鲁棒性的关键。将感知作为独立模块，能有效防止VLA模型在微调中损失其视觉语言对齐能力，从而大幅提升在复杂场景下的可靠性。</li><li>[数据效率]： 通过前端的感知净化，VLA策略模型只需在“干净”的单物体数据上微调，即可泛化到部署时的“杂乱”场景。这极大降低了对大规模、多样化杂乱场景演示数据的依赖。</li><li>[表征选择]： 相比于物体的颜色、纹理等外观信息，其三维几何结构（通过深度图表达）是更稳定、更利于泛化的表征。这使得模型在面对背景变化或前所未见的新物体时表现更佳。</li></ul></section><section><h3>Next Steps</h3><ul><li>[模型融合与蒸馏]： 将独立的感知模块的能力蒸馏（distill）或摊销（amortize）到一个更轻量、更高效的单一网络中，在保持鲁棒性的同时解决推理延迟问题，实现端到端的实时控制。</li><li>[任务复杂度扩展]： 将该框架从简单的“抓取-放置”任务扩展到长时程、多步骤的复杂动态任务，例如与抽屉、瓶盖等可活动部件进行交互。</li></ul></section>
       <section>

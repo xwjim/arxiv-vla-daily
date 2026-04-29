@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.14125v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： end-to-end VLA 很吸引人，因为它把感知、语言理解和动作控制统一到一个模型里。</li><li>核心痛点： 一旦在相对狭窄的控制数据上继续微调，大模型原本强大的语义推理能力就会被破坏，形成 reasoning 与 control 之间的 trade-off。</li><li>进一步难点： 即便采用分层系统，很多方法也没解决“如何把 grounded plan 真正转成可执行动作”的问题，常常在全局空间信息与局部高分辨率细节之间二选一。</li><li>本文切入点： HiVLA 把高层规划与低层控制显式解耦，并让高层输出 子任务指令 + 精确目标框，再由专门的 DiT action expert 去执行。</li></ul></section><section><h3>Key Insights</h3><ul><li>高层 reasoning 最怕被低层控制数据“污染”： 这篇论文把 catastrophic forgetting 直接视为系统设计问题，而不是简单的数据量问题。</li><li>visual grounding 是分层系统的关键接口： 真正有用的中间表示不是抽象文字计划，而是“带定位的子任务”，因为它更容易落到物理动作上。</li><li>精细操作需要同时保留局部与全局： 小物体抓取、遮挡场景操作之所以难，不是因为动作模型太弱，而是接口没有同时保住局部纹理与全局坐标。</li><li>分层不是退步，而是更可扩展： 作者的结果说明，把能力分给不同模块，反而更容易保持 VLM 的 zero-shot reasoning 和低层策略的鲁棒执行。</li></ul></section><section><h3>Next Steps</h3><ul><li>把 grounding 做成可校正闭环： 让低层执行反馈反过来修正高层定位与子任务分解。</li><li>扩展到更开放的操作场景： 包括多目标、多步依赖和更复杂的人机共场环境。</li><li>研究更轻量的分层接口： 降低对高分辨率 crop、多模块通信和精细标注的工程依赖。</li></ul></section>
       <section>

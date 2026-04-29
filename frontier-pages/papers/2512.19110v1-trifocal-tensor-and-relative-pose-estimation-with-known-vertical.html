@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.19110v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的三视图位姿估计（如 7pt-Hartley-3view）需要较多（≥7）的特征点对应来求解。</li><li>核心痛点： 所需匹配点数量多，导致在 RANSAC 框架下计算效率低、对离群点（outliers）敏感。</li><li>本文切入点： 作者洞察到，现代设备（无人机、手机）普遍搭载 IMU，可以提供免费且可靠的垂直方向信息。利用这一几何先验，可以从根本上降低问题的自由度。</li></ul></section><section><h3>Key Insights</h3><ul><li>先验信息的价值：</li><li>几何先验能极大地简化视觉问题。引入垂直方向这一物理世界约束，直接将一个高维非线性问题“降维”，把求解 3 个自由度的旋转矩阵，简化为求解 1 个自由度的偏航角。</li><li>鲁棒估计的本质：</li><li>算法的鲁棒性不仅来自后端优化，更源于前端对最小样本集（Minimal Sample Size）的追求。本文的 3 点法将样本数降至极限，这使得 RANSAC 迭代次数呈指数级减少，从而在充满噪声和外点的真实场景中获得压倒性的效率和鲁棒性优势。</li><li>问题建模的多样性：</li></ul></section><section><h3>Next Steps</h3><ul><li>与动态环境结合： 如何利用该方法的效率优势，快速分割出场景中的静态背景并完成定位？垂直先验能否帮助更好地区分物体运动与相机运动？</li><li>从松耦合到紧耦合： 本文将 IMU 信息作为预处理步骤（松耦合）。更有前景的方向是建立一个视觉-惯导紧耦合（Tightly-coupled）的优化框架，将 IMU 的原始测量值与视觉信息共同放入一个优化器中，从而能更好地处理 IMU 噪声和偏差，实现更高鲁棒性。</li></ul></section>
       <section>

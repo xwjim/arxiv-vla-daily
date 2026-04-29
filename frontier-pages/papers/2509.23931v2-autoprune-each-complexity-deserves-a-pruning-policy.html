@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.23931v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 以往的剪枝方法对所有输入样本都采用固定的、一刀切的剪枝策略。</li><li>核心痛点： 固定策略无法适应不同样本和任务的复杂度差异，导致在简单任务上剪枝不足，在复杂任务上又可能过早丢弃关键信息。</li><li>本文切入点： 借鉴人类认知科学的直觉——人脑处理不同难度任务时注意力模式不同。作者将此规律迁移到模型上，提出为每个样本动态生成一个专属的剪枝策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>[VLM推理模式]： VLM在处理图文任务时，其跨模态注意力模式与人类认知高度相似。简单任务的注意力在浅层迅速收敛，而复杂任务则在多层中保持分散探索，这从根本上揭示了固定剪枝策略的内在局限性。</li><li>[任务复杂度量化]： 早期层中视觉与文本Token间的互信息（Mutual Information）是一个高效且免训练的任务复杂度代理指标。它精准地反映了图文对齐的强度，高互信息对应简单任务，低互信息则对应需要更多推理的复杂任务。</li><li>[动态剪枝范式]： 模拟人类“探索-锁定-稳定”认知过程的逻辑斯蒂曲线（Logistic Curve），是构建动态剪枝策略的有效范式。通过互信息动态调整曲线的斜率和拐点，可以为每个样本生成一条既符合认知规律又满足计算预算的个性化剪枝路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>[非单调与可复活的剪枝]</li><li>[分阶段动态复杂度评估]</li></ul></section>
       <section>

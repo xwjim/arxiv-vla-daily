@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.03169v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 路径规划通常使用 RRT* 等采样算法，或单独用 TSP 算法解决多点访问顺序。</li><li>核心痛点： 现有方法难以同时解决 最优访问顺序、轨迹平滑性 和 复杂环境避障 这三个耦合在一起的难题。</li><li>本文切入点： 分而治之。先在理想空间用 遗传算法 (GA) 解决旅行商问题 (TSP) 获得一个“理论最优”的访问顺序，再将此顺序作为强引导，在真实环境中进行 B样条轨迹优化 以满足所有现实约束。</li></ul></section><section><h3>Key Insights</h3><ul><li>[规划范式]： 复杂的“多目标点轨迹规划”问题，可以通过 “抽象层排序 + 物理层优化” 的解耦范式有效解决。这显著降低了在单一阶段解决所有问题的计算复杂度。</li><li>[序列的非刚性]： 在拥挤环境中，全局最短路径的访问顺序（TSP解）不等于考虑了动力学和平滑性约束后的最优执行顺序。后端优化器为了避障或保持平滑，会动态调整前端GA给出的初始顺序，这是对传统TSP假设的现实修正。</li><li>[障碍物表征]： 使用 欧几里得距离变换 (EDT) 将离散的障碍物地图转化为一个连续的势场，是实现基于梯度优化的关键。这使得轨迹能被平滑地“推离”障碍物，而不是进行生硬的绕行。</li></ul></section><section><h3>Next Steps</h3><ul><li>局部快速重规划： 如何在保持主体轨迹不变的情况下，仅对受动态障碍物影响的局部B样条段进行快速、实时的重新优化？</li><li>分层规划 (Hierarchical Planning)： 针对超大规模POIs场景，能否先对POIs进行聚类，在簇间进行宏观TSP规划，再在簇内执行本文的精细化轨迹生成，形成一个分层规划框架。</li></ul></section>
       <section>

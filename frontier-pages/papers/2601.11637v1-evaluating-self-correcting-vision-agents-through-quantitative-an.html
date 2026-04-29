@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.11637v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言智能体 (VLAs) 已经开始具备利用工具进行迭代式自我纠错的能力。</li><li>核心痛点： 我们对这种自我纠错能力的定量极限、收益边界和核心推理瓶颈知之甚少。</li><li>本文切入点： 设计一个诊断性的微观基准测试 (Diagnostic Micro-Benchmark)，将任务成功与纠错成功分离开来，从而精确解剖纠错过程本身。</li></ul></section><section><h3>Key Insights</h3><ul><li>能力解耦 (Ability Decoupling)： 智能体初始解决任务的能力 (TSR ≈ 62%) 与其修复自身错误的能力 (CSR ≈ 25-33%) 存在巨大鸿沟。这意味着，一个擅长“一次做对”的模型，不一定擅长“知错能改”。</li><li>收益递减 (Diminishing Returns)： 自我纠错并非无限有效。其效果在 3 次重试后迅速饱和，继续尝试几乎没有收益。这为智能体交互设计（何时应放弃或求助）提供了明确的量化依据。</li><li>失败根源 (Root Cause of Failure)： 一个最主要的失败模式是 “语义漂移” (Semantic Drift)，占比高达 28%。这指的是智能体在多轮纠错中丢失了对原始目标和上下文的追踪，而非简单的逻辑或工具使用错误。</li></ul></section><section><h3>Next Steps</h3><ul><li>状态化智能体 (Stateful Agents)： 针对“语义漂移”问题，研究如何为 VLA 引入更强的长期记忆或状态追踪机制，以确保其在多轮交互中保持目标一致性。</li><li>纠错专家模型 (Correction Specialist)： 既然任务能力与纠错能力解耦，可以探索训练一个专门用于“修复”方案的专家模型。该模型不负责从头生成计划，只负责在给定错误方案和反馈后，生成高质量的修正方案。</li></ul></section>
       <section>

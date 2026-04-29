@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.18043v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 模仿学习 (IL) 策略在训练数据分布内的场景表现良好。</li><li>核心痛点： 面对分布外 (Out-of-Distribution) 的初始状态（如目标被遮挡），现有策略泛化能力差，需要海量多样化的数据才能学会。</li><li>本文切入点： 模仿人类的直觉——遇到复杂情况时，不直接解决难题，而是先动手简化问题。作者将此「先准备，后行动」的思路引入机器人。</li></ul></section><section><h3>Key Insights</h3><ul><li>[理论基础]： 任务分解在数学上是更优的。通过「规整策略」将多样的初始状态收束到方差更小的「锚点状态」集合 (tr(Σ_a) &lt; tr(Σ_0))，从理论上降低了策略泛化差距的上限，使学习更数据高效。</li><li>[数据解耦]： 实现了“意图”与“执行”的学习解耦，大幅提升数据效率。</li><li>使用廉价的、无需标注动作 (action-agnostic) 的人类视频学习“应该做什么”（what to do）。</li><li>使用通用的、与具体任务无关 (task-agnostic) 的机器人玩耍数据学习“如何去实现”（how to do it）。</li><li>[范式转变]： 从“训练一个能解决所有情况的复杂模型”转向“训练一个简单的规整模型 + 一个简单的任务模型”。这种分而治之的策略，本质上是用一个策略为另一个策略创造有利的执行条件，降低了对单一模型泛化能力的极致要求。</li></ul></section><section><h3>Next Steps</h3><ul><li>[多模态规整] 将语言指令融入规整策略。用户可以说“把那个红色的盒子拿开”，使规整过程更具指向性和灵活性，而不仅仅是模仿视觉上的简化模式。</li><li>[端到端规整] 探索端到端的规整策略学习，摆脱对预定义动作原语的依赖。直接从点流或其他意图表示生成连续的低层电机指令，以应对更复杂的环境重构任务。</li></ul></section>
       <section>

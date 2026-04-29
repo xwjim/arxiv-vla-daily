@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10556v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用大规模、多机器人的数据集来训练一个通用的视觉-语言-动作（VLA）模型。</li><li>核心痛点： 现有VLA模型与训练数据中的机器人形态强耦合，其动作输出与VLM的预训练知识存在分布失配，导致无法泛化到未见过的机器人上。</li><li>本文切入点： 一个核心直觉——如果将机器人的底层动作（Action）也用自然语言（Language）来描述，就能使控制任务的监督信号与VLM的预训练分布保持一致，从而最大限度地保留其强大的泛化能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作表征的统一]： 将机器人动作语言化，从根本上缓解了VLM在进行控制任务微调时的分布偏移问题。这使得模型能学习到更独立于具体机器人形态（embodiment-agnostic）的通用控制知识，而不是过拟合到特定机器人的运动学或动力学上。</li><li>[表征空间的对齐]： LAP训练后，模型在内部表征空间中不再将不同机器人（新旧）视为孤立的簇群（见论文图5a的t-SNE可视化）。这种跨机器人表征的融合是其能够在新机器人上直接预测出合理动作、实现零样本迁移的根本原因。</li><li>[语言模态的协同效应]： 动作的语言化表示，使得控制任务与视觉问答（VQA）任务可以在输出格式上无缝统一。通过联合训练（如预测两帧图像间运动的VQA任务），可以进一步提升模型的空间推理能力和控制精度，实现了 1+1 &gt; 2 的效果。</li></ul></section><section><h3>Next Steps</h3><ul><li>[利用非结构化数据源]： 探索直接从人类活动视频中学习。通过姿态估计生成粗粒度的语言动作描述（例如“手向右移动”），可以利用海量的互联网数据，摆脱对昂贵机器人数据的依赖。</li><li>[发展层级化语言动作]： 建立分层的语言动作体系。模型可以先生成“打开抽屉”等高层抽象指令，再由一个低层策略将其解析为“前移、下拉”等一系列细粒度的语言动作，从而解决长时程、多步骤的复杂任务。</li></ul></section>
       <section>

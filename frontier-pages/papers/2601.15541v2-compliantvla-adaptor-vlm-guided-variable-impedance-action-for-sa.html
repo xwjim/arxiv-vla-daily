@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.15541v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的 VLA 模型能理解图像和语言，直接输出机器人末端的位置指令。</li><li>核心痛点： 这种模型对物理世界的力一无所知，执行接触任务时像个“莽夫”，容易因用力过猛而失败或损坏物体。</li><li>本文切入点： 作者直觉地认为，可以利用 VLM (视觉语言模型) 的高级推理能力，作为一个“合规教练”，实时指导机器人该用多大的“柔劲”（阻抗参数），从而弥合高级语义理解与低级力控之间的鸿沟。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构解耦]： 高级语义推理 (VLM) 与 低级物理顺从 (变阻抗控制) 可以有效解耦。这意味着我们无需重新训练庞大的 VLA 模型，只需一个轻量级的 “合规适配器” 就能让它们安全地处理接触任务，这是一条极具工程价值的捷径。</li><li>[语义到物理的映射]： VLM 不仅能做高级规划，还能充当一个“物理直觉”引擎。它能将“插入易碎插头”这类模糊的语义概念，直接映射为“X/Y方向保持高刚度对准，Z方向降低刚度柔顺插入”这类具体的、各向异性的物理控制参数。</li><li>[失效模式的质变]： 本文最重要的发现是改变了机器人失败的方式。传统 VLA 的失败是灾难性的（力超限、撞坏东西）；而加入适配器后，失败模式转变为优雅的（轻微错位、打滑）。这种从“硬故障”到“软故障”的转变，是机器人走向真实世界应用的关键一步。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端融合： 将阻抗参数的预测直接整合进 VLA 模型的输出层，与动作指令一起端到端地进行训练。这有望构建一个原生的、具备物理交互能力的“具身基础模型”，消除适配器带来的延迟。</li><li>从物理交互中学习： 让系统能够从“优雅失败”（如打滑、卡住）的经验中在线学习和微调其阻抗策略。这将使机器人从一个依赖预训练知识的“推理者”，进化为一个能适应物理世界的“学习者”。</li></ul></section>
       <section>

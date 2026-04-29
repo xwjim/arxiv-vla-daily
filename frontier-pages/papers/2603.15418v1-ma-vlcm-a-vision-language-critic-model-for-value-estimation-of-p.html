@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15418v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 多智能体强化学习（MARL） 普遍采用 中心化训练、去中心化执行（CTDE） 框架，依赖一个从零学习的 中心化评价器（Critic）。</li><li>核心痛点： 从零学习的评价器 样本效率极低，且难以 泛化到新任务或新环境。</li><li>本文切入点： 直觉上，与其从零学习评价，不如利用 预训练视觉语言模型（VLM） 的先验知识，将其 微调 成一个通用的、能理解任务和场景的 多智能体行为评价器。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型规模与适应性]： 并非模型越大越好。更小的 VLM (0.5B) 在微调后表现 优于更大的模型 (7B)，这表明大模型的 预训练表征空间可能过于僵化，难以高效适应到精确的标量价值回归任务上。</li><li>[评估能力的分离]： MA-VLCM 在 相对排序（判断策略好坏） 上的能力（高 Spearman 相关系数）强于其在绝对数值预测 上的能力（MSE 可能较高）。对于策略优化而言，准确的相对排序比精确的绝对值更关键。</li><li>[微调的必要性]： 仅靠预训练 VLM 的零样本能力不足以胜任评价器。低秩适应（LoRA）微调是关键，它能有效激活并调整 VLM 的内部表征，使其 理解多智能体任务中的特定价值结构。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线策略优化：将预训练的 MA-VLCM 作为 冻结的或少量样本微调的评价器，直接用于指导在线 MARL 策略学习，验证其在 提升真实训练效率和性能 上的作用。</li><li>异构智能体团队的泛化：探索 MA-VLCM 在 物理形态、传感器和动作空间差异巨大 的异构机器人团队（如无人机+地面机器人）中的价值评估能力。</li></ul></section>
       <section>

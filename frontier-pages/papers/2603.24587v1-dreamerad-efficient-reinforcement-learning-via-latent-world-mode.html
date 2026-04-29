@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.24587v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用基于视频生成的世界模型，在“想象”出的未来中训练强化学习策略，以规避真实路测的风险。</li><li>核心痛点： 此类世界模型（尤其是扩散模型）推理速度极慢（每帧约2秒），无法满足强化学习所需的高频交互，导致训练不切实际。</li><li>本文切入点： 作者洞察到，无需将每一步想象都解码成像素图像。整个“预测-评估-决策”的强化学习循环，完全可以在模型的压缩隐空间内高速完成。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征有效性]： 视频生成模型的隐空间已包含足够丰富的时空与语义信息，可以直接支撑复杂的驾驶决策评估，无需依赖像素级解码。这证明了在压缩表征上进行端到端学习的可行性。</li><li>[生成与规划解耦]： 世界模型的视觉生成保真度与下游任务规划性能可以被解耦。通过 Shortcut Forcing 机制，即便生成质量略有下降，其提供的隐空间表征也足以支撑高质量的策略学习，实现了速度与性能的权衡。</li><li>[探索约束]： 在学习到的世界模型中，无约束的随机探索是危险且低效的。采用基于高斯词汇表采样 (Gaussian vocabulary sampling) 的方法，将探索约束在物理上更可能、更安全的轨迹邻域内，是稳定训练并避免世界模型产生“幻觉”的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>[在线模型适配] 研究如何利用强化学习过程中的新数据，在线微调或适配隐空间世界模型。这能让世界模型持续修正自己的“物理引擎”，应对真实世界中的动态变化。</li><li>[隐空间动作规划] 当前策略仍输出显式的轨迹点。下一步可以探索在隐空间中直接定义和学习动作，让智能体在模型的“想象”中学习更抽象、更高效的驾驶原语 (Maneuver Primitives)。</li></ul></section>
       <section>

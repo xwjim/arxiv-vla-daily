@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.01048v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 时序模型（如视频理解VLM）应通过分析动态视觉变化来完成任务。</li><li>核心痛点： 模型实际上会走捷径，过度依赖与任务无关的静态特征（如背景、物体），导致在特定场景下泛化能力差，系统性犯错。</li><li>本文切入点： 直觉上，如果一个静态特征总能导致模型在某个类别上犯错，那它就是一个有害的偏见。作者通过拆解时序、聚类静态特征、双重标准评分，将这种直觉变成了可计算的算法。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型学习模式]： 时序VLM在处理动态任务时，会“偷懒”学习到静态特征（如背景、物体）与特定标签的虚假关联，而非真正理解时间维度上的变化。</li><li>例如，模型将“树木”这个静态特征与“爬树”这个动作标签强绑定，而不是学习“向上攀爬”的动态模式。</li><li>[偏见量化]： 一个特征的“有害性”可以通过两个正交维度来精确衡量：它出现时模型错误率的增幅（外部表现），以及模型在仅看到该静态特征时做出预测的置信度（内部依赖）。</li><li>TRoVe 的核心贡献在于将这两个维度结合，创建了一个比单一指标更鲁棒的偏见发现方法。</li><li>[偏见利用与修复]： 识别出的静态偏见可作为一种“调试信号”。通过为包含偏见特征的样本定制化文本提示（Prompt），可以在不重新训练模型的情况下，显著提升模型在特定“故障模式”下的性能（论文中最高提升111%）。</li></ul></section><section><h3>Next Steps</h3><ul><li>[从静态到动态偏见]： 如何扩展TRoVe框架，使其不仅能发现静态背景/物体偏见，还能发现并量化“动态”偏见？例如，所有“鼓掌”视频都是正面拍摄，而“挥手”视频都是侧面拍摄。</li><li>[从发现到自动修复]： 能否建立一个闭环系统，在TRoVe发现偏见后，自动生成并应用修复策略（如数据增强、模型微调或Prompt优化），实现模型的持续性、自动化鲁棒性提升？</li></ul></section>
       <section>

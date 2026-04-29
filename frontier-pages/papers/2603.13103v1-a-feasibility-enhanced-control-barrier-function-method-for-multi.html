@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.13103v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用控制屏障函数 (CBF) 构建二次规划问题 (QP) 来计算保证安全的无人机控制指令。</li><li>核心痛点： 在密集场景下，多个无人机产生的多重CBF约束相互冲突，导致CBF-QP问题无解（infeasible），控制器失效。</li><li>本文切入点： 直觉上，问题无解根源于约束的“内在矛盾”。作者从数学上分析了这种内部不兼容性 (internal incompatibility)，并推导出一个可直接施加的几何条件来主动避免这种矛盾。</li></ul></section><section><h3>Key Insights</h3><ul><li>[可行性的根源]： 密集场景下 CBF-QP 的不可行性，其根本原因常是多个CBF约束间的“内部不兼容”，而非控制输入达到物理极限。这意味着，即使无人机有无限的机动能力，也可能找不到一个满足所有安全约束的解。</li><li>[约束兼容性的几何映射]： 多个抽象的代数约束（CBF 不等式）的内部兼容性，可以被直观地映射为一个几何条件。即从本机视角看，所有邻居的相对位置向量需落在同一个锥形区域内。这为从物理空间上主动设计可行解提供了抓手。</li><li>[去中心化的信息补偿]： 在无法获取邻居控制输入的去中心化场景下，可通过对邻居行为进行最坏情况估计 (worst-case estimate) 来补偿信息缺失。这是一种在保证安全下限的同时，将集中式理论（如符号一致性）应用于分布式系统的有效范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>意图感知的自适应约束： 结合意图预测模型 (如 Transformer, GRU) 替代当前保守的“最坏情况”估计。根据邻居的预测轨迹，动态、自适应地调整符号一致性约束的强度和方向，实现更智能、高效的规避。</li><li>兼容性分析与不确定性的结合： 将本文的内部兼容性分析理论推广到考虑状态观测噪声和外部扰动（如风）的鲁棒或随机CBF框架中，研究不确定性如何影响约束兼容性，并设计相应的鲁棒可行性增强策略。</li></ul></section>
       <section>

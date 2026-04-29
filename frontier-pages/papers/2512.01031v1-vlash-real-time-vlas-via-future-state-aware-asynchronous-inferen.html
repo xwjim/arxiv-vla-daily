@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.01031v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型采用 同步推理（推理→执行→等待→再推理），导致机器人动作卡顿、反应迟钝。</li><li>核心痛点： 异步推理（边执行边推理）虽能消除卡顿，但会产生 时间错位——模型基于旧状态生成的动作，在未来新状态上执行，导致动作不稳定。</li><li>本文切入点： 作者意识到，虽然未来的 环境观测 未知，但未来的 机器人自身状态 是可预测的。通过使用已知的待执行动作来“前滚”当前状态，可以提前告知模型动作执行时的确切状态。</li></ul></section><section><h3>Key Insights</h3><ul><li>模型行为洞察： 现有 VLA 模型严重 低估了本体状态信息（如关节角度），过度依赖视觉输入。直接在推理时输入未来状态效果不佳，必须通过特定的 时序偏移增强训练，才能迫使模型学会利用这些状态信息来修正动作。</li><li>系统瓶颈洞察： 一旦通过异步推理隐藏了 计算延迟，机器人系统的下一个瓶颈就变成了 物理执行速度。这启发了作者提出 动作量化 (Action Quantization)，通过合并微小动作来提升物理世界的执行效率，实现了速度与精度的权衡。</li><li>训练范式洞察： 模型可以被训练来 泛化不同的系统延迟。通过在训练时引入一个 随机的延迟范围 δ，单一模型就能在部署时自适应不同的硬件（不同推理延迟），甚至在同步模式（δ=0）下也保持高性能，无需为每种配置单独训练。</li></ul></section><section><h3>Next Steps</h3><ul><li>环境状态预测： 将“未来感知”的思想从机器人自身扩展到环境。能否构建一个轻量级的预测模型，对场景中关键物体的 短期运动轨迹进行预判，从而实现对动态环境的真正预测性控制？</li><li>通用时序鲁棒性训练： 将 时序偏移增强 范式应用到更广泛的机器人学习问题中。例如，训练模型以应对网络通信延迟、多传感器数据不同步等其他形式的 时序不一致性 问题。</li></ul></section>
       <section>

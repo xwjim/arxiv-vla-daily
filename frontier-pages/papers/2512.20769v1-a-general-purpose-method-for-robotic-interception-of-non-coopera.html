@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.20769v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人拦截算法通常是 平台特定的，严重依赖专门的传感器或对目标运动的强假设。</li><li>核心痛点： 现有方法 缺乏通用性，难以在不同动力学特性的机器人（如无人机、地面车）之间迁移，且在无全局定位（如GPS）的场景下鲁棒性差。</li><li>本文切入点： 直觉上，如果将整个问题都在 机器人的局部坐标系 中进行建模和求解，就可以摆脱对全局信息的依赖，从而构建一个更通用的、与平台无关的感知与预测模块。</li></ul></section><section><h3>Key Insights</h3><ul><li>[框架设计的通用性]： 实现跨平台通用性的关键在于 “关注点分离”。通过将通用的感知（EKF）和预测（多项式）模块与 平台相关的 动力学规划模块（SCP vs. Min-snap）解耦，框架获得了极高的适应性。这证明了复杂的机器人任务可以通过 模块化和接口标准化 来泛化。</li><li>[局部坐标系的鲁棒性]： 彻底放弃全局坐标系，在 纯相对框架 下进行状态估计和规划，是实现系统在 GPS拒止或未知环境 中鲁棒运行的本质原因。这表明对于“追逐”这类相对任务，全局信息并非必要条件，反而会引入不必要的复杂性和脆弱性。</li><li>[预测模型的实用主义]： 在实时、资源受限的嵌入式系统上，一个简单的 三阶多项式预测器 在效果和效率上，胜过了复杂的深度学习模型。这揭示了对于短时程的物理交互任务，模型的“够用”远比“强大”更重要，计算开销是决定技术能否落地的关键约束。</li></ul></section><section><h3>Next Steps</h3><ul><li>[融合避障的规划]： 将障碍物信息作为 额外约束 加入到现有的后退水平面优化器中。研究如何在保证拦截效率的同时，生成能够动态规避静态和动态障碍物的轨迹。</li><li>[博弈论预测器]： 针对对抗性目标，将目标预测从“轨迹外推”升级为 “意图推理”。可以引入简单的博弈论模型，将拦截问题建模为机器人与目标之间的二人零和博弈，从而预测更具策略性的规避行为。</li></ul></section>
       <section>

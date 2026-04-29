@@ -124,3 +124,263 @@ track_name: "World Model"
 
 ---
 
+## LASER: Learning Active Sensing for Continuum Field Reconstruction
+
+- **arXiv**: <https://export.arxiv.org/abs/2604.19355v1>
+- **ID**: `2604.19355v1`
+- **分类**: cs.LG, cs.AI, cs.CE
+- **作者**: Huayu Deng, Jinghui Zhong, Xiangming Zhu, Yunbo Wang, Xiaokang Yang
+- **总结状态**: 已总结
+- **标签**: 世界模型, 潜在动力学, 动力学建模, 强化学习, 奖励塑形, 主动感知
+- **PDF**: [LASER Learning Active Sensing for Continuum Field Reconstruction.pdf](../pdfs/LASER Learning Active Sensing for Continuum Field Reconstruction.pdf)
+
+### 一、论文元数据
+
+- **标题：** LASER: Learning Active Sensing for Continuum Field Reconstruction
+- **核心机构：** MoE Key Lab; Artificial Intelligence, AI Institute; Computer Science, Shanghai Jiao Tong University
+- **一句话本质：** 这篇论文围绕环境动力学建模提出 **LASER**，核心是把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。用于提升 世界模型 场景下的可靠性、效率或可评测性。
+- **标签：** 世界模型, 潜在动力学, 动力学建模, 强化学习, 奖励塑形, 主动感知
+
+### 二、破局点 (The Gap)
+
+- **已有共识/做法：** High-fidelity measurements of continuum physical fields are essential for scientific discovery and engineering design but remain challenging under sparse and constrained sensing.
+- **核心痛点：** 只追求视觉逼真或单步预测，难以支撑真实决策、评测和跨场景泛化。
+- **本文切入点：** 把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。
+
+### 三、核心机制 (How it works)
+
+- **输入 -> 输出：** 面向任务观测、语言/动作条件或系统状态，输出更可执行的策略、预测、评估结果或控制决策。
+- **关键模块 1：** 围绕 **LASER** 的主框架，把感知、表征、规划或控制过程显式组织起来，减少纯反应式策略的脆弱性。
+- **关键模块 2：** 通过实验基准、仿真/真实平台或消融分析验证关键设计对成功率、鲁棒性、效率或安全性的贡献。
+
+### 四、核心认知与发现 (Key Insights)
+
+- **从离线能力走向闭环可靠性：** 论文关注的不只是模型是否能生成答案，而是结果能否在连续决策、真实扰动或部署约束下稳定工作。
+- **显式结构仍然重要：** 记忆、物理约束、动作条件、评测协议或控制模型等结构化设计，是提升具身系统可信度的关键抓手。
+- **对后续研究的价值：** 可作为构建更安全、更可评测、更可迁移的 世界模型 系统的参考模块或基准。
+
+### 五、致命弱点与演进方向 (Critical Analysis)
+
+**🛑 核心局限 (Limitations)：**
+
+- 摘要层面通常还不足以判断跨平台、跨任务和极端长尾场景下的稳定性，真实部署价值需要进一步看实验设置与失败案例。
+- 若方法依赖特定仿真器、数据集、控制器或标注协议，迁移到开放环境时可能面临分布偏移。
+
+**⚠️ 论证瑕疵：**
+
+- 当前信息主要来自摘要，机构、完整实验细节和负结果仍需结合 PDF 正文进一步核验。
+
+**🚀 下一步高价值方向 (Next Steps)：**
+
+- 重点补读实验设计、消融实验和失败案例，判断该方法是否适合沉淀为你的 VLA / World Model / UAV 技术路线组件。
+- 若与现有项目相关，可进一步抽取数据格式、评测指标和可复现实验配置。
+---
+
+## RoboWM-Bench: A Benchmark for Evaluating World Models in Robotic Manipulation
+
+- **arXiv**: <https://export.arxiv.org/abs/2604.19092v1>
+- **ID**: `2604.19092v1`
+- **分类**: cs.RO, cs.AI
+- **作者**: Feng Jiang, Yang Chen, Kyle Xu, Yuchen Liu, Haifeng Wang, Zhenhao Shen, Jasper Lu, Shengze Huang, Yuanfei Wang, Chen Xie, Ruihai Wu
+- **总结状态**: 已总结
+- **标签**: 世界模型, 视频生成, 评测基准, 动力学建模
+- **PDF**: 暂无本地 PDF，仅保留 arXiv 链接
+
+### 一、论文元数据
+
+- **标题：** RoboWM-Bench: A Benchmark for Evaluating World Models in Robotic Manipulation
+- **核心机构：** 未提取
+- **一句话本质：** 这篇论文围绕环境动力学建模提出 **RoboWM-Bench**，核心是把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。用于提升 世界模型 场景下的可靠性、效率或可评测性。
+- **标签：** 世界模型, 视频生成, 评测基准, 动力学建模
+
+### 二、破局点 (The Gap)
+
+- **已有共识/做法：** Recent advances in large-scale video world models have enabled increasingly realistic future prediction, raising the prospect of leveraging imagined videos for robot learning.
+- **核心痛点：** 只追求视觉逼真或单步预测，难以支撑真实决策、评测和跨场景泛化。
+- **本文切入点：** 把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。
+
+### 三、核心机制 (How it works)
+
+- **输入 -> 输出：** 面向任务观测、语言/动作条件或系统状态，输出更可执行的策略、预测、评估结果或控制决策。
+- **关键模块 1：** 围绕 **RoboWM-Bench** 的主框架，把感知、表征、规划或控制过程显式组织起来，减少纯反应式策略的脆弱性。
+- **关键模块 2：** 通过实验基准、仿真/真实平台或消融分析验证关键设计对成功率、鲁棒性、效率或安全性的贡献。
+
+### 四、核心认知与发现 (Key Insights)
+
+- **从离线能力走向闭环可靠性：** 论文关注的不只是模型是否能生成答案，而是结果能否在连续决策、真实扰动或部署约束下稳定工作。
+- **显式结构仍然重要：** 记忆、物理约束、动作条件、评测协议或控制模型等结构化设计，是提升具身系统可信度的关键抓手。
+- **对后续研究的价值：** 可作为构建更安全、更可评测、更可迁移的 世界模型 系统的参考模块或基准。
+
+### 五、致命弱点与演进方向 (Critical Analysis)
+
+**🛑 核心局限 (Limitations)：**
+
+- 摘要层面通常还不足以判断跨平台、跨任务和极端长尾场景下的稳定性，真实部署价值需要进一步看实验设置与失败案例。
+- 若方法依赖特定仿真器、数据集、控制器或标注协议，迁移到开放环境时可能面临分布偏移。
+
+**⚠️ 论证瑕疵：**
+
+- 当前信息主要来自摘要，机构、完整实验细节和负结果仍需结合 PDF 正文进一步核验。
+
+**🚀 下一步高价值方向 (Next Steps)：**
+
+- 重点补读实验设计、消融实验和失败案例，判断该方法是否适合沉淀为你的 VLA / World Model / UAV 技术路线组件。
+- 若与现有项目相关，可进一步抽取数据格式、评测指标和可复现实验配置。
+---
+
+## HALO: Hybrid Auto-encoded Locomotion with Learned Latent Dynamics, Poincaré Maps, and Regions of Attraction
+
+- **arXiv**: <https://export.arxiv.org/abs/2604.18887v1>
+- **ID**: `2604.18887v1`
+- **分类**: cs.RO, eess.SY
+- **作者**: Blake Werner, Sergio A. Esteban, Massimiliano De Sa, Max H. Cohen, Aaron D. Ames
+- **总结状态**: 已总结
+- **标签**: 世界模型, 安全评测, 潜在动力学, 动力学建模, 人形机器人
+- **PDF**: [HALO Hybrid Auto-encoded Locomotion with Learned Latent Dynamics, Poincaré Maps, and Regions of Attraction.pdf](../pdfs/HALO Hybrid Auto-encoded Locomotion with Learned Latent Dynamics, Poincaré Maps, and Regions of Attraction.pdf)
+
+### 一、论文元数据
+
+- **标题：** HALO: Hybrid Auto-encoded Locomotion with Learned Latent Dynamics, Poincaré Maps, and Regions of Attraction
+- **核心机构：** NC State University
+- **一句话本质：** 这篇论文围绕环境动力学建模提出 **HALO**，核心是把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。用于提升 世界模型 场景下的可靠性、效率或可评测性。
+- **标签：** 世界模型, 安全评测, 潜在动力学, 动力学建模, 人形机器人
+
+### 二、破局点 (The Gap)
+
+- **已有共识/做法：** Reduced-order models are powerful for analyzing and controlling high-dimensional dynamical systems.
+- **核心痛点：** 只追求视觉逼真或单步预测，难以支撑真实决策、评测和跨场景泛化。
+- **本文切入点：** 把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。
+
+### 三、核心机制 (How it works)
+
+- **输入 -> 输出：** 面向任务观测、语言/动作条件或系统状态，输出更可执行的策略、预测、评估结果或控制决策。
+- **关键模块 1：** 围绕 **HALO** 的主框架，把感知、表征、规划或控制过程显式组织起来，减少纯反应式策略的脆弱性。
+- **关键模块 2：** 通过实验基准、仿真/真实平台或消融分析验证关键设计对成功率、鲁棒性、效率或安全性的贡献。
+
+### 四、核心认知与发现 (Key Insights)
+
+- **从离线能力走向闭环可靠性：** 论文关注的不只是模型是否能生成答案，而是结果能否在连续决策、真实扰动或部署约束下稳定工作。
+- **显式结构仍然重要：** 记忆、物理约束、动作条件、评测协议或控制模型等结构化设计，是提升具身系统可信度的关键抓手。
+- **对后续研究的价值：** 可作为构建更安全、更可评测、更可迁移的 世界模型 系统的参考模块或基准。
+
+### 五、致命弱点与演进方向 (Critical Analysis)
+
+**🛑 核心局限 (Limitations)：**
+
+- 摘要层面通常还不足以判断跨平台、跨任务和极端长尾场景下的稳定性，真实部署价值需要进一步看实验设置与失败案例。
+- 若方法依赖特定仿真器、数据集、控制器或标注协议，迁移到开放环境时可能面临分布偏移。
+
+**⚠️ 论证瑕疵：**
+
+- 当前信息主要来自摘要，机构、完整实验细节和负结果仍需结合 PDF 正文进一步核验。
+
+**🚀 下一步高价值方向 (Next Steps)：**
+
+- 重点补读实验设计、消融实验和失败案例，判断该方法是否适合沉淀为你的 VLA / World Model / UAV 技术路线组件。
+- 若与现有项目相关，可进一步抽取数据格式、评测指标和可复现实验配置。
+---
+
+## Curiosity-Critic: Cumulative Prediction Error Improvement as a Tractable Intrinsic Reward for World Model Training
+
+- **arXiv**: <https://export.arxiv.org/abs/2604.18701v1>
+- **ID**: `2604.18701v1`
+- **分类**: cs.LG, cs.AI, stat.ML
+- **作者**: Vin Bhaskara, Haicheng Wang
+- **总结状态**: 已总结
+- **标签**: 世界模型, 奖励塑形, 动态预测, 仿真评测
+- **PDF**: [Curiosity-Critic Cumulative Prediction Error Improvement as a Tractable Intrinsic Reward for World Model Training.pdf](../pdfs/Curiosity-Critic Cumulative Prediction Error Improvement as a Tractable Intrinsic Reward for World Model Training.pdf)
+
+### 一、论文元数据
+
+- **标题：** Curiosity-Critic: Cumulative Prediction Error Improvement as a Tractable Intrinsic Reward for World Model Training
+- **核心机构：** University of Toronto
+- **一句话本质：** 这篇论文围绕环境动力学建模提出 **Curiosity-Critic**，核心是把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。用于提升 世界模型 场景下的可靠性、效率或可评测性。
+- **标签：** 世界模型, 奖励塑形, 动态预测, 仿真评测
+
+### 二、破局点 (The Gap)
+
+- **已有共识/做法：** Local prediction-error-based curiosity rewards focus on the current transition without considering the world model's cumulative prediction error across all visited transitions.
+- **核心痛点：** 只追求视觉逼真或单步预测，难以支撑真实决策、评测和跨场景泛化。
+- **本文切入点：** 把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。
+
+### 三、核心机制 (How it works)
+
+- **输入 -> 输出：** 面向任务观测、语言/动作条件或系统状态，输出更可执行的策略、预测、评估结果或控制决策。
+- **关键模块 1：** 围绕 **Curiosity-Critic** 的主框架，把感知、表征、规划或控制过程显式组织起来，减少纯反应式策略的脆弱性。
+- **关键模块 2：** 通过实验基准、仿真/真实平台或消融分析验证关键设计对成功率、鲁棒性、效率或安全性的贡献。
+
+### 四、核心认知与发现 (Key Insights)
+
+- **从离线能力走向闭环可靠性：** 论文关注的不只是模型是否能生成答案，而是结果能否在连续决策、真实扰动或部署约束下稳定工作。
+- **显式结构仍然重要：** 记忆、物理约束、动作条件、评测协议或控制模型等结构化设计，是提升具身系统可信度的关键抓手。
+- **对后续研究的价值：** 可作为构建更安全、更可评测、更可迁移的 世界模型 系统的参考模块或基准。
+
+### 五、致命弱点与演进方向 (Critical Analysis)
+
+**🛑 核心局限 (Limitations)：**
+
+- 摘要层面通常还不足以判断跨平台、跨任务和极端长尾场景下的稳定性，真实部署价值需要进一步看实验设置与失败案例。
+- 若方法依赖特定仿真器、数据集、控制器或标注协议，迁移到开放环境时可能面临分布偏移。
+
+**⚠️ 论证瑕疵：**
+
+- 当前信息主要来自摘要，机构、完整实验细节和负结果仍需结合 PDF 正文进一步核验。
+
+**🚀 下一步高价值方向 (Next Steps)：**
+
+- 重点补读实验设计、消融实验和失败案例，判断该方法是否适合沉淀为你的 VLA / World Model / UAV 技术路线组件。
+- 若与现有项目相关，可进一步抽取数据格式、评测指标和可复现实验配置。
+---
+
+## MultiWorld: Scalable Multi-Agent Multi-View Video World Models
+
+- **arXiv**: <https://export.arxiv.org/abs/2604.18564v2>
+- **ID**: `2604.18564v2`
+- **分类**: cs.CV
+- **作者**: Haoyu Wu, Jiwen Yu, Yingtian Zou, Xihui Liu
+- **总结状态**: 已总结
+- **标签**: 世界模型, 视频生成, 动力学建模
+- **PDF**: [MultiWorld Scalable Multi-Agent Multi-View Video World Models.pdf](../pdfs/MultiWorld Scalable Multi-Agent Multi-View Video World Models.pdf)
+
+### 一、论文元数据
+
+- **标题：** MultiWorld: Scalable Multi-Agent Multi-View Video World Models
+- **核心机构：** The University of Hong Kong; Sreal AI
+- **一句话本质：** 这篇论文围绕环境动力学建模提出 **MultiWorld**，核心是把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。用于提升 世界模型 场景下的可靠性、效率或可评测性。
+- **标签：** 世界模型, 视频生成, 动力学建模
+
+### 二、破局点 (The Gap)
+
+- **已有共识/做法：** Video world models have achieved remarkable success in simulating environmental dynamics in response to actions by users or agents.
+- **核心痛点：** 只追求视觉逼真或单步预测，难以支撑真实决策、评测和跨场景泛化。
+- **本文切入点：** 把动作条件、物理约束、占据空间或评测协议纳入模型，使生成结果更接近可用于控制的世界表示。
+
+### 三、核心机制 (How it works)
+
+- **输入 -> 输出：** 面向任务观测、语言/动作条件或系统状态，输出更可执行的策略、预测、评估结果或控制决策。
+- **关键模块 1：** 围绕 **MultiWorld** 的主框架，把感知、表征、规划或控制过程显式组织起来，减少纯反应式策略的脆弱性。
+- **关键模块 2：** 通过实验基准、仿真/真实平台或消融分析验证关键设计对成功率、鲁棒性、效率或安全性的贡献。
+
+### 四、核心认知与发现 (Key Insights)
+
+- **从离线能力走向闭环可靠性：** 论文关注的不只是模型是否能生成答案，而是结果能否在连续决策、真实扰动或部署约束下稳定工作。
+- **显式结构仍然重要：** 记忆、物理约束、动作条件、评测协议或控制模型等结构化设计，是提升具身系统可信度的关键抓手。
+- **对后续研究的价值：** 可作为构建更安全、更可评测、更可迁移的 世界模型 系统的参考模块或基准。
+
+### 五、致命弱点与演进方向 (Critical Analysis)
+
+**🛑 核心局限 (Limitations)：**
+
+- 摘要层面通常还不足以判断跨平台、跨任务和极端长尾场景下的稳定性，真实部署价值需要进一步看实验设置与失败案例。
+- 若方法依赖特定仿真器、数据集、控制器或标注协议，迁移到开放环境时可能面临分布偏移。
+
+**⚠️ 论证瑕疵：**
+
+- 当前信息主要来自摘要，机构、完整实验细节和负结果仍需结合 PDF 正文进一步核验。
+
+**🚀 下一步高价值方向 (Next Steps)：**
+
+- 重点补读实验设计、消融实验和失败案例，判断该方法是否适合沉淀为你的 VLA / World Model / UAV 技术路线组件。
+- 若与现有项目相关，可进一步抽取数据格式、评测指标和可复现实验配置。
+---
+

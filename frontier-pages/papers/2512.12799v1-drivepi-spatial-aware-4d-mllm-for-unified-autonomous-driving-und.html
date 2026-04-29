@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.12799v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶模型分为两大范式：VA模型 (Vision-Action) 精于空间感知但无法语言交互；VLA模型 (Vision-Language-Action) 可交互但缺乏精细3D感知，安全性低。</li><li>核心痛点： 现有VLA模型无法直接生成精细化的3D感知与预测结果 (如3D栅格占用)，导致其可解释性和安全性受损。</li><li>本文切入点： 直觉上，不应将VA和VLA视为互斥范式。作者通过设计一个能并行输出粗粒度语言理解和细粒度空间预测的统一模型，打破了两者之间的壁垒。</li></ul></section><section><h3>Key Insights</h3><ul><li>[协同增益]： 粗粒度的语言理解任务与细粒度的视觉感知任务在联合训练中存在正向增益。语言描述为视觉特征提供了语义锚点，反过来提升了模型在3D占用、流预测等任务上的精度。</li><li>[多模态增强]： MLLM的空间推理能力可通过引入原生3D传感器数据（激光雷达）得到显著激发。相比于仅从2D图像中推断3D，直接输入精确的几何信息能更有效地解锁 MLLM 在自动驾驶场景下的空间感知潜力。</li><li>[架构统一可行性]： 一个单一、统一的VLA模型，可以在不牺牲语言交互能力的前提下，达到甚至超越多个高度优化的专用模型（如纯感知、纯规划模型）的性能。这证明了通用大模型在自动驾驶领域实现“一专多能”是完全可行的。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态多任务优化： 研究自适应损失平衡算法，让模型在训练中根据任务难度或梯度冲突动态调整各任务的权重，以寻求更优的帕累托前沿。</li><li>闭环仿真与世界模型： 将 DrivePI 部署到闭环仿真环境中，利用强化学习对其规划和决策能力进行在线微调，检验其在真实交互中的泛化与纠错能力，这是迈向实际应用的关键一步。</li></ul></section>
       <section>

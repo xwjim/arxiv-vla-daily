@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.13626v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型在标准化的机器人操作基准测试上取得了近乎完美的成功率。</li><li>核心痛点： 高分掩盖了模型在真实世界变化（如视角、光照）下的脆弱性，现有评估方法无法衡量其鲁棒性。</li><li>本文切入点： 作者的直觉是高分可能源于对特定训练数据的过拟合，而非真正的多模态理解。他们通过对输入进行系统性、多维度、可控的扰动来量化模型的真实泛化能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>[语言理解的伪装]： VLA模型并未真正理解语言。它们对语言指令的改写表现出“鲁棒性”，其根本原因是它们在大多数情况下直接忽略了语言输入，退化为依赖视觉模式记忆的视觉-动作（VA）模型。</li><li>[视觉理解的捷径]： 模型的视觉能力是基于“位置记忆”而非“语义理解”。它们能忽略无关的干扰物体，但只要目标物体的位置或姿态改变，性能就会崩溃，证明其学到的是固定的视觉-动作映射，而非通用的物体识别与操作能力。</li><li>[泛化能力的非分解性]： 模型的脆弱性是耦合且非线性的。多种扰动同时出现时，性能下降远超各单一扰动效果之和（呈现负向组合泛化差距），说明当前模型无法解耦和独立处理来自不同维度的变化。</li></ul></section><section><h3>Next Steps</h3><ul><li>[解耦表征学习] 如何设计模型架构（如引入模块化网络或因果表征），使其能学习到解耦的、对不同扰动因子不变的特征，从而打破“负向组合泛化差距”？</li><li>[主动鲁棒性训练] 能否从“被动评估”走向“主动增强”？例如，在训练中引入一个对抗性扰动生成器 (Adversarial Perturbation Generator)，动态地创造出能使模型最快失败的场景，进行在线强化训练。</li></ul></section>
       <section>

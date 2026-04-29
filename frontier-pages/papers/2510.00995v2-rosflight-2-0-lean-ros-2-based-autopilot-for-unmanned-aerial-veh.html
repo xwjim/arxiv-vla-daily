@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.00995v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用功能全面但复杂的开源飞控（如 PX4, ArduPilot）进行无人机研发。</li><li>核心痛点： 现有飞控系统是“黑箱”，代码库庞大、学习曲线陡峭，导致研究人员难以修改底层算法或快速验证新想法。</li><li>本文切入点： 作者认为“精简即是高效”。他们将飞控的核心职责拆分，仅在飞控固件 (FCU) 上保留最基础的传感器读取和执行器控制，而将所有高级控制和自主算法全部移至算力更强、更易于开发的上位机 (Companion Computer)。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构解耦]：</li><li>飞控的“大脑”可以与“身体”分离。将控制算法从资源受限的嵌入式微控制器 (FCU) 中解放出来，放到算力充裕的 Linux 上位机，能极大地加速复杂算法（如神经网络控制）的开发和迭代。实验证明，通过高速串口，这种分离式架构依然能实现 400 Hz 的高频闭环控制。</li><li>[控制抽象]：</li><li>通过“混控矩阵” M 可以将飞行器的物理几何形态与控制算法解耦。研究人员无需关心底层电机如何分配动力，只需专注于设计输出期望力/力矩的控制器。这使得为异构飞行器（如 eVTOL）设计控制器变得异常简单，只需提供一个新的 M 矩阵即可。</li><li>[虚实一致]：</li></ul></section><section><h3>Next Steps</h3><ul><li>混合控制的安全性验证： 当安全员和上位机分别控制部分自由度时（例如，安全员控制姿态，AI 控制油门），如何形式化地验证这种“混合控制权”的安全性，确保在任何切换或组合下都不会发生灾难性故障。</li><li>探索高带宽无线链路： 用低延迟、高可靠的无线数据链取代物理串口连接。这将彻底解放飞行器的物理束缚，为更复杂的分布式控制、集群协同等前沿研究铺平道路。</li></ul></section>
       <section>

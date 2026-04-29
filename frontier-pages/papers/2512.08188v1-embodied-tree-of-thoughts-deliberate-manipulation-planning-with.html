@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08188v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用视觉语言模型 (VLM) 生成规划，或用视频生成模型作为世界模型来预测未来。</li><li>核心痛点： 视频生成模型缺乏严格的 物理约束，在长程任务中会产生 物理幻觉 (如穿模、不稳定的放置)，导致规划失败。</li><li>本文切入点： 直觉上，与其用“会幻想”的视频模型，不如用一个 严格遵守物理定律的仿真器 作为世界模型。作者将这个想法与 思维树 (Tree of Thoughts) 结合，让 VLM 在仿真器中“思考”和“试错”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[世界模型]： 物理仿真器 作为世界模型，其核心优势在于提供了 严格的物理一致性。它能有效杜绝视频生成模型在长程、接触丰富的任务中产生的“物理幻觉”，是实现可靠复杂规划的基石。</li><li>[规划结构]： 机器人规划的本质是一个 探索与修正 的过程，而非线性推理。“先验分支（探索）+ 反思分支（修正）” 的树状搜索结构，远比单一的思维链 (Chain-of-Thought) 更能应对现实世界的多样性和不确定性。</li><li>[失败价值]： 失败不是终点，而是宝贵信息。通过 “模拟-失败-诊断-纠正” 的闭环，系统能将高阶的语言推理与底层的物理反馈相结合，从而发现那些仅靠静态观察无法预见的 隐性物理约束（如支撑不稳、空间不足）。</li></ul></section><section><h3>Next Steps</h3><ul><li>扩展技能库与连续控制： 探索如何将该框架与 技能学习 (Skill Learning) 相结合，让机器人能自主学习新的动作原语，甚至生成连续的运动轨迹，摆脱离散动作集的束缚。</li><li>在线物理参数自适应： 研究如何让世界模型（仿真器）在与真实世界交互的过程中，在线估计和调整物体的物理参数（如质量、摩擦系数），从而缩小 Sim2Real 差距，提升规划的鲁棒性。</li></ul></section>
       <section>

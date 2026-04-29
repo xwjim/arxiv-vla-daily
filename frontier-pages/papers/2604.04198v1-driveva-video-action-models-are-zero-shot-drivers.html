@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.04198v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的世界模型通常将场景预测（生成视频）和动作规划（生成轨迹）作为两个独立或松散耦合的模块。</li><li>核心痛点： 规划与感知不一致。模型“想象”的未来世界与其“规划”的驾驶行为脱节，导致在未见场景中泛化能力差，决策不可靠。</li><li>本文切入点： 直觉上，强大的视频生成大模型（如Sora）已内隐了丰富的物理世界动态规律。作者将此先验知识迁移至自动驾驶，将动作视为视频生成的内在约束，从而打破僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[泛化能力来源]： 自动驾驶的零样本泛化能力主要源于预训练视频模型带来的时空动态先验（世界如何运动），而非传统VLA模型从静态图文对中学习的语义知识（物体是什么）。这是一种范式级的转变。</li><li>[视频监督作用]： 视频生成并非规划任务的辅助，而是其核心驱动力。只有当动作规划被强制与“想象”的未来视频在生成层面保持一致时，规划性能才能从密集的视频监督信号中真正受益。</li><li>[规划-感知对齐]： 将动作序列和未来视频置于同一个隐空间生成过程中，能实现比分离式或级联式模型更紧密的规划-感知对齐。这种“生成即规划”的强耦合是保证轨迹与场景演化一致性的根本机制。</li></ul></section><section><h3>Next Steps</h3><ul><li>[可控的反事实推理]： 探索可交互、可控的未来生成。不仅仅是预测一种最可能的未来，而是能根据不同的反事实假设（“如果我选择强行变道会怎样？”）生成多种不同的未来视频与动作，以支持更复杂的决策推理和风险评估。</li><li>[显式因果结构建模]： 将模型隐式学到的物理先验显式化为因果图或结构化表征。这不仅能提升模型的可解释性（为何如此规划），还能在面对未见过的长尾场景时，通过因果推理而非模式匹配，做出更鲁棒的决策。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.09092v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法采用“先检测后跟踪”或“联合检测与跟踪”范式，但对小目标处理能力有限。</li><li>核心痛点： 无人机目标通常尺寸小、背景复杂、频繁遮挡，导致现有方法检测精度低、ID 切换频繁和轨迹断裂。</li><li>本文切入点： 直觉上，全局视角负责发现新目标和感知全局态势，局部视角则能精细化识别已知目标。作者通过动态切换全局与局部检测模式，实现了优势互补。</li></ul></section><section><h3>Key Insights</h3><ul><li>[检测层面]： 对于弱纹理的小目标，运动信息比外观信息更具判别力。</li><li>论文中的 STFF 模块通过融合时序特征，性能远超仅依赖单帧外观的检测器。这表明，在像素信息稀疏时，目标在时间维度上的位移变化是更可靠的检测线索。</li><li>[系统设计层面]： 单一尺度的感知存在固有瓶颈，动态的多尺度策略是出路。</li><li>纯全局检测易漏掉小目标，纯局部检测会丢失全局视野。GL-DT 的成功证明，在全局感知（发现新威胁）和局部专注（确认已知威胁）之间自适应切换，是解决复杂场景下多目标跟踪问题的有效架构。</li><li>[数据关联层面]： 目标身份的一致性源于多维度的状态相似性，而非单一几何重叠。</li></ul></section><section><h3>Next Steps</h3><ul><li>[智能调度策略] 将当前基于规则的全局-局部切换机制，升级为基于强化学习的智能调度器。让智能体根据当前跟踪状态（如目标数量、速度、置信度等）自主学习最优的切换策略，以最大化长期跟踪收益（如 HOTA 分数）。</li><li>[从 2D 到 3D 状态感知] 当前框架输出的是 2D 边界框。一个极具价值的演进方向是，利用 STFF 模块提取的丰富运动特征，直接回归或预测无人机的 3D 姿态和速度矢量，为真正的“感知与规避”系统提供更关键的决策信息。</li></ul></section>
       <section>

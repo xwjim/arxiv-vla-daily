@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.11586v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的 LiDAR 目标检测与跟踪算法，严重依赖于每个目标提供 数十甚至上百个 点云才能稳定工作。</li><li>核心痛点： 新型固态 LiDAR 的 非重复扫描模式 导致对小型无人机的探测点云 极端稀疏 (每帧仅 1-2 个点)，传统方法直接失效。</li><li>本文切入点： 作者的直觉是，单个点云帧虽然信息不足，但如果将这些稀疏的点在 时间维度上串联，其 运动的连续性和物理合理性 本身就是一种强有力的信号，足以将目标从随机噪声中分离出来。</li></ul></section><section><h3>Key Insights</h3><ul><li>[检测的本质]： 在 极端稀疏 条件下，检测的瓶颈不再是空间特征的提取，而是 时间维度的信息挖掘。本文证明，时序一致性 是比空间几何形状更可靠、更本质的特征。</li><li>[关联的权衡]： 面对模糊的、稀疏的观测数据，确定性关联（如 匈牙利算法）追求瞬时最优匹配，容易在轨迹交叉时 犯下不可逆的身份交换错误。而 概率数据关联 (JPDA) 通过考虑所有可能的匹配，牺牲了微小的定位精度，却换来了 64% 的 身份交换减少，这对于多智能体协同至关重要。</li><li>[系统的耦合]： 检测器与跟踪器之间存在深刻的耦合关系。一个 高召回率 (Recall-biased) 的检测器，即使产生更多不确定性，反而能为 JPDA 这样的概率跟踪器提供更丰富的“证据”，从而 放大其在保持身份一致性上的优势。这颠覆了“输入精度越高越好”的传统认知。</li></ul></section><section><h3>Next Steps</h3><ul><li>[真实世界的多目标验证] 如何在近距离（&lt;2m）交互的真实多无人机场景中，获得 高精度、带身份的真值？这是一个开放的工程难题，或许可以探索 UWB 或 机载运动捕捉系统 来解决，从而真正验证 JPDA 在真实物理干扰下的鲁棒性。</li><li>[可扩展的概率关联] 如何将 JPDA 的 身份保持 优势扩展到无人机蜂群？研究 JIPDA 等近似算法或开发基于学习的、能处理稀疏输入的 数据关联模型，将是解锁大规模应用的关键。</li></ul></section>
       <section>

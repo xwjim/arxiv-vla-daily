@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.01581v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用推测解码 (Speculative Decoding, SD) 技术来加速视觉-语言-动作 (VLA) 大模型的推理速度。</li><li>核心痛点： 朴素的推测解码一旦出错，就需要代价高昂的重推理来纠正，且其容错阈值难以设定，通常是固定的，无法适应动态任务。</li><li>本文切入点： 作者洞察到，AI模型的Token域预测错误代价高，而传统机器人控制的运动学域预测代价极低。他们利用这种“范式差异”，让低成本的运动学预测来补偿和校正高成本的AI预测错误。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式鸿沟]： 机器人控制的 Token 域 (VLA) 和 运动学域 (经典控制) 存在本质差异。AI 的 Token 预测错误代价高昂（需重推理），而运动学预测的物理误差代价低且可控，两者结合能形成高效的纠错系统。</li><li>[误差度量]： 运动学可变性 (Kinematic Variability) 比抽象的 Token ID 差异更能有效衡量一个动作序列的物理合理性。一个微小的 Token 错误可能导致剧烈的、不稳定的物理动作，这为动态调整容错策略提供了物理世界的锚点。</li><li>[计算架构]： VLA 模型的复杂语义推理与运动学的轻量逻辑计算可以完全解耦。将前者（大模型）置于 GPU，后者（KF 和阈值逻辑）置于 CPU，能实现更优的系统级异构计算加速。</li></ul></section><section><h3>Next Steps</h3><ul><li>[更强的运动预测器]</li><li>用一个轻量级的学习型运动预测模型（如小型RNN/Transformer）替代卡尔曼滤波器。这能更好地捕捉非线性动作规律，提升补偿机制在复杂任务中的准确性。</li><li>[从“事后补偿”到“事前引导”]</li><li>将运动学约束作为一种偏差（Bias）或提示（Prompt）融入草稿模型的生成过程中。从源头就减少不符合物理规律的 Token 产生，而非等待错误发生后再进行补偿。</li></ul></section>
       <section>

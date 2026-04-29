@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.10642v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人策略学习主要依赖 VLM 的语义理解 或 生成模型的动态预测 这两条独立的技术路线。</li><li>核心痛点： 单纯依赖 VLM 在小规模机器人数据上微调易丧失预训练能力；单纯依赖视觉生成模型则缺乏高级语义对齐。</li><li>本文切入点： 作者的直觉是，语义理解和动态预测对机器人同等重要，不应割裂。他们通过一个统一框架将两者结合，让模型既能理解指令，又能预见未来。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表示空间]： 预测 连续的高维视觉特征 (如 SigLIP 特征) 比预测离散的 VQ-Token 或原始像素，能为动作生成提供 更有效、更丰富的动态信息。这说明对机器人而言，抽象的、连续的未来画面“草稿”比精确的像素点更有价值。</li><li>[训练范式]： 将 语言理解 (VQA) 和 视觉预测 任务在互联网数据上联合预训练，能为下游机器人任务提供一个 更优的初始化。这尤其能加速 预测模块的收敛，证明了“先看懂世界、再学预测”的有效性。</li><li>[特征对齐]： 视觉预测模块所用的 特征空间 必须与 VLM 主干的特征空间 高度对齐。实验证明，使用 VLM 原生视觉编码器 (SigLIP) 的特征进行预测，效果远好于使用非对齐的编码器 (DINOv3)，揭示了多模态模型内部特征一致性的重要性。</li></ul></section><section><h3>Next Steps</h3><ul><li>从确定性未来预测走向概率性未来预测： 使用 CVAE 或扩散模型来预测未来视觉特征的 分布，而不是单一结果，以应对任务的多模态可能性和不确定性。</li><li>预测更本质的物理表征： 将预测目标从 视觉特征 延伸到 物理属性或可供性 (Affordance) 特征。直接预测场景中物体的物理状态（如位置、姿态）或交互可能性，可能比预测视觉表征更贴近决策本质。</li></ul></section>
       <section>

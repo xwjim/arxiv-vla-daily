@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.04731v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过扩大模型规模和原始交互数据（即端到端强化学习）来训练智能体。</li><li>核心痛点： 在足球等多智能体长时程任务中，成功策略的动作序列极度稀疏（任务稀疏性 Task Sparsity），导致随机探索几乎不可能成功。</li><li>本文切入点： 将任务分解的负担从智能体转移到环境本身。通过分析2024年机器人足球研究趋势，发现混合、层级化方法是主流，作者将其形式化并引入LLM使其动态化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[问题重定义]： 复杂多智能体学习的核心障碍并非简单的奖励稀疏 (Reward Sparsity)，而是更根本的任务稀疏 (Task Sparsity)。这意味着成功策略在整个行为空间中的密度趋近于零，暴力探索注定失败。</li><li>[世界模型重定义]： 一个有效的决策世界模型，不仅要模拟物理规律，更要模拟任务语义 (Task Semantics)。本文主张将任务结构本身作为世界模型的一部分，以指导策略学习。</li><li>[环境角色转变]： 环境不应只是一个被动的评估平台，而应成为一个主动的、结构化的“教学脚手架”。通过逐步移除（fading）这种外部脚手架，迫使智能体内化 (internalize) 层级化推理能力，而非简单地依赖它。</li></ul></section><section><h3>Next Steps</h3><ul><li>[脚手架的自动学习与发现]：研究如何让智能体自主学习和构建任务的层级结构，而不是完全依赖外部给予。例如，通过识别探索过程中的“瓶颈状态”来自动切分出子任务。</li><li>[脚手架褪去 (Scaffold Fading) 策略]：系统性地研究如何以及何时移除环境提供的脚手架，以确保智能体能真正“内化”策略，而非对引导产生“过拟合”。这使得智能体在没有脚手架的“扁平”环境中依然能表现出色。</li></ul></section>
       <section>

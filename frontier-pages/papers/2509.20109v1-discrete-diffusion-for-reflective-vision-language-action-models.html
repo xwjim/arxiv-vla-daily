@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.20109v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端（E2E）的模仿学习是自动驾驶的主流范式，但无法内在地保证安全合规。</li><li>核心痛点： 现有安全保障方法或依赖复杂的后处理规则，或局限于仿真环境的强化学习，或需要高计算成本的梯度引导。</li><li>本文切入点： 将连续的驾驶轨迹离散化为Token序列。这使得安全约束问题从一个复杂的连续优化问题，转变为一个高效的离散搜索和修复问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转换]： 动作空间的离散化是实现可验证安全的关键。它将遵守物理规则的难题，从“学习”问题降维为“搜索”问题，允许高效地注入硬性约束。</li><li>[模型能力]： 离散扩散模型的修复 (Inpainting) 能力是其核心优势。它允许在修正局部错误（不安全点）后，模型能自动“脑补”出全局连贯的轨迹，优雅地实现了局部修正与全局一致性的统一。</li><li>[系统解耦]： “反思”机制将“生成-验证-修正”解耦成一个迭代循环。模型负责生成“可能性”，外部评估器负责提供“确定性”，实现了数据驱动的模仿学习与规则驱动的安全保证之间的有效对话。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态自适应编码簿 (Adaptive Codebook)： 研究动态调整轨迹编码簿的分辨率。例如，在车辆近场和关键交互区域使用高分辨率，在远场使用低分辨率，以实现精度和效率的更优平衡。</li><li>学习安全评估器 (Learning the Scorer)： 将当前基于规则的安全评估器，替换为一个可学习的、基于数据驱动的风险预测模型。这能让系统更好地泛化到复杂和未知的交通场景，减少对人工规则的依赖。</li></ul></section>
       <section>

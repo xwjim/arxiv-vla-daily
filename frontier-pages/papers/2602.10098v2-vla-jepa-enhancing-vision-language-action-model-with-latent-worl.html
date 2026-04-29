@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10098v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在大规模视频数据上预训练 VLA 模型，通常做法是让模型学习一个「潜在动作」，即压缩前后两帧图像的 像素差异。</li><li>核心痛点： 以往方法学习的是 表观变化，而非 动作语义。模型极易被光照、背景、镜头移动等无关紧要的视觉噪声干扰，且常因「信息泄漏」学到无意义的捷径。</li><li>本文切入点： 灵感源于 JEPA 架构。作者认为，与其预测混乱的未来像素，不如去预测未来那个 高度抽象、干净的「概念」表征，并严格杜绝未来信息作为输入，从而倒逼模型学习真正的动态规律。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征学习]： 预测「抽象概念」远胜于重建「具体像素」</li><li>在潜在空间中做预测，天然地滤除了光照、纹理等高频但与任务无关的噪声。这使得模型学到的 动态表征 对视觉环境变化（如背景、光线扰动）更加鲁棒，本质上是学会了「什么东西在变」的核心语义。</li><li>[因果推理]： 「信息泄漏」是学习真实动态的最大敌人</li><li>许多模型在训练时，会将未来帧信息作为输入的一部分，这会导致模型学会「抄答案」（直接编码未来），而非「学推理」（预测未来）。本文的 无泄漏设计 强制模型必须根据当前状态进行 因果推断，从而学到有意义的 状态转移函数。</li><li>[数据利用]： 人类视频的核心价值在于提供「行为先验」，而非「物理动力学」</li></ul></section><section><h3>Next Steps</h3><ul><li>[在线自适应]</li><li>利用学到的潜在世界模型进行 「想象」和在线规划。在机器人执行任务前，先在潜在空间中模拟多个动作序列的可能结果，选择最优路径，甚至在真实执行出错时，利用模型进行 快速的在线自我修正。</li><li>[多模态动态融合]</li><li>将 物理参数（如力、触觉）或声音信息 融入到潜在状态的预测中。这能让世界模型超越纯视觉的局限，构建一个对世界更完整、更符合物理规律的内在理解。</li></ul></section>
       <section>

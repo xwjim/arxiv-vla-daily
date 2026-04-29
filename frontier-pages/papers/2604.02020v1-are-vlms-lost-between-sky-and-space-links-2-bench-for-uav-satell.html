@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.02020v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 已有基准要么只评估孤立的无人机视频，要么只评估静态的卫星-地面跨视图像。</li><li>核心痛点： 缺乏一个能评测模型“动态局部感知”（无人机）与“宏观全局地图”（卫星）之间实时映射与推理能力的工具。</li><li>本文切入点： 直觉上，要让模型学会这项复杂技能，必须先创造一个能精确衡量它的“靶场”。作者因此构建了 LinkS$^2$Bench，将动态视频与静态大地图强行关联。</li></ul></section><section><h3>Key Insights</h3><ul><li>[瓶颈识别]： 现有 VLM 的核心障碍是 “跨视动态失准” (cross-view dynamic misalignment)。模型无法在无人机移动时，持续、准确地将其局部视野与静态的卫星全局地图对应起来，这是所有后续高级推理任务失败的根源。</li><li>[对齐原则]： 显式的空间对齐建模是必需的。仅仅依靠通用 VLM 的隐式能力不足以解决该问题。通过 CVAA 适配器证明，专门设计用于增强跨视角对齐的模块能显著提升性能，说明“大力出奇迹”的暴力缩放策略在此处可能失效。</li><li>[数据价值]： 高质量、结构化的专业数据是“教会”模型复杂技能的关键。实验证明，在 LinkS$^2$Bench 上进行监督微调能大幅提升模型性能，表明该数据集不仅是“考官”，更是宝贵的“教练”，其蕴含的结构化知识能有效引导模型学习复杂的时空推理。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线跨视定位与追踪 (Online Cross-View Localization)： 从回答离线问题，演进到开发能够实时、连续估计无人机在卫星地图上6-DoF位姿的模型。这要求模型具备时序记忆和连续状态更新能力，是实现真自主导航的基础。</li><li>统一4D时空表征 (Unified 4D Spatiotemporal Representation)： 放弃将视频和图像作为分离输入的范式，探索构建一个统一的、可融合动态与静态信息的四维（3D空间+时间）世界模型。这能让模型从“看图说话”升级为对物理世界进行因果推断和未来预测。</li></ul></section>
       <section>

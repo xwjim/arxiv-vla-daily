@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07484v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端的视觉-语言-动作 (VLA) 模型，将原始图像和指令直接映射到机器人动作。</li><li>核心痛点： 在高密度杂乱场景中，模型会产生“注意力稀释”，大量无关物体干扰了对核心目标的理解和定位，导致性能急剧下降。</li><li>本文切入点： 模仿人类“先观察规划，再聚焦执行”的认知模式。与其让一个模型处理所有事，不如将其解耦：用一个“大脑”负责剔除无关信息，再让一个“小脑”在简化后的场景中精准执行。</li></ul></section><section><h3>Key Insights</h3><ul><li>[瓶颈反转]： 机器人操作在复杂场景下的核心瓶颈，并非控制不够准，而是感知被干扰。通过主动进行场景清理 (Scene-Clearing)，将感知问题简化，控制的成功率就能得到数量级的提升（高密度下从 34.3% -&gt; 86.7%）。</li><li>[动态一致性]： 成功的长时任务不仅需要初始的场景简化，更需要动态、实时的场景更新。实验证明，在交互导致场景变化后，“动态更新掩码”的策略远胜于“静态掩码”或“无掩码”，这是避免错误累积的关键。</li><li>[训练-部署对齐]： 成功的关键在于“所见即所练”。通过在离线训练数据上应用与部署时完全相同的掩码生成流程，确保了策略模型在训练和执行时面对的是同分布的、被简化过的视觉输入，这是实现模型鲁棒性的重要保障。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端掩码学习]： 将掩码生成与底层策略进行联合端到端训练，让系统自主学会“应该忽略什么”，而不是依赖一个固定的、外部的 VLM，从而提升整体协同性与效率。</li><li>[多模态场景表征]： 抛弃像素级的 2D 掩码，探索更高效的中间表征，如3D 几何图元或神经场 (NeRF)。这不仅能更好地处理遮挡，还能为底层策略提供更丰富的空间信息。</li></ul></section>
       <section>

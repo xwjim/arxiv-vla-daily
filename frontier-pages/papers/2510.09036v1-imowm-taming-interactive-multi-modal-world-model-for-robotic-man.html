@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.09036v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流世界模型主要基于 RGB 视频 进行未来预测，缺乏对三维空间的理解。</li><li>核心痛点： 纯视觉模型缺少几何与空间推理能力，这对于物理世界的机器人操作至关重要。</li><li>本文切入点： 引入一个统一的多模态编码器 (MMTokenizer)，将高成本的3D信息（深度、掩码）高效压缩进Token流，解决了多模态带来的计算爆炸问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[协同增强效应]： 增加 深度图 和 机械臂掩码 不仅提升了模型对3D几何的预测精度，反过来也显著改善了未来 RGB 图像的生成质量。这表明，显式的几何与动态注意力信息为模型提供了物理约束，使其幻想出的未来更真实。</li><li>[表征统一效率]： MMTokenizer 证明了将不同物理含义和数据分布的模态（RGB、Depth、Mask）统一到同一个离散 Token 空间是高效且可行的。这避免了复杂的跨模态融合设计，为构建可扩展、高效率的多模态世界模型提供了一个简洁的架构范式。</li><li>[模拟器价值]： 高保真的多模态世界模型可作为强大的 数据增强引擎 和 RL 模拟器。实验证明，基于 iMoWM 生成的“想象”数据训练的策略，其性能几乎可以媲美使用真实数据训练的策略，这直接验证了提升世界模型的物理真实感是通向更优机器人策略的关键路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端生成] 探索能从 纯 RGB 输入 中隐式学习并生成多模态特征（如深度）的世界模型，摆脱对外部感知模块的依赖，构建更自洽的系统。</li><li>[语言指令融合] 将当前的 动作条件 扩展为 自然语言指令条件。让世界模型能够根据“把A放到B上”这类抽象指令来推演未来，从而实现更高级别的任务规划。</li></ul></section>
       <section>

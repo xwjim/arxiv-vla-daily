@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.25261v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用多智能体强化学习（MADRL）来联合优化无人机轨迹、资源分配等，以解决移动众包（MCS）问题。</li><li>核心痛点： 传统 MADRL 算法中的 MLP 网络难以高效捕捉复杂动态环境下的状态-动作关系，导致决策非最优。</li><li>本文切入点： 直觉上，新出现的 Kolmogorov-Arnold Networks (KAN) 比 MLP 更擅长用更少参数拟合复杂函数。作者押注用 KAN 替换 MLP，可以更精准、高效地为智能体（无人机/用户）建模决策过程。</li></ul></section><section><h3>Key Insights</h3><ul><li>[网络结构有效性]： 在多智能体决策中，用 KAN 网络替代 MLP 作为策略生成器，能显著提升学习效率和最终性能。这证明了 KAN 的函数逼近能力优势，在解决复杂的强化学习问题上比传统 MLP 更有潜力。</li><li>[系统瓶颈转移]： 简单增加无人机数量或其计算频率，系统性能（数据处理量）的提升会快速饱和。这揭示了系统的瓶颈会从计算资源动态转移到通信带宽上，印证了联合优化的必要性。</li><li>[问题降维可行性]： 通过数学推导，可以将部分决策变量（如用户的本地计算频率）求出解析解（Closed-form expression）。这能有效降低强化学习需要探索的动作空间维度，是加速模型收敛、提升训练稳定性的一个高效技巧。</li></ul></section><section><h3>Next Steps</h3><ul><li>利用 KAN 的可解释性： 深入分析 KAN 网络学到的激活函数形状，尝试解释无人机在特定状态下做出决策（如改变高度、分配带宽）的内在物理逻辑，真正打开强化学习的“黑箱”。</li><li>多目标强化学习： 将优化目标从单一的数据处理量扩展为数据量、能耗、时延的多目标帕累托前沿，探索不同业务偏好下的最优策略，更贴近真实业务需求。</li></ul></section>
       <section>

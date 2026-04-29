@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.17573v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用单一的推测解码（草稿模型或数据库检索）来加速 VLA 模型。</li><li>核心痛点： 草稿模型有额外开销，而数据库检索的草稿质量低、分布不匹配，导致加速效果不理想。</li><li>本文切入点： 作者观察到机器人轨迹存在“粗粒度”和“细粒度”两种模式。直觉上，简单的粗粒度轨迹可以用低成本的数据库检索，而复杂的细粒度操作需要高质量的草稿模型。</li></ul></section><section><h3>Key Insights</h3><ul><li>[轨迹分段特性]： 机器人执行任务的轨迹天然地分为两种模式：高重合度的粗粒度运动（如接近物体）和低重合度的细粒度操作（如抓取）。这两种模式分别对应检索式解码和草稿式解码的最佳适用场景。</li><li>[解码策略优化]： 针对检索式解码，核心矛盾不是草稿“完全错误”，而是与模型输出“分布不完全一致”。通过序列级的宽松接受，允许单个动作 Token 有较大偏差，只要整段运动趋势正确即可接受，这极大地提高了有效加速率。</li><li>[运动学与语义对齐]： 轨迹的运动学特征（如曲率、速度）可以作为判断动作语义复杂度的有效代理指标。一个简单的物理度量（ℱ[w]）就能有效区分需要“思考”的复杂操作和可以“复用”的简单移动，实现了底层物理规律与高层决策的对齐。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端决策边界学习： 将混合边界的判断（即选择哪种 SD）作为一个可学习的决策过程，利用强化学习或元学习，让模型根据当前状态自主学习最优的解码策略，替代当前基于固定阈值的启发式规则。</li><li>多模态检索数据库： 当前的检索数据库仅基于历史动作序列。下一步可以构建一个多模态数据库，将视觉特征和语言指令也作为检索的 Key，实现更精准、更符合当前场景的轨迹片段检索。</li></ul></section>
       <section>

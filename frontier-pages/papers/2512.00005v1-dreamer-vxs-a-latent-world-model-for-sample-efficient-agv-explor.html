@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.00005v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法是使用无模型强化学习（Model-Free RL）端到端地学习导航策略。</li><li>核心痛点： 无模型方法存在致命的样本效率低下和泛化能力差的问题，需要海量真实世界交互，部署成本极高且危险。</li><li>本文切入点： 不直接学习策略，而是先学习一个环境的世界模型（World Model）。将这个模型作为高速内部模拟器，让智能体在“想象”中进行大量训练，从而解耦策略学习与真实交互。</li></ul></section><section><h3>Key Insights</h3><ul><li>学习范式： 在想象中学习是实现样本效率跃升的关键。与真实环境交互一次后，在世界模型中进行成百上千次“想象”训练，其效率远超纯粹的物理试错。这使得数据成本降低了 90%。</li><li>泛化能力： 基于模型的智能体泛化能力更强。因为它学习的是环境的抽象动态规则（如“墙不可穿越”），而非记忆特定地图的“像素-动作”对。因此，它在未见过的环境和动态障碍面前表现更鲁棒。</li><li>行为涌现： 预测性规划催生了更高级的智能行为。智能体为了降低自身世界模型的不确定性，会涌现出“主动扫描”新房间或“预判并规避”动态障碍等非直接逐利的探索行为，这是无模型方法无法实现的。</li></ul></section><section><h3>Next Steps</h3><ul><li>从仿真到物理世界的迁移 (Sim-to-Real)： 核心挑战在于如何将在模拟中训练好的世界模型，高效地迁移并适应充满噪声和延迟的真实物理机器人，解决“现实鸿沟”问题。</li><li>分层规划与长期记忆： 当前的规划视野有限。引入分层规划机制，用高层模型进行长期战略规划（例如决定先探索哪个区域），用底层模型执行具体导航，是解决大场景、长时序任务的关键。</li></ul></section>
       <section>

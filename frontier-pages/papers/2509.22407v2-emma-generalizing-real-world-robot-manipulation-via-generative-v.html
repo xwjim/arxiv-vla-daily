@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.22407v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人视觉-语言-动作 (VLA) 模型的泛化能力，强依赖于大规模、多样化的真实世界训练数据。</li><li>核心痛点： 在真实世界中采集覆盖不同物体、场景和光照的机器人操作数据，成本极高且耗时费力。</li><li>本文切入点： 与其费力采集，不如高效“创造”。作者认为，可以通过生成式模型编辑已有的真实视频，低成本地创造出视觉多样但行为逻辑一致的“新”数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据生成有效性： 高质量的生成数据是提升机器人泛化能力的关键。研究发现，只要生成视频能维持多视角一致性和几何准确性，就能作为真实数据的有效替代品，大幅提升策略在零样本视觉环境下的表现。</li><li>生成质量 &gt; 数量： 数据的“质”远比“量”重要。与以往模糊或不一致的视频生成技术相比，DreamTransfer 的成功表明，生成数据必须忠于原始物理世界的3D结构和运动逻辑，否则错误的视觉线索会误导甚至损害策略学习。</li><li>训练策略放大收益： 简单地混合真实与生成数据并非最优解。AdaMix 策略证明，通过智能地聚焦于难例进行学习，可以进一步放大生成数据带来的好处，不仅加速了模型收敛，也让最终策略的性能上限更高。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“视觉迁移”到“行为生成”： 下一个突破口在于，利用生成模型直接合成全新的、物理上可行的机器人技能与轨迹。这要求模型不仅理解视觉，更要理解物理定律和任务因果，实现从数据增强到数据创造的飞跃。</li><li>策略与生成的闭环自进化： 建立一个策略-生成器的闭环系统。让机器人在真实世界中的失败案例作为负反馈信号，直接指导生成模型（DreamTransfer）创造出更具针对性、更能暴露当前策略弱点的“魔鬼”训练数据，形成一个自我迭代、持续进化的主动学习循环。</li></ul></section>
       <section>

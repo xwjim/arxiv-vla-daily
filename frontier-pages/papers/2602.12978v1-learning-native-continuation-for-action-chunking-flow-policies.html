@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.12978v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型普遍使用 动作分块 (Action Chunking) 预测，并依赖 RTC 等推理时方法来平滑块间连接。</li><li>核心痛点： RTC 是一种 推理时“补丁”，策略本身并未学会平滑过渡，导致动作抖动和模式切换 (spurious multimodal switching)。</li><li>本文切入点： 直觉：平滑性不应是推理时的外部约束，而应是策略 内在的、学习到的 属性。因此，必须在训练中 重塑流模型的动力学，使其与推理时的引导过程完全一致。</li></ul></section><section><h3>Key Insights</h3><ul><li>[引导机制]： “一次性”的初始引导是无效的。在生成模型的去噪过程中，若不 持续、每步施加引导 (per-step guidance)，动作序列会逐渐偏离约束，无法实现真正的平滑。</li><li>[学习范式]： 动作的平滑性可以通过 重塑（reshape）动力学 的方式，从一个 外部推理约束 内化（internalize）为策略的 原生属性。这比单纯在训练数据中增加约束（如硬性前缀）更根本、更有效。</li><li>[泛化与控制]： 通过 随机化引导时间表 并将其作为 条件输入，模型不仅能泛化到不同的 推理延迟（如不同硬件），还获得了对 轨迹平滑度的可控性，实现了“一个模型，多种平滑度”的效果。</li></ul></section><section><h3>Next Steps</h3><ul><li>研究 自适应去噪步数 的 Legato 机制，让模型在推理时能根据任务需求动态调整计算量与平滑度的平衡。</li><li>将 “原生连续性”思想 从流模型推广到其他生成式策略（如扩散模型），探索其在不同动力学建模范式下的等价实现。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.14948v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶中的场景生成（预测世界如何变化）和轨迹规划（决定自己如何行动）是两个独立优化的任务。</li><li>核心痛点： 用于生成逼真视觉场景的表征，和用于做出精确驾驶决策的表征之间存在鸿沟 (Schism)，导致世界模型的预测能力无法被规划器充分利用。</li><li>本文切入点： 一个强大的直觉——能生成未来的特征，理应就是能决定未来的特征。作者认为这两个任务应该共享同一套统一的表征。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征统一的有效性]： 场景生成任务预训练出的视觉与运动联合表征，能直接作为高质量的先验知识迁移给下游的规划任务。这证明了“生成”与“规划”的底层逻辑可以、也应该被统一。</li><li>[未来预测的“蒸馏”]： 世界模型对未来的预测能力可以被蒸馏到一个轻量级模块中。这使得规划器能在不显式生成视频的情况下，依然能利用世界模型的“远见”来评估决策，完美平衡了性能与效率。</li><li>[运动控制的结构化]： 将连续、复杂的驾驶轨迹离散化为“轨迹词表 (Anchor) + 偏移量 (Residual)”的形式，是一种极其有效的运动表征方式。它既能让生成模型精确理解运动指令，也为规划器提供了结构化的、多模态的搜索空间。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线联合优化： 探索如何将规划器的反馈信号（如碰撞、舒适度等）实时用于在线微调世界模型。这将实现生成与规划的动态对齐，形成一个真正闭环的自适应系统。</li><li>开放式轨迹生成： 摆脱固定的轨迹词表，研究如何让模型直接基于视觉和语言指令从零生成（如使用扩散模型）更灵活、更符合情境的轨迹，真正实现任意行为控制。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.02700v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 高光谱成像 (HSI) 技术因其能识别物质独特的光谱特征，被认为是探测地雷的有效手段。</li><li>核心痛点： 严重缺乏公开、可复现、带有精确地面真值的无人机高光谱地雷探测数据集，阻碍了算法的开发与验证。</li><li>本文切入点： 与其提出新算法，不如先解决“没有靶场”的问题。作者通过构建并公开发布一个在真实环境中采集的高质量基准数据集，为整个领域的研究提供了标准化的测试平台。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据保真度]： 通过 经验线性法 (ELM) 校正，无人机高光谱数据在 400-900nm 范围内能实现高保真度的反射率反演 (RMSE &lt; 1.0, SAM &lt; 6°)，证明了无人机平台获取高质量光谱数据的可行性与可靠性。</li><li>[传感器性能边界]： 在近红外波段 &gt;900nm 区域，由于传感器灵敏度下降和大气水汽吸收，数据信噪比显著降低，导致反射率反演的可靠性大幅下降。这为后续算法开发划定了有效的光谱应用范围。</li><li>[多模态融合潜力]： 该高光谱数据集与同一场地的电磁感应 (EMI) 数据集在空间上共存且有精确真值，为研究光学与电磁数据融合以提升探测鲁棒性（例如，区分金属地雷与非金属地雷）提供了前所未有的基准。</li></ul></section><section><h3>Next Steps</h3><ul><li>多模态融合检测： 开发基于高光谱 (HSI) 和电磁感应 (EMI) 数据的深度融合检测算法，以同时利用地物表面材质和地下金属反应，显著降低虚警率。</li><li>时间序列光谱分析： 利用该场地数据（采集于布设一年后），研究地雷/UXO因环境变化（如植被生长、土壤风化）而导致的光谱特征演变规律，开发更具鲁棒性的时序探测模型。</li></ul></section>
       <section>

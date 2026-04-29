@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.22991v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖模型内部的语义注意力或简单的时序线索来剪枝视觉令牌。</li><li>核心痛点： 模型的语义偏见导致其错误地丢弃对物理操作至关重要的几何结构（如透明把手、光滑边缘），造成动作不稳定。</li><li>本文切入点： 从被动依赖模型注意力，转向主动注入物理世界先验（几何轮廓 + 运动状态），强制模型关注物理交互本身。</li></ul></section><section><h3>Key Insights</h3><ul><li>[语义与物理的解耦]： 视觉显著性（模型关注点）与物理可操作性（affordance，如边缘、把手）是两个独立且常冲突的维度。对于机器人任务，后者远比前者关键。</li><li>[任务阶段的计算自适应]： 可通过语义-运动对齐度来量化任务的不确定性阶段。在不确定时（低对齐）需保留更多信息，在锁定目标后（高对齐）可大幅压缩计算，这是一种高效的计算资源分配策略。</li><li>[免训练校正的有效性]： 无需重新训练，仅通过注入简单的外部物理先验（如几何边缘），就能有效纠正大模型在特定任务（物理操作）中的固有偏见，证明了外部知识引导的巨大价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>从硬编码到可学习的物理先验： 将简单的边缘检测升级为轻量级、可学习的 affordance（可操作性）预测网络，以适应更复杂的物体材质和形态。</li><li>发展自适应剪枝率： 将二元（保守/激进）切换策略，演进为由一个小型策略网络根据实时 IoU 和任务上下文连续预测最优剪枝率的机制。</li></ul></section>
       <section>

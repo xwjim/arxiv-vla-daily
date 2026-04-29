@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.00930v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用 LLM 智能体作为模拟用户来评估推荐系统。</li><li>核心痛点： 仅靠提示词驱动的智能体无法理解行为后果，导致模拟行为与真实用户偏差大，更像是 LLM 自身偏见的投射。</li><li>本文切入点： 直觉：智能体必须先理解环境如何响应其行为（世界模型），才能通过对比反思（反事实学习）真正对齐人类。</li></ul></section><section><h3>Key Insights</h3><ul><li>[环境理解的重要性]： 让 LLM 智能体先学习环境的动态变化（世界模型），比单纯模仿行为（行为克隆）更能让其做出符合逻辑、有远见的决策。这证明了对“世界规则”的内化是实现高级智能行为的基础。</li><li>[对齐机制的本质]： 有效的对齐并非来自对正确行为的模仿，而是来自对「错误行为为何是错的」的深刻反思。通过对比反事实轨迹，智能体学到的是可泛化的决策原则，而非孤立的动作。</li><li>[画像与行为的一致性]： 通过在反思环节中明确质问「为何该行为更符合用户画像」，可以显著增强智能体行为与其中长期偏好的一致性，解决了传统方法中画像仅作为“背景板”的问题。</li></ul></section><section><h3>Next Steps</h3><ul><li>[多模态世界模型] 将视觉信息（如页面截图）融入世界模型，让智能体理解 UI 布局和视觉元素，构建更真实的环境认知。</li><li>[主动探索与学习] 赋予智能体「好奇心」，主动探索人类数据未覆盖的区域，以增强世界模型的完备性和策略的泛化能力，减少对人类示範的过度依赖。</li></ul></section>
       <section>

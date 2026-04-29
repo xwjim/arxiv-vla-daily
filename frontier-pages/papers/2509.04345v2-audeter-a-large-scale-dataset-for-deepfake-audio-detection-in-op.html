@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.04345v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在现有数据集上，将真伪音频检测视为一个封闭世界的二元分类问题进行训练。</li><li>核心痛点： 模型对训练集中未见过的新型伪造方法和多样化真人语音泛化能力极差。</li><li>本文切入点： 直觉认为，问题的根源是数据覆盖度不足和训练范式缺陷。作者通过构建一个系统性、大规模、多样化的数据集，并观察到朴素训练会引发负迁移，从而找到了新的解法。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据多样性的关键性：</li><li>训练数据的系统性多样性（同时覆盖多种真实语音和多种合成技术）是提升检测模型开放世界泛化能力的决定性因素，其重要性远超单纯增加数据量。在 AUDETER 上训练的模型，跨域性能获得巨大提升（EER 相对下降 74.9%）。</li><li>多样化训练的“负迁移”效应：</li><li>当训练数据包含高度多样的伪造模式时，标准的二元分类训练会引发负迁移。</li><li>部分具有强合成指纹的系统（如 SparkTTS, BigVGAN）会主导训练信号，使模型过拟合到这些“明显”的假特征上，从而损害其对其他更隐蔽伪造系统的泛化能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>[方向 1] 超越二元分类的表征学习：</li><li>既然负迁移是核心障碍，未来的研究应探索能显式建模不同伪造来源的训练范式，如将检测视为细粒度的多任务学习或异常检测问题，从根本上解耦和消除“有害”指纹的影响。</li><li>[方向 2] 伪造音频的“归因溯源”：</li><li>AUDETER 的精细结构（真实源-生成器-伪造品的一一对应）为伪造音频溯源提供了绝佳的训练场。下一步不仅要判断“真假”，更要回答“是谁伪造的”，即识别出伪造音频由哪种具体模型生成，这对追究责任至关重要。</li></ul></section>
       <section>

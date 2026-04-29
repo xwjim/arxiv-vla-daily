@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08478v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 3DGS (3D Gaussian Splatting) 渲染效果好、速度快，但依赖特定桌面软件或游戏引擎插件。</li><li>核心痛点： 现有方案部署摩擦力巨大。桌面端太重，不易分享；Web端（基于WebGL）性能不足，无法支持动态内容和实时模型推理。</li><li>本文切入点： 放弃传统Web渲染管线，通过 WebGPU 获取GPU原生计算能力，并设计一套 标准化的ONNX模型合约，将算法与渲染彻底解耦。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构范式]： 通过 ONNX 合约 将「算法生成」与「渲染」解耦，使 3DGS 算法从定制化开发走向了 可插拔的“应用”模式。这极大地降低了新算法的部署和验证成本。</li><li>[性能瓶颈]： 现有 Web 查看器的核心瓶颈在于 CPU 排序或非全局排序，导致快速视角变化时出现伪影。将基元排序完全转移到 GPU (WebGPU) 执行，是实现浏览器内实时、高质量渲染的关键。</li><li>[应用边界]： 浏览器内的实时推理与渲染闭环，使 3DGS 平台从一个“查看器”质变为一个 “世界模型承载器” (World Model Carrier)。它为在消费级设备上运行和交互生成式 3D 内容提供了标准化的基础设施。</li></ul></section><section><h3>Next Steps</h3><ul><li>[物理真实性] 集成物理引擎，将纯视觉的动态高斯模型（如 4DGS）与 物理模拟（如 MPM） 结合，实现更真实的物理交互和形变，而不只是预设动画。</li><li>[交互智能] 构建基于 3D 场景的 具身智能体 (Embodied AI)。利用该平台作为模拟环境，让多模态大模型能够在空间中进行 推理、规划和交互，形成感知-决策-执行的闭环。</li></ul></section>
       <section>

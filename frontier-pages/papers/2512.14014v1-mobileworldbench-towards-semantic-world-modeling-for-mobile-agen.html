@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.14014v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统世界模型通过预测视频的下一帧像素来模拟世界变化。</li><li>核心痛点： 在GUI（图形用户界面）场景下，像素级预测极难且非必要。它要求模型生成海量无关细节（如新闻标题），计算成本高，且难以做到像素级精确。</li><li>本文切入点： 直觉：智能体决策不需要知道未来屏幕的每一个像素，只需要理解发生了什么语义层面的变化。因此，作者提出直接用文本来预测状态变化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表示范式]： 语义世界模型（预测文本变化）比像素世界模型（预测下一帧图像）在GUI任务中是更优的表示范式。它成功解耦了“理解状态转移”和“渲染像素细节”这两个难度与重要性均不对等的子任务。</li><li>[模型行为]： 不同VLM在世界建模任务中表现出不同的行为偏好。例如，某些模型（如Gemini-2.5-Pro）倾向于生成更完整、更相关的预测（高Completeness/Relevance分），但代价是牺牲了事实准确性（低Accuracy分），这可能源于其为推理任务进行的特定微调。</li><li>[数据价值]： 针对性的高质量数据集（MobileWorld）是提升VLM在特定领域（如GUI世界建模）能力的关键。通过SFT，一个中等规模的模型（8B）可以超越未经特定训练的、更大规模的通用模型，证明了数据杠杆的巨大价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>从被动预测到主动规划： 探索如何利用语义世界模型生成一个包含多种可能未来的状态图（State Graph），而不仅仅是单一动作的未来，以支持更复杂的、基于搜索的规划算法。</li><li>语义-像素协同生成： 将语义世界模型的文本预测作为强先验或控制信号，指导一个像素生成模型（如Diffusion Model）渲染下一帧。这可以结合两个范式的优点，生成既语义正确又视觉逼真的未来状态。</li></ul></section>
       <section>

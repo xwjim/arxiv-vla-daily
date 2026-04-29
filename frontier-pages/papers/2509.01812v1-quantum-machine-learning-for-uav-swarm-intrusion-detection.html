@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.01812v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖传统的机器学习模型（如 SVM、CNN）对无人机蜂群的网络流量进行入侵检测。</li><li>核心痛点： 无人机蜂群的高机动性、非平稳流量和严重的类别不平衡，使得传统模型难以在有限数据下捕捉复杂的非线性攻击模式。</li><li>本文切入点： 作者直觉性地认为，量子机器学习 (QML) 能够利用高维希尔伯特空间的表达能力，可能在数据稀疏和非线性问题上更具优势。因此，他们没有孤立地提出一个模型，而是对三种主流 QML 范式进行了系统性的基准测试，以找到最实用的架构。</li></ul></section><section><h3>Key Insights</h3><ul><li>[性能权衡]： QML 与经典模型的优势区间存在明显差异。量子模型（特别是量子核和 QT-NN）在数据量较少、非线性边界复杂的场景中表现出色；而当数据充足时，参数量更大的经典模型（如 CNN）则占据主导地位。</li><li>[架构选择]： “浅量子+轻经典”的混合架构是当前最优解。表现最佳的 Hybrid QNN 模型，通过让浅层量子电路负责提取复杂的非线性特征，再由一个微型经典网络负责校准和优化输出，成功规避了纯深度QNN的训练难题（如贫瘠高原），实现了性能与资源效率的最佳平衡。</li><li>[QNN 失败模式]： 深度变分量子网络 (QNN) 在不平衡安全数据上存在“虚报”偏见。实验发现，更深的 QNN 虽然能将敏感度（查全率）提升至接近 99%，但其特异性（识别正常流量的能力）会灾难性地崩溃（低至 4%），导致产生海量的错误警报，在现实中完全不可用。</li></ul></section><section><h3>Next Steps</h3><ul><li>[走向现实] 将表现最优的混合模型部署到真实的量子硬件上进行测试，并最终在物理无人机蜂群中验证其入侵检测的实际效果。</li><li>[扩展场景] 将该框架扩展到联邦学习环境（契合无人机分布式特性）和对抗性攻击场景下，研究其分布式的训练效率和面对恶意扰动时的鲁棒性。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11226v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流端到端模型从传感器输入到驾驶规划是一步到位的“直觉式”预测。</li><li>核心痛点： 这种“一锤子买卖”式的决策，无法预见自身行为对未来交通动态的影响，导致在复杂场景下决策短视、容易出错。</li><li>本文切入点： 受大模型思维链 (CoT) 启发，作者将“思考”过程重新诠释为在隐空间 (Latent Space) 中对未来世界的分步模拟，从而让模型具备了可微分的、面向行动的“深思熟虑”能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>思维链的具身化 (Embodiment of CoT)： 自动驾驶的“思考”过程，可被建模为在隐空间 (Latent Space) 中对未来世界状态的分步推演 (step-by-step rollout)。这种可微分的内部模拟，首次将抽象的“思考”与具体的“规划”动作直接关联，让模型能预见并修正自身行为的后果。</li><li>思考的经济性 (Economy of Thought)： 并非所有驾驶场景都需要复杂的未来推演。引入 Auto-think Switch 机制，模型能自适应地判断场景难度，只在必要时开启“思考模式”。这证明了在简单场景下保持快速反应、在复杂场景下进行深思熟虑的动态决策模式，是实现高性能与高效率平衡的关键。</li><li>规划的迭代式精炼 (Iterative Refinement of Planning)： 模型的规划能力并非一步到位，而是通过“初步规划 -&gt; 模拟推演 -&gt; 总结精炼”的闭环实现的。基于未来推演结果（𝐙_CoT），Summarizer 模块能够识别并修正初始规划中的潜在风险。这揭示了基于未来信息的反馈修正是提升端到端模型鲁棒性的核心机制。</li></ul></section><section><h3>Next Steps</h3><ul><li>从思维链到思维树 (From CoT to Tree-of-Thought)： 将线性推演升级为树状搜索。在“思考”阶段，并行推演多种不同的驾驶意图（如“超车”、“跟车”、“减速避让”），形成一个决策树，并从中选择最优的长期策略，实现真正的生成式规划。</li><li>引入不确定性建模 (Probabilistic World Model)： 将世界模型从确定性预测升级为概率性预测。让模型不仅知道未来会发生什么，更能量化各种可能性的概率（例如，“前方行人有30%的概率会突然冲出”），从而做出真正意义上风险感知的、更稳健的决策。</li></ul></section>
       <section>

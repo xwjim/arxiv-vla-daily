@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.23008v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的新视角合成（NVS）依赖扩散模型 (Diffusion Models)，通过迭代去噪的方式联合生成所有目标视角。</li><li>核心痛点： 扩散模型联合生成的方式，难以施加严格的相机轨迹因果结构，不利于沿长轨迹的序贯生成和知识累积。</li><li>本文切入点： 作者认为自回归模型 (AR) 的严格因果、序贯生成特性，与沿相机轨迹生成新视角的任务天然契合，可以将其建模为“下一Token预测”问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式可行性]： 证明了纯解码器的自回归模型 (AR) 在单视图合成新视角 (NVS) 任务上，可以达到与主流扩散模型 (Diffusion) 相媲美的性能。这为需要严格时序因果性的世界模型（World Models）开辟了全新的技术范式。</li><li>[Token排序机制]： 对于视频/多视图序列，最优的自回归生成顺序是“时序固定，空间乱序”。这既保留了沿轨迹生成的因果性，又通过打破光栅扫描顺序，让单向模型有效学习了图像的二维空间上下文。</li><li>[几何控制]： 在生成式任务中实现精确的几何控制（如相机姿态），全局条件是不足的。将相机轨迹编码为与每个视觉Token绑定的3D位置Token，能为模型提供更有效、更细粒度的几何引导，是实现可控生成的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>[研发专用分词器] 放弃通用的视频分词器，设计一个面向多视图几何的专用Tokenizer。该分词器可内建对极几何等3D先验，从根源上提升对视角变化的鲁棒性。</li><li>[结合规划实现自主探索] 将当前的AR生成器与决策/规划模块结合。让模型不仅能“看”，还能自主“决策”下一步要移动到哪个相机位姿进行探索，从“沿脚本生成”迈向“自主场景探索”。</li></ul></section>
       <section>

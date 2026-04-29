@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.15946v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 以往工作主要在第一代 AIE 硬件上，孤立地优化单个 GEMM (矩阵乘法) 计算核。</li><li>核心痛点： 缺乏一个能自动将整个神经网络（而非单个算子）部署到新一代 AIE-ML 阵列的工具链，导致层间数据流必须依赖片外逻辑（PL），成为性能瓶颈。</li><li>本文切入点： 将 AIE-ML 架构中的 Memory Tiles (内存瓦片) 从单纯的存储单元，提升为连接不同计算子图的 “可编程数据路由器”，从而打通了全片上执行的最后一公里。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构利用]： AIE-ML 这类空间并行架构的性能关键，在于将 Memory Tiles 视为一等公民，用于管理和编排片上数据流。这比单纯压榨计算核的性能潜力更为重要，是消除 PL 瓶颈、实现端到端片上推理的根本。</li><li>[性能扩展性]： 结构化的并行策略（水平方向用 cascade 扩展输入维度，垂直方向复制 cascade 行来扩展输出维度）是可行的。实验证明，该框架在扩展到近乎整个芯片时，仍能保持 &gt;97% 的线性加速效率，证明其互连和调度开销极小。</li><li>[编译自动化]： 对于复杂的 2D 硬件阵列，一个自动化的布局和布线 (Placement &amp; Routing) 算法是必不可少的。相比贪心或手动布局，系统性的搜索能发现更紧凑、高效的物理映射，是让复杂模型部署变得实用而非“炼丹”的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>扩展复杂算子库： 优先支持 Transformer 中的自注意力机制 和 CNN 中的卷积操作。将本文的片上数据流编排思想应用于这些算子的复杂数据重排需求中，是解锁更广泛模型支持的关键。</li><li>探索动态与稀疏计算： 研究如何利用可编程的 Memory Tile 和 AIE 内核，支持动态网络结构或对权重/激活稀疏性进行实时利用。这将是迈向更高效、更前沿模型部署的重要一步。</li></ul></section>
       <section>

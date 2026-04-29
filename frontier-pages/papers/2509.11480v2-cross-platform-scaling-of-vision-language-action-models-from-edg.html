@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.11480v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型的研究通常只在单一、强大的数据中心 GPU 上评估模型精度。</li><li>核心痛点： 严重缺乏对模型在不同硬件（尤其是边缘设备）和不同功耗下，其延迟、吞吐量、内存等系统性能如何变化的认知。</li><li>本文切入点： 通过在从边缘端 (Jetson Orin) 到云端 (H100 等) 的全谱硬件上，系统性地实测多款 VLA 模型，从而填补理论与实际部署间的认知鸿沟。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构 vs. 硬件： 架构优化对性能的增益，有时能超越硬件代差。例如，经过优化的 VOTE-MLP4 模型在现代边缘设备 (Orin) 上的吞吐量，甚至超过了未优化的基线模型在旧款数据中心 GPU (V100) 上的表现。</li><li>边缘性能伸缩： 边缘设备上的性能随功耗下降呈非线性衰减。在特定功耗点（如 Orin 从 50W 降至 30W）会出现性能“悬崖”，这对需要平衡性能与续航的移动机器人至关重要。</li><li>吞吐量 vs. 精度： 高吞吐量与高精度并非完全对立。通过 动作分块 (Action Chunking) 等架构设计，可以在几乎不牺牲任务成功率的前提下，将模型吞吐量提升一个数量级以上（例如 VOTE-MLP4 vs. OpenVLA）。</li></ul></section><section><h3>Next Steps</h3><ul><li>真实世界伸缩定律 (Real-World Scaling Laws)： 将评测体系扩展到真实物理机器人上，研究在实时闭环控制中，网络抖动、传感器延迟等因素如何影响这些模型的性能伸缩规律。</li><li>量化感知伸缩性研究 (Quantization-Aware Scaling)： 系统性地研究不同量化策略（如 INT8, FP8）如何与 VLA 模型架构、硬件平台相互作用，并揭示其对精度-性能权衡曲线的改变。</li></ul></section>
       <section>

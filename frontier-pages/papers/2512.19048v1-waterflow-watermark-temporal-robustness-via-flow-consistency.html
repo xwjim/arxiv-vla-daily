@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.19048v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 深度学习水印已能抵抗多数图像编辑和压缩，但仍是静态的。</li><li>核心痛点： 当带水印的图像被输入 I2V 模型生成视频时，水印信号在时间维度上被严重破坏，导致逐帧检测准确率大幅下降。</li><li>本文切入点： 与其被动防御，不如主动出击。在训练时就用一个轻量级视频生成代理来模拟I2V过程，让水印编码器提前“演练”并适应这种跨模态的失真。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练-攻击同构性]： 水印的鲁棒性源于在训练中模拟攻击。使用一个轻量级视频代理模型 (AnimateLCM) 进行训练，其鲁棒性可以成功迁移到结构完全不同、更强大的主流I2V模型（如基于U-Net的SVD和基于Transformer的CogVideoX）上。</li><li>[语义-首帧强关联]： 视频生成对输入图像的高级语义极其敏感。通过 语义保持损失 稳定了加水印图像的CLIP特征，本质上是稳住了I2V模型的初始条件 (conditioning signal)，这被证明是保证第一帧水印高准确率的关键。</li><li>[运动-时间衰减]： 视频中的物体运动是导致水印信号在时间上衰减和抖动的主要原因。光流对齐和时间一致性损失 (TCL) 的组合拳，被证明是抵抗这种动态失真、稳定后续帧解码的有效机制。</li></ul></section><section><h3>Next Steps</h3><ul><li>通用I2V鲁棒性： 研究不依赖特定代理模型的训练方法，使水印能够零样本泛化到任意未知的I2V生成器上，实现更通用的跨模态溯源。</li><li>扩展到T2V溯源： 将此框架的思想从I2V扩展到更前沿的文本到视频 (Text-to-Video) 领域。研究如何在一个纯粹由文本生成的视频中，嵌入并溯源其模型指纹或版权信息。</li></ul></section>
       <section>

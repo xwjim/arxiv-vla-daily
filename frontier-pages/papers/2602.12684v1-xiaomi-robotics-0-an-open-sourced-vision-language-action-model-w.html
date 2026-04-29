@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.12684v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 强大的视觉-语言-动作 (VLA) 大模型能理解指令并生成动作，但模型太大导致推理很慢。</li><li>核心痛点： 推理延迟导致机器人在执行连续动作时出现明显的停顿和卡顿 (jerky motions)，无法在真实世界中流畅工作。</li><li>本文切入点： 作者发现，为了平滑动作而让模型参考上一轮的动作（action prefixing），会导致模型“偷懒”，只模仿历史动作而忽略了实时视觉变化。他们通过一个巧妙的注意力机制打破了这种“路径依赖”。</li></ul></section><section><h3>Key Insights</h3><ul><li>异步执行的捷径问题： 让机器人动作变得平滑的常用方法（参考历史动作），会创造一个致命的“学习捷径”。模型会倾向于无脑复制历史动作，导致其对环境的动态变化反应迟钝，甚至陷入重复的无效动作循环。</li><li>知识保留的必要性： 直接用机器人轨迹数据微调一个预训练VLM，会引发灾难性遗忘，使其丧失宝贵的通用视觉和语言理解能力。必须采用混合数据预训练（机器人数据 + 通用图文数据）的策略，才能让模型既懂机器人操作，又不忘通用知识。</li><li>感知与执行的解耦： 将模型架构解耦为“冻结的感知VLM”和“可训练的动作DiT”是一种高效的知识迁移范式。这种方式能充分利用VLM强大的感知能力，同时避免了动作生成任务的梯度反向污染VLM主干网络，保持了其知识的稳定性。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态注意力策略： Λ-shape掩码是一种静态的、硬编码的规则。未来的方向是让模型学会动态决策：在环境稳定时更多地依赖历史动作以求平滑，在环境剧变时则强制关注视觉输入以保证响应。</li><li>长时序任务的错误恢复： 当前模型解决了动作层面的流畅性，但仍可能陷入任务层面的逻辑循环（如毛巾折叠失败）。下一步应结合高层任务规划器，让模型具备检测并主动打破无效循环的能力，实现真正的长时序自主操作。</li></ul></section>
       <section>

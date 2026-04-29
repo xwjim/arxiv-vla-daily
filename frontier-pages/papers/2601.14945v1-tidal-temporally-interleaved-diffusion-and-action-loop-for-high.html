@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.14945v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 大规模视觉-语言-动作 (VLA) 模型采用“批量计算-开环执行”模式，一次性生成长时序动作并盲目执行。</li><li>核心痛点： VLA模型推理延迟高，导致控制频率极低（约2-5Hz），在执行期间形成“执行盲点”，无法应对动态变化的目标。</li><li>本文切入点： 作者洞察到，任务的高级语义意图是时序稳定的，而物理状态是瞬息万变的。因此，无需在每一步都调用昂贵的VLM，可以缓存其输出。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构解耦的价值：</li><li>将语义推理与物理驱动解耦是解决大模型机器人延迟问题的关键。通过缓存高成本的语义意图，并将计算预算重新分配给高频、低成本的动作生成，可以在不增加总计算量的情况下，将有效控制频率提升数倍（从~2.4Hz到~9Hz）。</li><li>时序错配的训练范式：</li><li>模型可以被训练来主动补偿由系统延迟造成的“陈旧意图”和“实时状态”之间的时序错位。通过在训练中注入随机时序延迟，策略网络学会了利用最新的本体感知信息来“校正”基于过时视觉信息生成的动作规划。</li><li>流模型用于控制的新范式：</li></ul></section><section><h3>Next Steps</h3><ul><li>将运动感知能力内生于VLM骨干网络： 探索使用Video Foundation Model或修改注意力机制，使VLM本身能直接从时序图像中编码速度和加速度等动态信息，从而摆脱对外部运动预测器的依赖。</li><li>发展自适应频率控制 (Adaptive Frequency Control)： 设计一种机制，让智能体能根据环境的动态性自动调整控制频率。在静态环境下使用低频、高精度模式，在检测到目标运动时无缝切换到TIDAL的高频模式，以兼顾精度与响应速度。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.08971v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 过去对世界模型的评估，主要集中在视频生成质量等感知层面。</li><li>核心痛点： 这种评估方式忽略了模型在下游决策任务中的功能效用，导致“好看不中用”。</li><li>本文切入点： 必须将感知评估（Perception）和功能评估（Functionality）统一在同一个框架下，才能全面衡量一个具身世界模型的真实价值。</li></ul></section><section><h3>Key Insights</h3><ul><li>[感知-功能鸿沟]： 模型的视频生成质量（人类主观评分、EWMScore）与它在下游具身任务（如动作规划）中的实际表现存在显著的、非线性的正相关。这意味着，视觉效果的提升并不直接等同于功能效用的同等提升，存在一个“功能瓶颈”。</li><li>[模型范式差异]： 通用视频模型（如 Veo, Wan）在视觉渲染和美学上占优，但物理交互真实性差；而具身专用模型（如 CtrlWorld）虽然视觉质量稍逊，但在物理交互、动作一致性等功能相关维度上表现更好。</li><li>[动作条件的重要性]： 明确以动作（Action）作为条件输入的模型，在物理依从性和轨迹准确性上，系统性地优于仅依赖文本（Text）作为输入的模型。这表明，精确的控制信号是生成物理真实交互的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>研发面向功能的表征学习： 当前模型优化的目标函数（如像素级重建损失）与功能效用不完全对齐。未来的研究应探索直接优化物理属性、任务成功率等功能性指标的表征学习方法，以弥合感知-功能鸿沟。</li><li>构建真实世界的功能性评测： 将 WorldArena 的评测范式从模拟器迁移到真实机器人平台。这不仅能提供更具说服力的评估，还能暴露当前世界模型在现实部署中面临的真正挑战。</li></ul></section>
       <section>

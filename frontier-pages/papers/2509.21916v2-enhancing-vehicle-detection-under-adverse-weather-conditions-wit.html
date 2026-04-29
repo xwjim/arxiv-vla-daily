@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.21916v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用标准的深度学习模型（如YOLO）在无人机图像上进行车辆检测。</li><li>核心痛点： 恶劣天气（如积雪）导致领域漂移 (Domain Shift)，模型性能急剧下降，而标注新数据成本极高。</li><li>本文切入点： 直觉上，海量、廉价的无标签数据中蕴含着应对天气变化的宝贵信息。作者通过对比学习，从这些数据中预先提取对恶劣天气鲁棒的特征，再与现有模型结合。</li></ul></section><section><h3>Key Insights</h3><ul><li>[知识来源]： 单一知识源存在瓶颈。 仅靠通用知识（COCO预训练）无法应对领域剧变；仅靠领域内无标签数据预训练，又缺乏检测任务所需的结构化知识。必须将通用知识与领域特定知识结合，才能在恶劣天气下达到最佳检测效果。</li><li>[特征融合]： 动态融合优于静态融合。 类似 SE Gating 的自适应加权机制，能让模型根据输入动态判断通用特征和领域特征的贡献度，效果远超简单的特征相加。这本质上是赋予模型一种“情景感知”的能力。</li><li>[融合粒度]： “晚融合”优于“早融合”。 在主干网络的末端进行一次性特征融合效果最好。在早期层级进行过于频繁的融合会干扰模型自身层次化特征的提取，引入不兼容的“噪声”，反而导致性能下降。</li></ul></section><section><h3>Next Steps</h3><ul><li>[可解释的特征融合] 研究在训练过程中实时评估外部特征（侧路网络）的贡献是“有益”还是“有害”，并开发正则化策略来抑制负面影响，让融合过程从“黑盒”走向“白盒”。</li><li>[精细化的领域自适应] 针对性研究特定场景下模型泛化能力下降的原因，建立更精细的领域差异度量，从而指导模型进行更具鲁棒性和针对性的自适应，而不是“一招鲜吃遍天”。</li></ul></section>
       <section>

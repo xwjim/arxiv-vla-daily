@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.06339v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 已有的视频生成综述，通常只关注 单一技术 (如 GAN 或 Diffusion) 或 特定任务 (如视频编辑)。</li><li>核心痛点： 缺乏一个 宏观、全局的演进视角，无法清晰展现不同技术范式间的优劣传承与未来趋势，特别是对新兴的 AR 模型 和 多模态融合 讨论不足。</li><li>本文切入点： 作者通过 历史回溯 和 数据统计 的方式，将三大主流范式（GAN, Diffusion, AR）置于同一时间线进行对比，构建了一个 从过去到未来 的完整技术图谱。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式演进]：视频生成正从「像素渲染」走向「世界模拟」。</li><li>早期研究（2020-2022）关注点是 “运动”、“时序一致性” 等底层视觉质量。</li><li>当前研究（2024-2025）的关键词已变为 “世界模型”、“物理”、“长视频”，表明领域目标正从生成“看起来真实”的视频，转变为模拟“符合物理规律”的世界。</li><li>[架构收敛]：Transformer 架构（尤其是 DiT）已成为视频生成的主流骨干网络。</li><li>无论是 Diffusion 模型 (如 Sora, W.A.L.T) 还是 AR 模型 (如 VideoPoet)，其核心都依赖于 Transformer 对时空 Token 的建模能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>[命题 1] 统一表示与高效压缩： 如何设计一个 更优的视频 VAE，既能实现 极高压缩比 以降低 AR/Diffusion 模型的计算负担，又能 无损保留 精细的动态和纹理信息？这是训练更强世界模型的基础。</li><li>[命题 2] 物理规律的内化与强制： 如何让生成模型 真正理解并遵守物理规律（如因果、碰撞、流体动力学），而不仅仅是“看起来像”？这可能需要将 符号物理引擎 与神经网络相结合，或设计新的 物理约束损失函数。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15604v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机探索未知环境时，通常贪婪地飞向最近或能看到最多未知区域 (信息增益最大) 的边界点 (frontier)。</li><li>核心痛点： 这种策略完全忽略了飞行动力学，导致最短路径不等于最低能耗。剧烈的机动（如急转、爬升）会消耗不成比例的能量。</li><li>本文切入点： 作者的直觉是，可以在决策前提前“演练”并预测飞往各个候选目标的能量成本，从而选择一条真正节能的路径。</li></ul></section><section><h3>Key Insights</h3><ul><li>能量与几何的解耦： 论文用数据证明，最短的路径往往不是最节能的。飞行能耗与加速度、转弯等机动行为强相关，而这些是传统基于距离或时间的探索策略完全忽略的“隐性成本”。</li><li>预测开销的价值： 在决策循环中增加一个“离线能耗预测”步骤，其计算开销远小于轨迹生成本身，但带来的能耗节省收益却非常显著。这验证了“先预测，后执行”策略在机器人探索中的有效性。</li><li>节能与效率的权衡： 优化能耗并不一定会牺牲探索速度。通过选择更平滑、动力学更优的路径，EAAE 在降低总能耗的同时，依然保持了与传统方法相当甚至更快的探索完成时间。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线自适应能量模型： 开发一个能根据实时飞行数据（如电机负载、风速估计）在线修正的能量模型，以弥合 Sim-to-Real 的鸿沟，并适应动态变化的环境。</li><li>能量感知的轨迹生成器： 将能量消耗直接作为优化目标整合进轨迹规划器中，而不是“规划后再评估”。这能从根本上生成兼顾路径、时间和能量的最优轨迹。</li></ul></section>
       <section>

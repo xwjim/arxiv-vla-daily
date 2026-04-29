@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.17250v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 实时控制智能体为了保证精度，需要在每个时间步都进行完整的 重规划 (Replanning)。</li><li>核心痛点： 逐-步-重规划引入了巨大的 推理延迟 (Inference Latency)，这在时间敏感的任务中会直接导致控制不稳定和性能下降。</li><li>本文切入点： 作者的直觉是，未来状态在短期内是高度可预测的。因此，可以先 投机性地执行 (Speculative Execution) 预计算的动作，仅在预测与现实出现较大偏差时才进行修正或重规划。</li></ul></section><section><h3>Key Insights</h3><ul><li>[鲁棒性来源]： 在控制领域，单纯的投机执行是不可靠且脆弱的。系统的鲁棒性与效率并非来自完美的预测，而是来自一个 高效的、基于预测偏差的校正机制。</li><li>[计算可回收性]： 预测失误（Mishit）并非完全是浪费。预测与真实状态之间的 偏差（Mismatch）本身就是一种信息，可以被“回收”用作轻量级校正器的输入，从而避免昂贵的完全重计算。</li><li>[非对称决策]： 系统采用 “小错低成本修正，大错高成本重来” 的非对称策略。这揭示了在实时系统中，根据误差的量级动态分配计算资源，是平衡速度与精度的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>联合训练与自适应： 将世界模型、校正器与策略进行 端到端联合训练，使投机模块学会做出“更容易被校正”的预测。</li><li>动态投机预算： 将固定的偏差阈值 τ 替换为一个 动态预算模块。该模块根据历史偏差、模型不确定性等信息，实时决定投机的深度和重规划的频率，实现更智能的速度-性能权衡。</li></ul></section>
       <section>

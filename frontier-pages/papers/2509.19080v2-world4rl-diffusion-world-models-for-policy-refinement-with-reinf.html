@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.19080v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人策略通常用模仿学习初始化，再通过与环境交互进行强化学习。</li><li>核心痛点： 真实世界交互成本高、风险大；传统模拟器存在“模拟-现实”鸿沟 (sim-to-real gap)。</li><li>本文切入点： 既然扩散模型能生成逼真视频，就把它当成一个高保真的世界模拟器，让策略完全在“想象”中完成强化学习，彻底告别真实交互。</li></ul></section><section><h3>Key Insights</h3><ul><li>世界模型保真度： 扩散模型作为世界模型，相比 VAE 或 Transformer 等架构，能生成更清晰、时序更连贯的想象轨迹。这种高质量的“梦境”是RL策略能够稳定学习的物理基础。</li><li>世界模型泛化性： 训练世界模型时，必须混合专家数据、策略自身数据和随机探索数据。这能极大拓宽模型对状态-动作空间的覆盖，防止其对有限的离线数据过拟合，从而提升在RL探索未知区域时的可靠性。</li><li>想象与现实的对齐： 在学习到的世界模型中进行RL时，必须约束策略的探索范围（如限制动作分布的方差）。这能确保策略产生的动作始终处于世界模型“理解”的范畴内，避免因OOD (Out-of-Distribution) 动作导致模拟器崩溃，从而稳定优化过程。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态自适应的世界模型： 研究如何让世界模型能在线微调，根据RL策略的探索情况动态更新，实现“一边做梦，一边修正梦境”。</li><li>不确定性感知的RL： 开发能感知世界模型预测不确定性的RL算法。当模型预测不可靠时（进入OOD区域），策略应采取更保守的行动，或主动触发少量真实交互来校准模型。</li></ul></section>
       <section>

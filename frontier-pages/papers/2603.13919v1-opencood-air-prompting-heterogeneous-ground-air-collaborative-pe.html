@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.13919v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 车-车（V2V）协同感知 可以通过共享数据来扩大单个车辆的感知范围。</li><li>核心痛点： 单纯的V2V系统存在地面遮挡盲区，而直接引入无人机数据会因视角差异巨大导致模型训练崩溃（梯度冲突）。</li><li>本文切入点： 将空地融合视为一个非对称的迁移学习任务。冻结强大的V2V预训练模型，仅训练新模块来转换和校准无人机的“上帝视角”，使其能被地面车辆模型“理解”。</li></ul></section><section><h3>Key Insights</h3><ul><li>视角异构性的价值：</li><li>引入一个高空视角的无人机，比增加多个同质化的地面车辆，能更有效地消除感知盲区，带来更大的性能增益（例如，1车+1无人机 &gt; 3车）。这证明了信息多样性比信息冗余更重要。</li><li>异构数据融合策略：</li><li>直接端到端联合训练异构传感器（空+地）会导致严重的梯度冲突和性能下降。采用“冻结-微调”的解耦训练范式，能稳定地将新模态知识“嫁接”到预训练模型上，是解决异构融合难题的有效路径。</li><li>空间几何约束的重要性：</li></ul></section><section><h3>Next Steps</h3><ul><li>主动协同感知： 将感知结果（如不确定性地图）作为反馈，动态规划无人机航点，使其主动飞往地面车辆的感知盲区或冲突区域进行信息补充。</li><li>多模态空地协同： 将无人机的LiDAR数据也纳入融合框架，探索视觉与点云在异构空地平台间的跨模态、跨视角对齐与融合难题。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.13444v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的视觉-语言-动作（VLA）模型直接从视觉和语言生成 端到端 的机器人动作序列。</li><li>核心痛点： 直接生成动作缺乏对 手-物交互（HOI） 结构的显式建模，导致在长时程、富接触任务中失败率高且物理真实性差。</li><li>本文切入点： 模仿人类先抓取后操作的行为，将复杂的HOI生成任务 解耦为 先关注几何的 「抓取」 和后关注语义的 「操纵」 两个阶段。</li></ul></section><section><h3>Key Insights</h3><ul><li>[交互解耦]： 将HOI生成解耦为 「几何优先的抓取」 和 「语义优先的操纵」 两个阶段，能显著提升物理交互的稳定性和任务语义的一致性。这避免了单一模型在两种目标间进行无效折衷。</li><li>[场景表征]： 融合了 几何（Concerto） 与 语义（SceneSplat） 的混合3D场景表征，比单一表征更能有效指导生成。这确保了动作既不穿模（几何约束）又符合语境（语义约束）。</li><li>[生成范式]： 采用 流匹配（Flow Matching） 范式不仅带来了 ~40倍 的推理加速，其 x-prediction 变体还能更好地保持生成轨迹的 时序平滑性，减少高频抖动，这对于物理执行至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>[动态场景与移动操作]： 将静态场景扩展到动态环境，并结合移动平台，研究如何在线更新场景表征以生成适应性的HOI序列。</li><li>[跨视角HOI先验学习]： 研究如何从大规模的 第三人称（Exocentric）视频 中学习HOI先验知识，并有效将其迁移到第一人称的机器人执行任务中，以解决数据视角偏差问题。</li></ul></section>
       <section>

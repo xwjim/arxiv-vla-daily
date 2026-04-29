@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.04453v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶系统通常将感知、预测和规划视为独立的串联模块。</li><li>核心痛点： 模块间信息传递存在信息瓶颈，误差会逐级累积，且缺乏统一的端到端优化。</li><li>本文切入点： 模拟人类驾驶员的直觉——规划和对未来的视觉想象是耦合的。让规划（Action）去指导未来的图像生成（Observation），再用生成的好坏来反向优化规划。</li></ul></section><section><h3>Key Insights</h3><ul><li>[规划与生成的双向增强]：</li><li>规划为图像生成提供了强动作先验，使其生成的未来更符合意图；反之，生成任务为规划提供了密集的像素级监督信号，迫使模型更精细地理解场景，从而提升规划的准确性和安全性。这是一个正向循环。</li><li>[因果顺序的重要性]：</li><li>实验证明 “先规划，后想象” (Planning → Generation) 的因果顺序显著优于“先想象，后规划”。这更符合物理世界“动作决定观察”的规律，能生成与规划意图更一致的未来，从而更有效地指导模型。</li><li>[未来表征的权衡]：</li></ul></section><section><h3>Next Steps</h3><ul><li>[从2D图像生成到3D场景生成]</li><li>将未来的预测从单一前视图像扩展到完整的3D场景（如BEV occupancy或NeRF），这能为规划提供更完备、更符合物理约束的未来世界表征。</li><li>[交互式与反事实预测]</li><li>基于当前框架，探索对不同规划（actions）进行条件化，生成多种可能的未来。这能让模型进行反事实推理（“如果我变道会怎样？”），从而实现更深层次的风险评估和决策。</li></ul></section>
       <section>

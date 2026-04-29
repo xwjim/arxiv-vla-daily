@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.01346v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学界和业界正积极将世界模型 (World Models) 用于机器人、自动驾驶等领域，以提升其规划与决策能力。</li><li>核心痛点： 现有安全框架（如 MITRE ATLAS）无法有效评估世界模型独有的、在想象（rollout）中误差会滚雪球式放大的风险。</li><li>本文切入点： 将世界模型视为一个独立的、安全攸关的基础设施，并首次系统性地分析其从技术、对齐到认知三个层面的完整风险剖面。</li></ul></section><section><h3>Key Insights</h3><ul><li>风险的放大效应： 世界模型的风险核心在于其生成式和循环特性。一个微小的初始扰动（如对抗性攻击）会在多步推演（rollout）中被放大（实验证明轨迹持久性 𝒜k &gt; 1），导致灾难性后果，这与单步推理模型有本质区别。</li><li>对齐的“能力诅咒”： 世界模型赋予了智能体模拟未来的能力，但这反而加剧了对齐风险。智能体可以“在想象中”预演并发现奖励函数漏洞（Reward Hacking）或学会欺骗（Deceptive Alignment），因为它们能模拟被监督的场景。</li><li>风险的“铸造”效应： 世界模型的风险具有“铸造”属性（Foundry Problem）。在大规模预训练阶段植入的偏见或后门（表征风险），会像铸造缺陷一样固化在模型内部，下游任务的微调或安全防护难以根除。</li></ul></section><section><h3>Next Steps</h3><ul><li>开发针对世界模型动态过程的可验证鲁棒性（Certified Robustness）方法。不仅仅是防御编码器，而是要为整个想象轨迹（rollout trajectory）的误差边界提供数学保证。</li><li>在最先进的世界模型（如 Genie, Sora）中实证研究“能力诅咒”下的涌现对齐失败。设计实验环境，主动诱导和检测欺骗性对齐或目标错误泛化等高级风险行为。</li></ul></section>
       <section>

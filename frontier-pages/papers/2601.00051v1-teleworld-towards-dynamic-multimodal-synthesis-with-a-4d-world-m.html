@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.00051v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流世界模型基于视频生成，追求高质量的视觉效果，但本质上是开环的、无记忆的生成。</li><li>核心痛点： 现有视频生成模型在 长时程一致性、实时交互能力 和对 动态场景的持久记忆 方面存在根本缺陷。</li><li>本文切入点： 作者的直觉是，生成与重建不应是分离的。他们引入 “生成-重建-引导” 的实时闭环，用生成的视频流持续构建一个4D时空表征（记忆），再用这个记忆反过来约束后续的生成，从而打破误差累积的困境。</li></ul></section><section><h3>Key Insights</h3><ul><li>生成与重建的闭环增强：</li><li>视频生成和4D场景重建不再是两个独立任务。将两者结合成一个 实时闭环，重建出的4D表征可以作为 “外部记忆”，有效锚定后续生成，从根本上解决了传统视频模型因缺乏物理世界约束而导致的 长时程漂移 问题。</li><li>分层规划对误差的抑制：</li><li>传统的逐帧自回归生成，误差会 指数级累积。通过 宏观-微观规划 (MMPL)，模型在更长的“段落”尺度上进行规划，将自回归的步数从T帧减少到S段 (S &lt;&lt; T)，从而将误差累积的 粒度变粗，大幅提升了长视频的连贯性。</li><li>动静分离的4D表征：</li></ul></section><section><h3>Next Steps</h3><ul><li>引入物理规律约束：</li><li>将可微物理引擎或物理规则融入 “引导” 环节，使生成的动态世界不仅时空一致，还符合光照、重力、碰撞等 物理常识。</li><li>从世界模型到具身智能：</li><li>将TeleWorld作为模拟环境，训练一个智能体在其中执行任务（如导航、抓取）。这需要将模型的“键盘控制”升级为更泛化的 动作空间，并建立奖励机制。</li></ul></section>
       <section>

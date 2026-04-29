@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.19708v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 3D 内容生成依赖稀缺的 3D 数据集，或使用 SDS 等优化方法，难以保证多视角一致性。</li><li>核心痛点： 单纯调用 2D 生成模型无法保证跨视图的几何一致性，导致 3D 重建失败或质量低下。</li><li>本文切入点： 作者推断，既然 2D 模型在海量真实世界图片上训练，它们必然内隐地学习了 3D 空间结构。通过构建一个智能体协作框架 (Agentic Framing)，可以引导并“榨出”这种能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型本质]： 2D 基础模型确实内隐地掌握了 3D 世界知识。它们并非简单的“像素模式拟合器”，而是通过学习海量 2D 投影，形成了对物体形状、遮挡、布局等三维规律的底层理解。</li><li>[方法论]： 智能体协作是释放隐式能力的关键。单一模型无法完成复杂任务，但将任务解耦为“规划 (Director)”、“执行 (Generator)”、“验证 (Verifier)”三个专业角色，能有效引导模型、规避其弱点，最终实现复杂目标。</li><li>[一致性保障]： 3D 重建空间的验证是保证全局一致性的核心。仅在 2D 层面检查图像质量远远不够；通过评估新视图是否损害现有 3D 模型的重建质量，该机制能有效阻止错误累积，是实现从“多张好图片”到“一个好 3D 世界”的决定性一步。</li></ul></section><section><h3>Next Steps</h3><ul><li>赋能视频模型： 将此“导演-验证”框架应用于视频生成模型，有望解决其在长时序、大范围探索中普遍存在的几何漂移和一致性退化问题。</li><li>迈向动态世界 (4D)： 将导演智能体的任务从“规划新视角”升级为“规划场景的时间演化或与用户的交互”，探索生成可互动、有变化的动态 4D 世界。</li></ul></section>
       <section>

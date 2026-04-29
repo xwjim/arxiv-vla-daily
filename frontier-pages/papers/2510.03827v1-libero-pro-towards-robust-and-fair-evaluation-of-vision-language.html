@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.03827v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学界普遍使用 LIBERO 基准来评测 VLA (视觉-语言-动作) 模型的性能。</li><li>核心痛点： 现有 LIBERO 评测的训练与测试任务几乎完全相同，模型靠死记硬背就能拿高分，无法反映真实泛化能力。</li><li>本文切入点： 作者认为，要检验模型的真理解，必须在评测中引入系统性的、合理的扰动，看模型是否还能完成任务。</li></ul></section><section><h3>Key Insights</h3><ul><li>[性能假象]： 当前 VLA 模型在标准 LIBERO 上的 90% 以上高分是虚假的。在引入物体位置、任务目标等合理扰动后，性能会断崖式下跌至 0%，这暴露了模型的能力本质是死记硬背。</li><li>[伪理解]： 模型对语言指令和视觉目标缺乏真正理解。即使输入无意义的乱码指令或替换掉目标物体，模型依然会执行与训练数据中相似的固定动作序列，表现为一种“视而不见、听而不闻”的惯性。</li><li>[组合泛化缺失]： 模型无法将已学会的简单子任务组合成复杂任务。即使模型能独立完成“放碗”和“开火”，也无法完成“先放碗再开火”的序列，暴露出其不具备逻辑推理和任务规划能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>[训练范式革新] 研究如何利用 LIBERO-PRO 生成的扰动数据进行模型训练，即“从哪儿跌倒，从哪儿爬起”，探索能提升模型鲁棒性和组合泛化能力的数据增强或对抗训练方法。</li><li>[模型架构演进] 探索混合架构 VLA 模型，将神经网络的感知能力与符号逻辑的规划/推理能力相结合，以克服当前端到端模型在组合泛化上的根本缺陷。</li></ul></section>
       <section>

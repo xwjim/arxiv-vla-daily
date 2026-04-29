@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12772v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流 VLA 模型由一个 VLM (视觉语言模型) 负责语义理解，一个 Action Expert (动作专家) 负责生成具体动作。</li><li>核心痛点： VLM 为追求语义抽象，会 压缩并丢失 对机器人操控至关重要的 精细几何与时序动态信息，形成信息瓶颈。</li><li>本文切入点： 与其改造 VLM，不如直接 绕过 VLM 瓶颈，通过一个 微创、可插拔的旁路 将更原始、更丰富的视觉信息直接 “注入” 到下游的动作专家中。</li></ul></section><section><h3>Key Insights</h3><ul><li>[注入机制的重要性]： 注入辅助信息的方式 (如何注入) 与注入的 信息本身 (注入什么) 同等重要。PVI 的 双路并行、逐层注入 架构远优于简单的特征拼接或单点注入，能更有效地融合新知识。</li><li>[时序特征的优越性]： 对于需要 状态追踪和多阶段协调 的复杂操控任务，时序动态特征 (V-JEPA2) 提供的增益显著高于强大的 静态空间特征 (DINOv2)。这证明了运动和接触动态是 VLM 语义压缩后丢失的关键信息。</li><li>[模型扩展性原则]： 通过 冻结主干 + 零初始化旁路 的设计，可以 稳定、高效地 为预训练 VLA 模型扩展新能力。这种 “行为保持” 的初始化方式，是成功融合新信息而不破坏原有知识的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端联合优化]： 将辅助视觉编码器与 PVI 模块进行 端到端的联合微调，使视觉特征的提取过程能更好地适应下游的机器人操控任务。</li><li>[多模态注入扩展]： 将 PVI 的注入思想从视觉扩展到 其他模态，例如注入 触觉、力反馈或声音特征，以应对需要多感官融合的更复杂任务。</li></ul></section>
       <section>

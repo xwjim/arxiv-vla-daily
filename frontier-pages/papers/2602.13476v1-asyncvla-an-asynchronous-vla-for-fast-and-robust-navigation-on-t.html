@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.13476v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用大型视觉-语言-动作模型 (VLA) 作为机器人策略，以获得强大的泛化和语义理解能力。</li><li>核心痛点： VLA 模型 计算成本巨大，导致 高推理延迟，在动态变化的环境中无法满足实时控制要求。</li><li>本文切入点： 借鉴经典分层控制思想，将大模型的 高级语义规划 (慢) 与轻量模型的 低级反应执行 (快) 彻底解耦，形成异步工作流。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构设计]： 异步分层控制 是解决大模型机器人部署延迟的 根本性架构方案。它承认并利用了“思考”和“反应”的速度差异，而非试图在单一模型上达成不可能的平衡。</li><li>[训练策略]： 机器人的 反应能力 (如动态避障) 可以通过 有偏向地训练 习得。通过 加权训练 那些动作轨迹发生剧烈变化的“意外”数据片段，能显著增强模型在动态环境中的鲁棒性。</li><li>[模型对齐]： 慢速规划模型和快速反应模型之间存在 “语义鸿沟”。端到端联合微调 是弥合该鸿沟、确保高级指令能被低级执行器有效理解和修正的关键步骤，仅训练适配器效果不佳。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索与闭源大模型的对齐： 研究如何仅训练 Edge Adapter，使其能理解并修正来自 固定、不可微调的 黑盒 VLA（如通过 API 调用）的高级指令。</li><li>利用人类视频数据增强反应能力： 探索如何从大规模、无动作标签的 人类第一视角视频 中学习动态场景的先验知识，以弥补机器人交互数据的不足。</li></ul></section>
       <section>

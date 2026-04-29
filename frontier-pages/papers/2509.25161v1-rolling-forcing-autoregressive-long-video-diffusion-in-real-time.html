@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.25161v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有流式视频生成采用自回归方式，逐帧预测下一帧。</li><li>核心痛点： 严格的逐帧因果预测导致误差逐帧累积，长视频会逐渐失真和漂移 (Error Accumulation)。</li><li>本文切入点： 打破逐帧生成的严格因果链，通过滚动窗口内的联合去噪，让多帧互相校正，从而抑制误差传播。</li></ul></section><section><h3>Key Insights</h3><ul><li>[误差传播机制]： 自回归视频生成的误差累积，其根源在于严格的单向因果依赖。打破这种依赖，允许局部双向信息流（如联合去噪），是抑制误差的关键。</li><li>[时间一致性的分层]： 视频的时间一致性可分解为短期动态和长期全局属性。仅靠滑动窗口的局部上下文无法维持长期一致性，必须引入固定的全局锚点（如初始帧）来解决全局属性漂移问题。</li><li>[训练范式与曝光偏差]： 在自回归生成中，曝光偏差（训练用真值，推理用生成值）是误差来源之一。通过在训练中引入自生成历史，并设计高效的非重叠窗口训练策略，可以有效弥合这一差距，同时控制计算成本。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态全局上下文： 研究动态全局上下文机制。模型应能自动识别关键帧或场景转换点，并动态更新或替换作为全局锚点的注意力池，以适应非线性的视频叙事。</li><li>层级式规划生成： 引入层级式规划。在生成细节帧之前，模型可以先生成一个稀疏的、抽象的“骨架”序列（如关键动作或场景描述），然后以这个骨架为条件进行稠密帧的生成，实现从规划到执行。</li></ul></section>
       <section>

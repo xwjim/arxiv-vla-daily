@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.13977v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用学习到的 世界模型 (World Models) 作为模拟器，通过 强化学习 (RL) 提升机器人策略，以避免昂贵的真实世界交互。</li><li>核心痛点： 世界模型并非完美，其生成的模拟环境存在 幻觉 (hallucination) 和 长时程误差累积，导致 RL 策略学会利用模拟器的漏洞而非掌握真实技能。</li><li>本文切入点： 与其追求完美的模拟器，不如接受其缺陷，转而设计一套机制来 主动管理和约束 RL 与不完美模拟器的交互过程，将问题从“建模问题”转变为“可靠性问题”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[问题重构]： 世界模型用于 RL 的核心矛盾，并非模型不够真实，而是 RL 算法会无条件信任并利用模型的系统性偏差（幻觉）。因此，控制幻觉比消除幻觉 在当前技术阶段更具可行性和价值。</li><li>[交互协议]： 如何“使用”模拟器与模拟器本身同样重要。通过 关键帧初始化 (KIR) 这种精心设计的交互协议，可以将学习聚焦在模型最可靠的 短时程、关键决策区间，从而有效规避其长时程预测的不可靠性。</li><li>[动态对齐]： 策略和世界模型是 相互影响的动态系统，而非静态关系。一个固定的世界模型会因策略的进化而迅速“过时”，低频、策略驱动的协同进化 (PACE) 是维持模拟器有效性的高性价比方案。</li></ul></section><section><h3>Next Steps</h3><ul><li>让策略感知模拟器不确定性： 让 VLA 策略不仅在世界模型中学习，还能 感知到世界模型预测的不确定性。当模型预测不稳定（可能产生幻觉）时，策略可以采取更保守的行动。</li><li>探索多模态奖励信号： 结合除视觉外的其他模态（如 力/触觉反馈、声音）来构建奖励函数，使成功判断更鲁棒，减少对单一视觉奖励模型的依赖。</li></ul></section>
       <section>

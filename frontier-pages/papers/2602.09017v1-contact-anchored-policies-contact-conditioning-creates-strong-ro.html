@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.09017v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前主流的通用机器人策略，依赖 自然语言 作为任务指令的输入。</li><li>核心痛点： 语言过于 抽象和模糊，难以精确传达机器人操作所需的具体物理和空间信息，导致模型臃肿且泛化性差。</li><li>本文切入点： 直觉上，物理操作的本质是 接触。将策略的条件输入从「语言」降维到「目标接触点」，为模型提供一个更直接、无歧义的物理目标。</li></ul></section><section><h3>Key Insights</h3><ul><li>条件模态降维： 对于基础物理操作，具体的空间坐标 (接触点) 是比抽象的自然语言 更有效、信息密度更高的条件信号。这大幅降低了模型对世界知识的依赖，使其能用小得多的数据（仅23小时）和模型尺寸实现卓越的零样本泛化。</li><li>模块化 vs. 单体大一统： 成功的通用机器人系统，可能不是一个无所不能的单体模型，而是一个由多个 高度泛化的基础能力模型 (Utility Models) 组成的工具库。这些原子化的能力（如抓取、开门）可以被上层规划器（如VLM）灵活调用，实现复杂的长时程任务。</li><li>泛化测试范式： 验证零样本泛化能力的关键在于 场景和物体的多样性，而非仿真环境的视觉逼真度。本文证明，一个轻量级的、专注于程序化内容生成（PCG）的仿真器，足以作为评估和迭代真实世界策略的 有效代理指标。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“点”到“轨迹”： 研究如何让策略自主 预测并执行一个接触点序列或轨迹，而非依赖单个静态目标点。这将是解锁擦拭、切割等连续接触任务的关键。</li><li>学习接触分布： 探索让模型输出一个关于 最佳接触区域的概率分布，而不是一个确定的点。这能极大提升在面对物体姿态不确定或感知噪声时的鲁棒性。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.05057v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学习机器人运动（潜动作）依赖于时序视频数据和复杂的时序模型。</li><li>核心痛点： 视频学习范式成本高、效率低，且表征模糊；而传统状态表征要么信息冗余，要么表达力不足。</li><li>本文切入点： 作者凭直觉推断，一个足够表达力强且极度紧凑的状态表征，其状态间的简单差值就足以蕴含清晰的运动信息，从而颠覆性地摆脱对视频的依赖。</li></ul></section><section><h3>Key Insights</h3><ul><li>[运动的涌现性]： 机器人运动（潜动作）无需从时序视频中显式学习。一个好的静态图像状态表征空间本身是线性化的，两点之差（s_goal - s_start）就自然地、涌现式地编码了动态变化。</li><li>[表征的因果解耦]： 通过强大的生成模型（DiT）作为解码器进行无监督重建，可以将图像中的“不变”物理状态与“可变”的视觉纹理有效解耦。这使得状态表征 s 专注于核心物理信息，其差值才能干净地表示运动。</li><li>[表征的尺度效应]： 该状态-运动表征框架具有高度可扩展性。增加来自不同来源（模拟、真实机器人、人类第一视角视频）的数据，能持续提升表征的泛化能力和任务性能，证明了其作为基础模型的潜力。</li></ul></section><section><h3>Next Steps</h3><ul><li>结构化潜动作空间： 如何在当前线性空间基础上，引入非线性结构或层级化的潜动作表征，以支持更复杂的、多阶段的任务规划？</li><li>语言引导的潜空间导航： 能否将语言指令直接映射为潜空间中的一个向量（方向+大小），从而实现用语言直接“驱动”状态 s 在潜空间中移动，生成零样本的动作序列？</li></ul></section>
       <section>

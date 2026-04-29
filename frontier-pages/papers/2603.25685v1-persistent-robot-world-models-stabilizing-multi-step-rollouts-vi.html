@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.25685v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型在训练时，使用 完美的真实数据 (ground-truth) 作为历史输入，来预测下一步的视频。</li><li>核心痛点： 这种训练方式导致了 “暴露偏差” (Exposure Bias)。模型从未见过带误差的输入，一旦部署时将自己有瑕疵的输出作为下一步输入，误差就会迅速累积，导致视频质量在几秒内崩溃。</li><li>本文切入点： 核心直觉是，不应在完美数据上训练，而应让模型在自己 生成的、有瑕疵的序列 上直接学习和迭代，从而学会纠错和保持稳定。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练范式]： 解决 误差累积 的关键不是提升单步预测精度，而是改变训练范式。必须让模型在 闭环自生成 的数据分布上进行优化，才能获得对自身错误的鲁棒性。</li><li>[模型能力]： RL 调优的收益主要集中在 任务相关区域（机械臂和物体），而非静态背景。这证明模型学会了更好地模拟 动态交互物理，而非简单地记忆场景。</li><li>[关键视角]： 腕部相机 的视觉质量提升最显著。这表明该方法能有效捕捉对机器人操作至关重要的 近距离、精细交互 细节，这是评估下游策略的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入物理一致性奖励： 设计基于物理引擎或几何约束（如碰撞、遮挡）的奖励函数，提升生成视频的 物理真实感。</li><li>与策略学习闭环： 将稳定化的世界模型作为 虚拟环境，直接用于下游机器人策略的训练和评估，形成 模型-策略协同进化 的闭环。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12730v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的 VLA 模型仅根据当前单帧图像和语言指令来生成动作。</li><li>核心痛点： 机械臂在动作中遮挡目标物后，模型会丢失上下文，忘记任务目标，导致动作中断或失败（即缺乏时空记忆）。</li><li>本文切入点： 直觉上，如果不断地把任务开始时的场景（第一帧）给模型看，就能像一个备忘录一样，时刻提醒它最初的目标和物体位置。</li></ul></section><section><h3>Key Insights</h3><ul><li>[时序记忆]： 单张固定的初始帧足以充当一种极其高效的短期记忆机制。它能有效防止模型在遇到临时遮挡时“分心”或“遗忘”，从而实现更及时的失败重试 (Early Retrying)。</li><li>[空间推理]： 无需昂贵的深度相机或点云，仅靠初始帧与当前帧的时序对比，就能为模型提供足够的隐式3D线索。这使得一个预训练的空间编码器能被激活，以提升对物体位置和姿态的理解精度。</li><li>[模型效率]： 解决复杂的时空推理问题，不一定需要复杂的模型结构（如 RNN 或 Transformer History）。采用“锚点”这种极简的输入增强，就能以几乎可忽略的计算开销，获得显著的性能提升，体现了“简单即有效”的设计哲学。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态锚点更新机制： 研究如何让模型在任务关键节点（如完成一个子目标）后，自动更新或切换锚点帧，使其能适应长时程、多阶段的任务。</li><li>多视角锚点融合： 在任务开始时，融合多个不同视角的初始帧来构建一个更立体的“场景锚点”，以降低对单一初始视角的依赖，并提供更鲁棒的3D先验。</li></ul></section>
       <section>

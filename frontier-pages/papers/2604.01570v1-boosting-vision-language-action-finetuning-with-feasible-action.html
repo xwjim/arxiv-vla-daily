@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.01570v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 直接套用语言模型的训练范式 (SFT/RFT)，将机器人连续动作离散化为独立的Token进行预测。</li><li>核心痛点： 语言的正确答案是唯一的，但物理动作存在容错性。one-hot 式的训练目标导致模型过拟合到单一的最优动作，泛化能力差且样本效率低。</li><li>本文切入点： 作者意识到物理世界中，一个最优动作周围存在一个“可行邻域” (Feasible Action Neighborhood, FAN)。因此，模型输出的动作概率分布不应是尖锐的脉冲，而应是平滑的、有一定宽度的分布，以反映这种容错性。</li></ul></section><section><h3>Key Insights</h3><ul><li>物理与语言的本质差异： 论文揭示了 VLA 领域一个被忽视的根本问题——语言空间的“排他性”与物理动作空间的“容错性”存在本质冲突。将语言模型训练目标直接迁移到机器人控制上是导致模型脆弱的根源之一。</li><li>分布形态即泛化能力： 模型输出的动作概率分布的“形状”是其泛化能力的直接体现。尖锐、单峰的分布（低熵）意味着过拟合和差的泛化性；而平滑、宽容的分布（高斯状）则与更强的鲁棒性和OOD（分布外）性能正相关。</li><li>结构化先验优于无结构探索： 相比于传统的熵最大化（鼓励均匀、无结构的探索），本文提出的 FAN 正则化是一种结构化先验。它将“动作邻域内结果近似”这一物理直觉编码为高斯分布，为模型提供了更明确、高效的学习信号，从而显著提升了样本效率。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习自适应的 FAN 几何： 与其使用固定的高斯先验，不如让模型根据当前状态（state）和指令（instruction）自主学习 FAN 的形状。可以探索使用混合高斯模型（GMM）或归一化流（Normalizing Flow）来建模更复杂的多模态可行域。</li><li>任务感知的正则化强度： 不同的任务对精度要求不同。未来可以研究让模型根据任务难度或指令的模糊性，动态调整正则化强度 α 或目标邻域大小 σ。例如，对于“精确插入”任务，应自动减小 σ；对于“随意放置”任务，则可增大 σ。</li></ul></section>
       <section>

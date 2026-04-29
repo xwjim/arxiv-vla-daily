@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.00732v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统方法要么生成静态抓取姿态，要么依赖固定的动作序列，缺乏语言指令的灵活性。</li><li>核心痛点： 无法理解开放式语言指令，且严重依赖昂贵的、针对特定机器人的遥操作数据。</li><li>本文切入点： 将不同形态的灵巧手动作统一编码到一个共享的离散动作空间（Codebook），从而能直接从人类视频中学习通用操作技能。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作表征的统一性]： 不同形态（异构）的灵巧手动作可以被抽象和压缩到一个共享的、形态无关的离散动作空间（Codebook）。这证明了复杂操作技能存在一种通用的底层“语法”，可以跨机器人实体进行迁移。</li><li>[学习范式的转变]： 灵巧操作技能的学习无需昂贵的机器人遥操作数据。仅用大规模的人类视频数据，模型就能学到足够泛化、类人的操作序列，极大地降低了数据收集的门槛。</li><li>[生成与优化的解耦]： 语言模型擅长生成语义正确（做什么）的动作序列，但物理真实性较差。一个独立的物理引导优化模块能有效弥补这一缺陷，将“意图”转化为“可行”的物理轨迹，实现“what”与“how”的分离。</li></ul></section><section><h3>Next Steps</h3><ul><li>[引入闭环反馈]： 结合触觉传感器数据，将 VLM 嵌入到一个实时的策略循环中，使其能根据物理接触信息动态调整后续动作。</li><li>[扩展统一编码本的语义]： 将当前的动作编码本扩展到双手协同操作或工具使用场景，探索更复杂的、层级化的动作“语法”。</li></ul></section>
       <section>

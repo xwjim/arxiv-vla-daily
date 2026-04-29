@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.03741v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法依赖端到端的像素级修复/重绘范式来编辑图像。</li><li>核心痛点： 这种像素级操作将规划与执行耦合，缺乏物体级精确控制，难以处理需要复杂空间推理的多对象编辑任务，且易产生物理谬误。</li><li>本文切入点： 放弃直接操作像素，而是将图像“升维”成一个由独立物体图层构成的2.5D 结构化环境，像操作 Photoshop 图层一样进行编辑。</li></ul></section><section><h3>Key Insights</h3><ul><li>[解耦的重要性]： 将指令理解（规划）与像素生成（执行）彻底解耦，是实现复杂、多步、高保真编辑的关键。传统方法将二者混在一起，导致指令理解不准、执行效果差。</li><li>[表征的结构化]： 将图像表征从无结构的像素网格提升到有结构的物体图层，是实现物理真实性（如重力、支撑关系）和局部编辑精确控制（不污染无关区域）的根本前提。</li><li>[交互的原子化]： 将编辑过程建模为一系列原子动作的累积，而非一次性全局重绘。这不仅能有效抑制误差累积，还天然支持多轮交互式修正，使编辑过程可控、可追溯。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“指令执行者”到“智能设计师”： 让 VLA 智能体具备主动规划和美学判断能力。在模糊指令下，它不仅能执行，更能提出多种符合物理和美学原则的编辑方案，进行创造性而非指令性的编辑。</li><li>引入动态物理引擎与可微渲染： 将当前的“图层操作”升级为在动态物理世界中的交互。支持软体、流体等复杂物理属性，并结合可微渲染处理全局光照，实现电影级的物理真实感与更高维度的交互性。</li></ul></section>
       <section>

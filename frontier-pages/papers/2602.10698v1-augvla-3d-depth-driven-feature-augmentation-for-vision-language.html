@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10698v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的机器人VLA模型（如OpenVLA）严重依赖从2D图像中提取的特征，缺乏对三维空间的直接理解。</li><li>核心痛点： 引入3D信息要么依赖昂贵的3D数据集，要么需要专用传感器（如LiDAR），这极大地限制了模型利用海量、易获取的2D数据进行扩展的能力。</li><li>本文切入点： 作者的直觉是，可以利用先进的单目深度估计算法，将任何2D图像“升级”为带有3D信息的伪3D数据，从而绕过对物理3D传感器和真实3D数据集的依赖。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据利用范式： 通过算法生成3D信息（伪3D），而非依赖物理传感器，成功解锁了海量2D机器人数据集的3D应用潜力。这本质上是一种低成本的数据增强范式，让模型能从2D数据中学到3D知识。</li><li>特征融合机制： 直接注入原始3D特征会干扰预训练模型。“动作助手”模块通过任务导向的正则化，确保了3D几何信息能被有效吸收并服务于最终动作，而非成为破坏预训练权重的噪声。</li><li>能力边界拓展： 2D模型的瓶颈在于几何歧义（如物体遮挡、远近误判）。注入的深度先验能显著提升模型在精细操作（如对准、插入）和避障等强依赖空间关系任务上的鲁棒性。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端的深度估计： 探索让深度网络与VLA策略进行联合训练，使其生成任务相关的、而非通用的深度图。例如，在抓取任务中，模型可能更关注物体边缘的深度信息。</li><li>构建前瞻性世界模型： 利用生成的3D场景表征，构建一个轻量级的动态世界模型。这能让机器人不仅感知当前状态，还能预测短期未来，从而实现更优的规划和避障。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.14992v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 训练强大的世界模型需要大规模、精细标注的多模态视频数据，通常依赖人工标注。</li><li>核心痛点： 纯人工标注成本高、速度慢、不一致，且难以处理视频中的隐私与合规（PII/NSFW/未成年人）问题。</li><li>本文切入点： 与其让人类从零观看和标注，不如先用一系列AI模型进行预标注，将人类的角色从“大海捞针”转变为“审查-确认” (review-by-exception)，大幅提升效率和合规性。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据标注效率：</li><li>AI预标注结合“审查-确认”模式，能产生巨大的效率增益。实验证明，该流程每小时可节省约 19分钟 的人工审查时间，并将需要人工审查的视频总量减少 超过80%。</li><li>数据治理范式：</li><li>“治理优先 (Governance-first)” 是扩展数据生产规模的关键。在数据处理的最前端集成隐私合规检测（如PII、未成年人），能直接产出安全、合规、可信的高质量数据集，避免了后续补救的巨大成本。</li><li>系统架构的可扩展性：</li></ul></section><section><h3>Next Steps</h3><ul><li>开发学习型的融合策略： 训练一个轻量级模型（如小型Transformer），让其学习如何智能地融合来自不同AI模块的信号，以识别更复杂的跨模态事件，替代当前的启发式规则。</li><li>向边缘-云混合架构演进： 将部分轻量级计算（如运动检测、人脸模糊）推送到边缘设备（如摄像头）上进行实时处理。这能极大降低延迟和带宽需求，并从数据源头就实现“设计即隐私”(privacy-by-design)。</li></ul></section>
       <section>

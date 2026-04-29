@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.02330v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视频生成模型（世界模型）能模拟单个智能体的交互环境。</li><li>核心痛点： 现有模型无法将特定动作精确绑定到场景中的特定主体，在多主体控制时会“张冠李戴”。</li><li>本文切入点： 引入可学习的主体状态令牌 (subject state tokens)，为每个主体创建一个独立的、可追踪的“身份卡”，将抽象的控制信号与场景内具体的主体进行解耦和锚定。</li></ul></section><section><h3>Key Insights</h3><ul><li>[绑定机制的本质]： 成功的动作-主体绑定依赖于 “解耦-锚定” 两步范式。首先用独立的状态令牌将主体表征从像素中解耦出来，然后通过空间偏置机制（如 RoPE）将其锚定回像素空间，这比端到端让模型自己学更有效。</li><li>[世界模型的演进]： 视频模型可以自回归地、联合地学习并预测视觉场景 (x) 和抽象物理状态 (z)。这表明世界模型不仅是在“画画”，更是在“推演”一个包含离散对象及其状态的内部物理世界。</li><li>[架构的可塑性]： Transformer 架构内的信息流是可编程的。通过精巧的注意力掩码设计，可以在一个统一的模型内部模拟出分离的功能模块（如游戏引擎的“状态更新”和“渲染”），而无需改变骨干网络结构。</li></ul></section><section><h3>Next Steps</h3><ul><li>富状态表征 (Rich State Representation): 如何将主体状态 z 扩展为一个包含姿态、速度、交互意图等信息的更丰富向量，并让模型学会联合预测这些物理量？</li><li>开放世界主体发现与跟踪 (Open-World Discovery &amp; Tracking): 如何让模型在不提供初始位置的情况下，自动检测、实例化并跟踪场景中出现的新主体，实现一个真正动态、开放的多智能体世界模型？</li></ul></section>
       <section>

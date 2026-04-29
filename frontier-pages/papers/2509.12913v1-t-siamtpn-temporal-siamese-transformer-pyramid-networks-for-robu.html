@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.12913v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流追踪器（如 SiamTPN）严重依赖单帧空间特征进行目标匹配。</li><li>核心痛点： 缺乏时序信息，导致在长期追踪和目标被遮挡时模型极其脆弱，容易丢失目标。</li><li>本文切入点： 直觉上，人类追踪物体时会利用短期记忆。作者将此直觉迁移，通过维护一个动态更新的历史模板库，让模型拥有“短期记忆”来应对外观变化和遮挡。</li></ul></section><section><h3>Key Insights</h3><ul><li>[时序信息的重要性]： 在追踪任务中，时序上下文（Temporal Context）与空间特征同等重要。引入多帧动态模板是解决遮挡和长期追踪问题的关键，它为模型提供了“目标消失后应该长什么样”的先验知识。</li><li>[非线性融合的优势]： 基于注意力机制的特征融合远优于传统的线性相关操作。后者只能做“像素级”的模板匹配，而前者能学习目标与背景之间的全局语义关系，判别能力更强，尤其在背景杂乱或有相似物干扰时。</li><li>[效率与性能的平衡]： 高性能追踪不一定意味着高计算开销。通过轻量化骨干网络 (ShuffleNet_v2) 和有条件的智能更新策略，可以在引入复杂时序建模的同时，将模型部署在资源受限的边缘设备 (Jetson Nano) 上并实现实时运行。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应时序建模： 设计一种能动态调整动态模板数量和更新频率的机制。例如，用一个小型网络来决定何时更新、更新哪个模板，甚至更新多少个模板，实现真正的“智能”记忆管理。</li><li>元学习更新器 (Meta-Learner for Updater)： 训练一个元学习模型来代替当前启发式的更新策略。让模型学会如何更新，而不是依赖人工设计的规则，从而获得更强的泛化能力和鲁棒性。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.13096v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人巡检依赖人工操作或预定义的有限状态机进行任务规划，并使用传统计算机视觉（CV）技术进行目标检测。</li><li>核心痛点： 传统方法适应性差、无法理解复杂场景的上下文，且在新任务或动态环境中需要大量人工干预。</li><li>本文切入点： 直觉上，LLM的推理规划能力可以替代僵化的状态机，而VLM的图文理解能力可以替代传统CV，从而实现端到端的智能巡检。</li></ul></section><section><h3>Key Insights</h3><ul><li>[规划范式升级]： LLM不仅能生成动作序列，更能生成包含依赖图 (Dependency Graph) 的符号化计划 (Symbolic Plan)。这使得多机器人协同任务的安全性和执行逻辑被内嵌于规划本身，超越了传统的路径点规划。</li><li>[感知范式升级]： VLM将巡检任务从“检测什么”的识别问题，转变为“是否合规”的问答与推理问题。通过自然语言查询，系统能进行零样本（Zero-shot）的语义检查，并生成结构化的、人类可读的报告，极大提升了巡检的智能化水平。</li><li>[端侧部署可行性]： 实验证明，轻量化的VLM模型（如Qwen2-VL, Moondream2）在保持较高语义正确性的同时，可在资源受限的机器人平台上实现亚秒级推理。这验证了在端侧部署复杂AI模型以执行实时智能任务的工程可行性。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环在线决策： 将LLM从离线规划器转变为在线决策大脑。利用VLM的实时感知反馈，持续更新LLM的“世界模型”，实现对突发状况的实时、动态重规划，形成一个完整的感知-决策-执行闭环。</li><li>统一多模态模型： 探索使用单一的、更强大的多模态大模型（如GPT-4V或其后续版本）同时承担规划与感知任务。这能简化系统架构，并可能通过更深度的图文融合，实现“所见即所思，所思即所行”的更优协同。</li></ul></section>
       <section>

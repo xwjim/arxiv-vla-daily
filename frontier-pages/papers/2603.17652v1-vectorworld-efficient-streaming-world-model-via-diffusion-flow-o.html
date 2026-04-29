@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.17652v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用生成模型来创建自动驾驶的仿真场景，以进行测试和训练。</li><li>核心痛点： 现有模型生成速度慢、初始化状态不匹配策略输入、且在长时域仿真中误差会累积。</li><li>本文切入点： 将世界模型从一次性、多步生成的范式，转变为流式的、单步补全的实时范式。</li></ul></section><section><h3>Key Insights</h3><ul><li>[仿真范式]： 流式、增量式的世界生成范式，远比一次性生成完整场景的范式更适合长时域、交互式的闭环仿真。它将一个宏大的生成问题，拆解为一系列实时、低延迟的局部补全问题。</li><li>[生成模型训练]： 通过 MeanFlow 和 JVP 监督直接优化大步长（单步）的生成过程，可以实现无求解器的实时采样。这有效解决了传统扩散模型多步迭代导致的高延迟问题，是实现流式仿真的关键。</li><li>[状态表征]： 仿真世界的初始状态必须包含运动历史信息（通过 Interaction-State 接口）。这才能与依赖历史的下游策略模型无缝衔接（Warm-start），从根本上避免冷启动造成的早期不稳定。</li></ul></section><section><h3>Next Steps</h3><ul><li>矢量到视觉的渲染： 将 VectorWorld 作为结构化先验，指导一个神经渲染或视频生成模型。此举可实现兼具逻辑一致性和视觉真实感的高效仿真。</li><li>目标导向的对抗性生成： 研究可控的、目标导向的场景生成。不再是随机生成，而是根据最大化 ego-vehicle 规划难度的目标，来逆向生成具有挑战性的交通场景（Adversarial Scenarios）。</li></ul></section>
       <section>

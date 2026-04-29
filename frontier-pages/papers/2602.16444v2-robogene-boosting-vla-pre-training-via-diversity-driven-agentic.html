@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.16444v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖人工设计或直接用通用大模型 (LLMs) 生成机器人训练任务。</li><li>核心痛点： 人工设计任务单一、有偏见；大模型生成任务脱离物理现实、缺乏多样性，存在“幻觉”。</li><li>本文切入点： 将任务生成视为一个闭环智能体（Agentic）过程，通过多样性采样和自我反思机制，主动创造高质量任务，而非被动生成。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据质量 &gt; 数据数量： 任务的多样性和物理可行性是提升VLA模型泛化能力的关键瓶颈。与单纯增加同质化数据量相比，通过高质量任务生成来优化数据分布是更高效的预训练杠杆。</li><li>智能体框架的必要性： 通用大模型（如GPT-4o）直接用于机器人任务生成是不可靠的。必须将其封装在专门的智能体框架内，通过自我反思和物理世界反馈进行约束，才能弥合其与物理现实的鸿沟。</li><li>主动式多样性控制： 机器人任务数据存在严重的长尾效应，被动生成会加剧此问题。主动式多样性采样（如LFU）是打破偏见、确保模型接触到稀有但关键的交互场景的有效机制。</li></ul></section><section><h3>Next Steps</h3><ul><li>视觉驱动的任务发现： 从预定义库采样升级为视觉驱动的场景理解。让系统直接分析真实场景图像，自动识别可交互物体和潜在任务，实现真正的开放世界任务生成。</li><li>与物理模拟器深度集成： 将生成的任务直接在模拟器中进行快速运动规划和可执行性验证，形成一个全自动化的“生成-验证”闭环，取代对LLM常识和人工验证的重度依赖。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.16454v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统调度算法（如 FIFO, EDF）基于当前状态分配任务，不考虑设备的未来位置。</li><li>核心痛点： 无法应对无人设备的高度动态性和时空不确定性，导致 任务分配盲目，资源浪费且成功率低。</li><li>本文切入点： 直觉上，如果能 预知哪个设备将在未来某个时刻出现在任务点附近，就能极大提升调度成功率。作者将设备视为可招募的“用户”，从“预测”而非“现状”入手解决问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[行为异构性]： 无人设备并非铁板一块，其移动模式存在显著差异。为不同行为模式（如周期性、随机性）的设备匹配专属的预测模型，能比单一模型更精准地预测其未来位置，这是实现高效招募的基础。</li><li>[调度权衡]： 在资源受限时，最优调度并非“先到先得”或“最急优先”。平衡「任务紧迫度」和「系统执行能力（基站历史表现）」的调度策略，能取得更高的全局任务完成率，避免将宝贵资源浪费在注定失败的任务上。</li><li>[预测性招募]： 核心转变在于从“被动分配”到“主动预测”。通过 提前计算未来某个时空区域内可用设备的期望数量（Recruitment Expectation），系统可以做出更明智的决策，如判断是否需要请求邻近基站支援，从而根本上提升了资源调度的前瞻性和鲁棒性。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入能量与通信约束： 将 设备剩余电量 和 通信质量 作为调度决策的关键变量，构建一个能量感知的调度模型，解决“设备赶到但没电执行”的现实问题。</li><li>从独立预测到协同规划： 研究基于 多智能体强化学习 (MARL) 的调度框架，让设备不仅被动接受任务，还能学会在复杂环境中 自主协同、动态组队，以应对更复杂的联动任务。</li></ul></section>
       <section>

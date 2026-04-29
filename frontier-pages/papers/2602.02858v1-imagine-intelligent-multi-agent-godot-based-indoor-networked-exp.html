@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.02858v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有探索算法多为单智能体、集中式控制，或依赖理想化的通信与环境假设。</li><li>核心痛点： 现有MARL方法要么过于理想化（如假设永久连接），要么计算复杂（如依赖RNN/Transformer），导致仿真与现实脱节，难以在真实受限场景中部署。</li><li>本文切入点： 作者认为，与其堆叠复杂模型，不如结合高保真仿真、结构化课程学习和更简洁的架构，让智能体在接近真实物理和通信约束下，循序渐进地学会协作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构选择]： 显式信念状态优于隐式记忆。一个精心设计的、融合历史观测的自我中心地图 (Egocentric Map) 输入，其性能和效率超过了直接用通用RNN处理原始传感器序列的“黑盒”方法，且更具可解释性。</li><li>[通信悖论]： 更多的通信不一定带来更好的协作。在特定拓扑结构中（如必须穿过已探索区域），过度共享地图信息会导致智能体集体“锁死”，都不愿进入已知区域，从而因局部最优而错失全局探索。</li><li>[学习过程]： 结构化的训练过程是MARL成功的关键。相比于并行训练所有任务，序贯式、带有“可靠性”验证（如要求多次达成80%覆盖率）的课程学习，能有效避免“灾难性遗忘”，让智能体稳固掌握基础技能并成功迁移到更复杂的环境。</li></ul></section><section><h3>Next Steps</h3><ul><li>分层强化学习与长期规划： 当前策略是反应式的（最大化短期新发现面积），导致了短视行为。引入一个高层策略（负责设定宏观目标，如“探索那个远处的房间”），可能解决智能体不愿穿越已知区域的难题。</li><li>探索与利用的动态权衡： 当前奖励函数纯粹鼓励探索。下一步可以设计一个自适应奖励机制，当探索陷入停滞时，能动态增加对“重访”和“穿越”已知区域的价值，以智能地解锁新的探索路径。</li></ul></section>
       <section>

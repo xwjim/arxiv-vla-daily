@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.19822v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的无人机视觉语言导航（VLN）基准，主要关注“按详细指令逐步导航至终点”。</li><li>核心痛点： 现有方法无法处理现实中 “简短、高层” 的模糊指令，且评估指标只看终点，忽视了 过程的正确性 和 安全性。</li><li>本文切入点： 通过构建一个 “高层指令驱动多阶段任务” 的新范式，并结合兼具真实感和物理碰撞的数字孪生环境，来模拟真实操作。</li></ul></section><section><h3>Key Insights</h3><ul><li>任务范式转变的挑战：</li><li>现有 SOTA 视觉语言动作（VLA）模型在 从“逐步导航”到“高层意图理解”的范式转变中表现不佳。这揭示了当前模型在 语义补全 和 多阶段任务分解 上的核心短板。</li><li>评估维度的重要性：</li><li>传统的 终点成功率（SR） 具有欺骗性。引入 过程导向（TCR） 和 安全感知（CR, CSPL） 的评估后，发现模型即使能到达终点，也常以 “跳过步骤”或“危险碰撞” 为代价，这暴露了现有策略的“捷径”行为。</li><li>环境表征的二元性：</li></ul></section><section><h3>Next Steps</h3><ul><li>动态环境下的高层任务执行： 将基准扩展到包含 移动车辆、行人、天气变化 的动态环境中，研究模型在线重规划和动态适应能力。</li><li>开放域指令的泛化与组合： 研究模型如何理解和执行 训练集中从未见过的全新任务组合指令（例如“先巡检右边的楼，然后降落到中间的草坪上”），探索任务的组合泛化能力。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.20188v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型将大语言模型的“思考”和动作专家的“执行”耦合在单一频率下运行。</li><li>核心痛点： 大模型（VLM）的推理速度很慢，这严重限制了机器人（尤其是高自由度的全身机器人）的控制频率、稳定性和实时反应能力。</li><li>本文切入点： 模拟人类的快慢双系统认知。将VLM的慢速“思考”和控制器的快速“反应”彻底异步并行化，并用一个潜层表征缓存 (Latent Representation Buffer) 作为桥梁来解耦二者。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构解耦的价值： 策略的推理深度与控制频率可以被有效解耦。一个慢速、强大的VLM可以指导一个快速、简单的控制器，实现高层智能与底层反应速度的兼得，解决了“大模型上机器人”的普遍瓶颈。</li><li>能力分工的协同： VLM的自回归符号推理（慢系统）更擅长泛化、异常处理和遵循复杂指令；而扩散模型的连续动作生成（快系统）更擅长精细、平滑的物理控制。异步架构能有效融合二者的独特优势。</li><li>高维动作的表征： 对于高维度的全身机器人，一个结构化的、紧凑的动作分词器 (Action Tokenizer) 是让VLM能够进行有效高级规划（即预测动作Token）的关键前提。直接对29自由度进行分词会导致组合爆炸和推理失效。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态桥接机制： 设计更智能的桥接模块，使其能预测未来状态或根据快系统的反馈动态调整慢系统的推理焦点，实现双向信息流动。</li><li>多速率多模态融合： 将高频力/触觉信号整合进快速通路用于实时力控，同时将接触事件的低频语义（如“碰到障碍物”）反馈给慢速通路进行重新规划。</li></ul></section>
       <section>

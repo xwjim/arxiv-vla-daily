@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.22286v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过复用扩散模型去噪过程中间的计算结果（特征缓存），来跳过部分计算，从而加速推理。</li><li>核心痛点： 现有方法采用“零阶保持”（Zero-Order Hold）假设，即简单地“复制粘贴”旧特征。这在处理动态场景时，会导致严重的鬼影、模糊和运动不连贯问题。</li><li>本文切入点： 作者的直觉是，缓存不应是静态的复制，而应是一个动态的近似过程。缓存的决策（何时复用）和执行（如何复用）都必须与视频内容（运动、显著性）紧密相关。</li></ul></section><section><h3>Key Insights</h3><ul><li>[问题根源]： 视频生成缓存的核心瓶颈在于“零阶保持”的静态假设。该假设完全忽略了时序动态，是导致视觉伪影的根本原因。本文将其重新定义为一个动态近似问题。</li><li>[决策机制]： 高质量的缓存决策必须是内容感知的。一个有效的决策系统需要同时考虑两个维度：运动强度（决定了缓存的风险）和感知显著性（决定了错误的代价）。</li><li>[近似质量]： 缓存复用不等于直接复制。通过引入向量空间的最优投影和运动补偿，可以在几乎不增加开销的情况下，将缓存从一个简单的“状态复用”升级为一个高质量的“状态预测”，极大缓解了误差累积。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习式缓存策略 (Learned Caching Policy)： 将当前基于规则的启发式模块（CFC, SWD, OFA）替换为一个轻量级的、可学习的策略网络。该网络能根据特征本身，端到端地决策何时跳过、如何生成最优近似，从而实现真正的自适应。</li><li>跨模态缓存机制 (Cross-Modal Caching)： 将“内容感知”的思想扩展到多模态输入。例如，利用文本 Prompt 中的动词或描述来预先调整缓存策略的激进程度，实现更高层次的语义感知加速。</li></ul></section>
       <section>

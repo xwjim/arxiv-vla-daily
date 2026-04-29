@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.15543v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人 VLA 模型采用静态融合策略，无差别地处理所有传感器（如多视角相机、触觉、热成像）的输入。</li><li>核心痛点： 静态融合不仅计算开销大，而且任务无关的传感器信息会成为噪声，干扰决策，降低模型性能。</li><li>本文切入点： 模拟人类主动感知机制。人类不会处理所有感官信息，而是根据任务动态聚焦于关键信息。作者据此设计了一个“路由器”，让机器人学会“挑”着看。</li></ul></section><section><h3>Key Insights</h3><ul><li>[感知范式]： 对于多模态机器人，动态、选择性的感知优于静态的全量信息融合。它不仅是计算上的优化，更是通过主动抑制噪声来提升决策准确率和长时任务稳定性的关键机制。</li><li>[锚点视角]： 在动态感知系统中，一个稳定的“锚点”至关重要。实验证明，使用第一人称的腕部相机作为路由器的核心输入，比固定位置的外部相机能更有效地判断当前任务阶段，从而做出更准确的路由决策。</li><li>[监督来源]： 强大的 VLM 本身可以成为一种有效的监督信号源。其高级推理能力可用于为下游小模型（如本文的路由器）生成高质量的训练标签，这为构建复杂机器人系统提供了一条数据成本极低的实践路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合物理交互信息： 将力/力矩传感器数据整合进动态路由框架。研究机器人在接触和非接触状态下，如何动态调整对力觉和视觉的依赖。</li><li>探索自监督路由： 摆脱对 VLM 离线标注的依赖。研究如何让模型在线、自监督地学习路由策略，例如，通过预测未来状态或任务成功与否的内在奖励信号来指导注意力的分配。</li></ul></section>
       <section>

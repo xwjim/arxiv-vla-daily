@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.03310v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型在单一、特定的机器人硬件上进行训练和部署。</li><li>核心痛点： 模型泛化能力差，无法直接用于新的机器人（跨硬件泛化失败），且数据收集成本高昂。</li><li>本文切入点： 直觉上，如果能用独立于具体硬件的接口 (UMI) 收集足够大规模、多样化的数据，模型就能学会与硬件无关的通用操纵规律。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据与模型的可扩展性 (Scaling Law)： 机器人策略的性能，与模型参数量 (N) 和数据规模 (D) 共同遵循一个可预测的幂律法则 (Loss ∝ A/N^α + B/D^β)。这证明了在机器人领域，暴力堆数据和增大模型是通往更强泛化能力的有效路径。</li><li>跨硬件泛化的实现机制 (Cross-Embodiment Generalization)： 零样本跨硬件泛化是可行的。其核心机制在于，使用独立于硬件的 UMI 数据进行大规模预训练，使模型学习到底层的物理操作逻辑，而非特定机器人的动力学特性。</li><li>混合动作表征的有效性 (Hybrid Action Representation)： “先离散、后连续”的训练范式是成功的。离散化 (RVQ) 有效地将动作与 VLM 的语义空间对齐；而后续的连续生成 (Flow-Matching) 则保证了控制的精度和效率，解决了两者之间的根本矛盾。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索超越“抓取”的通用接口： 设计并验证用于全身移动（如可穿戴腿部传感器）或多指灵巧操作的新型通用数据采集接口，并检验其是否同样遵循 Scaling Law。</li><li>从“可行”到“可靠”： 探索将在线强化学习或失败后自我修正等机制与当前框架结合。利用 VLM 的推理能力，在零样本策略失败时进行在线调整，以大幅提升任务成功率和鲁棒性。</li></ul></section>
       <section>

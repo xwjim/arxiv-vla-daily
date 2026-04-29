@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.15061v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的视觉-语言-动作模型 (VLA) 遵循单向模式，被动接收指令并直接执行。</li><li>核心痛点： 当人类指令存在模糊性时（例如场景中有多个同类物体），现有模型无法主动求助，导致执行失败或随机猜测。</li><li>本文切入点： 直觉上，应将“沟通协作”与“动作执行”解耦。作者让智能体先通过对话（问问题）搞清楚“做什么”，再执行具体动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练策略]： “知识绝缘” (Knowledge Insulation) 训练策略是实现“先问后做”的关键。通过分阶段训练并冻结协作模块(VLM)，可以有效保留其对话能力，避免在学习动作生成时被“灾难性遗忘”。</li><li>[架构设计]： 在分层VLA架构中，一个显式的连接模块至关重要。它通过语言指令调整视觉表征，为下游的动作模型（Diffusion）生成具有区分度的条件，解决了高级语义无法有效指导低级动作的难题。</li><li>[交互模式]： 引入特殊信号Token (&lt;AMBG&gt;, &lt;ACT&gt;) 和一个信号检测器，可构建一个轻量级的“路由器”。这使得智能体能在“提问澄清”和“执行动作”两种模式间无缝切换，实现了从被动执行到主动协作的根本转变。</li></ul></section><section><h3>Next Steps</h3><ul><li>执行中的动态澄清 (Dynamic Clarification)： 研究智能体在任务执行过程中暂停、提问并恢复的能力。这能应对执行期间才出现的意外或模糊情况，更贴近真实协作。</li><li>从对话中学习 (Learning from Dialogue)： 将对话从简单的“信息获取”升级为“知识学习”。让智能体不仅能澄清指令，还能从用户的回答中学习新的概念、偏好或技能，并用于未来的交互。</li></ul></section>
       <section>

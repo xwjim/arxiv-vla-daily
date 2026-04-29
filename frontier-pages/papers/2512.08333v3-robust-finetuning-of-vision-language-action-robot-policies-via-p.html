@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08333v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通用机器人策略通过在少量新任务演示数据上微调 (Finetuning) 来学习新技能。</li><li>核心痛点： 微调后的模型会严重过拟合，不仅丧失了原有的通用能力（灾难性遗忘），也无法泛化到新任务的未见过的场景（分布外泛化能力差）。</li><li>本文切入点： 作者的直觉是，最优解可能存在于预训练模型和微调模型参数空间的“中间地带”。他们没有设计复杂的算法，而是直接尝试用最简单的线性插值来寻找这个“甜点”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[知识保留]： 简单的参数线性插值是一种极其有效的正则化手段。它能将被微调过程“冲走”的通用知识“拉回来”，从而在保留新技能的同时，恢复模型的通用泛化能力。</li><li>[规模效应]： 参数合并的效果与预训练数据的规模和多样性正相关。预训练模型越“博学”（通用能力越强），合并后的模型在新任务上的分布外（OOD）泛化能力就越强。</li><li>[模态重要性]： 在视觉-语言-动作（VLA）模型中，语言模型骨干 (LLM Backbone) 的参数是保留通用能力的关键。实验表明，仅合并语言模型的权重，而保持视觉和动作模块完全微调，就能达到几乎同等的泛化效果。</li></ul></section><section><h3>Next Steps</h3><ul><li>自动化合并系数选择： 研究如何在没有OOD验证集的情况下，通过分析模型内在属性（如损失景观、参数范数）来自动确定最优的合并系数 $\alpha$。</li><li>非线性与多任务合并： 探索更复杂的非线性合并方法，或借鉴LLM领域的任务向量算法（如TIES-Merging），以更高效、无冲突地将多个新技能合并到一个基础模型中。</li></ul></section>
       <section>

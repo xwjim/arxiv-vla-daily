@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.11660v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法是训练端到端的 视觉-语言-动作 (VLA) 模型，通过模仿学习直接映射视觉和语言到机器人动作。</li><li>核心痛点： VLA 模型严重依赖 大规模、高质量的演示数据，且在面对长时程、复杂推理任务时 “任务智能”不足。</li><li>本文切入点： 放弃端到端训练范式，转而利用强大预训练模型（LLM/VLM）的原生能力，构建一个 免训练的、分工明确的多智能体协作框架，将复杂问题拆解为感知、推理和控制。</li></ul></section><section><h3>Key Insights</h3><ul><li>[框架有效性]： 对于复杂的机器人操作任务，“分而治之”的智能体协作框架 (解耦感知、推理、行动) 比端到端的 VLA 范式更有效。它能充分利用不同模型的专长，避免了微调导致大模型 原生高级能力的“知识侵蚀”。</li><li>[数据生产力]： 一个高成功率的 免训练机器人框架 (ManiAgent) 本身就是一种高效的数据生产工具。它颠覆了“需要数据来训练好模型”的传统逻辑，变为“用好模型（框架）来自动化生产高质量数据”，从而大幅降低了 VLA 等学习方法的数据获取成本。</li><li>[智能可扩展性]： 框架的整体性能与 底层 VLM/LLM 的能力强度直接正相关。实验证明，更换更强的商业模型能带来显著的成功率提升，表明该框架设计并未成为瓶颈，而是有效地将 基础模型的“智能”转化为了“物理行动力”。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索实时闭环反馈机制： 如何在子任务执行 *期间* 引入快速的视觉反馈和动态重规划能力，而不是仅在子任务之间进行状态更新，以应对环境突变（如物体滑落）。</li><li>泛化至更复杂的交互类型： 当前框架主要处理基于关键点位姿的刚体操作。未来的高价值方向是将其推理能力扩展到 非刚体操作（如折叠毛巾） 和 更复杂的物理交互（如使用工具）。</li></ul></section>
       <section>

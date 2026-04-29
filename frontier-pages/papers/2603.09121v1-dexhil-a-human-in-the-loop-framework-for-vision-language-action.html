@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.09121v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型通常依赖离线收集的大规模成功案例数据进行微调。</li><li>核心痛点： 对于灵巧手这类高维、接触密集的任务，离线数据样本效率极低，且无法有效纠正模型在真实执行中的错误累积。</li><li>本文切入点： 直觉上，人类在模型即将失败时提供的纠正动作，是比海量成功数据更有价值的信号。作者以此为切入点，构建了一个专注于捕获和学习“纠错”数据的在线训练框架。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据价值分布]： 人类干预数据的价值远高于常规成功数据。它本质上是高信息量的分布外 (Out-of-Distribution) 样本，精确暴露了模型的认知盲区和能力边界。</li><li>[学习效率]： 简单增加数据量不如主动为“纠错”数据赋予更高权重。这种类似重要性采样的机制，能让模型将有限的梯度资源集中用于学习最关键的恢复策略，从而指数级加速收敛。</li><li>[策略学习范式]： 训练模型时不应使用包含多次失败尝试的完整轨迹，而应只关注从最后一次纠错到成功的片段。这避免了模型学习到错误的中间动作，形成了一种“渐进式错误修正”的高效学习模式。</li></ul></section><section><h3>Next Steps</h3><ul><li>[从被动干预到主动求助] 研究模型自我不确定性评估机制。让模型在即将进入 OOD 状态或预测置信度低时，主动请求人类干预，从而将“人”从持续监督者变为按需介入的“教练”，极大提升效率。</li><li>[灵巧手动作的离散化与表征] 探索将高维连续的灵巧手动作空间“分词化” (Tokenize)。构建一个通用的灵巧手动作词表，这可能比直接回归连续动作更利于 VLA 模型的学习与泛化，并能与大语言模型的思维链更好地对齐。</li></ul></section>
       <section>

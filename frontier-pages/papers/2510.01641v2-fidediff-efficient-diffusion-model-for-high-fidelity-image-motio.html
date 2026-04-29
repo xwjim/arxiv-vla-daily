@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.01641v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 扩散模型（DM）生成效果好但推理慢，且常为追求观感而牺牲保真度。</li><li>核心痛点： 现有扩散模型用于图像去模糊，存在推理耗时过长与复原保真度低的根本矛盾。</li><li>本文切入点： 将不同模糊程度视为同一清晰图像在“模糊轨迹”上的不同时间点，训练模型学习跨时间点的一致性，从而实现单步直达清晰结果。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练范式]： 一致性训练是实现高效高保真复原的关键。相比于让模型独立学习每个“模糊-清晰”对，强制模型认知到不同模糊程度的内在关联（同属一条退化轨迹），能学到更鲁棒的退化逆过程，从而在单步推理中保持稳定和高保真。</li><li>[信息注入]： 显式的物理先验（模糊核）比隐式学习更有效。直接将估计出的模糊核作为条件注入扩散模型，比让模型自身从像素中隐式推断模糊模式，能带来更显著的保真度提升。这证明了对于图像复原任务，物理退化模型的指导价值巨大。</li><li>[退化建模]： 模糊程度可以被有效映射为扩散模型的时间步（timestep）。实验证明，模型不仅能根据预测的t值处理未知模糊，而且在一定t值范围内（如120-280）都能保持高质量输出。这揭示了扩散模型的时间步t可以作为一种通用的、连续的退化程度描述符。</li></ul></section><section><h3>Next Steps</h3><ul><li>无监督一致性学习： 如何在没有成对轨迹数据的情况下，让模型学会时间一致性？可以探索为单张真实模糊图伪造一条虚拟退化路径，或通过自监督信号强制模型对不同扰动版本产生一致的清晰化预测。</li><li>统一退化时间步建模： 将本文“模糊程度t”的概念推广到多种图像退化（如噪声、压缩、模糊）。构建一个能将不同退化类型和程度映射到统一潜空间 (t, c_degradation)的通用模型，有望实现“万能”的单步图像复原器。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.18183v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型依赖训练数据与部署环境间的 视角一致性。</li><li>核心痛点： 部署时摄像机 视角一旦变化，模型性能会急剧下降，而现有解决方案（如3D重建）成本高、效率低。</li><li>本文切入点： 直觉上，不同视角的图像在深层特征空间中应有关联。作者选择 在特征空间（Latent Space）对齐并融合多视角信息，而非在像素空间或通过3D重建。</li></ul></section><section><h3>Key Insights</h3><ul><li>特征空间对齐的有效性： 证明了 直接在特征层面进行视角对齐是可行且高效的。这表明神经网络可以隐式学习不同2D视角间的几何变换关系，从而绕过复杂的3D重建或海量数据采集。</li><li>渐进式学习的必要性： 视角适应能力的学习需要一个 渐进式的训练过程。实验表明，逐步引入多视角数据（Progressive a pproach）比一次性全部引入，能让融合模块学得更好。这揭示了复杂能力习得的一种有效范式：分解任务，逐步学习。</li><li>特征对齐的本质： 对比损失函数发现，余弦相似度（Cosine Similarity）优于均方误差（MSE）。这表明对于视角对齐任务，保证不同视角下同一物体的 特征向量“方向”一致性，比保证其“幅值”一致性更为关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入显式几何约束： 探索将 相机内外参或对极几何等显式几何约束 融入特征融合模块，可能实现更精准、更可解释的视角对齐。</li><li>探索分层与动态融合： 研究在视觉主干网络的不同层级进行 分层融合（Hierarchical Fusion），让模型在浅层对齐低级纹理，在深层对齐高级语义，可能进一步提升融合效果。</li></ul></section>
       <section>

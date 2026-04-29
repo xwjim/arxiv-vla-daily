@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.05930v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： AI智能体依赖“生成-执行-反馈”的循环来迭代优化机器学习代码。</li><li>核心痛点： 执行瓶颈 (Execution Bottleneck)，真实运行和训练代码的物理过程极其耗时（可达数小时），严重限制了探索效率。</li><li>本文切入点： 借鉴世界模型 (World Models)的灵感，让LLM扮演一个“内部模拟器”，通过逻辑推理直接预测不同代码方案的性能，从而跳过物理执行。</li></ul></section><section><h3>Key Insights</h3><ul><li>预测能力的来源： LLM的预测能力源于对数据语义的深层理解，而非简单的代码复杂度启发式。将数据特征转化为语言叙述 (Verbal Report)能显著激活其推理能力，效果远超提供原始数据或统计数据。</li><li>能力边界与可靠性： 该预测能力在成对比较 (Pairwise Comparison)中表现稳健，但在需要全局视角的列表排序 (Listwise Ranking)任务上会失效。然而，其预测的置信度校准良好（高置信度 ≈ 高准确率），使其可作为可靠的决策“门控”机制。</li><li>扩展定律的失效： 预测准确率并不遵循传统的参数规模扩展定律，模型参数在达到一定规模（如30B）后，性能提升迅速饱和。这表明提升能力的关键在于优化模型推理架构（如思维链），而非单纯增加参数量。</li></ul></section><section><h3>Next Steps</h3><ul><li>将该预测模型作为奖励模型 (Reward Model)，为强化学习提供密集的、免执行的反馈信号，以加速更复杂Agent的训练和优化过程。</li><li>探索如何从成对偏好（Pairwise Preference）扩展到全局排序（Listwise Ranking）。研究模型在全局排序上失效的根本原因，并设计新的训练范式或模型结构来赋予其全局最优解的判别能力。</li></ul></section>
       <section>

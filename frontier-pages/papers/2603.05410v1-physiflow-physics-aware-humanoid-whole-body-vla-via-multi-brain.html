@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.05410v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA（视觉-语言-动作）模型用于机器人操纵，而全身控制则依赖强化学习或模仿学习。</li><li>核心痛点： VLA模型推理速度慢，无法满足全身控制的高频需求；而全身控制缺乏语义理解，难以自主执行复杂任务。</li><li>本文切入点： 受生物学启发，采用多脑层级架构解耦高层语义推理（慢）和底层运动控制（快），并以一个语义-运动潜向量作为信息枢纽。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构规律]： 分层解耦是解决VLA在人形机器人上应用瓶颈的关键。将高层语义推理（慢）与底层运动生成（快）分离，能同时保证语义泛化性和实时物理稳定性。</li><li>[生成范式]： 流匹配 (Flow Matching) 在机器人运动生成中，相比自回归(AR)或扩散(DDPM)模型，能更好地平衡推理效率与动作平滑度，是实现高频全身控制的有效路径。</li><li>[表征学习]： 一个精心设计的语义-运动潜向量 (z_vl) 是连接抽象指令和具体执行的桥梁。通过课程学习和知识蒸馏，可让该向量在无未来信息的推理阶段，也能有效指导动作生成。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入闭环反馈： 将实时环境感知（视觉、力觉）融入决策流，实现从开环执行到闭环动态修正的升级，大幅提升系统鲁棒性。</li><li>融合世界模型： 结合世界模型进行长时序规划，让机器人不仅理解当前指令，还能预测动作的物理后果，从而处理更复杂的、需要多步推理的交互任务。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.13869v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用合成数据 (Sim) 训练模型，来解决真实世界 (Real) 标注数据稀缺的问题。</li><li>核心痛点： 合成数据与真实图像存在巨大域差 (Domain Gap)，直接训练的模型在真实场景中性能严重下降，尤其对无人机视角下的小目标处理不佳。</li><li>本文切入点： 将 Sim2Real 的域差解耦为「全局风格」和「局部内容」两个问题，并用分层、由粗到精的思路分别解决。</li></ul></section><section><h3>Key Insights</h3><ul><li>[全局与局部的冲突]： 单纯进行全局风格迁移对最终检测任务有害。 这种操作会破坏无人机图像中微小行人目标的结构与细节，引入噪声，反而降低检测性能。</li><li>[评价指标的再思考]： 下游检测性能与“局部真实感”强相关，而非“全局真实感”。 实验证明，即使全局图像的FID指标（衡量图像整体质量）变差，只要关键目标（行人）区域的真实感（patch-wise FID）提升，检测器性能就会显著提高。</li><li>[分层对齐的必要性]： Sim2Real的域差是多层次的，必须解耦并分步解决。 必须先统一全局画风，再精炼局部细节，最后进行清理。这三个阶段相辅相成，缺一不可，共同构成了一个有效的对齐流程。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端统一框架： 设计一个单一的、端到端的生成模型，在一次前向传播中同时完成全局风格、局部细节和内容分布的对齐，取代当前复杂的三阶段流水线。</li><li>从图像到视频的扩展： 将该框架扩展到视频域，在保证单帧图像真实性的同时，维持生成视频在时间维度上的连续性和一致性，避免帧间闪烁和伪影。</li></ul></section>
       <section>

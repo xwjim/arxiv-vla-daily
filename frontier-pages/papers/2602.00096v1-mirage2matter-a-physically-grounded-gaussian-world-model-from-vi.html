@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.00096v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖仿真环境生成大量数据来训练具身智能体，以规避高昂的现实世界数据采集成本。</li><li>核心痛点： 现有仿真器存在巨大的“模拟-现实鸿沟” (Sim-to-Real Gap)，要么视觉效果失真，要么物理交互不真实，且常依赖昂贵传感器。</li><li>本文切入点： 直觉上，将视觉渲染和物理模拟解耦处理。用最适合的工具分别解决，再通过精确的坐标对齐将两者统一，从而同时实现视觉真实与物理真实。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征解耦： 视觉真实性和物理真实性是两个可以被独立优化的目标。与其用单一模型（如 NeRF）同时解决两个问题，不如用 3DGS 专攻视觉、Mesh 专攻物理，再通过坐标对齐统一，是更高效且高质量的路径。</li><li>渲染一致性： 仿真器中，背景（环境）和前景（可交互物体）必须使用统一的渲染管线 (Unified 3DGS World)。若将 Mesh 物体直接渲染在 3DGS 背景上，会产生视觉伪影，导致模型学到错误的“捷径”，从而降低现实泛化能力。</li><li>尺度锚定： 视觉上的照片级真实感，若没有米级精确的尺度对齐 (Metric-accurate Alignment)，对于物理交互是无效的。一个简单的校准板是实现 Zero-Shot Sim-to-Real 迁移的必要“锚点”，它将虚幻的视觉模型“锚定”在物理世界的真实坐标中。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态世界建模： 引入 4D 或动态 3DGS 技术，捕捉并重建包含动态元素（如光照变化、物体移动）的场景，生成更丰富、更真实的训练数据。</li><li>物理属性生成： 从视频中不仅重建几何，还要自动推断并生成更丰富的物理属性（如质量、摩擦系数、弹性、关节连接等），以支持更复杂的物理交互模拟。</li></ul></section>
       <section>

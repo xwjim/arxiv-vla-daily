@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.00813v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶依赖稀疏感知（3D检测/地图）或引入语言（VLA）辅助决策。</li><li>核心痛点： 已有的稠密几何重建方法依赖批处理 (batch processing)，计算冗余大、延迟高，无法用于在线实时规划。</li><li>本文切入点： 作者的直觉是，无需处理全部历史帧，一个固定大小的滑动窗口就足以提供连续的几何信息，从而实现高效的流式在线推理。</li></ul></section><section><h3>Key Insights</h3><ul><li>范式有效性： 稠密几何是比语言更直接、更有效的驾驶中间表示。它提供了像素级的精确空间信息，无需语义标注就能实现鲁棒的规划，避免了语言的模糊性。</li><li>流式处理的可行性： 通过滑动窗口和相对位姿预测，可以将依赖全时序的几何重建问题解耦。这证明了在保持恒定计算成本下，进行高质量在线几何感知与规划是完全可行的。</li><li>几何的泛化能力： 基于稠密几何学习的模型具有强大的泛化能力。一个在混合数据集上训练好的模型，无需微调即可直接应用于不同相机配置和不同驾驶场景的规划任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合几何与语言 (VGLA)： 将本文的 VGA 范式与 VLA 范式结合。利用稠密几何提供精确的空间感知，同时用语言模型进行高级推理（如理解交警手势、预测异常行为），实现优势互补。</li><li>自监督几何学习： 摆脱对深度伪标签的依赖。探索如何仅从多视角视频流和自车运动中，通过自监督信号（如光度一致性）直接学习度量准确的稠密几何。</li></ul></section>
       <section>

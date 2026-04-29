@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.05107v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将机器人长时程动作序列（Trajectory）视为一个整体，使用类似优化语言模型的方法进行优化。</li><li>核心痛点： 无法定位长序列中的具体错误步骤，导致 信用分配（Credit Assignment）模糊，训练不稳定且效率低下。</li><li>本文切入点： 洞察到机器人动作与语言的本质不同——动作具有 严格的因果相连的阶段性。作者利用此特性，将优化单位从 整个轨迹 降维到 具体阶段。</li></ul></section><section><h3>Key Insights</h3><ul><li>[结构特性]： 机器人动作序列 与语言序列有本质不同。它具有 严格的因果依赖 和 难度异构性（如“抓取”比“移动”难）。将优化单元从轨迹降维到「阶段」，是更符合机器人任务本质的做法。</li><li>[微调范式]： 模仿 -&gt; 偏好 -&gt; 交互 (IPI) 的串行管线是一种高效的微调策略。它平滑地连接了 利用专家数据、对齐次优数据 和 在线探索 三个过程，实现了从粗到精的策略优化。</li><li>[奖励机制]： 阶段性感知的价值并非均等。它在任务的 关键决策点 和 高精度要求 的阶段（如最后的“放置”或“摆正”）作用最大，能提供最关键的校正信号，有效防止“功亏一篑”。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习自动化的阶段识别：能否用一个无监督或自监督的模型，从大量机器人轨迹数据中自动发现并分割出有意义的语义阶段，取代当前的人工规则系统？</li><li>端到端学习阶段性奖励：将阶段划分和奖励函数设计也纳入学习框架，让模型不仅学习“如何做”，也学习“任务应该分为几步”以及“每一步的好坏标准”，实现真正的端到端优化。</li></ul></section>
       <section>

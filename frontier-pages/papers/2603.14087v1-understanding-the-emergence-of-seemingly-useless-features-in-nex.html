@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.14087v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 普遍认为，自回归模型学习的所有特征都应服务于预测紧邻的下一个词元。</li><li>核心痛点： 无法解释为何模型会学到对当前预测无用，但更抽象、更长远的特征（如世界模型）。</li><li>本文切入点： 放弃静态分析最终模型，转而从训练动态入手，将梯度信号分解为三个来源，从而解释“无用”特征的形成动机。</li></ul></section><section><h3>Key Insights</h3><ul><li>[“无用”特征的起源]： 模型学习看似无用的特征（如Othello棋盘中不影响下一步的棋子状态），其动力并非来自直接预测，而是来自预缓存（为未来预测做准备）和回路共享（从其他位置泛化来的知识）。这从根本上解释了为何世界模型会存在但又很脆弱。</li><li>[预缓存的作用域]： 预缓存对于学习简单的、局部的特征（如基础语法）不是必需的。但它对于需要长程依赖和高级结构（如代码解析、故事连贯性）的任务至关重要。</li><li>[预缓存 vs 前瞻预测]： 预缓存和前瞻预测（模型内部预测未来多个词元的能力）是两种独立现象。实验表明，高预缓存影响力的特征反而对解码未来词元的贡献更小，这有力支持了“面包屑”假说（即前瞻预测源于不同位置所需特征的相似性，而非主动规划）。</li></ul></section><section><h3>Next Steps</h3><ul><li>开发一种轻量化的归因方法，无需重训练即可估算大模型中特征的“预缓存”和“回路共享”影响，使其更具实用性。</li><li>利用梯度分解作为特征发现工具，主动寻找那些主要由“预缓存”信号塑造的、与长程推理和规划相关的全新可解释性回路。</li></ul></section>
       <section>

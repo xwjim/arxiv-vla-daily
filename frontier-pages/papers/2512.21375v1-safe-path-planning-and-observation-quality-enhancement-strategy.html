@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.21375v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过后期图像处理（如辐射校正）修复受干扰数据，或采用固定的预设航线。</li><li>核心痛点： 现有方法无法实时适应动态变化的光照干扰（如阴影、水面反光），导致数据质量差且不可靠。</li><li>本文切入点： 将光影干扰从“待修复的数据瑕疵”重新定义为“需主动规避的动态虚拟障碍物”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[问题重构]： 本质上是将光谱数据质量问题，从“后期图像修复”的信号处理思路，转变为“前期主动规避”的机器人控制思路，通过路径规划根除低质量数据源。</li><li>[混合控制策略]： IFDS 提供“流体般”的局部平滑规避本能，确保反应速度和路径连续性；而 MPC 提供“前瞻性”的全局滚动优化大脑，确保决策的最优性。二者结合实现了反应速度与路径质量的精妙平衡。</li><li>[任务驱动自适应]： 路径规划的目标不只是避障，更是最大化有效数据收益。当水平规避空间受限时，系统会通过 DFAA 机制牺牲部分能耗（调整高度）来换取更高的数据分辨率，体现了“质量优先”而非“能耗优先”的设计哲学。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合实时视觉的动态光影预测： 利用端到端的深度学习模型（如视频预测网络），直接从机载相机画面预测光影区域的未来演化，以替代对气象和地理模型的依赖，提升预测的实时性与鲁棒性。</li><li>能量-时间-质量的多目标协同优化： 将无人机能耗、任务总时间与数据采集质量（如GSD、信噪比）共同纳入MPC的优化目标，研究三者之间的帕累托前沿，实现不同任务优先级下的最优决策。</li></ul></section>
       <section>

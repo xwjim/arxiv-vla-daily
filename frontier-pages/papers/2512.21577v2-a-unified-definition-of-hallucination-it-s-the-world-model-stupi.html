@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.21577v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 幻觉的定义是碎片化的，每个任务（如摘要、问答）都有自己特定的、不兼容的定义和评测标准。</li><li>核心痛点： 定义的混乱导致研究成果难以比较、缓解策略难以泛化，阻碍了对幻觉根本原因的理解。</li><li>本文切入点： 作者的直觉是，所有幻觉定义都隐含地假设了一个“真实世界”。通过将其显式化、形式化为 “参考世界模型” (Reference World Model)，便可统一所有乱象。</li></ul></section><section><h3>Key Insights</h3><ul><li>[幻觉的本质]： 幻觉并非任意错误，而是模型内部世界表征的错误，并通过其输出被用户观察到。这清晰地将幻觉（信念错误）与规划错误（信念正确但行动错误）或激励错误（为显得自信而说谎）区分开。</li><li>[定义多样性的根源]： 不同任务对幻觉的定义之所以五花八门，根本原因在于它们对 W (世界模型)、V (视图)、P (冲突策略) 这三个变量做出了不同的隐式选择。该框架揭示了这种多样性背后的统一结构。</li><li>[评估方法论的革新]： 该框架催生了一种新的基准测试设计范式：使用程序化生成的、世界模型完全已知的合成环境（如棋类游戏、模拟数据库）。这使得大规模、低成本、无歧义的幻觉评估成为可能，摆脱了对昂贵且主观的人工标注的依赖。</li></ul></section><section><h3>Next Steps</h3><ul><li>可学习的冲突策略： 设计更复杂的任务，让模型不仅仅是遵循一个给定的冲突策略 P，而是需要根据上下文动态地推断或学习该遵循何种策略。这更贴近真实世界中复杂的决策场景。</li><li>动态世界中的幻觉： 构建参考世界模型 W 会随时间动态变化的基准。这可以用来测试模型知识更新、识别过时信息和适应新环境的能力，这对长时程运行的AI Agent至关重要。</li></ul></section>
       <section>

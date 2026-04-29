@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.08546v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 基于视频预测的 世界模型 对机器人学潜力巨大，但受限于性能瓶颈。</li><li>核心痛点： 现有模型要么 推理速度太慢 (如扩散模型)，要么在长时程预测中 累积误差导致崩溃。</li><li>本文切入点： 作者洞察到 一致性模型 (Consistency Models) 兼具生成质量与推理效率，并创新地将其同时用于 图像解码 和 时序动态预测，实现了速度与稳定性的统一。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据等价性]： 惊人地发现，完全由该世界模拟器生成的 100% 模拟数据 训练出的模仿学习策略，其性能与使用 同等数量的真实世界数据 训练出的策略 几乎没有差别。这证明了该模拟器能有效捕捉任务的核心物理规律。</li><li>[评估可靠性]： 策略在模拟器中的 性能表现 与其在 真实世界中的性能表现 呈现出 强正相关性。这意味着该模拟器可以作为一个 可靠的、可复现的评估代理，用于策略迭代和模型筛选，极大加速研发循环。</li><li>[架构突破]： 创造性地将 一致性模型 应用于世界模型的 解码和动态预测 两个核心环节，是实现 长时程稳定 (10+分钟) 与 实时交互速度 (15 FPS) 的关键。它解决了以往模型在速度、质量和稳定性之间的“不可能三角”。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索缩放定律 (Scaling Law)： 系统性地研究该世界模型的性能（如保真度、稳定性）如何随 数据量、模型参数量和任务多样性 的增加而变化，为构建更大、更通用的物理世界模型提供指导。</li><li>构建通用世界模型 (Generalist World Model)： 尝试在 大规模、多任务 的机器人数据上训练一个统一的、通用的世界模拟器，摆脱当前“一任务一模型”的范式，向机器人领域的“物理基础模型”迈进。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.04137v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有视频生成和世界模型的评测，主要关注视觉质量或通用的物理推理。</li><li>核心痛点： 现有评测无法衡量模型在机器人场景下的规划合理性、物理一致性及动作可执行性。</li><li>本文切入点： 引入“图灵测试”的直觉，构建一个专为具身智能设计的评测基准，用人类偏好和逆动力学模型（IDM）来检验生成视频的真实性与可执行性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[评测指标错配]： 传统的视频质量指标（如 FVD、PSNR）与人类在具身交互场景中的偏好判断相关性极低（本文提出的指标与人类偏好相关性 &gt;0.93）。这表明，仅追求像素或分布相似度，无法有效衡量模型的真实物理世界理解能力。</li><li>[模型能力短板]： 即便最先进的世界模型，在长时序规划（得分仅17.27）和物理一致性（最高分68.02）方面也表现出严重缺陷。这说明模型生成的视频时空连贯性差，且无法稳定遵循物理规律。</li><li>[生成到现实的鸿沟]： 大多数视频模型生成的动作序列，在真实世界中的执行成功率近乎为零。这揭示了一个本质问题：模型生成的“看似真实”的物理过程，与真实世界的动力学存在根本性差异，无法直接用于机器人控制。</li></ul></section><section><h3>Next Steps</h3><ul><li>[物理规律注入的生成]： 如何将可微分的物理引擎或符号化的物理规则直接整合到视频生成模型中，使其在生成时就能主动遵循物理约束，而非仅仅依赖事后评测。</li><li>[生成与控制的闭环对齐]： 构建世界模型（生成器）与策略/逆动力学模型（判别器）的对抗式训练闭环。通过将“可执行性”作为直接的反馈信号，来优化世界模型，使其生成对下游控制任务真正有价值的未来序列。</li></ul></section>
       <section>

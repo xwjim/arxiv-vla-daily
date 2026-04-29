@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.06474v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶VLM通常将多视图图像压缩成BEV特征或用Q-Former提取全局特征，再送入LLM。</li><li>核心痛点： 传统方法面临信息密度与Token数量的根本矛盾。全局压缩会丢失关键空间细节，而BEV或稠密占用表示又会导致LLM难以处理的Token爆炸。</li><li>本文切入点： 核心直觉是驾驶场景在语义上是稀疏的。因此，无需对整个空间进行稠密编码，只需用少量可学习的稀疏查询去主动“抓取”场景中最重要的几何与语义信息即可。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征范式转变：</li><li>证明了稀疏、显式的3D几何表征（Sparse Occupancy Queries）是比传统图像全局特征（Q-Former）或2D投影特征（BEV）更适合LLM的视觉语言连接器。它在大幅降低Token量的同时，保留了驾驶决策所需的关键空间细节，解决了效率与精度的两难。</li><li>跨模态对齐机制：</li><li>发现稠密占用监督是实现视觉与语言对齐的关键“正则项”。若没有占用预测任务的几何约束，仅靠文本监督，稀疏查询将难以学习到有意义的空间结构，导致模型无法收敛。这揭示了几何先验在VLM中的重要性。</li><li>任务解耦与模型协同：</li></ul></section><section><h3>Next Steps</h3><ul><li>弱/自监督的占用学习： 研究如何摆脱对稠密3D标签的依赖。例如，利用时间连续性、多视角一致性或2D分割等弱标签，来自监督地训练稀疏占用编码器，是实现大规模应用的关键。</li><li>构建稀疏世界模型： 将当前的开环模型演进为闭环世界模型。让模型不仅预测未来，还能基于自身规划的动作，递归地预测下一时刻的稀疏占用状态，从而实现真正意义上的长时序、多步规划。</li></ul></section>
       <section>

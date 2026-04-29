@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.02834v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA模型通过“大规模预训练 + 小规模任务微调”的范式来学习机器人技能。</li><li>核心痛点： 微调后的VLA模型在推理时表现不稳定。由于微调数据包含次优或错误的演示，模型会学习到一个包含“好”和“坏”动作模式的混合分布，导致仅改变随机噪声就可能使任务失败。</li><li>本文切入点： 将VLA的不稳定性问题类比为离线强化学习中的分布外（Out-of-Distribution）探索问题。作者认为，解决方案不是改变模型，而是在推理时约束模型，使其只选择数据集中最高频（最可能成功）的动作模式。</li></ul></section><section><h3>Key Insights</h3><ul><li>问题定性： VLA的推理不稳定性本质是分布偏移问题。模型被迫学习了微调数据中所有好坏动作模式的混合分布，推理时随机采样可能落入“坏”的模式，这与离线RL的OOD问题同源。</li><li>范式创新： “测试时反探索”是解决VLA不稳定的高效范式。它无需重新训练或复杂的RL更新，通过“生成-验证”机制，在推理时将动作约束在数据的高密度（成功）区域内，巧妙地绕开了修改生成模型本身的难题。</li><li>特征利用： VLA自身的内部表征是最高效的验证特征来源。直接在VLA的隐藏特征上附加一个轻量级验证器（CFN），远比训练独立的编码器或直接拟合动作误差更有效，因为它完全复用了VLA强大的预训练感知和理解能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应反探索： 研究如何动态调整“反探索”的强度。例如，在不确定的状态下允许更多探索（采样更多候选），在关键决策点则更保守（选择最高频动作），实现探索与利用的动态平衡。</li><li>价值与频率的混合验证： 将代表“熟悉度”的伪计数与一个代表“未来收益”的轻量级价值/奖励模型结合。这样可以在选择“熟悉”的动作的同时，也考虑其长期回报，从而在安全性和任务效率之间取得更好的平衡。</li></ul></section>
       <section>

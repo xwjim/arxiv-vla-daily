@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12144v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有 3D 占用预测依赖 有限视角 的图像，且只能识别 预定义 的封闭类别。</li><li>核心痛点： 视角受限导致 感知不全，封闭词汇导致模型在开放世界中无法泛化到 未见过的物体。</li><li>本文切入点： 作者认为，全向视觉 的几何特性（如畸变）和 开放词汇 的对齐难题是核心。他们直觉上用 极坐标螺旋扫描 (PsM) 匹配全景几何，并用 解耦的模态对齐 (NMA) 提升泛化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征几何]： 对于全向感知任务，柱状体素 (Cylindrical Voxel) 结合 极坐标螺旋扫描 的方式，比传统笛卡尔坐标系能更自然地建模 360° 空间的连续性和长距离依赖，有效缓解了全景图两极的畸变问题。</li><li>[模态对齐]： 直接对齐 “像素-体素-文本” 特征在开放词汇任务中是脆弱的。先构建代价体 (cost volume) 再进行聚合，并采用 无梯度方式主动校准文本嵌入，能显著提升对新类别的泛化能力，避免过拟合。</li><li>[训练范式]： 将文本嵌入的优化过程与主网络 解耦（无梯度），可以更好地保留预训练语言模型的泛化能力。这种方式比端到端微调更能抵抗对“基类”的过拟合，是实现开放词汇能力的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入时序信息： 将单帧 O3N 扩展为视频序列模型，利用时序一致性来优化动态场景的占用预测和对遮挡的鲁棒性。</li><li>迈向语言交互式 3D 理解： 结合大型语言模型 (LLM)，实现更复杂的 空间关系查询（如“离门最近的椅子在哪里？”），而不仅仅是体素级别的语义标注。</li></ul></section>
       <section>

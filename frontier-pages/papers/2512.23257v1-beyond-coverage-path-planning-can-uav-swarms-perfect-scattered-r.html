@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.23257v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统上使用 覆盖路径规划 (CPP) 方法，像耕地一样无差别地扫描整个区域。</li><li>核心痛点： 对于多个分散的目标区域，CPP 方法会采集大量无关数据，导致 时间与能源的巨大浪费。</li><li>本文切入点： 作者的直觉是，许多巡检任务并不需要“地毯式”全覆盖，一张 “恰到好处”的代表性照片 就足够了。这个认知转变将复杂问题降维。</li></ul></section><section><h3>Key Insights</h3><ul><li>[效率权衡]： 巡检目标存在 “大而全 (MCO)” 与 “小而精 (BCO)” 的根本性权衡。</li><li>MCO 模式确保 100% 覆盖 目标，但可能引入大量无关背景（高召回、低精度）。</li><li>BCO 模式则寻求 内容与画幅的平衡，在牺牲少部分覆盖率的同时，换取更高的主体分辨率和更少的背景噪声（高精度、高分辨率）。</li><li>[蜂群规模]： 无人机蜂群规模存在 显著的边际效益递减。</li><li>从 1 架增至 6 架无人机，任务效率能获得巨大提升，甚至实现“一波流”完成所有任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>[多视点协同]： 放宽“单图像”约束，研究 “用最少的几张照片组合” 来覆盖一个复杂目标。这能有效弥补当前方法的短板，是走向更通用场景的关键一步。</li><li>[语义化巡检]： 结合先验知识（如卫星图、历史数据）为目标区域的不同部分赋予 “重要性权重”。让视点优化过程，不仅仅是几何上的最优，更是 信息价值上的最优。</li></ul></section>
       <section>

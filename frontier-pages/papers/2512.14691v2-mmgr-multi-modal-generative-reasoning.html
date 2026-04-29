@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.14691v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有视频模型评测主要关注视觉保真度 (FVD) 和文本对齐度 (CLIP Score)。</li><li>核心痛点： 传统指标无法检测模型在物理、逻辑、因果一致性上的推理失败，即“看起来对但其实是错的”。</li><li>本文切入点： 受人类核心知识理论启发，提出必须从物理、逻辑、空间等五个核心推理维度来评测生成模型，才能走向真正的“世界模型”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[推理能力与模态鸿沟]： 在抽象和逻辑推理任务上（如 Sudoku, ARC-AGI），图像模型显著优于视频模型。视频模型因时间不一致性 (temporal instability) 问题，难以维持静态的逻辑约束，生成过程即是遗忘过程。</li><li>[感知-执行分离]： 模型表现出“看似在推理”的行为（如走迷宫、解数学题的步骤），但过程充满逻辑谬误或物理违规（如穿墙）。这表明模型优化目标是视觉合理性 (visual plausibility)，而非因果正确性 (causal correctness)。</li><li>[训练数据不平衡]： 当前模型在物理常识任务上表现尚可，但在抽象推理上惨败。这揭示了训练数据中严重偏向于感知数据，而缺乏结构化、符号化推理数据的根本缺陷。</li></ul></section><section><h3>Next Steps</h3><ul><li>修正优化目标： 如何设计新的训练目标或架构，使模型从追求“视觉合理”转向保证“逻辑/物理正确”？例如，引入可微分的物理引擎或神经符号模块。</li><li>构建推理数据： 如何系统性地构建包含复杂因果链、逻辑规则和物理约束的大规模视频/图像数据集，以弥补当前模型在结构化推理能力上的短板？</li></ul></section>
       <section>

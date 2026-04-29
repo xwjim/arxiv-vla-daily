@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.10980v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 扩散策略在模仿学习中很强大，但其随机性会导致误差累积，最终导致任务失败。</li><li>核心痛点： 现有解决方案（如增加专家数据、设计密集奖励、训练世界模型）成本高昂且难以扩展。</li><li>本文切入点： 作者洞察到，可以将整个机器人执行轨迹视为一个“包”，将其中每个动作片段视为“实例”。这完美符合 多示例学习 (Multiple Instance Learning, MIL) 的框架，从而可以仅用最终的成败标签，自动定位出决定性的动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[时序信用分配]： 证明了 多示例学习 (MIL) 是解决机器人学中时序信用分配问题的有效范式。它能仅从稀疏的、二元的轨迹最终结果（成功/失败）中，精准定位出导致该结果的关键动作片段，无需手动设计密集奖励。</li><li>[引导策略]： 发现了引导扩散策略时存在一种 “推拉”不对称性。“推离”失败模式的引导强度 (w_fr) 应远大于“拉向”成功模式的引导强度 (w_sr)。这是因为失败模式更泛化、多样，而成功动作往往是稀疏且高度依赖上下文的，过强的“拉力”会破坏策略的稳定性。</li><li>[自监督改进]： 揭示了一种 策略自我改进的闭环。模型能通过分析自身经验（执行轨迹）进行学习和迭代，而无需新的外部专家数据。更重要的是，用较弱策略的经验训练出的引导器，依然能有效提升更强策略的性能，证明了其泛化能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线自适应引导： 将当前的离线训练范式转变为在线学习框架。让引导分类器随着策略收集到新的经验而持续更新，实现对环境变化的动态自适应。</li><li>探索更鲁棒的信用分配模型： 研究超越离散关键动作的信用分配机制。例如，如何处理那些由一系列微小误差缓慢累积导致的失败，这是当前 MIL 框架难以捕捉的。</li></ul></section>
       <section>

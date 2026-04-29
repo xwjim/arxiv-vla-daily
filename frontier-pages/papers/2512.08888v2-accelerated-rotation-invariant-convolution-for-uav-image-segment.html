@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08888v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过将一个卷积核旋转多次，生成一组滤波器来实现旋转不变性。</li><li>核心痛点： 每增加一个旋转角度，计算量和内存访问量就线性增加，导致成本过高。</li><li>本文切入点： 作者发现，传统卷积是“多对一”的Gather模式；如果逆转为“一对多”的Scatter模式，对称旋转下的多次乘法可被合并为一次。</li></ul></section><section><h3>Key Insights</h3><ul><li>[计算范式]： 卷积的计算瓶颈可以从乘法+访存转移到索引+加法。通过Scatter操作，将高成本的im2col数据复制和冗余乘法，转化为一次乘法和多次高效的地址计算与加法，这在现代GPU并行架构上更高效。</li><li>[对称性与计算]： 几何对称性可以直接映射为计算冗余。对于旋转群（如p4群），不同旋转角度的卷积核在Scatter视角下共享了完全相同的乘法项，变化的仅是结果的写入地址。这揭示了通过改变数据流来利用几何先验的有效性。</li><li>[模型扩展性]： 降低中间特征维度是实现高阶旋转不变性的关键。传统方法为每个旋转角度生成一个完整的特征图，导致内存爆炸。Scatter方法通过融合计算（fused computation），在一次传递中处理多个对称旋转，避免了中间特征图的显式存储，从而能够支持更多（如16个）旋转方向。</li></ul></section><section><h3>Next Steps</h3><ul><li>向3D/更高维度空间扩展：将Scatter卷积机制推广到3D点云或体积数据（如医学影像）。这些领域中的旋转不变性需求更强，且传统G-Conv的计算开销呈指数级增长，本文方法有望带来巨大收益。</li><li>探索更通用的硬件无关Scatter原语：开发一种更高级、与硬件解耦的Scatter/Gather原语，并推动其成为主流深度学习框架（如PyTorch 2.0+的Triton）的一等公民，从而让更多研究者能便捷地利用这种计算模式。</li></ul></section>
       <section>

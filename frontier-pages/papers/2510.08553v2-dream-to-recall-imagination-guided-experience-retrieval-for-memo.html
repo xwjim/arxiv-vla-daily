@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.08553v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 智能体通过在环境中不断导航，将所有遇到的视觉观察存入记忆库以供后续使用。</li><li>核心痛点： 现有方法要么全盘接收所有记忆（计算量大、信息嘈杂），要么固定范围查找（容易错失关键远距离经验），且大多只记住了“看到了什么”，忽略了“当时是怎么决策的”。</li><li>本文切入点： 模仿人类“脑中预演”的直觉。作者认为，对未来的想象本身就是最好的查询线索，可以用它来指导智能体在庞大的记忆库中，主动、精准地“回想”起最相关的经验。</li></ul></section><section><h3>Key Insights</h3><ul><li>[检索机制的本质]： 前瞻性检索优于回溯性匹配。</li><li>与基于当前状态或指令的静态匹配不同，基于“想象”的动态检索（Dream to Recall）能更好地捕捉导航的意图。它通过预测未来可能到达的状态，实现了从“我现在在哪”到“我将要去哪”的思维转变，从而更精准地召回对未来决策有用的经验。</li><li>[记忆内容的完备性]： 导航决策同时需要“地图”和“攻略”。</li><li>仅存储环境观察（地图）是不够的。实验证明，同时存储和检索导航行为模式（攻略，即过去的决策序列）能显著提升性能。这表明，成功的导航不仅依赖于对环境的认知，更依赖于对“在特定情境下如何行动”的策略性知识的复用。</li><li>[系统效率的瓶颈]： 记忆的“访问效率”比“存储容量”更关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>增强世界模型的“空间想象力”：</li><li>通过更大规模的预训练或引入显式的空间关系建模，提升世界模型对复杂环境的长期、精准预测能力，以生成更高质量的检索查询。</li><li>发展“置信度感知的检索与探索”机制：</li><li>研究如何让模型评估检索结果的“可信度”。基于此置信度，智能体可以动态决策：是坚定地利用高可信度的过往经验，还是在低可信度时主动进行探索，从而解决“盲目信任”的问题。</li></ul></section>
       <section>

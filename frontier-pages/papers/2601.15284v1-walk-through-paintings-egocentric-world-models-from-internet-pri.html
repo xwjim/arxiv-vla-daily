@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.15284v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统世界模型通常在特定领域内，利用昂贵的（动作-观测）配对数据从零开始训练。</li><li>核心痛点： 从零训练成本高、泛化能力差，难以适应新的机器人形态（embodiment）或环境。</li><li>本文切入点： 与其从零构建，不如“改造”。作者的直觉是，互联网规模的预训练视频模型已包含丰富的世界规律，只需通过轻量级注入动作信号，即可将其转化为一个强大的世界模型。</li></ul></section><section><h3>Key Insights</h3><ul><li>先验知识的价值： 互联网视频中的被动观测数据蕴含的视觉和物理先验，对学习主动交互的世界模型具有巨大价值。这使得模型能泛化到“画作”这类非现实场景，证明其学到的是抽象的运动规律而非死记硬背。</li><li>控制机制的简约性： 无需复杂的结构改造，仅通过“搭便车”式地利用扩散模型中普遍存在的时间步（timestep）调制通路，就能高效注入高维、复杂的动作控制信号（如25-DoF）。这揭示了预训练模型的内部表征本身就具备被引导和控制的潜力。</li><li>评估范式的革新： 传统视频指标（如LPIPS）无法区分“看起来真实”和“做得正确”。本文提出的结构一致性分数 (SCS)，通过追踪场景中静态元素的运动轨迹，首次将视觉逼真度与动作遵循的准确性解耦，为世界模型提供了更本质的评估标准。</li></ul></section><section><h3>Next Steps</h3><ul><li>长时程规划与闭环控制： 将该世界模型与模型预测控制 (MPC) 等规划算法结合，研究如何在长时程任务中进行误差校正和闭环反馈，是提升其实用价值的关键。</li><li>融合显式几何/物理先验： 将当前纯视觉模型与显式的三维几何表示（如NeRF、3D点云）或物理引擎相结合，有望增强模型对物理交互的理解，实现更鲁棒和长期的动态预测。</li></ul></section>
       <section>

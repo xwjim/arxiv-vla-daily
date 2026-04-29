@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08983v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过模型剪枝（如剪通道或剪层）来压缩神经网络，以部署在资源受限设备上。</li><li>核心痛点： 单一维度的剪枝很快会遇到瓶颈。只剪通道会迅速损害精度，而只剪层则压缩效率不足且不稳定。</li><li>本文切入点： 作者的直觉是，网络中的冗余是分层级的。与其用不同标准分别处理，不如用一个统一的“表征相似度”标准，进行从粗到细 (Coarse-to-Fine) 的系统性剔除。</li></ul></section><section><h3>Key Insights</h3><ul><li>[剪枝即正则化]： 极致的结构化剪枝，不仅是压缩，更是一种强大的正则化手段。通过剔除冗余的特征通路，模型被迫学习更本质、更鲁棒的特征，最终实现了在低信噪比（SNR）环境下精度反超原始模型的惊人效果。</li><li>[冗余的层级性]： 神经网络的冗余存在于不同粒度（层级和通道级）。采用“先粗后细”的层级剪枝策略，可以打破单一剪枝方法的压缩天花板。先移除冗余的计算“块”（层），再精雕细琢“块”内部的计算单元（通道），效率远高于只在单一维度上操作。</li><li>[相似度作为统一标准]： 特征表征相似度 (CKA) 是一个普适且高效的冗余度量标准。它无需依赖梯队、权重大小等间接指标，而是直接从功能（输出的相似性）上判断是否冗余，为跨层级、结构化的剪枝提供了统一且自洽的理论基础。</li></ul></section><section><h3>Next Steps</h3><ul><li>联合剪枝优化 (Joint Pruning Optimization)： 将层剪枝和通道剪枝统一到一个联合优化框架中，而非串行执行。例如，构建一个包含层节点和通道节点的统一图结构，通过一次图分割算法同时决定剪哪些层和哪些通道，以寻求全局最优的剪枝结构。</li><li>在线动态剪枝 (Online Dynamic Pruning)： 将 CKA 相似度分析嵌入到模型训练过程中。这使得网络可以在训练时“感知”到自身的冗余并动态调整结构，从而省去“预训练-剪枝-微调”的繁琐流程，实现端到端的架构自适应。</li></ul></section>
       <section>

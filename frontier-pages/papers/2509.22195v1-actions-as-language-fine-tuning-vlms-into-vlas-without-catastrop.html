@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.22195v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将视觉语言模型 (VLM) 在机器人遥操作数据上进行微调，以创建视觉-语言-动作模型 (VLA)。</li><li>核心痛点： 微调导致 灾难性遗忘，模型学会了动作却丢失了预训练时获得的常识推理和泛化能力，其根源是 数据分布不匹配 (机器人动作向量 vs. 互联网图文数据)。</li><li>本文切入点： 与其修改模型，不如在 数据层面 解决不匹配。作者的直觉是，如果将 底层动作也用自然语言来描述，那么机器人数据就和VLM的预训练数据“说同一种语言”了。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据表征的决定性]： 灾难性遗忘 的根源是 表征不匹配。通过将动作数据 语言化，从根本上统一了预训练和微调的数据分布，这是解决遗忘问题的关键。</li><li>[训练范式的简化]： 一旦数据表征对齐，就不再需要复杂的训练策略。仅使用 低秩适应 (LoRA) 这种轻量级微调方法，就能在不破坏VLM骨干网络的情况下注入动作能力，避免了昂贵的联合训练。</li><li>[知识保留与泛化]： 被保留下来的VLM世界知识并非摆设，而是可以直接转化为 机器人零样本泛化能力。模型能利用其未被遗忘的语义理解（如识别流行文化角色）和多语言能力，解决训练数据中从未见过的全新任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>[跨形态通用表征]： 将 语言作为通用媒介，统一描述不同机器人（机械臂、足式机器人等）的动作。这有望训练出真正 跨机器人形态 的通用策略。</li><li>[加速推理]： 研究 非自回归 的动作语言生成方法，一次性输出完整的动作指令，以解决推理延迟的瓶颈。</li></ul></section>
       <section>

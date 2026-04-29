@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.05378v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有自动驾驶评测主要关注环境变化（如天气、交通），并假设语言指令是精确且规范的。</li><li>核心痛点： 现实中的语言指令充满多样性、模糊性甚至错误，现有评测体系无法衡量模型对语言输入本身的鲁棒性。</li><li>本文切入点： 通过“反事实”思想，在完全相同的驾驶环境下，仅改变语言指令的表述，从而精准分离并量化语言变化对驾驶行为的影响。</li></ul></section><section><h3>Key Insights</h3><ul><li>[指令脆弱性]：模型对语言的理解是“表面的”，而非“语义的”。</li><li>即使是语义完全等价的指令（如 Paraphrase），也会导致模型性能发生剧烈波动，甚至出现性能提升的随机现象。这表明模型并未真正理解指令的核心意图，而是对训练数据中的特定语言模式（surface form）产生了过拟合。</li><li>[失效模式分化]：不同类型的语言扰动会诱发截然不同的驾驶失败模式。</li><li>模糊 (Ambiguity) 指令主要导致车辆犹豫不决或偏离路线（高 Route Deviation）。</li><li>误导 (Misleading) 指令则能成功“劫持”车辆，使其执行完全错误的任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>[构建免疫力]</li><li>开发鲁棒性导向的训练范式。例如，将 ICR-Drive 生成的反事实指令作为数据增强的一部分，训练模型对语言变化的“不变性”，使其学会关注指令的核心语义而非表面形式。</li><li>[建立防火墙]</li><li>研究在线指令审查与修复机制。在模型接收指令前，部署一个轻量级“防火墙”模块，用于实时检测并拦截高风险指令（尤其是 Misleading 和 Ambiguity 类型），或尝试将其“修复”为更规范的表达，从而避免灾难性后果。</li></ul></section>
       <section>

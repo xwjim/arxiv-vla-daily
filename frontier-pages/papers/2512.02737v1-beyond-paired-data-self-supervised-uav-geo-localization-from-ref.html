@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.02737v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过匹配无人机实时图像与带地理坐标的卫星参考图进行定位。</li><li>核心痛点： 训练模型强依赖成对的无人机-卫星图像数据集，获取成本高昂且难以泛化。</li><li>本文切入点： 既然没有成对的无人机数据，那就用数据增强在卫星图上“伪造”出无人机视角，让模型自己学会跨域不变性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[特征选择]： 在高空、低纹理场景下，图像的结构（边缘）比纹理/色彩更重要。使用 Canny 边缘检测作为预处理，能有效剥离光照、季节等瞬时变化，保留稳定的定位线索。</li><li>[学习范式]： 无需真实的跨域配对数据，通过“自洽性”模拟即可学习。即，对单一数据源（卫星图）施加目标域的变换（模拟无人机视角），并强迫模型认为变换前后是“同一事物”，从而塑造出对该变换鲁棒的特征空间。</li><li>[模型设计]： 基于边缘的轻量级模型在真实世界（含噪声、伪影）中表现优于复杂模型，但在干净的合成数据上反而落后。这揭示了模型复杂性与数据“脏”度之间的权衡：简单的结构化特征足以应对真实世界的挑战，而无需为合成数据中的“完美”纹理过度拟合。</li></ul></section><section><h3>Next Steps</h3><ul><li>从单尺度到多尺度/尺度自适应嵌入： 训练模型使其能显式地编码高度信息，或输出一个对高度变化连续鲁棒的特征表示，解决高度骤变时的定位失败问题。</li><li>从手动模拟到自动学习域差异： 利用生成对抗网络（GAN）或无监督域自适应技术，让模型自动学习从卫星视图到无人机视图的转换，而不是依赖手动设计的增强列表，从而发现更复杂、更真实的视觉差异。</li></ul></section>
       <section>

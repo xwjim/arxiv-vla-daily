@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.03195v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 智能体（VLA模型）通过两种方式理解世界动态：要么预测完整的未来视频帧（世界模型），要么预测两帧间的抽象变化（潜行动作）。</li><li>核心痛点： 预测完整帧计算成本极高且浪费在静态背景上；预测两帧间变化则缺乏长时程、连续的动态推理能力。</li><li>本文切入点： 作者的直觉是，人类思考运动时，并不会在脑中“渲染”每一帧像素，而是抽象出运动的轨迹和趋势。因此，可以将视频解耦为静态的“结构”和动态的“运动”，让模型只在紧凑的“运动”潜空间中进行思考和预测。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征解耦]： 将视觉世界显式地分解为不变的结构和变化的运动是构建高效世界模型的关键。这种解耦让模型能忽略冗余的静态信息，将计算资源聚焦于对任务至关重要的动态变化上，从而获得更紧凑、更高效的动态表征。</li><li>[潜空间推理]： 有效的未来预测无需在像素层面进行。通过预测一个连续的潜运动向量（Chain of World），并用稀疏的关键帧进行“校准”，模型能以一种类似“思维链”的方式进行高效且符合物理直觉的动态推理，这比生成稠密的视频帧更具扩展性。</li><li>[动态先验]： “先学物理，再学操作”的范式是有效的。通过预训练让模型掌握从初始状态预测未来运动动态的先验知识，可以在后续的动作策略微调中起到强大的正则化和引导作用，显著提升了策略的鲁棒性和泛化能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>[潜物理引擎] 当前的潜运动是描述性的，下一步可以探索构建一个因果性的“潜物理引擎”。该引擎不仅描述“如何运动”，更能理解“为何如此运动”（如重力、碰撞、摩擦等），让模型的推理更接近世界本质。</li><li>[端到端联合优化] 目前的潜运动提取器和 VLA 解码器是分阶段训练的。一个高价值方向是探索将两者端到端地联合优化，让 VLA 的任务目标（Action）能反向塑造和优化潜运动空间（Motion）的表征，形成一个任务感知的动态世界模型。</li></ul></section>
       <section>

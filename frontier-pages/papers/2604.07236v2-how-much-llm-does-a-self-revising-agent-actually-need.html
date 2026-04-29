@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.07236v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将世界建模、规划和反思等能力都打包在一个单一的LLM循环中。</li><li>核心痛点： 无法分清智能体的能力增益究竟来自LLM本身，还是来自其外部的显式结构，两者贡献被混淆。</li><li>本文切入点： 设计一个“声明式反思运行时 (Declared Reflective Runtime)”协议，将智能体内部状态和决策过程外化，使其可被独立测量和分析。</li></ul></section><section><h3>Key Insights</h3><ul><li>显式规划的价值： 一个良好的结构化规划器是智能体能力的基础。实验中，仅增加显式世界模型和规划模块（WMA）带来的胜率提升（+24.1pp），远超后续引入LLM修正带来的微小变化。</li><li>反思能力的可剥离性： 不依赖LLM的符号化反思机制是可行的。该机制能在特定场景下产生决定性作用，证明了“反思”这一元认知能力可以从LLM的黑盒中剥离出来，并用显式的、可诊断的符号规则来实现。</li><li>LLM的边际效应： 在一个已有良好规划和反思结构的智能体中，稀疏地调用LLM进行修正，其边际效益非常有限，甚至是负向的（胜率下降）。这表明LLM并非万能灵药，其价值在于弥补显式结构无法解决的特定“残差”问题，而非作为核心驱动。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习LLM调用策略： 基于本文的可观测反思结构（如置信度、预测误差），训练一个元控制器（meta-controller）来学习何时调用LLM才是最高效的，从而实现动态、智能的资源分配。</li><li>自动化符号规则生成： 将LLM的角色从“在线修正者”转变为“离线规则生成器”。利用LLM的推理能力，自动生成或优化符号化的反思和修正规则集，以提升符号化模块的性能和泛化能力。</li></ul></section>
       <section>

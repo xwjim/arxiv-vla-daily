@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15186v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的机器人导航模拟器（如 Habitat）依赖于 3D 网格 (Mesh) 来构建虚拟环境。</li><li>核心痛点： 基于 Mesh 的渲染 视觉保真度低，导致在模拟器中训练好的模型难以直接应用于现实世界 (Sim-to-Real Gap)。</li><li>本文切入点： 直觉上，渲染的真实感 是决定 Sim-to-Real 效果的关键。作者用 3D 高斯溅射 (3DGS) 替代传统 Mesh，直接从真实世界视频中重建出照片级场景，从根源上解决了视觉失真问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[Sim-to-Real]： 视觉保真度 是导航任务中 Sim-to-Real 迁移 的决定性瓶颈。实验证明，使用低质量渲染训练的模型，在真实世界的性能会 锐减 81%，这定量地揭示了照片级真实感的核心价值。</li><li>[统一表示]： 3DGS 不仅是渲染工具，其本身就蕴含了 三维几何信息。通过 GS-Slice 技术，证明了单一的 高斯表示 可以同时服务于 视觉渲染 和 物理碰撞检测，无需为两者维护两套独立的模型（如图像+Mesh）。</li><li>[训练范式]： 仅有高保真模拟器是不够的。对于长时程导航任务，预训练知识 (VQA 数据) 和 在线纠错 (DAgger 算法) 对抑制 误差累积 至关重要，能显著加速模型收敛并提升最终性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态高斯场与交互： 研究如何 实时、局部地更新高斯场 以响应环境变化（如开门、移动家具），将模拟器从静态导航升级为 动态交互 平台。</li><li>物理属性嵌入高斯： 在高斯表示中，除了颜色和几何，进一步 编码更丰富的物理属性（如材质、摩擦系数、可否穿透等），实现更逼真的物理模拟，而不仅仅是刚体碰撞。</li></ul></section>
       <section>

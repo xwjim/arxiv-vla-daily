@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.20321v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将视觉触觉传感器的图像当作“另一只眼睛”，与场景视觉信息进行“触觉-视觉对齐”。</li><li>核心痛点： 这种做法只教会了模型“看到”接触，但无法理解接触背后的物理动力学（如压力、摩擦力），导致模型“力盲”。</li><li>本文切入点： 作者认为，触觉的本质是物理交互，而非视觉纹理。因此，应该将触觉图像的表征锚定在物理力上，即实现“触觉-力对齐”。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征范式： 物理对齐优于视觉对齐。将触觉信息与物理世界的基本量（力）直接关联，比将其视为辅助视觉信息，能更有效地教会模型物理交互的本质，是实现力感知操作的关键。</li><li>表征形式： 离散化编码是泛化的关键。将连续、带噪声的力和触觉信号量化为离散的码本 (Codebook)，能有效过滤掉传感器特有的物理噪声和细节，提取出更本质、更通用的动力学模式，从而实现跨传感器的强大泛化能力。</li><li>信息维度： 时序信息对理解“力”至关重要。单一静态的触觉图像具有歧义性（例如，无法区分“稳定抓握”与“即将滑动”），只有通过分析历史观测序列，模型才能准确推断出力的动态变化过程（如滑移、压力变化率）。</li></ul></section><section><h3>Next Steps</h3><ul><li>深度融合的统一架构： 探索将触觉信息深度融入VLA骨干网络，而不仅仅是作为外部条件输入。这能让模型利用触觉反馈来更新对环境物理属性的内在理解（如表面滑不滑），并动态调整高级任务规划，而非仅仅调整动作。</li><li>自监督的物理先验学习： 摆脱对专用、同步数据采集设备的依赖，研究如何通过自监督或无监督学习，让机器人在与环境的自由交互中自主学习触觉与物理结果（如物体滑动、变形）之间的关联，从而实现更大规模、更泛化的物理世界模型构建。</li></ul></section>
       <section>

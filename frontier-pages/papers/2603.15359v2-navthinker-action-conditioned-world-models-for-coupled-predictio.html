@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15359v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人的社交导航需要预测行人的未来路径，然后进行规划。</li><li>核心痛点： 传统方法将预测与规划解耦，即预测行人轨迹时，未考虑机器人自身动作对行人的影响，导致规划被动且短视。</li><li>本文切入点： 核心直觉是让机器人学会“思考”。通过构建一个动作条件的世界模型 (Action-Conditioned World Model)，机器人在决策前可以“想象”出自己采取不同动作后，世界（尤其是行人）会如何演变，从而选择最优的未来。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征空间]： 在一个强大的预训练视觉模型（DA-V2）的特征空间中进行未来预测，比从零学习像素级预测更高效。这相当于站在巨人的肩膀上，让世界模型直接继承了对三维几何的深刻理解，从而能更准确地模拟未来。</li><li>[想象力注入]： 拥有世界模型（想象能力）还不够，关键在于如何使用它。本文证明，将“想象”的未来作为决策的附加上下文，并用其指导奖励函数，是一种比完全在想象中训练策略更稳定、更有效的“虚实结合”方法。</li><li>[任务对齐]： 通过增加深度图和行人轨迹这两个解码器，可以有效“锚定”世界模型学到的抽象特征。这种强制模型解码出具体物理量的做法，反向约束了隐空间，使其学习到的表征更对齐导航任务所需的几何感知和社交互动理解。</li></ul></section><section><h3>Next Steps</h3><ul><li>[分层规划]： 将当前的反应式“思考”模型作为底层执行器。在其上构建一个更高层级的规划器，利用世界模型进行更长时程、更抽象的推演（例如，预测“让路”、“跟从”等宏观策略），实现战略与战术的结合。</li><li>[多模态意图识别]： 融合 RGB 视觉、甚至声音等多模态信息构建世界模型。这有望让模型从简单的轨迹预测，升级到对人类真实意图的深层理解和预测，实现更符合社会规范的导航。</li></ul></section>
       <section>

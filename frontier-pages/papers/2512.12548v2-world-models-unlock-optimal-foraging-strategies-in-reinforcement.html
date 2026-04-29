@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.12548v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 生物觅食行为遵循边际价值定理 (MVT)，而传统强化学习（特别是无模型RL）通过试错来学习策略。</li><li>核心痛点： 尚不清楚生物或AI实现MVT最优策略背后的计算机制。无模型RL智能体通常无法学到这种最优行为。</li><li>本文切入点： 作者直觉地认为，生物所拥有的对未来的预判能力是关键。因此，他们假设赋予AI一个可学习的预测性世界模型，就能复现这种最优策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>预测驱动最优： 智能体能做出符合 MVT 的最优决策，其根本驱动力是对未来的预期能力 (anticipatory capabilities)，而非单纯的奖励最大化。无模型智能体因缺乏此能力而表现次优。</li><li>世界模型是生物与AI的桥梁： 世界模型为连接“生态学最优原则”和“AI决策”提供了计算上的解释。它证明了生物学中被广泛认可的“内部心智模型”在AI中同样能催生高级、自适应的行为。</li><li>复杂规划的涌现： 智能体对“何时离开资源点”的复杂规划能力，是从学习预测世界动态的过程中自然涌现的，而非被硬编码。其内部的隐状态表征自发地编码了资源枯竭和旅行成本等关键抽象概念。</li></ul></section><section><h3>Next Steps</h3><ul><li>多智能体社会性觅食： 将研究从单个智能体扩展到多智能体系统。探索在使用世界模型的基础上，是否会涌现出合作、竞争、角色分工等符合社会性觅食理论的复杂群体行为。</li><li>世界模型的泛化与迁移： 测试训练好的世界模型在全新未知环境（如不同的地图布局、奖励函数）中的泛化能力。这能真正检验智能体是否学到了“觅食”这一任务的本质，而非仅仅过拟合训练环境。</li></ul></section>
       <section>

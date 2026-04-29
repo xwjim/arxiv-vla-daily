@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.12099v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型直接根据当前观测（视觉、语言）生成动作。</li><li>核心痛点： 现有 VLA 模型是“近视眼”，缺乏对未来的预判能力，难以完成长时序复杂任务。</li><li>本文切入点： 直觉上，强大的视频世界模型擅长预测未来。因此，将世界模型预测的未来状态和价值作为额外条件，注入 VLA 策略网络，为其提供“远见”。</li></ul></section><section><h3>Key Insights</h3><ul><li>信息增益： 向策略提供世界模型预测的未来状态 (z)，比仅提供稀疏的二元优势信号 (I) 能带来巨大的信息增益。前者提供了密集的时空和物理先验，显著降低了动作决策的不确定性。</li><li>协同预测： 世界模型同时预测未来状态和价值的效果，优于单独预测任意一项。未来状态为价值评估提供了关键的物理情境，使价值预测更准确。</li><li>闭环自进化： “大规模预训练 + 在线强化学习” 的范式是有效的。通过 RAMP 的迭代循环（部署策略 -&gt; 收集数据 -&gt; 联合训练世界模型和策略），智能体能进入一个持续自我提升的良性循环。</li></ul></section><section><h3>Next Steps</h3><ul><li>自主数据管理： 研究如何让智能体自主管理和筛选交互数据，摆脱对人类的依赖，实现更具扩展性的闭环自进化（Autonomous Data Curation）。</li><li>提升模型利用效率： 探索如何更高效地利用世界模型的想象轨迹 (rollout)，用更少的计算开销，提取出对策略学习最有价值的信息，解决计算开销问题。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.17094v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前的 LLM 将世界知识与语言能力混合在一个黑箱模型中。</li><li>核心痛点： 这种耦合导致模型难以更新知识、容易产生幻觉，且无法判断其是真正理解世界还是在“鹦鹉学舌”。</li><li>本文切入点： 提出一个极简的架构原则——“嘴巴不是大脑” (the mouth is not the brain)。通过显式分离两个模块，让“大脑”（世界模型）负责理解和推理，让“嘴巴”（语言模型）只负责流畅表达。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构解耦的有效性：</li><li>明确分离世界模型（理解）和语言模型（表达）是可行的且高效的。这种解耦让一个小型语言模型（如 GPT-2）在外部世界模型的指导下，也能实现高度一致和可控的文本生成，证明了语言能力和世界理解可以分开训练和部署。</li><li>世界模型的“可度量性”：</li><li>基于能量的模型（EBM）为“世界合理性”提供了一个量化标尺。其能量函数可以直接判断输入配置是否符合已学习的领域结构，高能量值对应不合理的组合（如苹果手机卖白菜价），使模型的“理解”变得可检验、可度量。</li><li>因果干预的精准传导：</li></ul></section><section><h3>Next Steps</h3><ul><li>引入时间维度： 将当前捕捉静态共现结构的世界模型，升级为能够理解时序数据和因果过程的动态世界模型，用于生成具有时间连贯性的叙事或预测。</li><li>探索多模态输出： 利用“大脑”与“嘴巴”分离的架构，将同一个世界模型连接到不同的输出模态（如图像生成器、语音合成器）。例如，基于同一个用户画像，同时生成一段评论文本和一张匹配的广告图，并检验跨模态的一致性。</li></ul></section>
       <section>

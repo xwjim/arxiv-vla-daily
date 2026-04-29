@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.02857v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 采用交互式 POMDP 或贝叶斯心智理论 (BToM) 等形式化模型来推理他人意图。</li><li>核心痛点： 精确的嵌套信念推理计算上是不可行的 (intractable)，且手动设计的符号模型在开放世界中适应性差 (brittle)。</li><li>本文切入点： 将「观点采择」这一认知过程，类比为物理学中的薛定谔桥 (Schrödinger Bridge) 问题。即，从“我的信念”到“他的信念”的转换，可以看作是在一个已知的“基础动力学”上，寻找一条最可能的演化路径。</li></ul></section><section><h3>Key Insights</h3><ul><li>观点采择的物理学重构：</li><li>本文最核心的洞察是，复杂的认知推理过程（观点采择）可以被形式化为一个最优输运 (Optimal Transport) 问题。薛定谔桥为此提供了一个兼具理论优雅与计算效率的解决方案，它寻找的是从一个信念分布到另一个信念分布的最小努力路径。</li><li>动态解耦与组合：</li><li>社交互动可以被成功地解耦为「与环境交互的基础模型」和「用于理解他人的社交影响模型」。薛定谔桥在这里扮演了“社交影响”的角色，它在基础模型之上施加了一个“扰动”或“倾斜”(tilt)，从而生成了符合社交情境的信念。</li><li>摊销推理的价值：</li></ul></section><section><h3>Next Steps</h3><ul><li>异质智能体建模 (Heterogeneous Agents)： 核心挑战是如何在薛定谔桥框架内，对不同类型的智能体（如新手 vs. 专家，合作者 vs. 对手）进行建模。这可能需要学习一个能根据少量交互动态调整“基础动力学”或“输运成本”的元学习器。</li><li>从离散到连续的桥接： 将该框架从离散状态空间扩展到连续状态与动作空间。这需要将现有的离散薛定谔桥算法替换为适用于连续空间的变体（如基于流模型或扩散模型的方法），是通向真实机器人的必经之路。</li></ul></section>
       <section>

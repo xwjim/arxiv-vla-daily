@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.19571v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人策略主要依赖端到端的视觉-语言-动作 (VLA) 模型，直接从像素映射到动作。</li><li>核心痛点： 端到端模型面对复杂指令和新场景时，泛化能力差，且像一个难以解释和调试的“黑箱”。</li><li>本文切入点： 作者洞察到，大部分机器人任务可被拆解为“定位物体、空间推理、部件交互”三步，而这三步都可以被统一为对一个丰富场景表征的“查询”。</li></ul></section><section><h3>Key Insights</h3><ul><li>范式对比： 在零样本泛化上，基于显式场景表征和推理的模块化方法 (ASP)，其鲁棒性与任务理解能力显著优于当前最先进的端到端VLA模型。这挑战了“端到端至上”的普遍观念。</li><li>功能可供性的价值： Affordance检测是连接“语义理解”和“物理交互”的关键桥梁。实验证明，显式地对物体功能部件（如把手、按钮）进行推理，是解决复杂交互任务（而非简单抓取）的必要条件。</li><li>推理的统一性： 机器人任务可被解耦并统一为对场景的系列查询：语义查询（找什么）、空间查询（在哪）、功能查询（怎么做）。LLM Agent能灵活组合这些查询，实现强大的零样本规划能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>混合式策略： 结合ASP的高层结构化推理能力和VLA的底层连续动作学习能力。例如，由ASP进行任务规划（“拿起海绵擦桌子”），由一个学习型策略来生成“擦拭”这个复杂动作。</li><li>动态记忆与长时规划： 将ObjectMap升级为动态记忆系统，能追踪物体状态随时间的变化。这能让机器人执行真正需要记忆和长序列规划的长时程任务（例如“整理房间”）。</li></ul></section>
       <section>

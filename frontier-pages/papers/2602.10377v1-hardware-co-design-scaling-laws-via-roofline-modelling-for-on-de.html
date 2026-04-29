@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10377v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 模型设计与硬件部署是分离的，通常先设计一个通用的小模型，再尝试用量化、剪枝等手段使其在硬件上跑起来。</li><li>核心痛点： 缺乏一个能提前预测特定架构在目标硬件上“精度-延迟”综合表现的理论框架，导致架构选择过程耗时巨大且带有盲目性。</li><li>本文切入点： 直觉上，模型精度和硬件延迟都应是架构参数的函数。作者将模型精度（用 Scaling Law 建模）和推理延迟（用 Roofline 模型建模）统一到了一个联合优化框架中，从而将“试错”问题转化为了“求解”问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构偏好]： 在资源受限的端侧设备上（特别是 batch size=1 时），最优架构并非传统的“深而窄”，而是“宽而浅” (wide-and-shallow)。在同等延迟预算下，增加模型宽度 (width) 比增加深度 (depth) 能更有效地降低模型损失。</li><li>[稀疏性价值]： MoE（混合专家模型） 在端侧部署场景中占据绝对主导地位，所有帕累托最优解均为MoE架构。因为它能在不显著增加单次推理激活参数量的前提下，极大扩展模型总容量，是实现“高精度-低延迟”权衡的关键。</li><li>[约束决定论]： 不存在普适的最优架构，最优解强依赖于硬件约束类型。例如，延迟受限时应最大化稀疏度（激活最少的专家）；而内存受限时，最优稀疏度则与模型宽度存在一个反比缩放关系 (ρ* ∝ d⁻¹.¹⁹)，即模型越宽，专家应越稀疏。</li></ul></section><section><h3>Next Steps</h3><ul><li>[扩展到新架构] 将该协同设计框架扩展到非 Transformer 架构，如状态空间模型（SSM）或 Transformer-SSM 混合架构，探索它们在端侧硬件上的帕累托最优设计原则。</li><li>[引入动态机制] 研究运行时动态架构，即模型可以根据实时负载和可用资源，在推理时动态调整其稀疏度（如激活专家数量K）或计算路径，实现更精细化的性能-精度权衡。</li></ul></section>
       <section>

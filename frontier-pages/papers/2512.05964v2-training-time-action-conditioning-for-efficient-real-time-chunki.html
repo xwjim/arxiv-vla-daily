@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.05964v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人模型（VLA）异步预测动作块，在推理时通过“inpainting”技术拼接，以保证轨迹连续。</li><li>核心痛点： 推理时的拼接（inpainting）引入了额外的计算开销，增加了延迟，违背了实时控制的初衷。</li><li>本文切入点： 与其在运行时“亡羊补牢”，不如在训练时“未雨绸缪”。通过模拟推理延迟，让模型直接学会在给定一小段已执行动作的条件下，生成后续动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[计算范式]： 可以用微不足道的训练开销（前置计算），来完全消除机器人实时控制中的推理时修正开销。这是一种将运行时计算负担向训练阶段转移的高效策略。</li><li>[模型鲁棒性]： 直接在训练数据中学习处理延迟，比在推理时基于模型梯度进行线性近似修正（Inference-time RTC 的做法），对高延迟和长前缀场景更鲁棒。因为模型学到的是一个更本质的、非线性的条件生成能力。</li><li>[模型可迁移性]： 该方法具有“即插即用”的特性。即使是没有经过此方法预训练的 VLA 基础模型，也只需通过少量微调即可掌握这种能力，极大地降低了应用门槛。</li></ul></section><section><h3>Next Steps</h3><ul><li>混合式实时分块 (Hybrid RTC)： 探索如何结合训练时条件化的高效性与推理时修正的灵活性。例如，主体依赖训练时方法，但保留一个极轻量的推理时校正模块，以应对训练分布之外的突发延迟。</li><li>自适应延迟条件化 (Adaptive Delay Conditioning)： 模型能否在运行时在线估计或感知当前的系统延迟 d，并将其作为动态输入？这将彻底摆脱对预设延迟分布的依赖，使系统更加智能和自适应。</li></ul></section>
       <section>

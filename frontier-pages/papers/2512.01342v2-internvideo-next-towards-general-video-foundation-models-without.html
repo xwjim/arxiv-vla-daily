@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.01342v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流视频模型依赖大规模视频-文本对进行预训练，或采用自监督的掩码视频建模 (MVM)。</li><li>核心痛点： 视频-文本数据质量差且昂贵；而纯视频自监督（MVM）难以学习到高层语义，容易走捷径 (shortcut learning)。</li><li>本文切入点： 作者认为，问题的关键在于预测器 (Predictor) 输出的隐空间质量。他们提出先构建一个语义丰富且保留细节的隐空间（第一阶段），再在该空间内做预测（第二阶段），从而解决冲突、避免捷径。</li></ul></section><section><h3>Key Insights</h3><ul><li>[像素重构与语义学习的冲突根源]： 传统的掩码视频建模（MVM）之所以语义效果差，根源在于其线性解码器要求隐层表征能被线性映射到像素，这与学习抽象语义存在根本性冲突。使用更强大的扩散解码器可以解耦这一约束。</li><li>[无监督学习的“知识蒸馏”]： 无需昂贵的视频-文本对，仅通过注入高质量的预训练图像模型（如 SigLIP）的语义先验，就能为纯视频自监督学习提供强大的语义“锚点”，加速收敛并提升语义理解能力。</li><li>[潜空间预测的“捷径”问题]： 潜空间预测（如 V-JEPA）容易学到“捷径”解，其关键在于预测目标不稳定或信息量不足。通过预测一个由第一阶段生成、同时富含细节与语义的“冻结”目标，可以有效规避此问题，迫使模型学习真正的世界知识。</li></ul></section><section><h3>Next Steps</h3><ul><li>[统一训练框架]： 能否设计一个单阶段的端到端训练框架，同时实现语义引导的重构和潜空间预测，以降低训练复杂度和成本？</li><li>[从表征到生成与交互]： 当前模型验证了其作为“世界表征模型”的潜力。下一步是将其作为视觉主干，探索其在长视频生成、可交互的具身智能体等任务中的应用，实现从“理解世界”到“改造世界”的跨越。</li></ul></section>
       <section>

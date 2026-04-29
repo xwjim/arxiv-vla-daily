@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.03782v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人需要世界模型来预测未来，现有模型通常基于像素或特定 3D 表示。</li><li>核心痛点： 状态和动作的表示不统一，导致模型难以跨机器人（embodiment）泛化，且难以处理现实世界的 部分可观测性。</li><li>本文切入点： 直觉上，物理交互的本质是 几何的接触与运动。因此，将 场景状态 和 机器人动作 统一表示为 3D 点流，直接对交互的几何进行建模，从而实现跨机器人形态的泛化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作表示的几何性]： 将机器人动作表示为 执行器（夹爪）的 3D 点流，比表示为低维姿态或整个身体的点流更有效。它精准捕捉了 接触几何，同时避免了无关点的噪声干扰。</li><li>[3D 世界模型的缩放定律]： 模型的预测误差随着 模型参数量 和 训练数据量 的增加，呈现出可预测的 对数线性下降。这表明大规模预训练是提升 3D 物理预测能力的关键路径。</li><li>[2D 先验与训练目标的重要性]： 引入 预训练的 2D 视觉特征 (DINOv3) 能显著提升 3D 动态预测的准确性。同时，针对移动点进行 加权 和 不确定性正则化 的损失函数，是稳定训练和处理真实世界稀疏信号的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>[学习逆动力学模型] 从当前状态和 目标状态（期望的点云构型）直接预测所需的 机器人动作点流，从而实现更高效的目标导向规划。</li><li>[融合物理属性] 将点的表示从纯几何特征扩展到包含 物理属性（如质量、摩擦系数、刚度）的隐式或显式编码，以提升对不同材质物体交互的预测精度。</li></ul></section>
       <section>

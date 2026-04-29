@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12832v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统的变化描述任务处理的是固定视角的图像对，假设前后图像场景内容基本对齐。</li><li>核心痛点： 无人机视角移动导致图像对仅部分重叠且存在视差，传统方法无法区分真实场景变化与视角变化带来的差异。</li><li>本文切入点： 直觉上，应先分离出图像间的重叠公共区域与非重叠差异区域，再对这些区域间的关系进行建模，而不是将两张图粗暴地进行全局比较。</li></ul></section><section><h3>Key Insights</h3><ul><li>[空间布局建模]： 对于动态视角的变化理解任务，核心在于显式地解耦和建模重叠与非重叠区域。与假设全局对齐的传统方法相比，这种先分割再关联的策略能更准确地定位和描述由视角移动和真实物体变化共同引起的复杂场景差异。</li><li>[方向语义对齐]： 视角变化的方向本身是一种关键的语义信息，而非噪声。通过在视觉和语言模态间建立方向向量的一致性约束 (HCM-OCC)，能显著提升模型生成描述的准确性（例如，正确描述出“无人机向左移动”）。</li><li>[分层特征学习]： 通过对全局背景、重叠区域和非重叠区域施加不同的学习目标（一致性约束 vs. 独立性正则化），可以迫使模型学习到更具判别力的多层次变化表征。这证明了分而治之的监督信号设计是有效的。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入时序建模： 将输入从两张静态图片扩展为短视频序列，利用光流或时序 Transformer 捕捉无人机的运动轨迹和物体的动态过程，生成更丰富的过程性描述。</li><li>探索通用运动表征： 放弃固定的平移假设，转而使用如可学习的空间变换网络 (STN) 或稠密光流场来建模更复杂的相机运动，以适应真实世界中多自由度的无人机飞行姿态。</li></ul></section>
       <section>

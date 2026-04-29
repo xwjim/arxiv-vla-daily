@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.07687v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机（UAV）可作为空中边缘计算节点，为地面设备提供算力支持。</li><li>核心痛点： 生成式AI（如扩散模型）的推理质量与计算开销强相关，在资源受限且动态的无人机上，难以平衡更新保真度和更新时延。</li><li>本文切入点： 将此问题建模为异构智能体（传感器 vs 无人机）的联合优化问题，并直觉地认为序贯决策（传感器先决策卸载，无人机再决策资源和轨迹）能避免策略冲突，提升学习效率。</li></ul></section><section><h3>Key Insights</h3><ul><li>[机制发现] 扩散模型的“成本-收益”旋钮：</li><li>推理步数 (Inference Steps) 是一个可直接调控的变量，它精确地量化了生成质量（保真度）与计算成本（时延）之间的权衡关系。这为在资源受限系统中使用生成式AI提供了可操作的优化维度。</li><li>[算法规律] 异构协作的稳定性：</li><li>在包含不同类型决策者（传感器、无人机）的系统中，同步更新策略易导致学习目标冲突和训练不稳定。采用序贯更新 (Sequential Update) 机制，能有效解耦决策依赖，确保策略的单调改进，从而实现更快、更稳定的收敛。</li><li>[涌现行为] 智能轨迹的自发形成：</li></ul></section><section><h3>Next Steps</h3><ul><li>引入能量约束： 将无人机的飞行与计算能耗纳入优化目标，研究保真度-时延-能耗三者间的帕累托最优，这更贴近实际部署需求。</li><li>面向动态事件的调度： 从处理周期性任务，演进为响应突发、高优先级的非周期性事件（如交通事故后的紧急数据处理），这对系统的实时感知、抢占式调度和动态重规划能力提出了更高要求。</li></ul></section>
       <section>

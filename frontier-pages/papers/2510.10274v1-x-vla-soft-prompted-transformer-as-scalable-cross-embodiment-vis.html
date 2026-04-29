@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.10274v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 训练通用机器人模型需要融合来自不同机器人（跨具身）的大规模异构数据集。</li><li>核心痛点： 不同机器人的硬件、相机、数据分布差异巨大，导致深层特征冲突与语义错位，模型难以有效学习。</li><li>本文切入点： 将不同机器人配置视为不同“任务”，为每个数据源引入一个可学习的软提示向量，在特征融合早期就引导模型区分并适应硬件差异。</li></ul></section><section><h3>Key Insights</h3><ul><li>[异构数据整合]： 微小的、可学习的“软提示”是解决跨机器人平台数据异构性的极简且高效的方案。它能引导模型在早期就区分并适应不同硬件配置，效果优于在输出端打补丁（如专用解码头）或依赖人工描述（如语言提示）。</li><li>[模型扩展性]： 基于标准Transformer和软提示的架构展现出清晰的“缩放法则”（Scaling Law）。模型性能随模型尺寸、数据量和数据多样性的增加而稳定提升，且未见饱和迹象，证明了该路径的巨大潜力。</li><li>[知识解耦与迁移]： 软提示成功地将“硬件特异性知识”与模型的“通用任务知识”解耦。预训练后的模型骨干是具身无关的（embodiment-agnostic），仅需微调新的软提示（参数量仅占1%）即可高效适配新机器人，实现了极高的参数效率。</li></ul></section><section><h3>Next Steps</h3><ul><li>提示生成网络 (Prompt Generator Network)： 研究一个能根据新机器人的物理描述（如URDF文件、相机参数）直接生成其对应软提示的模型。这将是迈向真正零样本跨具身泛化的关键一步。</li><li>提示的组合与操控 (Prompt Composition &amp; Manipulation)： 探索软提示向量空间的结构。例如，能否通过向量运算（如“Franka提示”+“双臂”向量）来组合出新的机器人能力，从而实现对机器人行为的模块化、可解释控制。</li></ul></section>
       <section>

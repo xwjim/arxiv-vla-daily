@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.08653v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机避障主要依赖传统模块化规划（感知-规划-控制）或纯端到端强化学习（RL）。</li><li>核心痛点： 传统方法累积延迟高，限制了高速性能；纯 RL 方法缺乏形式化的安全保证，在关键任务中不可靠。</li><li>本文切入点： 提出一种混合架构。利用 RL 策略的低延迟和高机动性，同时在部署时用一个基于模型的安全过滤器强制约束其输出，从而兼顾速度与安全。</li></ul></section><section><h3>Key Insights</h3><ul><li>[导航效率]： 在复杂非凸环境中，基于欧几里得距离的奖励会使智能体陷入局部最优（如 U 型陷阱）。改用基于 Dijkstra 算法的测地线距离作为势场引导，能提供更具全局视野的梯度，显著提升训练效率和任务成功率。</li><li>[安全机制]： &quot;软&quot;的安全激励（如奖励惩罚）在低速时有效，但在高速飞行时不足以保证安全。因为巨大的系统惯性使得安全边界变得极其敏感，RL 策略难以精确学习。必须引入&quot;硬&quot;的HOCBF 安全过滤器作为最后防线，实现学习敏捷性与模型安全性的解耦。</li><li>[高速飞行]： 纯端到端方法在高速时存在感知与控制的内在冲突。例如，急加速时的大俯仰角会导致相机视野偏离，造成感知盲区。本文的混合方法通过解耦导航策略与安全约束，结合鲁棒的训练，能更好地维持高速下的环境感知与稳定控制。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态安全博弈： 将 HOCBF 框架扩展到能够预测和响应动态智能体。这需要将对其他智能体的运动意图预测模型整合进安全约束的构建中，是实现人机共存环境飞行的关键。</li><li>多模态鲁棒感知： 融合事件相机、激光雷达或毫米波雷达等异构传感器。这可以弥补深度相机在面对透明/反光物体、恶劣光照和高速运动模糊时的不足，为安全盾提供更可靠的输入，从而建立一个全天候、全场景的飞行安全系统。</li></ul></section>
       <section>

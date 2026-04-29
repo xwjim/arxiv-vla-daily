@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08028v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用无人机（特别是领航-跟随模式的蜂群）进行灾后侦察。</li><li>核心痛点： 现有蜂群系统难以在充满障碍物的复杂灾后环境中，同时 保持队形、自主避障 并高效完成 区域覆盖 任务。</li><li>本文切入点： 采用 分层规划 思想。将宏观的 全局路径规划 (去哪些地方) 与微观的 局部轨迹优化 (怎么安全过去) 解耦，再通过一个统一的优化框架结合起来。</li></ul></section><section><h3>Key Insights</h3><ul><li>系统架构： 将 全局离线任务规划 (TSP) 与 局部在线轨迹生成 (ESDF) 相结合，是解决复杂环境下蜂群自主导航的一种高效且鲁棒的范式。这种分层解耦的思路，有效降低了单一算法的求解复杂度。</li><li>队形与避障的权衡： 通过在优化目标中加入 队形相似度 和 个体间排斥 项，蜂群可在执行避障机动时，仅产生 微小、可恢复 的队形扰动，而非队形崩溃。这证明了队形保持可以作为一个 “软约束” 被成功地整合进实时运动规划中。</li><li>任务规划的智能： 引入 带奖励和时间窗的 TSP (PC-TSP) 机制，使系统具备了 智能决策 能力。在资源（如续航）有限时，它能 主动放弃低价值目标，从而优先确保 核心信息 的获取，这在分秒必争的灾后场景中至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线动态重规划： 研究允许蜂群在任务执行中，根据新获取的传感器数据（如发现新的火点或道路坍塌）实时更新 POI 的优先级，并 动态重新求解 TSP 路径 的机制。</li><li>自适应队形变换： 探索让蜂群根据任务需求（如从广域搜索切换到对特定目标的抵近侦察），能够 自主改变和优化队形（如从一字形变为圆形包围），以最大化传感效率和信息获取质量。</li></ul></section>
       <section>

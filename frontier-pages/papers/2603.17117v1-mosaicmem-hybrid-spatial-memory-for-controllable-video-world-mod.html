@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.17117v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视频生成依赖空间记忆来保证一致性，主要分为显式3D结构（如点云）和隐式潜空间（如注意力上下文）两种。</li><li>核心痛点： 显式方法难以处理动态物体，而隐式方法存在相机运动漂移且上下文冗余，导致效率低下。</li><li>本文切入点： 作者发现，介于“3D点云”和“完整帧”之间的图像补丁 (Patch)，是构建记忆的更优单元，可兼顾二者优点。</li></ul></section><section><h3>Key Insights</h3><ul><li>记忆范式融合： 空间记忆的显式几何定位（为了准）和隐式生成调节（为了活）可以解耦。将两者结合，能同时实现高几何一致性和强动态内容生成能力，打破了二者不可兼得的局面。</li><li>记忆单元粒度： 图像补丁 (Patch) 是比“3D点”或“完整帧”更优的记忆单元。它既保留了足够的视觉信息用于生成，又足够局部化以支持灵活稀疏的检索和直接的场景编辑（移动、删除补丁）。</li><li>相机控制的重要性： 仅依赖记忆中的视觉线索不足以精确控制相机。必须引入独立的相机参数编码模块（如PRoPE），才能在长时程生成中有效抑制视角漂移，实现可控导航。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端联合优化： 将3D几何估计与视频生成过程进行端到端联合训练，让模型自行学习如何从视频中提取和利用几何信息，摆脱对外部预训练模型的依赖。</li><li>语义化与结构化记忆： 将当前的“像素补丁”记忆升级为“对象级”或“概念级”的语义记忆。这不仅能实现更高级的编辑（如“替换所有椅子”），还能让模型理解场景的结构和功能。</li></ul></section>
       <section>

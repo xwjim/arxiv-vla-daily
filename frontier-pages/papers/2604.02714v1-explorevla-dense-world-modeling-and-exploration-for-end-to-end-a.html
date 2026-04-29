@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.02714v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流端到端自动驾驶模型（VLA）通过模仿学习（Behavior Cloning）复制专家驾驶数据。</li><li>核心痛点： 模仿学习导致模型泛化能力差，在未见过（OOD）的场景中表现脆弱；同时，仅依赖轨迹点和文本指令的监督信号过于稀疏。</li><li>本文切入点： 利用一个世界模型同时解决两个问题：</li><li>通过预测未来图像提供密集的视觉和几何监督。</li><li>将预测的不确定性作为衡量“新颖性”的天然指标，用作强化学习的内在奖励，鼓励安全探索。</li></ul></section><section><h3>Key Insights</h3><ul><li>[世界模型的多重价值]： 世界模型不仅是模拟器，更是一个“二合一”工具。它既是稠密监督的来源（通过图像生成），又是探索信号的发生器（通过预测不确定性），将表征学习与策略优化巧妙地统一起来。</li><li>[探索奖励的本质]： 有效的探索奖励 = 新颖性 + 安全性。论文发现，轨迹与专家的 L2 距离是糟糕的新颖性指标，而世界模型预测的不确定性是更可靠的代理。将此不确定性奖励与 PDMS 安全分数结合，才能实现有价值的探索，而非鲁莽的试错。</li><li>[表征学习的互补性]： 联合预测 RGB 图像（视觉外观）和深度图（几何结构）能产生 1+1 &gt; 2 的效果。消融实验证明，这两种模态提供了互补的监督信息，共同构建了比单一模态更全面的场景理解，从而提升了规划性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>[多模态世界模型探索]： 将不确定性探索机制扩展到能生成多模态未来（如 BEV 图、LiDAR 点云）的世界模型。这能提供更结构化、更与规划任务对齐的新颖性信号。</li><li>[因果世界模型与不确定性]： 探索构建因果世界模型，使其不确定性不仅反映数据分布的新颖性，更能表示对场景动态的因果模糊性（例如，“我不确定那辆车是否会让我，因为其意图不明”），从而实现更智能、更具预判性的探索。</li></ul></section>
       <section>

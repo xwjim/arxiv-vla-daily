@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.07712v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的世界模型（World Models）擅长通过学习隐空间（Latent Space）来进行事实性预测。</li><li>核心痛点： 模型学习到的隐变量是高度纠缠的预测特征，缺乏因果结构，导致在分布外或人为干预下的预测会崩溃。</li><li>本文切入点： 与其从零构建新模型，不如将一个专门学习因果结构的模块（CausalVAE），作为插件直接注入到现有世界模型的隐空间中。</li></ul></section><section><h3>Key Insights</h3><ul><li>模块化因果增强 (Modular Causal Enhancement)：</li><li>因果结构可以作为一个独立的即插即用模块，在不改变核心预测模型架构（如GNN、VAE等）的情况下，显著增强其在干预下的鲁棒性。这证明了预测能力与因果推理能力在一定程度上可以解耦和模块化组合。</li><li>解耦学习范式 (Decoupled Learning Paradigm)：</li><li>直接联合优化预测动态和因果结构是极其不稳定的。分阶段训练（先学好预测，再注入因果，最后联合微调）是让因果约束在动态模型中稳定生效的关键机制，避免了任务冲突导致的训练失败。</li><li>隐空间的物理可解释性 (Physical Interpretability of Latent Space)：</li></ul></section><section><h3>Next Steps</h3><ul><li>非线性因果模块： 研究如何将非线性或动态的因果图机制（如基于神经常微分方程的因果模型）引入该插件，以捕捉超越一阶近似的复杂物理或逻辑关系。</li><li>与大规模预测架构结合： 将此因果插件思想与更大规模的联合嵌入预测架构 (JEPA) 等自监督模型结合，探索其在更复杂、高维真实世界视觉任务中的可扩展性和有效性。</li></ul></section>
       <section>

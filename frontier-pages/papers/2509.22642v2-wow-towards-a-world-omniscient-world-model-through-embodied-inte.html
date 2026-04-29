@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.22642v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前的视频生成模型（如Sora）主要通过被动观察海量网络视频来学习世界。</li><li>核心痛点： 被动观察无法有效学习物理因果关系，导致模型生成的视频常有物理常识错误（如物体穿模、动力学不真实）。</li><li>本文切入点： 作者的核心直觉源于人类认知——真实的物理直觉必须源于与世界的真实交互。因此，他们用大规模、带有因果链的机器人交互数据来训练模型。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据范式]： 大规模、带有因果关系的真实物理交互数据是AI获得物理直觉的基石。这证明了“做什么”比“看什么”在学习物理规律上更为根本和高效。</li><li>[物理知识的表征]： 即便基于物理数据训练，世界模型对物理规律的理解本质上是一个可能结果的概率分布，而非确定性规则。这直接导致了模型会自发产生“物理幻觉”（stochastic instabilities and physical hallucinations），需要外部机制进行约束。</li><li>[幻觉约束机制]： 可以通过一个“生成-评估-迭代优化”的闭环来主动约束模型的物理幻觉。其中，用语言模型（VLM）作为“物理真实性”的评估器，并通过优化文本指令来引导生成，是一条高效的非微分优化路径，实现了对复杂、不可微目标的优化（如“物理真实感”）。</li></ul></section><section><h3>Next Steps</h3><ul><li>将物理约束内化到模型权重中： 与其在推理时通过SOPHIA进行外部修正，不如探索如何将VLM评估器的反馈作为一种奖励信号，通过强化学习或在线学习直接微调WoW生成模型。这能将物理知识“编译”进模型参数，实现更快、更原生的物理推理。</li><li>从交互数据到抽象物理概念的泛化： 当前模型擅长学习机器人可执行动作的物理后果。未来的挑战是，模型能否从这些具体交互中泛化出更抽象的物理概念（如刚性、弹性、流体动力学），并用于预测其自身无法直接交互的、更广泛的物理现象。</li></ul></section>
       <section>

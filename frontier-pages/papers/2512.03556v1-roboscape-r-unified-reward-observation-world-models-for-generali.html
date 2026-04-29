@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.03556v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 强化学习 (RL) 训练机器人策略，但依赖于 任务特定、人工设计的奖励函数。</li><li>核心痛点： 人工设计的奖励函数难以在多场景、多任务下保持 统一和通用，导致训练出的策略 泛化能力差。</li><li>本文切入点： 直觉上，一个好的世界模型已经内隐地理解了物理世界的动态规律。因此，奖励信号不应从外部引入，而应从世界模型对“任务完成”的 内在理解中“内生”地产生。</li></ul></section><section><h3>Key Insights</h3><ul><li>奖励信号的泛化性： 内生奖励 (Endogenous Reward) 比外生奖励 (Exogenous Reward，如人工规则或代理模型) 在未见过的场景中 表现出更强的鲁棒性和泛化能力。因为它源于模型对物理动态的通用理解，而非对特定场景奖励函数的过拟合。</li><li>多任务学习的优化： 传统RL因 奖励函数不统一，在多任务学习时常出现性能冲突（一升一降）。本文的 统一内生奖励 提供了一个通用优化目标，使策略能在多个任务上实现 均衡、无冲突的同步性能提升。</li><li>世界模型的角色演进： 世界模型不再仅仅是数据生成器或离线评估器，而是可以进化为一个 完备的在线RL训练环境。其关键在于它能同时提供 观测、奖励和终止 三要素，为机器人学习开辟了从 Sim2Real 到 WorldModel2Real 的新范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索分层规划 (Hierarchical Planning)： 结合高层规划器设定子目标，利用 RoboScape-R 进行短时序的子目标达成训练。这有望 突破当前模型在长时序任务上的限制。</li><li>验证 WorldModel2Real 的迁移差距： 将在本文世界模型环境中训练好的策略，直接部署到真实机器人上，系统性地研究 从世界模型到真实世界的性能迁移差距 (Transfer Gap)，并探索缩小差距的方法。</li></ul></section>
       <section>

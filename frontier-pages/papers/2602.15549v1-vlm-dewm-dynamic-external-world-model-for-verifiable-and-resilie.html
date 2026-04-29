@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.15549v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLM直接用于机器人高级规划，将世界状态隐式编码在有限的上下文窗口中。</li><li>核心痛点： VLM存在状态遗忘（无法追踪视野外物体，导致世界状态漂移）和推理不透明（失败难以诊断，只能盲目重试）两大问题。</li><li>本文切入点： 将VLM的语义推理与世界状态维护在架构上彻底分离，让VLM只负责它擅长的推理，而状态管理交给一个持久化的外部系统。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构 &gt; 算法]： 对于长时程机器人任务，将VLM推理与世界状态管理解耦的架构设计，比单纯增大模型上下文窗口或增强模型本身更根本、更有效。</li><li>[可验证性 &gt; 黑盒]： 将VLM的输出视为待验证的“假设”（通过ERT），而非直接执行的“指令”，是抑制模型幻觉、确保物理安全的关键。这是一种从“信任VLM”到“审计VLM”的范式转变。</li><li>[诊断粒度]： 精准的故障恢复依赖于对交互阶段（Constraint State）的锚定；知道“在哪一步交互”失败（如抓取时 vs 运输时），比笼统地知道“任务失败”本身更有价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入不确定性建模： 将DEWM从确定性数据库升级为概率图模型，显式建模物体位姿、关系的不确定性，实现真正的风险感知规划。</li><li>融合物理推理的深度诊断： 将物理仿真引擎（如力/摩擦模型）集成到验证和诊断环节，使系统能区分几何错误（如碰撞）与物理错误（如打滑），实现更深层次的因果归因。</li></ul></section>
       <section>

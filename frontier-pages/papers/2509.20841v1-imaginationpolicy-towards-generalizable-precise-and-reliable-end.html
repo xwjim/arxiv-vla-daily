@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.20841v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端策略（尤其是 VLA 模型）直接将传感器输入（像素）映射到低级机器人动作（如末端执行器位姿）。</li><li>核心痛点： 现有的动作表示（如末端位姿）与具体物体形态和机器人耦合过紧，导致在面对新物体或复杂任务时泛化能力差、精度不足。</li><li>本文切入点： 作者的直觉是，将操作任务从“机器人该怎么动”解耦为“物体上的关键功能点该如何移动”。这个思路将任务本质与物体的局部几何特征绑定，而非全局形态。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作表示的泛化]： 核心发现是，将动作表示从机器人中心（末端位姿）转移到物体中心（功能关键点），是实现泛化的关键。例如，“放置”任务被统一抽象为“将任意物体的‘底部’关键点移动到平面上”，从而自然泛化到不同形状的瓶子、盒子或三脚架。</li><li>[任务的统一框架]： 移动关键点链 (CoMOK) 是一种高度通用的表达范式。抓取、放置、插入、悬挂等原先需要独立研究的任务，都可被统一描述为“识别一个功能关键点 T_affordance 并将其移动到目标位姿/轨迹 T_action_seq”。这为构建通用操作模型提供了基础。</li><li>[精度与泛化的统一]： 通过预测语义关键点，模型学会了关注任务相关的局部几何（如杯柄），而忽略不相关的全局形态。这使得模型既能处理大尺度的物体外形变化（泛化性），又能实现亚厘米级的局部操作精度（精确性）。</li></ul></section><section><h3>Next Steps</h3><ul><li>关键点语义的自学习： 如何让模型在没有显式标注的情况下，从视频或交互经验中自主发现并涌现出新的、有意义的功能关键点 T_affordance？这是迈向真正开放世界操作的关键一步。</li><li>几何与物理的融合： 当前的 T_action_seq 轨迹是纯几何的。如何将物理约束（如稳定性、摩擦力）和动态效应（如倾倒液体） 融入到动作生成过程中，使模型能“想象”出物理上更可行、更可靠的操作轨迹。</li></ul></section>
       <section>

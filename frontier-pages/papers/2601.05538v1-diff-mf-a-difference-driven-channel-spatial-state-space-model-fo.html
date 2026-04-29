@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.05538v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 基于状态空间模型 (Mamba) 的方法因其线性的计算复杂度和全局感受野，成为图像融合领域的新趋势。</li><li>核心痛点： 现有 Mamba 类方法存在 模态信息不均衡 问题。要么过度偏重红外强度而丢失可见光纹理，要么保留了可见光结构却削弱了红外热目标。</li><li>本文切入点： 作者的直觉是，与其直接混合特征，不如先 显式地计算出模态间的差异。利用这个“差异”作为一种注意力或引导信号，强制网络关注那些真正互补的信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>[差异驱动的有效性]： 显式地将模态差异作为先验知识 是一个极其有效的策略。它迫使模型从“混合所有信息”转变为“重点关注互补信息”，从而从根本上解决了单一模态（如红外）在融合中过分主导的问题。</li><li>[解耦融合的优势]： 将复杂的融合任务 解耦为通道和空间两个维度 分别处理，比单一的混合策略更具优势。通道交换负责“哪些特征重要”，空间交换负责“特征如何空间组合”，分工明确，融合效果更精细。</li><li>[模态特征分工现象]： 在该框架下，网络自发学习到一种高效的 模态分工。特征图可视化表明，红外分支更专注于提取 局部细节和边缘，而可见光分支则更侧重于捕捉 全局结构和上下文，最终实现高效互补。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应差分学习： 将当前基于特征减法的“硬”差分引导，升级为通过 对比学习等方式端到端学习出的“软”差分表征。让网络自主发现何为“差异”、何为“共性”，从而实现更智能的自适应融合。</li><li>N-模态差分融合范式： 将当前的双模态差分框架 扩展到三种及以上模态的融合场景 (如红外、可见光、激光雷达)。这需要研究如何定义和利用多模态间的复杂差异关系，而非简单的两两配对。</li></ul></section>
       <section>

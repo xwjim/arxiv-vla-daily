@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.03837v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 动作识别依赖RGB、骨骼姿态或姿态估计过程中的热图（Heatmap）作为输入。</li><li>核心痛点： 直接用热图（作为图像）信息冗余且计算/存储成本高；只用最终的姿态坐标又丢失了大量细节信息（如外观、姿态不确定性）。</li><li>本文切入点： 作者的直觉是，最终的姿态坐标是热图中信息量最密集的区域。因此，可以用最终的稀疏坐标，反过来指导对原始的、信息丰富的热图进行特征采样，从而实现信息密度与简洁性的平衡。</li></ul></section><section><h3>Key Insights</h3><ul><li>特征表示的新范式： 论文发现，热图池化特征 是一种优于传统2D/3D姿态坐标和完整热图图像的新型动作表征。它既保留了姿态坐标的拓扑结构（可用GCN处理），又吸收了热图中被argmax操作抛弃的局部空间分布和多通道语义信息，在信息量和冗余度之间取得了更优的平衡。</li><li>中间特征的价值： 传统姿态估计将中间生成的热图视为“过程产物”，最终只取一个最大值点坐标。本文证明，这些被丢弃的中间层、多尺度的热图特征，对于下游的动作识别任务具有极高的价值。特别是中等尺度的热图（如文中的 H2），在空间细节和语义抽象之间达到了最佳平衡点。</li><li>跨模态桥梁作用： 热图池化特征 不仅仅是一种更优的单模态特征，它还是一种强大的跨模态“粘合剂”。实验证明，它能有效提升RGB视频特征的性能，甚至能作为调制信号去“精炼”来自大语言模型的文本特征，这揭示了它作为一种通用、可迁移的中间表示的潜力。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端的热图池化： 设计一个可微的argmax或类似的注意力机制，将姿态估计与热图池化过程整合进一个端到端的网络。这能让网络学会“为了更好地池化”而去生成“最合适”的热图，潜力巨大。</li><li>泛化“反馈池化”概念： 将“用稀疏关键点查询密集特征图”的思路推广到其他领域。例如，在人-物交互识别中，用物体的关键点去池化视频帧的特征，以专门分析交互区域；或在自动驾驶中，用行人的关键点去池化激光雷达点云特征。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.21523v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 多无人机追踪依赖固定的预训练模型，无法适应动态环境；而联邦学习（FL）能协同学习，但受数据异构性困扰。</li><li>核心痛点： 无人机端算力、通信资源受限，且不同无人机因视角（尤其是高度）不同导致数据异构，联邦学习难以收敛。</li><li>本文切入点： 作者发现飞行高度是数据异构的关键来源，并直觉地想到用自适应归一化 (AdaIN) 将高度信息注入模型，使其对位置变化不敏感。</li></ul></section><section><h3>Key Insights</h3><ul><li>[异构性来源]： 在多无人机视觉追踪中，数据异构性的主要来源并非目标本身，而是无人机的飞行高度。不同的高度导致了尺度和视角上的巨大差异，是阻碍联邦学习收敛的关键。</li><li>[模型解耦价值]： 将视觉感知 (YOLO) 与轨迹预测 (Transformer) 分离，是提升系统泛化性的关键。这使得系统能适应视觉背景的变化（如从农田到果园），而端到端的中心化模型则会因环境失配而彻底失效。</li><li>[联邦学习收益]： 联邦学习的在线自适应能力带来了显著收益。相较于使用固定的预训练模型，DroneFL能持续学习环境和目标动态的变化，从而将预测误差降低6%-83%。</li></ul></section><section><h3>Next Steps</h3><ul><li>去中心化规划与联邦学习融合： 设计一个完全分布式的框架，让无人机不仅协同学习预测模型，还能通过局部通信协同规划，摆脱对中心节点的依赖。</li><li>开放世界下的目标追踪： 将框架扩展到开放世界场景，研究如何利用联邦学习处理新出现的目标类别、目标ID的长期维持与重识别问题。</li></ul></section>
       <section>

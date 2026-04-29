@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.04315v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>行业共识与痛点： 在 GeneralVLA 之前，机器人学习领域，尤其是模仿学习，普遍遵循一种“端到端”的范式。 1. 共识： 我们需要收集大量人类专家的操作演示（视频、手柄轨迹等），然后训练一个庞大的神经网络，让它直接学习从“输入的图像/指令”到“输出的电机指令（力矩、速度）”的映射。 2. 痛点/工程假象： 这种方法看似直接，实则脆弱不堪。它就像一个只会死记硬背的学生，在实验室里能考高分，但换个考场（比如光线变了、物体换了位置、任务稍作修改）就彻底懵了。因为它学到的是像素和动作之间的“相关性”，而不是任务背后的“因果”和“物理逻辑”。这导致了：</li><li>数据无底洞： 每个新任务、新场景都需要海量的新演示数据，成本极高，无法规模化。</li><li>泛化能力极差： 所谓的“Zero-Shot”（零样本）泛化，即在没见过的场景下完成任务，几乎是不可能完成的任务。模型本质上是在“复现”而非“理解”。</li><li>核心 Insight： 作者的“灵光一现”在于打破了“端到端”的迷思，引入了“解耦”与“中间表示”的思想。他们意识到，问题的关键不是我们的基础模型（大语言模型、视觉模型）不够强大，而是我们“用错了地方”。</li><li>“思考”与“执行”的分离： 大语言模型擅长推理和规划，但不擅长精确的物理控制。那就让它只负责思考，输出一个它能理解且对机器人有用的中间产物——一条3D空间中的路径。</li></ul></section><section><h3>Key Insights</h3><ul><li>非共识发现 1：机器人可以“无师自通”，高质量的“自我思考”远胜于拙劣的“人类模仿”。</li><li>发现： 论文最震撼的结论是，它完全不需要任何真实世界的机器人操作数据或人类演示。它生成的轨迹数据，反过来可以用来训练一个更强大的模仿学习策略，其性能甚至超越了用真人演示数据训练出的模型。</li><li>洞察： 这彻底颠覆了“数据为王”的传统观念。它告诉我们，数据的“质量”和“内在逻辑”比“来源”更重要。人类的演示充满了犹豫、抖动和非最优路径，是“脏数据”。而 GeneralVLA 生成的轨迹是基于模型对物理世界理想化的理解，是平滑、高效、逻辑自洽的“干净数据”。用这种“理想教师”的数据来学习，效果自然更好。这标志着机器人学习从“依赖外部输血”向“实现内部造血”的范式转变。</li><li>非共识发现 2：解耦不是能力的削弱，而是泛化能力的放大器。</li><li>发现： GeneralVLA 在14个不同的任务上，零样本（Zero-Shot）性能远超之前的 SOTA 方法（如 VoxPoser）。</li></ul></section>
       <section>

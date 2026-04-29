@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07949v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖视觉特征（如模型输出的动作分布熵）来动态决定何时将计算任务从边缘设备卸载到云端。</li><li>核心痛点： 纯视觉方案极易受环境噪声（如光照变化、背景干扰）影响，导致决策不稳定；同时，它忽略了机器人任务中普遍存在的动作冗余性，造成不必要的计算和通信开销。</li><li>本文切入点： 一个核心直觉——机器人自身的运动学/动力学数据（如关节加速度、力矩）是独立于外部视觉环境的，且能更直接地反映动作的“重要性”和“关键性”。</li></ul></section><section><h3>Key Insights</h3><ul><li>决策信号源的迁移： 机器人本体的运动学数据是比外部视觉信息更鲁棒、更本质的边云协同决策依据。它从根本上解决了环境兼容性问题。</li><li>物理与信息的强关联： 机器人的物理状态（如关节力矩变化）与 VLA 模型内部的信息熵（即“动作重要性”或“步骤冗余度”）存在强相关性。这使得我们可以用一个极低成本的物理量去代理一个高成本的内部模型状态。</li><li>机器人运动的阶段性： 机器人任务执行在物理层面具有鲜明的阶段性。高速的自由空间运动（由加速度表征）和低速的接触交互运动（由力矩表征）是两种正交且核心的状态，需要用不同的指标动态感知。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应阈值： 研究在线学习机制，让系统能根据任务类型或机器人动力学模型自适应调整触发灵敏度，摆脱手动调参。</li><li>“软”分区策略： 从当前的二元决策（上云/不上云）升级为连续决策。根据运动学信号的强度，决定模型计算的深度或宽度（如部分卸载），实现更细粒度的资源调配。</li></ul></section>
       <section>

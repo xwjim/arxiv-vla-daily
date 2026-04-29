@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.01202v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用传统优化算法或标准深度强化学习（如DDPG）来分别或联合优化通信系统中的部分变量（如波束、相移）。</li><li>核心痛点： 标准DDPG算法在处理高维、连续的联合优化问题时，其评判网络 (Critic) 的评估能力不足，且策略网络 (Actor) 的探索效率低下，难以找到全局最优解。</li><li>本文切入点： 作者的直觉是，卷积网络 (CNN) 擅长提取局部特征。将CNN嵌入DDPG的评判网络中，可以更精准地“看懂”复杂的状态信息，从而更准确地评估（打分）当前策略的好坏。</li></ul></section><section><h3>Key Insights</h3><ul><li>[算法机制]： 卷积增强的评判网络必须与增强的探索机制（随机扰动）相结合，才能显著提升DDPG算法的性能。消融实验（图5）表明，单独引入卷积层效果不佳，证明了“看得准”和“敢于试”必须相辅相成。</li><li>[系统行为]： 提高系统发射功率虽能增加总速率，但会导致学习过程（奖励曲线）的波动性显著增大（图7）。这揭示了在高功率区，优化问题的“地形”变得更复杂、更不稳定，算法收敛更困难。</li><li>[系统伸缩性]： 系统规模（天线数、用户数）的增大使系统总速率的上限提高，但也显著增加了算法的收敛难度和所需时间（图8）。这揭示了该类DRL方法在扩展到超大规模网络时，面临着性能与训练成本之间的尖锐权衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>[多智能体扩展]： 将CA-DDPG框架扩展到多智能体场景（MADRL），用于多无人机或多RIS的分布式协同优化，解决更大规模网络中的干扰管理和资源分配问题。</li><li>[通感一体化 (ISAC)]： 将CA-DDPG的状态空间和奖励函数扩展，纳入感知相关指标（如定位精度、探测概率），实现通信性能与感知性能在同一框架下的联合优化与权衡。</li></ul></section>
       <section>

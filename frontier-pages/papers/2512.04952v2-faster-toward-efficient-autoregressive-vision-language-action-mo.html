@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.04952v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自回归 VLA 模型通过将连续动作离散化（Tokenize）后，逐个预测动作 Token 来生成轨迹。</li><li>核心痛点： 现有动作编码方式要么 压缩率低 (导致推理慢)，要么 重建精度差 (导致动作错)，限制了自回归模型的速度与性能。</li><li>本文切入点： 将机器人动作序列（Action Chunk）视为 二维图像，借鉴音频编解码器的 残差量化 (RVQ) 思想，设计了一个可学习的、高压缩率、高保真度的动作编码器。</li></ul></section><section><h3>Key Insights</h3><ul><li>动作的结构性：</li><li>机器人动作序列具有类似图像/音频的 二维结构 (时间维度 vs 动作维度) 和 时空冗余。将其视为二维数据并用 Transformer 进行编码，比简单拉平为一维序列更有效，能更好地平衡 压缩率 与 重建精度。</li><li>编码的通用性：</li><li>一个在足够大的、多样化的数据上预训练的 动作编码器 (FASTerVQ)，可以不经修改地泛化到 新的机器人形态、新任务、甚至新的动作表示 (如关节速度 vs 末端位置)。这证明了不同机器人动作底层存在可迁移的 “动作语法”。</li><li>推理的效率瓶颈：</li></ul></section><section><h3>Next Steps</h3><ul><li>通用动作基础模型： 既然 FASTerVQ 展现了强大的泛化能力，下一步可以构建一个基于海量机器人数据预训练的 “通用动作编码器”，作为所有 VLA 模型即插即用的基础模块。</li><li>离散空间上的并行生成： FASTerVQ 提供了一个高质量的离散动作空间。下一步可以探索完全并行的生成范式（如 离散扩散模型），在该空间中一次性生成所有动作 Token，彻底摆脱自回归的序列依赖，实现极致的推理速度。</li></ul></section>
       <section>

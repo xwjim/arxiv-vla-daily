@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.10527v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统数据驱动方法直接将历史测量数据（如电压、电流）回归映射到未来的健康状态（SOH）。</li><li>核心痛点： 直接回归模型缺乏前向传播动力学的机制，无法捕捉非线性的老化过程，预测结果趋于一条“平均斜率”，不符合真实物理过程。</li><li>本文切入点： 借鉴强化学习中的 “世界模型” 思想，不直接预测结果，而是学习一个隐空间动力学模型，通过迭代推演（rollout）来生成未来轨迹。</li></ul></section><section><h3>Key Insights</h3><ul><li>隐空间动力学推演的本质优势： 与直接回归相比，在隐空间中进行迭代推演（rollout） 是实现精准轨迹预测的关键。该机制迫使模型学习到一个统一且按SOH有序的退化流形，而不是过拟合到单个电池的身份特征，从而实现了真正的动力学传播。</li><li>物理约束的“双刃剑”效应： 引入基于电化学模型（SPM）的物理约束并非全局最优。它能有效修正模型在“退化拐点”处的非物理预测（如SOH反弹），但在退化后期反而成为一种过度正则化，损害了模型的准确性。</li><li>持续学习（EWC）的适用边界： 当序贯任务的数据分布一致时（如不同批次的同种电池），持续学习方法（EWC）不仅无效，甚至有害。此时，联合训练（Joint Training）才是最优策略，因为EWC旨在解决分布漂移下的灾难性遗忘问题。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应物理约束： 研究如何根据电池所处的退化阶段动态调整物理约束的权重。例如，在退化拐点区域增强约束，在后期则减弱或关闭约束。</li><li>基于世界模型的“主动”老化管理： 将模型从被动预测转向主动控制。利用学到的动力学模型来规划最优的充电策略（action），以主动延缓电池老化。</li></ul></section>
       <section>

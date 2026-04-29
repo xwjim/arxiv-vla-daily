@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.03144v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 大模型在通用代码生成上表现优异，但通常被用于孤立的工业子领域。</li><li>核心痛点： 极度缺乏能体现专家如何处理硬件约束和时序语义的高质量推理过程数据，导致模型难以胜任复杂的工业代码任务。</li><li>本文切入点： 模仿人类工程师的“试错-修正”学习模式。通过捕捉代码在真实工具链中的失败反馈，来逆向合成高质量的思考链（Chain-of-Thought）数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[自适应推理深度]： 模型的“思考”深度并非一成不变，而是由任务的真实反馈复杂性自适应决定的。例如，GPU内核优化（硬件反馈复杂）自然诱导出极长的思考链，而简单任务则思考得更简洁，这符合专家直觉。</li><li>[世界模型的可行性]： 语言模型（ICWM）可以高保真地（&gt;94%）模拟复杂工业工具链（如 Verilog 仿真器）的因果动态。这证明了用“廉价”的模拟环境替代“昂贵”的真实环境，来规模化生成高质量推理数据的路径是完全可行的。</li><li>[思考数据的规模效应]： 模型的工业推理能力（如芯片设计、内核优化）与“思考训练数据”的数量存在显著正相关。实验证明，将思考数据从 180M 扩展到 540M tokens，关键工业指标持续稳定提升，揭示了“反思性数据”是解锁深度推理能力的核心驱动力。</li></ul></section><section><h3>Next Steps</h3><ul><li>在线世界模型推理 (Online Self-Correction)： 将 ICWM 从离线数据生成工具，变为模型推理时可实时调用的“外部知识库”。模型在生成代码的每一步都可“咨询”ICWM 以进行自我验证和即时修正，从而提升单次生成成功率。</li><li>多模态世界模型 (Multi-modal World Model)： 当前 ICWM 只处理文本报错信息。下一步可构建能理解多模态反馈（如 Verilog 仿真波形图、GPU 性能剖面图）的 ICWM，以生成更深刻、更专业的推理链。</li></ul></section>
       <section>

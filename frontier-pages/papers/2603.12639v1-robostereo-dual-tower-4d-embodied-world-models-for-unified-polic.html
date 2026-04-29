@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12639v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用具身世界模型 (EWMs) 在虚拟环境中进行推演，以替代昂贵、危险的真实世界交互。</li><li>核心痛点： 现有EWMs生成的视频缺乏3D几何一致性，常出现物体穿模、漂移等物理幻觉，且没有统一框架来利用EWMs系统性地优化策略。</li><li>本文切入点： 作者认为RGB视频和3D点云两种模态可以互为补充和约束。通过双塔结构和双向交叉注意力，让视觉语义和空间几何相互校验，从而根除物理幻觉。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模态协同的本质]： RGB视觉和3D几何两种模态的双向增强是抑制物理幻觉的关键。视觉为几何提供语义（哪个是物体），几何为视觉提供刚性约束（物体不能随意变形），二者结合才能生成时空一致的4D世界。</li><li>[策略优化的范式]： 在世界模型生成的视觉空间中进行策略优化，比在抽象状态空间或用稀疏奖励更有效。稠密的视觉感知奖励 (LPIPS) 能最大化激活VLA模型预训练的知识，指导策略进行更精细的调整。</li><li>[策略的全生命周期管理]： 单一的优化方法（如模仿或强化）存在局限。一个覆盖部署前验证 (TTPA)、有监督对齐 (IEPL) 和无监督探索 (OEPL) 的统一框架，能形成一个闭环的、持续自进化的系统，实现策略能力的全面提升。</li></ul></section><section><h3>Next Steps</h3><ul><li>研究世界模型的不确定性建模。让策略能够识别出世界模型预测不可靠的区域，从而决定是在虚拟世界中继续探索，还是必须进行一次昂贵的真实世界交互来校准模型。</li><li>引入多模态物理感知。将视觉和几何信息与触觉、力反馈等更直接的物理交互信号融合，构建对接触动力学理解更深刻的世界模型，以解决更复杂的精细操作任务。</li></ul></section>
       <section>

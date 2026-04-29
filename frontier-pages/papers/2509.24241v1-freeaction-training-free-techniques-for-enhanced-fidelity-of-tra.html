@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.24241v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有模型将动作轨迹作为一种被动条件注入扩散模型中来生成视频。</li><li>核心痛点： 动作信息未被充分利用，导致模型对动作的控制力不足，生成的视频与预期运动轨迹存在偏差。</li><li>本文切入点： 动作向量不仅是条件，更应是主动的引导信号。其大小和方向应直接用于动态调控生成过程。</li></ul></section><section><h3>Key Insights</h3><ul><li>引导机制的泛化： 动作的“反义词”是有效的负向引导。在机器人控制领域，使用负向动作向量 (-a) 可以模拟传统CFG中的负向提示，这是一种无需额外训练即可增强条件控制的通用技巧。</li><li>运动与噪声的耦合： 物理运动的幅度应与生成过程的不确定性相关联。通过将动作幅度与初始噪声的方差挂钩，可以为生成模型注入一种符合直觉的物理先验：小动作应导致微小、确定的变化；大动作则允许更大、更多样的变化。</li><li>模型潜力的挖掘： 预训练的生成模型内部已具备精确遵循动作指令的能力。本文证明，无需重新训练，仅通过在推理时进行巧妙的、免训练的干预，就能解锁并放大这种被“埋没”的控制能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>多模态条件的“FreeAction”： 如何为自然语言指令等非向量化条件定义其“幅度”和“负向指令”？探索将此免训练增强思想扩展到更广泛的多模态生成任务中。</li><li>自适应引导与噪声： 研究让模型根据当前生成步 t 和条件 a 的状态，动态预测或学习最佳的引导强度 ω 和截断阈值 τ，从而替代当前固定的超参数。</li></ul></section>
       <section>

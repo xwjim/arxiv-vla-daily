@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.17808v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 采用“解耦”范式：先用视频世界模型生成视觉规划，再用逆动力学模型 (IDM) 将视频解码为动作。</li><li>核心痛点： 存在“可执行性鸿沟” (executability gap)。视觉上看似连贯的视频，解码出的动作可能违反物理约束，导致机器人执行失败。</li><li>本文切入点： 不在推理时低效地过滤（如拒绝采样），而是将“可执行性鸿沟”本身视为一种训练信号。利用 IDM 构建奖励模型，通过强化学习从根源上对齐视频生成器。</li></ul></section><section><h3>Key Insights</h3><ul><li>鸿沟的本质： 首次明确定义并量化了“可执行性鸿沟”。其核心在于，机器人规划的失败根源常常不在于视觉真实性，而在于动作空间的运动学不连续性，这为评估和优化提供了新的维度。</li><li>奖励的代理： 逆动力学模型 (IDM) 不仅是解码工具，更是物理世界约束的绝佳代理 (proxy)。即使在面对有严重视觉瑕疵的视频时，其解码出的动作通常会剧烈抖动或超限，依然能提供一个信息量极高且鲁棒的惩罚信号。</li><li>跨空间正则化： 在动作空间进行对齐优化，能够反向约束并显著改善视频空间的生成质量。具体表现为，它能有效减少机器人本体的运动学伪影（如手臂变形、关节跳变），实现了从控制到生成的“逆向提纯”。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建富含动力学信息的奖励模型： 结合物理模拟器或学习一个动力学模型，将接触力、扭矩等物理量纳入奖励函数，使模型能规划出物理交互更真实、更有效的动作。</li><li>对齐与推理效率的协同优化： 研究如何将可执行性约束直接融入生成模型的采样过程，或将对齐后的“慢模型”蒸馏到一个轻量级的“快策略”中，实现高质量规划与实时控制的统一。</li></ul></section>
       <section>

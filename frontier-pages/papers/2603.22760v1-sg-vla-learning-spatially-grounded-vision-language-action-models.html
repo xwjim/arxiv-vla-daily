@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.22760v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA (视觉-语言-动作) 模型在桌面级的固定操作任务上已取得巨大成功。</li><li>核心痛点： 直接将VLA模型用于家庭等复杂场景的移动操作时，模型缺乏对三维空间和自身状态的精确理解，导致性能急剧下降。</li><li>本文切入点： 直觉认为，强迫模型在预测动作的同时，去重建（预测）一系列中间的空间/状态信息，可以倒逼其主干网络学到更鲁棒、更“接地气”的表征。</li></ul></section><section><h3>Key Insights</h3><ul><li>[监督信号密度]： 对于复杂的移动操作，端到端的模仿学习信号过于稀疏。引入显式的、多任务的辅助监督（如预测自身位姿、物体分割）是强迫模型学习空间接地（Spatially Grounded）表征的关键。</li><li>[输入模态价值]： 多视角RGB和深度信息对空间理解的提升远大于时序信息。在本文的反应式任务中，增加时序历史反而可能引入噪声，干扰决策，这挑战了“历史信息总是有益”的普遍认知。</li><li>[训练范式]： 直接共训辅助任务会破坏预训练VLM的强大表征。必须采用渐进式训练（先冻结主干训练解码器，再联合微调），才能实现知识的正向迁移而非灾难性遗忘。</li></ul></section><section><h3>Next Steps</h3><ul><li>[真实世界迁移] 如何将辅助监督学习到的空间表征有效迁移到真实机器人，并处理真实世界的感知不确定性，是其走向实用的关键命题。</li><li>[混合动作决策] 研究一种能自适应切换或融合离散与连续动作的统一策略，以同时应对需要全局导航和局部精细操作的复杂长程任务。</li></ul></section>
       <section>

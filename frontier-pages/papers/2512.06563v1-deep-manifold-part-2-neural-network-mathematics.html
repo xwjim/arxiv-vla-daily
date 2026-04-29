@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.06563v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将神经网络视为在固定坐标系下、通过梯度下降优化的通用函数逼近器。</li><li>核心痛点： 缺乏一个能统一解释其学习动力学、能力涌现和内在局限的数学理论。</li><li>本文切入点： 将用于工程计算（如岩石力学）的 数值流形方法 (Numerical Manifold Method, NMM) 思想，创造性地迁移到对神经网络的理解上。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征空间几何]： 神经网络的表征空间并非单一光滑流形，而是由大量 分片堆叠的光滑子流形 构成。这使得高阶非线性问题被分解为局部可计算的简单问题，是网络能够处理复杂现实数据的几何基础。</li><li>[计算的本质]： 神经网络的核心代数操作是 迭代式的坐标系变换 和 无属性的计数 (propertyless counting)。能力并非来自学习复杂语义，而是来自通过移动坐标系高效拟合数据，最终归结为对证据的累积计数。</li><li>[学习的统一机制]： 预训练、指令微调、强化学习等不同训练阶段，本质上都是在为同一个 拉格朗日不动点系统 施加 不同类型和强度的边界条件（弱统计、强意图、弱扰动），从而构建出不同类型的目标不动点。</li></ul></section><section><h3>Next Steps</h3><ul><li>设计可显式控制流形复杂度的网络架构。 例如，能否设计一种模块化结构，使其能动态调整分片流形的数量和重叠方式，以适应不同任务的非线性复杂度？</li><li>实现“流形联邦 (Manifold Federation)”系统。 如何让多个“弹性”小模型协同工作，每个模型学习全局数据流形的一个局部，并能在没有中心化聚合的情况下形成连贯的世界模型？</li></ul></section>
       <section>

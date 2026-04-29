@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.06963v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流 VLA (视觉-语言-动作) 模型依赖大型理解模型 (如 CLIP, LLaVA) 作为骨干网络。</li><li>核心痛点： 现有模型对未见过的任务、物体和场景的泛化能力有限，难以适应开放世界。</li><li>本文切入点： 直觉上，大型视频生成模型已学习到丰富的物理世界动态规律。作者押注：将这种生成式先验迁移到机器人领域，比单纯的理解式先验更能提升泛化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[想象与执行的耦合]：</li><li>实验证明，高质量的视觉想象 (生成的未来视频) 与高成功率的机器人动作之间存在强正相关。这意味着，当模型能「想象」出一个清晰、物理上合理的未来时，其生成的动作也更可靠。“想象力”成为了衡量规划质量的内在指标。</li><li>[生成式先验的价值]：</li><li>相比依赖理解模型的传统 VLA 范式，直接利用视频生成模型作为机器人策略模型的基础，能更有效地实现对新物体、新技能的泛化。这是因为视频模型学习的是世界的动态变化规律，而不仅仅是静态的语义对应。</li><li>[双重预测的必要性]：</li></ul></section><section><h3>Next Steps</h3><ul><li>弥合想象-现实鸿沟： 研究如何利用真实世界的执行反馈（成功或失败）来在线微调或校准视频生成模块，使其“想象”的物理过程更接近现实，实现一种自适应的物理引擎。</li><li>实时生成式决策： 探索将 Diffusion 模型蒸馏为一致性模型 (Consistency Models) 或其他单步生成模型，在基本不损失“想象”质量的前提下，实现机器人动作的实时生成。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.18428v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖大规模、人工标注的遥操作（Teleoperation）数据集进行有监督预训练（如 OpenVLA, $\pi_0$）。</li><li>核心痛点： 动作数据收集成本极高、难以扩展，且有监督预训练容易导致模型过拟合于特定的机器人形态和环境分布。</li><li>本文切入点： 将 Imitation Learning 与 World Model 耦合，通过预测视频帧的动态变化（而非预测动作标签）作为学习信号，强制模型理解环境动力学。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动力学归纳优于动作拟合]： 相比有监督预训练（拟合特定动作分布），基于世界模型的预训练学习的是 通用环境动力学，这使得模型在迁移到新任务时具有更强的泛化能力。</li><li>[人类视频的迁移价值]： 仅使用无标签的 人类操作视频 进行预训练，其效果能达到甚至超越使用昂贵机器人动作数据进行有监督预训练的结果，证明了跨形态（Human-to-Robot）学习的可行性。</li><li>[潜在空间的语义对齐]： 通过 CCA (典型相关分析) 验证，模型学到的 潜在动作表征 与真实动作标签高度相关，说明模型在无监督过程中自动捕获了操作任务的本质语义。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入感知损失： 引入 光流损失 (Optical Flow) 或 感知损失 (Perceptual Loss)，引导模型聚焦于任务关键的动态变化而非静态背景。</li><li>Web-scale 扩展： 利用 LAWM 的无监督特性，在互联网规模的视频数据上进行预训练，探索机器人领域的 Foundation Model 潜力。</li></ul></section>
       <section>

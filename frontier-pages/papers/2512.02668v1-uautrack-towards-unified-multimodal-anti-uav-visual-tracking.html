@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.02668v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 针对不同模态（RGB、TIR）分别设计独立的跟踪模型，或使用复杂的后期融合与重检测模块。</li><li>核心痛点： 缺乏一个能处理多种模态的统一跟踪框架，导致模型冗余且跨模态信息共享困难。</li><li>本文切入点： 直觉上，一个单一流（Single-stream）的 Transformer 架构可以统一处理不同模态的输入；同时，利用文本先验知识（如“追踪一个小型无人机”）可以为模型提供高级语义引导，取代笨重的检测器。</li></ul></section><section><h3>Key Insights</h3><ul><li>框架统一性： 证明了单一模型架构完全有能力处理和融合多种异构模态（RGB、TIR）的跟踪任务，打破了“不同模态需要不同专属模型”的传统思路。其关键在于统一的输入表征和动态的注意力计算。</li><li>语义引导价值： 在目标类别固定（无人机）的跟踪任务中，注入高级语义先验（文本描述）能显著提升跟踪精度。这证明了语言作为一种强先验，可以有效弥补纯视觉特征在小目标、低分辨率等挑战场景下的不足，是一种轻量级但高效的性能增强手段。</li><li>训练策略启示： 对于这类基于预训练模型的 Transformer 跟踪器，全局全参数微调（Full Fine-tuning） 的效果远超 LoRA 等参数高效微调方法。这表明，为了适应反无人机这种专业领域的独特挑战，必须对模型的底层特征提取能力和高层逻辑推理能力进行全面调整。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态与交互式 Prompt： 能否让模型不仅理解“是什么”（无人机），还能理解“在干什么”？探索使用描述目标状态或场景上下文的动态 Prompt（例如：“正在快速下降的无人机”），甚至允许用户通过自然语言进行交互式干预。</li><li>零样本模态扩展： 当前框架统一了已知的几种模态。一个更有价值的命题是，能否设计一个能零样本（Zero-shot）或少样本（Few-shot）适应未知新模态（如事件相机、毫米波雷达）的跟踪框架，实现真正意义上的“终极统一”。</li></ul></section>
       <section>

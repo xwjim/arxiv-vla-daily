@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.01878v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 知识图谱推理依赖于路径搜索或图神经网络，通常认为距离近的实体更相关。</li><li>核心痛点： 现有方法多为经验驱动，缺乏一个解释“为何近就更相关”的第一性原理或统一理论框架。</li><li>本文切入点： 受句法树研究启发，作者直觉地将神经科学的自由能最小化原理 (FEP) 从树结构推广到图谱，用最短路径距离这一简单概念来形式化定义“意外”。</li></ul></section><section><h3>Key Insights</h3><ul><li>理论统一性： 首次将神经科学的自由能原理 (FEP) 与AI领域的知识图谱推理建立了一座理论桥梁。它将KG推理从一个纯粹的算法问题，升格为一个智能体在最小化对世界认知意外的根本性过程。</li><li>概念可计算性： 成功将“意外”这一抽象的哲学/神经科学概念，降维并锚定到一个具体、可计算的指标——最短路径距离。这为图神经网络 (GNN) 的消息传递层数（即推理深度）等设计选择提供了理论依据。</li><li>结构泛化能力： 该框架将“意外最小化”的思想从简单的树结构（如句法树）成功推广到了更复杂的有环有向图（知识图谱）。这证明了该理论的普适性，有望应用于更广泛的结构化数据推理。</li></ul></section><section><h3>Next Steps</h3><ul><li>语义加权距离： 研究如何学习一个语义加权的图距离，而非简单的跳数。让距离能反映关系的类型和重要性，使“意外”的度量更贴近认知。</li><li>动态图谱中的意外： 将此框架扩展到时序知识图谱 (Temporal KGs)。探索如何定义一个随时间演变的“意外”，以捕捉事件的新颖性或状态变化。</li></ul></section>
       <section>

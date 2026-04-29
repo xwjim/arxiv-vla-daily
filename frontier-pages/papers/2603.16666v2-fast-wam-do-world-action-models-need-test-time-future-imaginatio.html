@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.16666v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界动作模型（WAMs）普遍遵循“先想象，后执行”的范式，即先生成未来视频，再基于想象的未来预测动作。</li><li>核心痛点： 测试时迭代式的视频生成过程导致延迟极高，且不清楚“未来想象”本身对性能的贡献是否真的关键。</li><li>本文切入点： 解耦训练目标与推理过程。作者猜想，WAM 的真正优势可能仅来自训练阶段的视频预测任务（它能学到更好的世界表征），而推理时的显式生成或许可以被省略。</li></ul></section><section><h3>Key Insights</h3><ul><li>[价值来源]： WAM 的核心收益源于训练阶段的视频联合建模（video co-training），而非测试阶段的未来想象。移除视频联合训练会导致性能大幅下降，而去掉测试时未来想象则影响甚微。</li><li>[设计范式]： 训练目标与推理过程可以有效解耦。复杂的辅助任务（如视频预测）能作为一种强大的表征学习工具，但在推理时可以被舍弃以换取极致的效率，而性能损失很小。</li><li>[性能与效率]： 无需显式的未来生成，直接策略模型（Fast-WAM）也能达到与“想象-执行”范式相当的性能。这证明了后者所带来的巨大计算开销（慢4倍以上）对于许多任务来说并非必要。</li></ul></section><section><h3>Next Steps</h3><ul><li>选择性想象机制： 研究一种混合策略。模型能否学会判断何时需要调用耗时的未来想象（如遇到不确定或关键状态时），而在常规状态下则使用快速的直接策略？</li><li>探索想象的真正作用： 在必须进行多步复杂推理和规划的场景下，重新评估“想象-执行”范式的价值。设计新的基准来放大“想象”能力带来的优势。</li></ul></section>
       <section>

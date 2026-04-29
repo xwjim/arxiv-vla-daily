@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.09882v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人操纵主要依赖对场景的静态几何理解来规划动作，例如避开障碍物或寻找抓取点。</li><li>核心痛点： 仅靠几何信息无法预测接触后的动态连锁反应（如一个物体被推动后会撞到另一个），导致在密集杂乱场景中频繁失败。</li><li>本文切入点： 直觉上，人类高手并非只看形状，更能预判「力」的效果。作者认为，与其让策略在强化学习中盲目试错，不如先用一个世界模型显式地学习场景的接触动力学，再将这种物理感知能力注入策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动力学 vs. 几何学]： 在密集杂乱场景中，操纵成功与否的关键不再是几何避障，而是对接触引发的连锁物理效应（如滑动、倾倒）的精准预测。静态几何模型在此会失效，而动力学感知模型则能抓住本质。</li><li>[物理表征的有效性]： 将质量、速度等物理属性显式编码到点云中，并稠密地预测每个点的未来状态，是学习有效动力学表征的关键。仅预测物体级别的6D姿态信息不足以捕捉复杂的接触物理。</li><li>[策略与模型的协同进化]： 通过课程学习，让策略的交互数据不断迭代式地优化世界模型；反过来，一个更懂物理的世界模型又能加速策略的学习。这种协同进化机制是实现高水平灵巧操作的有效路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>将在线系统辨识（Online System Identification）与该框架结合，让机器人能通过少量交互实时估计未知物体的物理属性，摆脱对预先估计的依赖。</li><li>将动力学模型与高层任务规划器（如大语言模型）深度融合，使其不仅能预测“推一下会怎样”，还能规划出“为了抓取A，我应该先推开B”的多步策略。</li></ul></section>
       <section>

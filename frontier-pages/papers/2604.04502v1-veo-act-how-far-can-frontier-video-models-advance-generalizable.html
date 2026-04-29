@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.04502v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法是端到端训练 视觉-语言-动作 (VLA) 模型来学习机器人通用策略。</li><li>核心痛点： VLA模型在训练中难以完全保留预训练语言模型的泛化能力，且现有机器人视频模型能力不足，物理交互的预测精度低。</li><li>本文切入点： 作者猜想，最前沿的视频模型（如 Veo-3）虽不完美，但其强大的世界知识足以生成 “大致正确” 的高级运动规划，从而绕开VLA模型的泛化损失问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[视频模型能力边界]： 前沿视频模型（Veo-3）已具备强大的 零样本任务级规划能力，能生成大致正确的运动轨迹。但其 物理模拟精度不足，尤其在接触丰富的交互中，无法作为可靠的低层控制器。</li><li>[泛化能力保持]： “视频预测 + 逆动力学” 的范式能最大程度 保留预训练模型的泛化能力。因为它不改变模型原生的输入输出格式（图像/视频），避免了VLA模型因引入新“动作”模态而造成的知识退化。</li><li>[分层控制的协同效应]： 分层框架 是当前利用大模型能力的有效路径。让视频模型做其擅长的 高层语义规划，让VLA策略做其擅长的 底层反应式控制，二者结合能实现 1+1 &gt; 2 的效果，尤其在语义模糊或存在干扰的复杂场景中。</li></ul></section><section><h3>Next Steps</h3><ul><li>物理增强的视频生成： 研究如何让视频模型生成 物理交互上更精确 的轨迹，例如通过物理引擎反馈或针对接触动力学进行微调，以减轻对底层策略的依赖。</li><li>规划与执行的联合优化： 探索一种更紧密的 端到端训练框架，让高层视频规划器能够“感知”到底层策略的执行能力，从而生成 “更易于执行” 的计划，而非仅仅是“看起来正确”的计划。</li></ul></section>
       <section>

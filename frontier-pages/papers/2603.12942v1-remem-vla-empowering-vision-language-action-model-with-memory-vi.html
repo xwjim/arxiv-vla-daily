@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12942v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流 VLA 模型遵循马尔可夫假设，仅依赖当前或极短期的观测进行决策。</li><li>核心痛点： 现有记忆方法（如记忆库、扩展历史窗口）或易受干扰，或记忆长度受限；简单的循环网络因截断反向传播（TBPTT）难以学习长期依赖。</li><li>本文切入点： 核心直觉是不同时间尺度的记忆需要不同机制。作者设计了两种更新频率不同的循环查询 (Recurrent Queries)，分别处理短时和长时信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>记忆传播机制： 在 VLA 模型中实现长期记忆的关键，是让记忆的传播路径梯度自由 (gradient-free)。实验证明，任何可学习的更新机制（如 GRU 或可训练的 VLM 主干）在 TBPTT 训练下都会导致长期记忆能力崩溃，而固定的 EMA 更新则能稳定传递信息。</li><li>记忆的时间分层： 单一的记忆机制无法兼顾长短时需求。帧级查询擅长处理需要快速响应的短期任务，而块级查询则为需要回忆初始状态的长期任务提供了稳定上下文。二者结合才能实现鲁棒的综合记忆能力。</li><li>记忆内容的解耦： 循环查询机制本身更擅长编码时空、序列和情节记忆（如物体位置、操作顺序），但在保存高保真视觉细节方面能力有限。必须引入如过去观测预测这样的专门任务，才能有效增强模型的视觉记忆。</li></ul></section><section><h3>Next Steps</h3><ul><li>记忆机制的即插即用化： 将本文验证有效的双层循环查询模块设计为一种即插即用的组件，并将其集成到已有的预训练 VLA 模型（如 OpenVLA）中，以低成本赋予它们强大的记忆能力。</li><li>自适应记忆管理： 研究动态的记忆更新与遗忘机制，让模型学会根据任务上下文自主决定何时更新记忆、更新什么以及遗忘什么，而不是依赖固定的更新频率和系数。</li></ul></section>
       <section>

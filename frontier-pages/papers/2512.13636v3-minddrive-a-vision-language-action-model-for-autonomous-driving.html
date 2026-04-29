@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.13636v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前的视觉-语言-动作 (VLA) 自动驾驶模型主要依赖模仿学习 (IL) 进行训练。</li><li>核心痛点： 模仿学习存在分布偏移和因果混淆问题；而直接应用在线强化学习 (RL) 则因连续动作空间的探索效率极低而难以实现。</li><li>本文切入点： 直觉上，将复杂的驾驶任务解耦为“做什么”（高级决策）和“怎么做”（具体轨迹）。作者通过让模型在有限的、离散的语言决策空间（如“超车”、“保持车道”）中进行选择，而不是在无限的连续轨迹空间中探索，从而大幅提升了强化学习的效率。</li></ul></section><section><h3>Key Insights</h3><ul><li>决策与执行解耦：</li><li>本质上，该工作成功地将驾驶任务解耦为“高级语义决策”和“低级动作执行”两个层面。语言成为了连接这两个层面的、具备丰富语义且离散化的强大接口，使得对高级认知能力的优化成为可能。</li><li>探索空间降维：</li><li>核心发现是，在离散的语言决策空间中进行试错学习，其探索效率远高于在无限维度的连续动作（轨迹）空间中直接探索。这使得在线强化学习在复杂的自动驾驶场景中变得计算可行。</li><li>精准的信誉分配 (Credit Assignment)：</li></ul></section><section><h3>Next Steps</h3><ul><li>动态元动作空间： 研究让模型自主学习和生成新的元动作，而不是依赖固定的集合。例如，模型能否在经验中提炼出“在无保护左转时谨慎探头”这类更精细、更场景化的新决策，从而实现决策空间的自适应演化。</li><li>在线-离线混合强化学习： 纯在线学习的样本效率低下。一个极具价值的方向是，探索如何将本文的在线试错学习与大规模离线驾驶数据相结合，利用离线数据进行策略预训练或约束在线探索，从而构建一个更高效、更安全的混合学习范式。</li></ul></section>
       <section>

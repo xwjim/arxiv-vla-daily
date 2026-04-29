@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15618v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA模型通常在LLM的第一层输入视觉特征，然后通过堆叠的Transformer层串行处理，最终生成动作。</li><li>核心痛点： 视觉信息在LLM的深层网络中影响力逐渐衰减，导致模型在进行最终决策时，对关键物体的视觉感知能力严重下降。</li><li>本文切入点： 直觉非常简单——既然深层网络会“遗忘”视觉信息，那就在深层网络中，直接把一个更强大的“视觉专家”模型的特征重新注入进去。</li></ul></section><section><h3>Key Insights</h3><ul><li>[信息传递瓶颈]： 在标准的串行VLA架构中，视觉信息是一种“一次性”输入。随着Transformer层数加深，其影响力被语言和动作生成任务不断稀释，导致深层“失明”，这是现有VLA模型的一个普遍结构性缺陷。</li><li>[网络层级分工]： VLA模型的浅层网络天然保留了较好的视觉-动作对齐能力（知道“该看哪”），而深层网络更偏向于抽象推理与决策。因此，浅层注意力可以作为可靠的“向导”，指导深层网络应该关注哪些关键视觉区域。</li><li>[专家知识注入]： 与其强求一个通用模型同时精通视觉和控制，不如引入一个独立的“视觉专家”（如DINOv3）。将其高阶、语义丰富的特征直接“输血”给VLA模型的决策层（深层），是一种更高效的能力互补范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态与自适应的特征注入：能否让模型学会“何时”以及“何种”视觉特征最需要被注入深层？例如，在简单场景下减少注入以节省算力，在复杂、精细操作场景下才激活深度注入。</li><li>融合时序信息的视觉增强：将本文的空间视觉增强机制与视频或历史观测信息结合。利用浅层的“时空注意力”来指导深层关注关键的动态变化区域，而不仅仅是静态物体。</li></ul></section>
       <section>

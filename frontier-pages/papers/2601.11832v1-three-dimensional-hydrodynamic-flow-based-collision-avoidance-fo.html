@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.11832v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统避障依赖人工势场法、模型预测控制(MPC)或强化学习。</li><li>核心痛点： 传统方法或易陷入局部最优解（势场法），或计算成本高不适合实时应用（MPC），或可解释性与安全性不足（学习方法）。</li><li>本文切入点： 直觉上，流体绕过物体的轨迹天然平滑且无碰撞。作者将此物理现象数学化，用拉普拉斯方程描述的谐波势流场来直接生成避障速度指令，从根本上避免了路径重规划和局部极小值问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>机制解耦：</li><li>本文成功地将局部避障（流场模型）与全局编队（VRB模型）两个任务解耦。流场模型提供一个实时的、局部的速度扰动项，而VRB模型则施加一个全局的、稳定的几何约束。这种“局部扰动+全局约束”的设计范式，使得复杂的多智能体协同问题变得清晰且高效。</li><li>内生安全性：</li><li>采用基于拉普拉斯方程的势流理论，其数学性质天然保证了生成的路径（流线）是连续、平滑的，并且不存在局部极小值。这意味着无人机永远不会像在传统势场法中那样“困在”某个点，总能找到前进的路径，这是一种“与生俱来”的安全性。</li><li>计算效率与可扩展性：</li></ul></section><section><h3>Next Steps</h3><ul><li>异构体与非线性运动： 将该框架扩展到异构无人机编队（不同动力学性能）和应对非线性、高机动性的障碍物。当前模型对障碍物的运动预测较为简单，如何将更复杂的预测模型融入流场生成是关键。</li><li>学习型流场生成： 放弃固定的偶极子模型，利用神经网络直接从传感器原始数据（如激光雷达点云）中学习生成一个最优的避障流场。这既能保留流场法平滑、无局部极小值的优点，又能使其适应任意形状的障碍物，实现数据驱动与物理模型的完美结合。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.02765v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流世界模型（如Dreamer）通过重构像素或对齐同一时刻的表征来学习环境的动态。</li><li>核心痛点： 像素重构浪费模型能力在无关细节上；同T刻对齐无法有效建立时序关联，导致在需要长时记忆的部分可观测环境中表征能力不足。</li><li>本文切入点： 一个好的世界模型不仅要理解现在，更要能预测未来。因此，作者将学习目标从“重构当前”转变为“预测下一时刻的编码”，直接强制模型学习时序预测能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征学习的目标： 在需要长时记忆和推理的任务中，直接预测未来（下一时刻的嵌入）是比重构现在（当前像素）更有效、更本质的表征学习信号。它能驱动模型学到更具时序连贯性的隐状态。</li><li>时序建模的重要性： 模型的性能增益并非来自单一组件，而是源于 强大的时序模型（Transformer） 和 前瞻性的预测目标（next-step） 的协同作用。消融实验表明，二者缺一不可，否则模型性能会急剧下降。</li><li>隐状态的稳定性： “下一时刻嵌入预测”机制迫使模型关注并保留对未来有预测价值的持久化信息（如空间布局），同时过滤掉瞬时视觉噪声。这使得其学到的表征在时间上更稳定，更专注于任务核心要素。</li></ul></section><section><h3>Next Steps</h3><ul><li>多步未来预测 (Multi-step Prediction)： 当前只预测 t+1 时刻。可以探索使用Transformer一次性预测未来多个时刻 (t+1, t+2, ..., t+k) 的嵌入序列，这可能进一步增强模型的长时规划能力。</li><li>任务导向的对齐 (Task-aware Alignment)： 当前的对齐损失（Barlow Twins）是任务无关的。未来可以设计一种与任务奖励/价值相关的对齐损失，引导模型更关注对决策有直接影响的表征维度。</li></ul></section>
       <section>

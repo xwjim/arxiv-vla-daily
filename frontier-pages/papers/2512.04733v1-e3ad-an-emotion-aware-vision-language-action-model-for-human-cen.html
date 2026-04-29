@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.04733v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端自动驾驶模型（VLA）直接将视觉和语言指令映射到驾驶动作。</li><li>核心痛点： 现有模型是情感盲视的，无法理解指令中的紧迫、焦虑等情绪，导致驾驶行为机械，乘客缺乏信任感和舒适度。</li><li>本文切入点： 直觉上，人类驾驶员会根据乘客的语气调整驾驶风格。作者将此直觉形式化，引入了心理学中的 VAD 连续情感空间，使模型能理解指令“怎么说”而非仅仅“说什么”。</li></ul></section><section><h3>Key Insights</h3><ul><li>情感即控制信号：</li><li>乘客的情感向量 (VAD) 可以作为规划模块的连续调节信号。例如，高“唤醒度 (Arousal)”会使模型生成更直接、更果断的轨迹（如更快变道），而低“唤醒度”则会生成更保守、更平滑的轨迹。</li><li>认知架构的优越性：</li><li>模仿人类认知系统的 “自车+全局”双通路空间推理架构，比单一视角的模型在视觉定位 (Grounding) 和空间理解上更鲁棒。全局地图提供了拓扑结构，自车视角提供了即时细节，二者结合能更好地处理遮挡和歧义。</li><li>无监督对齐的潜力：</li></ul></section><section><h3>Next Steps</h3><ul><li>多模态情感融合： 融合音频（语调、语速）和车内摄像头视觉（面部表情）信息，构建一个更全面、更精准的实时情感状态评估模型。</li><li>闭环仿真与强化学习： 将模型部署到高保真驾驶模拟器中进行闭环测试，并利用基于人类反馈的强化学习 (RLHF) 对驾驶策略进行在线微调，使其在动态交互中持续优化。</li></ul></section>
       <section>

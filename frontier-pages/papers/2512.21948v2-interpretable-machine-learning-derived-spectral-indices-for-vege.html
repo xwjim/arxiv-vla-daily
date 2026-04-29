@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.21948v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 遥感监测依赖 专家手动设计 的光谱指数（如 NDVI）来进行。</li><li>核心痛点： 手动设计效率低下，且在 无限的数学公式组合空间 中难以找到最优解。</li><li>本文切入点： 将 领域知识 (限定为具有光照不变性的比值形式) 与 机器学习 (自动化特征选择与优化) 相结合，在受约束的巨大空间内进行高效搜索。</li></ul></section><section><h3>Key Insights</h3><ul><li>[发现范式]： 自动化数据驱动的发现优于专家经验驱动的设计。SFP 框架发现的指数 (KDI, WCI) 在两个截然不同的任务中，均显著超越了所有经典的人工设计指数 (NDVI, NDRE 等)，证明了系统性搜索的优越性。</li><li>[指数的适应性]： 最优光谱指数是高度依赖于具体情境的。在小麦分类任务中，框架为三个不同生长阶段分别找到了 结构完全不同的最优指数。特别是在晚期，它发现了一个 完全不依赖近红外 (NIR) 波段 的指数，颠覆了传统植被指数的构建逻辑。</li><li>[泛化能力来源]： 跨数据子集的“共识”是泛化能力的关键。通过在多个交叉验证折（不同年份、不同空间区域）中寻找 重复出现的“胜出”指数，该框架本质上筛选出了具有 强大时空泛化能力 的公式，而非在特定数据集上过拟合的解。</li></ul></section><section><h3>Next Steps</h3><ul><li>高光谱数据探索： 将 SFP 框架应用于 高光谱数据。在数百个波段的组合爆炸中，该框架的自动化搜索能力将具有不可替代的价值。</li><li>动态指数发现： 从发现离散时间点（如生长阶段）的静态指数，演进为发现一个 能随时间连续演化的动态指数公式，以更精确地捕捉植被的完整生长过程。</li></ul></section>
       <section>

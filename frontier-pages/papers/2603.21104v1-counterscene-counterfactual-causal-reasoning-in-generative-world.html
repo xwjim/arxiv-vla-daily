@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.21104v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用生成模型，通过启发式规则或全局扰动来制造危险驾驶场景。</li><li>核心痛点： 强行制造碰撞会牺牲场景的真实性，导致 真实性与对抗性的权衡 (realism-adversarial trade-off)。</li><li>本文切入点： 直觉认为，危险并非凭空产生，而是某个 关键智能体 放弃了维持安全的行为。只需对它进行 最小化反事实干预，即可在保持真实性的前提下诱发危险。</li></ul></section><section><h3>Key Insights</h3><ul><li>[干预对象的重要性]： “选对”对抗智能体比“如何”对抗更重要。实验证明，错误地干预一个不相关的智能体，对 场景真实性的损害 远大于对 对抗性的提升。</li><li>[风险的本质]： 交通风险的核心是 时序问题。通过 压缩关键智能体到达冲突点的时间裕度 (Temporal Guidance)，是制造真实碰撞最有效的手段，且几乎不损害轨迹的几何真实性。</li><li>[泛化性的来源]： 模型的泛化能力源于对 因果不变性 (Causal Invariance) 的利用。它干预的是 普适的物理冲突条件（时空重叠），而非特定数据集的驾驶行为模式，因此能零样本迁移到新数据集（如 nuPlan）并保持高性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建 反事实交互语法 (Counterfactual Interaction Grammar)：从单智能体干预扩展到 多智能体、多步骤的组合干预，以生成逻辑链更长、更复杂的“阴谋”式场景。</li><li>诊断式场景生成：将反事实干预与 自动驾驶规划模块的内部状态 相结合。不仅生成碰撞，更能揭示“为什么”规划器会失效（例如，是因感知错误还是预测偏差）。</li></ul></section>
       <section>

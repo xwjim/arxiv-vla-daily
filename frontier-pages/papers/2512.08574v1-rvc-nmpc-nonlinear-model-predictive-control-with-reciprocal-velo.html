@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08574v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>行业共识与痛点： 在 RVC-NMPC 之前，让无人机集群不相撞，主要有几种“笨办法”： 1. 上帝指挥模式 (Centralized)： 一个中央大脑计算好所有无人机的路径，然后发号施令。这在无人机少、环境简单时还行，但一旦数量增多或情况复杂，中央大脑就成了计算和通信的瓶颈，而且一旦它宕机，整个机群就瘫痪了。 2. 开会讨论模式 (Communication-based)： 无人机之间互相广播自己的位置、速度和意图（“我要往左飞了，大家注意！”）。这种方式更灵活，但严重依赖通信质量。在信号不好的地方、或者信息延迟高的时候，等“会议”开完，可能已经撞上了。这就像在战场上，靠吼来协同作战，既不现实也不安全。 3. 各扫门前雪模式 (Reactive)： 每个无人机都把其他无人机当成静态障碍物。它只考虑“我怎么躲开你”，而不考虑“你也会躲开我”。这种“自私”的算法常常导致过度反应（比如不必要的急刹车或大转弯），甚至出现“抖动”或“死锁”（两架无人机在走廊中间相对，你往左我往右，你往右我往左，谁也过不去）。</li><li>核心 Insight： 作者的“灵光一现”在于，他们打破了“协同必须通信”的思维定式。他们意识到，协同可以通过一种“社会性契约”来实现，而这个契约可以内嵌到每个个体的决策逻辑中。</li><li>RVC 提供了那个“走廊默契”：它计算出一个“安全速度集”，前提是假设对方也会承担一半的避让责任。</li><li>NMPC 是无人机强大的“个体大脑”，它能预测自己未来几秒的各种高难度飞行动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>非共识发现： 1. “快”本身就是一种安全机制。 论文中提到的 100Hz 刷新率不仅仅是一个性能指标，它揭示了一个反直觉的规律：对于高速动态系统，决策的频率比单次决策的完美度更重要。与其花很长时间做一个“完美”的长期规划（世界早已改变），不如以极高的频率做一系列“足够好”的短视决策。这种“小步快跑、不断修正”的哲学，在高动态对抗中，碾压了传统的“深思熟虑、一步到位”模式。 2. 协同效率的提升，源于“责任共担”而非“能力更强”。 31% 的飞行时间缩短，这个惊人的提升并非来自无人机飞得更快或更猛，而是因为它减少了因“过度自保”而产生的不必要减速和绕行。当每个个体都相信同伴会分担责任时，整个群体的行为会变得极其流畅和高效，避免了“交通堵塞”式的内耗。</li><li>机制洞察： 1. NMPC 与 RVC 是天作之合。 为什么这套组合对“敏捷”飞行特别有效？因为 NMPC 的“N”（非线性）意味着它深刻理解无人机自身的复杂气动特性和极限。当 RVC 给了它一个清晰的、数学上优雅的“安全边界”后，NMPC 能够利用它对自身能力的深刻理解，去探索贴着安全边界的极限机动。它知道如何用一个最节能、最平滑的倾斜、拉升来完成避让，而不是像简单控制器那样只会笨拙地急停或转向。 2. “可观测信息”的价值被重新定义。 实验成功证明，实现高水平协同，你不需要知道对方的最终目的地、任务优先级、甚至它在想什么。你只需要精确、高频地知道它的当前状态（位置和速度）。RVC 算法的精妙之处在于，它从这些最基本、最容易获取的信息中，提炼出了足以支撑复杂协同行为的“社会契约”。这大大降低了系统的复杂性和对通信的依赖。</li></ul></section>
       <section>

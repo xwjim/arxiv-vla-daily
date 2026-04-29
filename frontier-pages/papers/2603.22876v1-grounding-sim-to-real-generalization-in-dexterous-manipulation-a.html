@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.22876v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 业界普遍使用模拟器生成大规模数据来训练机器人 VLA 模型，以规避真实世界数据采集的高昂成本。</li><li>核心痛点： Sim-to-Real 技术虽多（领域随机化、真实渲染、强化学习等），但对于复杂的 VLA 模型，我们并不清楚哪种技术最有效，以及它们各自的贡献度有多大，导致资源投入盲目。</li><li>本文切入点： 与其提出新算法，不如回归本源。作者通过大规模、因子化、可控的真实世界实验，像做物理实验一样，逐一拆解和量化各种已知技术的影响力，从而建立一个清晰的认知基准。</li></ul></section><section><h3>Key Insights</h3><ul><li>空间 &gt; 外观： 在领域随机化中，空间特征的扰动（如桌子高度、相机位姿）对提升 Sim-to-Real 泛化能力的贡献远大于外观特征的扰动（如背景纹理、光照）。这表明让模型适应几何关系的变化，比适应视觉表象的变化更为关键。</li><li>随机化粒度： “帧级”随机化（每一步都变化）比传统的“回合级”随机化（每轮游戏开始时变化一次）能带来更强的泛化能力。高频的变化迫使模型忽略静态的背景信息，转而聚焦于与任务核心相关的动态物体。</li><li>RL 的内在泛化力： 强化学习（RL）微调本身就是一种强大的泛化工具。即使在“干净”（无随机化）的模拟环境中进行 RL 训练，其真实世界性能也几乎能追平在复杂随机化环境中进行监督学习（SFT）的效果。RL 与领域随机化结合，效果最佳，证明了探索式学习对弥合现实差距的巨大价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“随机”到“智能”的扰动： 既然已知空间特征最重要，下一步应研究如何自动学习最优的扰动分布，而不是简单的均匀随机采样。例如，通过对抗性学习生成能最大化挑战模型的“杀手级”相机位姿和场景布局。</li><li>模拟技术的经济学： 探索不同技术（如超高保真渲染 vs. 大规模多样性随机化）的“性价比”。在有限的计算预算下，如何组合这些技术以达到最佳的 Sim-to-Real 效果，是一个极具工程价值的命题。</li></ul></section>
       <section>

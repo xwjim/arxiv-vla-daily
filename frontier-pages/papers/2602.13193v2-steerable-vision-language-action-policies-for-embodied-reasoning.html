@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.13193v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通常采用分层控制：一个高阶 VLM (大脑) 生成自然语言指令，一个低阶 VLA (身体) 负责执行。</li><li>核心痛点： 两者间的接口过于单一和模糊。仅靠高级自然语言指令（如“把胡萝卜放进锅里”）无法精确传达 VLM 的复杂推理，导致控制精度低、泛化能力差。</li><li>本文切入点： 直觉认为，机器人训练数据中已包含丰富的行为，只是缺少精细的指令标签。作者通过合成多抽象层级的“指令词典” (Steering Commands) 来重新标注数据，让低阶策略能听懂更精细的指令，从而打破了高低阶之间的沟通瓶颈。</li></ul></section><section><h3>Key Insights</h3><ul><li>[指令抽象度的价值]： 不存在一种万能的指令抽象层级。实验证明，坐标/轨迹指令在处理新物体（语义泛化）时最有效，而原子动作指令在空间关系推理任务中表现更佳。一个“可控”的策略必须能理解一个指令谱系 (spectrum of commands)。</li><li>[VLM 的在线适应性]： 丰富的指令集使 VLM 能进行在线试错与纠正 (online error correction)。当 VLM 发现一个高层级指令（如“拿起锤子”）导致机器人抓错物体时，它能立刻切换到更具体的低层级指令（如“向右上移动到锤柄处”）来主动解决问题，这是传统单一指令接口无法实现的。</li><li>[知识接地的瓶颈]： 机器人控制的瓶颈不仅在于 VLM 的推理能力，更在于推理结果到物理动作的转化效率。一个“可控”的低阶策略是放大器，它将 VLM 强大的场景理解和物理常识高效地“接地” (grounding) 到物理世界。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习指令的价值函数： 如何让高阶 VLM 自主学习不同指令在特定状态下的价值 (affordance)？可以引入强化学习，让 VLM 通过与环境交互的反馈来优化其指令选择策略，而不是仅依赖零样本推理。</li><li>指令集的动态生成与扩展： 当前指令集是预定义和离线生成的。未来的系统能否在执行任务中动态发现并定义新的、更有效的组合指令，从而实现指令集的自我演化和扩展？</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.05578v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有自动驾驶大模型要么依赖稀疏的文本3D标注，要么直接输入昂贵的3D数据（如点云）。</li><li>核心痛点： 文本3D标注信息密度低，而直接输入3D数据则成本高昂且丧失了2D预训练模型的泛化能力。</li><li>本文切入点： 转换思路，不将3D信息作为输入，而是将其作为预测目标。通过强迫模型从2D图像重建出密集的3D占据栅格，以此为监督信号，将3D空间知识“蒸馏”进模型的内部表征。</li></ul></section><section><h3>Key Insights</h3><ul><li>监督范式： 证明了“输出式监督”比“输入式喂养”更有效。强迫模型从低维（2D图像）生成高维（3D场景），是向2D模型灌输3D知识的一种高效且低成本的范式，这比直接输入3D数据更能激发模型的内在空间推理能力。</li><li>训练与推理的解耦： 模型的3D理解能力是在训练中通过隐式任务习得的，而此任务模块（占据预测器）在推理时可以被完全丢弃。这实现了“训练时增智，推理时零开销”的理想状态，即3D知识已被内化为VLM的参数，而非依赖一个额外的实时计算模块。</li><li>LLM的能力边界： 再次验证了LLM在“语义推理”而非“数值回归”上的核心优势。将规划任务分解为“LLM预测高级意图（元动作）”和“MLP执行低级控制（坐标生成）”的策略，是最大化模型能力、规避其短板的有效路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>从3D到4D的隐式监督： 将隐式监督从静态的3D空间扩展到4D时空。让模型不仅预测当前场景的占据，还要预测未来几个时间步的场景流（Scene Flow）或动态变化，从而内化对物体运动和动态交互的理解。</li><li>闭环自优化的数据引擎： 摆脱对外部大模型（GPT-4o）的依赖。探索让训练好的OccVLA模型自我反思和修正其生成的元动作与思维链数据，构建一个自举（Bootstrapping）的数据增强闭环，实现模型的持续自我进化。</li></ul></section>
       <section>

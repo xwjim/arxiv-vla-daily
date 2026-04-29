@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.24329v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用通用的视频问答 (Video QA) 基准来评测多模态模型。</li><li>核心痛点： 现有基准节奏太慢、视角单一、缺乏对抗性，无法有效评估智能体在复杂动态环境下的核心能力。</li><li>本文切入点： 将快节奏、多玩家、多视角的 3D 游戏作为一个“认知沙盒”，用其内在的高决策密度和多智能体交互特性来压榨和诊断模型的极限。</li></ul></section><section><h3>Key Insights</h3><ul><li>[认知层级]： 模型的性能随着认知复杂度的提升而稳定下降。从基础感知 (L1) 到时间推理 (L2)，再到跨视频理解 (L3)，准确率逐级递减，证明时序和多视角关联是当前模型的关键瓶颈。</li><li>[决策密度与归因]： 决策密度是模型性能的“反向指标”。游戏节奏越快（如 FPS），模型表现越差。同时，模型理解“他人” (Other Agents) 的状态和行为远比理解“自我” (Self) 和“世界” (World) 更加困难，暴露出其在多智能体建模与归因上的根本缺陷。</li><li>[错误根源]： 模型失败的核心原因并非看不懂静态画面，而是搞不清时序和关系。结构化干扰项分析表明，模型最容易被“时间错位” (Temporal) 和“视角混淆” (Cross-Video) 的选项迷惑，而非简单的视觉内容捏造。</li></ul></section><section><h3>Next Steps</h3><ul><li>[从“理解”到“决策”] 开发需要模型预测或生成最优动作的新基准。这要求模型不仅能看懂过去，还能基于世界模型进行前瞻性规划，是通向真正具身智能的关键一步。</li><li>[自动化数据标注] 研究如何利用游戏内置日志 (Game Logs) 或半监督方法来自动化生成高密度的时空事件标签。解决数据生产的成本瓶颈，是实现大规模、多样化智能体训练的基础。</li></ul></section>
       <section>

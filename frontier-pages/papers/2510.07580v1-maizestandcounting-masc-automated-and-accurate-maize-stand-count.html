@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.07580v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖人工田间计数，或使用传统图像处理（如颜色分割）及无人机拼接图进行自动计数。</li><li>核心痛点： 人工计数成本高、效率低、易出错；传统自动化方法易将杂草误认为玉米，且拼接图像会引入伪影和信息损失，严重影响精度。</li><li>本文切入点： 作者的直觉是，与其在有损的拼接大图上检测，不如直接在原始视频帧上进行冗余检测，再利用帧间变换关系（单应性矩阵）进行高精度融合去重。</li></ul></section><section><h3>Key Insights</h3><ul><li>[处理范式]： “先检测，后融合” 的范式（处理原始视频帧）远优于 “先拼接，后检测” 的范式（处理拼接图）。原始视频帧的数据冗余（一棵植株在多帧中出现）反而成为优势，显著提高了检出率和鲁棒性，有效对抗了单帧漏检问题。</li><li>[精度瓶颈]： 在自动化农业表型分析中，输入数据的质量和表征方式（如拼接伪影、几何畸变）是比检测模型本身更关键的精度瓶颈。提升前端的图像配准精度和优化数据流，能带来比单纯优化检测模型更大的性能增益。</li><li>[算法有效性]： 传统基于颜色（如ExG指数）的分割方法因无法区分作物与杂草而基本失效。而基于深度学习的方法，其成功不仅依赖模型能力，更依赖于对多视角、重叠信息的有效利用，这使得处理原始视频流成为兼顾精度和鲁棒性的首选。</li></ul></section><section><h3>Next Steps</h3><ul><li>[从2D到3D] 探索多视角或倾斜摄影，结合三维重建技术，解决因冠层遮挡导致的漏检问题，实现对“隐藏”植株的计数。</li><li>[从静态到动态] 实现跨时间序列的植株追踪，将单次计数升级为对单株植物生长发育过程的动态监测，从而分析长势、胁迫等更复杂的农业表型。</li></ul></section>
       <section>

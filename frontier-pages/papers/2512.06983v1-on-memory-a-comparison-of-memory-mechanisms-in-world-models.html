@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.06983v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型通过在想象中预测未来来进行规划。</li><li>核心痛点： 模型（尤其是 Transformer）的有效记忆长度有限，导致长期想象会产生感知漂移，无法识别曾到过的位置（回环闭合）。</li><li>本文切入点： 将复杂的记忆问题拆解为两个正交过程——记忆编码（如何存）和记忆注入（如何用），并系统性地评估不同组合的优劣。</li></ul></section><section><h3>Key Insights</h3><ul><li>[机制解耦]： 记忆机制的设计可以被清晰地解耦为编码（如何高效存储）和注入（如何有效使用）两个维度。这个框架本身就是一种重要的认知，它将一个模糊的问题变成了可组合、可测试的工程模块。</li><li>[效率与性能的权衡]： 存在一个明确的性能-效率权衡。缓存 (Cache) 机制因保留了最原始的信息而性能最佳，但扩展性最差；而状态空间模型 (SSM) 在信息压缩和性能保留之间取得了最佳平衡，是当前最实用的长时记忆方案。</li><li>[信息注入的本质]： 基于注意力的注入方式（如上下文前置、交叉注意）普遍优于其他方法。其本质原因是，注意力机制能够实现全局、选择性的信息路由，让模型自主决定在何时、何处、从历史中读取何种信息，而不是被动地接受（如加性注入）或进行全局调整（如自适应归一化）。</li></ul></section><section><h3>Next Steps</h3><ul><li>[混合记忆与分层记忆] 探索混合记忆架构。例如，使用 SSM 压缩遥远且模糊的长期记忆，同时用 Cache 精确保留近期或关键的短期记忆，模拟人类记忆的层次性。</li><li>[面向任务的记忆评估] 设计超越像素的评估体系。直接衡量记忆能力对下游规划和决策任务（如能否成功完成回环闭合、能否找到特定物品）的最终贡献，而不是停留在中间的重建保真度上。</li></ul></section>
       <section>

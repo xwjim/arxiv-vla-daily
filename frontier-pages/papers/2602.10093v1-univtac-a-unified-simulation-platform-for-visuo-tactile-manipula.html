@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10093v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人操作主要依赖视觉，但视觉在接触密集型任务中存在局限（如遮挡、精度不足）。</li><li>核心痛点： 真实世界中，大规模、高质量的触觉数据难以获取，且缺乏统一的评测基准来系统性地评估触觉策略。</li><li>本文切入点： 核心直觉是用高保真模拟器来替代物理世界，从而可控、可规模化地生成带有丰富物理标注的视觉-触觉数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[洞察方向] 触觉表征的解耦： 有效的触觉表征需要解耦并融合三个核心物理要素：物体的几何形状 (Shape)、接触的物理动态 (Contact) 和相对的空间位姿 (Pose)。单一维度的信息不足以应对复杂的接触任务。</li><li>[洞察方向] 模拟数据的有效性与规模效应： 高保真模拟数据足以替代真实数据进行有效的触觉表征预训练。并且，模型性能随着数据规模的增长呈现出明显的正向伸缩性 (Scaling Law)，证明了该数据生成范式的价值。</li><li>[洞察方向] 模拟到现实的泛化能力： 在模拟环境中基于物理监督信号学到的触觉表征，具备强大的 Sim-to-Real 泛化能力。它无需在真实世界微调，即可显著提升物理机器人在精细操作任务上的成功率。</li></ul></section><section><h3>Next Steps</h3><ul><li>[闭环数据生成与策略自举] 利用当前学到的策略去探索和收集“困难”的触觉交互数据，反哺编码器和策略的迭代优化，实现数据和模型的共同进化。</li><li>[融合语言的多模态触觉表征] 将学到的物理触觉表征与大规模语言模型对齐，让机器人不仅能“感受”接触，还能“理解”并执行如“轻轻地捏”、“找到插头的边缘”等带有触觉语义的指令。</li></ul></section>
       <section>

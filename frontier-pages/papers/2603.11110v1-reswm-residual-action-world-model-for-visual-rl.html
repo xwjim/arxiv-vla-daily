@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.11110v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统世界模型直接基于当前状态预测一个绝对的、全新的动作。</li><li>核心痛点： 预测绝对动作导致策略学习方差大、不稳定，产生的控制信号抖动剧烈 (chattering)，不适用于真实物理系统。</li><li>本文切入点： 作者的直觉是，真实世界的控制是平滑连续的。因此，预测相对于上一步动作的微小调整（残差），比从零开始预测一个完整动作更简单、更稳定。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作空间重构]： 改变动作的表示形式（从绝对值到残差）比优化算法本身更能带来本质性的稳定和性能提升。这证明了为问题构建正确的归纳偏置（如平滑性）是解决复杂控制问题的关键。</li><li>[感知-控制耦合]： 将感知的变化（通过 ODL 捕捉）与控制的变化（残差动作）直接关联，形成了一个紧密的因果循环。这比用一个通用的、静态的视觉表征来指导动作更有效，模型能更好地理解“什么视觉变化导致了什么动作调整”。</li><li>[规划空间收缩]： 在残差空间中进行规划和策略学习，极大地缩小了有效搜索空间。智能体不再是在整个动作空间中进行全局、高方差的探索，而是在上一时刻动作附近进行局部、低方差的微调，从而显著提升了样本效率和规划稳定性。</li></ul></section><section><h3>Next Steps</h3><ul><li>[自适应残差控制] 研究一种动态切换机制。让智能体根据对环境波动性的预测，自主决定何时使用残差模式（用于平滑控制）和何时切换到绝对模式（用于快速反应），实现平滑与敏捷的统一。</li><li>[层级化残差规划] 将残差思想扩展到时间层级。高层策略负责在长远尺度上规划一个粗略的残差目标（如“未来5秒内向左移动”），底层策略则通过高频的精细残差动作来平滑地执行该目标。</li></ul></section>
       <section>

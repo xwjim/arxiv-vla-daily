@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.24060v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型是强大的端到端机器人控制器，但它们是静态的、无记忆的，面对新环境（OOD）时很脆弱。</li><li>核心痛点： 现有模型缺乏长期记忆，无法从失败中归因，也无法动态干预自身行为，导致在噪声和变化面前频繁失败。</li><li>本文切入点： 作者的核心直觉是：失败经验是宝贵的诊断数据。通过对比成功与失败案例，系统可以进行因果归因，从而指导精确的在线纠错，而不是盲目模仿。</li></ul></section><section><h3>Key Insights</h3><ul><li>失败经验的诊断价值： 负样本（失败案例）对于机器人进行因果归因和制定纠错策略，其价值不亚于甚至高于正样本（成功案例）。同时存储和对比两者，是实现高效决策的关键。</li><li>解耦感知与执行： VLA 模型的 OOD 失败多源于感知或理解偏差（如看错物体、理解错指令），而非底层运动能力缺陷。因此，通过外部工具干预其输入（视觉/语言）是比微调模型更高效的鲁棒性提升路径。</li><li>在线干预与离线优化的闭环： 一个鲁棒的机器人系统需要在线的快速反应（干预）和离线的深度复盘（记忆整合）相结合。这种异步闭环设计，可以在不影响任务执行效率的前提下，实现系统能力的持续自我迭代。</li></ul></section><section><h3>Next Steps</h3><ul><li>工具的自生成与演化： 研究如何让 LLM 编排器不仅仅是调用工具，而是能根据失败经验自动生成或组合新的 MCP 干预代码，实现工具集的开放式扩展。</li><li>将外部智能内化 (Distillation)： 探索如何将 LLM 编排器的诊断和决策逻辑蒸馏回一个更小、更快的模型，甚至反哺 VLA 策略本身，以降低延迟和成本，实现更紧凑的端侧部署。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.25741v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA (视觉-语言-动作) 模型可用于端到端自动驾驶，但通常只执行简单导航指令或模仿专家策略。</li><li>核心痛点： 从高维视觉/语言输入到低维动作输出的监督信号过于稀疏，模型难以学会遵循复杂、开放式的指令。</li><li>本文切入点： 直觉：让模型同时预测未来图像，可以提供密集的像素级监督，迫使模型理解“指令→动作→视觉结果”的因果链。</li></ul></section><section><h3>Key Insights</h3><ul><li>[监督信号密度]： 直接从语言指令预测低维驾驶动作的监督信号太稀疏。引入未来图像生成（世界模型）作为辅助任务，能提供密集的像素级监督，显著增强模型对指令的理解和遵循能力。</li><li>[因果关系学习]： 联合训练“规划”与“生成”任务，迫使模型学习了 “指令→动作→世界状态变化” 的完整因果链。这使得模型不仅能执行动作，还能“想象”出该动作在物理世界中对应的视觉后果，从而做出更合理的规划。</li><li>[模型架构解耦]： 在统一模型中，为不同任务（如语言理解、图像生成、动作规划）分配独立的 Transformer 模块 (MoT)，比让一个通用模块处理所有任务更有效。特别是，一个轻量化的动作专家模块能以更低计算成本达到更优性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>[真实世界闭环学习]： 如何在真实车辆上收集“指令-动作-结果”数据，并利用在线反馈进行模型微调，以弥合模拟与现实的差距。</li><li>[交互式与多轮指令]： 将模型从理解单句指令，升级为能够进行多轮对话、澄清模糊指令、并记忆历史对话上下文的交互式驾驶助手。</li></ul></section>
       <section>

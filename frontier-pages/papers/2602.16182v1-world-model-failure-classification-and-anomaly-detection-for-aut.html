@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.16182v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 单独使用监督学习分类已知故障，或单独使用无监督方法检测未知异常 (OOD)。</li><li>核心痛点： 单一方法无法兼顾：异常检测无法提供具体故障信息，而故障分类无法应对训练集中未见过的新问题。</li><li>本文切入点： 逆向思维，不再问“它像不像正常的？”，而是同时问两个问题：“它像不像成功的？”和“它像不像已知的失败？”。如果两者都不像，那它就是未知异常。</li></ul></section><section><h3>Key Insights</h3><ul><li>[框架有效性]： “正反双模型” 策略远优于单一模型。它通过定义“什么是成功的”和“什么是已知的失败”，清晰地划出了第三类“未知的异常”空间，实现了鲁棒性与可解释性的统一。</li><li>[信号前瞻性]： 基于世界模型的潜空间预测误差 (latent prediction error) 是一个极其灵敏的“先行指标”。它能在视觉上问题变得明显之前，就捕捉到动态变化的微小偏差，实现比人类观察员早 1-3 秒的预警。</li><li>[度量选择]： 并非所有度量都生而平等。潜空间预测误差在准确性和稳定性上表现最佳。而马氏距离 (Mahalanobis distance) 虽然在测试集上表现完美，但在高维空间中极易过拟合，是一种脆弱的“虚假繁荣”。</li></ul></section><section><h3>Next Steps</h3><ul><li>统一模型框架： 能否设计一个单一世界模型，通过引入多头输出或对比学习机制，同时学会对成功、已知失败和未知异常进行建模，大幅降低部署成本？</li><li>在线自适应阈值： 如何实现阈值的在线动态调整？例如，利用鞅 (martingales) 等统计工具实时监测数据分布变化，让决策边界自适应，提升长期鲁棒性。</li></ul></section>
       <section>

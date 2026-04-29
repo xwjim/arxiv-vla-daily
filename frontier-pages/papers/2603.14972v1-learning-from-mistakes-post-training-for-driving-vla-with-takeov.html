@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.14972v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 利用人类驾驶员的接管数据（Takeover Data）对 VLA 模型进行事后微调，以弥补离线数据集的不足。</li><li>核心痛点： 现有方法只学习接管后的正确操作，治标不治本，导致模型安全边界不足，且被动学习限制了性能上限。</li><li>本文切入点： 核心直觉在于，错误的发生并非瞬间，其前兆（pre-takeover）是更宝贵的学习信号。通过语言引导，可让模型学会“反思”并主动探索更优策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>语言空间的前瞻性监督： 在错误发生前，仅对语言输出进行“预警式”监督，能有效转化为物理世界的安全距离（TTC 提升 11.76%）。这证明了语言是塑造 VLA 模型安全行为的有效杠杆。</li><li>探索优于模仿： 在安全关键场景中，被动模仿（SFT）存在性能瓶颈。通过在“梦境”中进行主动探索（RFT），模型能发现超越专家演示的最优解，实现性能的二次跃迁。</li><li>新旧知识的平衡： 纠错式学习并非越多越好。采用 20% 的接管数据与 80% 的常规数据混合进行微调时效果最佳，这揭示了模型在学习新知识（纠错）与巩固旧能力（常规驾驶）之间的最佳平衡点。</li></ul></section><section><h3>Next Steps</h3><ul><li>从单目到多模态感知： 为 VLA 模型融合更多传感器（如环视、激光雷达），缩小与全知专家的信息差，探索在更丰富感知下的“预见”能力。</li><li>基于世界模型的 Scenario Dreaming： 用学习到的世界模型替代当前基于 GT 的场景重建。这不仅能摆脱对模拟器的依赖，还能让模型在想象出的、更多样的未来场景中进行探索和学习。</li></ul></section>
       <section>

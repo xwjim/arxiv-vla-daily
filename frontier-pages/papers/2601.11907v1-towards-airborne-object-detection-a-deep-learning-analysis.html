@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.11907v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖人工监控，或使用深度学习模型执行单一的物体分类任务。</li><li>核心痛点： 现有自动化方法无法同时评估威胁等级，且缺乏干净、均衡的公开训练数据集。</li><li>本文切入点： 直觉上，物体分类和威胁评估高度相关。作者通过构建一个 双输出头的模型 和一个 自制的高质量数据集 (AODTA)，同时解决了模型能力和数据瓶颈两大问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据质量 &gt; 模型结构]： 模型性能的巨大差异（AVD 数据集上 83% vs AODTA 数据集上 96%）揭示，在此领域，数据质量的提升 是比模型结构优化更关键的性能驱动力。一个经过精心聚合、清洗和平衡的数据集能带来压倒性的优势。</li><li>[任务敏感性差异]： 威胁等级预测 任务比物体分类任务对 数据不平衡 问题更为敏感。在不均衡的 AVD 数据集上，模型对少数类别（中/低威胁）的预测能力完全崩溃 (精度/召回为0)，表明该任务需要更严格的数据平衡。</li><li>[特征共享可行性]： 一个标准的 EfficientNetB4 网络足以同时支撑物体分类和威胁评估两个任务。这证明了两个任务在底层特征上具有 高度共享性，无需设计复杂的专用多任务架构，简化了模型设计。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端集成： 将该双任务分类器与一个高效的目标检测器（如 YOLO）集成，研究在 真实、非完美检测框 上的系统鲁棒性和实际性能。</li><li>动态威胁评估： 从分析静态图像扩展到分析视频序列，利用物体的 飞行轨迹、速度和行为模式 等时序信息，建立更客观、动态的威胁评估模型。</li></ul></section>
       <section>

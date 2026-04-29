@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.15493v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 物理动力学模型应遵循严格的几何对称性（即等变性 Equivariance），以提升泛化能力。</li><li>核心痛点： 真实世界中充满对称性破缺（如墙壁碰撞、摩擦力），导致严格的等变模型性能下降，无法拟合现实。</li><li>本文切入点： 与其强制执行“硬”规则，不如提供一个“软”偏好。作者的直觉是，几何代数 (Geometric Algebra) 这个数学工具本身就蕴含了几何结构，用它来构建网络，可以引导模型学习几何规律，但又不强制它，从而为学习“例外情况”留出空间。</li></ul></section><section><h3>Key Insights</h3><ul><li>对称性破缺的权衡 (Symmetry Breaking Trade-off)：</li><li>严格的等变性 是一把双刃剑。它在理想物理条件（如无障碍自由运动）下表现优异，但在遇到边界碰撞、外力等 对称性被打破 的场景时，其性能会急剧下降，甚至不如没有几何先验的普通模型。</li><li>软归纳偏置的有效性 (Effectiveness of Soft Inductive Bias)：</li><li>软几何偏置 提供了一个完美的“中间地带”。它既利用了 几何代数 的结构来高效学习物理规律，又不像严格等变模型那样脆弱，能够灵活地学习和拟合 非等变 的动态（如碰撞、摩擦），最终在混合场景下取得最佳的长期预测效果。</li><li>表征范式的力量 (Power of Representation Paradigm)：</li></ul></section><section><h3>Next Steps</h3><ul><li>从 2D 到 3D 世界： 将该软偏置机制应用于更复杂的 3D 刚体动力学，并验证其在 E(3) 旋转平移群下的有效性，这是迈向真实世界应用的关键一步。</li><li>与感知结合的端到端学习： 将该动力学模型与一个视觉感知前端（如 Slot Attention）结合，实现从原始像素到物理动态预测的端到端学习，从而摆脱对符号化输入的依赖。</li></ul></section>
       <section>

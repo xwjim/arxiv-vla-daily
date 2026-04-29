@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.13615v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 生成手物交互视频时，通常需要提供未来的物体轨迹作为强条件来引导生成。</li><li>核心痛点： 这种做法绕过了对物理动力学的真实理解，模型只是在“填空”作画，而非真正的因果模拟。</li><li>本文切入点： 与其给模型“看答案”（未来状态），不如教它“解题方法”（物理规律）。作者将3D几何、运动学等物理先验蒸馏成嵌入向量，强制模型在生成时遵守物理规律。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动力学建模]： 直接在像素空间学习手物交互的物理动力学极其困难。注入显式的3D运动学先验（HKE）能极大降低模糊性，让模型学会生成物理上更合理的手部姿态和接触效果。</li><li>[几何一致性]： 第一人称视频的视角抖动和遮挡问题严重。引入基于相机位姿的几何嵌入（EME）能有效稳定生成过程，确保视频的时空连续性和视角一致性，避免场景“漂移”。</li><li>[实体稳定性]： 在长时程交互中，物体外观和身份容易退化。使用第一帧的物体信息作为“实体锚点”（OEE），能显著提升生成物体的身份一致性和细节稳定性，解决了生成模型常见的“遗忘”问题。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端学习] 探索端到端的联合学习框架，让模型在生成视频的同时隐式地学习或修正物理表征，而不是依赖固定的、预处理的3D输入。</li><li>[深度物理融合] 将更深层次的物理规律（如接触动力学、物体材质、质量等）融入世界模型，实现从“看起来对”到“物理上对”的质变。</li></ul></section>
       <section>

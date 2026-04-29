@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.14732v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前 VLA 模型已经能把视觉和语言映射到动作，但多数方法本质上仍是逐步 action prediction，缺少显式的长时程后果评估。</li><li>核心痛点： 一旦任务变成长链条、组合式或需要前瞻决策，直接在动作空间里规划会迅速遇到“可行动作轨迹概率随时域增长而指数衰减”的难题。</li><li>本文切入点： 作者不再在高维动作空间里硬搜轨迹，而是学习一个 未来轨迹潜表示 + world model + trajectory value 的统一框架，在潜空间里完成 implicit planning。</li></ul></section><section><h3>Key Insights</h3><ul><li>长时程能力的关键不只是更大模型，而是更好的搜索空间： 论文强调，规划失败往往不是“模型不够大”，而是直接在动作空间搜索时可行轨迹太稀薄。</li><li>世界模型与价值模型要联合出现才有意义： 单独预测未来不够，必须再有一个长期价值评估器，才能把 imagined futures 变成可用的决策依据。</li><li>隐式规划比显式优化更适合 VLA： 对高维、连续、长时域的机器人控制问题，潜空间中的渐进式推断比显式轨迹优化更容易做成统一端到端框架。</li><li>收益主要体现在复杂任务上： 论文特别强调在 long-horizon 和 compositional 场景下，WAV 的成功率、泛化性和鲁棒性提升更明显。</li></ul></section><section><h3>Next Steps</h3><ul><li>做 uncertainty-aware latent planning： 把世界模型的不确定性显式纳入推断过程，减少长时程滚动时的模型幻觉。</li><li>接入显式安全约束与在线纠偏： 让潜空间规划可以和碰撞约束、接触约束、实时反馈控制联动。</li><li>扩展到更开放的具身任务： 例如多阶段操作、开放词汇指令和更复杂的跨场景泛化任务。</li></ul></section>
       <section>

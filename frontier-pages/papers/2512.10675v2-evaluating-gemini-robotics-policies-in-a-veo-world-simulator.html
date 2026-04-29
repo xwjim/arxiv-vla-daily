@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.10675v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人策略评估依赖大规模昂贵的真实世界测试或存在“模拟-现实鸿沟”的传统物理模拟器。</li><li>核心痛点： 真实世界测试成本高、风险大、无法覆盖长尾场景；传统模拟器资产创建难、物理模拟不准、视觉保真度低。</li><li>本文切入点： 与其从零构建物理模拟，不如直接利用已在海量视频数据上预训练、内隐了物理与真实感知识的视频生成模型，将其改造为机器人专用的模拟器。</li></ul></section><section><h3>Key Insights</h3><ul><li>[预测保真度]： 视频模拟器在预测绝对成功率上偏保守（低于真实值），但能非常准确地预测不同策略的相对性能排序。这意味着它是一个高效的模型选型工具。</li><li>[泛化能力剖析]： 该系统能定量揭示不同泛化维度对策略性能的影响程度。例如，实验发现，对于被测策略，更换交互物体带来的性能下降远大于增加干扰物或改变背景。</li><li>[安全评估范式]： 提出“预测性红队测试 (Predictive Red Teaming)”概念。通过生成并模拟安全关键场景（如笔记本电脑上的剪刀），该系统能在零物理风险的情况下，有效发现策略在闭环执行中涌现的危险行为。</li></ul></section><section><h3>Next Steps</h3><ul><li>长时程一致性生成： 探索如何将模拟时长从秒级扩展到分钟级，例如结合隐式动作模型 (Latent-Action Models) 来维持长期依赖和一致性。</li><li>全自动评估流水线： 用强大的视觉语言模型 (VLM) 替代当前对生成视频的人工打分环节，实现一个完全自主、可无限扩展的机器人策略评估系统。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.03449v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖简化的仿真环境和监督学习方法来训练无人机。</li><li>核心痛点： 现有仿真与物理现实脱节，无法应对真实野火的复杂动态、烟雾遮挡和数据稀缺问题。</li><li>本文切入点： 直觉上，人类消防员通过“烟雾”、“火线”等语义概念来判断火情。作者将此直觉迁移，利用 VLM 将这种语义理解能力赋予了 RL 智能体，并在一个高保真数字孪生中进行训练。</li></ul></section><section><h3>Key Insights</h3><ul><li>语义稀疏奖励 (Semantic Sparse Rewards)：</li><li>VLM 能从极度稀疏的视觉信号（如远方地平线上的一缕烟）中识别出“野火”的语义概念。这解决了传统RL在奖励稀疏环境下（目标在视野外很远）难以探索的根本问题，实现了超远距离搜索。</li><li>奖励函数设计 (Reward Function Design)：</li><li>将 VLM 的语义相似度 作为 势函数奖励 (Potential-based Reward)，比直接作为奖励更有效。它只奖励“更有信息量”的状态变化（即越来越接近火），而非“有信息量”的状态本身，从而引导智能体稳定地朝目标探索，避免在原地打转。</li><li>多尺度感知 (Multi-scale Perception)：</li></ul></section><section><h3>Next Steps</h3><ul><li>领域专属VLM微调 (Domain-Specific VLM Fine-tuning)： 使用野火专用的RGB/热成像数据集对VLM进行微调，可能比使用通用的CLIP模型获得更精准、鲁棒的语义信号。</li><li>多智能体协同与语义通信 (Multi-Agent Coordination &amp; Semantic Communication)： 将VLM的语义理解能力扩展到多智能体系统。无人机之间不再交换原始像素或坐标，而是交换“我在3点钟方向发现浓烟”这类高度抽象的语义信息，以实现更高效的协同。</li></ul></section>
       <section>

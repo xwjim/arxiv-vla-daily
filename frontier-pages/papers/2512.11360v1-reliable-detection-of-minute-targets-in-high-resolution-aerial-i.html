@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11360v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用无人机和深度学习进行精准农业监测是通用做法。</li><li>核心痛点： 在高分辨率航拍图像中，目标（幼苗）过小、特征稀疏，且图像受不同时间（光照、天气）影响，导致检测困难。</li><li>本文切入点： 作者直觉地认为，与其发明新网络，不如利用现有工具的组合优势：</li><li>使用以高精度著称的两阶段检测器 (Faster R-CNN) 来解决小目标问题。</li><li>使用迁移学习来解决农业领域标注数据稀缺和训练慢的问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>迁移学习的有效性：</li><li>结论：对于农业这类高度专门化的视觉任务，在大型通用数据集（如 COCO）上预训练的模型，其学到的底层视觉特征（如边缘、纹理）是可复用的。这使得模型仅需少量领域内数据和极短时间（&lt;1小时）即可收敛，极大地降低了数据和算力成本。</li><li>架构选择的权衡：</li><li>结论：在处理微小、密集的目标时，定位精度的重要性超过了推理速度。Faster R-CNN 这类两阶段架构通过“先提议后检测”的机制，相比 YOLO 等一阶段架构，能更可靠地捕获微小目标，尽管速度较慢。</li><li>泛化能力的边界：</li></ul></section><section><h3>Next Steps</h3><ul><li>无监督域适应 (Unsupervised Domain Adaptation)： 研究如何让模型自动适应新的、无标注的环境（如长满藻类的稻田），通过学习域不变特征，提升模型在极端环境下的零样本泛化能力。</li><li>模型压缩与量化 (Model Compression &amp; Quantization)： 针对 Faster R-CNN 的效率瓶颈，研究如何通过剪枝、知识蒸馏或量化等技术，在不显著牺牲小目标检测精度的前提下，打造一个可以在无人机上实时运行的轻量化模型。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.00475v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>行业共识与痛点： 在“世界模型”（一个能预测未来的模拟器）里做规划，一直是个老大难问题。大家普遍的做法主要有两种，但都有致命伤：</li><li>核心 Insight (灵光一现): 作者们的核心洞察是：我们为什么一定要被“时间”的线性顺序绑架？</li></ul></section><section><h3>Key Insights</h3><ul><li>非共识发现 1：规划的“最优路径”不是“搜”出来的，而是“捏”出来的。 传统方法（如CEM）的哲学是，最优解隐藏在巨大的搜索空间中，我们要去“找到”它。而 GRASP 证明，我们可以直接定义出解的形态（一个状态和动作的序列），然后通过梯度下降把它“塑造”成我们想要的样子。这是一种从“搜索范式”到“生成范式”的转变，效率天差地别，尤其是在长时程任务上，优势是压倒性的。</li><li>非共识发现 2：在基于视觉的世界模型中，对“动作”求导比对“状态”求导更重要、更稳定。 论文中一个非常技术但关键的洞察是，它修改了梯度结构，主要依赖于“动作-输入”的梯度。这意味着什么？在复杂的视觉世界里，预测下一帧图像（状态）的梯度极其嘈杂和混乱。微小的像素变化可能导致梯度剧变。作者发现，与其在如此混乱的“状态空间”里艰难导航，不如直接关注“哪个动作能让未来更好”，这个信号要清晰和鲁棒得多。这揭示了一个深层规律：对于控制而言，找到正确的“力”（Action）比精确描绘世界的每一个“细节”（State）更关键。</li><li>机制洞察：</li><li>“松弛约束 (Relaxed)” 和 “随机性 (Stochastic)” 是天作之合。 “松弛约束”把一个崎岖陡峭的优化山脉，变成了一片相对平缓的丘陵，让下山（优化）变得更容易。但平缓的丘陵也充满了小坑洼（局部最优）。此时，“随机性”就像一阵风，时不时把你从坑里吹出来，让你有机会找到通往真正谷底（全局最优）的路。没有松弛，随机搜索效率低；没有随机，松弛优化容易“躺平”。</li><li>并行化不仅仅是工程福利，更是算法的本质。 GRASP 的并行性不是简单地把任务分给多个处理器，而是其算法核心——所有时间步同时对最终目标负责。这打破了传统规划中“错误会逐级累积”的魔咒。在 GRASP 中，任何一个时间点的“错误”都会被全局目标和其他所有时间点的约束“立即看到”并共同修正。</li></ul></section>
       <section>

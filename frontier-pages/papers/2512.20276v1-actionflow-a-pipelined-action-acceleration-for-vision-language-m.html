@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.20276v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉语言动作模型 (VLA) 因其端到端特性而强大，但在边缘设备上推理速度极慢 (3-5Hz)，远低于机器人实时交互所需的 20-30Hz。</li><li>核心痛点： 性能瓶颈在于自回归解码 (Decode) 阶段。该阶段逐个生成 Token，是典型的 内存带宽受限 (Memory-bound) 任务，导致昂贵的计算单元大量闲置。</li><li>本文切入点： 作者洞察到，单个 VLA 任务可被拆解为一系列内部“微请求”（1次 Prefill 和 N 次 Decode）。利用机器人任务的连续性，将当前帧的 计算密集型 Prefill 与过去几帧的 内存密集型 Decode 批处理 (Batching)，从而打破了单请求流无法批处理的僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[计算特征转变]： ActionFlow 的核心贡献是将原本 内存受限 的多个小计算（Decodes）与一个 计算受限 的大计算（Prefill）融合。这使得整个批处理任务的 算术强度 大幅提升，成功将瓶颈从内存带宽转移到计算单元，从而榨干了硬件性能。</li><li>[性能与负载关系]： 该加速方案的 收益随负载增加而放大。实验表明，当动作序列更长（K值增大）或上下文更复杂时，ActionFlow 的加速比远超常规负载。这说明它能有效摊销自回归解码的串行成本，在复杂任务中鲁棒性极强。</li><li>[系统级优化的正交性]： 本文提出的是一种 纯粹的系统级优化，它不修改模型算法，不需重新训练，且保证输出结果与原始模型完全一致。这意味着 ActionFlow 可以作为一种底层加速引擎，与 量化、剪枝、推测解码 等其他算法层面的优化方法 正交叠加，共同提升性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态流水线深度 (Dynamic Pipeline Depth)： 结合任务的实时反馈或模型的置信度，动态调整流水线深度 K。这能将 ActionFlow 的系统效率与“提前退出 (Early Exit)”等算法策略的灵活性相结合，实现更智能的资源调度。</li><li>端到端跨模态流水线 (End-to-End Cross-Modal Pipelining)： 将流水线思想从 LLM 内部扩展到整个 VLA 模型。尝试将 T 时刻的 视觉编码 (Vision Encoder) 计算与 T-1 时刻的 LLM 解码 计算进行流水线重叠，实现更深层次的端到端延迟隐藏。</li></ul></section>
       <section>

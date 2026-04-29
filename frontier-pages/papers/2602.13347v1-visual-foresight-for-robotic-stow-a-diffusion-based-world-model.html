@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.13347v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖简单的物理启发式规则（如直接粘贴、模拟重力）来预测放置结果。</li><li>核心痛点： 简单规则无法模拟复杂的多物体物理交互（推挤、倾倒），且缺乏连续视频数据来学习动态过程。</li><li>本文切入点： 将物理预测问题转化为一个结构化的生成问题：预测物体掩码（Mask）的最终布局，而非模拟连续运动。</li></ul></section><section><h3>Key Insights</h3><ul><li>[物理交互的隐式建模]： 扩散模型能隐式学习物体间复杂的接触物理学（如倾倒、滑动、推挤），其效果远超简单的启发式规则。这证明了数据驱动的生成模型在模拟特定领域（如仓储）物理现象上的巨大潜力。</li><li>[表征抽象的有效性]： 将视觉预测问题从像素空间简化到物体掩码（Mask）空间，是处理复杂场景的关键。这过滤了无关的视觉信息（如纹理），让模型专注于几何布局和交互，大幅降低了学习难度。</li><li>[预测的下游任务可用性]： 高质量的视觉预测可以直接作为下游规划任务的输入。模型生成的未来状态在几何上足够精确，能够替代真实观测数据用于决策（如评估仓储密度），证明了其作为“世界模型”的实用价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端的姿态与形态预测] 研究如何仅从物品的独立视图（如俯瞰图）预测其放入货箱后的最终形态和姿态，摆脱对“真实后置掩码”的依赖，实现真正的端到端预测。</li><li>[不确定性与风险建模] 利用扩散模型的随机性，生成多种可能的放置结果分布，而不仅仅是单一的最优预测。这可以用于评估放置动作的风险和不确定性，对鲁棒的机器人规划至关重要。</li></ul></section>
       <section>

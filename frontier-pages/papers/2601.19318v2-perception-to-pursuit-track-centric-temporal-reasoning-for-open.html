@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.19318v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有方法专注于提升无人机轨迹预测的几何准确度（例如降低像素误差）。</li><li>核心痛点： 仅追求准确度的预测结果，在物理上往往是无法实现追击的（论文指出 99.9% 的预测轨迹不可行）。</li><li>本文切入点： 直觉上，目标的时序运动模式（而不仅是当前位置）蕴含了其未来的行为意图和物理约束，可用于预测可执行的追击路径。</li></ul></section><section><h3>Key Insights</h3><ul><li>[预测的目标函数]： 轨迹预测的 “准确性” (Accuracy) 与 “可追击性” (Actionability) 是两个不等价的核心指标。本文提出的 ISR (Intercept Success Rate) 指标揭示了现有高精度模型在现实追击任务中几乎完全失效的窘境。</li><li>[特征的表征能力]： 纯粹的时序运动模式足以在不依赖任何外观特征的情况下，实现完美的开放世界目标分类（无人机 vs. 其他）。这表明“怎么动”比“长什么样”在某些场景下是更本质、更具泛化性的分类依据。</li><li>[时序推理的价值]： 预测复杂机动（如规避、急转）的关键在于对长时序序列（而非瞬时状态）的推理。Transformer架构能有效捕捉加速度等高阶动态变化，这是超越简单线性外推模型的根本原因。</li></ul></section><section><h3>Next Steps</h3><ul><li>可微的物理约束优化： 将 ISR 指标或其可微近似形式，直接整合进模型的训练损失函数中。这能驱动网络端到端地、主动地生成物理上更可行的轨迹，而非事后评估。</li><li>预测与控制的闭环整合： 将该预测模块与模型预测控制（MPC）等先进控制算法深度融合。让预测器能够感知其预测结果对后续控制决策的影响，实现真正的“感知到追击”的决策闭环。</li></ul></section>
       <section>

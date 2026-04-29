@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.05377v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有无人机数据集任务单一（如仅检测或分割），且通用视觉语言模型（VLM）主要基于 地面视角数据 训练。</li><li>核心痛点： 通用VLM在无人机顶视视角下，因 “领域偏移”（物体微小、纹理重复、方向模糊）导致语义理解和空间推理能力严重下降。</li><li>本文切入点： 作者认为“推理”和“生成”任务是互补的，通过统一的多任务学习，让生成任务（如分割、深度图）为推理任务提供 强大的几何结构先验。</li></ul></section><section><h3>Key Insights</h3><ul><li>[生成促进分析]： 联合训练像素级的生成任务（如分割、深度图）能为模型注入 几何结构先验，这显著提升了其在高层语义推理（尤其是时序推理）上的鲁棒性和准确性。这验证了 “Synthesis promotes Analysis” 的核心假设。</li><li>[通用VLM的失效模式]： 通用VLM在无人机视角下的失败根源是 “语义悬浮” (semantic floating)。即因缺乏几何约束，模型无法将语言概念精确对应到微小、模糊的物体上，导致其推理结果看似流畅但事实错误（如VQA任务 EM≈0）。</li><li>[语言正则化生成]： 语言理解任务（如VQA）反向地对生成任务起到 正则化作用。缺乏高层语义指导，模型在仅有稀疏几何条件（如仅深度图）下生成图像时，更容易产生纹理和语义错误。</li></ul></section><section><h3>Next Steps</h3><ul><li>[闭环决策与规划]： 将统一的场景理解能力与 机器人动作决策 相结合，实现基于自然语言指令的自主飞行与任务规划，从“感知-推理”迈向“感知-行动”。</li><li>[在线学习与自适应]： 研究如何让模型在飞行过程中进行 在线学习，利用新采集的数据持续优化自身，以适应未知环境和动态变化，解决模拟数据与现实世界的差异。</li></ul></section>
       <section>

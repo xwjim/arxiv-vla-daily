@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.03213v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的世界模型能生成驾驶视频，但常出现物体在时序上的外观或类别不一致。</li><li>核心痛点： 身份漂移 (Identity Drift)。模型缺乏实例级别的时序约束，导致同一物体在不同帧间信息泄露和特征混淆。</li><li>本文切入点： 直觉上，只要强制模型在处理一个物体时，其注意力交互和学习重点都 严格限制在该物体自身的时间与空间范围内，就能锁住其身份。</li></ul></section><section><h3>Key Insights</h3><ul><li>[注意力约束]： 标准的全局自注意力机制是 身份漂移的根源之一，因为它允许不同实例间的特征无差别“泄露”。有效的时序一致性并非来自更强的注意力，而是来自 基于物理实体（实例）的结构化稀疏注意力。</li><li>[损失函数设计]： 在视频生成中，均匀计算所有像素的损失是低效的。通过 动态地将损失信号聚焦于前景物体，能以极小的代价显著提升关键区域（如车辆、行人）的生成保真度和一致性，尤其对小目标效果显著。</li><li>[数据价值评估]： 衡量生成数据质量的黄金标准是其 在下游任务中的可用性。该研究证明，具备 强实例时序一致性 的合成数据，能显著降低真实下游任务（如多目标追踪）的 ID切换错误 (ID Switches)，这比单纯提升FID/FVD等视觉指标更有价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>无/弱监督实例发现： 研究如何在没有精确3D标注的情况下，让模型 自动从视频中学习并分割出时序一致的实例，从而摆脱对昂贵标注的依赖。</li><li>可控的实例级编辑与组合： 基于当前模型对实例的强解耦能力，探索实现 对视频中特定实例的交互式编辑（如改变颜色、替换模型）或 按需组合新实例，将生成模型升级为高保真世界模拟器。</li></ul></section>
       <section>

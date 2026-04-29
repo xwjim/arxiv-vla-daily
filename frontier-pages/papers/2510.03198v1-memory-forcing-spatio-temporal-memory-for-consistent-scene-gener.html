@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.03198v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自回归视频模型依赖有限的上下文窗口，通过引入时间记忆或空间记忆来生成长序列。</li><li>核心痛点： 存在一个根本性的能力权衡：纯时间记忆在重访时会丧失空间一致性；而引入空间记忆又会损害模型在探索新场景时的生成质量。</li><li>本文切入点： 作者的直觉是，模型不应被动地使用记忆，而应被主动地“教导”何时使用何种记忆。通过模拟不同的游戏情境（探索 vs. 重访），强制模型学习一种动态的记忆使用策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练范式]： 模型的记忆使用模式是一种可以被“塑造”和“教导”的行为。简单提供空间记忆不足以解决一致性问题，必须通过 Hybrid Training 这样的课程设计，让模型将场景类型（如探索 vs. 重访）与特定的记忆依赖模式（依赖时间记忆 vs. 依赖空间记忆）建立关联。</li><li>[误差与纠错]： 自回归模型在推理时的误差累积并非纯粹的负面效应，可以被利用。Chained Forward Training 表明，在训练中主动引入这种误差，能迫使模型学会利用稳定的外部记忆源（空间记忆）进行自我纠错，从而增强系统在长序列生成中的鲁棒性。</li><li>[记忆架构]： 长期记忆系统的效率瓶颈在于索引而非存储。与按时间或姿态索引相比，基于三维几何（点云）的索引是更本质的方案。它不仅对视角变化更鲁棒，而且让记忆的扩展成本与探索的新空间成正比，而非与时间流逝成正比，从根本上解决了长时程任务的扩展性问题。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应记忆融合 (Adaptive Memory Fusion)： 当前模型在“使用时间记忆”和“使用空间记忆”之间更像是一种硬切换。下一步应探索可学习的软融合机制，让模型通过注意力等方式，在像素或补丁级别动态决定两种记忆源的贡献权重，实现更精细化的场景构建。</li><li>语义增强几何记忆 (Semantics-Enhanced Geometric Memory)： 当前的 3D 记忆是纯几何的。一个极具价值的方向是，为这个三维点云标注语义信息（例如，这个点属于“树木”，那个区域是“水”）。这将使模型不仅能实现几何上的一致，还能实现语义和逻辑上的一致性生成，为更高级的交互和推理奠定基础。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.14577v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶规划模型主要分为两类：扩散模型 (Diffusion-based) 和 Token 化模型 (Token-based)。</li><li>核心痛点： 这两种范式优缺点互补。扩散模型泛化性差且模态对齐难；Token 化模型存在累积误差和不可逆解码问题，一旦出错无法修正。</li><li>本文切入点： 作者认为，既然两者优劣互补，就可以将扩散模型的迭代修正思想注入到泛化性更好的 Token 化模型中。核心灵感是利用 Block-MoE 架构将生成和精调两个任务解耦，互不干扰。</li></ul></section><section><h3>Key Insights</h3><ul><li>[任务解耦]： 轨迹的“生成”和“精调”是两个目标冲突的任务。通过 Block-MoE 架构和梯度阻断可以实现二者的有效解耦，既保留了预训练模型的基础生成能力，又额外赋予了其精调修正能力，避免了灾难性遗忘。</li><li>[范式潜力]： 掩码扩散 LLM (Masked Diffusion LLM) 是比自回归 LLM 更适合规划任务的框架。其并行解码机制先生成一个完整的轨迹“草稿”，为后续的全局修正 (Refinement) 提供了天然的操作窗口，克服了自回归模型的不可逆解码缺陷。</li><li>[RL 简化]： 在“生成-精调”框架下，强化学习的机制可以被简化。生成器产出的轨迹本身就是天然的基线 (Baseline)，精调器只需学习如何比这个基线做得更好，无需复杂的价值网络或优势估计，训练过程更直接高效。</li></ul></section><section><h3>Next Steps</h3><ul><li>[迭代式精调]： 将单步精调升级为多步迭代式精调。让模型学会动态判断轨迹是否需要进一步修正，以及何时停止修正，从而在效果和延迟之间取得动态平衡。</li><li>[多模态反馈]： 当前的精调仅依赖标量奖励信号。未来可探索引入更丰富的多模态反馈（如预测未来画面的视觉反馈、或来自“批评家”模型的文本反馈）来指导精调，使修正过程更精准、更可解释。</li></ul></section>
       <section>

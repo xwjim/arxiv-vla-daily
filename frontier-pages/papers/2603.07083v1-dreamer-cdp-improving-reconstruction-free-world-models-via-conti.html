@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07083v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流世界模型（如 Dreamer）依赖重构像素来学习环境的动态。</li><li>核心痛点： 像素重构会迫使模型关注任务无关的细节（如背景纹理），浪费建模能力，且现有无重构方法在复杂任务上性能不佳。</li><li>本文切入点： 直觉上，预测“下一刻会发生什么”的抽象本质，比画出“下一刻的完整图像”更高效。作者受 JEPA 架构启发，直接在连续的、确定的表征空间中进行预测。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征学习]： 证明了自上而下的预测信号（在抽象表征空间中预测）足以替代自下而上的重构信号（在像素空间中重构）来学习一个高质量的世界模型。这为模型摆脱像素依赖提供了关键证据。</li><li>[信号质量]： 在 Crafter 这类探索性任务中，表征预测比动作预测（如 MuDreamer）提供了更丰富、更稳定的学习信号。这揭示了不同自监督信号在不同环境类型下的有效性差异。</li><li>[机制互补]： CDP 预测损失与 Dreamer 原有的 KL 散度正则化 (ℒ_dyn/rep) 是互补而非替代关系。消融实验表明，两者共同作用才能达到最佳性能，说明纯粹的预测和概率约束的结合是必要的。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索表征的通用性： 这个无需重构学习到的连续表征 u 是否具有更好的任务迁移或泛化能力？可以设计实验，在同一世界模型上评估其解决多个不同下游任务的性能。</li><li>迈向多模态世界模型： 无重构框架天然适合融合多模态输入（如文本、声音）。只需为不同模态设计相应的编码器，将它们映射到同一个连续表征空间进行预测，即可构建更通用的世界模型。</li></ul></section>
       <section>

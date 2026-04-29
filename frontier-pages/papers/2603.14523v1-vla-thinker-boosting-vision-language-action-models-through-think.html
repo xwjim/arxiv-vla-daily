@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.14523v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型通过文本思维链 (CoT) 来“先思考再行动”，提升决策能力。</li><li>核心痛点： 视觉输入是一次性的静态信息，模型在漫长的思考过程中无法主动重新审视环境以解决模糊性。</li><li>本文切入点： 将视觉感知本身也视为一种可被动态调用的“思考工具”，让模型在推理中主动获取视觉信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>[主动感知 &gt; 被动观察]： 将视觉从一次性静态输入转变为可动态调用的内部动作，能显著提升模型在长时程任务中的鲁棒性和错误恢复能力。模型不再是“一条道走到黑”，而是可以“停下来看一看”。</li><li>[‘教’与‘练’的结合]： SFT 注入了结构化思考的先验知识（教会“怎么想”），而 GRPO 则进行因果对齐（优化“为什么想”）。二者结合解决了稀疏奖励下从零学习复杂推理策略的不稳定性问题。</li><li>[推理的经济性原则]： 通过 RL 优化，模型学会了自主权衡思考（调用视觉工具）的成本与收益。它会逐渐减少不必要的视觉查询，只在关键决策点或高不确定性时才“再看一眼”，实现了高效推理。</li></ul></section><section><h3>Next Steps</h3><ul><li>[丰富动态感知工具集]： 从单一的“ZOOM-IN”扩展到多视角查询、主动光照调整、甚至调用深度/红外相机等更丰富的感知工具集，让模型学习“如何看”而不仅仅是“看哪里”。</li><li>[融合物理世界反馈的闭环推理]： 将推理过程与物理执行紧密耦合。模型不仅在行动前思考，也应在行动中根据力反馈、碰撞检测等实时物理信号动态修正其推理链和后续动作。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.21975v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有深度学习模型（如CNNs, Transformers）在图像去模糊任务上效果显著。</li><li>核心痛点： 这些模型参数量巨大、计算复杂，导致推理延迟极高，无法在手机、无人机等边缘设备上实时运行。</li><li>本文切入点： 直觉上，与其通用地压缩大模型，不如从零开始设计专用于去模糊的轻量化模块，在U型网络结构中精细化地平衡特征提取、融合与重建的计算开销。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构效率： 专用轻量化模块（如LD Block）的设计，比通用的大型模块在特定任务（如去模糊）上能实现更优的效费比。这证明了在U型结构中，通过精细化模块设计可以打破性能与速度的传统权衡。</li><li>特征融合策略： 分阶段、差异化的特征融合是有效的。在网络瓶颈处（MLIA）进行多尺度特征的宏观整合，而在解码路径上（X-Fuse）引入原始输入进行微观细节修正，是提升恢复质量的关键。</li><li>边缘部署可行性： 通过极致的模型压缩（&lt;6M参数）和计算优化（&lt;16 GMACs），图像恢复模型可以在消费级移动设备上达到超过140 FPS的实时性能，证明了复杂视觉任务在边缘侧部署的巨大潜力。</li></ul></section><section><h3>Next Steps</h3><ul><li>研究一个统一的轻量化实时恢复框架，使其能自适应处理运动模糊、散焦等混合、未知的图像退化问题。</li><li>将当前单帧模型扩展为利用时序信息的轻量化视频去模糊模型，通过帧间关联进一步提升效果和稳定性，同时保持边缘侧的实时性。</li></ul></section>
       <section>

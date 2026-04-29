@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07647v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过堆叠历史图像帧或训练专门的记忆模块，为机器人策略引入时序信息。</li><li>核心痛点： 堆叠帧计算开销大且信息冗余；训练新模块则破坏了预训练模型的即插即用性，需要重新训练。</li><li>本文切入点： 作者的直觉是，Transformer 模型内部的注意力 K/V 值本身就是一种原生的、可寻址的记忆载体，可以直接跨时间步复用，无需任何额外训练。</li></ul></section><section><h3>Key Insights</h3><ul><li>[记忆植入的层级选择性]： 记忆并非越深越好。在 Transformer 的中间层植入时序记忆效果最佳，因为底层特征太泛化，顶层特征又过于任务特化，中间层特征的迁移性与组合性最强。</li><li>[免训练检索的兼容性]： 对于冻结的预训练模型，使用当前的 K 查询历史的 K（K-to-K）比用 Q 查询 K 更有效。这本质上是在模型原生的“地址空间”内进行匹配，避免了引入新查询方式带来的分布偏移。</li><li>[时序记忆的动态平衡]： 仅有历史记忆还不够，必须主动抑制过时信息。引入一个固定的、随时间衰减的近因偏置（FGTB）至关重要，它能强制模型优先关注当前状态，避免被陈旧或无关的历史信息干扰。</li></ul></section><section><h3>Next Steps</h3><ul><li>[从被动 FIFO 到主动记忆管理] 研究自适应的记忆更新与遗忘机制，让模型能判断哪些历史 K/V 更有价值并长期保留，而不是简单地丢弃最旧的。</li><li>[分层记忆系统] 将本文的低阶状态记忆（KV-cache）与一个高阶的任务规划记忆（如子目标完成状态）相结合，解决更复杂的长链条、可中断恢复的任务。</li></ul></section>
       <section>

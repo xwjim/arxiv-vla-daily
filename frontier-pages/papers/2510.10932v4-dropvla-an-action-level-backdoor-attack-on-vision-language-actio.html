@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.10932v4">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 以往的后门攻击主要在任务层面进行，例如替换整个任务目标或造成无目的的策略失灵。</li><li>核心痛点： 缺乏对单个、可复用动作（如抓手开合）进行精准、定时劫持的攻击方法，而这在安全关键场景中威胁更大。</li><li>本文切入点： 直觉上，攻击可跨任务复用的基础动作原语（如 open_gripper），比劫持整个任务更隐蔽、更具泛化性，是一种全新的攻击维度。</li></ul></section><section><h3>Key Insights</h3><ul><li>模态主导性： 在低投毒预算下，视觉通道在后门攻击中起绝对主导作用。纯视觉触发器攻击成功率极高且稳定，而纯文本触发器效果很差且不稳定，添加文本触发器对视觉攻击几乎没有增益。</li><li>泛化边界： 视觉后门对外观变化（如形状、透明度）具有良好鲁棒性，但对空间位置高度敏感。触发器一旦偏离训练时的投毒位置，攻击效果会急剧下降，这揭示了其泛化能力的明确边界。</li><li>隐蔽与高效： 可以利用极低的数据投毒率（如 0.31% 的训练片段）植入高成功率（&gt;98%）的动作级后门，同时几乎不影响模型在正常任务上的表现（&gt;98% 性能保留），实现了高隐蔽性和高效率的攻击。</li></ul></section><section><h3>Next Steps</h3><ul><li>位置鲁棒的触发器： 研究位置鲁棒的触发器植入方法。例如，在训练时对触发器进行数据增强（如随机位移、旋转），以提升攻击在真实物理世界中的有效性和泛化能力。</li><li>组合式后门攻击： 探索组合式或条件式的后门攻击。例如，通过不同的触发器或触发时机，编码并激活不同的原子动作，实现对机器人行为更复杂的恶意控制。</li></ul></section>
       <section>

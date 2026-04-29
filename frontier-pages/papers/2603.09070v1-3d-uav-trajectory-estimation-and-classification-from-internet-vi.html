@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.09070v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖昂贵传感器（如LiDAR）和大量人工标注，来构建用于训练反无人机模型的数据集。</li><li>核心痛点： 高质量3D轨迹数据的采集成本极高，且难以规模化，严重制约了相关算法的研发。</li><li>本文切入点： 颠覆数据生产范式，利用大型语言模型（LLM）作为“零样本”推理引擎，从海量、免费但充满噪声的网络视频中自动挖掘和生成可用的3D轨迹数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据规模效应]： 论文揭示了一个关键的数据缩放定律 (Data Scaling Law)。在零样本迁移设置下，生成的3D轨迹和分类精度，会随着所用网络视频数据量的增加而持续提升，证明了“用免费数据量换取模型性能”的路径可行。</li><li>[多专家模型融合]： 单一的零样本检测器在轨迹生成上表现不稳。通过融合多个异构检测器（专家）并进行投票，可以显著提升2D定位的稳定性和准确性，这是生成高质量3D伪标签的基石。</li><li>[语言模型的通用推理能力]： 大型语言/视觉模型在此框架中扮演了“瑞士军刀”的角色。它不仅用于数据筛选和分类，还被创新地用于估计无人机的物理尺寸（H_real），这是后续单目3D重建的关键环节，展现了其作为通用物理世界感知引擎的潜力。</li></ul></section><section><h3>Next Steps</h3><ul><li>处理动态相机场景：研究如何将相机自运动估计（Ego-motion Estimation）融入框架，从而在动态拍摄的视频中解耦并提取出无人机的真实运动轨迹。</li><li>增强单目深度估计的鲁棒性：探索利用视频中的多帧几何约束（如Structure from Motion）或引入能感知场景几何的预训练模型，来获得更精确的深度估计，摆脱对类别尺寸先验的强依赖。</li></ul></section>
       <section>

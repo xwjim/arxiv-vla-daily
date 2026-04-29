@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.14371v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 混合专家架构 (MoT-VLA) 的模型在推理时，每个任务（如动作、语言）都独立、串行地执行一次完整的前向传播。</li><li>核心痛点： 这种 孤立执行 (isolated execution) 模式导致了严重的 重复计算 (共享的视觉输入被反复编码) 和 资源争抢 (高频动作任务被低频语言任务阻塞)。</li><li>本文切入点： 作者的核心直觉是，所有任务共享的 KV 缓存不应被孤立看待，而应被抽象为一个 跨任务、跨时间统一管理的共享资源。</li></ul></section><section><h3>Key Insights</h3><ul><li>[资源抽象]： 将 KV 缓存从一个中间计算结果，提升为一个跨任务、跨时间统一调度的一等公民资源，是解决多任务并行推理冲突与资源争抢的根本性范式转变。</li><li>[任务解耦]： 通过连续批处理，可以将具有 软截止时间（如语言生成）和 硬截止时间（如动作控制）的异构任务彻底解耦。这使得二者性能可以 协同提升，而非此消彼长的零和博弈。</li><li>[瓶颈转移]： 多任务并行的性能瓶颈是动态变化的。在短序列生成时，瓶颈是 重复的 Prefill (KV 共享解决)；在长序列生成时，瓶颈则转移为 低效的 Decode (连续批处理解决)。</li></ul></section><section><h3>Next Steps</h3><ul><li>支持任务依赖图： 研究支持 任务间依赖关系 的 KV 缓存管理。例如，一个任务可以消费另一个任务生成的 KV 缓存，从而实现高效的 链式或图式推理流程。</li><li>动态 KV 缓存融合/剪枝： 探索 跨任务的 KV 缓存压缩与融合。当多个相似任务并行时，它们的 KV 缓存可能存在语义冗余，设计机制来动态融合或剪枝这些共享缓存，可进一步节省显存与计算。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.28301v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA模型通过在特定环境的数据上微调来学习新任务。</li><li>核心痛点： 现有评测主要关注视觉泛化（如物体位置变化），而忽略了语言泛化，导致模型对训练时未见过的指令说法（即转述）表现很差。</li><li>本文切入点： 作者认为，指令的核心是“动作”和“物体”。通过构建一个能独立控制这两个语言变量的基准，可以精确诊断出模型语言理解能力的短板所在。</li></ul></section><section><h3>Key Insights</h3><ul><li>[普遍性]： VLA模型对指令转述的脆弱性是普遍存在的。这种性能下降与模型架构、参数规模或微调策略无关，是一个共性问题。</li><li>[瓶颈归因]： 性能下降的主要瓶颈是物体指代的词汇变化（如用“cooktop”替代“stove”）。这表明模型严重依赖于表层词汇匹配，而非真正理解物体的语义。</li><li>[失败模式]： 绝大多数失败（80-96%）发生在规划层面（生成了完全错误的轨迹），而非执行层面（在正确轨迹上犯错）。这说明转述指令直接破坏了模型的任务识别能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>[提升物体泛化] 研究如何增强模型的物体语义泛化能力，使其超越表层词汇匹配，真正实现对不同物体指代的鲁棒理解（例如，引入外部知识或设计新的训练范式）。</li><li>[稳固任务识别] 探索如何改进从语言指令到高层任务规划的映射机制，确保模型在面对不同语言表述时能稳定识别出正确的任务意图，而不是从规划起点就出错。</li></ul></section>
       <section>

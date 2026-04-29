@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.22793v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用 Hamilton-Jacobi (HJ) 可达性分析 求解二维空间中的无人机攻防博弈问题，能提供最优策略和安全保证。</li><li>核心痛点： HJ 分析方法存在 维度灾难，无法直接应用于状态空间复杂的 三维 真实场景（例如 9D 联合状态）。</li><li>本文切入点： 直觉上，无人机的水平移动和垂直移动可以解耦。作者将一个复杂的 9D 博弈问题，创造性地 分解 为一个 6D 的水平子博弈 和一个 3D 的垂直子博弈，从而使计算变得可行。</li></ul></section><section><h3>Key Insights</h3><ul><li>[分解的可行性]： 复杂的高维控制问题，可以通过 正交维度的分解 来近似求解。只要子问题间的耦合足够弱（或可以被合理假设），分解后的解组合起来依然能提供 有保证的 (guaranteed) 性能，而不只是一个「还不错」的启发式策略。</li><li>[捕获的本质]： 真正的“捕获”不是瞬间的触碰，而是一个 能稳定维持的状态。论文通过引入 不变捕获集，重新定义了捕获条件，从“到达”升级为“到达并能保持”，这对于处理具有惯性的物理系统（如无人机）至关重要。</li><li>[博弈胜利的条件]： 攻防的胜负手，取决于 时间竞争。论文给出了明确的判据：如果攻击者到达目标区域的 最短时间 (T_goal) 小于防御者完成捕获的 最短时间 (T_capture)，则攻击者胜。这个洞察将复杂的博弈过程，提炼为了两个关键时间参数的比较。</li></ul></section><section><h3>Next Steps</h3><ul><li>多智能体博弈： 将当前的“一对一”分解框架，扩展到 “多对多” 的场景。例如，如何通过任务分配（如混合整数规划）让多个防御者协同拦截多个攻击者。</li><li>不完美信息下的决策： 结合 状态估计/滤波 算法（如卡尔曼滤波），研究在传感器数据有噪声、有延迟的情况下，该框架的鲁棒性以及如何进行更安全的决策。</li></ul></section>
       <section>

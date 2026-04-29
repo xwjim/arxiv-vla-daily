@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.20732v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有LLM代码基准主要评估通用编程逻辑、软件工程技能或定性物理判断。</li><li>核心痛点： 缺乏一个能严格评估LLM生成科学有效、物理可靠的数值模拟代码能力的基准。</li><li>本文切入点： 利用计算力学（Computational Mechanics）作为测试场。该领域具有清晰的数学结构、严格的物理约束和成熟的验证方法，是评估结构化科学推理的理想选择。</li></ul></section><section><h3>Key Insights</h3><ul><li>失败模式分类： LLM在科学计算中的失败可归结为三类缺陷：领域知识缺陷（不懂物理公式）、组合推理缺陷（无法正确组合已知模块）和算法保真度缺陷（代码逻辑混乱或出错）。</li><li>实现与验证的鸿沟： LLM在编写核心代码方面的表现，显著优于其编写验证代码（单元测试）的能力。这表明，将物理和数值约束转化为可执行的测试用例，需要比代码实现更深层次的领域理解。</li><li>复杂度与性能的边界： 模型性能随任务复杂度（如引入几何非线性、减少辅助函数）的增加而急剧下降。这清晰地标定了当前LLM在处理多步、结构化科学推理问题上的能力边界。</li></ul></section><section><h3>Next Steps</h3><ul><li>智能体科学工作流 (Agentic Scientific Workflow)： 将评估从“单次代码生成”升级为“自主调试与迭代”。构建一个能利用FEM-Bench反馈来修正自身代码的AI智能体。</li><li>科学调试与假设检验 (Scientific Debugging &amp; Hypothesis Testing)： 探索LLM能否在给定一个失败的单元测试时，反向推断出代码中潜在的物理或数值错误，并提出修正假设。</li></ul></section>
       <section>

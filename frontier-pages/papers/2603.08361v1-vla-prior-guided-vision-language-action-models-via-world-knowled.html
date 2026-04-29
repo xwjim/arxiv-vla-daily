@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.08361v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型通过预测 未来的视觉图像 或 世界知识状态 作为中间步骤，来辅助生成动作。</li><li>核心痛点： 这种做法关注 “未来是什么样”，而非 “如何造成改变”，导致模型学习到的因果关系较弱，容易生成视觉上合理但行为上无效的动作。</li><li>本文切入点： 动作的本质是 引起“变化”。因此，模型应该直接对 “世界知识的变化量 (Δ)” 进行建模，而不是对未来的绝对状态建模。</li></ul></section><section><h3>Key Insights</h3><ul><li>[认知范式]： 机器人策略的核心是理解 “变化” 而非 “未来”。预测世界知识的 增量（Δ） 比直接回归绝对未来状态，更能建立动作与结果间的因果关联，学习也更稳定。</li><li>[表征锚点]： 对“变化”的建模必须基于一个 明确的“当前”世界知识先验。否则，模型会陷入无锚点的“想象”，预测的变化与当前物理世界脱节，导致动作不接地气。</li><li>[信息压缩]： 将连续、高维的世界知识变化 量化（Quantization）为离散的 Token 是关键。这不仅压缩了信息，更提供了一个 稳定、解耦、可组合 的接口，让下游的策略网络（LLM）能更高效地学习。</li></ul></section><section><h3>Next Steps</h3><ul><li>变化模型的在线自适应： 当前的变化模型（LWVQ 码本）是离线训练的。一个高价值方向是研究如何让模型 在线适应新物体或新动态，动态更新其对“世界如何变化”的理解。</li><li>层级化变化量预测： 当前模型预测一个固定时间窗口内的变化。未来可以探索 层级化的变化预测，即模型不仅预测短期、具体的变化（如物体位移），还能规划和预测长期、抽象的任务阶段性变化。</li></ul></section>
       <section>

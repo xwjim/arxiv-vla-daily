@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.11934v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人视觉控制普遍依赖为「分类」任务设计的视觉编码器（如 CLIP, DINOv2）。</li><li>核心痛点： 这些编码器追求 语义不变性，主动忽略了毫米级的几何细节，导致机器人在精细操作（如插孔、按按钮）时“物理失明”。</li><li>本文切入点： 作者洞察到，生成式扩散模型为重构图像，其内部特征天然蕴含了丰富的、多尺度的几何与空间结构信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征失配]： 首次清晰地指出并验证了机器人操控领域的核心瓶颈是「表征失配」。即，主流视觉模型的目标（语义不变性）与机器人精细操控的需求（几何敏感性）存在根本性矛盾，这比单纯扩大数据或模型规模更致命。</li><li>[生成式先验]： 颠覆性地提出，生成模型的内部特征是比判别模型特征更适合物理交互的视觉先验。它证明了扩散模型不仅能“画画”，其学习到的世界模型包含了对空间布局、表面法线和接触边界的隐式理解。</li><li>[知识与推理分离]： 流形蒸馏机制提供了一个优雅的工程范式，它成功地将知识的来源（慢、随机的 Teacher）与实时的推理（快、确定的 Student）解耦。这使得在对延迟和稳定性要求极高的闭环控制中，利用强大生成模型的知识成为可能。</li></ul></section><section><h3>Next Steps</h3><ul><li>时空动态蒸馏： 从静态的图像扩散模型，升级到从视频扩散模型（如 Sora, Kling）中蒸馏。这不仅能注入几何先验，更能注入关于物理动态、因果关系和时间连续性的先验知识。</li><li>任务自适应表征： 开发一种机制，让机器人在任务的不同阶段动态调整其视觉表征的焦点。例如，在接近目标时依赖语义特征，在执行接触操作的最后几毫米，则切换到高分辨率的几何特征。</li></ul></section>
       <section>

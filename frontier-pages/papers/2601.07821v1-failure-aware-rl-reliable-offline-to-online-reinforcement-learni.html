@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.07821v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人策略通常先用离线数据（模仿学习）做预训练，再到真实环境中用强化学习（RL）进行在线微调。</li><li>核心痛点： 在线微调的探索（Exploration）过程在真实世界中极易导致不可逆的失败（如打碎物品），需要人类频繁干预，成本高且危险。</li><li>本文切入点： 与其被动地限制策略，不如主动预测即将发生的失败，并在危险发生前切换到一个专门的“恢复策略”来化解危机。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式差异]： 传统的在线安全 RL 算法（如 PPO-Lagrangian）不适用于“离线到在线”的微调范式。它们的优化目标会破坏预训练模型的知识，导致性能严重下降；而 FARL 的“动作修正”机制仅在必要时干预，能更好地利用先验知识。</li><li>[预测优于约束]： 基于世界模型（World Model）的短期未来预测，比基于简单 Q 值的风险评估，能更准确地识别动态和复杂场景下的失败风险。这证明了“向前看”对于安全决策的必要性。</li><li>[数据驱动安全]： 高效的安全保障依赖于专门化的数据。除了成功的任务数据，还需要显式地收集失败数据（用于训练世界模型识别危险）和恢复数据（用于训练恢复策略如何救场）。</li></ul></section><section><h3>Next Steps</h3><ul><li>[通用安全模型] 预训练一个跨任务、跨形态的“通用失败世界模型”。这个模型将学习物理世界中失败的共性规律，从而在新任务上实现零样本或少样本的安全泛化。</li><li>[多模态融合] 将视觉和触觉等更丰富的传感器信息融入安全预测模型。这能让系统感知到更隐蔽的失败前兆（如物体滑动、液体晃动），极大提升安全决策的鲁棒性。</li></ul></section>
       <section>

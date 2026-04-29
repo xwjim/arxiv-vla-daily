@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07264v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型（World Model）通过在隐空间中「想象」未来，来减少与真实环境的交互，提升强化学习的数据效率。</li><li>核心痛点： 传统世界模型仅依赖像素重建作为监督信号，导致其隐空间表征臃肿，且缺乏对驾驶任务至关重要的物理运动和空间几何结构的精确理解。</li><li>本文切入点： 与其让模型从海量像素中艰难地“领悟”物理规律，不如直接将车辆运动学数据作为输入，并用关键几何信息（如车道线）作为额外的监督信号，主动引导隐空间学习。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征的有效性]： 仅靠像素重建的损失函数，不足以让隐空间学到驾驶相关的关键语义。增加几何监督（如车道线、车辆检测）能显著“提纯”隐空间表征，使其更关注决策信息而非背景纹理。</li><li>[物理的解耦]： 让模型从像素中推断自身的运动状态（如速度）是困难且低效的。直接输入运动学数据，能将“自身状态感知”与“外部环境理解”解耦，让模型更专注于后者，从而加速学习。</li><li>[想象的保真度]： 一个物理上自洽且几何上结构化的隐空间，是实现长期、稳定、真实“想象”的基础。缺乏这种约束的想象会快速发散，产生物理谬误（如车辆瞬移、车道线变色），进而导致策略学习失败。</li></ul></section><section><h3>Next Steps</h3><ul><li>[自监督几何学习] - 如何在没有真值标签的情况下，通过自监督或对比学习的方式，让模型自动从原始数据中提取出关键的几何与交互关系？这将是摆脱对高精度标注依赖的关键。</li><li>[多智能体交互建模] - 将该框架扩展到多智能体场景，显式地对其他交通参与者的意图和动态进行建模和预测，而不仅仅是将其视为环境的一部分，以应对复杂的博弈场景。</li></ul></section>
       <section>

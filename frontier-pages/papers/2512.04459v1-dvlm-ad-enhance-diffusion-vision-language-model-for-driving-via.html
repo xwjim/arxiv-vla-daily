@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.04459v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用自回归 (Autoregressive, AR) 视觉语言模型 (VLM) 进行端到端自动驾驶，通过语言推理提升泛化性。</li><li>核心痛点： AR 模型的单向生成机制 (causal attention) 导致高级推理与低级规划脱节，且易受指令干扰，可控性与安全性差。</li><li>本文切入点： 直觉上，扩散模型的双向注意力和迭代修正特性，能让推理和规划相互“看到”并协同优化，从而实现更强的一致性和可控性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[生成范式]： 自动驾驶决策中，扩散模型的迭代式、全局性生成范式比自回归模型的序列式、局部性生成范式，能产生更一致的推理-行为对。这是因为双向注意力允许规划（action）反向约束推理（reasoning）。</li><li>[可控性]： 通过模板引导的“填空式”生成 (constrained infilling)，扩散模型能有效抵抗恶意或错误的指令干扰。这为安全攸关的自动驾驶系统提供了一种内生性的“防火墙”，强制模型遵循既定的安全推理框架。</li><li>[模型偏见]： 在受控生成任务中，模型会产生“槽位长度偏见” (slot-length bias)，即倾向于生成能填满预设空间长度的内容，而非语义最准确的内容。这揭示了受控文本生成中的一个普遍陷阱，需要特定机制（如本文的动态降噪）来规避。</li></ul></section><section><h3>Next Steps</h3><ul><li>[混合生成模型] 探索将扩散模型的可控推理能力与自回归模型的高效生成能力相结合。例如，使用扩散模型生成结构化的推理框架，再由一个轻量级自回归模型快速生成最终的轨迹。</li><li>[物理感知的扩散过程] 将车辆动力学模型或安全规则作为一种外部引导信号或约束，在扩散模型的每一步降噪过程中进行干预，使生成的轨迹在物理上更可行、更安全。</li></ul></section>
       <section>

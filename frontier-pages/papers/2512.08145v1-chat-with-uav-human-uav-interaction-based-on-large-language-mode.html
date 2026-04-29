@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08145v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用单个大语言模型 (LLM) 智能体，直接进行端到端的任务规划与代码生成。</li><li>核心痛点： 单一智能体在处理复杂任务时，极易将高层逻辑规划与底层执行代码混淆，导致规划失败或效率低下。</li><li>本文切入点： 模拟人类思考（规划）与动手（执行）的分离过程，构建了职责分离的规划智能体和执行智能体。</li></ul></section><section><h3>Key Insights</h3><ul><li>功能解耦的重要性： 将 LLM 的能力拆分为“规划脑”和“执行脑”是实现复杂机器人任务的关键。这有效避免了单一模型在长链条推理中因角色混乱而导致的输出质量下降问题。</li><li>动态策略选择： 通过对任务进行“复杂度”和“是否需工具”的双维度预分类，系统能动态切换策略。简单的任务直接生成代码，复杂的任务则调用专用工具，实现了资源的最优分配和更高的成功率。</li><li>混合智能范式： LLM 并非万能。其长处在于语义理解和逻辑规划，而短板在于实时、精确的物理世界控制。最佳范式是让 LLM 作为高层指挥，与传统的机器人算法（如 ROS 节点、路径规划器）协同工作，各司其职。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应复杂度评估： 研究在线学习或自适应方法，让框架能够在新环境中自主校准任务复杂度参数，实现真正的“即插即用”环境自适应能力。</li><li>轻量化与端侧部署： 开发轻量级的专用工具链和推理模型，摆脱对 ROS 和大型计算平台的重度依赖，推动该框架在真实户外场景和边缘设备上的实际应用。</li></ul></section>
       <section>

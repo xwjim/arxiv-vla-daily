@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.14453v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 智能体要么在所有时间都模仿“标准行为”（全局合规），要么需要离线规划完整的欺骗路径。</li><li>核心痛点： 全局合规过于保守和低效，尤其在监视稀疏时，极大地牺牲了智能体自身任务的性能。</li><li>本文切入点： 作者的直觉是，智能体不需要全局合规，只需在“感觉”自己可能被观察的瞬间表现合规即可。这种“感觉”可以被量化为一个动态信号。</li></ul></section><section><h3>Key Insights</h3><ul><li>局部信息驱动全局策略：</li><li>研究发现，一个简单的、局部的、随时间变化的“风险”信号 ψ_t，就足以引导智能体在全局任务中表现出复杂的欺骗行为。</li><li>这颠覆了必须进行复杂全局路径规划或拥有完整对手模型的传统认知，证明了用简单的规则可以涌现出复杂的智能。</li><li>观测稀疏性的直接价值：</li><li>智能体能自动地将“更长的未被观测时间”转化为“更高的自身任务回报”，无需任何手动调参。</li></ul></section><section><h3>Next Steps</h3><ul><li>博弈论视角下的欺骗与反欺骗： 将问题从单向欺骗升级为双向博弈。研究当监督者也具备学习和适应能力，主动采取反欺骗策略时，智能体应如何演化其欺骗模型。</li><li>多智能体环境下的社会性欺骗： 将该机制扩展到多智能体系统。研究一个智能体如何在向监督者伪装的同时，与其他智能体进行合作、欺骗或信息隐藏，这涉及到更复杂的社会性推理和集体行为。</li></ul></section>
       <section>

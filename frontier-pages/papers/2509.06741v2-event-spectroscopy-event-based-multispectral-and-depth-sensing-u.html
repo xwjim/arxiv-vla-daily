@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.06741v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机在复杂环境（如森林）中通常需要携带多个独立传感器（深度相机、RGB相机、多光谱相机）来完成导航和数据采集。</li><li>核心痛点： 传统方案存在载荷过重、数据对齐困难、功耗高以及在弱光/动态光照下性能下降的问题。</li><li>本文切入点： 作者发现事件相机传感器的物理非理想特性（像素对光强的响应速度不同）并非纯粹的噪声，而是一种可以被利用的信号，能用来反推物体表面的反射率。</li></ul></section><section><h3>Key Insights</h3><ul><li>[传感器物理利用]： 首次揭示并利用了事件相机源极跟随器电路 (source follower circuit) 的带宽对光强依赖这一非理想特性。这颠覆了“该特性是噪声”的传统认知，将其巧妙地转变为一种测量光强的有效手段，实现了从“测变化”到“测绝对值”的跨越。</li><li>[多模态内在对齐]： 由于深度和光谱信息均源于同一套主动结构光系统和同一个事件相机传感器，两者在生成时便实现了像素级的完美时空对齐。这从根本上解决了传统多传感器融合方案中耗时耗力的数据配准难题。</li><li>[数据协同增效]： 实验证明，深度信息与光谱信息存在显著的协同效应。在区分树叶和树枝等材质分类任务中，融合了“免费”获取的深度数据后，分类准确率比仅使用光谱（颜色）的方法提升了超过 30%，证明了这种一体化多模态数据的下游任务价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>并行光谱采集机制： 研究设计空分复用或码分复用的结构光图案，将不同波长的光编码到不同的空间图案中并同时投射。这有望在单次曝光内解码出多个光谱通道，打破当前“速度-光谱分辨率”的线性瓶颈。</li><li>闭环自适应光照控制： 开发一个紧凑型多光谱激光投影模组，并集成闭环反馈系统。该系统能根据环境光强度和目标距离，动态调整各波长通道的投影功率，以在保证信号质量的同时最大化系统能效和户外鲁棒性。</li></ul></section>
       <section>

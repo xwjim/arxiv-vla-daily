@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.25518v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用无模型强化学习（如 SAC 算法）训练AI智能体，但通常是一个任务一个模型。</li><li>核心痛点： 现有方法泛化能力极差，无法用单个模型有效处理不同病人的血管解剖结构和长时程、多阶段的导航任务。</li><li>本文切入点： 直觉上，让AI先学习一个关于环境如何运作的“内心模型”（即世界模型），再基于这个模型进行规划，会比直接学习“状态-动作”映射更具泛化性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[泛化能力来源]： 基于模型的RL（TD-MPC2）通过学习一个通用的“物理规律”（环境动态模型），比直接学习“条件反射”的无模型RL（SAC），能更好地泛化到不同病人的血管结构和多样的导航任务中。</li><li>[性能权衡]： 世界模型的高成功率是以更长的手术时间为代价的。这揭示了AI在“深思熟虑”的规划（高成功率）与“快速反应”（高效率）之间的内在权衡（Trade-off）。</li><li>[学习范式]： 世界模型的性能高度依赖于用于预训练它的“经验”数据质量。初始数据（本文来自SAC单任务模型）的优劣，会直接影响世界模型在对应任务上的最终表现，形成一种“路径依赖”。</li></ul></section><section><h3>Next Steps</h3><ul><li>[从坐标到图像]： 探索能直接处理视觉信息（模拟X光荧光镜图像）的世界模型（如DreamerV3），使AI的决策依据更接近人类医生，可能获得更鲁棒的环境感知能力。</li><li>[构建可微物理仿真]： 研发或采用可微分的物理仿真环境，将血管形变、力反馈等真实物理效应纳入模型，利用梯度信息极大加速训练，并从根本上解决仿真与现实的差距（Sim-to-Real Gap）。</li></ul></section>
       <section>

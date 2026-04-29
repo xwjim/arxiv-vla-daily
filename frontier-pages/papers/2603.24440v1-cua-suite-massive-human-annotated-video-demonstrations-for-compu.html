@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.24440v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有计算机智能体（CUA）主要依赖稀疏的屏幕截图和离散的动作对进行训练。</li><li>核心痛点： 稀疏数据丢失了交互的动态过程（如光标移动、UI响应），导致智能体难以理解连续操作，在复杂的专业桌面应用中泛化能力差。</li><li>本文切入点： 作者的核心直觉是，连续、高帧率的专家操作视频是训练通用智能体的关键缺失环节，它能完整保留人类交互的时序动态信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>[智能体失败的核心模式]： 当前基础动作模型的主要瓶颈是视觉定位（Grounding）而非动作选择。模型常能预测正确的动作类型（如“点击”），但无法准确定位到屏幕上的目标UI元素，尤其是在复杂专业软件的多面板界面中（人类评估显示，动作正确率85.9%，但定位正确率仅52.4%）。</li><li>[数据模态的重要性]： 稀疏截图数据是导致现有智能体在专业桌面应用中表现不佳的根本原因。连续视频流保留了交互的完整时序动态，是训练能够处理复杂工作流的通用智能体的必要信息超集。</li><li>[跨应用泛化挑战]： 智能体在不同桌面应用间的性能差异巨大，在专业创作工具（如Blender, Krita）和自定义UI界面上失败率尤其高。这表明，当前模型难以泛化到训练数据中未充分覆盖的、具有独特视觉词汇和交互模式的软件。</li></ul></section><section><h3>Next Steps</h3><ul><li>利用VideoCUA的连续视频帧（(s_t, a_t, s_{t+1})三元组）来训练视觉世界模型（Visual World Models），使智能体能够进行前瞻性规划和预测操作的视觉后果。</li><li>基于数据集中完整的光标运动轨迹，使用模仿学习或离线强化学习来训练连续空间控制策略，实现更像人类的、基于视觉反馈的平滑光标导航。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15304v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖伪标签 (pseudo-ground truth) 或非林业领域的合成数据来训练深度估计模型。</li><li>核心痛点： 伪标签存在精度上限且无法验证，而现有合成数据集（如城市场景）与林业场景中精细的植被几何结构差异巨大。</li><li>本文切入点： 作者洞察到，UE5 引擎的渲染能力和 Quixel Megascans 的真实树木扫描模型相结合，可以低成本生成兼具视觉真实性与标签完美性的林业专用数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>高保真模拟： 成功缩小 Sim-to-Real 差距的关键在于三大要素的对齐：资产真实性（源于真实世界的光度扫描模型）、光学对齐（模拟真实相机的物理参数）和光照真实性（基于物理的渲染引擎）。</li><li>数据策略互补： 合成数据与伪标签并非相互替代，而是战略互补。合成数据为模型提供了一个无误差、可验证的训练起点 (pre-training)，而真实图像的伪标签可用于后续的领域微调 (fine-tuning)。</li><li>问题解耦： 该数据集的出现，将林业深度估计的瓶颈从“无法获取高质量标注数据”，转移到了“如何设计更优的模型架构和领域自适应算法”上，使研究焦点更加清晰。</li></ul></section><section><h3>Next Steps</h3><ul><li>程序化生成复杂森林生态： 构建包含多树木交互、复杂地形和动态环境因素（如天气、光照变化）的程序化森林场景，以进一步提升数据多样性与真实性。</li><li>探索混合训练与领域自适应： 系统性研究“合成数据预训练 + 真实无标签数据微调”的混合训练范式，并验证不同领域自适应 (Domain Adaptation) 算法在该数据集上的有效性。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08991v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用带随机潜在变量的生成模型（如 cGAN）作为相机替代品，来模拟和验证视觉控制系统。</li><li>核心痛点： 生成模型中的随机潜在变量 (stochastic latent variables) 没有物理意义，其取值范围难以确定。这导致验证过程中生成的图像集合过大，可达集 (reachable sets) 急剧膨胀，从而产生大量错误的“不安全”报告。</li><li>本文切入点： 作者的直觉是，验证任务追求的是精确而非多样性。因此，他们直接移除了生成模型中的随机潜在变量，让图像的生成完全由系统的物理状态确定，从根源上消除了不必要的过近似。</li></ul></section><section><h3>Key Insights</h3><ul><li>[验证 vs. 生成的多样性]： 用于图像生成的随机潜在变量旨在提升多样性，但这与验证所需的紧凑边界存在根本性冲突。移除潜在变量是提升视觉系统形式化验证精度的关键一步，它解决了“生成多样性”与“验证精确性”之间的核心矛盾。</li><li>[代理模型的“好”标准]： 在验证任务中，一个好的相机代理模型不仅要视觉上相似（像素损失），更要保证行为上一致（控制损失）。实验证明，加入控制一致性损失能显著减小真实系统与模型间的轨迹偏差，这为构建高保真代理模型提供了新的度量标准。</li><li>[误差的闭环放大效应]： 在闭环验证中，单步的图像生成不确定性会通过控制器和动力学模型被逐级放大，导致最终可达集严重膨胀。因此，从源头（即图像生成环节）上收紧不确定性，对整个验证过程的精度有着不成比例的巨大影响。</li></ul></section><section><h3>Next Steps</h3><ul><li>[应对复杂场景]： 探索更丰富的可解释输入表示（超越纯物理状态），或使用混合专家模型 (Mixture-of-Experts)，为不同场景条件训练专用解码器，以应对复杂视觉环境。</li><li>[从离线到在线]： 将离线验证框架扩展为在线运行时监控。通过在线收集数据并更新共形预测边界 (Conformal Prediction Bound)，为已部署的安全关键系统提供实时的安全保障。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.12691v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 用保守的在策略（On-Policy）强化学习，来微调机器人大模型（VLA）以保证在真实世界中的稳定性。</li><li>核心痛点： 在策略方法学习效率低下。因为它依赖于历史混合数据（包含人类干预）进行价值评估，无法准确评价当前策略的优劣，导致优化信号失准。</li><li>本文切入点： 一个核心直觉——与其模糊地评估整个任务轨迹的成败，不如精准地评估一小段「动作序列」的价值。这种更细粒度的评估能让信誉分配更准确，学习更高效。</li></ul></section><section><h3>Key Insights</h3><ul><li>[评估粒度]： 将价值评估的基本单元从「整个轨迹」降维到「动作序列」。这使得算法能更精确地定位导致任务成败的关键决策点和错误行为，实现了更高效的信誉分配。</li><li>[离策略学习的再引入]： 证明了通过「分块评估」和「悲观估计」这两个稳定器，经典的离策略时序差分（TD）学习可以被安全地重新引入到真实世界的大模型微调中，打破了过去必须依赖保守的在策略方法的局面。</li><li>[数据拼接能力]： 基于时序差分（TD）的自举特性，ALOE能隐式地「拼接」来自不同策略（包括人类干预）的碎片化轨迹。这使得它能从不完整的、混合的数据源中学习到一个连贯的价值函数，非常契合真实世界的复杂数据环境。</li></ul></section><section><h3>Next Steps</h3><ul><li>迈向自主学习： 结合本文的离策略评估能力与自动化环境重置技术，探索实现 VLA 模型在真实世界中完全自主（fully autonomous）的强化学习闭环。</li><li>价值函数的世界模型化： 将 ALOE 的价值评估能力扩展，使其不仅能评估动作，还能预测和理解物理世界的动态后果，向构建一个能泛化到任意任务的通用价值函数或世界模型演进。</li></ul></section>
       <section>

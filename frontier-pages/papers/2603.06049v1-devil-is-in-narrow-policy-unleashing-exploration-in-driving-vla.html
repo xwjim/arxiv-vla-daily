@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.06049v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶VLA模型普遍采用 “模仿学习 (IL) + 强化学习 (RL)” 的两阶段训练范式。</li><li>核心痛点： IL阶段过度拟合单一的专家轨迹，导致模型策略极其狭窄、缺乏探索，这使得后续RL阶段因收不到多样化的反馈而训练停滞。</li><li>本文切入点： 作者认为专家轨迹只是众多可行解之一。他们通过在IL阶段主动创造并学习多样的可行轨迹，并在RL阶段激励探索，从根本上拓宽了策略空间。</li></ul></section><section><h3>Key Insights</h3><ul><li>[策略学习的瓶颈]： 传统的 IL -&gt; RL 范式存在固有的 “策略狭窄” (Narrow Policy) 瓶颈。IL阶段对单一真值的过度拟合，会扼杀策略的多样性，导致后续RL阶段因缺乏有效反馈而提前饱和、学习停滞。</li><li>[数据多样性的有效性]： 仅增加训练数据的多样性不足以解决问题，甚至可能损害性能。关键在于轨迹的表征方式，通过 “步进式归一化” (Step-wise Normalization) 平衡不同时间步的梯度贡献，才能让模型真正吸收多样化数据。</li><li>[强化学习的激励机制]： 强化学习阶段必须主动引导和奖励探索行为。通过 “自适应多样性采样” (ADAS) 筛选出能激发策略多样性的训练样本，并用 “跨度驾驶奖励” (SDR) 放大奖励信号，能有效避免策略重新收敛到单一模式。</li></ul></section><section><h3>Next Steps</h3><ul><li>内生多样性生成： 研究如何让VLA模型自身具备生成多样化、安全轨迹的能力，摆脱对外部生成器的依赖，例如通过集成世界模型或内在好奇心驱动。</li><li>长时程闭环规划： 将该框架从短时程（4秒）轨迹预测扩展到长时程的闭环战略决策，验证增强的探索能力是否能转化为在复杂交互场景中更强的纠错和规划能力。</li></ul></section>
       <section>

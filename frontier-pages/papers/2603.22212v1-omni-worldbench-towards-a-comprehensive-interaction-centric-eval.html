@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.22212v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有对世界模型的评估，主要沿用视频生成的视觉保真度指标或静态的三维重建指标。</li><li>核心痛点： 这些指标忽视了时间动态和模型对交互行为的因果响应能力，无法衡量模型是否真正理解世界规律。</li><li>本文切入点： 作者认为，世界模型的核心是模拟交互响应（即行为如何驱动时空状态变迁），因此评估体系也应以此为中心构建。</li></ul></section><section><h3>Key Insights</h3><ul><li>[输入模态与性能关系]： 模型的交互保真度与输入信息的丰富度强相关。图生视频 (IT2V) 模型由于有初始帧作为强约束，其综合表现（如 Wan2.2）普遍优于仅依赖文本的 文生视频 (T2V) 模型。</li><li>[能力发展不均衡]： 当前世界模型在表层视觉质量（如运动平滑度）上已趋于成熟，但在深层因果理解（如物理交互一致性、非目标物体稳定性）上存在巨大鸿沟。视觉上「好看」不等于物理上「正确」。</li><li>[控制与一致性的权衡]： 引入显式相机控制会加剧模型维持场景一致性的难度。模型在遵循复杂相机轨迹时，往往会牺牲背景或其他物体的稳定性，暴露出联合控制能力的不足。</li></ul></section><section><h3>Next Steps</h3><ul><li>[闭环任务评估] 将评估从被动生成推向主动决策。构建闭环评估，即让一个智能体 (Agent) 在模型生成的世界中执行任务，通过任务成功率来反向评估世界模型的有效性。</li><li>[长时程交互建模] 研究长时程、多阶段的复杂任务交互评估。例如，如何评估一个模型能否模拟「从零件组装一辆自行车」的全过程，而不仅仅是单步动作。</li></ul></section>
       <section>

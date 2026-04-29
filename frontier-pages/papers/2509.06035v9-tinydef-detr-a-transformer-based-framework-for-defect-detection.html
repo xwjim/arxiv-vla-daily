@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.06035v9">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通用物体检测器（如 YOLO, DETR）被用于输电线路缺陷检测。</li><li>核心痛点： 缺陷目标尺寸微小、特征模糊且背景复杂，导致通用模型在下采样中丢失关键细节，检测性能差。</li><li>本文切入点： 作者直觉地认为，单一模块的改进不足以解决问题。必须通过一个系统性的、多管齐下的组合拳，分别解决细节丢失、边界模糊、上下文建模不足和定位不准这四个核心短板。</li></ul></section><section><h3>Key Insights</h3><ul><li>特征质量优先于注意力机制： 复杂的注意力模块（CSDMAM）本身并不能保证性能提升，甚至可能引入不稳定性。只有当输入特征经过预先“调理”（通过 EE-ResNet 增强边界、通过 SPD 保留细节）后，注意力机制才能有效聚焦于真正的目标而非背景噪声。这揭示了优质特征是高级注意力发挥作用的基石。</li><li>频域信息是空间注意力的有效“导航”： 对于小而模糊的目标，纯空间域的注意力难以区分目标与高频噪声。通过引入频域分解（FSCA 模块），模型能将高频缺陷信号与低频背景分离，从而引导空间注意力更准确地定位目标。这证明了频域-空间域协同对于提升信噪比的价值。</li><li>上下文感知存在“最佳尺度”而非越大越好： 消融实验表明，在 CSDMAM 中使用过大的卷积核（如 k=63, 127）反而会降低性能。这说明存在一个最佳的感受野尺寸（k=31），它既能捕捉到输电线这类长条状目标的全局结构，又不会因过度平滑而抹去微小缺陷的细节。这揭示了上下文建模中的一个关键权衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>从静态组合到动态自适应架构： 当前模型结构是固定的。未来可以探索让模型根据输入图像的特征，动态地、自适应地调整各模块（如 SPD, CSDMAM）的激活强度或权重。例如，对于细节丰富的区域，增强 SPD 的作用。</li><li>特征与损失的闭环引导： FWS-SIoU 损失函数可以识别出“难例”。一个高价值方向是，将这种从损失函数中获得的“难易度”信息作为反馈信号，反向指导前端的特征提取网络，让模型主动学会为它认为困难的样本提取更具辨识度的特征。</li></ul></section>
       <section>

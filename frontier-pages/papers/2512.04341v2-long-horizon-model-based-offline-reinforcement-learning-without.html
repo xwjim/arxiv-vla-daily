@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.04341v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流离线RL方法依赖保守主义 (conservatism)，通过惩罚或短视规划来避免分布外（OOD）错误。</li><li>核心痛点： 过度保守会抑制智能体的泛化与探索能力，尤其在低质量数据集中表现不佳，无法发现数据之外的更优策略。</li><li>本文切入点： 反其道而行之，不惩罚不确定性，而是用贝叶斯视角处理。并发现长时程规划本身就能替代保守主义，起到抑制价值过高估的作用。</li></ul></section><section><h3>Key Insights</h3><ul><li>[长时程规划的新作用]： 放弃保守主义后，长时程规划本身成为抑制价值过高估的关键机制。它通过用模型预测的累积奖励替换远期的、更易被高估的价值函数引导，从而降低了整体偏差。</li><li>[实现长时程规划的条件]： LayerNorm 在世界模型中的应用能有效约束预测状态的范数，从根本上减缓复合误差 (compounding error) 的爆炸式增长。结合基于不确定性的自适应截断，使得数百步的长时程规划在实践中变得可行。</li><li>[贝叶斯 vs. 保守主义的适用边界]： 贝叶斯方法 (NEUBAY) 在低质量或中等覆盖率的数据集上优于保守主义方法，因为它能通过测试时自适应探索未见的高收益区域。但在覆盖率极窄的数据集上，模型误差会成为其瓶颈。</li></ul></section><section><h3>Next Steps</h3><ul><li>提升世界模型质量： 当前方法在窄覆盖数据上失败，根源是单步预测世界模型的误差。下一步应探索生成式模型（如Diffusion）或多步预测模型，以更准确地捕捉长期动态，弥补贝叶斯方法在模型精度上的短板。</li><li>更逼近贝叶斯推断： 当前的集成学习是对贝叶斯后验的粗略近似。可以探索更先进的贝叶斯深度学习方法（如变分推断、归一化流）来建模世界模型后验，从而得到更准确的不确定性估计，指导更高效的规划。</li></ul></section>
       <section>

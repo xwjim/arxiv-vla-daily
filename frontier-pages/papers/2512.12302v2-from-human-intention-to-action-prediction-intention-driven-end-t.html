@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.12302v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前的端到端自动驾驶系统是指令跟随者，只能执行“左转”、“直行”等简单导航命令。</li><li>核心痛点： 系统无法理解和执行“停在右边那栋楼旁边”这类高层、抽象的人类意图，且缺乏评测语义满足度的基准和指标。</li><li>本文切入点： 直觉上，真正的智能驾驶应是意图实现者而非指令执行者。作者通过定义新任务、构建新基准、设计新指标，强行将领域的研究焦点从“如何开得好”引向“如何开得对”。</li></ul></section><section><h3>Key Insights</h3><ul><li>驾驶能力 vs. 意图理解的分裂： 实验揭示了一个核心矛盾：现有模型在几何驾驶能力（如碰撞率低、轨迹平滑）上表现尚可，但在语义意图满足度上表现极差。这表明，“开得稳”和“开得对（符合意图）”是两种被解耦的能力，优化前者并不能自然带来后者的提升。</li><li>传统评估指标的失效： 对于意图驱动任务，传统的轨迹误差指标 (ADE/FDE) 是有误导性的。因为一个意图可能存在多条正确路径，模型即使生成了一条与真值（demo）轨迹几何差异很大的路径，也可能完美达成了意图。这从根本上论证了新评估范式（如 IFA）的必要性。</li><li>架构解耦的有效性： 分层智能体框架（范式二）证明，通过将高级语义推理（VLM）与低级运动控制（现有驾驶模型）解耦，可以有效利用现有模型的强大驾驶能力来解决新任务。这暗示，相比训练一个庞大、笨拙的端到端“全能”模型，“聪明大脑+强壮小脑”的组合式架构可能是实现复杂任务更务实的路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>从开放环路到闭环交互： 将意图驱动模型部署到交互式闭环仿真环境中。研究当环境对模型行为做出动态反馈，或出现干扰意图的突发事件时，模型的鲁棒性和适应性如何。</li><li>从单向执行到双向沟通： 探索当人类意图模糊、不完整或有歧义时，模型如何主动发起澄清式对话（例如，“您是指左边的第一个还是第二个停车位？”）。这要求模型从一个“执行者”演变为一个“合作者”。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.03386v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统方法围绕无人机质心 (CoM) 进行动力学建模与控制。</li><li>核心痛点： 当吊挂点偏离质心时，负载与无人机的动力学强耦合，导致控制模型异常复杂且难以精确求解。</li><li>本文切入点： 作者直觉地将建模参考系从无人机质心转移到负载悬挂点，从而重构了整个系统的动力学方程，发现问题结构变得更清晰。</li></ul></section><section><h3>Key Insights</h3><ul><li>[建模视角]： 将动力学模型参考点从无人机质心切换到悬挂点，能从数学上将负载摆动（由悬挂点加速度驱动）和无人机姿态（负责补偿所有耦合项）的控制目标进行有效解耦。这是一种“换个角度看问题”的典型成功案例。</li><li>[控制分配]： 新模型允许将复杂的控制任务非对称地分配。中环控制器专注于解耦后的负载摆动，而内环控制器则作为“耦合垃圾桶”，集中处理所有非线性耦合力矩，实现了控制逻辑的简化与高效。</li><li>[隐式估计]： 在内环姿态控制器中，通过精确建模，可以根据无人机的状态和期望加速度反向推算出吊索的张力。这使得系统无需额外安装张力传感器，显著降低了硬件复杂度和成本。</li></ul></section><section><h3>Next Steps</h3><ul><li>结合学习方法（如强化学习或自适应控制），在线辨识和补偿模型未覆盖的非线性动力学（如吊索弹性、下洗气流效应），以提升系统的鲁棒性和适应性。</li><li>将该偏心建模与控制框架扩展到多无人机协同吊运场景。研究多个偏心悬挂点如何协同分配力与力矩，以稳定和操控大型、不规则的负载。</li></ul></section>
       <section>

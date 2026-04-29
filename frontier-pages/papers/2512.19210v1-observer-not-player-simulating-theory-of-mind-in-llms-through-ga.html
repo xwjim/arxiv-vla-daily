@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.19210v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通常让LLM作为玩家参与游戏，并以胜率作为评估其智能水平的主要指标。</li><li>核心痛点： 胜率指标是“黑箱”的。它将策略理解、运气、模式匹配等多种能力混为一谈，无法揭示模型是否真正理解了游戏内在的动态和对手意图。</li><li>本文切入点： 角色转换。将LLM从“玩家”转变为“观察者”，强制模型从预测行动转向推断动机，从而将“玩得好不好”的问题，解耦为“理解得对不对”的纯粹推理问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>推理模式的异质性： 不同LLM展现出截然不同的“认知风格”。例如，o3模型表现出系统性的信念更新（损失曲线平滑下降），而GPT-4o-mini则显得“认知固执”，一旦形成初步假设就很少根据新证据调整，导致其损失曲线几乎是平的。</li><li>“理解”的多层次性： 低损失（能大致预测结果）不等于能明确指认策略（Strategy Identification Rate, SIR）。实验发现，即使模型能较好地预测胜负平概率，也常常无法用语言准确命名对手正在使用的复杂动态策略。这揭示了LLM的隐性理解（行为预测）和显性推理（规则阐述）是两种可以分离的能力。</li><li>评估指标的必要性： 单一指标（如准确率）具有欺骗性。本文的联合损失 (Union Loss)证明，一个全面的评估必须同时考察预测准确性、概率校准度、和收益理解。例如，模型可能为了获得较低的Brier分数而给出保守的平均预测，但这会在交叉熵上表现很差，暴露出其并未真正识别出确定性的规律。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态策略转换检测： 在一局游戏中，让一个玩家中途悄悄改变策略。测试“观察者”LLM能否实时检测到这一策略转换点，并更新其对玩家的认知模型。这能更深入地探测其信念更新和异常检测能力。</li><li>从“识别”到“生成”： 移除预定义的候选策略列表。当面对一个未知策略时，要求LLM用自然语言自行归纳并生成对该策略的描述。这将把任务从一个封闭世界的分类问题，升级为一个开放世界的归纳与解释问题。</li></ul></section>
       <section>

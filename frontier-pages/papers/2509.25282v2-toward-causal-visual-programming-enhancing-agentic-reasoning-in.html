@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.25282v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： LLM 智能体在低代码平台中通过编排模块来自动化复杂任务。</li><li>核心痛点： 智能体是关联机器而非因果机器，依赖虚假相关性，导致在分布变化时出现幻觉和逻辑错误。</li><li>本文切入点： 与其让 AI 从数据中艰难学习因果，不如让人类专家通过可视化界面直接注入因果知识，将其作为智能体不可违背的强推理约束。</li></ul></section><section><h3>Key Insights</h3><ul><li>鲁棒性根源： 智能体的鲁棒性不取决于模型大小或数据量，而取决于其推理是否锚定在不变的因果结构上。当环境变化导致虚假相关性失效时，关联模型会崩溃，而因果模型则保持稳定。</li><li>幻觉的本质： 幻觉是智能体在巨大可能性空间中进行无约束概率关联的产物。提供一个因果图作为结构化先验知识，能极大压缩推理的“合法”空间，从机制上根除了无中生有的可能性。</li><li>人机协作范式： CVP 将人从 AI 的“事后修正者”转变为“事前架构师”。人类专家不再被动地纠错，而是主动地将领域知识编码为 AI 必须遵守的世界模型，实现了更深层次的主动引导式协作。</li></ul></section><section><h3>Next Steps</h3><ul><li>混合式因果发现： 研究如何将数据驱动的因果发现算法（自动生成草图）与人类专家的交互式修正相结合，打造一个半自动化的因果图构建工具，降低使用门槛。</li><li>动态与多模态因果建模： 探索如何将框架扩展到支持因果环路和反馈系统，并融合图像、文本等多模态信息来定义更丰富的因果关系，以应对更复杂的现实问题。</li></ul></section>
       <section>

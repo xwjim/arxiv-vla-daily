@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.08450v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统海上搜索依赖静态规划或简单的环境模型，效率低下。</li><li>核心痛点： 海洋环境的动态性与不确定性（尤其是洋流）使预设的搜索路径迅速失效。</li><li>本文切入点： 与其对抗不确定性，不如实时量化并利用它。通过一个感知-建模-规划-行动的闭环，让系统自适应地追踪不确定性。</li></ul></section><section><h3>Key Insights</h3><ul><li>系统耦合的价值：</li><li>海上自主搜索的成功，不在于某个单一部件（如流场模型或搜索算法）的极致精确，而在于各子系统间的紧密耦合与实时信息反馈。整个系统作为一个整体，实现了对动态环境的鲁棒适应。</li><li>不确定性的量化与利用：</li><li>本文最精妙的发现是，模型误差本身就是一种可利用的信息。通过计算预测浮标位置与实际浮标位置之间的漂移误差(Drifting error)，系统能量化自身流场模型的不确定性。</li><li>该误差被直接转化为一个自适应扩散系数，用于“模糊”目标概率图。这确保了即使流场预测有偏差，搜索区域也足够大，能大概率地“罩住”真实目标。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入基于学习的流场预测： 使用时空图神经网络 (Spatio-Temporal GNN) 或类似模型，直接从稀疏的浮标数据中学习并预测未来一段时间的流场演化，替代当前的准稳态优化方法，以提高实时性和预测能力。</li><li>异构多智能体协同： 将框架扩展至包含不同类型智能体（如用于广域搜索的固定翼无人机、用于近距离识别的旋翼无人机、用于救援的水面无人艇USV）。核心命题是：如何基于统一的概率图，为不同能力的智能体动态分配差异化的任务。</li></ul></section>
       <section>

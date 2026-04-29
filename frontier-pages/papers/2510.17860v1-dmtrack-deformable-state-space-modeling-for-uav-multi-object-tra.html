@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.17860v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流追踪器依赖卡尔曼滤波的线性运动假设，或在无人机场景下不可靠的外观特征。</li><li>核心痛点： 现有运动模型无法处理无人机视角下，由平台和目标自身导致的剧烈、非线性运动。</li><li>本文切入点： 一个核心直觉——将卡尔曼滤波的稳定性与能动态选择历史关键帧的可变形深度模型 (Mamba) 相结合，取长补短。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型范式]： 物理模型（卡尔曼）与数据驱动模型（Mamba）的动态融合，是解决复杂动态系统建模的有效范式。前者提供稳定性下限，后者提供适应性上限。</li><li>[时间序列建模]： 对于运动轨迹预测，均匀或静态地聚合历史信息是次优的。引入可学习的时间采样机制（Deformable），让模型自主关注“高信息量”的历史帧，是提升预测精度的关键。</li><li>[特征依赖]： 通过极致强化运动模型（融合+可变形）并引入不确定性作为关联线索，可以在完全抛弃外观特征的情况下实现顶级追踪性能，尤其适用于外观信息退化的场景（如无人机）。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端联合建模]： 探索端到端的联合检测与追踪框架。利用 DeformMamba 强大的时序预测能力，反哺检测模块，例如通过预测未来位置来指导稀疏查询或唤醒“沉睡”的检测器。</li><li>[构建运动先验]： 构建“运动预训练大模型”。在海量、多样化的运动数据上预训练 DeformMamba 模块，使其学习通用的运动先验，再到特定下游任务进行微调，以提升零样本泛化能力。</li></ul></section>
       <section>

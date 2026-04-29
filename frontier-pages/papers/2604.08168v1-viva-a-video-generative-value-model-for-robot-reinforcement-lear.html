@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.08168v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在机器人强化学习中，使用基于静态图像的视觉语言模型 (VLM) 来构建价值函数 (Value Function)。</li><li>核心痛点： VLM 缺乏对时间动态的理解，导致在长时程任务中无法可靠地评估任务进展，对执行过程中的错误不敏感。</li><li>本文切入点： 作者认为，价值评估本质上是一个预测未来的问题。因此，使用为捕捉时空演化而生的视频生成模型，是构建价值函数的更自然、更有效的途径。</li></ul></section><section><h3>Key Insights</h3><ul><li>价值评估的本质：</li><li>时空先验是可靠价值评估的关键。相比于 VLM 依赖的静态视觉特征，视频模型学习到的动态演化规律能让价值函数更准确地追踪任务真实进展，而非仅仅对场景外观变化做出反应。</li><li>价值信号的接地：</li><li>通过联合预测未来的机器人本体状态 (Future Proprioception)，能将抽象的价值信号“接地”到具体的物理交互中。这使得价值模型对细微的执行错误（如错位、不稳定）变得极其敏感，从而提供更精细的策略改进信号。</li><li>泛化能力的来源：</li></ul></section><section><h3>Next Steps</h3><ul><li>价值与视觉的联合生成： 论文提到联合预测未来视觉帧会降低价值预测精度。一个高价值方向是研究如何有效协同预测未来视觉、动作和价值，克服任务难度不匹配问题，构建一个既能预测世界、又能评估状态的统一“世界模型”。</li><li>从“价值”到“可解释的批评”： 当前模型只输出一个标量价值。下一步可以探索让模型在给出低价值时，生成可解释的反馈（如文本“左侧未对齐”或在预测的未来图像中高亮问题区域），将价值函数升级为可解释的机器人教练 (Explainable Critic)。</li></ul></section>
       <section>

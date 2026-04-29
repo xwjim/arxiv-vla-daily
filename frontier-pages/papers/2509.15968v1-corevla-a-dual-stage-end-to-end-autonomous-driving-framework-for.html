@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.15968v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖大规模、高质量的标注数据来训练端到端的自动驾驶模型 (VLA)。</li><li>核心痛点： 长尾危险场景的数据极其稀疏且难以获取，导致模型在这些关键时刻学习效率低下、泛化能力差。</li><li>本文切入点： 作者的直觉是，人类驾驶员的“接管”行为本身就是针对模型失败场景的、最有价值的偏好信号，可以被直接利用来高效地“纠错”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据闭环的价值]： 自动驾驶模型的失败案例 (failures)，特别是需要人类接管的时刻，是最高价值的训练数据。一个“部署-收集-精炼”的数据闭环是解决长尾问题的有效范式，能让模型持续进化。</li><li>[学习范式的转变]： 相比于需要设计复杂奖励函数的强化学习，直接偏好优化 (DPO) 更适合处理稀疏、高价值的长尾场景数据。它将隐性的人类偏好直接转化为模型的行为，避免了奖励函数设计的偏差 (reward hacking)。</li><li>[模型行为的权衡]： 针对安全关键场景进行优化的模型，其行为会变得更加保守和谨慎。这显著提升了成功率 (SR)，但可能以牺牲效率和舒适度为代价，揭示了自动驾驶多目标优化中的内在权衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>真实世界数据闭环： 如何将在仿真中验证的 CoReVLA 框架迁移到真实车辆上？可以探索利用影子模式 (shadow mode) 下的驾驶员干预数据，在真实世界中构建在线的 Collect-and-Refine 闭环。</li><li>多模态偏好学习： 除了驾驶动作，人类接管时还伴随着视线转移、语言惊呼等信号。如何将这些多模态反馈融入 DPO 或其他偏好学习框架，以提供更丰富的监督信号？</li></ul></section>
       <section>

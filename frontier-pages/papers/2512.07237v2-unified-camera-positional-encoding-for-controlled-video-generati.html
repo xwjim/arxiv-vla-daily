@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.07237v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过编码相机位姿（Pose）来引导视频生成模型，实现运镜控制。</li><li>核心痛点： 现有方法大多基于简化的 针孔相机模型，无法处理真实世界中广泛存在的 镜头畸变 和多样的 相机内参，导致泛化性和控制精度不足。</li><li>本文切入点： 直觉：与其编码整个相机，不如编码 每一条独立的光线 (Ray)。通过在光线级别进行几何推理，可以自然地统一所有相机模型（无论是否畸变）。</li></ul></section><section><h3>Key Insights</h3><ul><li>[编码粒度]： 将相机编码的粒度从 “相机级”下沉到“光线级” 是统一不同相机模型（针孔、鱼眼等）的关键。这使得注意力机制能直接在几何一致的“光线空间”中进行推理，而非处理抽象的相机参数。</li><li>[绝对 vs. 相对]： 精准的相机控制需要 相对运动编码 (RRE) 和 绝对朝向编码 (AOE) 的结合。仅有相对编码会导致初始姿态模糊，而本文的 Lat-Up 图 证明了通过引入重力对齐的先验，可以有效固定初始的俯仰和滚转角。</li><li>[模型注入]： 通过 轻量化的并行注意力适配器 (LoRA-inspired Adapter) 注入几何编码，可以在不破坏预训练模型视觉先验的同时，高效赋予其相机控制能力。这证明了 保留主干、旁路注入 是一种比完全替换或串行修改更优的范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>[自监督几何学习] 研究 自监督或弱监督的相机几何编码学习，摆脱对精确相机姿态标注的依赖，例如通过多视图一致性损失来隐式学习。</li><li>[通用物理世界接口] 将 UCPE 扩展为通用的 3D/4D 场景表示接口，不仅用于生成，也用于机器人感知和世界模型等需要物理世界接地的（grounding）任务。</li></ul></section>
       <section>

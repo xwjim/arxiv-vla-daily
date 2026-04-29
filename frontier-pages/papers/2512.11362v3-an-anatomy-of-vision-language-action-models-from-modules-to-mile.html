@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11362v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 已有综述或聚焦于特定技术分支，或提供宽泛的架构分类。</li><li>核心痛点： 现有综述将核心挑战放在末尾一笔带过，且其结构不符合研究者的认知学习路径，信息零散。</li><li>本文切入点： 将五大核心挑战作为论文的中枢，并围绕 模块 -&gt; 里程碑 -&gt; 挑战 的递进式学习路径来组织内容。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构演进]： VLA模型架构正从模块化、分离式设计（如独立的视觉编码器+LLM规划器）向端到端、原生多模态的统一模型收敛。预训练的VLM正成为事实上的“机器人大脑”标准底座。</li><li>[动作生成]： 机器人动作的生成范式正在发生根本性转变。从早期将连续动作离散化为Token进行分类预测，转向使用扩散模型或流匹配等生成模型直接在连续空间建模，以产生更平滑、自然的轨迹。</li><li>[学习范式]： 具身智能正从依赖静态数据集的被动模仿学习，转向主动的在线交互与探索。结合强化学习和自主生成奖励，让模型在部署后能持续进化，是突破模仿学习性能上限的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>形态无关的通用策略 (Morphology-Agnostic Policies)： 研发一个统一的“大脑”，能够通过轻量级适配器控制不同形态的机器人（如四足、人形、机械臂），实现零样本跨机器人实体迁移。</li><li>物理感知的生成式世界模型 (Physics-Informed World Models)： 构建能理解物理因果的内部模拟器。该模型不仅预测像素，更能模拟物体的运动、接触力学和语义变化，实现基于物理想象的规划。</li></ul></section>
       <section>

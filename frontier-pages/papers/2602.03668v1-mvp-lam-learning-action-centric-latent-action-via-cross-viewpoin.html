@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.03668v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 从无标签的单视角视频中学习潜在动作 (Latent Actions)，作为训练机器人大模型 (VLA) 的伪标签。</li><li>核心痛点： 学习到的潜在动作混淆了主体动作与视点变化等无关视觉信息 (外源噪声)，导致其“动作纯度”不高，影响了下游任务性能。</li><li>本文切入点： 一个真实的动作，其本质不应随观察视角而改变。因此，一个视角的动作编码，必须能解释另一个视角的未来，以此强迫模型忽略特定视角的“噪音”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[解耦机制]： 跨视点重建是一种高效的“解耦”机制。它通过强制一个视角的潜在动作能解释另一视角的未来，成功地将动作信号从视点相关的视觉噪声中分离出来，从而提升了潜在动作的“动作中心性” (action-centricity)。</li><li>[数据价值]： 数据多样性是学习高质量潜在动作的关键。在机器人数据基础上混入更多样的人类视频，能防止模型过拟合到机器人数据中有限的、偶然的视觉变化，从而学到更泛化的动作表征。</li><li>[预训练价值]： 潜在动作的“纯度”直接影响下游策略的性能。使用 MVP-LAM 产出的高“动作中心性”伪标签进行 VLA 预训练，能为下游任务微调提供一个更好的起点，显著提升了机器人的操作成功率，即便预训练数据规模远小于其他方法。</li></ul></section><section><h3>Next Steps</h3><ul><li>放宽数据约束： 研究如何利用弱同步甚至非成对的多视点视频进行训练。例如，使用对比学习或最优传输等方法来对齐不同视频中的相似动作片段，以摆脱对严格同步数据的依赖。</li><li>泛化解耦机制： 将“跨X重建”的思想泛化到其他外源噪声。例如，设计跨背景、跨光照、甚至跨物体的重建任务，以学习对更多干扰因素不变的、更加鲁棒的动作表征。</li></ul></section>
       <section>

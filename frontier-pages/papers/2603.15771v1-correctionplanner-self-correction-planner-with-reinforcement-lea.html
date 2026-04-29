@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15771v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学习型规划器通常直接从场景信息中“一站式”预测出未来轨迹。</li><li>核心痛点： 缺乏显式的自我纠错能力。一旦模型生成了一个危险的动作，没有内部机制在执行前进行评估和修正。</li><li>本文切入点： 借鉴大语言模型的“推理链”思想，将这种反思和修正过程从语言空间迁移到了运动 Token 空间。</li></ul></section><section><h3>Key Insights</h3><ul><li>[纠错机制的本质]： 自我纠错并非简单的“拒绝重采样”。通过将不安全动作（Correction Trace）作为条件输入，模型能主动调整后续动作的生成分布，从而跳出局部不安全区域，这比在原有分布上反复尝试更高效。</li><li>[训练范式的价值]： 模仿学习（IL）只能学会“做对”，而基于世界模型的强化学习（RL）才能教会模型如何“改错”。RL 通过模拟交互和碰撞反馈，专门训练了模型在给定不安全历史（Correction Trace）后生成安全动作的能力。</li><li>[性能的权衡]： 安全性提升伴随着必然的效率折衷。引入自我纠错机制会使规划器在复杂场景下更倾向于减速或让行，这虽然显著降低了碰撞率，但也可能轻微牺牲了行驶效率（Progression）。</li></ul></section><section><h3>Next Steps</h3><ul><li>从二元 Critic 到连续/多维度的安全评估器： 将当前的“碰撞/不碰撞”二元判断，升级为能输出连续风险评分、或预测碰撞类型/严重程度的评估器，从而实现更精细、更智能的纠错策略。</li><li>将隐式的“运动纠错”升级为显式的“因果推理”： 让模型在生成 Correction Trace 的同时，也生成一个低维的“原因”向量来解释为何前一个动作是危险的（如“速度过快”、“距离太近”），使纠错过程更具可解释性和指导性。</li></ul></section>
       <section>

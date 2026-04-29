@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.22643v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流机器人大模型 (VLA) 通过模仿学习，直接将 当前视觉 映到 下一步动作。</li><li>核心痛点： 这种“反应式”决策是 短视的，在长程任务中容易因 累积误差 而失败。</li><li>本文切入点： 与其直接执行，不如先“脑补”一下。在执行前，利用 世界模型 和 蒙特卡洛树搜索 (MCTS) 在线推演多个动作序列的未来结果，然后选择最优的。</li></ul></section><section><h3>Key Insights</h3><ul><li>规划与反应的结合：</li><li>纯模仿学习的 VLA 策略本质上是 反应式 的，缺乏深思熟虑。本文证明，通过 即插即用 的方式为其嫁接一个 测试时 (test-time) 的在线规划模块，是修正其短视行为、处理 累积误差 的高效范式。</li><li>高效搜索的重要性：</li><li>在线规划的瓶颈在于 计算效率。直接在真实世界或高精度模拟中推演成本过高。本文证明，利用 数据驱动的先验（KDE） 和 轻量级的价值评估模型，可以大幅降低搜索成本，使 在线规划在机器人任务中变得可行。</li><li>世界模型的价值：</li></ul></section><section><h3>Next Steps</h3><ul><li>规划过程的内化 (Amortized Planning)： 将显式的、耗时的 MCTS 搜索过程，通过训练 内化 到一个单一的策略网络中。让模型学会“直觉式”地进行前瞻性思考，实现 反应速度 和 深思熟虑 的统一。</li><li>构建通用世界模型： 利用最新的 视频生成模型 (如 Sora, V-JEPA) 来构建一个 更通用、更精准 的世界模型。一个高质量的世界模型将是解锁更复杂、更长程机器人任务推理能力的关键基础设施。</li></ul></section>
       <section>

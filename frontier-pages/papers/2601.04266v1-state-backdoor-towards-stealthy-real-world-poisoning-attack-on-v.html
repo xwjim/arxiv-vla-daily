@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.04266v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 以往对具体化AI（Embodied AI）的后门攻击，主要是在视觉输入中植入可见的触发物（如特定贴纸）。</li><li>核心痛点： 视觉触发器在真实世界中极不稳定，易受光照、视角变化影响，且容易被人类察觉，隐蔽性差。</li><li>本文切入点： 作者的直觉是，相比于多变的环境视觉，机器人自身的本体感受状态 (proprioceptive state) 是一个更稳定且不易察觉的信息通道，可以作为后门的触发器。</li></ul></section><section><h3>Key Insights</h3><ul><li>[攻击面转移]： 揭示了具体化AI模型的一个全新攻击面。相比于外部的视觉模态，模型内部的状态模态（如关节角度）是更稳定、更隐蔽的后门载体，因为它不受环境变化影响，且不易被外部观察者察觉。</li><li>[触发器设计权衡]： 一个有效的后门触发器并非随意设定，而是一个多目标优化问题。必须在攻击有效性（能稳定触发）和隐蔽性（与正常状态差异小）之间找到最佳平衡点，PGA算法就是实现这种权衡的有效工具。</li><li>[投毒标签的结构化]： 投毒数据的“毒性”质量至关重要。向模型投喂随机的、无结构的失败动作作为标签，效果差且会破坏模型正常功能。而提供结构化的、一致的失败模式（如相反动作轨迹），能让模型更高效地学会后门关联，同时不影响正常任务性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>[状态域防御]： 开发专门针对状态空间异常的防御机制。例如，训练一个判别器来识别不自然的初始状态配置，或在模型推理时对状态输入进行规范化/扰动，以破坏触发条件。</li><li>[多模态状态触发]： 将后门触发器从单一的关节状态，扩展到更丰富的多模态本体感受信息。例如，结合关节力矩、末端触觉传感器的读数等，构建更复杂、更难以检测的复合状态触发器。</li></ul></section>
       <section>

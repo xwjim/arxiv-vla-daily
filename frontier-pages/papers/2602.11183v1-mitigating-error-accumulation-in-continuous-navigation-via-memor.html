@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.11183v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的视觉-语言导航 (VLN) 模型采用航位推算法 (dead-reckoning)，即一步步预测下一个航点来构建完整轨迹。</li><li>核心痛点： 这种逐步预测的方式会导致误差随时间累积，造成模型内部的信念位置与真实坐标错位，即“状态漂移 (state drift)”，最终损害长距离导航的准确性。</li><li>本文切入点： 作者从经典控制论中获得灵感，不再将导航视为单纯的序列预测任务，而是将其重新定义为一个递归的贝叶斯状态估计问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构性洞察]： 导航任务的核心矛盾在于内部动力学模型与外部观测的冲突。将导航过程解耦为 “预测-修正” 两个独立又互补的阶段，比单一的端到端预测模型具有更强的鲁棒性和纠错能力。</li><li>*这证明了经典控制理论的范式在现代深度学习导航模型中依然具有强大的生命力和指导意义。*</li><li>[理论性洞察]： 本文在数学上建立了注意力机制与核密度估计 (KDE) 之间的等价性。这意味着从记忆库中检索历史信息，不仅仅是寻找相似特征，而是在进行一次非参数化的概率密度估计。</li><li>*这为“Attention is all you need”提供了新的统计学解释：Attention 本质上是在用历史样本估计当前输入的观测似然，为修正提供了坚实的数学基础。*</li><li>[机制性洞察]： 可学习的卡尔曼增益 K_t 是实现自适应修正的关键。它扮演了一个动态不确定性开关的角色：当观测可信时，它放大修正信号；当观测模糊或检索到无关记忆时，它更相信平滑的内部运动预测。</li></ul></section><section><h3>Next Steps</h3><ul><li>强化先验模型： 将预测模块中的 GRU 替换为更强大的序列模型，如状态空间模型 (SSM, 如 Mamba)，以更精确地建模长期运动动力学，进一步提升“预测”环节的准确性。</li><li>结构化记忆与主动探索： 将扁平化的记忆库升级为拓扑图或语义地图。这不仅能优化检索效率，还能让模型在修正状态的同时构建对环境的结构化理解，甚至可以引出“为了更好地定位而主动探索”等更高级的行为。</li></ul></section>
       <section>

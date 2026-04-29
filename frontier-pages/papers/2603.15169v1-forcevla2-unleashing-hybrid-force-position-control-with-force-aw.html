@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15169v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的机器人VLA（视觉-语言-动作）模型主要依赖纯位置控制，即只关心机械臂末端“去哪里”。</li><li>核心痛点： 在需要与环境持续接触的任务（如擦拭、按压）中，纯位置控制非常脆弱，无法感知和调节接触力，容易导致任务失败或机械臂过载。</li><li>本文切入点： 模仿人类运动控制系统，将任务分解为高层语义认知和底层反应执行。用文本指令（力Prompt）引导高层认知，用实时力反馈驱动底层自适应调节。</li></ul></section><section><h3>Key Insights</h3><ul><li>[控制范式升级]： 对于接触丰富的任务，机器人控制的范式必须从“去哪” (Where) 升级为“去哪”+“用多大力” (Where + How Hard)。引入混合力-位置控制是解决物理交互稳定性的根本途径。</li><li>[信息流分层]： 将力信息分层处理是成功的关键。高级语义力（力Prompt）用于指导VLM进行任务规划，而低级实时力信号则通过“绿色通道”直接作用于动作生成，实现了规划性与反应性的解耦与结合。</li><li>[动态权重调节]： 机器人并非在所有时刻都需要同等关注所有传感器。MoE机制证明，让模型自主学习在不同阶段（如自由空间移动 vs. 接触表面）动态切换对视觉、语言、力等不同模态的依赖权重，是实现流畅、自适应操作的有效方法。</li></ul></section><section><h3>Next Steps</h3><ul><li>任务阶段的自动发现： 研究如何让模型从纯粹的演示数据中，无监督地学习出任务的物理交互阶段（即自动生成“力Prompt”），摆脱人工定义。</li><li>力感知能力的规模化预训练： 探索如何利用包含稀疏或非结构化力/触觉数据的大规模异构数据集（如Open-X-Embodiment），来预训练一个通用的力感知基础模型，以提升泛化性。</li></ul></section>
       <section>

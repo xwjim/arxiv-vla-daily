@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.11978v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在环路中引入人类（HIL），通过实时纠错来指导机器人，加速强化学习的探索过程。</li><li>核心痛点： 人类指导无法规模化。它受限于 1:1 的监督比例、操作员疲劳以及不同人之间指导水平不一导致的高方差。</li><li>本文切入点： 将多模态 Agent 视为一个语义世界模型 (Semantic World Model)。这个模型天生就带有从互联网数据中学到的价值先验，能直接“猜到”任务的关键区域，从而取代人类来指导机器人。</li></ul></section><section><h3>Key Insights</h3><ul><li>Agent 作为语义世界模型： 多模态 Agent 拥有内在的价值先验。它无需与环境交互，就能零样本 (Zero-shot) 地预测出任务的高价值区域（如 USB 接口附近），这本质上是用预训练知识替代了物理世界的低效探索。</li><li>指导质量与泛化性： Agent 的指导比人类更稳定和一致。这种低方差的指导，结合“非必要不干预”的触发机制，让策略学会了自主从微小错误中恢复，最终学到的价值函数景观更宽阔，泛化能力远超人类引导下的“窄路径”策略。</li><li>Agent 是“老师”而非“演员”： 由于视觉定位误差，Agent 直接作为控制器时在精细任务上表现很差（例如 USB 插入成功率为 0%）。但它提供的不完美但大体正确的指导，对强化学习策略来说是极佳的“教学信号”，使其能从成功和失败的指导中学习，变得比 Agent 本身更强大。</li></ul></section><section><h3>Next Steps</h3><ul><li>[全自动训练闭环] 如何让 Agent 学会任务失败后的重置策略（例如把叠失败的毛巾重新展开）？这是实现真正无人、端到端自动化训练的关键。</li><li>[提升物理世界常识] 如何让 Agent 的空间推理能力与物理规律（如刚体、柔性体动力学）更紧密地结合，以提供更符合物理直觉的指导？</li></ul></section>
       <section>

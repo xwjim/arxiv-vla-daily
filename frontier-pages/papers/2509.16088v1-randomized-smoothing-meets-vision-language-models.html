@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.16088v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 随机平滑 (Randomized Smoothing, RS) 是一个可扩展的、能为分类模型提供鲁棒性证明的有效技术。</li><li>核心痛点： RS无法直接用于VLM等生成模型，因为它们的输出是自由文本序列，而非离散类别标签。</li><li>本文切入点： 核心灵感在于“关注输出的属性，而非输出本身”。作者引入一个预言机分类器 (Oracle Classifier)，将VLM生成的任意文本映射到有限的、预定义的类别中（如“有害” vs “无害”），从而将生成问题转化为RS可以处理的分类问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转换]： 证明了生成模型的鲁棒性认证问题，可以被解耦为 (原始模型生成 -&gt; 外部模型分类) 两个阶段。我们无需认证生成内容的每一个字符，只需认证其高级语义属性（如安全性），这极大地降低了问题复杂度。</li><li>[理论完备性]： 即使预言机分类器不完美（存在有界的错误率 ϵ &lt; 0.5），该认证框架依然理论上可靠。论文证明，此时计算出的鲁棒性半径仍是真实半径的一个有效下界，这为在现实世界部署提供了关键的理论保障。</li><li>[计算可行性]： 论文推导出了新的缩放定律 (Scaling Laws)，精确刻画了采样数量 (n) 与认证半径及认证准确率之间的关系。该定律表明，采样数减少2-3个数量级（如从10000降至100），认证性能的损失是可预测且有限的，这使得对大型VLM进行认证在计算上变得可行。</li></ul></section><section><h3>Next Steps</h3><ul><li>文本随机平滑： 设计一种适用于离散文本空间的“噪声”分布，将随机平滑框架扩展到语言模态，以抵御针对Prompt的攻击。</li><li>复杂属性认证： 将认证目标从简单的二元分类（如“有害/无害”）扩展到更复杂的语义属性，例如事实性、逻辑一致性、风格等。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.06155v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用多步预测 (MTP) 训练模型，期望其学习比单步预测 (NTP) 更长远的序列结构。</li><li>核心痛点： 标准 MTP 会导致 “结构幻觉”——模型为了预测对遥远的目标，在潜空间中走了违反环境约束的“非法捷径”。</li><li>本文切入点： 直觉上，问题源于离散的 Token 监督与连续的潜空间动态之间的脱节。作者通过将预测过程锚定到真实的潜空间状态轨迹上来解决此问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[MTP 的双刃剑]： 多步预测 (MTP) 通过 “梯度耦合” 机制，确实能将拥有共同未来的不同历史轨迹在表征空间中拉近 (表征收缩性)，这有利于形成抽象的信念状态 (Belief State)。</li><li>[幻觉的根源]： MTP 的根本缺陷在于其 “结果导向”。由于监督信号仅来自最终的离散 Token，模型会不择手段地达成目标，从而在潜空间中学习到不符合物理或逻辑约束的“非法捷径”，即结构性幻觉。</li><li>[对齐的价值]： LSE-MTP 的成功证明，弥合 “离散 Token 监督” 与 “连续潜空间动态” 之间的鸿沟是关键。通过将预测锚定于 “教师强制” 生成的真实潜空间轨迹，能有效将环境的结构约束注入到学习过程中，从根本上抑制幻觉。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索开放域语言的“潜空间轨迹”： 如何在没有明确“图结构”的开放域文本中定义和利用“真实潜空间轨迹”？例如，能否用更强教师模型的隐状态作为锚点，来约束学生模型的长程推理连贯性。</li><li>融合不同潜空间正则化方法： 结合 LSE-MTP 与对比学习 (如 CPC) 或 变分自编码器 (VAE) 等方法，探索不同形式的潜空间监督信号是否能互补，从而构建更鲁棒、更一致的世界模型。</li></ul></section>
       <section>

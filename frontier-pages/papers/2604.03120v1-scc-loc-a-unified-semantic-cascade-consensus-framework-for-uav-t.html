@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.03120v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉地理定位普遍采用“粗检索-精匹配”的二级范式。</li><li>核心痛点： 热成像与可见光卫星图的巨大模态差异，导致传统流程产生大量错误匹配和定位漂移，尤其是在面对重复性结构时。</li><li>本文切入点： 直觉上，问题不在于特征提取器不够强，而在于匹配结果的后处理。作者不训练新网络，而是设计一套精巧的对齐、过滤、共识投票流程，来净化现有SOTA模型的匹配结果。</li></ul></section><section><h3>Key Insights</h3><ul><li>[定位障碍的本质]： 热成像与可见光的模态鸿沟，本质上是一种“结构性错觉”(Structural Illusion)。地理上不同的重复纹理（如屋顶、农田）在热成像中特征高度相似，导致仅靠匹配点数量无法区分真伪。</li><li>[基础模型的潜力]： 视觉基础模型（如 DINOv2）无需在目标域上训练，即可有效提取跨模态（热成像-可见光）的共性语义特征。这证明了其强大的零样本泛化能力，定位失败的瓶颈不在特征提取，而在后续的匹配净化与决策。</li><li>[可靠决策的机制]： 可靠的定位决策必须超越匹配点数量，引入“地理共识”(Geographic Consensus)。正确的候选位姿解在地理空间上会自然聚集，而错误的“视觉诱饵”则会随机散落，利用这一空间分布特性可高效排除伪解。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端学习： 将当前多阶段、依赖手动阈值的流程，演进为一个端到端的可训练架构。这不仅能自动学习参数，还能通过联合优化提升整体性能并大幅降低推理延迟。</li><li>不确定性感知与自适应： 显式地建模和利用不确定性。例如，模型不仅预测位姿，还预测其对遥测数据（如俯仰角）的置信度，并根据置信度动态调整框架内的物理约束权重，实现对噪声的自适应。</li></ul></section>
       <section>

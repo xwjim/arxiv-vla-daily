@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.19199v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 采用异步推理来消除动作块之间的停顿，以追求轨迹的平滑性。</li><li>核心痛点： 现有方法反应迟钝。基于流（Flow-based）的模型必须完成整个动作序列（例如10步去噪）的生成后，才能执行第一个动作。</li><li>本文切入点： 一个核心直觉——预测近期动作比预测远期动作更容易。因此，近期动作不需要和远期动作一样多的计算（采样步数）就能生成。</li></ul></section><section><h3>Key Insights</h3><ul><li>[反应时间的本质]： 机器人策略的反应时间并非一个固定值，而是一个由「首次动作生成时间 (TTFA)」和「执行周期」共同决定的均匀分布。降低平均反应时间必须同时压缩这两个变量。</li><li>[动作生成的不均衡性]： 在流模型生成的动作序列中，近期动作的预测难度远低于远期动作。它们的采样路径更“直”，仅需少量去噪步数即可收敛，而将大量算力用于它们是一种浪费。</li><li>[生成质量与速度的解耦]： 通过动态调整采样步数，可以在不牺牲远期轨迹规划质量的前提下，极大压缩近期动作的生成延迟。这实现了对反应速度和规划精度的「分时优化」。</li></ul></section><section><h3>Next Steps</h3><ul><li>从预定义调度到动态学习调度： 能否让模型根据当前观测的「不确定性」，自主决定不同动作所需的采样步数？例如，在简单场景下用1步，在复杂场景下动态增加步数。</li><li>将「渐进式」思想扩展到视觉处理： 能否在视觉编码阶段也优先处理与「立即反应」最相关的图像区域或特征，从而实现真正的端到端、全流程的延迟优化？</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.24593v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 3D语义分割模型依赖于在常规场景（如室内、城市街道）的高质量数据集上进行训练和评估。</li><li>核心痛点： 严重缺乏专门针对 灾后环境 的3D基准数据集，导致现有模型的真实灾评能力成谜。</li><li>本文切入点： 作者的直觉是，灾后场景的几何与纹理特征与常规场景差异巨大。他们通过 无人机采集真实灾后数据 并重建为3D点云，直接创造了一个“试金石”来检验SOTA模型的泛化能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>[模型泛化性]： 现有SOTA 3D分割模型（如 PTv3, FPT）在常规数据集上表现优异，但在 灾后场景 中性能会发生 断崖式下跌。这揭示了当前模型对特定数据分布的严重过拟合，其鲁棒性远低于预期。</li><li>[灾害特征识别]： 所有被测模型都难以区分 “损坏建筑” 与 “完好建筑”。这表明模型依赖的底层特征（可能更多是宏观形状而非结构细节）在面对灾害造成的 细微但关键的结构与纹理变化 时会失效。</li><li>[数据驱动的本质]： 3D场景理解的进步 高度依赖于高质量、场景特定的基准数据集。没有匹配场景的数据，再先进的模型架构也无法发挥作用，这凸显了为边缘场景（Edge Scenarios）构建多样化基准的紧迫性。</li></ul></section><section><h3>Next Steps</h3><ul><li>跨灾种的领域自适应： 如何将在一个灾种（如飓风）上训练的模型，以 无监督或少样本 的方式快速迁移到另一个灾种（如地震）的3D点云分割任务中？</li><li>融合多模态信息的灾害特征提取： 如何设计能有效融合点云 几何信息 与原始图像 纹理/颜色信息 的模型，从而更鲁棒地识别出“损坏”这类依赖细微视觉线索的语义类别？</li></ul></section>
       <section>

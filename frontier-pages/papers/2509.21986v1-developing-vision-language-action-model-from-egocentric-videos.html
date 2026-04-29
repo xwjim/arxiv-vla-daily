@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.21986v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 训练机器人（VLA）依赖于在真实机器人上进行人工远程遥操作来收集大规模数据。</li><li>核心痛点： 遥操作数据收集成本极高、耗时耗力，严重限制了模型的规模化和泛化能力。</li><li>本文切入点： 作者洞察到，可以利用 EgoScaler 框架，从海量的、无需特殊标注的原始第一视角视频中，直接提取出显式的 6DoF 物体运动轨迹作为动作监督信号。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据源有效性： 从原始第一视角视频中提取的显式动作轨迹，是一种极其有效且可扩展的预训练数据源。其效果不仅远超从零训练，甚至能与部分真实机器人数据集相媲美。</li><li>数据互补性： 第一视角视频数据与真实机器人数据具有很强的互补增益效应。将两者混合进行预训练，能取得超越任何单一数据集的最佳性能。</li><li>动作表征优越性： 显式的 6DoF 轨迹作为动作监督信号，比学习隐式的潜在动作编码 (Latent Actions) 更加鲁棒和通用。尤其在视觉简单的仿真环境中，隐式编码性能会下降，而显式轨迹则能稳定迁移。</li></ul></section><section><h3>Next Steps</h3><ul><li>夹爪动作推断： 研究如何从第一视角视频的手-物交互上下文（如接近、接触、离开）中，自动推断出夹爪的开合 (open/close) 动作，以生成更完整的 7-DoF+Gripper 动作序列。</li><li>跨形态轨迹重定向 (Retargeting)： 开发一种通用方法，在预训练阶段就将提取的物体轨迹智能地适配到不同形态的机器人末端执行器上，而不仅仅依赖于下游微调。</li></ul></section>
       <section>

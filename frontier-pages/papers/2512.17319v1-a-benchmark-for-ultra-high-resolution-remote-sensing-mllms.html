@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.17319v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有遥感（RS）基准主要使用低分辨率图像切片或存在设计缺陷。</li><li>核心痛点： 许多所谓的“推理”任务存在 评估错配（mismatch），纯文本 LLM 无需看图即可取得高分，这表明模型在利用 语言先验 而非真正的 视觉理解。</li><li>本文切入点： 通过一个惊人的发现——文本模型在多模态任务上表现优异——作者意识到必须构建一个能消除语言捷径、真正考验视觉能力的全新基准。</li></ul></section><section><h3>Key Insights</h3><ul><li>[基准缺陷]： 现有遥感基准存在严重的 “语言污染”。实验证明，在 XLRS-Bench 等基准上，纯文本 LLM 在部分推理任务上的表现甚至超过了 GPT-4o 等顶尖多模态模型，这直接暴露了这些基准在评估真实视觉能力上的 无效性。</li><li>[性能悬崖]： 所有现有 MLLM（无论开源、闭源或遥感专用）在处理 超高分辨率（&gt;4K） 影像时，均表现出 显著的性能悬崖。模型在识别微小目标、理解全局空间布局和进行复杂推理方面的能力 急剧下降。</li><li>[分辨率敏感性]： 模型性能对 图像分辨率 极其敏感。在 RSHR-Bench 上，从 4K 到 100M/200M 像素，所有模型的准确率都大幅降低；这与其他基准上性能对分辨率变化不敏感的现象形成鲜明对比，证明 RSHR-Bench 真正考验了模型处理 高像素密度信息 的能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>高效率、高保真视觉编码器： 如何在不丢失关键细节的前提下，高效地将 数亿像素 的视觉信息编码为 LLM 能够处理的序列长度，这是亟待解决的核心技术命题。</li><li>多尺度联合推理框架： 发展能够同时处理 全局上下文（如城市规划）和 局部细节（如车辆类型）的 MLLM 架构，实现跨尺度、跨区域的复杂逻辑推理。</li></ul></section>
       <section>

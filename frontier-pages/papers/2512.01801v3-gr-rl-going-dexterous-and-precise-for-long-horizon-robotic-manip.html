@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.01801v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖大规模人类示教数据，通过行为克隆 (Behavior Cloning) 训练通用的视觉-语言-动作 (VLA) 模型。</li><li>核心痛点： 在高精度、长时程任务中，人类示教数据本身是次优且充满噪声的，直接模仿会学到错误或犹豫的行为。</li><li>本文切入点： 与其相信所有人类示教都是完美的，不如利用强化学习（RL）训练一个评判器，反过来审视和筛选数据，只学习其中“有进步”的部分。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据质量]：</li><li>人类示教在精细操作中并非“黄金标准”，而是充满了次优片段。但无需完全抛弃，可以利用离线 RL 学习到的 Q 值作为“任务进展”的代理指标，从海量次优数据中自动提纯出高质量的训练集。</li><li>[价值函数]：</li><li>在长时程、稀疏奖励的真实世界任务中，分布式的 Critic (Distributional Critic) 比传统回归式 Critic 更鲁棒。它将价值预测约束在有界分布内，避免了价值爆炸，使其能更稳定地充当任务进展的评估函数。</li><li>[训练与部署对齐]：</li></ul></section><section><h3>Next Steps</h3><ul><li>专家知识回流 (Specialist-to-Generalist Distillation): 研究如何将通过 GR-RL 流程学到的专家能力高效地蒸馏回通用的 VLA 基础模型，实现基础模型的持续自我迭代和能力增强。</li><li>更稳定的在线对齐算法 (Stable Online Alignment): 针对真实世界机器人，开发更具样本效率和稳定性的在线 RL 算法，以抑制行为漂移，例如结合更强的正则化方法或更结构化的探索策略。</li></ul></section>
       <section>

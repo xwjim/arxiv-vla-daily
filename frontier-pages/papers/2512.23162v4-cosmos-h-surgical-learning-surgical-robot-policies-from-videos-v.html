@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.23162v4">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 训练机器人需要海量、带精确动作标签的视频数据进行模仿学习。</li><li>核心痛点： 手术领域因安全、伦理和成本问题，无法大规模收集这种“视频-动作”配对的数据。</li><li>本文切入点： 既然无法收集，那就凭空创造。用世界模型生成逼真的手术视频，再用逆动力学模型反推“伪”动作标签，从而无中生有地制造出海量训练数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[生成数据质量]： 合成数据的“质量”比“数量”更重要。使用专家级、细粒度的文本描述（如 SATA 数据集）来引导世界模型，生成的视频在语义和物理真实性上远超使用粗糙类别标签，这是提升策略模型性能的关键。</li><li>[预训练与迁移]： 在特定领域（如手术）进行大规模预训练，能极大提升模型在全新任务上的小样本学习效率。相比于从通用模型直接微调，经过 SATA 预训练的 Cosmos-H-Surgical 能用极少量真实数据（例如 5 个轨迹）就生成高质量、高成功率的视频。</li><li>[伪标签有效性]： 逆动力学模型生成的“伪”动作标签虽然不完美，但足以作为有效的监督信号。这表明，对于策略学习，视频的视觉多样性和动作的粗略方向的组合，比少量但精确的“完美”数据更有价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>[统一世界与动作模型]： 开发一个能同时理解世界模型（视频如何演化）和逆动力学（视频由何动作产生）的统一模型。这有望让模型在生成视频的同时直接生成对应的动作，避免 IDM 的误差累积。</li><li>[在线规划与“想象”]： 将世界模型用于在线规划 (Online Planning)。让机器人在执行任务时，利用 Cosmos-H-Surgical 在“脑中”进行多步推演（“想象”不同动作的后果），从而选择最优动作，提升决策的鲁棒性和安全性。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.26251v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 潜动作模型（LAMs）通过学习视频中的状态转换，来表征抽象的动作意图。</li><li>核心痛点： 现有模型对空间几何结构理解差（只看表面纹理），且对时间动态感知弱（仅用两帧图像，无法捕捉连续运动）。</li><li>本文切入点： 直觉上，有效的行动规划需要预判。作者让模型先“想象”出未来的视觉场景（视觉思维链），并强制这个想象同时包含空间结构（几何）和时间变化（动态）。</li></ul></section><section><h3>Key Insights</h3><ul><li>[潜动作表征]： 真正有效的潜动作，必须同时编码“世界的外观如何变化”和“世界的3D结构如何变化”。通过强制模型重建未来多帧的RGB和深度图，潜动作被迫学习到了语义外观和3D几何的双重信息。</li><li>[策略推理结构]： “先想象后行动”的视觉思维链（Visual CoT）机制是有效的。将决策拆解为“预测未来视觉 → 规划抽象动作 → 生成具体动作”的级联流程，比端到端直接输出，能显著提升决策的稳定性和泛化能力。</li><li>[时间建模尺度]： 使用连续的多帧未来信息（Farsighted）来学习潜动作，远优于仅使用稀疏的两帧。这为模型提供了中间状态的约束和更平滑的动态监督，使其能更好地理解物理世界中连续、平滑的运动过程。</li></ul></section><section><h3>Next Steps</h3><ul><li>[命题 1] 探索带有反馈的推理结构： 当前的级联结构是单向的。一个高价值方向是研究带有反馈修正的CoT机制，例如，让下游的动作规划模块反过来评估上游视觉预测的物理合理性，并进行修正，形成一个动态的“想象-验证”闭环。</li><li>[命题 2] 潜动作模型的泛化与过拟合： 论文指出了潜动作模型训练的过拟合风险。如何设计新的训练范式（如对抗性训练、课程学习），使其在多样化、长尾场景中学会更鲁棒的动态表征，而不是仅仅“背诵”训练数据中的特定模式，是亟待解决的问题。</li></ul></section>
       <section>

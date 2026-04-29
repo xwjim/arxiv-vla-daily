@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.09086v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 研究分散在以任务（预测/规划）或架构（Diffusion/Transformer）为中心的孤立领域。</li><li>核心痛点： 开环指标（如视觉保真度）的提升与闭环安全性（真实驾驶表现）之间存在巨大鸿沟，导致模型无法可靠部署。</li><li>本文切入点： 将潜空间表征 (latent representation) 作为核心分析单元，认为其结构、动态和对齐方式是决定模型成败的根本。</li></ul></section><section><h3>Key Insights</h3><ul><li>规律发现： 开环指标具有欺骗性。视觉上完美的预测（低 FID/FVD）不等于安全的闭环驾驶策略，复合误差 (compounding error) 会在真实交互中被放大，导致灾难性失败。</li><li>机制洞察： 潜空间的结构比生成器架构更重要。强制执行结构同构性（如 BEV 网格）和注入几何先验，是抑制模型“幻觉”和保证物理一致性的关键，其作用超过了单纯扩大模型规模。</li><li>趋势洞察： 训练目标正从“像素级重建”转向“价值对齐”。顶尖模型已开始通过强化学习微调 (RFT) 等手段，使潜空间直接对驾驶安全和任务成功等奖励进行优化，而不仅仅是拟合数据分布。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建可解耦的结构化潜空间： 发展能将场景几何、动态物体和外观纹理分离的潜表征。这使得模型可以进行可控的、有物理意义的干预和规划。</li><li>研发面向部署的系统级优化： 重点突破高效生成算法（如少步数 Diffusion）和硬件感知压缩。同时，建立将任务性能与计算成本（如 DC 指标）相结合的评估新范式。</li></ul></section>
       <section>

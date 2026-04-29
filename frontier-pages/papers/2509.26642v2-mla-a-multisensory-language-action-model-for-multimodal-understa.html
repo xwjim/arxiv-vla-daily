@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.26642v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流机器人VLA模型（视觉-语言-动作模型）主要依赖 2D图像 和语言指令来生成动作。</li><li>核心痛点： 仅靠2D视觉，模型对世界的 空间几何 和 物理交互 理解不足，难以完成复杂的接触式任务。</li><li>本文切入点： 直觉上，让大模型（LLM）自己成为“感知中枢”，而不是依赖外部编码器。同时，通过 预测未来的多感官信息 来倒逼模型学会物理世界的动态规律。</li></ul></section><section><h3>Key Insights</h3><ul><li>[多模态对齐]： 相比于简单的特征拼接或图像级对齐，基于 空间位置对应 的 Token级对比学习 能更有效地统一异构传感器信息（2D、3D、触觉），让LLM形成更精准的物理世界表征。</li><li>[物理动态建模]： 仅预测未来图像不足以应对复杂交互。联合预测未来图像（语义）、点云（几何）和触觉（交互） 能为模型提供更全面的物理动态约束，从而生成更鲁棒的动作。</li><li>[模型架构]： 对于机器人多模态学习，引入独立的、预训练的感知编码器可能是一种“弯路”。让LLM直接处理原始（或轻度处理的）多模态Token，并利用其内部结构进行对齐和融合，可能是更高效、更根本的路径。</li></ul></section><section><h3>Next Steps</h3><ul><li>从预测单一未来关键帧到预测多步、多模态的未来轨迹。这能让模型具备更长期的规划能力，而不仅仅是反应式的下一步动作。</li><li>探索无需精确相机参数的隐式多模态对齐方法。例如，通过注意力机制让模型自主发现不同模态Token之间的空间和语义关联，从而摆脱对标定的依赖。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.04757v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>行业共识与痛点：</li><li>在 MCANet 之前，大家普遍使用卷积神经网络（CNN）来做图像识别。这套方法论有一个根深蒂固的“认知偏见”：它像一个“大锅饭”式的特征提取器。</li><li>理论瓶颈 1 (尺度混淆)： 传统的CNN在处理图像时，感受野（即“视野范围”）是逐层固定的。这导致它要么“只见树木，不见森林”（只关注局部细节，如一片瓦砾），要么“只见森林，不见树木”（只关注整体轮廓，如一大片水域），很难同时兼顾“被洪水淹没的社区里，有一栋房子屋顶塌了”这种多尺度的复合信息。</li><li>工程假象 2 (类别纠缠)： 传统模型在识别时，底层特征是所有类别共享的。对于灾后场景，&quot;道路被淹&quot; 和 &quot;道路被杂物堵塞&quot; 在视觉上可能非常相似（都是路不通了），甚至经常同时出现。传统模型很容易“串线”，把两者搞混，因为它内部没有一个清晰的机制来区分“这是由水导致的”还是“这是由固体物导致的”。大家一直默认，只要模型够深、数据够多，它自己就能学会，但这往往是“大力出奇迹”的幻想。</li><li>核心 Insight：</li></ul></section><section><h3>Key Insights</h3><ul><li>非共识发现： 1. “专业化”远比“通用化”更有效： 论文最大的启示是，在复杂、多任务的场景下，与其追求一个更大、更深的“万能模型”，不如构建一个由多个、更小、更专注的“专家模型”组成的协作系统。这挑战了“模型越大越好”的朴素观念。MCANet的性能超越了像ViT（Vision Transformer）这样更大、更“时髦”的通用模型，证明了架构设计的巧思可以胜过暴力的模型缩放。 2. 模糊地带的性能提升是检验真理的唯一标准： 模型在“道路堵塞”这类极易混淆的类别上取得超过6%的巨大提升，这比总分（mAP）的提升更有说服力。它揭示了，一个好模型的价值不仅在于把“1+1=2”算对，更在于能解开“鸡兔同笼”这样的难题。这说明“类别专属注意力”机制精准地打击了“类别纠缠”这一痛点。</li><li>机制洞察： 1. 注意力机制不是万金油，“有目的”的注意力才是： 实验结果（通过类别激活图CAM的可视化）证明，不同的“专家头”确实在关注图像上不同的、与其任务相关的区域。比如，“洪水”头关注的是大片水域，而“建筑损坏”头关注的是同一个区域里的房屋。这揭示了，模型真的在进行语义上的解耦（disentanglement），而不是简单地在像素层面做模式匹配。它学会了“这是房子，虽然它在水里”和“这是水，虽然它淹了房子”这两种不同的逻辑。 2. 多尺度是“专家”发挥作用的前提： 如果没有Res2Net提供的多尺度“情报文件夹”，再厉害的专家也可能因为信息不足而误判。这说明，有效的特征表示（Representation）和强大的推理机制（Reasoning）必须相辅相成。一个好的系统，既要有高质量的“食材”（多尺度特征），也要有高明的“厨师”（专属注意力）。</li></ul></section>
       <section>

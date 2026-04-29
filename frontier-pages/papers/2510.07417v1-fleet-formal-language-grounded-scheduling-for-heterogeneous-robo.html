@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.07417v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 单独使用纯 LLM 规划器或纯形式化方法来协调机器人。</li><li>核心痛点： 纯 LLM 规划器在长时序协调中易出错和产生幻觉；纯形式化方法则需要预先定义的封闭世界模型，无法理解自由格式的自然语言指令。</li><li>本文切入点： 将两者结合。利用 LLM 作为语义前端，负责理解指令并分解任务；利用形式化方法作为优化后端，负责生成保证可行且最优的调度方案。</li></ul></section><section><h3>Key Insights</h3><ul><li>[系统协同]： LLM 的语义理解与形式化方法的优化保证是互补而非替代关系。LLM 解决了“做什么”和“谁适合做”的问题，而形式化方法解决了“何时做”和“如何最高效协同”的问题，两者结合实现了 1+1 &gt; 2 的效果。</li><li>[能力归因]： 调度器中的不同组件有明确的功能分工。MILP 优化器主要解决了任务时序依赖问题，显著提升了需要严格先后顺序的任务成功率。</li><li>[能力归因]： LLM 生成的能力适配度是解决异构机器人任务分配的关键。即使有最优的调度算法，如果不能将正确的任务（如红外检测）分配给具备相应能力的机器人，任务依旧会失败。</li></ul></section><section><h3>Next Steps</h3><ul><li>[学习化调度] 使用图神经网络（GNN）等机器学习模型替代或辅助 MILP 求解器。通过在 MILP 生成的数据集上进行训练，学习一个能快速生成高质量近似解的调度策略，从而解决可扩展性问题。</li><li>[不确定性感知规划] 将 LLM 输出的任务时长等参数建模为概率分布而非确定值，并将其整合到后端的随机规划或鲁棒优化框架中。这将使生成的调度方案能更好地应对现实世界的不确定性。</li></ul></section>
       <section>

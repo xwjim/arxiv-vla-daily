@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.22199v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型依赖大规模数据，但机器人数据收集成本极高，学界开始尝试利用人类视频。</li><li>核心痛点： 人类视频与机器人数据存在巨大 领域鸿沟 (Domain Gap)，包括视点不稳、人手/机械臂外观迥异、运动动力学不同。</li><li>本文切入点： 与其将人类数据作为辅助，不如将其 系统性地转化为 机器人可用的监督信号。作者的直觉是，必须 同时对齐 视觉、视点、动作这三个维度，才能真正弥合鸿沟。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据可扩展性]： 证明了 机器人策略的性能可以随着合成的人类数据量增加而稳定提升。这从根本上验证了“用廉价、海量的人类数据来扩展昂贵的机器人训练”这一路径的可行性与有效性。</li><li>[对齐的协同效应]： 成功并非源于解决单一问题，而是 同时解决视觉、视点、动作三个鸿沟所产生的协同效应。单独处理任一维度都无法生成高质量的“伪”机器人数据，必须三管齐下。</li><li>[合成数据的充分性]： 仅用 MimicDreamer 合成的数据 训练的 VLA 模型，就能在真实机器人上实现 少样本执行 (few-shot execution)。这表明该框架生成的合成数据质量极高，足以让模型学到可迁移至物理世界的通用技能。</li></ul></section><section><h3>Next Steps</h3><ul><li>[多模态合成]： 在合成视觉和动作之外，探索 合成触觉、力觉等物理交互信号 的可能性。这将使模型能够学习处理对物理接触敏感的复杂任务。</li><li>[通用跨物种模仿]： 将框架从“人类-&gt;特定机器人”升级为“任意演示-&gt;任意机器人”的 通用模仿翻译器。这需要更抽象的意图和技能表征，摆脱对特定机器人形态（URDF）的依赖。</li></ul></section>
       <section>

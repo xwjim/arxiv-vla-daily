@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12510v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过生成对抗性指令来测试视觉-语言-动作（VLA）模型的弱点。</li><li>核心痛点： 已有方法生成的失败指令不真实、不可控，且无法覆盖多样的失败模式。</li><li>本文切入点： 将质量多样性（Quality Diversity, QD）算法引入指令生成，同时追求指令的多样性（覆盖不同攻击风格）和质量（能引发失败）。</li></ul></section><section><h3>Key Insights</h3><ul><li>[对抗性指令的有效性边界]： 最有价值的对抗性指令并非100%导致失败的指令，而是那些处于模型能力“模糊地带”的指令。使用失败方差 (failure variance)而非失败率作为优化目标，能更有效地挖掘出这些有价值的、自然的失败样本。</li><li>[对抗性指令的多样性维度]： 指令多样性不应只追求文本表面的差异，而应追求结构化、可解释的语义多样性（如不同的“攻击风格”）。这种有目标的多样性比无目标的随机改写（Rephrase）或纯粹的失败驱动（ERT）更能暴露模型系统性的弱点。</li><li>[红队测试与模型鲁棒性的闭环关系]： VLA模型的鲁棒性可以通过一个“发现-修复”的闭环来持续提升。在多样化、高质量的对抗性指令上微调，能显著提升模型对未见过的、同类型对抗指令的泛化能力，证明了红队测试数据的质量直接决定了鲁棒性提升的效率。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建代理模型（Surrogate Model）：开发一个轻量级模型来预测给定指令的失败方差，替代昂贵的真实环境交互。这能极大加速QD的搜索过程，允许更大规模、更深入的红队测试。</li><li>在线对抗性生成与训练（Online Co-adaptation）：将指令生成器与VLA模型进行在线协同训练。生成器的目标是最大化VLA模型的训练损失，而VLA模型则努力适应这些“最难”的指令，形成一个动态的对抗博弈，从而更高效地提升鲁棒性。</li></ul></section>
       <section>

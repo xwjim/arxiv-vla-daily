@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.19484v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的人-景交互（HSI）生成方法，都假设 场景是完全静态的。</li><li>核心痛点： 一旦场景发生变化（如物体移动），模型无法感知，导致虚拟人出现 穿模或交互失败 的问题，缺乏适应性。</li><li>本文切入点： 作者的灵感来源于 世界模型 (World Models) 理论，将虚拟人建模为一个拥有 视觉、记忆、控制 三大模块的认知智能体，从而打破了静态场景的假设。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动态泛化]： 模型仅在 静态场景数据 上训练，但通过 自回归地感知局部场景变化（尤其是帧间差异），就能成功泛化到 从未见过的动态场景。这证明了 对“变化”的显式建模 是实现动态适应的关键。</li><li>[记忆机制]： 使用扩散模型前向过程产生的 “模糊”噪声表征 (X_T) 作为记忆，比存储原始动作数据更高效。这种 “噪声增强生成” (Noise-Augmented Generation) 机制能有效 引导模型生成稀有或分布外动作，显著提升了模型的泛化能力和鲁棒性。</li><li>[任务依赖]： 不同的交互任务对多模态输入的依赖程度不同（如“走路”更依赖轨迹，“坐下”更依赖场景）。一个简单的 条件适配器 模块，能让模型学会 根据任务自主分配注意力，是生成高质量、高保真交互动作的有效机制。</li></ul></section><section><h3>Next Steps</h3><ul><li>[实时动态交互]： 研究如何将该认知框架与 更快的生成模型（如一致性模型）结合，并优化导航模块，探索 实时响应 动态环境变化的可能性。</li><li>[复杂与长期交互]： 将模型扩展到 多智能体共存、物理规则约束、长期任务规划 的场景中。这要求模型不仅能躲避障碍，还能预测其他智能体的行为并进行协作，解决 长期误差累积 的问题。</li></ul></section>
       <section>

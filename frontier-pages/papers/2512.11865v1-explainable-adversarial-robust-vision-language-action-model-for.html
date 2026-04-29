@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11865v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖 RGB 摄像头的机器人系统在光照、色彩变化等光度扰动下性能会下降，通常用数据增强进行对抗训练来缓解。</li><li>核心痛点： 传统的对抗训练只是被动适应，模型本身并不理解为何输入质量变差，像一个“黑箱”，鲁棒性提升有限。</li><li>本文切入点： 与其让模型被动适应，不如让它主动检测并认知到“图像被攻击了”，将这种“元认知”作为决策的辅助信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>[协同增益]： “解释”与“行动”的联合学习，比单纯的数据增强式对抗训练，能更显著地提升模型在干扰下的动作准确率。这表明让模型“理解问题”是解决问题的有效途径。</li><li>[表征增强]： 将底层的统计信号（如色彩分布异常）作为明确的先验知识注入到高级语义模型（VLA）中，是一种高效的跨层信息融合方式，能有效引导模型关注并补偿视觉输入的质量缺陷。</li><li>[可解释性即鲁棒性]： 模型的可解释性（生成攻击描述）和鲁棒性（动作准确性）并非零和博弈。训练模型去解释问题，本身就是一种强化其内在表征、从而提升鲁棒性的强大机制。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“感知”到“物理”： 能否将检测机制从光度扰动扩展到物理世界的异常？例如，检测到“抓手滑了”或“目标被意外遮挡”，并生成相应的语言解释和恢复策略。</li><li>自适应权重： 当前解释任务的损失权重 λ_xai 是固定值（0.5）。未来能否让模型根据检测到的扰动严重程度，动态调整“关注解释”和“关注动作”的权重，实现更智能的资源分配。</li></ul></section>
       <section>

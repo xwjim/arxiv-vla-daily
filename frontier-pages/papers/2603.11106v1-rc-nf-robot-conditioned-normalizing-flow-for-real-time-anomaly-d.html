@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.11106v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖分类模型（需穷举异常）或大型视觉语言模型 VLM（进行多步推理）来监测机器人执行失败。</li><li>核心痛点： 传统方法难以泛化到未见过的异常，且 VLM 方案延迟过高（秒级），无法满足实时干预的需求。</li><li>本文切入点： 转换思路，不直接检测“异常”，而是用条件归一化流 (Conditional Normalizing Flow) 对成功任务中“机器人-物体”的联合运动分布进行概率密度建模，低概率即为异常。</li></ul></section><section><h3>Key Insights</h3><ul><li>[特征解耦与条件建模]： 将机器人状态作为条件（Query），物体轨迹作为被建模对象（Memory），比直接拼接所有特征更有效。这种解耦-交互的结构能更好地捕捉多模态数据间的因果关系，避免特征干扰。</li><li>[表征抽象的重要性]： 使用分割模型（SAM2）提取的物体点云作为输入，而非原始图像特征，能有效滤除光照、背景等无关视觉噪声。这种基于几何的表征对机器人操作任务的异常检测更为鲁棒和本质。</li><li>[任务嵌入的必要性]： 引入任务嵌入作为条件，使模型能学习任务特定的正常行为分布。这使得模型不仅能检测“数据分布外”的异常，还能识别“任务语义不符”（如走错目标位置）的异常。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合 RC-NF 的快速检测能力与 VLM 的高级推理能力。当 RC-NF 检测到异常时，异步调用 VLM 进行场景分析，实现从“检测异常”到“理解并修复异常”的闭环。</li><li>探索利用少量负样本进行学习。通过对比学习等方式，让模型不仅学习“什么是正常的”，也学习“正常与异常的边界在哪里”，以提升对细微或边界情况异常的检测灵敏度。</li></ul></section>
       <section>

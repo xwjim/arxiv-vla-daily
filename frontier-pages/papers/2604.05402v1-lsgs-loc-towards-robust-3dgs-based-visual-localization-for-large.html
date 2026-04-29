@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.05402v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 基于3D高斯溅射 (3DGS) 的定位方法，通常依赖 photometric loss 优化或特征点匹配。</li><li>核心痛点： 在大尺度场景下，现有方法难以获得 鲁棒的初始位姿（尤其存在尺度模糊问题），且对3DGS重建产生的 渲染伪影（如模糊、漂浮物） 非常敏感。</li><li>本文切入点： 作者的直觉是，可以将 场景无关的相对位姿估计 和 3DGS提供的显式尺度信息 结合，以获得精确的初始位姿；同时，可以利用图像的 结构信息 来区分渲染质量，从而只信任高质量区域进行优化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[初始化策略]： 解耦旋转与平移估计 是获取鲁棒初始位姿的关键。通用网络提供可靠的 相对旋转，而场景的 显式几何（深度） 则能以极低成本约束并解析出精确的 绝对平移，这比端到端回归或传统PnP方法在尺度不确定的大场景中更有效。</li><li>[优化鲁棒性]： 3DGS场景的 渲染质量在空间上是不均匀的。通过简单的 拉普拉斯算子 识别高频结构区域，可以有效量化渲染的“可靠性”。在优化中 忽略低可靠性区域，能极大增强定位对重建伪影（blur, floaters）的免疫力，避免优化陷入局部最优。</li><li>[模型协同]： 场景无关的通用模型 (如ReLoc3r) 与 场景特定的显式表达 (3DGS) 之间存在强大的协同潜力。前者提供泛化的先验知识（如相对关系），后者提供精确的度量几何约束（如尺度和深度），二者结合是实现高精度、免场景训练定位的有效途径。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端联合优化： 探索将检索、初始位姿估计和最终优化整合进一个 可微的框架。例如，能否学习一个任务相关的检索模块，或者将一维搜索过程变成可学习的注意力机制，从而实现全局联合优化，提升整体性能和效率。</li><li>面向动态场景的扩展： 当前方法基于静态3DGS地图。一个极具价值的方向是将其扩展至 动态或持续更新的场景（即SLAM）。研究当3DGS地图本身在变化时，该定位框架如何保持鲁棒性，以及定位模块如何与建图模块高效交互。</li></ul></section>
       <section>

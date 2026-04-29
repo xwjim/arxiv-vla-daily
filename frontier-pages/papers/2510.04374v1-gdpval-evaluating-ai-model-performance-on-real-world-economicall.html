@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.04374v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 业界普遍使用学术化基准（如MMLU）来评估AI模型的推理能力。</li><li>核心痛点： 学术基准脱离真实世界，无法有效衡量模型在实际经济活动中的应用价值和潜力。</li><li>本文切入点： 直觉上，要评估经济价值，就必须用真实的、来自高价值行业的专业工作任务作为“考题”，而不是抽象的逻辑题。</li></ul></section><section><h3>Key Insights</h3><ul><li>能力演进规律： 前沿模型在真实经济任务上的性能，随着时间推移呈现出近似线性的增长。这表明AI的经济实用性正在稳定、可预测地提升。</li><li>性能提升路径： 模型的表现并非仅由其规模决定。通过增加推理量（让模型“想得更多”）、提供更丰富的任务上下文以及优化脚手架（Scaffolding），可以显著提升模型在复杂经济任务上的完成质量。</li><li>能力分化现象： 不同顶尖模型展现出能力特长上的分化。例如，Claude Opus 4.1 在美学和格式上表现更优，而 GPT-5 则在准确性和指令遵循上更胜一筹。这揭示了“模型能力”正从单一维度向多维专业化发展。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建交互式评估场景： 开发需要模型通过多轮对话来澄清模糊需求的动态任务。这能更好地评估模型在真实协作环境下的问题解决能力。</li><li>评估“工具使用”能力： 设计需要模型学习并操作第三方专有软件（如CAD、SAP、金融终端）才能完成的任务，这是衡量AI能否深度嵌入专业工作流的关键。</li></ul></section>
       <section>

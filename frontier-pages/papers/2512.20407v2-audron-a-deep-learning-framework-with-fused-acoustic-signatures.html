@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.20407v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用单一的声学特征（如MFCC或STFT频谱图）来识别无人机声音。</li><li>核心痛点： 单一特征在复杂噪声环境下鲁棒性差，难以区分无人机信号与背景干扰。</li><li>本文切入点： 直觉上，不同维度的声学特征包含互补信息。将它们融合，可以构建一个更全面的声音画像，从而更准确地进行识别。</li></ul></section><section><h3>Key Insights</h3><ul><li>[特征融合的有效性]： 多种声学特征（倒谱、时频、时序）确实是互补的，单一特征存在信息瓶颈。通过特征层融合，模型能够克服单一特征在噪声环境下的不确定性，显著提升识别的鲁棒性。</li><li>[关键特征的识别]： 消融实验表明，在无人机声学识别中，MFCC特征（代表音色）的贡献最大。这揭示了无人机螺旋桨产生的核心谐波与音色质感，是区别于环境噪声的最关键、最稳定的线索。</li><li>[合成数据的价值与局限]： 基于物理模型合成的无人机音频，可以高效验证模型架构的理论性能上限（接近100%）。但合成数据与真实数据（约98%）之间的性能差距，也反向证明了真实世界信号的复杂性（如多普勒效应、环境反射）是当前模型泛化的主要挑战。</li></ul></section><section><h3>Next Steps</h3><ul><li>开集识别 (Open-Set Recognition)： 研究如何让模型不仅能识别已知的无人机，还能有效检测并拒绝训练集中未出现过的新型无人机，这对于安全应用至关重要。</li><li>模型轻量化与边缘部署： 探索知识蒸馏、模型剪枝或量化等技术，开发一个轻量级版本的AUDRON，使其能够在低功耗的边缘传感器上实时运行。</li></ul></section>
       <section>

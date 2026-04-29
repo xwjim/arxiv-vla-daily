@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.11475v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前的视觉-语言-动作 (VLA) 模型主要依赖模仿学习，直接将传感器输入映射到稀疏的轨迹点。</li><li>核心痛点： 模型未能充分利用其作为生成模型的潜力，只是在“模仿”而非“推理”未来，导致在长尾场景中表现脆弱。</li><li>本文切入点： 直觉上，与其只预测下一步动作，不如让模型在紧凑的隐空间中，自回归地“推演”出未来整个场景的演化过程。这种“脑补”式的生成过程能更好地进行长时程推理。</li></ul></section><section><h3>Key Insights</h3><ul><li>范式转变： 从“模仿式规划”转向“生成式规划”是提升自动驾驶模型长时程推理能力的关键。相比于简单地拟合轨迹点，让模型生成性地预测未来多智能体的交互演化，能显著提高在复杂和零样本场景下的决策质量。</li><li>隐空间推演： 在学习到的隐空间 (latent token space) 中进行自回归推演，是实现高效、稳定场景生成的关键。这个隐空间有效地解耦并表征了场景动态，使得模型可以专注于高层语义的演化，而不是在原始像素或坐标空间中挣扎，从而有效缓解了长期预测中的误差累积。</li><li>RL 的校准作用： 模仿学习和一致性损失本身不足以保证生成场景的安全性。引入基于强化学习 (GRPO) 的反馈，特别是使用碰撞和TTC (Time-to-Collision) 等安全指标作为奖励，是校准生成过程、使其符合物理世界安全约束的必要步骤。</li></ul></section><section><h3>Next Steps</h3><ul><li>推演过程的效率优化： 研究如何将这种复杂的生成式推演能力蒸馏 (distill) 到一个更小、更快的模型中，以实现车载实时部署。</li><li>不确定性建模： 当前的推演主要生成确定性的未来。一个更有价值的方向是，让模型生成多种可能的未来场景分布，并在此基础上进行鲁棒性规划，以应对现实世界的高度不确定性。</li></ul></section>
       <section>

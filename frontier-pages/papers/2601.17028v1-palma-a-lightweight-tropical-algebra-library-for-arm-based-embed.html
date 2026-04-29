@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.17028v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 热带代数 是解决特定优化问题（如最短路径、调度）的强大理论框架，但现有软件实现仅限于桌面/服务器环境。</li><li>核心痛点： 现有工具因资源消耗大、依赖项重，无法在资源受限的嵌入式平台（如无人机、物联网节点）上运行，而这些平台恰恰最需要实时优化。</li><li>本文切入点： 直觉是，通过从零构建一个轻量级、无依赖的C库，并利用底层硬件特性（ARM NEON SIMD指令集）进行深度优化，可以将这一强大的数学理论成功移植到嵌入式世界。</li></ul></section><section><h3>Key Insights</h3><ul><li>[代数统一性]： 不同的嵌入式优化问题，如网络路由（最短路径）、调度（最长路径）、带宽（瓶颈路），在数学本质上是同一套热带线性代数运算（如矩阵乘法 A⊗B 和克莱尼星闭包 A*）在不同半环 (Semiring) 上的具体实例。这为构建统一的嵌入式优化引擎提供了理论基础。</li><li>[算法-硬件协同]： 将图算法重构为热带代数中的矩阵-向量乘法，能显著提升缓存局部性 (cache locality)。相比传统算法（如Bellman-Ford）的零散内存访问，这种结构化的计算模式能更高效地利用嵌入式芯片的缓存，其带来的性能增益（实验中高达 11.9倍）甚至超过了单纯的并行计算优化。</li><li>[性能瓶颈漂移]： 在嵌入式SIMD加速中，性能瓶颈会随问题规模（矩阵大小）从计算密集型转向内存带宽密集型。当数据能完全载入L2缓存时，SIMD加速效果最显著（达1.8倍）；一旦超出缓存，内存访问延迟便成为主要限制，导致SIMD单元空等数据，计算优势被抵消。</li></ul></section><section><h3>Next Steps</h3><ul><li>[动态与增量计算]：研究针对图结构或权重动态变化的高效增量算法。例如，当网络中单个链路成本改变时，如何以远低于O(n³)的代价快速更新热带闭包或特征值，这对实时自适应系统至关重要。</li><li>[多目标优化代数]：将框架从单一半环扩展到支持多目标优化的代数结构（如词典序半环或区间半环）。这能让系统在单个统一框架内同时权衡多个冲突指标（如时延与功耗），解决更复杂的现实决策问题。</li></ul></section>
       <section>

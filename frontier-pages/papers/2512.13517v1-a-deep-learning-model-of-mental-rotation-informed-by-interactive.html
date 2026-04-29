@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.13517v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统观点认为心理旋转是连续的心理模拟，反应时间与旋转角度成正比；标准深度学习模型（如孪生网络）难以泛化解决三维旋转问题。</li><li>核心痛点： 现有模型要么无法鲁棒地解决3D旋转任务，要么无法提供对人类行为（如反应时间、决策过程）的机制性解释。</li><li>本文切入点： 通过VR实验发现，人类并非进行平滑旋转，而是采用少数几次“弹道式”的大角度跳跃。作者由此获得灵感：决策过程可能依赖于一种更抽象的、离散的符号表征来指导旋转。</li></ul></section><section><h3>Key Insights</h3><ul><li>混合表征是关键： 心理旋转并非单一过程，而是一个“空间-符号”混合系统。模型证明，大脑可能使用空间表征（等变编码器）来执行旋转操作，同时使用符号表征（符号模型）来进行高效的动作决策与相似性判断，这统一了认知心理学中长期存在的争论。</li><li>离散模拟而非连续旋转： 与传统“匀速旋转”的观点不同，VR实验与模型共同表明，心理旋转更像是一种目标导向的、离散的模拟过程。人类和模型都倾向于执行少数几次大角度“跳跃”，将物体对齐到大致正确的“象限”，而非追求精确的角度匹配。</li><li>结构化架构的必要性： 标准的、端到端的深度学习模型（如ResNet/ViT孪生网络）在泛化到未见过的3D旋转物体时彻底失败。本文证明，必须引入处理几何结构的等变性（模块1）和迭代式的智能体机制（模块3），才能同时解决任务并解释人类行为。简单的模式匹配器是不足的。</li></ul></section><section><h3>Next Steps</h3><ul><li>发展组合式表征 (Compositional Representation)： 当前的符号编码是针对整个物体的。一个极具价值的方向是，让模型学会将物体分解为基本部件（如臂、肘）并进行组合式理解，这可能极大提升泛化能力和数据效率，也更符合眼动追踪研究的发现。</li><li>集成主动视觉机制 (Saccadic Mechanism)： 论文提及眼动（saccades）可能在心理旋转中扮演重要角色。下一步可以为模型配备一个主动的眼动机制，让模型自主学习“看哪里”来构建其符号表征，使编码过程更加动态和逼真。</li></ul></section>
       <section>

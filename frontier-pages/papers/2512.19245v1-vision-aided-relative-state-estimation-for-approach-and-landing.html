@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.19245v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖视觉伺服或GPS-RTK等方案进行无人机着陆，但前者对平台剧烈运动鲁棒性差，后者受环境限制且成本高。</li><li>核心痛点： 难以对任意3D运动的平台进行精确、鲁棒的相对位姿与速度估计，现有方法通常对平台运动做出简化假设。</li><li>本文切入点： 直觉上，将复杂的六自由度（6-DoF）估计问题解耦。作者提出先用一个滤波器估计相对姿态，再将此结果“喂”给另一个滤波器来估计相对位置和速度。</li></ul></section><section><h3>Key Insights</h3><ul><li>[可观测性与运动耦合]： 系统的可观测性（即能否估计出所有状态）与平台的物理运动强相关。要准确估计相对姿态，平台法向量必须有持续的激励（即平台需要有翻滚/俯仰等角运动）；要估计相对位置/速度，无人机与平台的相对视线方向也需有持续变化。</li><li>[级联解耦的有效性]： “先姿态，后位置” 的级联架构是处理此类非线性估计问题的有效模式。该结构将一个复杂的非线性问题分解为两个更简单的子问题，并通过输入到状态稳定 (ISS) 理论证明了整体系统的稳定性，即姿态估计的误差会作为有界扰动输入到位置估计器中，只要姿态能收敛，整体就能收敛。</li><li>[退化情况下的信息补偿]： 当姿态估计的关键条件（平台翻滚/俯仰）不满足时（例如平台仅水平移动），系统部分状态会变得不可观。论文发现，此时可以利用平台的线性加速度作为额外信息源，来补偿和估计那个原本不可观的偏航角(yaw)，展现了在信息不足时挖掘隐含动态耦合的能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>[异步与延迟下的鲁棒估计]： 研究在平台IMU数据存在显著通信延迟和不同步情况下的状态估计算法。这是将该理论推向实际应用的关键一步。</li><li>[估计-控制一体化设计]： 将本文提出的状态估计器与一个鲁棒的飞行控制器相结合，形成一个完整的闭环着陆系统，并分析其在估计误差存在时的整体性能与稳定性。</li></ul></section>
       <section>

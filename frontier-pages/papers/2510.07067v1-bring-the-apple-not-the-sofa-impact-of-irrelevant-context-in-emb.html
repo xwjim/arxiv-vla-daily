@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.07067v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 假设 VLA 模型（如 OpenVLA）具备处理自然语言变体的鲁棒性，通常在干净的指令集上进行训练和评估。</li><li>核心痛点： 现实中指令充满“噪音”（无关上下文/口语化），现有模型在面对这些干扰时，性能会发生灾难性崩塌（甚至下降 50%）。</li><li>本文切入点： 系统性量化了“噪音”的干扰规律（长度 vs. 语义相似度），并提出了一种无需重训大模型、即插即用的 LLM 过滤框架。</li></ul></section><section><h3>Key Insights</h3><ul><li>[噪音的本质]：语义相似度远比长度更致命</li><li>随机的无关文本（如“天气不错”）仅导致 &lt;10% 的性能下降；但与训练集语义/词汇相似的干扰（如提到场景中的物体位置）会导致高达 50% 的性能崩塌。</li><li>[模型的脆弱性]：训练与部署的“语义鸿沟”</li><li>即使是 SOTA 的 VLA 模型，对人类自然口语（Paraphrasing）的鲁棒性也严重不足，成功率平均下降约 20%，说明当前模型过度依赖“模板式”指令。</li><li>[工程化解法]：预过滤优于模型重训</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应过滤机制： 开发能够区分“噪声”与“关键上下文”的智能过滤器，而非简单的“一刀切”式删除。</li><li>鲁棒性训练 (Robust Training)： 将“含噪指令”直接纳入 VLA 模型的训练流程，通过数据增强使模型从底层具备抗干扰能力，而非依赖外部过滤器。</li></ul></section>
       <section>

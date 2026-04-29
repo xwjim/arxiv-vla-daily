@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.13304v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有模型能处理静态空间感知任务，即回答“物体是什么/在哪里”。</li><li>核心痛点： 模型无法回答“如果移动某物会发生什么”这类因果问题，其推理过程会产生空间上不成立的幻觉 (spatially ungrounded hallucinations)。</li><li>本文切入点： 作者认为，失败根源在于模型依赖的纯文本思维链（CoT）会偏离视觉证据。因此，他们提出将“脑补”过程外部化——直接生成一个模拟视频来提供视觉证据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[推理模式缺陷]： 多模态大模型在因果空间推理上的失败，并非源于视觉感知能力不足，而是其推理模式存在根本缺陷。模型过度依赖文本思维链（CoT）进行物理模拟，该过程极易与初始的视觉几何事实“脱钩”，导致结论看似合理但物理上错误。</li><li>[模型缩放悖论]： 简单地增加模型参数规模并不能有效提升因果空间推理能力。实验发现，更大的模型虽然推理性能停滞不前，但其回答的“自信程度”（即更少的“不确定”回答）却显著提高，暴露出模型能力与置信度的严重脱节。</li><li>[视觉模拟锚定]： 外部化的视觉模拟是锚定因果推理的关键。为模型提供模拟未来状态的视频帧，能强制其推理过程重新锚定于物理现实，有效抑制基于语言先验的凭空想象，从而显著提升准确性。这证明了“眼见为实”对AI同样重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>发展物理属性感知的世界模型： 突破当前仅基于轨迹的模拟，研发能够理解和模拟物体体积、形变、材质、流体等更复杂物理属性的世界模型，以生成更高保真度的因果预测。</li><li>探索多模态思维链 (Multimodal Chain-of-Thought)： 既然纯文本思维链存在缺陷，未来的研究应探索混合推理模式。模型在推理过程中不仅生成文本，还应能生成中间的视觉草图、符号化的力学分析或简化的物理图示，形成一个真正意义上的“多模态”思考过程。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.04883v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在边缘设备上追踪无人机，要么牺牲分辨率来提速，要么处理高分辨率图像但无法实时。</li><li>核心痛点： 分辨率-速度冲突 (Resolution-Speed Conflict)。高分辨率输入在边缘设备上太慢；低分辨率输入则导致小目标特征消失，无法检出。</li><li>本文切入点： 模仿人类“扫视-凝视”的直觉，将任务解耦。用一个慢而准的“观察者”进行高精度定位，再用一个快而轻的“跟随者”进行高频轨迹跟踪。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构范式： “观察者-跟随者”架构是解决边缘计算中“模型能力”与“实时性能”矛盾的有效范式。它允许系统同时利用重型模型的语义精度和轻量算法的执行速度。</li><li>计算策略： 异构硬件的非对称分工是实现该架构的关键。将重度识别任务 (GPU) 与高频插值任务 (CPU) 分离，能最大化压榨边缘设备有限的并行计算潜力。</li><li>鲁棒性来源： 复杂场景下的鲁棒追踪不一定需要昂贵的深度学习模型。免训练的、基于先验知识的启发式方法（如本文的双颜色空间+几何约束），在特定任务上能以极低成本实现高效的目标重捕获，性价比极高。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习化的跟随者： 将跟随者流中的经典光流+卡尔曼滤波替换为轻量级循环网络 (RNN) 或 Transformer，直接学习目标的非线性运动模型，以应对更复杂的急转、悬停等机动动作。</li><li>多目标架构扩展： 将此框架扩展为多目标追踪。研究如何在“观察者-跟随者”模式下，高效地进行多目标的数据关联 (Data Association) 和身份管理 (ID Management)。</li></ul></section>
       <section>

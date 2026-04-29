@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.21739v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有研究将 LLM 用于无人机，但多集中于单一组件（如路径规划）或小型玩具无人机应用。</li><li>核心痛点： 缺乏一个能处理中远程、多尺度无人机复杂任务（如机场起降、遵守法规）的端到端综合系统。</li><li>本文切入点： 构建一个模块化的端到端系统 NeLV，将语言解析与传统规划算法结合，并提出一个从“解析器”到“自动驾驶仪”的五级自动化演进路线图，为领域发展提供了清晰蓝图。</li></ul></section><section><h3>Key Insights</h3><ul><li>[自动化演进路径]： 首次将 LLM 在无人机中的应用分层解耦为五个自动化等级（L1 解析器 -&gt; L5 自动驾驶仪），清晰地定义了从语言理解到自主决策的技术演进路径和所需知识，为复杂系统的人工智能集成提供了范式。</li><li>[系统架构范式]： 现阶段最务实的 LLM-UAV 集成范式是“LLM 作为前端解释器 + 传统算法作为后端规划器”的混合架构。这充分利用了 LLM 的自然语言理解力和传统算法在安全攸关任务上的高可靠性与确定性。</li><li>[任务的尺度依赖性]： 无人机任务的规划复杂度与飞行尺度强相关。不同尺度（短/中/远程）需要整合完全不同的知识库（如本地 POI vs. 全国机场燃油价格），这证明了系统设计必须是模块化和可扩展的，以适应不同层级的知识和约束。</li></ul></section><section><h3>Next Steps</h3><ul><li>[实现 LLM-as-Planner]： 探索如何通过微调（Fine-tuning）或工具使用（Tool Use），让 LLM 能够自主调用规划算法、查询数据库，并根据实时反馈进行多目标动态决策（如 L2 的路径选择），实现从“翻译器”到“决策者”的跨越。</li><li>[构建动态闭环反馈]： 研究 LLM 如何理解和响应实时传感器数据与外部事件（如恶劣天气警报、系统故障），实现从“一次性离线规划”到“持续性在线自适应控制”的转变，这是通往 L5 完全自主的关键。</li></ul></section>
       <section>

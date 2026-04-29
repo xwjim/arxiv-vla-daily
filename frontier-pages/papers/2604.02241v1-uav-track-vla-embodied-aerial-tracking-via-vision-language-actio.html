@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.02241v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机追踪依赖于被动视觉检测，或主动追踪但无法理解复杂的语言指令。</li><li>核心痛点： 通用VLA模型用于无人机追踪时，存在 时间信息冗余 和 空间几何先验缺失 的问题，导致语义与控制不匹配。</li><li>本文切入点： 直觉上，模型的“空间定位”和“动作生成”是两个耦合但易冲突的任务。作者通过 解耦 这两个过程，让模型先想清楚“目标在哪”，再决定“如何飞过去”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构设计]： 对于需要“感知”与“控制”紧密结合的具身智能任务，显式地解耦空间定位 (Grounding) 与动作生成 (Action Generation) 是一个极其有效的设计范式。强制模型在辅助任务中学习精确的几何位置，为最终的动作决策提供了更可靠的特征基础。</li><li>[时间建模]： 在高频连续控制任务中（如无人机追踪），完整的历史信息并非必需，其关键动态特征是可压缩的。通过轻量级网络压缩历史帧，可以在不显著牺牲性能的前提下，大幅提升模型推理速度（延迟降低33.4%），这是实现实时控制的关键。</li><li>[任务挑战]： VLA模型在追踪 小尺寸、高机动性目标（如行人） 时，性能衰减远比追踪大目标（如车辆）更严重。这表明，精确的空间几何先验 对于处理信噪比低、动态变化快的目标至关重要，本文的辅助定位头恰好弥补了这一点。</li></ul></section><section><h3>Next Steps</h3><ul><li>分层式长时程规划 (Hierarchical Long-Horizon Planning)： 当前模型只能执行短期的动作序列。未来的高价值方向是构建 分层VLA模型：上层模型负责理解长期指令并分解为系列子目标（如“先跟到路口”、“保持20米距离”），下层模型（如本文模型）负责执行这些子目标。</li><li>物理世界迁移与适应 (Sim-to-Real Transfer)： 将该框架部署到真实无人机平台。研究重点在于如何通过 域适应 (Domain Adaptation) 或少量真实数据微调，克服模拟与现实的巨大差异，实现模型的鲁棒落地。</li></ul></section>
       <section>

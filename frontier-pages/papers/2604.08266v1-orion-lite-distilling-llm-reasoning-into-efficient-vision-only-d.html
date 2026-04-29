@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.08266v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 集成大语言模型（LLM）的视觉-语言-动作（VLA）模型在自动驾驶任务中表现最佳。</li><li>核心痛点： VLA模型中的 LLM 参数量巨大，导致推理延迟高、内存消耗大，难以实际部署。</li><li>本文切入点： 作者直觉地认为，在推理时LLM主要扮演一个 “过参数化的特征提取器” 的角色，其“推理”能力或许可以被压缩到一个小模型中。</li></ul></section><section><h3>Key Insights</h3><ul><li>蒸馏的正则化效应： 学生模型 Orion-Lite 性能超越教师模型 ORION 的关键在于联合训练。教师LLM的隐特征作为 “软标签”，与真实轨迹的 “硬标签” 结合，起到了强大的正则化作用，有效 防止了学生模型对训练数据的过拟合，而教师模型自身反而受过拟合所困。</li><li>LLM推理角色的再定义： 实验成功证明，对于反应式规划任务，LLM在推理阶段的 高级因果推理并非不可或缺。其功能可被一个极小的网络有效替代，这意味着当前VLA模型中的LLM在推理时更像一个 可被高效压缩的特征处理器。</li><li>学生模型的最优复杂度： 存在一个 “最佳解码器深度”（约4-6层）。更浅的模型无法充分学习，而更深的模型则会 过拟合到“模仿教师”这个蒸馏任务本身，反而损害了其在未知场景中的泛化驾驶能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>无教师蒸馏： 研究如何 绕过VLA教师模型，直接将LLM的通用世界知识注入到轻量纯视觉模型中，彻底摆脱对昂贵教师模型的依赖。</li><li>端到端效率优化： 将优化重点转移到 视觉编码器，研究如何对其进行压缩或设计更高效的视觉主干网络，以实现整个系统的极致效率。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.00898v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用 KL 散度正则化的强化学习，通过对参考策略进行指数级加权回归来优化策略。</li><li>核心痛点： 指数加权项在追求高回报时极易导致梯度爆炸和训练不稳定，且学习效率低下。</li><li>本文切入点： 将不稳定的指数加权目标，巧妙地分解为两个有界的Sigmoid函数加权项，从而将一个优化目标拆解为两个对立且稳定的子目标。</li></ul></section><section><h3>Key Insights</h3><ul><li>[优化稳定性]： 证明了不稳定的指数价值加权目标，可以被精确分解为两个有界的、稳定的Sigmoid价值加权子目标（一个最大化，一个最小化），从根本上解决了 RL 优化扩散模型时的训练崩溃问题。</li><li>[理论统一性]： 本文提出的二分策略组合机制，在数学形式上与生成模型中的无分类器引导 (Classifier-Free Guidance, CFG) 惊人地相似，为强化学习中的策略优化和生成模型中的可控生成建立了深刻的理论联系。</li><li>[策略可控性]： 通过线性组合正负策略的输出来生成动作，可以通过一个贪婪因子 (greediness factor) ω 在推理时灵活控制策略的风险偏好和探索程度，而无需重新训练模型。</li></ul></section><section><h3>Next Steps</h3><ul><li>[参数效率]： 研究如何用单一网络同时建模正向和负向两个策略分布，例如通过引入一个条件变量来控制策略的“方向”（追求或规避奖励），从而大幅降低参数量和训练成本。</li><li>[自适应贪婪度]： 将贪婪因子 ω 从一个固定的超参数变为一个依赖于状态 (state-dependent) 的动态变量，让智能体可以根据当前环境的风险水平自适应地调整其行为的贪婪程度。</li></ul></section>
       <section>

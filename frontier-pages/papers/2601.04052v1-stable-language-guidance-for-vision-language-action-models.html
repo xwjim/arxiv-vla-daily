@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.04052v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型通过模仿学习，将视觉和语言指令映射到机器人动作。</li><li>核心痛点： 存在 “模态坍塌” (modality collapse) 现象，即强大的视觉信号会压倒稀疏的语言信号，导致模型对指令“视而不见”，只会执行场景中最明显的动作。</li><li>本文切入点： 作者将模型的“无条件”预测（即没有语言指令时的预测）重新定义为 “视觉可供性先验” (visual affordance prior)，并认为这是一种需要被抑制的偏见，而非像传统方法那样将其作为基准。</li></ul></section><section><h3>Key Insights</h3><ul><li>[规律] 模态失衡的根源： VLA 模型的“指令盲视”并非模型结构缺陷，而是训练动态中的一种必然。密集的视觉特征（如纹理、边缘）在梯度上天然 主导 (dominate) 稀疏的语言 token，导致模型收敛到忽略语言的 “视觉捷径” 上。</li><li>[认知] “无条件”的再定义： 传统上用于提升生成质量的无分类器引导（CFG）机制，在控制任务中有了新诠释。其“无条件”部分（无文本输入）并非无用基线，而是精准刻画了机器人的 “视觉本能”或“物理可供性先验”。因此，RSS 本质上是一个 “偏见抑制器” (Bias Suppressor)，而非“质量增强器”。</li><li>[权衡] 引导的代价： 增强语言引导的 引导系数 (γ) 是一把双刃剑。适度增强可校正视觉偏见，但过度增强会使模型 对语言噪声过拟合。当指令本身有误或模糊时，过强的引导反而会放大错误，导致性能急剧下降，揭示了 鲁棒性与指令敏感度之间的内在张力。</li></ul></section><section><h3>Next Steps</h3><ul><li>[动态引导系数] 开发一种自适应机制，让模型能 根据指令的清晰度和场景的复杂度动态调整引导系数 (γ)。例如，当指令模糊时降低 γ，更多依赖视觉先验；当指令明确时提高 γ，确保指令被严格执行。</li><li>[可供性先验的结构化学习] 将 “视觉可供性先验” p(a|o) 从一个黑箱分布，解耦为一组可解释的、与任务无关的物理技能基元（如“可抓取性”、“可推动性”）。这能让模型学到更通用的世界物理模型，而不仅仅是抑制一个笼统的视觉偏见。</li></ul></section>
       <section>

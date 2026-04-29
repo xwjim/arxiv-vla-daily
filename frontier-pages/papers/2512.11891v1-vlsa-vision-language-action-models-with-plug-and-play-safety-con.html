@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11891v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的 视觉-语言-动作 (VLA) 模型通过端到端模仿学习，在多任务泛化上表现出色。</li><li>核心痛点： VLA 模型是“黑箱”，缺乏明确的物理安全保证，在真实世界部署时极易发生碰撞，而为安全重训练模型成本高昂。</li><li>本文切入点： 将任务执行与安全保证彻底解耦。不改变 VLA 模型，而是将其输出的动作视为一个“意图”，然后用一个独立的、基于经典控制理论的“安全过滤器”来修正它。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构设计]： 任务泛化（由 VLA 提供）与物理安全（由 CBF 保证）可以被有效解耦。一个即插即用的安全层，可以在不牺牲 VLA 原有能力的前提下，为其提供确定性的、有数学保证的物理安全。</li><li>[安全与成功的关系]： 在复杂环境中，安全是成功的前提。通过主动避障，安全层防止了因碰撞（如撞倒障碍物压住目标）导致的不可逆任务失败，结果是显著提升了任务成功率，而非像直觉中那样因保守而降低成功率。</li><li>[安全-策略冲突]： 安全修正会引发分布外（OOD）问题。当安全层将机器人引导至其训练数据中罕见的“安全”状态时（如为了避障而抬得很高），VLA 模型可能因分布偏移而“困惑”并失效，无法继续完成任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>研究安全引导下的策略恢复问题。当安全层导致分布偏移时，如何让 VLA 模型快速适应并重新规划有效路径，而非直接失效。</li><li>将安全约束从末端执行器扩展到整个机械臂，并处理动态障碍物。这需要更复杂的实时几何建模和对未来轨迹的预测能力。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11584v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 当前的 VLA 模型直接在完整的、长时程的演示视频上进行模仿学习。</li><li>核心痛点： 这种“一锅端”的学习方式导致模型难以学会可组合的技能，在面对新的技能或物体组合时泛化能力极差。</li><li>本文切入点： 直觉上，人类执行长任务时会分解为多个子步骤。作者借此灵感，不再让模型直接学长视频，而是先用一个符号规划器生成高层任务步骤，再用此步骤指导视频的切分。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据结构决定学习上限：</li><li>相比于在原始长视频上进行“扁平化”模仿学习，将数据预处理为与高层规划对齐的原子动作，能显著提升模型的组合泛化能力。这证明了优质、结构化的训练数据比单纯增加数据量更有效。</li><li>大模型的高层推理是关键：</li><li>更强的多模态模型（Gemini 2.5 Pro）在对齐规划、切分视频方面表现近乎完美，且对噪声（如关键帧抖动）鲁棒性强。这揭示了高质量的数据标注/处理本身就需要强大的认知与推理能力，小模型难以胜任。</li><li>规划器-学习器协同的价值：</li></ul></section><section><h3>Next Steps</h3><ul><li>无监督的原子动作发现： 能否摆脱对 BDDL 的依赖，让模型直接从大量无结构视频和语言中，自发地发现并形成一套原子动作体系？这将是迈向真正通用智能体的关键一步。</li><li>在线规划与技能适应： 将该框架从离线数据集构建转向在线闭环系统。当机器人在执行中遇到失败时，能否实时重新规划、甚至动态调整或学习新的原子技能来适应环境。</li></ul></section>
       <section>

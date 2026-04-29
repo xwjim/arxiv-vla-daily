@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.09079v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA模型依赖2D图像块或简单的像素级深度图来理解场景。</li><li>核心痛点： 这种2D表示缺乏表面朝向、几何置信度等关键3D信息，且推理过程是黑箱。</li><li>本文切入点： 直觉上，一个好的机器人智能体应该像人一样，先构建一个结构化的3D心智模型，并在此基础上进行显式的规划，而不是直接从像素到动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[3D表征的结构化完备性]： 结构化的3D空间Token（包含位置、朝向、置信度）远优于点云、纯深度或表面法线等单一几何信息。各向异性协方差（编码朝向）和不透明度（编码置信度）是实现高精度操作的关键。</li><li>[显式推理的必要性]： 强制模型在行动前生成可解释、可监督的中间空间“思考”（DA-CoT），能显著提升任务成功率。这证明了将隐式的几何理解外化为显式步骤的巨大价值。</li><li>[表征与推理的协同演化]： 优质的3D表征 (GST) 是有效空间推理 (DA-CoT) 的基础，而推理过程的监督信号反过来又能优化表征的质量。两者形成了正向反馈闭环，效果1+1&gt;2。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端或多视角GST：将GST从依赖冻结深度估计器，演进为可从多视角图像或视频流中端到端学习3D高斯场，摆脱对单一、不可靠深度图的依赖。</li><li>交互式与主动推理：将DA-CoT从单向生成升级为交互式推理。允许模型在不确定时，主动控制摄像头或执行探索动作，以更新和精炼其内部的3D高斯表征。</li></ul></section>
       <section>

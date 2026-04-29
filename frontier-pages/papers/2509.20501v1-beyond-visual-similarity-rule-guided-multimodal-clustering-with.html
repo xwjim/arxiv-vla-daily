@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.20501v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统聚类算法主要依赖输入数据的 视觉相似性 来划分簇。</li><li>核心痛点： 在专业领域，外观与功能常常不一致，导致纯视觉聚类产生无实际操作意义的结果（例如，将无人机和战斗机混为一谈）。</li><li>本文切入点： 将 领域规则 视为一种可学习的一等公民信号，而非后处理滤镜，通过修改损失函数将其直接嵌入到 表示学习过程 中。</li></ul></section><section><h3>Key Insights</h3><ul><li>表示空间的重塑：</li><li>将显式规则注入损失函数，能根本性地改变潜在空间的结构。它迫使模型从学习“看起来像”转变为学习“功能上属于一类”，成功将 F-22 和 F-117 这类外观不同但功能（隐形）相似的飞机聚合在一起。</li><li>评价指标与语义的权衡：</li><li>增加规则数量（从2个到4个）虽然能让聚类结果更符合领域逻辑，但传统的聚类指标（如轮廓系数）反而可能下降。这揭示了 数学上的簇分离度 与 领域语义上的可解释性 之间存在一种 权衡关系。</li><li>规则的双刃剑效应：</li></ul></section><section><h3>Next Steps</h3><ul><li>自动化规则验证与冲突消解： 研究如何自动检测、剪枝和解决LLM生成的规则集中的 不一致或冲突项，构建一个更鲁棒的“规则预处理器”。</li><li>动态与自适应规则加权： 开发一种机制，让模型能 根据数据或上下文动态调整不同规则的权重，而不是全局一刀切，从而在遵守核心约束和探索数据新模式之间取得更优的平衡。</li></ul></section>
       <section>

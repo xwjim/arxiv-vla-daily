@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.02287v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用文本提示 (Text Prompt) 来引导视频扩散模型，将其作为一种可交互的世界模型 (World Model)。</li><li>核心痛点： 文本描述的粒度太粗，无法捕捉和控制机器人执行精细任务（如烹饪、手术）时微妙的物理交互。</li><li>本文切入点： 直觉上，人类自身的内部感知信号（如力触觉、肌肉活动）是控制精细动作的根本。作者将这些信号直接用作视频生成的条件输入，以绕开文本描述的瓶颈。</li></ul></section><section><h3>Key Insights</h3><ul><li>[控制粒度]： 视频模拟的控制保真度，本质上取决于条件信号的粒度。文本是低保真语义信号，而多模态体感数据是高保真物理信号，后者能实现对模拟世界中物理交互的帧级精确控制。</li><li>[特征融合]： 在生成任务中，强制对齐（如对比学习）会抹杀模态间的互补信息。更优的策略是保留独特性、对齐共通性，本文的 Softmax 加权融合机制允许功能相似（可替代）的模态（如力和肌肉激活）在特征维度上共享权重，从而提升了模型的鲁棒性和对缺失模态的适应性。</li><li>[因果表征]： 一个有效的动作表征必须具备“上下文感知”和“结果导向”的因果属性。通过松弛超平面交互正则化，模型学到的动作向量在潜空间中近似与上下文状态向量正交，这使其更像一个“流”或“更新算子”，显著减少了视频生成中的时序漂移。</li></ul></section><section><h3>Next Steps</h3><ul><li>无监督感官信号推断： 如何仅从海量无标注视频中，反向推断出其背后隐含的潜在物理交互信号（Latent Physical Actions）？解决此问题将彻底打破数据瓶颈。</li><li>分层控制框架： 结合文本（提供高层语义目标，如“拿起杯子”）和多模态信号（执行底层精细动作），构建一个“目标导向”与“物理精确”相结合的分层控制生成模型。</li></ul></section>
       <section>

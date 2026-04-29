@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.18741v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流实时长视频生成采用逐帧自回归 (frame-AR) 配合窗口注意力 (window attention) 机制。</li><li>核心痛点： 窗口注意力会丢弃窗口外的历史信息，导致灾难性遗忘和场景不一致；而保留全部历史则有无法承受的内存成本。</li><li>本文切入点： 将记忆压缩和帧生成解耦为两个独立任务，用专门的模型分别处理，从而打破记忆保真度与计算成本之间的权衡。</li></ul></section><section><h3>Key Insights</h3><ul><li>[优化视角]： 标准长视频训练存在“简并解” (degenerate solution)。模型会倾向于依赖文本提示而忽略历史上下文，因为教师模型无法提供历史一致性的监督信号。通过引入空文本条件的训练，可以强制模型学习从历史中推理。</li><li>[架构视角]： “记忆”与“生成”的分离是解决长程依赖问题的有效策略。让一个模型专职做高保真记忆压缩（类似 KV 缓存的自编码器），另一个模型专职做条件生成，比单一模型试图同时兼顾两者更高效、更稳定。</li><li>[表征视角]： 视频序列的KV 缓存中存在大量冗余。一个视频块（block）的信息可以被高度压缩到仅最后一帧的 KV 缓存中，并足以近乎无损地重建整个视频块。这证明了为实现长期一致性，我们无需保留所有历史帧的完整信息。</li></ul></section><section><h3>Next Steps</h3><ul><li>为生成器设计显式的历史检索或注意力机制。使其能主动查询压缩的记忆库，动态聚焦于对当前生成最关键的遥远历史信息。</li><li>探索无教师模型 (teacher-free) 的蒸馏或自学习框架。摆脱对大型预训练教师模型的依赖，使模型能直接从数据中学习世界规则，从而成为更通用的世界模型基础。</li></ul></section>
       <section>

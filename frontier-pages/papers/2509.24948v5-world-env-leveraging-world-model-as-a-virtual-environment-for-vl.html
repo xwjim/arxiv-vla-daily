@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.24948v5">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA模型依赖模仿学习，或通过强化学习（RL）在真实/模拟环境中进行后训练。</li><li>核心痛点： 真实世界交互成本高、风险大、不可重置；传统模拟器存在Sim-to-Real Gap且开发维护困难。</li><li>本文切入点： 用数据驱动的世界模型（World Model）替代物理环境或传统模拟器，构建一个低成本、可重置、语义丰富的虚拟训练场。</li></ul></section><section><h3>Key Insights</h3><ul><li>[虚拟环境的有效性]： 一个数据驱动的世界模型，即使不完美，也能为VLA策略提供足够有效的探索和学习信号。其关键在于物理一致性和对失败的建模，而非完美的物理渲染。</li><li>[任务完成的判定]： 引入VLM作为“裁判”，不仅能提供密集的语义奖励解决稀疏奖励问题，更重要的是能动态判断任务终点，避免了策略在任务完成后继续执行冗余或破坏性动作。</li><li>[数据效率的根源]： 少量专家数据足以训练一个“局部有效”的世界模型。RL策略随后可在该模型内部进行海量、低成本的“想象”和试错，从而将少量数据的价值指数级放大，实现小样本泛化。</li></ul></section><section><h3>Next Steps</h3><ul><li>[通用世界模型]： 构建一个通用的、可组合的世界模型，使其能快速适应新任务和新对象，而无需从头训练，解决当前模型任务特定的问题。</li><li>[潜空间推演]： 探索混合模拟（Hybrid Simulation）方法。例如，在潜空间（Latent Space）中进行大部分推演，只在关键步骤渲染回像素空间，以大幅提升训练速度。</li></ul></section>
       <section>

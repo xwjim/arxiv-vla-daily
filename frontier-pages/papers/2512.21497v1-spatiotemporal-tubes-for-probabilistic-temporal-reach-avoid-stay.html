@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.21497v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 安全控制方法通常要么处理系统动力学不确定性（如传统STT），要么处理环境感知不确定性（如概率规划），但很少能同时高效解决两者。</li><li>核心痛点： 缺乏一种计算开销极低（无优化、无采样）、且能同时对未知机器人模型和不确定障碍物感知都具有鲁棒性的实时控制框架。</li><li>本文切入点： 将时空管道 (STT) 的思想从确定性避障扩展到概率性避障。通过数学变换，将“与障碍物碰撞概率低于阈值”这一概率约束，直接转化为一个确定的几何安全距离，从而让管道实时、确定地绕开风险区域。</li></ul></section><section><h3>Key Insights</h3><ul><li>解耦的艺术： 本文最核心的贡献在于将复杂的概率安全规划问题与动态控制问题彻底解耦。</li><li>STT合成器负责处理所有与环境感知不确定性相关的复杂几何计算，将概率问题转化为一个简单的移动管道。</li><li>控制器则只负责一个极其简单的任务：跟踪这个管道。这种解耦使得控制器可以做到模型无关和无优化，计算效率极高。</li><li>概率到几何的转换： 本文发现，对于高斯不确定性，可以通过非中心卡方分布的逆累积分布函数 (Inverse CDF)，将“保持 ε 的安全概率”这一抽象要求，精确地、解析地转化为“必须保持 d̂(t) 的最小物理距离”这一确定性几何约束。这是实现无采样、无优化的概率安全保证的关键。</li><li>有限时间收敛的实用价值： 放弃了先前工作中严格的“规定时间” (Prescribed-Time) 收敛，转而采用更灵活的“有限时间” (Finite-Time) 收敛。</li></ul></section><section><h3>Next Steps</h3><ul><li>分布鲁棒的STT： 摆脱对高斯分布的强依赖。研究如何为一类不确定性分布（例如，仅知晓均值和协方差）构建STT，从而实现分布鲁棒 (Distributionally Robust) 的安全保证，极大增强现实适用性。</li><li>融合复杂时序逻辑： 将简单的“到达-规避-停留”任务，扩展为支持概率信号时序逻辑 (PrSTL) 等更复杂的指令。例如，实现“以95%的概率先访问A点，再访问B点，期间始终以99%的概率避开所有障碍”，这将极大提升自主系统的任务能力。</li></ul></section>
       <section>

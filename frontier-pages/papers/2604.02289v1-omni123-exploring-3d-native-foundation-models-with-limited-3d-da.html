@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.02289v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 3D生成要么依赖2D-to-3D提升（如Score Distillation），要么直接在稀疏的3D数据上训练原生模型。</li><li>核心痛点： 2D提升方法几何一致性差；原生3D模型因数据稀缺而泛化能力和几何质量受限。</li><li>本文切入点： 作者认为2D/3D间的跨模态生成一致性本身就是一种强大的隐式结构约束，可以利用海量2D数据来“反哺”3D表示学习。</li></ul></section><section><h3>Key Insights</h3><ul><li>[约束的来源]： 跨模态生成一致性是比单一模态监督更强的隐式几何约束。强迫模型完成 T→I→3D→I 的闭环生成，能有效利用2D数据来校准3D几何，缓解3D数据不足。</li><li>[知识的迁移]： 统一2D和3D生成任务可避免任务冲突 (task interference)。通过共享参数和交错训练，模型能将从海量2D数据中学到的外观和结构先验，有效迁移到数据稀缺的3D生成任务中，实现更高效的参数利用。</li><li>[模态的统一]： 3D生成的核心瓶颈并非模型结构，而是数据表示和训练范式。将所有模态拉平到统一的1D离散Token序列，是实现真正端到端、多模态统一生成的关键前提。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应分辨率的3D Tokenizer： 研究如何动态调整Token数量以匹配不同物体的几何复杂度，突破当前固定分辨率的瓶颈。</li><li>场景级生成与物理属性建模： 将该框架从单个物体扩展到包含多个物体的复杂3D场景，并进一步将材质、光照、物理属性（如刚性、弹性）也纳入统一的Token序列中。</li></ul></section>
       <section>

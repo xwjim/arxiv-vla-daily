@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.12673v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法使用 CNN 或 ViT 提取图像特征，然后进行相似度匹配。</li><li>核心痛点： 无人机与卫星的 视角差异巨大，导致同一地点的图像特征不一致，模型难以稳定识别。</li><li>本文切入点： 直觉上，无论视角如何变化，一个场景的 宏观结构（低频） 和 局部细节（高频） 是相对稳定的。作者抓住这一点，从频域入手来提取不变特征。</li></ul></section><section><h3>Key Insights</h3><ul><li>[特征解耦]： 将视觉特征 分解为低频结构和高频细节 是解决跨视角匹配难题的有效路径。实验证明，结构信息 和 细节信息 互为补充，缺一不可，共同构成了鲁棒的场景表征。</li><li>[骨干网络选择]： 相比传统 ViT，EVA02 这类优化了全局空间关系建模的视觉基础模型，能提供更优质的底层特征，是跨视角地理定位任务 更优的特征提取器。</li><li>[多路信息融合]： 将 原始特征、低频特征、高频特征 三路并行处理并融合，比单一特征或两两组合，能产生 信息更丰富、鲁棒性更强 的最终表征，有效抵抗视角变化带来的干扰。</li></ul></section><section><h3>Next Steps</h3><ul><li>轻量化频域模块： 如何设计一个 更高效、参数更少 的频域分解模块，替代现有复杂的 MFB 结构，以实现 端侧实时部署？</li><li>时空不变性探索： 当前模型只关注空间视角变化。如何将 频域分解思想 扩展到处理 时间（如季节、光照）变化，提取时空不变特征，实现全天候、全季节的定位？</li></ul></section>
       <section>

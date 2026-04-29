@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.14514v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 人类通过构建一个简化的、忽略无关细节的世界表征 (reduced representation) 来进行心理模拟。</li><li>核心痛点： 确定哪个简化版本最优，其计算成本甚至超过了直接模拟完整世界，这构成了一个计算悖论。</li><li>本文切入点： 作者的直觉是，表征的构建并非一个独立于模拟的预处理步骤，而是与模拟过程紧密交织、迭代发生的。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征构建的驱动力]： 人的心智模型构建并非由全局最优效用 (global utility) 驱动，而是由即时模拟需求 (immediate simulation need) 驱动。模型只编码对「当前这一步」模拟有用的信息，而非对「最终最优解」有用的信息。</li><li>[表征的经济性]： JIT (Just-in-Time) 模型在规划和物理推理任务中，平均编码的物体数量显著少于预先优化表征的 VGC (Value Guided Construal) 模型，且不损失任务性能。这揭示了「按需加载」比「预先优化」在认知资源上更经济。</li><li>[认知机制的通用性]： JIT 机制成功解释了路径规划 (planning) 和物理推理 (physical reasoning) 这两个不同认知领域的行为数据。这表明，模拟与表征构建的交织可能是一种跨领域的、通用的认知策略，而非特定于某个任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合先验知识： 如何将 JIT 的即时构建与 VGC 的预先优化相结合？在熟悉环境中，人类会利用长期记忆预先加载关键地标，这两种机制如何协同工作是一个未解命题。</li><li>扩展到抽象领域： JIT 机制本质上是一种“局部搜索-增量构建”的策略，能否将其应用于解释更抽象的认知任务，如逻辑推理中的子问题构建或语义记忆中的信息检索？</li></ul></section>
       <section>

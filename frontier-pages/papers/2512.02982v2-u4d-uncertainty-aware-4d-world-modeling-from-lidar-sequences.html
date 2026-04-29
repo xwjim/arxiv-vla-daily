@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.02982v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的生成模型平等地、统一地处理LiDAR场景中的所有空间区域。</li><li>核心痛点： “一锅烩”式的生成导致在几何复杂或语义模糊的区域（如细杆、远处物体）产生伪影和时序抖动。</li><li>本文切入点： 模仿人类认知，认为应先解决模糊部分。作者提出先生成高不确定性区域作为“结构锚点”，再以此为基础构建完整场景，即“从难到易”的生成策略。</li></ul></section><section><h3>Key Insights</h3><ul><li>[生成策略]： 传统“一锅烩”的生成方式在复杂区域效果不佳。实验验证了“从难到易”的生成策略是有效的：先集中资源攻克高不确定性的关键结构，再以此为“骨架”生成其余部分，能显著提升整体场景的几何保真度和结构合理性。</li><li>[特征融合]： 在扩散模型的不同层级，空间几何重建和时间动态建模的重要性是变化的。MoST模块的激活权重分析表明，模型在浅层和深层更关注空间特征（保证几何细节），而在中间层更关注时间特征（建模运动），实现了高效的时空解耦与动态融合。</li><li>[不确定性度量]： 将语义熵 (Shannon Entropy) 作为不确定性的度量，能有效定位场景中结构模糊或语义困难的区域。以此为先验引导生成，比基于置信度 (confidence) 或随机采样的方法更能显著提升生成质量和下游任务（如分割）的性能。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“从难到易”到“迭代式精炼”： 摒弃固定的两阶段流程，探索一种迭代式优化框架。模型可以先生成一个粗略场景，然后自主识别其中的不确定性区域，并循环地、有针对性地进行局部精炼。</li><li>统一不确定性估计与生成： 将不确定性估计与场景生成融合到一个端到端的模型中。让模型在生成过程中自主学习“何处不确定”，并动态地将生成能力聚焦于这些区域，从而摆脱对外部预训练分割模型的依赖。</li></ul></section>
       <section>

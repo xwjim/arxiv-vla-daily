@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.07648v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的视觉-语言-动作 (VLA) 模型使用一个单一、庞大的解码器来处理所有任务。</li><li>核心痛点： 单一解码器在学习多种技能时会产生内部干扰，导致灾难性遗忘，难以扩展到新技能和执行长时程任务。</li><li>本文切入点： 直觉上，不同技能（如“抓取”和“开门”）应由不同的“脑区”负责。作者将此思想物化，用混合专家模型 (MoE) 为每个原子技能分配一个专属的专家网络。</li></ul></section><section><h3>Key Insights</h3><ul><li>[技能专业化]： 将不同技能（如“推”和“抓”）分配给独立的专家网络，能有效避免混合训练时产生的技能间干扰。这从根本上解决了传统单一模型在多任务学习中的性能瓶颈。</li><li>[模块化知识扩展]： 学习新技能时，只需冻结旧专家，添加新的专家模块并只训练路由器识别它。这种“即插即用”的架构，从机制上根除了灾难性遗忘，实现了高效的机器人终身学习。</li><li>[语义路由的有效性]： MoE 成功的关键在于路由的粒度。路由决策基于高层、语义化的原子技能抽象（如 pick），而非底层的动作令牌或去噪步长，能生成更连贯、任务导向的动作序列。</li></ul></section><section><h3>Next Steps</h3><ul><li>结合强化学习 (RL)： 将预训练的技能专家库作为强化学习的动作原语 (Action Primitives)。这有望在少样本甚至零样本下泛化到新任务，摆脱对大量示教数据的依赖。</li><li>自动化技能发现： 开发无监督方法，让模型能从海量无标注的机器人数据中自动发现并构建原子技能库，而非依赖人类预先定义。</li></ul></section>
       <section>

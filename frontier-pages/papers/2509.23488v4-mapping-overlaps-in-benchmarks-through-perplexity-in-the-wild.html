@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.23488v4">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过语义相似度（问题文本是否相似）或性能相关性（模型在不同榜单上排名是否一致）来衡量基准的重叠。</li><li>核心痛点： 现有方法存在严重偏差。性能相关性极易被与评测能力无关的因素（如问题格式、同系列题库）污染，导致虚假的高相关性。</li><li>本文切入点： 直觉上，模型解决评测问题的能力源于其在“野生”训练语料中见过的模式。因此，模型对某些特定词元 (token) 的困惑度 (perplexity)，可以作为其能力“指纹”，反向预测它在某个评测上的表现。</li></ul></section><section><h3>Key Insights</h3><ul><li>[评估方法论]： 性能相关性是衡量基准重叠的“劣质”指标。它被问题格式、题库家族等评测正交因素 (benchmark-orthogonal factors) 严重干扰，而基准签名能有效免疫这些噪声，揭示更本质的能力关联。</li><li>[LLM 能力图谱]： LLM 的各项能力高度纠缠。逻辑、数学、语言、指令遵循等形成一个紧密的能力簇，而代码能力是最孤立的核心能力，仅与“检测缺失信息”的能力有中度关联。</li><li>[模型认知 vs 人类认知]： LLM “解决”任务的机制可能与人类认知迥异。对于抽象推理任务（如逻辑），其签名在语义上与任务本身毫无关联；只有在知识型任务中，签名内容才与任务领域语义对齐。这表明模型更多依赖统计代理线索而非真正的抽象理解。</li></ul></section><section><h3>Next Steps</h3><ul><li>[基准代数 (Benchmark Algebra)]：利用签名进行能力“运算”。例如，能否通过“减去”一个基准的签名来创造一个更纯粹、更少混杂能力的评测，或通过“组合”签名来设计针对特定能力交叉点的新评测？</li><li>[多模态签名 (Multimodal Signatures)]：将此概念扩展到多模态领域。能否用模型对图像块 (patch) 的“困惑度”或注意力分数来构建签名，从而绘制多模态评测基准的能力图谱？</li></ul></section>
       <section>

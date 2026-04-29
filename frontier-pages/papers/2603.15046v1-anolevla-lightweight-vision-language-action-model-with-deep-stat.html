@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.15046v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流机器人VLA模型普遍依赖大型Transformer作为多模态序列处理的核心。</li><li>核心痛点： Transformer的二次方计算复杂度导致模型在长序列（视觉+语言+状态）下推理速度慢、计算资源消耗大，难以部署到实体机器人。</li><li>本文切入点： 直觉上，可以用计算复杂度为线性的深度状态空间模型 (SSM/Mamba) 来替代Transformer，在不牺牲序列建模能力的前提下，大幅提升推理效率。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构范式]： 状态空间模型 (SSM/Mamba) 不仅是Transformer的高效替代品，其循环更新的机制可能更适合机器人控制这类时序决策任务，在资源受限下甚至能超越更大规模的Transformer模型。</li><li>[训练物理]： 显式地对动作的二阶导数（加速度）进行监督是提升物理世界中机器人任务成功率的关键。这能有效抑制轨迹的抖动，尤其在需要精细、连续接触的任务（如开抽屉）中优势明显。</li><li>[数据效率]： 在小样本（每个任务仅50个示例）的真实世界数据上，轻量级模型 (AnoleVLA) 的样本效率和泛化能力显著优于经过大规模预训练的重型模型 (π0.5)。这揭示了模型规模与数据规模的匹配至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>将SSM的高效序列处理能力与显式的场景图或空间关系模块相结合，解决物体定位和空间理解的瓶颈。</li><li>探索层级化架构：用一个高层的大语言模型（LLM）进行任务规划和分解，然后调用轻量级的AnoleVLA（SSM-based）作为低层运动策略执行器，兼顾规划能力与执行效率。</li></ul></section>
       <section>

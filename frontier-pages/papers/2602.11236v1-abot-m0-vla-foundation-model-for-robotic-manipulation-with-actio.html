@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.11236v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的视觉-语言-动作（VLA）模型通常在单一或碎片化的数据集上训练，并采用扩散模型预测噪声来生成动作。</li><li>核心痛点： 数据碎片化、表示不一，导致模型泛化能力受限；同时，预测噪声的范式学习效率低且稳定性差。</li><li>本文切入点： 提出「动作流形假说」（Action Manifold Hypothesis），即有效动作存在于一个低维、平滑的流形上。因此，模型应直接预测干净的动作本身，而非学习去噪。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作学习范式]： 验证了动作流形假说。直接预测干净动作（a-pred）比预测噪声（epsilon-pred）在学习上更高效、更稳定，尤其在长序列或高维动作空间下优势更明显。</li><li>[数据驱动泛化]： 系统性的数据清洗、标准化（如统一为delta-action）和重采样，是成功整合多个孤立公开数据集的关键。这个统一的数据基础是实现跨机器人形态（cross-embodiment）泛化的核心驱动力。</li><li>[多模态特征融合]： 经过VLA预训练后，VLM的最后一层特征已包含高度抽象的动作相关信息，足以驱动下游策略。通过交叉注意力机制额外注入来自独立3D模块的几何先验，能与语义特征形成正交互补，显著提升精度。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环数据引擎： 构建一个自进化的数据收集与增强闭环。利用模型在真实世界中的失败案例，自动生成新的训练数据或增强指令，实现数据与策略的协同进化。</li><li>统一多模态感知-动作空间： 将力、触觉等非视觉模态信息整合进模型，探索一个统一的动作表示，以支持需要主动物理交互（如试探、推挤）的更复杂任务。</li></ul></section>
       <section>

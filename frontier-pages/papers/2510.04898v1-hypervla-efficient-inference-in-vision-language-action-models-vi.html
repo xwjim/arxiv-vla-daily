@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.04898v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用庞大、单一的 VLA (Vision-Language-Action) 模型来学习通用的机器人策略。</li><li>核心痛点： 现有 VLA 模型参数量巨大 (数十亿)，导致推理成本极高，速度缓慢，难以部署于需要高频控制的现实任务。</li><li>本文切入点： 任务执行时，并不需要整个通用大模型。作者的直觉是，可以用一个超网络 (Hypernetwork) 来“按需打印”一个紧凑、高效的专家小模型，只在任务开始时生成一次，从而解耦知识存储与任务执行。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构解耦]： VLA 模型的能力可以被成功解耦。“知道如何生成策略”的通用知识（存储在超网络中）和“如何执行特定任务”的专用知识（编码在生成的小网络中）可以分离，且分离后性能不下降。</li><li>[优化动力学]： 超网络的训练极其不稳定。本文发现，其参数更新与标准网络不同，会受到上下文嵌入尺度的影响。通过对上下文嵌入进行特定尺度的归一化 (除以维度的平方根)，可以使生成的子网络参数更新动态近似于常规训练，这是成功训练大型超网络的一个关键技巧。</li><li>[输出策略]： 在超网络架构下，复杂的自回归或扩散式动作头并非最优。一个简单的线性头配合 MSE 损失，不仅将推理速度提升了数量级，性能也更好，这表明当模型结构发生根本变化时，需要重新审视输出端的策略设计。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态策略生成： 研究分层或动态的超网络。例如，一个高层 HN 负责生成子任务序列，然后为每个子任务动态生成一个小型策略，从而解决长时程、多阶段的复杂任务。</li><li>与 MoE 结合： 将超网络本身设计为稀疏激活的专家混合 (MoE) 架构。这可以在保持超网络巨大知识容量的同时，进一步降低训练和单次生成策略的计算成本，实现效率的二次方提升。</li></ul></section>
       <section>

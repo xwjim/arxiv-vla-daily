@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.02787v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA（视觉-语言-动作）模型主要在成功案例上训练，缺乏处理失败的能力；现有失败数据集多依赖模拟器生成。</li><li>核心痛点： 模拟数据与现实存在鸿沟 (Sim-to-Real Gap)，而标注真实世界的失败数据成本极高、效率低下。</li><li>本文切入点： 直觉上，人类用简单的涂鸦（视觉符号）比写长篇文字更容易指出错误。作者利用这一点，让标注者通过绘制符号来指导 VLM 半自动生成高质量的失败分析数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[标注范式]： 视觉符号是一种极高效的中间表征。它成功地将人类低成本的直观输入（画图）与 VLM 生成高信息量文本（失败原因、纠正策略）的能力连接起来，解决了真实世界失败数据难以大规模获取的瓶颈。</li><li>[模型能力]： 经过专门训练，VLM 不仅能“看懂”失败，更能“画出”纠正方案。这证明了模型可以从诊断者（输出文本）进化为指导者（输出可执行的视觉指令），其指导信息比纯文本更易于下游机器人策略的理解和执行。</li><li>[系统闭环]： 将该诊断模型（ViFailback-8B）作为外部“监督者”集成到机器人系统中，能显著提升 VLA 策略在真实世界的任务成功率（+22.2%）。这验证了“诊断-纠正”闭环对于构建鲁棒自主机器人的现实价值。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端自我纠正： 将诊断和纠正能力内化到 VLA 模型自身。研究如何构建一个单一模型，使其在规划动作时就能预判、检测并主动调整自身错误，实现真正的一体化自我反思与修正。</li><li>从纠正中在线学习： 当前系统只是“一次性”纠正失败。更高价值的方向是让 VLA 模型能根据 ViFailback 模型的反馈进行在线策略更新，从而“吃一堑，长一智”，在后续任务中减少犯同类错误的概率。</li></ul></section>
       <section>

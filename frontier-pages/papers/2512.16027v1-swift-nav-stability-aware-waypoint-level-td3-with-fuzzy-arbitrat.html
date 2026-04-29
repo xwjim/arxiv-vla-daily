@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.16027v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 普遍使用深度强化学习（如 TD3）进行端到端的无人机导航控制。</li><li>核心痛点： 纯强化学习方法存在探索不稳定、样本效率低的问题；而混合系统则常因模式切换过于频繁（振荡）而失效。</li><li>本文切入点： 作者的直觉是 RL 不应一直在线。他们引入了一个仅在危险时激活 RL 的混合框架，并通过带滞回和防抖的模糊逻辑来“干净利落”地管理模式切换，从根源上解决不稳定性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[规划与控制解耦]： 让强化学习负责航点级规划（去哪儿），而非底层电机控制（怎么去），能显著提升学习稳定性和最终的路径平滑度。这种解耦有效过滤了执行器延迟对策略学习的干扰。</li><li>[混合控制稳定性]： 混合系统的关键不在于“混合”，而在于“切换”的稳定性。通过引入模糊逻辑评估风险，并用滞回 (Hysteresis) 和防抖 (Debounce) 机制来管理模式切换，可以从根本上抑制系统振荡，实现鲁棒导航。</li><li>[高效探索机制]： 在航点几何空间（而非低维动作空间）进行探索，并结合优先经验回放 (PER)，能极大提升样本效率。这使得智能体能更快地放弃无效的“抖动”动作，学习到具有宏观方向感的避障策略。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态环境适应性： 将该框架扩展到动态环境。研究模糊仲裁机制如何快速响应移动障碍物，以及 TD3 策略如何生成预测性的避让航点。</li><li>多模态传感器融合： 将视觉信息融入模糊安全仲裁层。利用摄像头数据识别障碍物类型（如行人 vs. 墙壁），为安全分数赋予更丰富的语义权重，做出更智能的决策。</li></ul></section>
       <section>

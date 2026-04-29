@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.02722v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型在低阶连续控制（如驾驶）中很有效，但高阶任务规划依赖于无感官基础的 LLM 或低效的像素级预测。</li><li>核心痛点： 现有高阶规划方法要么缺乏对物理世界的真实感知（LLM Prompting），要么计算成本极高且充满无关细节（像素生成模型）。</li><li>本文切入点： 直觉上，语言本身就是一种高效、抽象、可解释的世界状态表征。作者以此为核心，直接在语言空间中学习世界模型，绕开了像素生成的无底洞。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征范式]： 语言是比像素或隐空间更高效、更具解释性的高阶世界模型表征。 它成功地将感官输入（视觉）与抽象推理（语言）连接起来，实现了对复杂任务动态的有效建模。</li><li>[规划模式]： 基于世界模型推演和成本最小化的“反思式”规划 (System 2) 显著优于“反应式”的自回归解码 (System 1)。 这证明了在模型内部进行“思想实验”（mental simulation）和选择最优路径的价值，使智能体从“模仿”走向“思考”。</li><li>[价值学习]： 通过自监督对比学习（好/坏/乱序），可以有效训练一个“评判家”模型来度量规划的语义成本。 这解决了在没有明确奖励信号的大规模无标签视频数据上进行价值判断的难题，是实现 System-2 规划的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环执行与在线重规划： 将 VLWM 整合到一个执行循环中。智能体执行规划的第一步，观察环境反馈，并利用 VLWM 更新其对世界状态的信念，然后在线调整或重新生成后续规划。</li><li>端到端的世界模型学习： 探索绕过当前繁琐数据流水线的端到端训练方法。例如，能否设计一种机制，让模型直接从原始视频和稀疏的文本描述中，隐式地学习到动作与世界状态变化之间的关系，从而统一整个学习过程。</li></ul></section>
       <section>

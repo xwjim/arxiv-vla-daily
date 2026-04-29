@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.21592v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用视频生成模型预测像素，或用回归模型预测少量关键点的单一轨迹。</li><li>核心痛点： 视频生成模型在像素渲染上浪费了大量模型容量，导致物理一致性差；回归模型无法处理未来的不确定性（即多种可能性）。</li><li>本文切入点： 将运动预测视为一个生成问题，但生成的不是像素，而是运动本身——点的轨迹场。这既能捕捉不确定性，又摆脱了像素生成的负担。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征优越性]： 预测运动的最佳表征是轨迹，而非像素。直接生成轨迹能让模型专注于动力学本身，避免了在光照、纹理等无关细节上消耗资源，从而获得更强的物理一致性（如物体刚性）。</li><li>[范式转换]： 对于不确定的物理未来，生成式建模远优于回归式建模。通过对可能结果的分布进行采样，模型可以提供多样且合理的未来预测，而不是给出一个错误的“平均”答案。</li><li>[全局视角]： 预测全场景的稠密轨迹网格比只预测少数几个“活跃”点更有效。这使得模型能够推理全局物体间的相互作用，即使它们初始位置相距很远。</li></ul></section><section><h3>Next Steps</h3><ul><li>从 2D 轨迹到 3D 物理场： 将预测目标从 2D 轨迹提升到 3D 速度场、力场或显式物理参数（如质量、摩擦系数），构建更本质的“世界模型”。</li><li>闭环控制验证： 将该运动预测模块集成到机器人决策与控制的闭环系统中。检验其对未来预测的能力是否能实际提升机器人在动态环境中的任务成功率。</li></ul></section>
       <section>

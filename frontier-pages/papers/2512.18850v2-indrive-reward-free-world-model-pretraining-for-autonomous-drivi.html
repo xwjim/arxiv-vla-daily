@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.18850v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶的强化学习严重依赖于 人工设计的、面向特定任务的奖励函数。</li><li>核心痛点： 奖励函数设计 困难且脆弱，导致模型 泛化能力差，难以适应新城市或新路况（分布偏移）。</li><li>本文切入点： 直觉上，智能体对世界 认知的不确定性 本身就是最好的学习信号。作者利用一个模型集成(ensemble)对未来的预测分歧来量化这种不确定性，并将其作为内在奖励，驱动智能体探索未知。</li></ul></section><section><h3>Key Insights</h3><ul><li>探索信号的质量： 模型分歧 (Disagreement) 是一种比 预测误差 (ICM/RND) 更高质量的内在探索信号。它能引导智能体关注真正有结构性价值的未知（如新路口），而非随机噪声，从而学到 更具泛化性的世界表征。</li><li>预训练的价值： 彻底的无奖励预训练 能够将 “世界如何运转”的通用知识 与 “具体任务怎么做”的特定技能 完全解耦。这使得预训练模型成为一个可复用的基础，在面对新环境（零样本迁移）和新任务（少样本微调）时，展现出极强的 鲁棒性 和 数据效率。</li><li>对安全任务的增益： 基于分歧的探索促使智能体在预训练阶段更多地暴露于模型认知不足的 “边缘场景” (edge cases)。这使得后续针对 碰撞规避 (Collision Avoidance) 等安全攸关任务进行微调时，模型能以极少数据快速掌握稳健策略，安全性能的提升远超其他方法。</li></ul></section><section><h3>Next Steps</h3><ul><li>[迈向真实世界] 如何将此框架应用于 真实世界数据 和 连续控制？这需要解决在物理世界中进行 安全探索 (Safe Exploration) 的核心难题。</li><li>[分层决策] 如何将这个强大的 低级世界模型 与一个处理导航指令的 高级规划器 相结合？这将是实现从A点到B点、真正端到端自动驾驶的关键。</li></ul></section>
       <section>

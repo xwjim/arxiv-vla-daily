@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.09430v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型通过在原子任务（如“打开盖子”）数据集上微调，来学习执行单个实验操作。</li><li>核心痛点： 模型能完成单个任务，但将这些任务串联成复合长任务时，因缺乏任务间的过渡动作而失败（即分布失配问题）。</li><li>本文切入点： 直觉上，VLA 模型本身的能力足够，问题仅出在“衔接”上。因此，无需重新训练 VLA，仅在推理时用 LLM 智能体动态生成缺失的过渡动作代码，即可“修复”长任务执行流。</li></ul></section><section><h3>Key Insights</h3><ul><li>[VLA 的长任务失败模式]： VLA 模型在长任务上的失败，并非源于原子技能的缺失，而是典型的“分布外”问题。即，一个任务的结束状态，对于下一个任务来说是未曾见过的、异常的初始状态，导致策略失效。</li><li>[模块化智能 &gt; 端到端蛮力]： 用 LLM 智能体作为“外部插件”来处理高阶逻辑（任务过渡），比强行让 VLA 模型通过海量数据学习所有过渡情况，更具数据和计算效率。这是一种解耦复杂任务的有效范式。</li><li>[代码作为中间表示]： 让 LLM 生成代码而非直接生成动作，是一种更可靠、更安全的“思想链”。代码作为一种结构化的中间表示，易于加入安全约束和模板，有效降低了 LLM 产生“幻觉”动作的风险。</li></ul></section><section><h3>Next Steps</h3><ul><li>[消除延迟]： 使用本地化、轻量级的代码生成模型替代通用 LLM API，以消除网络延迟，实现实时过渡动作生成。</li><li>[自适应调用]： 探索 VLA 模型与 LLM 智能体的深度融合，例如让 VLA 模型学会自主判断何时需要调用外部智能体来规划过渡路径，实现更智能的控制。</li></ul></section>
       <section>

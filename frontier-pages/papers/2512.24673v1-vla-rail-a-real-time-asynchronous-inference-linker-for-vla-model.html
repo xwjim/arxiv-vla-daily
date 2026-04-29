@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.24673v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA模型通过预测动作块 (action chunk) 来平衡大模型推理延迟与机器人实时控制。</li><li>核心痛点： 模型输出的动作块之间存在不连续和抖动，导致机器人执行时出现卡顿、停顿，限制了速度和成功率。</li><li>本文切入点： 将VLA模型的输出视为需要后处理的“原始意图”，而非直接执行的指令。通过一个异步解耦的中间件，在数学上对动作序列进行平滑和无缝拼接。</li></ul></section><section><h3>Key Insights</h3><ul><li>解耦的价值： VLA模型的输出是一种高层意图，而非底层控制信号。通过解耦推理与控制并引入后处理中间件，可在不重训练模型的情况下，大幅提升机器人运动的平滑度、速度和任务成功率。</li><li>抖动的二元性： 机器人运动抖动源于两个独立问题：1) 块内噪声（来自数据和模型）；2) 块间不连续（来自异步时序错位和独立预测）。必须采用两阶段策略（先平滑、后融合）才能彻底解决。</li><li>速度的再定义： 机器人执行速度不受限于模型的推理频率。将离散的动作序列转化为连续的数学函数后，可通过调整插值和控制频率，将执行速度提升至硬件极限，实现超人类遥操作的速度。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应过渡控制： 研究动态调整融合时间的策略。例如，根据机器人当前速度、任务紧迫性或模型输出的置信度，自适应地决定过渡的快慢。</li><li>安全感知的融合： 将模型预测控制（MPC）集成到融合模块中。在生成过渡轨迹时，不仅追求平滑，更主动优化以满足碰撞规避、力矩限制等安全约束。</li></ul></section>
       <section>

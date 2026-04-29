@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.01465v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人策略（VLA模型）严重依赖当前观测或一小段稠密的连续历史帧。</li><li>核心痛点： 这种“近视眼”方法在长时程任务中会失效，因为决定性瞬间可能早已过去，导致非马尔可夫状态混淆。</li><li>本文切入点： 直觉上，任务全程只有少数几个瞬间是真正重要的。与其处理整段冗余视频，不如只“记住”这些关键转折点。</li></ul></section><section><h3>Key Insights</h3><ul><li>记忆表征效率： 对于长时程任务，记忆的质量远比数量重要。一个由稀疏、语义相关的关键帧构成的历史，其效果远超一段稠密但均匀采样的历史，后者要么错过关键瞬时事件，要么无法覆盖足够长的时间。</li><li>感知与决策解耦： 将 “何时记忆”（关键帧选择） 与 “如何决策”（动作生成） 分离是成功的关键。一个专门的、轻量级的KSM模块可以高效地为大型VLA策略模型“喂送”高质量的上下文，无需改造VLA主干。</li><li>非马尔可夫任务的本质： 现有机器人基准普遍存在 “马尔可夫偏见”，无法有效评估模型的长期记忆。真正的挑战在于处理 “状态混淆” (State Aliasing)，即当前观测无法区分不同的历史路径，本文为此构建了更有效的试金石。</li></ul></section><section><h3>Next Steps</h3><ul><li>记忆压缩： 研究如何将视觉关键帧压缩成更抽象的潜在表征或离散语义Token，实现从“记住图像”到“记住概念”的跃迁。</li><li>动态记忆管理： 探索更智能的记忆更新机制，如主动遗忘过时或不重要的关键帧，或根据任务进展动态调整关键帧的选择标准。</li></ul></section>
       <section>

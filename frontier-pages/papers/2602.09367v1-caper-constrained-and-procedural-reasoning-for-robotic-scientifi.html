@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.09367v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用 端到端视觉-语言-动作 (VLA) 模型，试图将感知、推理和控制融合在一个模型中。</li><li>核心痛点： 端到端模型难以学习 严格的实验流程 (protocol-sensitive)。在科学实验中，错误通常是 不可逆 的，且长时序任务的 数据效率极低。</li><li>本文切入点： 放弃端到端幻想，将任务 责任分离 (responsibility-separated)。将 符号逻辑推理、多模态感知接地 和 底层物理控制 彻底解耦，让各模块处理其最擅长的不确定性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[责任分离原则]： 将 符号逻辑推理 (LLM 负责) 与 物理世界接地 (VLM+RL 负责) 彻底分离，是解决 协议敏感型 任务的关键。这种解耦能防止底层执行错误污染高层逻辑规划，保证了流程的正确性。</li><li>[符号规划的价值]： 纯语言空间的 任务规划 屏蔽了视觉感知的不确定性，能生成 全局最优 且 逻辑自洽 的动作序列。这远比让 VLA 在潜空间中隐式学习复杂流程要可靠和可解释。</li><li>[组合泛化能力]： 模块化设计带来了强大的 组合泛化 能力。只需学习少数 动作原语 (如 move, grasp)，就能通过符号规划组合出无穷多的长时序任务，极大提升了 数据效率 和对新任务的适应性。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建闭环反馈与动态重规划： 研究如何让底层执行的 失败信号 (如碰撞、抓取滑落) 反馈给高层规划器，触发实时的 任务重规划或修正，将开环流程变为闭环智能体。</li><li>动作原语的自动发现与学习： 探索如何从少量演示或无监督交互中 自动学习新的动作原语，打破预定义技能集的限制，使机器人能 持续扩展其能力边界 以适应未知实验。</li></ul></section>
       <section>

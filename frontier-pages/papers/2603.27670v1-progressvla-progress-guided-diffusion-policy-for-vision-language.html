@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.27670v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流 VLA 模型根据视觉和语言指令生成动作，但缺乏对任务进度的明确感知。</li><li>核心痛点： 模型无法判断一个动作是否真的在推进任务，导致在长任务中动作冗余、效率低下，且难以判断何时结束。</li><li>本文切入点： 直觉上，如果能量化任务进度（0到1），并将其变成可微分的信号，就能在生成动作的每一步都朝着“进度最大化”的方向优化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[预训练的价值]： 任务进度的“体感”是可以泛化的。在大规模数据集上预训练的进度估计器，比从零训练的更鲁棒，能零样本泛化到新场景（光照变化、新物体），为有效的引导提供了可靠基础。</li><li>[显式引导的有效性]： “边想边走”优于“一步到位”。在动作生成的每一步都用未来的进度进行引导，能显著减少无效和冗余动作，使机器人的行为更具目标导向性和执行效率。</li><li>[进度标签的代理]： 任务进度可以被“无监督”地学习。在缺乏显式进度标注时，使用专家演示中的归一化时间步 (t/T) 作为伪标签是简单且有效的，这隐含了一个假设：专家数据是高效且单调前进的。</li></ul></section><section><h3>Next Steps</h3><ul><li>[更通用的进度表征] 摆脱对 t/T 代理的依赖，探索从多模态（如视频、语言描述的子目标）对比学习或人类偏好反馈中学习进度信号。</li><li>[分层规划与进度引导] 将本文的低层动作引导与一个高层子目标规划器相结合。用高层规划器设定阶段性“检查点”，用进度引导模型高效地达成这些子目标。</li></ul></section>
       <section>

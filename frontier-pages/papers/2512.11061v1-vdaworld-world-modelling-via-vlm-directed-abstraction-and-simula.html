@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11061v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流世界模型通过生成视频来预测未来，即直接预测像素。</li><li>核心痛点： 视频生成模型是黑箱，常违反物理逻辑（如物体数量变化），且无法交互。</li><li>本文切入点： 与其预测像素，不如预测一个能生成像素的「程序」。作者直觉地认为，VLM 可以扮演一个智能「导演」，将视觉场景拆解成结构化表示，再调用合适的模拟器来推演。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转变]： 从「预测像素」到「预测程序」。显式地将场景抽象为结构化数据（如物体、属性），再用物理引擎模拟，比端到端生成视频能产生更符合物理和逻辑的结果。这从根本上解决了视频模型中物体无故出现/消失等问题。</li><li>[VLM 的新能力]： VLM 不仅是描述者，更是推理和规划者。它能从静态图像中推断出潜在的动态信息（如“这个球即将滚动”），并自主选择最合适的物理模型（刚体 vs. 流体），展现出一种“直觉物理”的能力。</li><li>[交互性的本质]： 生成结构化的程序是实现世界模型可解释性和可交互性的关键。用户可以直接修改代码（如改变重力、物体质量、游戏规则），探索视频模型无法实现的“反事实”推演，这才是真正的“世界模型”。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“选择”模拟器到“学习”模拟器： VLM 能否不止是调用现有引擎，而是根据观测数据，自动生成或微调模拟器的核心参数乃至物理规则，从而发现新的物理规律？</li><li>闭环自优化： 将模拟结果与真实世界视频进行对比，利用产生的差异作为反馈信号，反向优化上游的感知模块和 VLM 的决策逻辑，形成一个能自我迭代和完善的闭环系统。</li></ul></section>
       <section>

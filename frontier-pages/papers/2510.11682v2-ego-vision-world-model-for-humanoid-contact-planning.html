@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.11682v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统机器人接触规划依赖 优化方法 或 在线强化学习。</li><li>核心痛点： 优化方法 计算复杂 且对模型精度敏感；在线强化学习 样本效率极低，且难以处理 多任务。</li><li>本文切入点： 利用 无专家示例的离线数据，学习一个在 潜空间 中预测未来的 世界模型，并用一个 代理价值函数 指导规划，从而绕开在线交互和精确物理建模。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据范式]： 离线世界模型 范式在机器人接触规划任务中，样本效率 远超主流的 在线强化学习 (PPO)。它成功解耦了 数据收集 与 策略学习，且天然支持 多任务 学习。</li><li>[规划目标]： 在规划中，直接最大化 单步价值 (贪心) 或预测 未来奖励 是次优的。本文提出的 短期多步价值平均 (J_N) 是一种更鲁棒的目标函数，它在 偏差-方差 之间取得了有效平衡。</li><li>[表征学习]： 世界模型学到的 潜空间 并非简单的压缩，而是形成了 任务相关的结构化表征。它能区分不同任务（如t-SNE所示），并捕捉到 核心物理直觉（如物体运动轨迹），这是实现 多任务泛化 的基础。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端联合训练] 探索将高层世界模型与底层控制器进行 端到端联合优化，打破当前分层设计的瓶颈，可能释放更强的动态能力。</li><li>[在线自适应与终身学习] 研究如何让世界模型在 部署后持续在线更新。利用新收集的交互数据，在不遗忘旧知识的前提下，自适应地改进模型，实现终身学习。</li></ul></section>
       <section>

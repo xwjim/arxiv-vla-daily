@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.02473v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视频世界模型依赖有限的、最近的几个历史帧来预测未来。</li><li>核心痛点： 受限于计算成本，模型的上下文窗口极短，导致其快速遗忘远期历史，在长时间生成中出现空间不一致（如物体消失或错位）。</li><li>本文切入点： 作者的直觉是，并非所有历史都同等重要。他们提出无需暴力扩展上下文，而是通过智能压缩与检索，将更长时间、更关键的空间信息“塞”进有限的窗口。</li></ul></section><section><h3>Key Insights</h3><ul><li>协同效应： 轨迹打包和记忆检索两者缺一不可。单独使用任一模块效果有限，但二者结合才能实现性能的跃升。这揭示了高效长时记忆需要“概览式压缩”和“焦点式回忆”的协同工作。</li><li>信息密度 &gt; 上下文长度： WorldPack 用更短的有效上下文长度（2.84 帧的 Token 量）处理了更长的物理轨迹（19 帧），性能却远超使用更长上下文（4 帧）的基线模型。这证明了上下文的信息密度远比其原始长度更重要。</li><li>空间推理的本质： 在长时程导航任务（如 ABCA 环路）中，模型性能的决定性因素是记忆检索模块。这表明，真正的空间推理能力不依赖于被动的连续记忆，而依赖于主动根据当前位姿、按需索取相关历史场景的能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>记忆与决策的闭环： 将 WorldPack 作为世界模型，与强化学习智能体或规划算法结合。验证其增强的空间记忆是否能让智能体解决需要长时程空间推理的复杂任务（例如，“回到你之前经过的那个有红色椅子的房间”）。</li><li>可学习的自适应记忆策略： 开发一个元控制器，让模型学会根据任务和环境动态调整压缩率和检索标准。例如，对静态背景进行更激进的压缩，而对关键动态物体保持高保真度，实现更智能的记忆管理。</li></ul></section>
       <section>

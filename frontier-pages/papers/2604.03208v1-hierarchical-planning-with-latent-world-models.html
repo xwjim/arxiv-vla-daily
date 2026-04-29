@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.03208v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用基于学习的世界模型结合模型预测控制 (MPC) 进行机器人控制，在简单任务上具备良好的零样本泛化能力。</li><li>核心痛点： 在长时程任务中，现有方法因累积预测误差和指数级增长的搜索空间而失效。</li><li>本文切入点： 直觉上，长时程问题需要分层解决。作者在推理阶段引入时间层级，让高层规划器在粗粒度时间上生成潜空间子目标，再由低层规划器执行，从而解耦长时程推理与精细控制。</li></ul></section><section><h3>Key Insights</h3><ul><li>能力跃迁： 分层规划解锁了世界模型的一项全新能力：解决非贪心任务。对于需要“先退后进”的取放任务，单层模型成功率为 0%，而分层模型 (HWM) 达到 70%。这表明层级结构能让模型理解并规划暂时远离目标的必要动作。</li><li>效率与性能的权衡： 层级结构不仅提升了成功率，还大幅降低了计算成本。通过在高层规划压缩后的宏观动作空间，HWM 在取得更高成功率的同时，规划计算量最多可降低 4 倍。这证明了时间抽象是提升长时程规划可扩展性的关键。</li><li>表征与预测的尺度效应： 不同时间尺度的世界模型各有专长。实验证明（Fig. 6），高层模型更擅长长期预测（&gt;1.5s），而低层模型在短期预测（&lt;1s）上更精确。这为“高层指引方向，低层精细执行”的策略提供了机制性证据。</li></ul></section><section><h3>Next Steps</h3><ul><li>双向规划反馈： 开发一种允许低层向上层传递“可达性”反馈的规划算法。例如，当低层规划失败时，该信息可以作为惩罚信号，指导高层重新规划一个更合理的子目标。</li><li>解耦的层级表征： 探索为不同层级学习不同抽象程度的潜空间。高层模型可以在一个更粗粒度、更语义化的空间中进行规划（例如，只关心“抓取”和“放置”的状态），从而进一步提升长时程推理的鲁棒性和效率。</li></ul></section>
       <section>

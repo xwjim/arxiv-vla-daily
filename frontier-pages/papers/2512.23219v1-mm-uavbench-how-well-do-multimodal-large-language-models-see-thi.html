@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.23219v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有 MLLM 评测集中于通用场景，而无人机评测则局限于目标检测、跟踪等单一感知任务。</li><li>核心痛点： 缺乏一个能统一评估 MLLM 在复杂、动态的低空无人机场景下，从基础感知到高级认知与规划的综合智能的评测标准。</li><li>本文切入点： 作者认为，要推动 MLLM 在无人机领域的落地，必须先建立一个能模拟真实任务、分层评估其能力的“能力标尺”，即一个全面的评测基准。</li></ul></section><section><h3>Key Insights</h3><ul><li>[能力鸿沟]： 现有顶尖的 MLLM（包括 GPT-4V 等闭源模型）在专门的低空无人机场景下表现普遍不佳。这表明，从通用网络数据中学习到的知识难以直接泛化到这一高度专业化的领域。</li><li>[空间认知缺陷]： MLLM 在处理无人机独特的俯瞰视角和动态变化时存在严重瓶颈。它们难以准确理解物体的相对空间关系、尺度和三维布局，这在规划任务中是致命的。</li><li>[多视角整合困难]： 模型在整合来自不同时间或位置的多个无人机视角信息以形成完整态势感知的能力非常有限。这揭示了当前 MLLM 在时空信息融合方面的根本性短板。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建交互式仿真环境： 开发一个能让 MLLM 作为无人机“大脑”进行闭环测试的仿真平台，根据实时视觉反馈动态调整策略，是验证其真实规划能力的关键一步。</li><li>研发无人机原生模型架构： 针对本文发现的空间和多视角认知缺陷，设计引入显式 3D 空间表征或时空记忆模块的新型多模态模型架构，是克服当前模型能力瓶颈的核心研究方向。</li></ul></section>
       <section>

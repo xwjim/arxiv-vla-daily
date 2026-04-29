@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.21546v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型能有效模拟环境动态以提升强化学习效率，但其内部工作机制是一个黑箱。</li><li>核心痛点： 我们不清楚世界模型是学到了模糊的像素模式，还是学到了关于环境的、可解释的结构化知识（如“球的位置”这个概念）。</li><li>本文切入点： 借鉴 NLP 领域“解剖”大语言模型的方法（如探针、因果干预），系统性地“透视”两种主流世界模型的内部，看它们是否也自发形成了世界表征。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征的线性性 (Linearity of Representation): 世界模型内部对游戏状态（物体位置、得分）的编码是近似线性的。这意味着一个简单的线性模型就能高效读出这些信息，证明模型将复杂的像素世界解耦成了简单的、可操作的变量。</li><li>架构的功能解耦 (Functional Decoupling in Architectures): 不同架构的世界模型展现出明确的功能分工。</li><li>IRIS (Transformer-based): 其 VQ-VAE 编码器负责将像素压缩成空间表征，而 Transformer 模块则在此基础上进行时序动态的推理。</li><li>DIAMOND (UNet-based): 它将最抽象、线性的状态信息高度压缩在其网络的瓶颈层 (Bottleneck)。</li><li>表征的功能性 (Functionality of Representation): 模型学到的线性表征不仅是与游戏状态相关，更是被模型主动用于预测的因果要素。沿着这些表征方向进行干预，能精确地操控模型的未来预测结果，证明这套“世界地图”是模型决策的真实依据。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态与因果表征： 从探测“是什么”（What）升级到探测“如果...会怎样”（What-if）。设计实验检验模型是否学习了物体间的因果关系和物理规律（如“球碰到砖块会反弹并得分”）。</li><li>表征的可控编辑与迁移： 既然找到了线性的状态表征，能否直接编辑这些表征以实现对模拟环境的零样本控制（如直接移动球的位置）？或者将一个游戏中学到的“球”的概念迁移到另一个游戏中？</li></ul></section>
       <section>

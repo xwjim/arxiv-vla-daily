@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.16461v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉语言模型(VLM)处理语义，而几何感知系统（如SLAM）处理空间结构。</li><li>核心痛点： 两者相互割裂。VLM缺乏时空几何的物理“锚点”，无法统一理解4D动态场景。</li><li>本文切入点： 不去微调或改造VLM本身，而是构建一个结构化的4D场景图(4DSG)作为中间层，让VLM可以直接查询时空信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>结构化先验的重要性： 显式的4D时空结构 (如4DSG) 是比单纯的2D时序追踪或原始多视图输入更高效的VLM世界表征。它能大幅提升VLM在复杂动态场景中的空间关系和物体状态推理能力。</li><li>解耦与接口： 将感知(几何、时序)与认知(VLM语义推理)解耦，并通过结构化Token(STEP)作为标准接口，是一种无需训练即可赋能VLM理解物理世界的高效范式。这证明了好的表征比端到端微调更具通用性。</li><li>表征的通用性： 一种以物体为中心、融合了局部外观(图像块)、全局几何(3D形状/位置)和时间戳的Token化表征(STEP)，是实现跨任务、跨场景通用4D理解的有效原子单元。它同时解决了“是什么”、“在哪里”、“有多大”、“何时出现/消失”的核心问题。</li></ul></section><section><h3>Next Steps</h3><ul><li>[学习化表征] 从手工设计的STEP Token演进到端到端学习的4D表征。探索能否用一个统一的编码器直接从原始数据生成紧凑且信息丰富的4D Token，取代当前的多步级联流程。</li><li>[感知-决策闭环] 将4DSG作为决策依据，研究基于该世界模型的规划与控制。让VLM直接在4DSG上进行“思维推演”，生成导航路径或操作指令，实现从“看懂世界”到“改变世界”的跨越。</li></ul></section>
       <section>

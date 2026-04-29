@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.07993v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型通常独立控制机器人各身体部件，或采用分层解耦设计。</li><li>核心痛点： 现有方法难以生成高自由度人形机器人的 全身协调动作，导致在复杂任务中动作不稳定、易失败。</li><li>本文切入点： 直觉上，人类的协调动作依赖于对自身下一刻姿态的预判。作者将此思想迁移至机器人，通过 显式预测机器人未来的本体状态 来指导当前动作生成，从而打破了各部件独立控制的僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[协调性来源]： 人形机器人全身协调性的关键，在于 对自身未来状态的精准预测。实验证明，显式地将预测出的未来本体状态作为动作生成的条件，比单纯依赖历史视觉信息更能有效提升动作的连贯性和成功率。这揭示了 “内部动力学预演” 对复杂具身控制的根本性价值。</li><li>[跨机型泛化]： 混合专家网络 (MoE) 结构能够自发解耦机器人的静态形态和动态行为。实验发现，MoE 在 Transformer 前的专家倾向于学习 身体部位的静态分工 (如手臂专家、腿部专家)，而在 Transformer 后的专家则学习 任务阶段的动态分工 (如行走专家、抓取专家)。这为训练可泛化于不同形态机器人的通用模型提供了一种高效的结构化方法。</li><li>[预训练价值]： 在人形机器人领域，大规模跨机型预训练的主要价值在于 提供一个极佳的运动先验 (Motion Prior) 初始化，而非直接提升单任务的最终性能上限。预训练模型在下游任务微调时，能以 更高的样本效率 快速收敛，这对于数据昂贵的真实机器人场景至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>[端到端全身生成]： 探索将高层策略和底层控制器进行 端到端联合训练。让 VLA 模型直接生成包含平衡控制的全身关节力矩，这可能催生出超越人类遥操作范式的、更高效的机器人原生动作。</li><li>[统一时序生成模型]： 将 未来状态预测 (UPP) 和 动作生成 (Action Expert) 统一到一个框架中。例如，训练一个单一的生成模型，联合建模并生成 (状态, 动作) 的未来轨迹序列，有望实现更强的时序一致性和规划能力。</li></ul></section>
       <section>

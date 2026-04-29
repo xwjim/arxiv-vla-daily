@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.06355v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机信道建模依赖两类方法：确定性物理模型（可解释但刻板）或深度学习模型（精准但黑箱）。</li><li>核心痛点： 现有方法在模型精度与物理可解释性之间存在不可调和的矛盾。</li><li>本文切入点： 作者的直觉是，利用 Kolmogorov-Arnold Networks (KANs) 的结构特性，将物理规律作为可学习函数嵌入网络，而非像PINN一样作为损失函数惩罚项。</li></ul></section><section><h3>Key Insights</h3><ul><li>[融合范式]： 提出了一种新的物理信息与神经网络的融合范式。不同于PINN将物理规律作为软约束 (Soft Constraint) 添加到损失函数中，PIKAN将其作为结构化先验 (Structural Prior) 直接嵌入网络架构，实现了数据驱动与物理模型的更深层次耦合。</li><li>[效率与结构]： 模型的极高参数效率（比MLP轻37倍）揭示了一个本质规律：当问题存在底层物理结构时，一个结构正确的模型远比一个依靠堆叠参数暴力拟合的通用模型（如MLP）更高效。正确的归纳偏置能极大压缩解空间。</li><li>[可解释性的来源]： PIKAN的可解释性并非事后归因，而是源于其内在结构。KAN将多变量函数分解为多个单变量函数之和，使得我们可以独立分析每个输入变量对输出的函数关系，并能轻易将其符号化，从而获得与物理定律直接对应的数学表达式。</li></ul></section><section><h3>Next Steps</h3><ul><li>全信道建模： 将PIKAN框架从预测标量（路径损耗）扩展到预测矢量或矩阵，以建模完整的时变信道脉冲响应 (CIR)，实现对小尺度衰落的刻画。</li><li>动态自适应PIKAN： 研究如何让PIKAN模型具备在线学习能力，使其能够根据实时环境变化（如从农村进入城区）动态调整其内部的函数表达式，实现对非平稳信道的自适应建模。</li></ul></section>
       <section>

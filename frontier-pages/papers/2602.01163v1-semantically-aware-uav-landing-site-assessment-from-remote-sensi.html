@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.01163v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统无人机降落点选择依赖机载传感器（如激光雷达），仅评估地形的几何平坦度。</li><li>核心痛点： 几何平坦不等于安全。传统方法无法感知人群、车辆、临时建筑等 “语义风险”。</li><li>本文切入点： 模仿人类飞行员的认知模式，从全局遥感视角出发，利用 MLLM 的视觉-语言推理能力来理解和评估复杂的地面环境。</li></ul></section><section><h3>Key Insights</h3><ul><li>上下文 &gt; 视觉： 实验明确证明，移除 POI 地理空间上下文数据会导致评估准确率急剧下降 (约 25%)。这表明对于安全决策，理解“这里是什么地方”（如学校、加油站）比单纯看“这里长什么样”更重要。</li><li>分层过滤架构的必要性： “粗筛-精选”的两阶段过滤机制是成功的关键。它用计算成本低的分割模型高效排除了 90% 以上的无效区域，使计算成本高昂的 MLLM 能专注于高潜力候选点，解决了大范围搜索的效率瓶颈。</li><li>模型的“风险性格”： 不同的 MLLM 在评估中表现出固有的“风险偏好”差异。例如，Doubao 模型更保守（宁可错杀，不愿放过），而 Qwen 模型更激进（倾向于接受）。这揭示了在安全关键应用中，模型选择本身就是一种需要与任务风险容忍度相匹配的策略。</li></ul></section><section><h3>Next Steps</h3><ul><li>模型蒸馏与端侧部署： 将云端大模型的复杂推理能力蒸馏到轻量化的边缘网络中，实现无人机机载的离线、实时语义评估。</li><li>实时动态数据融合： 集成实时交通流、社交媒体事件、天气预报等动态数据源，将评估从静态的“地理空间分析”升级为动态的“情境感知决策”。</li></ul></section>
       <section>

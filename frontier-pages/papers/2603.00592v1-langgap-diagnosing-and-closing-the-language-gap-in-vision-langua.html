@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.00592v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉-语言-动作 (VLA) 模型在标准机器人操控基准（如 LIBERO）上已取得极高成功率。</li><li>核心痛点： 模型的高分是“假象”，它们严重依赖视觉捷径（visual shortcuts），而非真正理解语言指令，导致模态失衡。</li><li>本文切入点： 保持视觉场景完全不变，仅改变语言指令的语义。如果模型无法执行新任务，就证明了它并未理解语言，从而撕开了“高分低能”的伪装。</li></ul></section><section><h3>Key Insights</h3><ul><li>差异性语义失灵： VLA模型对语言的忽略并非一概而论。它对指令中不同语义成分的理解能力存在巨大鸿沟，例如对空间目标（Change Target）的理解几乎为零（0%成功率），而对物体类别（Change Object）则有部分理解（29%成功率）。</li><li>稀释效应 (Dilution Effect)： 针对性地增加少量多样性数据能有效提升模型表现。但若将其与大量依赖“视觉捷径”的旧数据混合训练，新数据的效果会被严重稀释，导致模型性能不升反降。</li><li>规模化的学习瓶颈： 随着任务语义多样性的增加，模型的学习能力会急剧下降。从单任务的90%成功率，到6个任务的28%，再到16个任务的6.2%，这揭示了当前VLA架构在处理多样化语言指令时存在根本性的学习能力瓶颈。</li></ul></section><section><h3>Next Steps</h3><ul><li>架构与数据协同进化： 将本文以数据为中心的方法，与旨在解决模态失衡的模型架构改进（如 BayesVLA）相结合，从两个层面夹击语言理解难题。</li><li>LLM驱动的任务生成： 利用大语言模型（LLM）自动化生成更海量、更复杂的语义任务，以低成本方式将LangGap扩展到更丰富的语言现象，探索模型的组合泛化极限。</li></ul></section>
       <section>

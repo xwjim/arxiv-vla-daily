@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.12498v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 基于CLIP的缓存方法（如Tip-Adapter）是有效的小样本学习范式。</li><li>核心痛点： 现有方法将图像视为 单一的全局特征向量，忽略了决定分类任务的关键局部细节和空间关系。</li><li>本文切入点： 作者认为，显式建模图像内部 补丁间的关系，能提炼出更具判别力的特征，从而构建一个更优质、更懂细节的缓存（Cache）。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征提炼机制]：</li><li>论文的核心发现是一种高效的 门控机制。它证明了 内容相似性 (点积注意力) 与 结构相关性 (前馈注意力) 的乘积 形式，能有效过滤噪声，确保只有 语义和结构上都相关的补丁 才能传递信息，从而提炼出对分类任务更具判别力的特征。</li><li>[模型效率与部署]：</li><li>复杂的 图关系建模仅在训练阶段用于“蒸馏”知识 到缓存键中。推理时则回归标准、高效的特征检索，实现了 复杂性与效率的解耦。这为将复杂结构先验知识注入轻量级模型提供了一个范本。</li><li>[小样本学习瓶颈]：</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应图构建： 研究如何 根据图像内容自适应地生成图节点（例如，使用无监督分割或目标检测方法），而不是使用固定的补丁网格，以构建更具语义意义的图结构。</li><li>关系知识的动态利用： 探索在 推理阶段以极低成本动态利用 这种关系知识的可能性。例如，在Transductive（转导）设定下，利用测试集中样本间的关系来进一步优化预测。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.17907v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有世界模型要么只处理相机导航，要么从零生成整个场景与动态。</li><li>核心痛点： 模型被迫同时生成静态场景和动态变化，导致两者混淆，无法精确模拟动作引发的物理后果。</li><li>本文切入点： 将静态世界与动态变化解耦。显式地将静态场景视频作为输入条件，让模型只专注于学习动作引发的残差动态 (residual dynamics)。</li></ul></section><section><h3>Key Insights</h3><ul><li>[建模范式]： 成功的交互建模关键在于解耦。将静态背景作为已知条件输入，迫使模型只学习由动作引发的“残差动态” (Residual Dynamics)，这极大降低了学习难度并从根本上保证了场景一致性。</li><li>[模型先验]： 预训练的视频修复 (Inpainting) 模型是学习残差动态的绝佳起点。当输入未被遮挡时，它天然地趋向于恒等映射（保持静态部分不变），同时其强大的生成先验又能很好地填充动作引发的新动态。</li><li>[数据策略]： 混合数据集 (Hybrid Dataset) 是解决（数据）对齐与（物理）真实性矛盾的有效策略。合成数据提供完美的（静态-动态）成对监督，用于学习核心的因果关联；而真实世界视频（即使是固定机位）则能注入丰富的、物理上更真实的动态细节。</li></ul></section><section><h3>Next Steps</h3><ul><li>[动态场景更新]： 研究如何将生成的视频动态“反向传播”回底层的3D场景表示（如高斯泼溅或NeRF），实现一个真正可编辑、状态可更新的动态数字孪生。</li><li>[闭环实时交互]： 构建一个闭环交互系统。模型根据当前帧和用户的初步动作预测下一小段动态，用户再根据预测结果调整动作，实现渐进式、可控的场景交互。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.01869v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 单人操控无人机群需要高级别的交互界面，而大语言模型（LLM）是实现自然语言控制的有效工具。</li><li>核心痛点： 缺乏一个统一的框架，能将高层级的自然语言意图稳健地转化为多无人机在真实世界中的闭环、协同动作，并能处理动态事件。</li><li>本文切入点： 借鉴认知科学中的双系统理论，将任务拆分为“慢思考”和“快执行”，构建了一个分层的双 LLM 架构，实现了规划与执行的解耦。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构设计]： 对于多智能体长时间任务，采用“规划-执行”分层 LLM 架构（Coordinator + Supervisor）比单一 LLM 模块的成功率更高。这种分离解耦了高级意图理解和低级实时执行，提升了任务的鲁棒性。</li><li>[信息流]： 在分层架构中，上层规划模型生成的“推理过程”文本 (Reasoning/CoT) 对下层执行模型至关重要。它不仅是解释，更是隐式的上下文，能帮助执行层正确推断任务的时序依赖和并行关系。</li><li>[语义推理]： LLM 不仅是指令翻译器，更是常识知识的注入器。它能利用预训练知识对模糊指令（如“从最可能的地方开始搜寻”）进行语义补全和优化，从而提高物理世界任务的执行效率（如优先搜索公园而非商业区）。</li></ul></section><section><h3>Next Steps</h3><ul><li>从 API 调用者到 API 生成者： 使 LLM 不仅能调用固定的 API，还能动态生成或组合新的控制脚本，从而突破预定义技能库的限制，创造更灵活的行为。</li><li>融合真实多模态感知： 将系统与真实的、多无人机的板载视觉/传感器数据流相结合。迫使 LLM 在不确定和不完整的感知信息下进行推理、规划和状态估计。</li></ul></section>
       <section>

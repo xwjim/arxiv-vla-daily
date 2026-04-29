@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.09022v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型主要通过像素级监督进行预训练，隐式地学习遵循动作指令。</li><li>核心痛点： 隐式监督信号太弱，导致模型在长序列、复杂组合动作下，指令遵循能力差且误差会累积。</li><li>本文切入点： 放弃间接的像素监督，直接用强化学习（RL）对预训练模型进行「后期调优」，用明确的奖励信号直接「教会」模型如何正确执行动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[奖励信号粒度]： 对于自回归长视频生成，序列级（Sequence-level）的奖励信号过于稀疏且无效。必须采用片段级（Clip-level）的奖励，才能为模型提供精确、可操作的优化方向。</li><li>[奖励函数设计]： 在生成任务中，单一维度的奖励极易导致「奖励作弊」。例如，只奖励动作遵循会牺牲画质，反之亦然。多维度互补的奖励函数是抑制模型走捷径、实现均衡提升的关键。</li><li>[探索空间]： 传统 RL 探索策略（如 SDE 采样）在世界模型中可能失效，因为它仅能探索视觉内容的变化，而无法有效探索动作（相机轨迹）的变化。有效的探索必须能覆盖动作空间的多样性。</li></ul></section><section><h3>Next Steps</h3><ul><li>从「模型打分」到「人类偏好」：引入人类反馈（RLHF），直接学习一个符合人类偏好的奖励模型，替代当前基于固定模型的打分，以解决奖励模型不准和作弊问题。</li><li>扩展到语言指令与长期规划：将动作空间从离散指令扩展到自然语言指令，并结合规划能力，让模型能理解并执行“先左转，然后直走穿过大厅”这类长时序、多步骤的复杂任务。</li></ul></section>
       <section>

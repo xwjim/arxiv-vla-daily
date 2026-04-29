@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.09708v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有具身VLA模型通过显式思维链 (CoT) 改善了泛化能力和任务解决能力。</li><li>核心痛点： 显式CoT生成冗长推理轨迹，导致高推理延迟，不适用于实时性要求高的具身应用。直接缩短CoT可能丢失关键信息。</li><li>本文切入点： 作者提出通过可言语化潜在推理，将显式CoT压缩成紧凑的连续潜在表示，同时保留推理能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>效率与性能的突破性平衡： Fast-ThinkAct通过将显式CoT蒸馏为紧凑潜在表示，在保持甚至超越现有VLA模型性能的同时，实现了高达89.3%的推理延迟降低。这表明高效推理不必然牺牲复杂任务解决能力。</li><li>潜在推理的强大表达力： 可言语化潜在推理不仅能有效压缩信息，还能支持长时程规划、故障恢复和少样本适应等复杂具身能力。这证明了潜在空间能有效编码和传递高层语义与视觉规划信息。</li><li>多模态蒸馏的协同效应： 结合语言偏好引导和视觉轨迹对齐的多模态蒸馏方法，对于将教师模型的高质量语言推理和空间规划能力有效转移到紧凑的潜在表示至关重要。这确保了潜在表示既有语义深度，又具备具身控制所需的视觉接地性。</li></ul></section><section><h3>Next Steps</h3><ul><li>提升言语化推理忠实性： 探索结合接地感知目标 (grounding-aware objectives) 或幻觉抑制技术，以提高潜在表示解码为文本时的准确性和可靠性。</li><li>动态推理粒度： 研究如何根据任务复杂度和实时性要求，动态调整潜在推理的粒度或压缩程度，实现更灵活的效率-性能权衡。</li></ul></section>
       <section>

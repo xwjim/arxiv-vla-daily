@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.25038v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 基础模型（如 $π_0$）在各种 固定基座 的机械臂之间表现出强大的泛化能力。</li><li>核心痛点： 无人机是 欠驱动、高动态 系统，与地面机械臂的 准静态 动力学存在根本性不匹配（即 “动力学鸿沟”），导致模型无法直接迁移。</li><li>本文切入点： 作者认为 VLA 的 视觉表征 可以有效迁移，但 控制策略 需要被修正。他们没有选择重训模型，而是在 推理时 注入物理约束来“纠正”模型的行为。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征迁移的不对称性：</li><li>VLA 模型在地面机械臂上学到的 视觉和语义理解能力 可以有效迁移到无人机的视角。</li><li>但其学到的 控制/动力学先验 完全不适用于飞行平台，直接微调效果极差。这揭示了 VLA 内部知识的 解耦特性。</li><li>推理时干预的有效性：</li><li>无需对庞大的基础模型进行完全重训，通过在 推理采样阶段 巧妙地注入物理约束（如载荷补偿），是弥合动力学鸿沟的一种 高效且低成本 的范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端的板载感知与控制： 替换动作捕捉系统，整合 VIO 或 SLAM 算法，实现完全依赖无人机自身传感器的自主飞行与操控，这是走向实用的必经之路。</li><li>动力学参数的在线自适应： 开发能从视觉或力反馈中 在线估计物体质量 的模块，并将其整合进引导机制，实现对不同载荷的 自适应补偿，而非依赖固定的补偿值。</li></ul></section>
       <section>

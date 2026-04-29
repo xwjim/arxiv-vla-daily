@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.01373v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的低光增强（LIE）方法主要针对地面图像，通常依赖配对数据或复杂的网络。</li><li>核心痛点： 现有方法无法同时解决无人机场景下的 超高分辨率、无配对数据、极端非均匀光照 和 端侧实时部署 四大难题。</li><li>本文切入点： 与其设计更复杂的网络，不如重塑问题本身。作者认为，通过简化学习任务和定义更务实的评价标准，一个极轻量的网络也能解决这个难题。</li></ul></section><section><h3>Key Insights</h3><ul><li>评价体系重塑： 在无人机等资源受限的边缘应用中，算法的真实价值不应仅由视觉质量决定。本文提出的 EEI (边缘效率指数)，将性能、速度、参数量、功耗等统一评估，这预示着未来的算法设计必须是“效率-效果”协同进化，而非单纯追求SOTA指标。</li><li>训练策略 &gt; 网络复杂度： 一个极轻量级的网络之所以能超越复杂的模型，关键在于 APA 训练策略。它揭示了一个核心规律：通过巧妙的训练策略降低学习任务的“认知负荷”，比盲目堆叠网络深度和参数量，是通往高效模型更根本的路径。这在推理成本不变的前提下，榨干了模型的潜力。</li><li>从“目标”到“区间”的控制思想： L_int 损失函数的本质是从“追求最优单点”转向“维持合理区间”。对于无人机航拍这种高动态范围场景，不存在唯一的“最佳亮度”。通过设定一个亮度上下限，模型学会了在提亮暗部的同时主动抑制亮部，实现了更精细、更鲁棒的局部光照自适应。</li></ul></section><section><h3>Next Steps</h3><ul><li>面向下游任务的联合优化： 将低光增强模块作为可端到端训练的“预处理层”，与下游的目标检测或分割网络进行联合训练，以任务的最终精度（如mAP）而非视觉指标（如PI）为优化目标。</li><li>可学习的自适应预处理： 将固定的 APA 模块替换为一个轻量级的元网络 (Meta-network)。该网络能根据输入图像的统计特征，动态预测出最优的预处理参数（如伽马值、饱和度调整系数），实现真正智能、自适应的训练增广。</li></ul></section>
       <section>

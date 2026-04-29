@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.00919v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通过堆积海量异构的机器人数据，训练一个端到端的 VLA 大模型。</li><li>核心痛点： 数据质量参差不齐且动作空间不统一，导致模型难以跨机器人形态正向迁移，且纯行为克隆（BC）无法解决长时程任务。</li><li>本文切入点： 放弃单纯的数据规模竞赛，设计一个从数据质控、动作统一到强化学习对齐的结构化、分阶段训练框架。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练范式]： 分阶段训练是构建通用机器人模型的关键。 它能有效解耦并依次解决语义理解（L1）、物理先验（R0）、特定机体适配（R1）和长时程任务对齐（R2）等不同层面的挑战，比“一锅炖”的训练方式更有效。</li><li>[数据与动作]： 动作空间的语义统一和数据质量的显式对齐是实现跨机器人正向迁移的先决条件。简单地将不同数据混合并填充（padding）动作向量，会引入冲突梯度，损害泛化能力；而统一的语义布局则能促进技能的抽象与迁移。</li><li>[学习机制]： 行为克隆（BC）为模型提供了稳定的基础先验，但强化学习（RL）对齐是突破其性能饱和、提升长时程任务成功率和鲁棒性的必要步骤。 实验证明，R2阶段（RL）带来的性能增益远超单纯增加BC数据或微调。</li></ul></section><section><h3>Next Steps</h3><ul><li>实时推理与规划解耦： 如何在保持低延迟控制的同时，集成更强的链式思考（CoT）或符号规划能力，以解决更复杂的长时程任务分解问题。</li><li>在线学习与安全探索： 如何将在线数据收集与安全的强化学习探索相结合，使模型能持续自我改进，并减少在真实世界部署时的灾难性失误。</li></ul></section>
       <section>

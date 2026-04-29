@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.05015v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有视频评测基准主要通过单点、孤立的问题来评估模型，追求更高的准确率分数。</li><li>核心痛点： 榜单分数虚高，无法反映模型在真实世界中处理复杂、关联性问题的鲁棒性和推理连贯性。</li><li>本文切入点： 直觉上，真正的理解不是猜对孤立问题，而是能在相关问题组上表现出一致性，并能完成连贯的多步推理。</li></ul></section><section><h3>Key Insights</h3><ul><li>[认知瓶颈]： 视频模型的性能存在“层级瓶颈”。高层复杂推理 (L3) 的失败，根源往往是底层视觉信息聚合 (L1) 和时序动态建模 (L2) 的错误累积传递所致，而非单纯的推理能力不足。</li><li>[推理模式]： 模型的“思考”模式 (Thinking Mode) 严重依赖文本。在有字幕时，它能显著提升性能；但在纯视觉场景下，它反而可能因过度依赖语言先验而导致性能下降，暴露出其推理并非真正源于视觉。</li><li>[评估偏差]： 传统的“平均准确率” (Avg Acc) 会严重高估模型能力。本文的“非线性组得分”揭示了即便是最强模型 (如 Gemini-3-Pro)，在面对关联问题时也缺乏稳定性，其真实鲁棒性远低于其单题准确率所呈现的水平。</li></ul></section><section><h3>Next Steps</h3><ul><li>攻克层级瓶颈： 如何设计模型架构或训练范式，以增强底层视觉感知的鲁棒性，防止错误向上层推理传播？这可能是提升整体视频理解能力的关键。</li><li>发展纯视觉推理： 如何让模型的“思考”过程摆脱对文本的依赖，发展出真正基于时空视觉信号的因果、物理和社会推理能力？</li></ul></section>
       <section>

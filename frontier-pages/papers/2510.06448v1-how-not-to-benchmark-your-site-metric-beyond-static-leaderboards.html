@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.06448v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 学界普遍使用一套固定的基准（模型池、数据集）来衡量源无关迁移性评估（SITE）指标的优劣。</li><li>核心痛点： 现有基准过于简单且脱离实际，其评测结果并不能真实反映SITE指标在复杂场景下的泛化能力。</li><li>本文切入点： 作者直觉地怀疑：现有基准可能存在“捷径”，一个简单的静态排序规则或许就能胜过复杂的SITE指标，从而证明基准本身是无效的。</li></ul></section><section><h3>Key Insights</h3><ul><li>[基准脆弱性]： 现有SITE指标的高性能是一种“虚假繁荣”。它们并非真正理解了任务与模型的匹配度，而只是在利用一个有偏且过于简单的评测环境。一旦评测环境稍作调整（如移除几个大模型），指标性能便会崩溃。</li><li>[评估的“捷径”]： 当前基准存在一个致命的“捷径”。由于模型性能层级几乎是固定的（大模型总是更好），一个简单的、与任务无关的静态排序规则（例如，永远首选ResNet-152）就能取得SOTA性能。这说明评测的不是“迁移能力”，而是“记忆排行榜的能力”。</li><li>[指标的实用性鸿沟]： 现有SITE指标缺乏“保真度 (Fidelity)”。指标分数的高低差距，并不能可靠地对应到模型真实性能的差距。这使得用户无法基于分数进行成本效益决策（例如，分数高0.1是否值得付出2倍的计算成本）。</li></ul></section><section><h3>Next Steps</h3><ul><li>跨领域基准批判： 将此批判性分析框架扩展到NLP、目标检测、医疗影像等其他领域，系统性地检验其基准是否存在类似缺陷。</li><li>构建成本感知基准： 研究如何将微调成本、推理延迟、超参数敏感性等现实约束，整合进SITE指标的评估框架中，使其更具实践指导意义。</li></ul></section>
       <section>

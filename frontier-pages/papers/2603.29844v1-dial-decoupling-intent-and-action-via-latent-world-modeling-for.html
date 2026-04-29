@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.29844v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流端到端VLA模型将VLM用作多模态编码器，直接将视觉语言特征映射到低层动作。</li><li>核心痛点： 直接用低层动作信号训练VLM，会破坏其预训练的语义表征，导致训练不稳定且无法充分利用其高层决策能力。</li><li>本文切入点： 灵感源于认知科学的双系统理论 (System-1/2)，让VLM不直接生成动作，而是预测一个「潜在的未来视觉特征」作为意图，再由一个独立的轻量策略解读该意图并生成动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[结构性瓶颈的必要性]： 简单的将未来预测作为辅助信息（松耦合）效果有限，策略会走捷径。必须设计一个结构性瓶颈（如本文的逆动力学设计），强制策略必须依赖VLM生成的意图来产生动作，才能有效避免捷径学习。</li><li>[表征空间的一致性]： 高层决策（System-2）和底层控制（System-1）在统一的、原生的VLM特征空间内进行信息交换至关重要。跨空间的特征转换（如VLM特征 -&gt; DINO特征）会引入语义-物理错位，损害性能。</li><li>[解耦训练的稳定性]： 端到端联合训练VLA模型极易崩溃。先解耦预热、再端到端微调的范式是关键：它让“大脑”先学会思考（预测未来），“小脑”先学会在完美指导下行动，为后续的稳定协同打下基础。</li></ul></section><section><h3>Next Steps</h3><ul><li>利用无动作标签的视频进行大规模预训练： System-2的核心任务是预测未来视觉特征，这使其天然适合利用海量的、无动作标注的人类第一视角视频进行预训练，以学习更通用的物理世界模型。</li><li>将世界模型内置于VLM预训练： 将「潜在世界建模」的能力直接整合到VLM的预训练阶段，而不是在下游任务中才引入。这能让VLM从一开始就具备物理动态感知能力，使其原生表征更适合机器人任务。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.12908v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 多机器人导航依赖于计算昂贵的3D建图或仅能识别预定义物体的封闭词汇模型。</li><li>核心痛点： 机载算力有限，难以部署重型模型；且系统无法泛化到训练集中未见过的新物体。</li><li>本文切入点： 放弃笨重的3D重建，转而构建轻量化的2D俯视语义地图；并引入零样本基础模型（SAM3），结合贝叶斯概率地图来处理开放词汇带来的感知不确定性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[协作效率的本质]： 多智能体协作的真正优势并非源于简单的数量叠加，而是通过共享地图信息来消除探索冗余。缺乏信息同步的独立探索会导致极低的路径效率（SPL），即使智能体数量增加。</li><li>[智能探索的机制]： 基于不确定性的探索（通过 Bayesian Value Map + UCB 实现）远优于随机或贪婪策略。系统性地探索“目标可能存在”的高不确定性区域，是高效定位的关键，而非简单地飞向最近的未知区域。</li><li>[环境表征的权衡]： 对于以“寻找物体”为核心的语义导航任务，无需构建完整的3D环境模型。一个轻量化的2D俯视语义地图足以保留关键的几何与语义信息，是实现机载高效决策的实用范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>[2.5D语义表征]： 探索介于2D和3D之间的轻量化多层栅格地图或稀疏语义图，在保持低计算成本的同时，编码关键的垂直空间关系，解决信息降维问题。</li><li>[高层语义推理]： 融合大型语言模型（LLM）的先验知识（如“台灯通常在书桌上”），为贝叶斯价值地图提供更强的初始假设，从“哪里不确定”升级到“哪里最应该有”。</li></ul></section>
       <section>

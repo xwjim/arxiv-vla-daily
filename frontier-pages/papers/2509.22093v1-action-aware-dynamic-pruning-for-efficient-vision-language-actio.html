@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.22093v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA（视觉-语言-动作）模型因处理大量视觉信息而计算昂贵，现有方法通过静态或统一的剪枝策略来提速。</li><li>核心痛点： 现有方法忽略了不同操作阶段对视觉精度的需求是变化的。例如，机械臂大范围移动时和精细抓取时，所需视觉信息量完全不同。</li><li>本文切入点： 作者的核心直觉是 视觉信息的冗余度与机器人的动作动态强相关。快速、大幅度的动作意味着视觉冗余高，可以大胆剪枝；反之，慢速、精细的操作则需要保留全部视觉信息。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作-感知耦合]： 首次明确了机器人动作动态与视觉信息冗余度之间的量化关系。高速、大范围的动作阶段对应着高视觉冗余，为动态调整计算资源分配提供了理论依据。</li><li>[剪枝信号的最优位置]： 反直觉地发现，用于剪枝的最佳文本-视觉相关性信号出现在模型的浅层（Layer 0）。深层特征虽然更抽象，但用于全局重要性排序时，信号更稀疏、噪声更大，不如浅层特征稳定和全面。</li><li>[动态策略的必要性]： 证明了自适应的动态剪枝显著优于静态剪枝或固定的周期性剪枝。只有根据任务实时状态（通过动作反馈）来决策，才能在不牺牲关键操作成功率的前提下，最大化计算效率。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“反应式”到“预测式”门控： 训练一个轻量级预测模型，根据当前状态和未来任务意图，提前预测下一阶段所需的视觉精度，从而实现主动、无延迟的智能剪枝。</li><li>从“开关”到“旋钮”： 将二元（开/关）的剪枝决策，演进为可学习的连续剪枝率（ρ）。让模型根据动作动态和任务上下文，自主决定保留 30%、50% 还是 90% 的视觉信息，实现更精细的效率-精度平衡。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.07077v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人系统将感知、高级规划（通常由LLM/VLM处理）和底层动作执行解耦。</li><li>核心痛点： 解耦系统泛化能力差，严重依赖预定义技能，无法适应新任务，且任务数据收集成本高。</li><li>本文切入点： 直觉上，将视觉、语言、动作模态在单一模型中进行端到端联合学习，可以利用大规模多样化数据涌现出通用泛化能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>架构演进规律： VLA模型的发展路径清晰地表明，成功的关键在于利用大规模互联网数据进行预训练。从零开始训练的专用模型，其泛化能力远不如基于预训练VLM（如PaLM-E, PaliGemma）构建的模型，证明了将网络知识迁移到物理世界是最高效的路径。</li><li>动作表征趋势： 动作输出正从离散化的分箱Token转向基于扩散或流匹配的连续动作生成。这揭示了一个核心瓶颈：离散动作难以实现物理世界所需的平滑、实时、高频控制，而连续生成模型是解决这一问题的关键。</li><li>数据泛化定律： 性能的提升不仅依赖数据量，更依赖数据的多样性。跨机器人实体 (cross-embodiment) 的混合数据训练，能让模型在单一目标机器人上表现更好。这说明模型学到的不是特定机器人的控制，而是更普适的“物理世界交互规律”。</li></ul></section><section><h3>Next Steps</h3><ul><li>分层与长时序任务： 探索更鲁棒的分层策略 (Hierarchical Policies)，让VLA模型能自主将“泡一杯咖啡”等复杂指令分解为可执行的子任务序列，解决长时序规划难题。</li><li>无监督视频学习： 大规模利用无标注的人类活动视频（如YouTube）学习潜在的动作和物理交互知识（如LAPA模型所示），以绕过机器人数据收集的瓶颈，实现真正的数据规模化。</li></ul></section>
       <section>

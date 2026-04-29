@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.12939v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统上使用优化算法或强化学习来解决无人机集群的路径规划问题。</li><li>核心痛点： 现有方法缺乏一个统一的、能实时适应动态环境（如新目标出现）的、可泛化的决策框架。</li><li>本文切入点： 引入认知科学的“主动推理” (Active Inference)原理，将决策问题从“最大化奖励”转变为“最小化与专家行为模型的认知偏差”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[决策范式]： 将决策从“奖励驱动”转变为“模型驱动的认知偏差最小化”，为智能体提供了一个更稳定、可解释的行为锚点。智能体的目标不再是探索未知最优解，而是努力使自己的行为符合一个已知的“专家范本”。</li><li>[知识表征]： 分层的符号化世界模型（任务-路径-运动） 实现了知识的解耦与组合。这种结构使得系统可以在不同抽象层次上进行推理和适应，例如，仅在运动层进行局部避障，而无需改变高层的任务分配，极大提升了决策效率和灵活性。</li><li>[学习与推理]： 该框架成功解耦了“离线策略学习”与“在线策略推理”。离线用传统优化算法（GA-RF）生成高质量的专家数据，在线用主动推理进行快速、自适应的模仿和泛化，结合了优化方法的最优性和学习方法的适应性。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合在线探索与世界模型更新。 允许智能体在执行任务时进行少量探索，并将成功的“意外”经验反向提炼、增补到世界模型中，实现模型的自我演进和超越。</li><li>神经符号化混合建模。 将分层符号结构与深度学习模型（如Transformer、GNN）结合，用神经网络代替简单的概率转移矩阵来建模不同层级间的关系，以增强模型的表达能力和对复杂模式的泛化能力。</li></ul></section>
       <section>

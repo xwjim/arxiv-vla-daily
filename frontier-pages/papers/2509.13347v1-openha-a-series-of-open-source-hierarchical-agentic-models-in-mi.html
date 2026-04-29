@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.13347v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 智能体通常使用分层架构，即高层模型生成抽象动作（如“砍树”），低层策略执行它。</li><li>核心痛点： 不存在普遍最优的抽象动作空间。不同动作类型（如导航、交互）在不同任务上表现迥异，这给构建通用智能体带来了困境。</li><li>本文切入点： 作者不再试图寻找“最优”的单一动作空间，而是将抽象动作视为一种中间推理步骤（类似思维链），并将其整合进一个统一的端到端模型中。</li></ul></section><section><h3>Key Insights</h3><ul><li>[动作空间的最优性]： 抽象动作空间的效果是高度任务依赖的。例如，Grounding Actions（绑定坐标的动作）在目标交互任务中表现优异，而 Motion Primitives（不依赖目标的移动指令）在纯导航任务中更有效。</li><li>[推理与执行的关系]： 将抽象动作作为显式的中间推理步骤 (CoA)，能显著提升VLA模型的性能。这相当于在推理时投入更多计算（先“思考”再行动），从而将复杂的决策问题分解为更简单的“规划-&gt;执行”两步。</li><li>[泛化能力的来源]： 动作表征的多样性可以提升模型的泛化能力。通过在多种抽象动作上进行联合训练（All-in-One），模型能学到更鲁棒、更全面的内部策略，其表现甚至超过了在单一动作空间上训练的“专家模型”。</li></ul></section><section><h3>Next Steps</h3><ul><li>学习抽象本身： 能否让智能体端到端地从原始经验中学习出最优的抽象动作（即“思考”内容），而不是依赖人工设计的动作空间？</li><li>跨领域动作统一： 将CoA和All-in-One框架推广至完全不同的领域（如网页浏览、手机GUI操作），探索构建一个能理解并执行跨平台、跨模态动作的通用智能体。</li></ul></section>
       <section>

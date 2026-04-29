@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.11075v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA (视觉-语言-动作) 模型主要依赖模仿学习 (IL) 进行训练。</li><li>核心痛点： 模仿学习存在暴露偏差（errors compound），而真实世界强化学习 (RL) 成本高、风险大、效率低。</li><li>本文切入点： 用一个学到的世界模型替代物理世界，将高成本的真实交互转化为低成本、可并行的想象推演，从而实现安全的在线策略优化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[世界模型有效性]： 高质量的生成式世界模型可以有效替代物理环境，作为在线强化学习的模拟器。这解决了真实世界交互成本高昂的核心瓶颈，使on-policy RL在真实机器人上成为可能。</li><li>[模型架构]： 将世界模型解耦为独立的动力学模型（预测未来）和价值模型（评估好坏）是成功的关键。这种组合式设计允许针对性优化（例如，动力学模型用Video Diffusion，价值模型用VLA主干），比单一模型更鲁棒、更有效。</li><li>[价值函数学习]： 结合时序进程估计（提供稠密、平滑的信号）和时序差分学习 (TD-learning)（对成功/失败的边界更敏感）能训练出更鲁棒的价值函数，为策略学习提供了稳定且精确的指导信号。</li></ul></section><section><h3>Next Steps</h3><ul><li>不确定性感知的想象： 让世界模型能评估自己预测的置信度。当预测不确定性高时，可以减少依赖或主动触发少量真实世界交互来“校准”模型。</li><li>自适应数据混合策略： 开发一种动态调整在线（想象）数据和离线（真实）数据比例的机制，而非使用固定比例，以实现最优的样本效率和性能。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.16927v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 多无人机协同感知依赖无线传输海量的视觉数据到中心节点进行融合。</li><li>核心痛点： 原始图像或密集特征的传输导致 通信开销巨大、延迟极高，无法满足实时性要求。</li><li>本文切入点： 作者的直觉是，大视觉模型 (LVM) 足够强大，可以从不完整的、稀疏的视觉信息中恢复出高质量的感知结果。因此，无需传输完整图像，只需传输 最关键的像素 给地面 LVM 处理即可。</li></ul></section><section><h3>Key Insights</h3><ul><li>[LVM 的稀疏容忍度]： 大视觉模型 (LVM) 对稀疏输入有极强的鲁棒性。实验证明，仅传输 15% 最重要的像素，感知性能就已接近饱和，这揭示了大部分视觉背景信息对于特定任务是高度冗余的。</li><li>[云边协同新范式]： “端侧极度轻量化 (仅筛选) + 云侧超强计算 (LVM)” 的架构，在通信效率上远优于 “端侧中度计算 (提特征)” 模式。相比在无人机端提取并传输 BEV 特征，该框架的通信开销 降低了 85%，同时感知性能还提升了 5%。</li><li>[感知-通信可控权衡]： 感知效用 与 通信质量 (SNR) 之间存在一个明确且 可量化调控的权衡关系。通过 DRL 调整延迟惩罚因子，系统能自动从 “追求最高感知精度” 的策略，平滑过渡到 “优先保障通信效率” 的策略。</li></ul></section><section><h3>Next Steps</h3><ul><li>混合式协同与容错机制： 研究 地面站-无人机协同 与 无人机-无人机（V2V-style）点对点协同 之间的动态切换。当与地面站通信质量下降时，无人机可自动切换到分布式融合模式，极大提升系统鲁棒性。</li><li>面向任务的语义通信： 从传输 “重要像素” 升级到传输 “语义符号”。利用 LVM 在端侧直接提取目标类别、位置、速度等结构化信息，将通信内容从像素级压缩到概念级，实现极致的通信效率。</li></ul></section>
       <section>

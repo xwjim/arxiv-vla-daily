@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.04566v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 网络调度主要依赖静态规则（如LQF）或纯数据驱动的强化学习（RL）。</li><li>核心痛点： 静态规则缺乏前瞻性，无法适应动态环境；而强化学习训练成本高、可解释性差，且难以保证硬性约束。</li><li>本文切入点： 受认知科学中“系统1/系统2”理论启发，将快速反应的启发式策略与深思熟虑的符号化推演（想象）相结合，取长补短。</li></ul></section><section><h3>Key Insights</h3><ul><li>[决策模式]： 在动态网络环境中，混合决策模型（前瞻性规划 + 反应式启发）的综合性能优于任何单一模式。规划提供了远见以应对拥塞和截止时间，而反应保证了实时性和鲁棒性。</li><li>[模型构建]： 对于物理规则明确的系统（如网络排队），使用符号化世界模型进行推演，比端到端学习的动态模型样本效率更高且更具可解释性。它将“学习”的负担从“预测物理过程”转移到了“评估策略价值”。</li><li>[规划效率]： 在复杂规划问题中，前置的约束过滤（如ICN模块）比后置的奖励惩罚更有效。通过提前剪枝不可行解，可以极大降低规划模块的计算复杂度，使其在实时系统中变得可行。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应规划深度 (Adaptive Horizon)： 研究让系统根据网络拥塞程度或决策不确定性，动态调整“想象”的步长 (H)，在计算开销和决策质量间取得更优的动态平衡。</li><li>学习指导规划 (Learning-to-Prune)： 将“慢脑”的规划过程与学习相结合，训练一个策略网络来指导搜索。该网络可以预测哪些可行调度方案更“有前途”，从而智能地剪枝搜索空间，进一步提升大规模网络下的规划效率。</li></ul></section>
       <section>

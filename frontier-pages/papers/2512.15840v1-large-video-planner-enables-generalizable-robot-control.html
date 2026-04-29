@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.15840v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流机器人基础模型 (VLA) 扩展多模态大模型，直接将视觉和语言映射到机器人动作。</li><li>核心痛点： 机器人动作数据极其稀缺，导致 VLA 模型在训练分布之外的新任务上泛化能力差。</li><li>本文切入点： 作者认为视频本身就是一种天然的状态-动作序列。与其依赖稀缺的动作数据，不如利用海量的互联网视频来学习一个“世界如何运作”的视觉规划模型。</li></ul></section><section><h3>Key Insights</h3><ul><li>范式转变： 视觉计划 (Video Plan) 是比动作指令 (Action Token) 更具泛化性的机器人任务中间表示。它将“学习如何做”的问题，从依赖稀缺的机器人动作数据，转变为利用海量的、描述物理世界动态的互联网视频数据。</li><li>数据对齐的关键性： 跨来源 (人类视频、机器人视频) 的时间对齐至关重要。将所有视频统一到“人类速度”，是实现从人类演示到机器人执行知识迁移的关键先决条件，有效弥合了不同形态之间的动态差异。</li><li>规划的物理一致性： 通用视频模型倾向于创意生成，但用于机器人规划时必须保证物理真实感。采用 History Guidance 和 Diffusion Forcing 技术，能显著增强生成视频对初始状态的遵循性和时序连贯性，这是确保计划可执行的基础。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环重规划 (Closed-Loop Replanning)： 研究如何将实时环境反馈整合到视频生成过程中，使模型能够在执行中途动态修正或重新生成后续计划，从开环走向闭环。</li><li>端到端规划与控制 (End-to-End Planning &amp; Control)： 探索一个统一的模型，能够直接从输入生成视频计划并隐式学习动作重定向，直接输出底层控制信号，从而避免多阶段流水线带来的误差累积。</li></ul></section>
       <section>

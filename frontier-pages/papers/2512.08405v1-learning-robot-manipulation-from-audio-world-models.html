@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.08405v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人学习主要依赖视觉，声音通常只作为辅助的、当前时刻的感知信息。</li><li>核心痛点： 在很多场景下（如倒水），视觉信息模糊或不变，仅靠当前时刻的感官输入无法做出预判，导致决策短视。</li><li>本文切入点： 直觉上，声音的变化（如音高、节奏）蕴含着物理过程的演进。作者不把声音当做“当前状态”，而是将其视为一种可预测的动态序列，构建了一个专门预测未来声音的“世界模型”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[预测 &gt; 感知]： 机器人成功的关键，不在于简单地增加声音这一多模态输入，而在于对声音未来的演化进行准确预测。这使得策略能够“未卜先知”，进行长远规划。</li><li>[信号本质]： 声音之所以是极佳的预测目标，因为它能高度浓缩地编码物理世界的内在动态（如倒水时的音高变化、音乐的节奏模式）。相比于预测高维、冗余的视频帧，预测音频的物理模式更直接、更高效。</li><li>[解耦训练]： 将世界模型（负责预测）与策略模型（负责行动）进行解耦、分阶段训练，比端到端一体化训练的性能更好。这种模块化设计也让系统更灵活，易于独立升级。</li></ul></section><section><h3>Next Steps</h3><ul><li>跨模态预测： 从“声音预测声音”走向“视觉预测声音”或“声音预测视觉”。构建一个能预测不同模态间因果关系的统一世界模型，例如看到水流变细时，能预测到水满的声音即将出现。</li><li>主动式听觉探索： 让机器人从被动接收声音，变为主动通过动作制造声音以进行探索。例如，通过敲击不同容器来判断其空满状态，实现真正的“具身听觉智能”。</li></ul></section>
       <section>

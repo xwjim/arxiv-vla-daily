@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.11862v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统方法试图将无人机的轨迹规划和任务卸载进行联合优化。</li><li>核心痛点： 长期的轨迹规划与瞬时的任务决策时空强耦合，导致组合爆炸，难以实时求解。</li><li>本文切入点： 直觉上，战略（去哪儿）和战术（怎么做）可以分开。作者将长周期的轨迹规划与短周期的任务决策解耦，用不同尺度的算法分别求解。</li></ul></section><section><h3>Key Insights</h3><ul><li>决策解耦： 将长时（轨迹）与短时（卸载）决策解耦是处理复杂时空耦合问题的有效范式。它用宏观的经济学机制（拍卖）保证全局方向，用微观的智能体学习（MARL）应对局部动态，实现了“战略”与“战术”的分离。</li><li>动作生成： 引入扩散模型（Diffusion Model）作为策略网络，本质上是将动作选择从一个“判别问题”变成了一个“条件生成问题”。这使得智能体能根据当前观测，从一个先验分布中“生成”更具适应性和多样性的动作，极大提升了在不确定环境下的探索与决策质量。</li><li>资源分配： 采用 VCG 拍卖机制进行宏观资源（任务区域）分配，其核心是实现了效率与激励的兼容。它不仅让无人机基于自身能耗与任务成功率进行“报价”，还通过机制设计确保“说真话”是最优策略，从而将个体理性导向了全局最优。</li></ul></section><section><h3>Next Steps</h3><ul><li>研究动态任务生成场景下的分层决策。例如，将大尺度拍卖从一次性分配变为周期性或事件触发的动态重分配机制。</li><li>将扩散模型的生成能力从离散的卸载决策扩展到连续的轨迹微调。这可以在大尺度拍卖分配的区域内，实现更精细、更节能的实时飞行路径规划，弥合两尺度之间的空隙。</li></ul></section>
       <section>

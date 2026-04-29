@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.01748v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统世界模型依赖像素级重构来解码潜变量，以确保其包含有效信息，防止模型学到无用的东西（即潜变量坍塌）。</li><li>核心痛点： 像素重构会迫使模型关注无关紧要的视觉细节（如纹理、光照），而非对预测真正重要的环境核心动态。</li><li>本文切入点： 与其通过重构间接学习，不如直接设计正则化项，强制让布尔潜变量（0/1 编码）本身变得信息熵高、维度独立、变化稀疏，从源头塑造一个理想的潜空间。</li></ul></section><section><h3>Key Insights</h3><ul><li>[正则化 vs. 重构]： 针对布尔潜变量设计的特异性正则化是比像素重构更有效的信息保持手段。它能更直接地学习到环境的核心动态，而避免被无关的视觉噪声干扰。</li><li>[高阶统计特性]： 仅惩罚二阶相关性（协方差）不足以完全解耦潜变量。引入三阶交叉矩（余偏度）正则化能有效抑制更高阶的依赖关系，迫使每个比特位编码更独立、更纯粹的语义因子。</li><li>[结构化先验]： 将“单次动作只会引起状态的局部稀疏变化”这一物理直觉作为局部性正则化项 (Locality Regularizer)，能显著提升模型在噪声环境下的鲁棒性和泛化能力，相当于为模型注入了关于世界如何运作的先验知识。</li></ul></section><section><h3>Next Steps</h3><ul><li>将 DWMR 作为世界模型，与基于模型的强化学习（MBRL）或规划算法（如 MCTS）结合，验证其在实际决策任务中的价值。</li><li>深入研究局部性先验学习到的潜变量转换规则，探索其可解释性，看能否自动抽取出类似符号逻辑（如 PDDL）的规则。</li></ul></section>
       <section>

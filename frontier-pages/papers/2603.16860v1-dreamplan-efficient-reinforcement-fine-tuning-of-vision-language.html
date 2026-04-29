@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.16860v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 直接使用大型视觉语言模型（VLM）作为零样本（Zero-shot）规划器，生成机器人操作指令。</li><li>核心痛点： VLM 虽有常识推理能力，但缺乏对物理世界的真实感知（Physical Grounding），导致规划的动作在现实中频繁失败，而通过真实交互进行强化学习又极其昂贵且低效。</li><li>本文切入点： 作者洞察到，即使是 VLM 零样本规划器收集的次优（甚至失败）的交互数据，也蕴含了丰富的物理因果关系。这些数据足以训练一个视频世界模型，作为强化学习的廉价虚拟环境。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据有效性： 证明了无需高质量的专家数据。仅使用 VLM 初始策略收集的次优探索性数据，就足以训练出一个能够模拟复杂物理（如可变形物体）的有效世界模型。</li><li>训练范式： 成功地将计算昂贵的物理模拟（视频生成）与策略模型优化这两个环节进行解耦。通过预先生成偏好数据（好/坏动作），使得 VLM 的微调过程无需反复调用世界模型，极大提升了训练效率。</li><li>知识内化： 经过在世界模型中的「想象训练」，VLM 规划器本身的能力得到了提升。它将模拟出的物理规律内化（Internalize）到了自身的模型参数中，在实际部署时无需再依赖世界模型进行在线验证，实现了快速决策。</li></ul></section><section><h3>Next Steps</h3><ul><li>通用世界模型： 如何构建一个在多种任务和物体数据上训练的通用视频世界模型？使其能够零样本或少样本泛化到新的物理交互场景，这是通往通用物理智能的关键。</li><li>想象中的长程规划： 如何在利用世界模型进行多步推演时，有效控制和修正累积误差？这可能需要结合模型预测控制（MPC）或在想象中进行周期性的状态校正。</li></ul></section>
       <section>

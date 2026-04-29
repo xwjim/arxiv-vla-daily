@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.06207v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人主要通过端到端模型（VLA）或调用预定义技能库的层级式系统来执行任务。</li><li>核心痛点： 端到端模型泛化能力差且依赖海量数据；层级式系统则受限于有限的、固化的技能库，无法处理新颖复杂的交互。</li><li>本文切入点： 直觉上，代码是比预定义技能更灵活、更具表达力的中间表示。作者利用这一点，让代码模型充当一个“即时技能生成器”，直接编写与物理世界交互的程序。</li></ul></section><section><h3>Key Insights</h3><ul><li>范式革新：</li><li>代码是连接高级语义与低级控制的更优中间件。相比于固定的技能 API 或黑盒的端到端映射，代码提供了可解释、可组合、可泛化的策略表达方式，有效解决了预定义技能的局限性。</li><li>泛化机制：</li><li>几何抽象是实现泛化的关键。通过将视觉感知（点云）解耦为数学化的几何参数，系统能将预训练模型中关于“门”、“抽屉”等功能的常识知识，应用到任何符合该几何抽象的新物体上，而无需见过该物体。</li><li>能力依赖：</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环反馈与代码修正： 将执行过程中的错误信息或状态反馈给代码模型，让其自动调试和修正已生成的代码。这能极大提升系统的鲁棒性，并构建一个可自愈的机器人控制系统。</li><li>融合学习与代码生成： 将代码生成与少量数据学习相结合。对于代码难以精确描述的细粒度交互（如柔性物体的形变），可以利用小型策略网络进行学习，并由代码模型负责调用和编排这些学习到的技能。</li></ul></section>
       <section>

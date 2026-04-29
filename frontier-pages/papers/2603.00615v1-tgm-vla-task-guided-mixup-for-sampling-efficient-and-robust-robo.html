@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.00615v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人模仿学习依赖于从专家演示中采样关键帧 (keyframe) 进行训练。</li><li>核心痛点： 现有方法存在数据冗余、感知失效（如深色物体）和指令理解弱（易被干扰物分散注意力）三大问题。</li><li>本文切入点： 作者的直觉是，数据质量和训练策略的瓶颈比模型结构的瓶颈更致命。因此，他们选择从数据根源入手，系统性地解决采样、感知和泛化问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据质量的决定性作用： 研究发现，模仿学习的性能瓶颈常常源于数据本身的缺陷（如冗余、时序不平衡、坏样本）。通过系统性的数据诊断和清理，可以在不改变模型主体结构的情况下，实现 5倍训练加速 和显著的性能提升。</li><li>低成本感知的有效性： 针对特定物理世界的感知难题（如深色物体），一个简单、低成本的增强策略（颜色反转）可能比引入复杂的新模态（如深度图）更有效。这揭示了几何信息（深度）和颜色信息在特定场景下的不可替代性。</li><li>通过“对抗性”数据增强强化跨模态对齐： Task-Guided Mixup 本质上是创造了包含“干扰项”的复杂场景。这迫使模型不能仅依赖视觉模式，而必须真正理解语言指令与目标动作之间的不变关系，从而极大地增强了模型的指令跟随能力和抗干扰鲁棒性。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应数据课程学习 (Adaptive Data Curriculum)： 开发一个能自动评估样本质量和难度的学习框架，替代当前的人工诊断流程。模型可以从简单、高质量的样本开始学习，逐步过渡到复杂、甚至带有噪声的样本，实现自适应的课程学习。</li><li>物理一致性的场景混合 (Physics-Consistent Scene Mixup)： 当前的点云混合可能产生物体相互穿透等物理上不合理的场景。未来的研究可以探索基于场景图或物理引擎的混合技术，生成更真实、更具挑战性的训练数据，进一步提升模型的泛化能力。</li></ul></section>
       <section>

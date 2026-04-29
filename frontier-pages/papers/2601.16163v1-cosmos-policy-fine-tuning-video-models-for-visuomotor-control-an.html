@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.16163v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将视频模型用于机器人领域，以利用其学习到的物理世界时空先验。</li><li>核心痛点： 现有方法流程复杂，需要多阶段训练或引入额外的网络结构（如动作解码器）来生成动作。</li><li>本文切入点： 作者直觉地认为，强大的视频模型本身就有能力建模高维、多模态的数据分布。因此，无需修改模型结构，只需巧妙地将动作、状态值等非视觉信息“伪装”成视频帧，即可让模型直接学会。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征统一性]： 强大的视频生成模型其潜在空间不仅能表征像素，还能统一表征 机器人动作 和 抽象的状态价值。这证明了模型学习到的是一种更泛化的 “时序演化” 规律，而非狭义的视觉变化。</li><li>[先验有效性]： 对于机器人底层控制，视频模型提供的 时空动态先验 (Spatiotemporal Priors) 比视觉语言模型 (VLA) 的静态语义先验更有效。这解释了为何 Cosmos Policy 在未经过大规模机器人数据预训练的情况下，依然能在精细操作和多模态任务上超越微调后的 VLA 模型。</li><li>[规划范式]： 在基于模型的规划中，“模型预测未来状态 s&#x27;，再评估其价值 V(s&#x27;)” 的两步式范式，比 “直接预测状态-动作价值 Q(s, a)” 的一步式范式更有效且样本高效。这表明将“世界如何运转”和“结果好不好”解耦，更利于模型学习。</li></ul></section><section><h3>Next Steps</h3><ul><li>[规划加速]： 如何在不牺牲性能的前提下加速规划过程？一个可能的方向是将规划模型的“思考结果”蒸馏回一个更快的反应式策略模型中。</li><li>[深度规划]： 当前规划仅为单步（一个动作块），如何扩展世界模型的预测时域，并实现多步、更深度的规划，以解决更长时序的复杂任务。</li></ul></section>
       <section>

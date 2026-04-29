@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.15219v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 轨迹预测方法严重依赖目标的连续视觉观测。</li><li>核心痛点： 当目标完全移出视野 (out-of-sight) 且其唯一的定位信号 (如GPS) 充满噪声时，现有模型会失效。</li><li>本文切入点： 作者的直觉是，场景中可见智能体的“干净”视觉轨迹和“嘈杂”传感器轨迹，共同蕴含了两者之间的映射关系 (相机矩阵)。这个关系可以被学习并泛化用于校准不可见智能体的嘈杂轨迹。</li></ul></section><section><h3>Key Insights</h3><ul><li>[因果关系]： 轨迹预测的精度强依赖于上游去噪的质量。实验证明，一个强大的去噪模块（如本文的 VPD）可以即插即用地提升多种下游预测模型的性能，表明解决噪声问题是预测不可见目标轨迹的首要矛盾。</li><li>[机制设计]： 显式地建模几何投影关系 (Vision-Positioning Projection) 远比让神经网络隐式学习更有效。通过估计相机矩阵来建立坐标系映射，为模型引入了强大的物理先验，显著提升了去噪和定位的准确性。</li><li>[范式创新]： 提出了一种有效的跨模态、跨目标的无监督学习范式。即利用一部分数据（可见智能体）的高质量模态（视觉），来为另一部分数据（不可见智能体）的低质量模态（嘈杂传感器） 提供监督信号，解决了目标本身缺乏干净真值（Ground Truth）的困境。</li></ul></section><section><h3>Next Steps</h3><ul><li>融合场景几何先验： 将场景的3D地图或语义信息（如道路网络、建筑物布局）作为输入。这能为视线外智能体的预测提供强大的物理约束，例如，智能体不会穿过墙壁，只能沿道路移动。</li><li>多相机协同推断： 研究当场景中存在多个视角不同、可能独立移动的相机时，如何融合它们的局部观测，以更鲁棒地估计和预测一个共同的、视线外智能体的全局轨迹。</li></ul></section>
       <section>

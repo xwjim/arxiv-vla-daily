@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.11383v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人遥操作依赖昂贵的VR/力反馈设备，或需要大量演示数据进行模仿学习。</li><li>核心痛点： 现有方案 成本高昂、数据依赖性强，阻碍了低成本机器人的快速部署。</li><li>本文切入点： 回归经典机器人学，利用 解析式方法 (Analytical Method)，直接通过数学计算（逆向运动学）建立人手姿态到机器人动作的映射，绕开数据驱动的学习范式。</li></ul></section><section><h3>Key Insights</h3><ul><li>[方法论]： 在结构化任务中，免训练的解析式方法 (IK) 在性能和效率上可以超越需要大量数据训练的 端到端学习策略 (VLA)。这表明对于运动学约束明确的场景，经典方法是更直接、可靠的解决方案。</li><li>[泛化性]： 系统的核心瓶颈是 视觉遮挡，而非算法本身。从实验室（90%成功率）到真实世界（9.3%）的性能骤降，揭示了纯视觉遥操作在复杂场景中对 “目标可见性” 的脆弱依赖。</li><li>[工作流]： “模拟器预演” 是一个关键的解耦环节。它不仅能安全验证轨迹，还能将解析法生成的“完美”动作数据，转化为可用于训练 模仿学习模型 的高质量数据集，实现了两种范式的桥接。</li></ul></section><section><h3>Next Steps</h3><ul><li>[数据闭环]： 将此 IK 系统作为 高质量数据标注工具，大规模生成模仿学习所需的训练数据。用解析法的效率和精度，来解决学习方法的泛化性问题。</li><li>[多模态融合抗遮挡]： 融合 时序信息（如卡尔曼滤波） 或 其他模态（如触觉传感器），在视觉关键点短暂丢失时，对手机器人姿态进行预测和补偿，提升系统在复杂环境下的鲁棒性。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.09783v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有无人机跟踪依赖视觉（光照敏感）或大型激光雷达（不适用于小型无人机），且普遍使用固定参数的滤波器。</li><li>核心痛点： 轻量化激光雷达的非重复扫描模式产生稀疏、非均匀的点云，导致固定参数的滤波器在目标高速机动或部分遮挡时，跟踪精度差、易发散。</li><li>本文切入点： 核心直觉在于，滤波器的噪声模型不应是固定的。它必须根据实时测量数据的好坏（即新息与残差），进行动态在线调整。</li></ul></section><section><h3>Key Insights</h3><ul><li>噪声模型的适应性： 对于非重复扫描的激光雷达，其点云质量（例如，击中目标的点数）是实时剧烈变化的。任何固定的噪声模型都无法胜任，而动态调整过程噪声Q和测量噪声R是实现稳健跟踪的根本机制。</li><li>不确定性的解耦归因： 该框架通过新息 (Innovation) 调整过程噪声Q（用于应对目标真实运动与模型的偏差），通过残差 (Residual) 调整测量噪声R（用于应对传感器数据质量的下降）。这实现了对不同来源不确定性的精确建模与补偿，是自适应成功的关键。</li><li>轻量化系统的可行性： 本文证明了轻量化、低功耗的激光雷达在先进算法（AEKF）的加持下，完全有能力完成高动态、稀疏数据下的无人机跟踪任务。这为小型无人机集群的相对定位提供了高性价比、可落地的硬件+软件方案。</li></ul></section><section><h3>Next Steps</h3><ul><li>多目标跟踪扩展： 将当前的单目标AEKF框架扩展为支持多目标跟踪 (MOT) 的系统。这需要引入更复杂的数据关联算法（如JPDA）和航迹管理逻辑（生命周期管理），以适应无人机集群协同场景。</li><li>跨模态自适应融合： 将AEKF的自适应思想应用于视觉-激光雷达融合。利用滤波器的测量噪声R作为动态权重，当激光雷达数据质量差时（R增大）自动增加视觉权重，反之亦然，打造全天候、更鲁棒的跟踪系统。</li></ul></section>
       <section>

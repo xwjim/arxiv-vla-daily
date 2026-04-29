@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.19312v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流的 JEPA (联合嵌入预测架构) 通过在隐空间中预测未来来学习世界模型。</li><li>核心痛点： 现有方法极易发生 表征坍塌 (所有输入映射到同一点)，必须依赖复杂的 多项损失函数、预训练编码器或EMA等技巧来规避，导致训练不稳定且调参困难。</li><li>本文切入点： 作者认为，与其用多个复杂损失间接约束，不如直接对隐空间施加一个简单的 全局统计约束，即强制所有表征的分布服从 各向同性高斯分布。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征坍塌的解法]： 避免表征坍塌无需复杂的 多目标损失函数 或 启发式技巧 (如EMA)。施加一个简单的 全局统计约束（强制表征服从高斯分布）就足以稳定地学习到多样化且有意义的表征。</li><li>[隐空间的物理涌现]： 一个仅为 “可预测性” 和 “高斯分布” 优化的隐空间，会自发涌现出对 物理世界结构 的编码。模型能区分物理上可能与不可能的事件（如瞬移），且其表征可被线性探针解码出 具体物理量（如位置）。</li><li>[模型效率与稳定性]： 训练世界模型的 核心瓶颈 不在于模型参数量，而在于 损失函数的设计。一个设计良好、仅含两项的损失函数，能让一个 小型模型 (15M) 在单GPU上实现稳定训练，其规划效率远超大型模型（快48倍），且性能具有竞争力。</li></ul></section><section><h3>Next Steps</h3><ul><li>分层世界模型： 构建分层的隐空间，在高层级进行 长期、抽象的规划，在低层级执行 短期、具体的操作，以克服单步预测误差累积问题。</li><li>无动作标签的学习： 通过学习 逆动力学模型（即根据状态变化反推动作），让世界模型能够从未标注的视频数据中学习，摆脱对昂贵的 动作标签 的依赖。</li></ul></section>
       <section>

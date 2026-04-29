@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.02248v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在高逼真度的仿真环境（如 NeRF/GSplat）中，为特定赛道训练专用的视觉导航策略。</li><li>核心痛点： 训练出的策略严重 过拟合 于单一赛道，对赛道几何形状的变化缺乏 泛化能力，换个新赛道就失效。</li><li>本文切入点： 与其采集更多真实赛道数据，不如让一个仿真场景“活”起来。作者的直觉是，如果能 程序化地编辑 仿真环境中的赛道布局，就能以极低成本创造出无穷多的训练样本，从而打破数据瓶颈，并针对性地进行强化训练。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据范式变革：</li><li>单一真实场景的 GSplat 重建 + 程序化编辑 API，足以生成泛化性训练所需的无限数据。这颠覆了依赖“多场景真实数据采集”的传统范式，实现了 数据生成的高效闭环。</li><li>泛化能力来源：</li><li>PGR 算法 扮演了“对抗性教练”的角色，迫使策略学习 与任务强相关的视觉特征（如门），而非记忆背景等虚假关联。解耦的 感知-控制 架构进一步强化了这一点，避免了端到端黑箱的过拟合。</li><li>训练策略简化：</li></ul></section><section><h3>Next Steps</h3><ul><li>攻克遮挡问题： 结合 Edit API 程序化地生成遮挡场景，并引入记忆机制（如 LSTM 或 Transformer）到策略网络中，让无人机学会处理“看不见”的门。</li><li>扩展编辑维度与任务： 将 Edit API 从编辑“门”扩展到编辑 光照、天气、动态障碍物 等，训练出对环境变化更鲁棒的策略，并可将任务从竞速拓展至 搜索救援 等更复杂的场景。</li></ul></section>
       <section>

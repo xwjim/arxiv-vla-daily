@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.14851v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将视觉-语言-动作（VLA）能力统一到单个端到端自回归模型中。</li><li>核心痛点： 现有VLA模型将慢速的场景推理与快速的驾驶动作以相同频率同步执行，导致巨大的推理延迟，不满足真实驾驶的实时性要求。</li><li>本文切入点： 作者洞察到推理和动作的内在时间尺度不同。他们提出，可以将两者解耦，让它们在统一模型内以不同频率异步运行，从而在不牺牲性能的前提下实现高效率。</li></ul></section><section><h3>Key Insights</h3><ul><li>VLM 的功能边界： 预训练VLM仅通过提示工程就足以胜任场景理解任务。但对于驾驶决策和规划等动作级任务，领域内的微调仍然至关重要，这为VLM在自动驾驶中的应用划分了清晰的功能界限。</li><li>微调的昂贵代价： 为自动驾驶任务微调VLM的视觉语言主干，虽能略微提升特定指标，但会严重损害其通用领域的推理能力（灾难性遗忘），这种牺牲往往得不偿失。</li><li>异步推理的有效性： 推理（慢）与动作（快）的异步执行不会显著降低规划精度（L2误差仅增1.24%）。但它能将推理延迟降低86.8%，证明了该解耦策略在真实驾驶场景中的高效率与可行性。</li></ul></section><section><h3>Next Steps</h3><ul><li>参数高效的在线学习： 探索在冻结的UE上应用参数高效微调（PEFT）技术（如LoRA）。这可能使其在不破坏通用知识库的前提下，持续学习领域新知识，解决知识静态性问题。</li><li>自适应推理频率： 开发一种闭环自适应推理机制。让AE根据当前驾驶场景的复杂度或不确定性，动态调整UE的推理频率和深度，实现计算资源的按需分配。</li></ul></section>
       <section>

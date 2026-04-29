@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.08862v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人导航依赖经典规划器（需手动调参）或端到端学习（泛化差），混合方法（如APPL）尝试在线学习参数。</li><li>核心痛点： 现有参数学习方法泛化到未见环境的能力差；而直接用VLA模型输出动作则控制精度低、延迟高，不适用于狭窄空间。</li><li>本文切入点： 一种直觉上的任务解耦：让VLM做它擅长的高层场景理解（预测参数），让经典规划器做它擅长的底层精确控制（生成动作）。</li></ul></section><section><h3>Key Insights</h3><ul><li>决策层级解耦： 将VLM用于高层语义决策（预测参数），经典规划器用于底层实时控制（生成动作），是高效的解耦范式。它既利用了VLM的理解力，又规避了其在精细控制和高延迟上的短板。</li><li>预训练知识迁移： VLM强大的通用视觉预训练知识可以被成功迁移到机器人导航任务。即使输入是抽象的、非自然图像，其性能也远超从零训练的同规模模型，证明了其强大的泛化潜力。</li><li>数据效率与特征学习： 模型性能并非随数据量单调增长，在捕获了核心的“场景-参数”映射关系后，更多数据收益递减。这表明VLM主要在学习可泛化的视觉特征，而非简单地过拟合训练数据。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索端到端的参数预测，直接从原始多模态传感器（如摄像头、激光雷达）输入中学习，摆脱对定制化俯瞰图的依赖。</li><li>研究元学习（Meta-Learning）框架，让模型不仅预测参数值，还能根据场景动态选择需要调整的参数子集，甚至在多个规划器之间进行切换。</li></ul></section>
       <section>

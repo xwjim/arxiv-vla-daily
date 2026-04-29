@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.10428v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统方法依赖外部风速计或简化动力学模型，仅在静态或悬停时有效。</li><li>核心痛点： 现有方法在 动态飞行 中精度骤降，且无法摆脱对额外传感器的依赖，限制了无人机的适用性。</li><li>本文切入点： 作者的直觉是，无人机受到的 外部气动力 是风的直接体现。因此，可以先精确估计外力，再反解出风矢量，从而绕开直接测风的难题。</li></ul></section><section><h3>Key Insights</h3><ul><li>解耦估计的有效性： 将风估计解耦为 “力估计(DOB)” 和 “力-风映射(TPS)” 两个阶段，比端到端学习方法更鲁棒、更具物理可解释性，且数据需求量显著更小。</li><li>映射模型的选择： 薄板样条(TPS)模型 能有效捕捉无人机在不同朝向下的 各向异性 空气动力学特性。这优于全局多项式拟合，实现了更平滑和精确的力-风映射，并具备良好的外推能力。</li><li>物理增强的重要性： 通过加装 定制风筒 增大空气阻力，显著放大了待测的风力信号，提高了系统的 信噪比(SNR)。这证明了简单的物理结构设计能极大提升纯软件估计方法的性能，尤其在低风速下。</li></ul></section><section><h3>Next Steps</h3><ul><li>无校准/自校准风估计： 研究在线学习或自监督方法，让无人机在飞行中 自动学习力-风映射模型，彻底摆脱对风洞的依赖，实现真正的“即插即用”。</li><li>动态推力与气动建模： 建立更精细的、考虑 螺旋桨前飞比效应 的动态推力模型，以提升DOB在高速、机动飞行下的力估计精度，从而突破当前方法的性能瓶颈。</li></ul></section>
       <section>

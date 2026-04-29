@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.14965v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 机器人找物通常需要结合感知、主动观察和操作，但现有方法要么过度理想化，要么在高维规划下计算量失控。</li><li>核心痛点： 一旦把找物问题建成更真实的 3D POMDP，就会同时遇到 state space 会增长、动作空间是连续与离散混合、遮挡与观测不确定性强 三个难点。</li><li>本文切入点： 作者直接承认问题的复杂性，不回避真实感知与动作建模，而是提出一个针对 growing state space 与 hybrid action domain 的在线求解框架。</li></ul></section><section><h3>Key Insights</h3><ul><li>真正难的不是“看见目标”，而是“在不确定下做长期找物决策”： 这篇论文把 object search 的难点从 perception problem 扩展成 sequential decision problem。</li><li>高维 POMDP 仍然可以工程化： 通过 belief reuse、动作过滤和聚类离散化，作者展示了复杂 POMDP 不一定只能停留在理论层。</li><li>启发式探索在现实任务中很关键： guessed target object 看起来像技巧，但在奖励稀疏与遮挡严重时，它实际上是提升搜索效率的重要策略。</li><li>对 LLM-based search 的启示是： 语言先验并不能自动替代严格的 belief planning，在同等算力约束下，结构化规划仍有优势。</li></ul></section><section><h3>Next Steps</h3><ul><li>把语义先验和 POMDP 更深融合： 例如把语言知识作为 belief 初始化或动作过滤器，而不是替代规划本身。</li><li>做更强的 anytime / real-time 求解： 面向更大场景和更复杂家居环境继续压缩在线推理成本。</li><li>扩展到“找 + 抓 + 清障”一体任务： 让 object search 不只停留在定位层，而是延伸到真实操作闭环。</li></ul></section>
       <section>

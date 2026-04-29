@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.24249v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用贝叶斯优化 (BO) 自动整定 PID 控制器参数，以替代繁琐的人工调参。</li><li>核心痛点： 传统 BO 假设噪声恒定（同方差），无法适应无人机在不同飞行状态下（如高速机动 vs. 悬停）噪声水平动态变化的真实情况，导致调参精度和鲁棒性不足。</li><li>本文切入点： 作者的直觉是：噪声本身是可建模的，且与控制参数（输入）相关。通过为噪声方差建立一个依赖于输入的模型（异方差），可以让优化器更智能地在参数空间中进行探索和利用。</li></ul></section><section><h3>Key Insights</h3><ul><li>[噪声的本质]： 控制系统中的噪声并非均匀分布，而是与系统状态和控制参数（输入）强相关的异方差噪声。显式地为噪声建模，能让优化器更准确地评估不确定性，从而在“高噪声”区域更保守，在“低噪声”区域更大胆地探索。</li><li>[优化的规律]： 分阶段优化符合复杂系统调参的认知规律。先通过粗调解决主要矛盾（大幅误差），再通过精调解决次要矛盾（精细误差），避免了在优化早期陷入不必要的精细计算，实现了效率与效果的平衡。</li><li>[性能的归因]： 该方法对姿态角误差的改善（40.9%~78.4%）远超位置误差（24.7%~42.9%）。这深刻揭示了，对噪声的精准建模尤其有利于高频、敏感的内环控制器（姿态环）的参数寻优，因为姿态控制对扰动的响应更为直接和剧烈。</li></ul></section><section><h3>Next Steps</h3><ul><li>[元学习与自适应]： 结合元学习 (Meta-Learning)，学习一个从“轨迹特征”到“最优PID参数”的快速映射模型。这能让无人机在面对新任务时，实现“零样本”或“少样本”的参数自适应，而不是每次都从头优化。</li><li>[轻量化代理模型]： 开发轻量化的、基于神经网络的动力学代理模型来替代高成本的物理仿真。这能极大降低单次评估成本，为实现在线、持续的参数自适应优化铺平道路。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.24622v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的火灾检测研究多集中于森林等自然场景，类别单一（如仅含烟、火）。</li><li>核心痛点： 现有数据集场景单一、类别不全，无法满足城市复杂救援场景的指挥需求，导致模型泛化能力差。</li><li>本文切入点： 认识到数据是瓶颈。通过构建一个覆盖城市、类别丰富的专用数据集 (FireRescue)，并针对性设计模型来解决小目标和类别混淆问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据驱动的领域适配]： 在消防救援这类专业垂直领域，一个高质量、场景全面、类别精准的专用数据集是提升模型性能的根本前提，其价值远超通用算法的微调。</li><li>[特征增强策略]： 针对类间相似度高的目标（如不同卡车），单一的特征描述（如平均池化）不足。并行融合多种统计特征（平均值、标准差、最大值）能构建更鲁棒的特征描述符，显著提升类别区分能力。</li><li>[小目标检测范式]： 检测远距离小目标的关键在于防止其特征在下采样中被稀释。通过注意力机制（MCEA）锁定高响应前景特征，并结合动态上采样（Dysample）进行内容自适应的特征重建，是解决该问题的有效范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>[融合时序信息]： 研究基于视频流的目标检测与跟踪，利用时序信息预测目标轨迹、判断火势蔓延方向。</li><li>[迈向 3D 感知]： 融合多模态数据（如红外、激光雷达）进行 3D 场景重建与目标定位，为指挥系统提供更丰富的空间态势感知。</li></ul></section>
       <section>

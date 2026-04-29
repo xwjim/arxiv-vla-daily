@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.16176v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 依赖专业飞手手动设定航点和运镜规则，或使用预设的镜头语法库。</li><li>核心痛点： 无法理解抽象的人类意图（如“拍出宽敞的感觉”），需要专业技能，成本高且效果不一。</li><li>本文切入点： 直觉上，大模型（LLM/VFM） 能理解人类的抽象语言和审美偏好。作者利用这一点，让模型充当“导演”和“摄影师”，将意图翻译为机器可执行的空间目标。</li></ul></section><section><h3>Key Insights</h3><ul><li>语义与空间的对齐： 证明了大模型能将“宽敞”、“温馨”等抽象氛围指令，成功“接地气”地映射到3D场景中的具体区域和最佳视角选择上，实现了从高级概念到底层物理空间的语义对齐。</li><li>审美优化的代理： 发现无需定义复杂的“审美”数学公式。通过让VLM进行成对比较（例如判断“A视角比B视角更好”），即可生成有效的偏好信号，驱动贝叶斯优化迭代出更具美感的镜头。这本质上是找到了一个可计算的审美代理（Proxy）。</li><li>解耦框架的有效性： “检索-优化-规划”的三阶段解耦式框架，比单一的端到端模型在当前技术下更鲁棒和可控。它允许系统将复杂的任务分解，用最合适的工具（VLM、优化器、规划器）分别处理语义、审美和物理约束，是解决复杂机器人任务的有效范式。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“离线规划”到“在线探索与拍摄”： 将系统与 实时SLAM（同步定位与建图） 结合。让无人机一边探索建图，一边理解指令并动态规划拍摄路径，实现真正的即时智能拍摄。</li><li>从“单向指令”到“对话式创作”： 引入多轮对话能力。允许用户对生成的轨迹进行追问和修改（例如“很好，但飞得再低一点、慢一点”），将无人机从一个执行者升级为一个可交互的创作伙伴。</li></ul></section>
       <section>

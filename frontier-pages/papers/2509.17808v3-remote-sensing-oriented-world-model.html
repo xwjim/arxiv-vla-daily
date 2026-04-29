@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.17808v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 世界模型在合成环境或受限场景中进行评估，而遥感研究主要集中在分类、分割等识别任务。</li><li>核心痛点： 现有世界模型缺乏在 真实、大尺度空间 中的验证；传统评估指标无法区分 真实的地理外推 与简单的纹理复制。</li><li>本文切入点： 将遥感世界建模问题 形式化 为一个具体的、可执行的任务：方向条件下的空间外推 (direction-conditioned spatial extrapolation)。</li></ul></section><section><h3>Key Insights</h3><ul><li>[评估范式]： 评估遥感世界模型必须超越传统的视觉保真度 (如 FID)。本文证明，视觉保真度 (Fidelity) + 空间推理一致性 (Reasoning) 的 双维度评估 才是有效衡量模型能力的正确范式。</li><li>[模型偏见]： 模型表现出显著的 各向异性 (anisotropic performance)，即 水平方向 (左/右) 的外推能力显著优于垂直方向 (上/下)。这揭示了模型不仅受卫星成像物理因素影响，更继承了预训练语言模型中存在的 固有归纳偏见 (通用语料中水平关系更强)。</li><li>[数据结构]： 训练数据的 空间结构 对模型学习至关重要。消融实验证明，瓦片间的 高空间重叠率 是教会模型学习 跨边界地理连续性 的根本机制；同时，模型仅能理解 图像相对坐标 (上/下)，而无法理解 地理绝对坐标 (南/北)。</li></ul></section><section><h3>Next Steps</h3><ul><li>[全局一致性建模]： 引入一个 全局潜在地图 (Global Latent Map) 或记忆模块。模型在生成下一个瓦片时，不仅要参考前一个瓦片，还要与这个动态更新的全局地图保持一致，以抑制多步外推中的误差累积和结构漂移。</li><li>[地理信息融合]： 将 地理坐标 (如 GPS)、高程、真实方向 (南/北) 等多源地理信息作为额外的条件输入。这有望将模型从图像相对空间的推理，提升到真实地理空间的智能，实现真正的 地理感知 (Geo-aware) 世界模型。</li></ul></section>
       <section>

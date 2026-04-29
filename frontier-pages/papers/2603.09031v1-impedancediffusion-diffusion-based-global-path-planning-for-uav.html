@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.09031v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统无人机导航依赖显式地图构建（如占据栅格图）和搜索式规划算法（如 A*）。</li><li>核心痛点： 建图过程计算昂贵且在部分可观测环境下易失败；固定的控制参数无法让机器人在人、墙等不同性质的障碍物间做出差异化反应。</li><li>本文切入点： 作者的直觉是，扩散模型可以直接从原始图像中学会生成全局路径，从而跳过建图；同时，视觉语言模型 (VLM) 能理解障碍物的语义，从而动态调整蜂群的物理交互策略（阻抗）。</li></ul></section><section><h3>Key Insights</h3><ul><li>[规划范式权衡]： 不同的视觉输入模态导致了规划策略的根本性差异。</li><li>顶视图 (Top-view) 规划器生成更平滑、更直接的全局路径，追求全局效率。</li><li>第一人称视角 (FPV) 规划器生成的路径在障碍物周围保留了更大的安全间隙，虽路径更曲折，但为底层控制器留出更多反应空间，反而允许更高的局部速度。</li><li>[分层控制协同]： 生成式AI与经典控制理论的结合是实现鲁棒自主系统的有效架构。</li><li>扩散模型作为高级“战略”规划器，负责生成全局意图（去哪里）。</li></ul></section><section><h3>Next Steps</h3><ul><li>[模型蒸馏与边缘部署]： 研究如何将大型的扩散和语言模型蒸馏成轻量化版本，使其能直接在无人机机载计算平台上运行，实现真正的蜂群自主。</li><li>[学习连续的阻抗策略]： 放弃离散的参数表，转而训练一个端到端的策略网络，使其能够根据实时视觉和状态信息，直接输出连续的阻抗参数（刚度、阻尼），实现更精细、更泛化的物理交互。</li></ul></section>
       <section>

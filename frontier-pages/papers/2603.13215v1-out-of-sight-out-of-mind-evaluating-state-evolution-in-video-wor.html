@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.13215v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 已有基准主要在完全可见的条件下，评估视频的物理真实性和时序一致性。</li><li>核心痛点： 缺乏一种评估方法，来检验模型是否理解“世界独立于观测而演化”这一核心物理规律，即状态演化与观测解耦的能力。</li><li>本文切入点： 设计一个评测范式，在动态过程中主动引入观测控制（如遮挡、关灯、镜头移开），直接探查模型在观测中断后的推理能力。</li></ul></section><section><h3>Key Insights</h3><ul><li>演化-观测耦合性 (Evolution-Observation Coupling): 视频模型生成动态演化的能力与其是否能“看到”该过程紧密耦合。一旦引入遮挡或关灯等观测中断，模型的物理演化过程会普遍出现“演化停滞” (evolution stopping) 现象，仿佛看不见，世界就静止了。</li><li>动态-控制权衡 (Dynamics-Control Trade-off): 在可控相机模型中，状态演化和相机控制似乎是互斥的。当模型成功生成动态场景（如火箭发射）时，它会倾向于忽略用户的相机移动指令；反之，当相机移动被忠实执行时，场景则几乎总是完全静止的。</li><li>记忆即复现 (Memory as Memorization): 引入记忆模块的架构（如 VMem）并不能解决状态演化问题，反而加剧了对静态场景的偏见。这类记忆机制更擅长精确“复现”被遮挡前的最后一帧画面，而不是“推演”其间发生的变化，本质是“记忆”而非“推理”。</li></ul></section><section><h3>Next Steps</h3><ul><li>解耦状态表征架构： 设计一种能将隐式世界状态 (latent world state) 与像素渲染过程 (pixel rendering) 分离的视频模型架构。该状态应能根据物理规律独立更新，不受当前“视锥”内是否可见的影响。</li><li>构建“不完美观测”数据集： 针对性地创建或搜集包含大量自然遮挡、短暂中断和视角外演化的视频数据集。这不仅能直接弥补现有数据的偏差，也能为训练出真正理解世界运行规律的模型提供基础。</li></ul></section>
       <section>

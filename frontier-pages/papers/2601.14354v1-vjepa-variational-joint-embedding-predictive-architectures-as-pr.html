@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.14354v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： JEPA通过在潜空间中预测未来或缺失部分的表征，来进行自监督学习。</li><li>核心痛点： 现有JEPA是确定性的，无法建模不确定性，这限制了其在充满随机性的真实世界中进行规划与控制的能力。</li><li>本文切入点： 将JEPA从一个简单的确定性回归问题，重构为一个变分推断问题，从而引入了对未来潜变量的概率分布预测。</li></ul></section><section><h3>Key Insights</h3><ul><li>[控制与表征的解耦]： 最优控制不需要重建像素，只需要一个对未来有足够预测能力的潜空间信息状态 (Sufficient Information State)。VJEPA通过潜空间预测直接学习这种状态，绕开了像素重建的计算瓶颈。</li><li>[序列建模的本质]： 序列建模不等于在观测层面（如像素）进行自回归预测。VJEPA在潜空间进行序列预测，从而绕开了对高熵、无关细节（如随机噪声）的建模，使其在嘈杂环境中更鲁棒、更具可扩展性。</li><li>[对噪声的内在免疫力]： 基于像素重建的生成式模型被迫为高熵噪声分配建模能力，而VJEPA的潜空间预测目标使其天然忽略与预测未来无关的噪声。这是一种架构层面的优势，而非简单的技巧。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端学习潜空间成本函数： 本文假设规划所需的成本函数 c(Z) 已知或可另外学习。一个关键方向是，将VJEPA与逆向强化学习或基于偏好的学习结合，直接从专家演示或人类反馈中端到端地学习这个潜空间成本函数。</li><li>层级化VJEPA (Hierarchical VJEPA)： 当前VJEPA是单层预测模型。构建一个层级化的VJEPA，使其能在不同时间尺度和抽象层次上进行预测，将是实现长时程、分层规划（如先定大目标，再定小步骤）的关键一步。</li></ul></section>
       <section>

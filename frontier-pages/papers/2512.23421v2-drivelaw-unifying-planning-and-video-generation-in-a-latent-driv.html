@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.23421v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有世界模型将视频生成和轨迹规划作为并行任务，分别训练和输出。</li><li>核心痛点： 视频生成和规划模块解耦，规划器无法利用生成模型对物理世界的深度理解，导致想象与行动脱节。</li><li>本文切入点： 作者认为视频生成器学习到的中间层隐特征，已蕴含丰富的世界动态和物理规律，是比传统BEV或VLM特征更优的规划输入。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征质量： 视频生成模型（VGM）的中间隐特征比传统的BEV或VLM特征更清晰、噪声更少、语义更连贯，是更优的驾驶规划表征。这为端到端自动驾驶提供了一种新的、更高质量的中间表示。</li><li>架构统一性： 将视频生成与规划从并行解耦转变为串联驱动，能显著提升规划性能。这证明了利用生成先验指导决策的内在一致性优于简单的多任务学习。</li><li>特征时机： 在视频生成（去噪）的早期阶段提取的隐特征，对规划任务的效果最好。这表明，过于接近最终像素的、细节丰富的后期特征反而可能包含冗余信息，干扰决策。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建交互式生成闭环： 将规划器的输出反馈给视频生成器，使其能够根据自车动作实时“想象”和渲染世界的动态变化，实现真正的闭环仿真世界模型。</li><li>融合多模态与长尾场景生成： 将LiDAR、高清地图等信息融入生成过程，并探索如何利用该框架主动生成和学习长尾、危险场景，以提升规划器在极端情况下的鲁棒性。</li></ul></section>
       <section>

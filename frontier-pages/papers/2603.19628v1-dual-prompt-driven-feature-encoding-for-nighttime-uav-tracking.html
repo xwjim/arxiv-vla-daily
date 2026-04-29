@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.19628v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流跟踪器依赖强大的通用特征编码器（如 ViT），但在特定恶劣场景下适应性不足。</li><li>核心痛点： 现有方法普遍忽略了夜间光照和无人机剧烈视角变化这两个最关键的变量，导致特征提取在低信噪比下失效。</li><li>本文切入点： 与其让模型盲目适应，不如主动提供“提示”（Prompts），显式地将光照和视角这两种先验知识注入到特征编码过程中，进行精确引导。</li></ul></section><section><h3>Key Insights</h3><ul><li>[适应范式]： 针对特定退化场景（如夜间），显式、可学习的提示（Prompt） 比通用的无监督域自适应方法更稳定、更有效。它将模糊的“适应”问题转化为具体的“引导”问题。</li><li>[问题解耦]： 成功地将夜间跟踪的混合挑战分解为光照和视角两个相对正交的问题。通过设计专用提示器分别建模，比单一、笼统的增强方案更具鲁棒性。</li><li>[双向交互机制]： 鲁棒的特征编码源于一个动态反馈闭环。提示不仅单向地“指导”特征，特征的上下文也能反向“进化”提示，最终实现协同优化，而非简单的信息注入。</li></ul></section><section><h3>Next Steps</h3><ul><li>多维度的“逆境”提示： 将提示驱动的思路从光照/视角扩展到更多维度，如运动模糊、遮挡、天气等，构建一个通用的“逆境自适应”跟踪框架。</li><li>提示间的协同与融合： 探索光照提示与视角提示之间可能存在的高阶交互。例如，在特定视角下，光照信息的权重是否应该动态调整，以实现更智能的特征调制。</li></ul></section>
       <section>

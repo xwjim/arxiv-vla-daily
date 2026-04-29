@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.28565v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA 模型遵循「观察 → 生成动作块 → 执行动作块」的同步串行流程。</li><li>核心痛点： 机器人每执行完一串动作，都必须停下来等待模型完成新一轮的观察和思考，导致执行卡顿 (halting) 和高延迟。</li><li>本文切入点： 作者的直觉是，机器人模型的各个处理阶段（观察、生成、执行）不必相互等待，可以通过异步并行，像流水线一样重叠（overlap）起来，从而消除等待时间。</li></ul></section><section><h3>Key Insights</h3><ul><li>范式转变： 机器人动作生成的核心，可以从「去噪预测一个静态的动作块」转变为「预测一个动态的、连续的动作流轨迹」。后者更符合物理世界的连续性，且天然适合流式处理，是解决卡顿问题的根本。</li><li>动作的非均质性： 并非所有动作都对未来产生同等重要的影响。识别出那些高显著性（high-saliency）的关键动作（如拉开抽屉），并只在执行低显著性动作时进行并行观察，是平衡加速效果与任务成功率的关键。</li><li>架构的内在约束： 在转向状态累加的流式模型时，传统的归一化层 (Normalization Layer) 会破坏动作的可加性，导致模型无法训练。这揭示了在设计连续决策模型时，必须关注基础算子对物理属性（如累加性）的保持。</li></ul></section><section><h3>Next Steps</h3><ul><li>内生化显著性预测： 如何让 VLA 模型内生적으로 (intrinsically) 感知动作的显著性，而不是依赖外部预测器？这能让模型在决策时，自主决定何时“分心”去提前观察。</li><li>从流式执行到流式推理： 当前工作只实现了低层动作的流式处理。未来能否将此思想扩展到高层任务规划，实现机器人在执行一个长程任务时，根据新观察动态、流式地调整后续计划？</li></ul></section>
       <section>

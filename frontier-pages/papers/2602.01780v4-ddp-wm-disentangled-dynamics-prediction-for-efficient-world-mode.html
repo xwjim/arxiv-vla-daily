@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.01780v4">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用 稠密的 Transformer 在预训练视觉特征空间中，对所有像素区域进行无差别、高成本的未来状态预测。</li><li>核心痛点： 现有模型计算开销巨大，在静态背景上浪费了绝大多数算力，导致 无法实时部署 于需要高频决策的机器人（如 MPC）。</li><li>本文切入点： 作者洞察到物理场景的动态是 异构 的。他们假设可以将动态分解为由物理交互驱动的 稀疏“主体动态” 和由前者引发的 “上下文驱动的背景更新”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[规律] 动态的可解耦性： 视觉世界模型的动态演化并非铁板一块，而是可以被根本性地分解为两种不同性质的运动：由物理作用力直接导致的 稀疏、高频、非线性的“主体动态”，以及由主体变化引发的 全局、低频、近似低秩的“背景上下文更新”。</li><li>[机制] 规划的平滑性是关键： 简单的稀疏模型（只预测前景、复制背景）之所以在闭环规划中失败，并非因其开环预测精度不够，而是因为它为规划器制造了一个 崎岖、充满“悬崖”的优化目标景观。LRM 模块的核心价值在于 “抚平” 这个景观，为规划器提供一个平滑、单峰的“引力井”，从而保证了规划的成功。</li><li>[架构] 因果流的显式建模： LRM 模块的架构设计（背景 Query 已预测 的前景 Key/Value）巧妙地将物理世界的 单向因果链 编码到了网络结构中。这种“前景动、背景随之变”的不可逆信息流，是实现高效且自洽背景更新的底层原因。</li></ul></section><section><h3>Next Steps</h3><ul><li>自适应计算分配： 能否超越“前景/背景”的二元划分？可以探索用 MoE (Mixture of Experts) 架构，让模型学会根据不同区域动态的复杂性，自适应地为其分配不同计算量的“专家”模块进行预测。</li><li>端到端联合微调： 尝试将视觉编码器与动态预测器进行 端到端的联合微调。这可能让模型学到一种更利于动态解耦的视觉表征，进一步提升性能。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.16229v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 过去的潜在动作模型（LAM）使用一个单一、整体性 (monolithic) 的潜在动作向量来表征整个视频帧之间的变化。</li><li>核心痛点： 当场景中存在多个独立行动的实体时，单一动作向量难以压缩和表达所有并行的复杂动态，导致模型失效。</li><li>本文切入点： 直觉上，世界是由多个独立或半独立的实体组成的。因此，不应将它们的行为强行耦合，而应将场景和动作都进行因子化 (factorization)，为每个动态单元分配独立的动作表征。</li></ul></section><section><h3>Key Insights</h3><ul><li>动态驱动的表征解耦 (Dynamics-Driven Disentanglement)：</li><li>传统的物体表征学习主要依赖视觉相似性。而 FLAM 通过端到端联合训练，迫使模型将动态行为独立的实体分到不同的 slot 中。这意味着，即使两个物体外观相似，但只要运动模式不同，模型也会倾向于将它们分开。</li><li>组合泛化能力 (Compositional Generalization)：</li><li>单一动作模型必须学习所有实体动作的组合，这在组合爆炸时是不可能的。FLAM 只需学习每个实体在共享动作空间中的行为模式。这使得模型能更好地泛化到未见过的实体动作组合场景，甚至在实验中超越了使用真实（但单一化）动作标签的模型。</li><li>对因子数量的鲁棒性 (Robustness to Factor Count)：</li></ul></section><section><h3>Next Steps</h3><ul><li>融合基础模型 (Integration with Foundation Models)： 将 FLAM 的因子化动态建模思想与大型预训练视觉编码器 (如 ViT) 和扩散/流匹配等更强的解码器相结合，以构建一个可扩展、高保真的通用多实体世界模型。</li><li>结构化与层级化因子 (Structured &amp; Hierarchical Factors)： 当前模型假设所有因子是完全独立的。未来的研究可以探索因子间的依赖关系和层级结构（例如，人的“手”因子控制“杯子”因子），从而对更复杂的物理交互进行建模。</li></ul></section>
       <section>

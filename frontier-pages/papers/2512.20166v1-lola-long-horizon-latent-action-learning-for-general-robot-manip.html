@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.20166v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流 VLA 模型直接使用 VLM 提取的视觉语言特征，或简单地将其与机器人本体状态（如关节角度）进行拼接 (Concatenation)。</li><li>核心痛点： 简单的特征拼接导致模态对齐微弱，视觉语言表征与物理世界脱节，在长时程任务中易出现误差累积和动作不连贯。</li><li>本文切入点： 作者认为，机器人动作与其物理状态紧密耦合。因此，应利用机器人本体状态 (Proprioception) 作为物理世界的“锚点”，去深度重塑 (Re-represent) 抽象的视觉语言表征，而非简单拼接。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征物理锚定 (Representation Grounding)：</li><li>将机器人本体状态作为一种结构性约束，深度、逐层地重塑视觉语言特征，比将其作为附加信息进行简单拼接，能更有效地生成物理上合理的动作序列。这是一种从“信息相加”到“结构性重塑”的范式转变。</li><li>时序信息分层 (Hierarchical Temporal Information)：</li><li>长时程任务中，不同时间尺度的信息价值不同。模型仅需高分辨率的当前帧来保证动作精度，而低分辨率的历史帧已足够提供任务进展、速度等上下文，这是一种计算高效的时序信息处理策略。</li><li>深度融合架构 (Deep Fusion Architecture)：</li></ul></section><section><h3>Next Steps</h3><ul><li>探索闭环自适应策略： 结合本文的物理锚定思想，研究如何让模型预测未来状态并与实际观测进行比对，当出现显著偏差时，能够动态生成纠正性动作，从“模仿”走向“自适应”。</li><li>轻量化的物理锚定机制： 研究更高效的深度融合方法，例如使用参数高效微调 (PEFT) 技术或设计更轻量的融合模块，以在保持物理锚定效果的同时，大幅降低 SALR 模块的计算开销。</li></ul></section>
       <section>

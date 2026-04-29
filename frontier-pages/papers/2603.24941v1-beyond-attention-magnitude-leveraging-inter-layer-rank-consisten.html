@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.24941v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： VLA模型加速普遍依赖注意力大小（attention magnitude）来筛选重要的视觉Token。</li><li>核心痛点： 简单依赖注意力大小并不可靠，有时高注意力的Token反而是噪声，会损害模型性能。</li><li>本文切入点： 直觉：当模型“固执地”在各层都关注同样几个Token时（高层间排序一致性），可能陷入了虚假关联；反之，排序的动态变化才是健康的。</li></ul></section><section><h3>Key Insights</h3><ul><li>[注意力大小的不可靠性]： 高注意力Token并非总是任务关键信息，在某些任务中（如Drawer），它们反而是噪声，剔除后性能反而提升。这揭示了其任务依赖性和状态依赖性。</li><li>[层间排序一致性的信号价值]： 层间排序一致性 (Kendall&#x27;s τ) 是一个比注意力大小或熵更可靠的元指标。它能有效区分高注意力Token是“真信号”还是“假噪声”的场景。</li><li>[“一致性”反而是陷阱]： 反直觉地，高一致性（高τ值）往往意味着模型陷入虚假关联（如背景纹理），注意力被“锁定”；而低一致性（排序波动）反而是模型在各层健康地提炼和更新信息的标志。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索τ指标的因果机制：深入研究Transformer内部信息流，解释为何“注意力锁定”与“虚假关联”强相关，建立从计算现象到模型决策的理论桥梁。</li><li>语言指令引导的动态剪枝：将语言指令的语义信息融入剪枝过程，让模型能根据“拿起红色积木”等具体指令，主动保留与颜色、物体相关的Token，而非仅依赖通用的统计指标。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.04600v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法以人为中心（Human-motion-centric），优先保证人体运动的物理合理性。</li><li>核心痛点： 现有方法对相机姿态信息利用不足，且无法有效融合相机位移信息，导致全局轨迹漂移。</li><li>本文切入点： 放弃将相机轨迹作为硬性约束的“硬解码”思路，转而将其视为一种可学习的几何先验，让模型在联合任务中隐式学习相机与人体的运动关联。</li></ul></section><section><h3>Key Insights</h3><ul><li>[相机姿态解耦]： 相机旋转可以被解析地分解。与之前依赖复杂几何算子或隐式学习的方法不同，本文证明只需估计 roll-pitch 两个自由度，就能通过递推积分无误差地恢复全局航向。这是一种更高效、可解释且可扩展的姿态利用方式。</li><li>[相机位移融合]： 直接硬解码相机位移来约束人体轨迹是次优策略。由于深度模糊等问题，这种硬约束常引入不自然的运动。本文发现，将相机速度作为上下文特征，让模型在辅助任务中隐式学习其与人体运动的关联，是更有效的融合范式。</li><li>[相机-人体联合建模]： 相机和人体的运动轨迹是强相关的，应被联合建模。通过多任务学习（同时预测人体和相机速度）和特定的损失函数（如教师强制策略），模型可以在一个统一框架内相互约束，显著提升各自轨迹的物理合理性和时序一致性。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端联合优化： 将上游的 SLAM 模块纳入整个学习框架，实现相机轨迹估计与人体运动重建的端到端联合学习，摆脱对预计算轨迹的依赖，可能解决误差累积问题。</li><li>构建更丰富的世界模型： 当前仅用了相机速度作为上下文。未来可以引入更复杂的场景几何、物理交互（如地面接触、物体交互）等信息，构建一个更全面的“世界模型”来联合约束相机与人体的轨迹生成。</li></ul></section>
       <section>

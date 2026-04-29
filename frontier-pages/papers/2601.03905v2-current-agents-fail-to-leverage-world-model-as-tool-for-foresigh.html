@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.03905v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 普遍认为，为 Agent 配备一个能模拟未来的 世界模型，可以增强其规划和决策能力。</li><li>核心痛点： 这种假设从未被系统性地验证过。我们只知道世界模型越来越强，但不知道 Agent 是否会用、何时会用、以及用得好不好。</li><li>本文切入点： 将 世界模型 从一个内置能力，重新定义为一个 Agent 可以选择性调用的外部 “工具”。通过这个视角，来观察和量化 Agent 与这个新工具的交互行为。</li></ul></section><section><h3>Key Insights</h3><ul><li>[行为洞察]： Agent 普遍不愿意主动调用世界模型。即使在任务明显需要预见未来的情况下，调用率也极低（&lt;1%），表现出对自身内部推理的过度自信。</li><li>[机制洞察]： 问题的核心不是世界模型的模拟质量，而是 Agent 的 “预见治理能力” (Foresight Governance) 的缺失。Agent 不知道该问什么（输入治理）、如何解读模拟结果（意义治理）、以及如何整合模拟信息来指导行动（行动治理）。</li><li>[反直觉发现]： 调用世界模型的次数与任务成功率呈 负相关。频繁调用并非代表深思熟虑，而往往是 Agent 陷入困惑、反复试错的信号，最终导致行动循环或性能下降。</li></ul></section><section><h3>Next Steps</h3><ul><li>设计专门的“预见整合模块”： 开发独立的决策器 (Decider) 和反思器 (Reflector) 模块，强制 Agent 进行结构化的模拟与反馈循环，而不是依赖开放式的思维链。</li><li>针对性训练 Agent 的工具使用能力： 通过强化学习或高质量 SFT 数据，直接奖励 Agent “在关键时刻提出有价值的、多样化的模拟请求” 的行为，而非仅仅奖励最终任务成功。</li></ul></section>
       <section>

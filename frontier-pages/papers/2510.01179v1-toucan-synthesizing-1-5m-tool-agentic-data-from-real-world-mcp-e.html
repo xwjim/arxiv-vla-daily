@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2510.01179v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 训练 LLM Agent 需要大量的工具调用（Tool-Use）数据。</li><li>核心痛点： 已有的开源数据集要么是规模小，要么是工具响应由 LLM 模拟而非真实执行，导致数据缺乏真实性、多样性和复杂性。</li><li>本文切入点： 与其模拟，不如玩真的。作者的直觉是，利用 Model Context Protocol (MCP) 这个标准化接口，直接去对接和调用真实世界中已经存在的数百个线上服务，从而生成最真实的交互数据。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练效率]： 高质量、真实世界的合成数据可以显著提升模型的参数效率。用 Toucan 微调的小模型（如 7B），其工具使用能力能超越未训练的、规模大得多的模型（如 70B+），实现了“以小博大”。</li><li>[数据真实性]： Agent 训练数据的真实性是关键。相比于完全由 LLM 模拟工具返回，直接对接并执行真实世界的 MCP 服务器，是生成高质量、可信轨迹的根本保障，这使得模型能更好地泛化到真实应用。</li><li>[数据结构]： 优秀的 Agent 能力并非来自单一维度的训练。实验证明，核心轨迹、负样本（无关性）、复杂任务和多轮交互这几个部分缺一不可，共同构成了训练一个鲁棒 Agent 的最小数据组合。</li></ul></section><section><h3>Next Steps</h3><ul><li>开发“专家模拟器” (Expert Simulator)： 训练一个能高保真模拟工具执行结果的专家模型。这可以在保证一定质量的前提下，大幅降低数据生成的成本和时间，解决上述局限 2。</li><li>自动化工具发现与集成 (Automated Tool Onboarding)： 开发一个“自动化入职 Agent”，能自动发现、理解并集成新的 MCP 服务器，解决手动筛选和配置的瓶颈，实现数据生态的自扩展。</li></ul></section>
       <section>

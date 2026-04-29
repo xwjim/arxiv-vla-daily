@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.10958v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 业界普遍使用 图像/视频级感知指标 (如 FVD, LPIPS) 来评估生成式世界模型的质量。</li><li>核心痛点： 生成的世界 “看起来真，但动起来假”。现有指标无法衡量其几何一致性、物理合理性及在闭环控制中的功能可靠性。</li><li>本文切入点： 直觉上，一个“真实”的世界不仅要视觉逼真，更要 行为自洽。作者将评估维度从单一的“生成质量”分解为 五个正交且互补的方面，形成一个全面的评估体系。</li></ul></section><section><h3>Key Insights</h3><ul><li>模型能力的不均衡性： 现有世界模型存在显著的 能力权衡 (trade-off)。例如，视觉纹理强 的模型（如 OpenDWM）往往 物理一致性较差；而 几何稳定 的模型（如 DiST-4D）在 下游任务 和 人类偏好 中表现更优。这表明，单一维度的优化会导致模型能力的“偏科”。</li><li>视觉保真度与功能性的脱钩： 高 感知质量 (如低 FVD/LPIPS) 并不直接转化为高 下游任务性能 或 闭环控制稳定性。所有模型在 闭环仿真 中都迅速失效，证明了当前生成的数据在功能上仍不可靠。模型的 任务分布对齐 和 因果真实性 比单纯的视觉真实感更关键。</li><li>几何一致性的核心作用： 几何一致性 (如稳定的深度和多视角连贯性) 是实现 物理真实性 和 可重构性 的基础。实验发现，人类对“真实感”的主观判断也与模型的 几何和时间稳定性 强相关，而非仅仅是纹理细节。</li></ul></section><section><h3>Next Steps</h3><ul><li>从“评估者”到“优化者”： 将 WorldLens-Agent 作为 奖励模型 (Reward Model)，通过强化学习（类似 RLHF）直接对生成式世界模型进行微调，使其生成的内容在物理和行为上更符合人类偏好。</li><li>面向闭环的因果世界模型： 当前模型在闭环中普遍失败，核心在于缺乏对 物理因果 的建模。下一步应研究如何将 显式的物理规律 或 可微物理引擎 融入生成过程，以实现长时程、高保真的闭环仿真。</li></ul></section>
       <section>

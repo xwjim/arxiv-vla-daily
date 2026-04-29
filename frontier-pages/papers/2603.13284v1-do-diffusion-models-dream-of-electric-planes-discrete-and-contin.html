@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.13284v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统工程设计依赖物理仿真器进行迭代优化，而基于仿真的推理（SBI）尝试“逆向”学习此过程。</li><li>核心痛点： 真实工程设计（如飞行器）的参数空间是混合（离散+连续）且维度可变的（例如，增加一个机翼会增加一批新参数），传统 SBI 方法难以处理。</li><li>本文切入点： 将复杂的设计问题分层解耦。直觉是：先决定宏观的“骨架”（拓扑结构），再填充具体的“血肉”（连续参数），从而将一个棘手的可变维度问题拆解为两个更简单的固定流程。</li></ul></section><section><h3>Key Insights</h3><ul><li>[解耦与分层]： 复杂混合设计空间的核心难题可以通过“先定结构，再定参数”的层级分解来攻克。这种分而治之的策略，是让生成模型处理可变维度问题的关键。</li><li>[泛化与共享]： 通过拓扑掩码 (Topology Masking)机制，单一模型（MaskeDiT）能学会整个包含144种不同配置的庞大家族的设计规律。这证明了模型可以跨不同设计结构进行知识共享和泛化，而非为每个结构训练一个“专家模型”。</li><li>[物理规律涌现]： 模型在没有被直接灌输物理公式的情况下，仅通过学习仿真数据，就能自主“发现”并复现核心的空气动力学规律。例如，它能生成符合“阻力与升力平方成正比”这一物理直觉的设计，证明了其捕捉到了设计空间背后的物理本质。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环主动学习 (Closed-Loop Active Learning)： 将生成模型与仿真器结合成一个闭环系统。模型生成新奇、高潜力的设计 -&gt; 仿真器验证 -&gt; 新数据反哺模型，从而主动探索设计空间的未知领域。</li><li>约束与多目标生成 (Constraint &amp; Multi-Objective Generation)： 在生成过程中直接融入硬性约束（如最大翼展、成本上限）和多目标优化（如同时最小化阻力和最大化航程），使模型能直接生成“可用”而非“可能”的设计方案。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.05410v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 深度学习方法（如 PSMNet）精度高但计算昂贵；传统方法（如 SGBM）速度快但依赖手动调参。</li><li>核心痛点： 传统算法 SGBM 的性能高度依赖十几个相互影响的参数，手动调参耗时、困难且难以泛化，尤其是在无人机多变的真实环境中。</li><li>本文切入点： 将参数调节问题 重新定义为一个最优化问题。作者直觉地认为，遗传算法 (GA) 的全局搜索能力可以系统性地探索高维参数空间，自动找到比人类经验更优的参数组合。</li></ul></section><section><h3>Key Insights</h3><ul><li>[优化本质]： 自动化参数优化本质上是在 效率与精度之间寻找新的帕累托前沿。本文证明，传统算法的性能瓶颈很多时候并非算法本身，而是 参数配置的复杂度 超出了人力优化的范畴。GA 提供了一种系统性的解决方案。</li><li>[评估导向性]： 优化目标（适应度函数）直接决定了“最优解”的特性。 | 优化目标 | 优化结果特性 | 适用场景 | | :--- | :--- | :--- | | MSE (均方误差) | 倾向于最小化像素级数值误差，但可能牺牲局部结构。 | 对整体误差敏感的场景。 | | PSNR (峰值信噪比) | 产生更均衡的误差分布，图像整体质量较好。 | 通用图像质量评估。 | | SSIM (结构相似性) | 最能保留树枝的边缘和结构完整性，尽管像素误差可能不是最低。 | 本文核心应用（树枝分割与定位）的最佳选择。 |</li><li>[泛化能力]： GA 找到的参数集具有更强的泛化能力。手动为图像 A 调优的参数在图像 B 上可能完全失效，而 GA 在优化过程中隐式地学习到了对光照、背景变化更鲁棒的参数组合，这对于需要在野外作业的无人机至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>[从离线到在线]：研究无需“黄金标准”的在线适应度评估函数（例如，基于左右视图一致性、视差图平滑度等自监督信号），让无人机能够在飞行中实时、持续地微调 SGBM 参数以适应环境变化。</li><li>[元学习参数预测]：训练一个轻量级的元学习网络 (Meta-Learner)，其输入是立体图像对的特征，直接预测出当前场景下最优的 SGBM 参数集。这将遗传算法的“搜索”过程转变为一个极快的“推理”过程，有望实现真正的实时自适应。</li></ul></section>
       <section>

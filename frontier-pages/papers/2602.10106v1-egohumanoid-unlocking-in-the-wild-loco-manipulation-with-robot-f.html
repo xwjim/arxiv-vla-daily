@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10106v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 类人机器人的技能学习主要依赖于在实验室内进行的机器人远程遥操作来收集数据。</li><li>核心痛点： 遥操作数据成本高、效率低、场景单一，导致训练出的模型难以泛化到多变的真实世界环境中。</li><li>本文切入点： 作者的直觉是，人类日常行为本身就是最丰富、最多样化的移动-操作数据源。关键在于设计一套机制，有效弥合人类与机器人在形态和视角上的巨大差异 (Embodiment Gap)。</li></ul></section><section><h3>Key Insights</h3><ul><li>[泛化能力]： 少量昂贵的机器人数据与大量廉价的人类数据结合进行协同训练，能让机器人的泛化能力远超纯机器人数据训练，尤其是在从未见过的真实环境中，性能提升 51%。</li><li>[技能迁移不对称性]： 人类数据中的粗粒度移动、导航技能可以非常高效地迁移给机器人。但精细操作技能因形态差异（手部结构、臂长等）迁移效果较差，仍需机器人自身数据来“校准”。</li><li>[数据价值]： 人类演示数据的场景多样性比单纯的数量更能驱动机器人的零样本泛化能力。在不同场景中收集的数据，能让机器人在面对全新环境时表现更佳。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索更优的跨物种动作表示： 设计一种能隐式编码旋转意图、超越简单位姿增量的潜在动作空间 (Latent Action Space)，以解决精细操作中的模糊性问题。</li><li>大规模人类视频预训练： 利用互联网级别的无标签第一视角视频 (如 Ego4D) 进行预训练，学习通用的物理世界先验知识，再用本文的对齐数据进行下游任务微调，有望实现能力跃迁。</li></ul></section>
       <section>

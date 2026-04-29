@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.07837v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 在模拟器中训练策略，再迁移到单个真实机器人上进行微调或部署。</li><li>核心痛点： 真实世界数据收集慢、实验易中断、异构机器人和云边协同难以统一管理。</li><li>本文切入点： 将机器人从被动的“环境”提升为与GPU同等地位的“计算资源”，用系统工程思维而非纯算法思维来解决物理世界的学习效率和稳定性问题。</li></ul></section><section><h3>Key Insights</h3><ul><li>[范式转变]： 真实世界机器人学习的瓶颈已从算法转向系统工程。高效、可扩展的在线学习依赖于将机器人、网络、存储统一管理的系统级抽象，而非单纯的算法优化。</li><li>[效率本质]： “全异步”是最大化真实世界数据效率的关键。它将最慢的物理交互环节与高速的计算环节解耦，使昂贵的机器人时间得到充分利用，避免了因计算或网络延迟导致的“空等”。</li><li>[数据价值]： 持久化数据存储是实现长期自主学习的基石。它将瞬时经验转化为可复用、可恢复的长期资产，使策略能够跨越数天乃至数周的实验周期进行迭代，并从历史数据中持续学习。</li></ul></section><section><h3>Next Steps</h3><ul><li>[系统级自适应调度] - 开发更高层次的调度策略，让系统能根据各机器人的学习进展、数据质量动态调整资源分配（如训练优先级、探索策略），实现“智能化的在线学习管理”。</li><li>[联邦化机器人学习网络] - 将USER框架扩展为去中心化的联邦学习系统。允许多个机构的异构机器人安全地共享模型更新而非原始数据，共同训练一个大规模的通用机器人基础模型。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.08325v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的机器人策略（VLA模型）依赖固定或腕部相机，被动接收 视觉信息。</li><li>核心痛点： 无法主动调整视角和分辨率，导致在 长时程、有遮挡或精细 的任务中，因看不清、看不全而失败。</li><li>本文切入点： 模仿人类 “先粗后精” 的感知模式，让模型先从全局定位出 任务关键区域，再主动优化观察该区域的 视角和分辨率。</li></ul></section><section><h3>Key Insights</h3><ul><li>[感知策略]： “先定位后优化” 的两阶段感知策略，比端到端被动感知更有效。它将 “看哪里”（全局定位） 和 “怎么看”（局部优化） 解耦，显著提升了在复杂场景中的决策鲁棒性。</li><li>[表征融合]： 将 3D 空间信息（点云） 投影为 多视图 2D 图像，是融合 3D 结构与 2D 预训练模型能力的有效范式。这既保留了3D几何先验，又充分利用了VLM强大的2D理解能力。</li><li>[主动性价值]： 主动感知具有 层次化价值。主动选择视角 (解决遮挡和不完整性) 和 主动放大 (提升局部细节分辨率) 是两个正交且互补的能力，它们共同构成了实现高精度操作的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>[学习主动性]： 将 “何时”以及“如何”进行主动感知 本身作为策略的一部分进行学习（例如使用强化学习），而不是依赖固定的启发式规则，实现端到端的自适应感知决策。</li><li>[感知与动作并行]： 探索 感知与动作的并行化，即在执行初步动作的同时进行主动感知，而不是严格的“感知-行动”串行循环，以缩短任务总耗时，应对动态环境。</li></ul></section>
       <section>

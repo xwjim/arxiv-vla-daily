@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.10719v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端驾驶依赖单一视觉骨干网络，或直接用更强的 VLM (视觉语言模型) 替代。</li><li>核心痛点： 对 VLM 和传统视觉模型（如 ViT）在驾驶任务中的本质差异理解不清，只停留在精度-成本的表面权衡。</li><li>本文切入点： 直觉上，VLM 和 ViT 可能不是简单的强弱替代关系，而是在表征和行为上存在互补性，尤其在长尾场景中，这种互补性可以被系统化地利用。</li></ul></section><section><h3>Key Insights</h3><ul><li>[表征趋同性]： 尽管 VLM 和 ViT 的底层视觉表征差异巨大 (CKA ≈ 0.22)，但经过规划器 (Planner) 的“提纯”后，它们在最终决策层的表征会变得惊人地相似 (CKA ≈ 0.54)。这说明规划任务本身会迫使不同模型学习一个相似的决策空间。</li><li>[行为互补性]： VLM 和 ViT 并非简单的包含与被包含关系，而是在驾驶风格上存在本质差异。VLM 倾向于更激进，而 ViT 更保守，在约 2-3% 的长尾场景中，它们各自拥有对方无法比拟的决定性优势。</li><li>[选择机制的错位]： 模型底层的表征差异并不能有效预测其在具体场景下的优劣。有效的决策融合必须发生在下游的行为/轨迹层面（即评价最终结果），而非上游的特征层面（即分析中间过程）。</li></ul></section><section><h3>Next Steps</h3><ul><li>[在线自适应决策]： 能否让模型在线、动态地生成候选轨迹，而不是依赖两个固定的“风格”端点？例如，根据场景难度自适应调整规划的“激进”或“保守”程度。</li><li>[可解释的轨迹选择]： 能否利用 VLM 的语言能力，让 Scorer 不仅输出分数，还能用自然语言解释“为什么”选择某条轨迹？这将极大增强系统的安全性和可信度。</li></ul></section>
       <section>

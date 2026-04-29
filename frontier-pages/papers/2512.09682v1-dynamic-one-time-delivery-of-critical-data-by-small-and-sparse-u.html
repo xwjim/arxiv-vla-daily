@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.09682v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有研究使用多智能体强化学习（MARL）控制无人机群，主要用于维持持续的通信中继网络。</li><li>核心痛点： MARL算法在智能体数量增加时性能急剧下降（伸缩性差），且学术界缺乏一个可靠、非平凡的基准（Baseline）来公正地衡量其真实能力。</li><li>本文切入点： 与其直接改进MARL算法，不如先设计一个专为“伸缩性研究”服务的标准化任务（动态数据传递），并提供一个强大的传统算法（基于 Dijkstra）作为“试金石”来暴露现有方法的真实瓶颈。</li></ul></section><section><h3>Key Insights</h3><ul><li>MARL的伸缩性边界： 现成的MARL算法（如 MAPPO）在智能体数量较少（&lt;7）时表现优异，但一旦超过某个阈值，性能便会“断崖式”下跌。这暴露了其在处理复杂组合决策空间时的能力瓶颈。</li><li>问题分解的价值： 一个精心设计的“分解式”传统算法（先选路径，再定动作）在性能和伸缩性上能稳定超越“端到端”学习的MARL。这表明，在复杂协作任务中，显式地分解问题比让神经网络隐式学习全部策略更可靠。</li><li>MARL策略的质性特征： 成功的MARL策略（MAPPO）倾向于学习一种比传统算法更“激进”和“机会主义”的动态协作模式，而非死板地构建静态链条。但这种策略的稳定性会随智能体数量增加而显著降低。</li></ul></section><section><h3>Next Steps</h3><ul><li>引入部分可观测性 (Partial Observability)： 将模型从“上帝视角”变为基于每个无人机自身传感器的“第一人称视角”，研究在信息不完全情况下的去中心化决策，这是通向现实应用的关键一步。</li><li>将基准算法在线化/动态化： 将当前基于初始状态“一锤子买卖”的Dijkstra规划，改造为能够根据环境变化进行实时重规划 (re-planning) 的在线策略，使其能应对动态变化。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.05241v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 使用文本提示引导图像生成模型，对单帧机器人视觉数据进行修复（Inpainting）以增加多样性。</li><li>核心痛点： 现有方法多为单帧、单视角生成，缺乏时空一致性，且纯文本提示无法精确控制场景细节，导致生成的数据质量不足以训练先进的机器人策略。</li><li>本文切入点： 直觉上，一张范例图片比一段模糊的文字能提供更精确的视觉指导。作者引入视觉身份提示 (Visual Identity Prompting)，用具体的图像来直接引导视频生成，确保内容、风格和多视角的一致性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[数据增强的维度]： 时空一致性是机器人数据增强的关键瓶颈。</li><li>基于视频（而非单帧图像）的多视角数据增强，能显著提升需要长时序记忆的策略模型（如 Octo）的性能。实验证明，单帧增强带来的不一致性会导致模型在处理长历史序列时性能崩溃。</li><li>[生成模型的控制]： 视觉提示在机器人场景中远优于文本提示。</li><li>相比模糊的文本描述，视觉身份提示能为生成模型提供更精确、更丰富的控制信号。它不仅能保证生成物体的身份一致性，还能激发模型创造更复杂的场景（如增加桌面杂物），从而有效提升策略模型的鲁棒性。</li><li>[泛化能力的来源]： 生成式数据多样性可直接转化为真实世界的泛化能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>从视觉增强到物理/任务逻辑增强： 生成不仅在视觉上不同，而且在物理属性（如物体重量、摩擦力）或任务流程（如新的子目标序列）上也有变化的数据，为机器人提供更深层次的认知训练。</li><li>构建端到端的生成式数据增强模型： 将分割、理解和生成过程统一到一个模型中，减少对多个独立预训练模型的依赖，提升流程的鲁棒性、效率和一体化程度。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.06883v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 追踪器通常独立建模每个目标的运动轨迹，以预测其下一帧位置。</li><li>核心痛点： 独立建模忽略了无人机集群中个体间的强耦合运动依赖，导致在集体机动时预测失效，身份频繁切换。</li><li>本文切入点： 作者的直觉是，集群中单个无人机的运动并非孤立的，而是受整个集群运动趋势和邻居行为的共同约束。因此，从群体视角建模，能更准确地预测个体行为。</li></ul></section><section><h3>Key Insights</h3><ul><li>[群体与个体]： 个体运动预测的瓶颈在于群体。相较于只关注个体历史，同时建模集群的全局运动（如质心移动）和个体的相对运动，能大幅提升对非线性、协同运动的预测精度。</li><li>[运动与视觉]： 运动预测可以「指引」视觉特征的发现。传统方法中运动和视觉是分离或简单相加的，本文证明了用精准的运动预测（来自SMTP）去引导视觉特征的融合（在TG-STFF中），能有效解决小目标视觉特征微弱、易跟丢的问题。它把“预测”从一个简单的状态估计，升级为一种主动的视觉注意力引导机制。</li><li>[历史信息窗]： 历史信息的价值并非越长越好，而是取决于集群运动的耦合强度。实验表明，对于运动耦合松散的集群，短时历史窗口（如4帧）效果更佳，避免了旧信息的干扰；而对于队形紧密的集群，中等长度窗口（如8帧）则能更好地捕捉协同模式。</li></ul></section><section><h3>Next Steps</h3><ul><li>[异常行为感知]： 在当前“群体-个体”建模框架下，如何识别并建模偏离群体模式的“异常个体”？这对于追踪非合作目标或监测集群内部故障至关重要。</li><li>[知识蒸馏与轻量化]： 如何将 SCT-MOT 这种复杂模型的“群体耦合”知识，通过知识蒸馏等技术，迁移到一个轻量级的、适合实时边缘计算的追踪模型中？</li></ul></section>
       <section>

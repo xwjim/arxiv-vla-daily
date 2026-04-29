@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.03633v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流方法依赖深度学习进行单木分割，效果好但成本高。</li><li>核心痛点： 深度学习方法需要 大量的标注数据 和 强大的计算资源，而传统算法则在 精度 和 泛化性 上表现不佳。</li><li>本文切入点： 作者的直觉是，树木（尤其是树干）具有强烈的几何先验。他们通过 优化一个经典的无监督算法 并为其提供针对不同传感器（地面 vs. 无人机）的 参数预设，证明了利用好领域知识可以打破“高精度必然依赖大数据”的僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[算法范式]： 对于具有 强几何先验（如树干的垂直圆柱形态）的特定任务，一个精心设计的 无监督算法 在精度上可以与需要大量数据的 监督式深度学习模型 相媲美。这揭示了领域知识在特定场景下可以有效替代数据驱动的复杂性。</li><li>[泛化策略]： 算法的泛化能力不一定需要改变核心逻辑，通过提供针对不同数据源（如 TLS/PLS vs. ULS）的 精调参数预设，可以极大扩展其适用范围。这证明了 参数化适应 是提升传统算法泛化性的一种高效且可解释的途径。</li><li>[分割策略]： 在复杂的实例分割任务中，“先锚点，后扩张” 的策略极为有效。该方法成功的核心在于其鲁棒的 树干检测 步骤，它为后续的分割提供了稳定的起点。绝大多数分割失败案例都可归因于初始 “锚点”（树干）检测的失败。</li></ul></section><section><h3>Next Steps</h3><ul><li>混合式锚点检测： 将算法的瓶颈——树干检测，用一个 轻量级的深度学习模型 替代。利用深度学习的鲁棒性来完成最关键的“锚点”识别，然后沿用本文高效、无需数据的区域生长方法完成全部分割，实现 鲁棒性与效率的结合。</li><li>高级树冠分离： 针对交错树冠的局限，在树干检测后，将剩余的树冠点云构建成一个 图（Graph）。利用 图切割（Graph-Cut） 或拓扑学方法来寻找最优分割边界，从而更精细地分离重叠的树冠。</li></ul></section>
       <section>

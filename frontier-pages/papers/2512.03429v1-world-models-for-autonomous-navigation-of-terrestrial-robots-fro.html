@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.03429v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 传统方法使用 模型无关 (Model-Free) 强化学习 (如 SAC, DDPG)，且只能处理 降维后的少量 LIDAR 数据 (如 10 个点)。</li><li>核心痛点： 模型无关方法 样本效率低下，且无法处理 高维度的完整传感器数据 (如 360 个激光点)，导致机器人环境感知能力不足。</li><li>本文切入点： 直觉上，模型相关 (Model-Based) 的世界模型 可以先将高维传感器数据 压缩成低维度的潜空间表征，再在这个紧凑的表征空间内 高效地学习环境动态，从而打破瓶颈。</li></ul></section><section><h3>Key Insights</h3><ul><li>认知瓶颈： 模型无关算法 (SAC, DDPG 等) 存在 “感知缩放”的致命缺陷。它们在处理低维数据时表现尚可，但当输入维度从 10 增加到 360 时，其性能会 断崖式下跌甚至完全失效，这揭示了它们无法直接从高维原始感知中有效学习的本质局限。</li><li>解耦优势： 世界模型的成功关键在于 “感知与决策”的解耦。它通过 VAE 模块先独立解决 “看懂世界” 的感知问题（压缩数据），再通过动态模型解决 “如何行动” 的决策问题。这种分而治之的策略远比模型无关算法端到端“一锅炖”的方式更有效、更具扩展性。</li><li>效率来源： 学习效率的巨大提升源于 基于想象的策略优化。一旦世界模型建立，智能体便可在其内部进行 大规模、快速的虚拟推演 (Imagination Rollouts)，摆脱了对真实环境交互的重度依赖。这是其样本效率远超模型无关方法的根本原因。</li></ul></section><section><h3>Next Steps</h3><ul><li>动态世界建模： 将框架扩展到包含 动态、不可预测障碍物 的环境中。这会迫使世界模型不仅学习空间结构，还要学习 时序动态和不确定性，是迈向真实应用的关键一步。</li><li>多模态融合感知： 将 视觉 (Camera) 数据 融入世界模型的编码器中。结合 LIDAR 的几何信息和 Camera 的纹理/语义信息，可以构建更丰富、鲁棒的世界表征，处理仅靠几何信息无法解决的复杂导航任务。</li></ul></section>
       <section>

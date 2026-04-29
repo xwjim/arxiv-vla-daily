@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.24112v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有仿真平台（如 Gazebo）主要用于单机或小编队研发，缺乏面向大规模交通场景的真实感和测试能力。</li><li>核心痛点： 同时实现 高保真模型 (无人机+环境)、大规模交通场景 和 综合性测试能力 三者的平台极度稀缺。</li><li>本文切入点： 放弃从零自研，而是 “集成最优”。通过融合顶级的物理仿真引擎、游戏渲染引擎和真实世界建模技术，快速搭建一个功能完备的上层交通测试框架。</li></ul></section><section><h3>Key Insights</h3><ul><li>仿真范式升级：</li><li>证明了构建复杂领域仿真平台的有效范式是 “专业引擎集成 + 上层应用抽象”。相比于大而全的自研平台，这种方式能以更低成本同时实现高物理保真度与高环境真实感。</li><li>数据驱动闭环：</li><li>平台打通了 “数据生成 → 算法训练 → 仿真验证” 的完整闭环。它不仅是测试工具，更是高质量 合成数据 的生产工厂，能高效生成包含极端异常工况的数据集，极大加速了数据驱动算法（如强化学习、模仿学习）的开发迭代。</li><li>高保真度解耦：</li></ul></section><section><h3>Next Steps</h3><ul><li>迈向数字孪生 (Digital Twin)： 将平台从离线仿真器升级为实时数字孪生系统。通过接入真实世界的无人机、气象和通信数据流，使虚拟空间能实时映射并预测物理世界的交通态势，实现对真实系统的“在线推演”与主动干预。</li><li>复杂博弈与群体智能： 在当前规则驱动的交通管理之上，引入 多智能体博弈 (Multi-Agent Game Theory) 框架。支持去中心化的、具备自主决策与对抗/协作行为的无人机集群仿真，用于研究更复杂的空域资源分配和冲突解决策略。</li></ul></section>
       <section>

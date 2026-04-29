@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.11097v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 灾害评估主要依赖 2D 图像 (卫星、航拍)。</li><li>核心痛点： 2D 图像缺乏深度信息，存在遮挡和空间上下文缺失问题；现有 3D 数据集多为城市或室内场景，不含灾害特征。</li><li>本文切入点： 利用低成本无人机 (UAV) 在危险区域灵活采集数据，再通过 SfM+MVS 技术 将 2D 影像重建为高密度 3D 点云，从而创造一个全新的数据范式。</li></ul></section><section><h3>Key Insights</h3><ul><li>模型架构与灾害特征的适配性： 序列化 (如 PTv3) 和 自适应卷积 (如 OA-CNN) 架构，因其能高效处理不规则局部结构，在识别细粒度灾害损伤特征上显著优于其他模型。这表明灾后场景的几何无序性对模型设计提出了新要求。</li><li>场景复杂度与模型泛化能力： 现有 SOTA 模型在处理多建筑、高遮挡的复杂灾后场景时性能急剧下降。它们普遍难以区分“受损建筑”与“未受损建筑”，暴露了在复杂上下文理解上的严重短板。</li><li>几何特征与模型优势的匹配： 不同模型架构对几何特征有明显偏好。例如，改进的位置编码 (如 PTv2) 更擅长处理大尺寸、平坦的规整表面（如完好屋顶、道路）；而更复杂的局部建模机制则对不规则的破损结构更有效。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建 4D 动态数据集： 采集灾前、灾中、灾后的时序数据，从静态的 3D 评估升级到动态的 4D 变化监测，用于研究损伤演化过程和恢复进度。</li><li>多模态数据融合： 将 RGB 点云与热成像、高光谱或 LiDAR 数据融合。这不仅能提升几何精度，还能用于检测结构应力、材料损耗、水体渗透等非可见光信息。</li></ul></section>
       <section>

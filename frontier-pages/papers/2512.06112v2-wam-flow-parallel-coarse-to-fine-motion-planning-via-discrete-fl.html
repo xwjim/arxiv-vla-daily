@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.06112v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 端到端自动驾驶主要依赖自回归 (Autoregressive) 模型逐点生成轨迹。</li><li>核心痛点： 自回归模型串行生成速度慢、解码时无法修正早期错误，导致效率和精度受限。</li><li>本文切入点： 直觉上，轨迹规划不必是单向的。作者受离散流匹配启发，将轨迹视为一个整体，从一个随机噪声状态并行地、双向地去噪和修正，从而实现从粗到细的规划。</li></ul></section><section><h3>Key Insights</h3><ul><li>[生成范式]： 离散流匹配 (DFM) 是一种高效且灵活的轨迹生成新范式。它通过并行解码，实现了可调控的“计算-精度”权衡：用1步解码可快速获得可用轨迹，用多步解码则可迭代优化至更高精度。</li><li>[表征空间]： 对于生成式控制任务，为离散Token空间注入度量几何结构至关重要。若Token的嵌入距离不能反映其代表的物理数值大小，模型将无法进行有意义的“从粗到细”优化，证明了结构化表征的必要性。</li><li>[训练策略]： 成功的端到端驾驶模型需要复合训练策略。本文证明了 “VLM改造 + 领域VQA预训练 + 监督流匹配 + 强化学习对齐” 的多阶段范式是有效的，特别是GRPO强化学习对提升闭环测试中的安全性和性能至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>多视角并行规划： 如何将DFM的并行生成特性扩展到多摄像头或LiDAR等多传感器融合的场景，实现多视角信息下的一致性并行规划。</li><li>真实世界对齐： 如何摆脱对在线仿真器的依赖，研究基于真实世界驾驶日志的离线强化学习方法，以对齐模型策略，解决Sim-to-Real的核心挑战。</li></ul></section>
       <section>

@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.14758v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 预训练视觉模型（PVRs）被广泛用作机器人控制策略的感知主干。</li><li>核心痛点： 将传统安全理论（如HJ可达性分析）直接应用于高维视觉输入非常困难，且尚不清楚为“控制”优化的PVR是否适用于“安全”任务。</li><li>本文切入点： 作者直觉地认为，适用于最优控制的视觉表征，不一定适用于安全避障。因此，他们系统性地将PVRs专门用于构建安全滤波器，而非控制策略本身。</li></ul></section><section><h3>Key Insights</h3><ul><li>表征学习： 通用视觉特征不足以保证安全，必须针对安全任务进行微调。</li><li>实验表明，直接使用冻结的PVRs，其效果甚至不如为特定安全任务从零开始训练的简单模型。</li><li>只有在安全滤波器的训练过程中对PVR进行微调 (fine-tuning)，才能显著提升避障性能。</li><li>模型选择： 最适合控制任务的PVR，不一定最适合安全任务。</li><li>DINOv2 在所有安全任务中表现最稳定、最出色。推测原因是其预训练数据包含深度估计，使其表征天生具备对距离和空间的感知能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>Sim-to-Real 迁移： 如何将这些在仿真中验证有效的隐空间安全滤波器，鲁棒地迁移到物理机器人上，解决域漂移问题。</li><li>与大语言模型融合： 能否利用自然语言来定义动态、复杂的安全规则（例如，“远离红色的盒子，但如果盖子是关上的，可以靠近”），将语义理解与视觉安全滤波结合。</li></ul></section>
       <section>

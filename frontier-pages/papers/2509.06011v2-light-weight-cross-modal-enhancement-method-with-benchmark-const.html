@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.06011v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 通用开放词汇检测（OVD）模型在地面自然图像上表现良好。</li><li>核心痛点： 将现有 OVD 模型直接用于无人机（UAV）图像时，因 领域鸿沟（视角、目标尺寸、背景复杂度差异）导致性能严重下降。</li><li>本文切入点： 作者认为问题根源在于 数据 和 模型 两方面。因此，他们采用「数据+模型」双管齐下的策略，即先构建领域专属数据集，再设计适配该场景的轻量化模型。</li></ul></section><section><h3>Key Insights</h3><ul><li>数据为王： 解决无人机 OVD 性能问题的 首要关键是数据，而非模型。实验证明，仅使用新构建的 UAVDE-2M 和 UAVCAP-15K 数据集对基线模型进行预训练，其性能提升幅度远超模型结构优化带来的增益。</li><li>效率与精度可兼得： 针对无人机小目标、背景复杂的特点，精心设计的 CAGE 模块证明，通过结合局部（Cross-Attention）与全局（FiLM）调制的双路径融合策略，可以在 显著降低参数量和计算量 的同时，实现 更高的检测精度，打破了性能与效率的传统权衡。</li><li>知识的泛化性： 在高质量、大规模的领域专属数据集（UAVDE-2M）上预训练，模型学到的不仅仅是无人机视角的知识。交叉域实验表明，该模型在其他遥感数据集（如 SIMD）上也表现出强大的 零样本泛化能力，说明其学到了更通用的高空俯视视觉表征。</li></ul></section><section><h3>Next Steps</h3><ul><li>时序信息融合： 当前模型是单帧检测。利用无人机视频流的 时序连续性，融合多帧信息来增强对被遮挡目标、小目标的检测稳定性和一致性，是一个明确的高价值方向。</li><li>端侧在线增量学习： 将模型从离线预训练升级为支持 在线学习。使无人机在部署后能够根据实时观察或少量新样本，在端侧设备上 持续学习和识别新的未知类别，实现真正的开放世界感知。</li></ul></section>
       <section>

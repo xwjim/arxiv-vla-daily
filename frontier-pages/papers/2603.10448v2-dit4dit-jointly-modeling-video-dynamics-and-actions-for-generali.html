@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.10448v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流机器人策略（VLA模型）依赖静态图文预训练，再用少量动作数据微调。</li><li>核心痛点： 静态图文预训练缺乏物理动力学先验，导致机器人学习动作时样本效率极低，难以理解时序和因果。</li><li>本文切入点： 直觉上，视频生成过程本身就蕴含了物理演化规律。其“去噪”过程中的中间特征，比最终生成的图像更能直接、高效地指导动作。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练代理任务]： 视频生成是比物体定位或VLM特征对齐更高效的机器人策略学习代理任务。它能显著提升样本效率（&gt;10倍）和收敛速度（~7倍），是实现规模化的有效路径。</li><li>[特征提取机制]： 最有价值的物理动态特征并非来自视频生成模型的最深层，而是来自中后段（如第18层）。最深层特征为像素重建过度特化，反而丢失了控制所需的高层语义和物理抽象。</li><li>[联合训练价值]： 联合训练迫使视频模型生成的特征空间具有更清晰的时序结构（从任务早期到晚期特征分离度更高）。这证明了动作预测的损失反向传播，能有效规整视频表征，使其更适合长时序任务。</li></ul></section><section><h3>Next Steps</h3><ul><li>统一架构探索：能否将视频 DiT 和动作 DiT 融合为单个统一的 DiT 模型？通过特殊 token 或多任务输出来同时预测视频动态和机器人动作，简化架构并增强表征共享。</li><li>多模态物理动力学建模：当前模型仅依赖视觉。未来能否融入触觉、力觉等非视觉模态，让模型学习更全面的物理世界模型，处理需要感知接触力的精细任务？</li></ul></section>
       <section>

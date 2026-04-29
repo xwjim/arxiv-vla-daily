@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2601.02456v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 主流机器人通用模型（VLA）基于多模态大模型（MLLM），擅长语义理解。</li><li>核心痛点： 现有模型 缺乏对物理世界动态的推理能力，是“反应式”而非“预见式”的，导致在动态任务中表现不佳。</li><li>本文切入点： 直觉上，将 MLLM 的“理解”能力与世界模型的“预测”能力结合。通过一个 统一的架构 让模型既能理解指令，又能“想象”出动作的后果。</li></ul></section><section><h3>Key Insights</h3><ul><li>[架构协同]： 语义理解与动态预测的统一 是实现动态任务泛化的关键。将 MLLM 的高级推理与世界模型的物理预见能力在单一架构中融合，其效果远超两者独立工作或简单拼接，尤其在 动态任务上提升了 26.7%。</li><li>[数据配方]： 异构数据混合预训练 是实现模型鲁棒性的高效路径。仿真数据 提供多样性，真实机器人数据 弥合 Sim-to-Real 鸿沟，人类视频 则提供了丰富的交互先验知识。三者结合比任何单一数据源都更有效。</li><li>[预见效率]： 机器人控制 不需要高保真的视觉预见。模型生成的未来帧是低分辨率、粗粒度的，但足以捕捉关键的 运动趋势和动态信息 来指导行动。这证明了为保证实时性（~13Hz）而牺牲视觉细节是一种正确且高效的权衡。</li></ul></section><section><h3>Next Steps</h3><ul><li>端到端联合训练： 将机器人的动作学习与更大规模的通用多模态任务（如 VQA、图像描述）进行 端到端联合预训练，打造一个同时精通物理交互和开放世界语义的“超级模型”。</li><li>自适应预见机制： 开发一种 动态调整预见深度 的机制。模型可根据任务的动态性自主决定“想象”多远的未来：静态任务预测短，动态任务预测长，实现计算资源的智能分配。</li></ul></section>
       <section>

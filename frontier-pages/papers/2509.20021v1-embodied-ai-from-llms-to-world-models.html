@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.20021v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 具身智能的研究主要沿着两条独立路径发展：MLLM 驱动的规划与世界模型 (WM) 驱动的物理模拟。</li><li>核心痛点： MLLM 缺乏物理世界的常识，会产生不切实际的规划；而 WM 缺乏高级语义理解能力，难以处理开放、复杂的指令。</li><li>本文切入点： 作者的直觉是，这两种技术存在根本性的互补关系。将 MLLM 的高级推理能力与 WM 的物理预测能力结合，可以打破僵局。</li></ul></section><section><h3>Key Insights</h3><ul><li>[能力鸿沟]： MLLM 解决了“做什么”(What) 的问题，但其规划与物理现实脱节（knows what, not how）；WM 解决了“怎么动”(How) 的问题，但无法理解抽象的、长期的目标（knows how, not what）。</li><li>[协同机制]： MLLM-WM 联合架构形成了一种规划-验证-反馈的闭环。MLLM 提出宏观计划，WM 在其“内心世界”进行推演与筛选，从而将符号化的抽象推理“锚定”在物理现实中。</li><li>[演进方向]： 具身智能的进化方向是从单一模型驱动转向系统级架构融合。这种融合是实现智能体从“执行指令”到“自主完成复杂任务”跃迁的关键。</li></ul></section><section><h3>Next Steps</h3><ul><li>群体具身智能 (Swarm Embodied AI)： 将此联合架构扩展至多智能体系统，研究如何构建协同世界模型 (Collaborative WMs)，实现去中心化的集体感知与决策。</li><li>可解释与可信赖 AI (Explainability &amp; Trustworthiness)： 为这种复杂的联合系统设计内在的可解释性机制，确保智能体在执行关键任务（如救援、医疗）时的决策过程是透明且值得信赖的。</li></ul></section>
       <section>

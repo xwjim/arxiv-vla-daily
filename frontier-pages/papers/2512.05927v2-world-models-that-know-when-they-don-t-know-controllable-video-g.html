@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.05927v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 可控视频生成模型能根据指令（如动作）生成高清视频，可作为机器人学的世界模型。</li><li>核心痛点： 模型常产生物理上不一致的幻觉 (hallucinate)，且自身无法评估置信度，导致其不可信。</li><li>本文切入点： 将不确定性量化问题转化为一个在模型潜空间 (latent space) 内进行的分类任务，预测生成内容的准确率，从而高效地让模型“自知”。</li></ul></section><section><h3>Key Insights</h3><ul><li>[效率与有效性]： 在潜空间中进行不确定性量化是完全可行的，且计算成本极低。论文证明，潜空间的 L1 误差与像素空间的视频质量感知指标 (SSIM, LPIPS) 强相关，验证了这种“代理”方法的有效性。</li><li>[校准的根源]： 实现可信不确定性的关键机制，是将问题建模为分类任务，并采用严格正常评分规则进行端到端训练。这迫使模型学会输出统计上诚实的置信度，而不是任意的、未校准的分数。</li><li>[不确定性的应用价值]： 校准后的不确定性是一个强大的内置信号。它不仅能精确定位视频中的幻觉区域（如无中生有的物体、不符合物理规律的形变），还能有效检测分布外 (OOD) 输入，当模型面对陌生场景或任务时，会自然地表现出更高的不确定性。</li></ul></section><section><h3>Next Steps</h3><ul><li>不确定性驱动的主动学习 (Uncertainty-driven Active Learning)： 能否利用模型自身的不确定性信号，主动筛选出那些它“看不懂”的数据进行标注和学习？这将构建一个高效的闭环，极大提升模型的鲁棒性和认知边界。</li><li>不确定性与机器人决策的融合 (Uncertainty-aware Decision Making)： 如何将稠密的置信度图直接整合到机器人规划与控制中？例如，规划器可以主动规避会导致世界模型产生高不确定性预测的动作序列，或在不确定性超过阈值时请求人类介入。</li></ul></section>
       <section>

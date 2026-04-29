@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2602.12628v3">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 将仿真数据和真实数据混合，对 VLA (视觉-语言-动作) 模型进行监督微调 (SFT)。</li><li>核心痛点： 仿真数据仅被用作静态的专家数据，完全浪费了仿真环境可交互的优势，导致模型只会模仿而不会探索和纠错。</li><li>本文切入点： 直觉上，强化学习 (RL) 是利用交互的最佳方式。作者的灵感在于，可以在仿真中大胆使用 RL 进行探索，同时用少量真实数据作为正则项，像一根缰绳，防止模型在仿真中“学野了”而偏离真实世界。</li></ul></section><section><h3>Key Insights</h3><ul><li>[泛化能力]： 基于 RL 的 co-training 显著提升了模型的泛化能力。相比 SFT，RL 迫使模型在交互中学习自我纠错，因此在面对未见过的物体和新的初始状态时，其性能下降得更少，表现更鲁棒。</li><li>[数据效率]： RL 极大地放大了仿真数据的价值，从而显著降低了对昂贵真实数据的依赖。实验表明，RL-Co 使用 20 条真实世界轨迹的效果，就超过了 SFT 方法使用 200 条真实轨迹的效果，实现了数量级的效率提升。</li><li>[数据协同机制]： 真实数据和仿真数据在训练中扮演着不同但互补的关键角色。仿真数据通过 RL 提供探索的广度和试错机会；而真实数据则通过 SFT 正则化提供知识的锚点，确保模型学到的技能能在现实中落地。二者缺一不可。</li></ul></section><section><h3>Next Steps</h3><ul><li>探索少量真实世界 RL：在仿真 RL 训练后，引入少量、安全的真实世界在线 RL 微调。这可以作为最后“临门一脚”的校准，进一步弥合 Sim-to-Real 的鸿沟。</li><li>异构数据源的 RL Co-training：将此框架扩展到融合更多类型的数据源，如互联网视频、不同形态机器人的数据等，研究如何用 RL 统一并有效利用这些高度异构的经验。</li></ul></section>
       <section>

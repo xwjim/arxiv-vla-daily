@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.10059v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 现有的视觉问答（VQA）基准主要评估模型在自然图像上的感知或简单计数能力。</li><li>核心痛点： 极度缺乏能够严格评估模型在 真实无人机（UAV）遥感场景 下，进行 复杂数学推理（如几何、代数、逻辑）能力的基准。</li><li>本文切入点： 从零开始构建一个 融合了真实无人机参数（高度、俯仰角）和 多学科数学问题 的全新基准 AVI-Math，以此来量化并揭示现有模型的真实能力边界。</li></ul></section><section><h3>Key Insights</h3><ul><li>[领域知识的诅咒]： 领域知识的缺失 是导致顶尖VLM（如GPT-4o）推理失败的首要原因（占比56.8%），而非通用逻辑或计算能力不足。模型普遍缺乏对 成像几何、坐标变换 等遥感领域核心知识的理解。</li><li>[视觉编码的瓶颈]： 简单提升 输入分辨率 并不总能带来性能的线性提升。性能瓶颈在于现有 视觉编码器对高分辨率图像中“小目标”的有效表征能力 有限，高分辨率带来的信息增益被编码过程压缩掉了。</li><li>[微调的悖论]： 在特定遥感任务上微调的模型（如GeoChat），其 通用数学推理能力会显著退化（知识遗忘）。这揭示了当前监督微调（SFT）范式在实现通用人工智能上的局限性，模型更倾向于“拟合”而非“涌现”出真正的遥感智能。</li></ul></section><section><h3>Next Steps</h3><ul><li>避免灾难性遗忘： 如何通过 强化学习（RLHF） 或 持续学习（Continual Learning） 方法进行微调，在注入遥感领域知识的同时，避免通用推理能力的灾难性遗忘。</li><li>神经-符号融合： 探索 神经-符号混合架构，将符号化的几何、物理规律求解器与VLM的感知能力显式结合，以实现更可靠、更可解释的复杂空间推理。</li></ul></section>
       <section>

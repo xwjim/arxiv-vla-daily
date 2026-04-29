@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2604.08153v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 无人机路径规划（如TSP）与数据传输是两个独立优化的问题。</li><li>核心痛点： 传统路径规划不关心数据传输质量，导致无人机高速飞过时，数据因传输时间不足而采不全，图像重建质量差。</li><li>本文切入点： 直觉上，无人机应在“有价值”的设备上空停留更久。作者将数据重建质量直接作为路径规划（强化学习）的奖励信号，实现了二者的联合优化。</li></ul></section><section><h3>Key Insights</h3><ul><li>[耦合优化]： 将数据传输的语义质量（PSNR）直接整合进无人机运动控制（RL奖励）中，比解耦优化（先规划路径再传输）效率更高。这证明了任务驱动的通信与控制一体化的巨大价值。</li><li>[动态悬停]： 智能体学会了自适应调整速度。在通信带宽低或需要采集更多数据时，它会主动减速甚至悬停以确保收集足够多的语义符号，而非像传统方法那样匀速飞过。</li><li>[延迟补偿]： 该框架对控制信号延迟具有隐式鲁棒性。强化学习通过与包含延迟的环境进行交互，内在地学习到了如何预测和补偿延迟带来的影响，而无需显式建模。</li></ul></section><section><h3>Next Steps</h3><ul><li>多目标优化： 如何在数据收集质量、无人机能耗和任务完成时间这三个核心指标之间进行权衡？这需要一个更复杂的多目标强化学习框架。</li><li>异构数据价值评估： 如何处理动态生成的数据流（而不仅是单张图片），以及不同类型（如视频、传感器读数）的异构数据？这要求智能体能实时评估不同数据的“语义价值”。</li></ul></section>
       <section>

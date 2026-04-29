@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.23823v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 研究人员通常为每种机器人硬件构建独立的、定制化的数据采集和控制软件栈，常依赖 ROS 等中间件。</li><li>核心痛点： 硬件接口、数据格式和控制范式各不相同，导致工具链高度碎片化，严重阻碍了代码复用、数据共享和模型快速部署。</li><li>本文切入点： 通过抽象和标准化来解决工程复杂性。作者认为，可以通过一个统一的接口层来屏蔽底层硬件差异，从而实现上层应用的通用性。</li></ul></section><section><h3>Key Insights</h3><ul><li>[流程统一性的价值]： 一个标准化的闭环工作流（采集-训练-部署）能显著降低因工具链不一致引入的系统性偏差。这使得模型策略能够高度复现专家轨迹，是解决“训练有效、部署失效”问题的关键。</li><li>[系统解耦是扩展性的前提]： 将机器人系统解耦为控制器、传感器等可插拔的独立模块，是实现跨平台、跨形态（如从单臂到双臂）机器人学习系统可扩展性和可复用性的根本。这是一种软件工程思想在机器人学中的成功应用。</li><li>[数据保真度的重要性]： 框架能够支持高频控制（~300Hz）与多频数据（~60Hz视觉）的精确同步。这保证了采集数据的时间戳对齐和高保真度，对于学习需要精细时序协调的动态操作（如抓取飞行物）至关重要。</li></ul></section><section><h3>Next Steps</h3><ul><li>构建标准化“机器人数据联邦”： 利用该框架的跨平台能力，联合多个实验室，构建一个大规模、多形态、多任务的标准化机器人数据集（类似机器人领域的 ImageNet），为训练更通用的机器人基础模型提供基石。</li><li>无缝集成物理仿真： 将高保真物理仿真环境（如 Isaac Sim）集成到该闭环流程中。这可以实现“仿真大规模预训练 -&gt; 真实世界少量微调 -&gt; 快速部署”的敏捷开发模式，极大降低对昂贵且耗时的真实世界数据的依赖。</li></ul></section>
       <section>

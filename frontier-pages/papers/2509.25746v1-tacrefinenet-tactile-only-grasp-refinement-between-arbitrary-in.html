@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2509.25746v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视觉或传统规划方法引导机器人完成粗略抓取，但执行末端常有姿态误差。</li><li>核心痛点： 现有方法难以解决抓取“最后一公里”的姿态不准问题，尤其对高精度任务，且依赖视觉易受遮挡影响。</li><li>本文切入点： 模仿人类闭眼微调物体的直觉，利用目标触觉图像与当前触觉图像的差异，直接预测机器人手腕的调整量，实现纯触觉闭环控制。</li></ul></section><section><h3>Key Insights</h3><ul><li>[训练范式]： “模拟预训练 + 少量真实数据微调” 的 Sim-to-Real 范式，是解决触觉策略学习中数据稀缺和物理现实差距的有效路径。仅用模拟数据训练的策略性能远逊于微调后的策略。</li><li>[目标设定]： 通过提供一个目标触觉图像（而非复杂的姿态参数），可以有效定义一个与具体物体几何解耦的、高精度的抓取目标。这使得系统能泛化到任意未曾训练过的目标姿态。</li><li>[感知与动作]： 仅靠低成本的压阻式触觉传感器，就能为机器人提供足够丰富的信息以实现毫米级的精细操作。这证明了在特定任务中，触觉可以替代视觉，完成高精度闭环控制。</li></ul></section><section><h3>Next Steps</h3><ul><li>视觉-触觉融合 (Vision-Tactile Fusion)： 将本文的触觉精调模块与一个视觉前端（如VLA模型）结合。由视觉提供粗略的目标姿态和物体识别，再由触觉完成“最后一公里”的精确对齐，实现对任意未知物体的精细抓取。</li><li>动态手内操作 (Dynamic In-hand Manipulation)： 从“重新抓取”演进到连续接触下的手指步态调整。研究如何利用触觉反馈直接控制手指，在不释放物体的情况下微调其姿态，以提升操作效率和适用场景。</li></ul></section>
       <section>

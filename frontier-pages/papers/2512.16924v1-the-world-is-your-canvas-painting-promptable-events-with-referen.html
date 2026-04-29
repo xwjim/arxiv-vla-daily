@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.16924v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 视频生成主要依赖单一的文本提示或粗糙的轨迹引导。</li><li>核心痛点： 纯文本无法精确描述复杂的 时空动态；现有轨迹控制丢失了 时间、速度和可见性 信息；参考图的身份绑定能力弱。</li><li>本文切入点： 将一个复杂的“世界事件”拆解为三个基本要素：Who (谁)、What (做什么)、When/Where (时空)，并分别用参考图、文本和轨迹这三种最直观的模态进行精确指定。</li></ul></section><section><h3>Key Insights</h3><ul><li>[控制范式]：</li><li>视频事件的精细控制，可以通过 解耦 为 身份 (参考图)、语义 (文本) 和时空 (轨迹) 三个维度来实现。这种多模态的“分而治之”策略，远比单一模态的暴力堆叠更有效、更符合人类直觉。</li><li>[涌现能力]：</li><li>通过在训练中引入带 可见性标志 (即物体出入画) 的轨迹，模型 涌现出了场景和物体的时序一致性。即使物体短暂离开画面再返回，模型也能维持其身份和外观，这是一种初级的“视觉记忆”能力，是迈向真正世界模型的关键一步。</li><li>[注意力绑定]：</li></ul></section><section><h3>Next Steps</h3><ul><li>语言模型驱动的轨迹生成： 能否让用户只输入更高阶的自然语言指令（例如：“一只猫从左边追逐一只老鼠到右边”），由一个专门的模型 自动生成符合物理和语义逻辑的轨迹？这将极大降低使用门槛。</li><li>从 2D 画布到 3D 世界： 将此多模态控制范式 提升到 3D 空间。用户在 3D 场景中定义物体的运动轨迹和行为，模型不仅生成视频，还能支持任意视角的切换，从而构建一个真正可交互的 3D 世界模拟器。</li></ul></section>
       <section>

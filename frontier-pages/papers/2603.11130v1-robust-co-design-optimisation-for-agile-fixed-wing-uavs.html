@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2603.11130v1">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 联合优化 (Co-design) 无人机的物理形态和控制策略，比传统分步设计性能更好。</li><li>核心痛点： 现有联合优化只在理想（标称）条件下追求极致性能，得到的方案在现实世界中极其脆弱，一遇风吹草动就崩溃。</li><li>本文切入点： 直觉上，一个好的设计应该在各种恶劣情况下都“还行”，而不是只在一种理想情况下“完美”。因此，作者在评估每个设计时，不再只看理想表现，而是通过大量带噪声的随机模拟（蒙特卡洛集成），直接将“平均表现”和“成功率”作为优化目标。</li></ul></section><section><h3>Key Insights</h3><ul><li>[洞察方向]：鲁棒性与稳定性的物理体现</li><li>具体结论： 鲁棒优化倾向于后移机翼位置 (xw)，将设计从“为敏捷而不稳定”（负静稳定裕度）推向“近中性稳定”。这使得无人机在保持足够敏捷性的同时，获得了天然的扰动抑制能力，不再完全依赖控制器。</li><li>[洞察方向]：任务驱动的形态自适应</li><li>具体结论： 优化过程会根据任务自适应地调整气动外形。例如，在需要快速滚转/偏航的“发夹弯”任务中，会选择更低展弦比的设计以减小转动惯量；而在其他任务中，则会增加翼弦 (cw)以提供额外的气动阻尼，从而抑制振荡。</li><li>[洞察方向]：设计与控制的协同解耦</li></ul></section><section><h3>Next Steps</h3><ul><li>[方向 1] 高效率优化算法： 将 CMA-ES 替换为贝叶斯优化或学习优化 (Learning to Optimise)等样本效率更高的方法，以应对更复杂的多阶段任务和更高维度的设计空间。</li><li>[方向 2] 主动变形结构联合设计： 将可变机翼（如折叠、变弯度）等主动变形机制纳入优化框架，探索飞行器在任务中实时改变形态以适应不同飞行阶段的潜力。</li></ul></section>
       <section>

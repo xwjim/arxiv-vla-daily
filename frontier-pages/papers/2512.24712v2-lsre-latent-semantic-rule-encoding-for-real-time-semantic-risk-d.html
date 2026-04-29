@@ -36,12 +36,16 @@ a:hover { text-decoration:underline; }
 .sidebar li { margin-bottom:8px; }
 .sidebar .note-list { list-style:none; padding:0; }
 .sidebar .note-list li { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-.tag-manager-note { margin:0 0 12px; font-size:13px; color:var(--muted); }
-.user-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; }
+.tag-manager-note { margin:0; font-size:12px; color:var(--muted); }
+.user-tag-list { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+.user-tag-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border-radius:999px; background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; }
 .user-tag-chip button { border:0; background:transparent; color:inherit; cursor:pointer; padding:0; font-size:14px; line-height:1; }
-.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:7px 12px; cursor:pointer; font-size:12px; }
+.frontend-tag-details { margin-top:4px; }
+.frontend-tag-details summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:700; user-select:none; }
+.frontend-tag-details[open] summary { margin-bottom:10px; }
+.frontend-tag-details-body { display:grid; gap:10px; }
+.preset-tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; }
+.preset-tag-btn { border:1px solid var(--border); background:#fff; color:var(--text); border-radius:999px; padding:6px 10px; cursor:pointer; font-size:11px; }
 .preset-tag-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 .custom-tag-form { display:flex; gap:8px; }
 .custom-tag-form input { flex:1; border:1px solid var(--border); border-radius:12px; padding:10px 12px; font-size:13px; }
@@ -89,13 +93,18 @@ a:hover { text-decoration:underline; }
       </section>
       <section id="frontendTagPanel" data-entry-id="2512.24712v2">
         <h3>前端标签</h3>
-        <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
         <div id="frontendTagList" class="user-tag-list"></div>
-        <div id="frontendPresetTagList" class="preset-tag-list"></div>
-        <form id="frontendTagForm" class="custom-tag-form">
-          <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
-          <button type="submit">添加</button>
-        </form>
+        <details class="frontend-tag-details">
+          <summary>管理标签</summary>
+          <div class="frontend-tag-details-body">
+            <p class="tag-manager-note">固定标签和自定义标签会保存在当前浏览器，并同步影响总览页筛选。</p>
+            <div id="frontendPresetTagList" class="preset-tag-list"></div>
+            <form id="frontendTagForm" class="custom-tag-form">
+              <input id="frontendTagInput" type="text" placeholder="添加自定义标签">
+              <button type="submit">添加</button>
+            </form>
+          </div>
+        </details>
       </section>
       <section><h3>The Gap</h3><ul><li>已有共识/做法： 自动驾驶安全系统依赖几何或硬编码规则，无法处理复杂的社会语义规则（如避让校车）。</li><li>核心痛点： 大语言视觉模型 (VLM) 能理解这些语义，但其推理延迟极高，无法满足车载实时（&gt;10Hz）部署要求。</li><li>本文切入点： VLM 不必实时在线。可以利用 VLM 作为离线“语义教师”，将其昂贵的判断能力“蒸馏”并编码到一个轻量、快速的隐空间分类器中。</li></ul></section><section><h3>Key Insights</h3><ul><li>[知识蒸馏的有效性]： VLM 的高级语义知识可以被成功“压缩”到一个在世界模型隐空间上运行的轻量分类器中。这证明了隐空间已包含足够的抽象信息，可以替代昂贵的像素级 VLM 推理。</li><li>[风险预见性的来源]： 真正的风险预见性（提前数秒预警）并非来自更好的单帧感知，而是来自在隐空间中对未来的前瞻性推演 (latent rollout)。这使得模型能发现当前不明显、但即将出现的风险。</li><li>[语义泛化的基础]： 模型在少样本新场景中依然有效，表明它学习到的是抽象的“语义规则”（如“必须避让校车”），而非记忆特定的视觉模式。这得益于语言引导的隐空间分类，使其具备了超越像素相似性的泛化能力。</li></ul></section><section><h3>Next Steps</h3><ul><li>闭环语义安全： 将 LSRE 输出的风险信号直接整合到规划器中，研究如何生成可解释、可验证的安全避让或减速轨迹，实现从“检测”到“响应”的跨越。</li><li>不确定性驱动的主动学习： 当隐空间分类器不确定时（即分数在决策边界附近），主动在线查询 VLM。这能以极低成本持续优化模型，并处理训练中未见的罕见长尾场景。</li></ul></section>
       <section>
