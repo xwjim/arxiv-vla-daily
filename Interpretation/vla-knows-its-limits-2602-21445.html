@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VLA Knows Its Limits 论文解读</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #5d6a78;
+      --line: #d8dee7;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --blue: #2563eb;
+      --teal: #0f766e;
+      --rose: #be123c;
+      --amber: #b45309;
+      --green: #15803d;
+      --shadow: 0 18px 50px rgba(23, 33, 43, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.72;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero {
+      background:
+        linear-gradient(120deg, rgba(8, 47, 73, 0.82), rgba(15, 118, 110, 0.68)),
+        url("https://hatchetproject.github.io/autohorizon/static/images/framework.png");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 72px 24px 86px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      margin: 0 0 16px;
+      max-width: 820px;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 820px;
+      margin: 0;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    main {
+      margin-top: -42px;
+      padding-bottom: 64px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 18px 0;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    p { margin: 10px 0; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .point {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fbfcfe;
+    }
+
+    .point strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      background: var(--teal);
+      border-radius: 999px;
+      padding: 3px 9px;
+    }
+
+    .tag.blue { background: var(--blue); }
+    .tag.rose { background: var(--rose); }
+    .tag.amber { background: var(--amber); }
+
+    .diagram {
+      margin: 22px 0 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .diagram svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    li { margin: 7px 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #edf2f7;
+      font-weight: 700;
+    }
+
+    .callout {
+      border-left: 4px solid var(--teal);
+      background: #eefdfa;
+      padding: 14px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+
+    .warn {
+      border-left-color: var(--amber);
+      background: #fff7ed;
+    }
+
+    .risk {
+      border-left-color: var(--rose);
+      background: #fff1f2;
+    }
+
+    .score {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfcfe;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 22px;
+      color: var(--teal);
+      line-height: 1.15;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 13px;
+      padding: 18px 0 0;
+    }
+
+    @media (max-width: 820px) {
+      .hero { padding: 54px 0 76px; }
+      .wrap { width: min(100% - 28px, 1120px); }
+      section { padding: 20px; }
+      .lead-grid, .two-col, .score { grid-template-columns: 1fr; }
+      th, td { font-size: 13px; padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <h1>VLA Knows Its Limits</h1>
+      <p>论文解读：AutoHorizon 用 VLA 内部注意力判断“这段动作最多可信到哪一步”，在测试时动态决定 action chunk 的执行长度。</p>
+      <div class="meta">
+        <span class="pill">arXiv:2602.21445</span>
+        <span class="pill">Robotics / VLA / Action Chunking</span>
+        <span class="pill">作者：Haoxuan Wang 等</span>
+        <span class="pill">机构：UIC 与 Cisco Research</span>
+        <span class="pill">提交：2026-02-24</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>一句话结论</h2>
+      <div class="callout">
+        这篇论文的关键价值是把 VLA action chunking 中一个长期靠经验调参的控制量，执行 horizon，转化为一个可在线估计的模型内部信号问题：当动作 token 对边界 action sink 的自注意力开始衰减或平台化时，就说明模型对后续动作的预测可信度正在下降，应当提前重规划。
+      </div>
+      <div class="lead-grid">
+        <div class="point">
+          <span class="tag blue">问题</span>
+          <strong>固定执行长度并不稳</strong>
+          <p>同一个 VLA、同一个任务，执行 horizon 从短到长会出现明显的先升后降曲线。太短会频繁重规划造成抖动，太长会让过时感知支撑后续动作。</p>
+        </div>
+        <div class="point">
+          <span class="tag">洞察</span>
+          <strong>VLA 的注意力暴露了预测边界</strong>
+          <p>动作序列内部会强烈依赖首尾 action token，作者称之为 radial action sinks；这种结构可以作为模型“还能可靠往前推几步”的代理信号。</p>
+        </div>
+        <div class="point">
+          <span class="tag rose">方法</span>
+          <strong>AutoHorizon 是测试时方法</strong>
+          <p>不重新训练模型，只读取注意力图，筛出低熵行，再用双向 soft-pointer 找到注意力推进停止的位置，动态决定本 chunk 执行多少步。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>论文要解决什么问题</h2>
+      <p>在 flow-based Vision-Language-Action 模型里，策略通常不是每次只预测一个动作，而是一次预测一个动作块 <strong>action chunk</strong>。模型预测长度叫 <strong>prediction horizon</strong>，真正执行前缀长度叫 <strong>execution horizon</strong>。执行完这个前缀后，机器人重新观测环境，再预测下一段动作。</p>
+      <p>这个设计天然有一个张力：</p>
+      <ul>
+        <li><strong>执行得短</strong>：重规划频繁，反应快，但 chunk 间切换多，动作容易不稳定、犹豫。</li>
+        <li><strong>执行得长</strong>：动作平滑、连贯，但后半段动作越来越依赖旧观测，一旦环境或物体状态变化，后续动作可能失效。</li>
+      </ul>
+      <p>以往很多工作用固定值或离线穷举选 horizon。这篇论文认为固定值本身就不合理，因为 reaching、grasping、transport、placing 等阶段对“连贯性”和“反应性”的需求不同。</p>
+    </section>
+
+    <section>
+      <h2>核心机制图解</h2>
+      <div class="diagram" aria-label="AutoHorizon concept diagram">
+        <svg viewBox="0 0 1060 360" role="img">
+          <rect width="1060" height="360" fill="#f8fafc"/>
+          <g transform="translate(54 50)">
+            <rect x="0" y="0" width="210" height="86" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+            <text x="105" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#17212b">当前观测</text>
+            <text x="105" y="60" text-anchor="middle" font-size="14" fill="#5d6a78">图像 + 指令</text>
+            <path d="M220 43 H305" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+            <rect x="316" y="0" width="220" height="86" rx="8" fill="#ecfdf5" stroke="#0f766e"/>
+            <text x="426" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#17212b">Flow VLA</text>
+            <text x="426" y="60" text-anchor="middle" font-size="14" fill="#5d6a78">生成 action chunk</text>
+            <path d="M546 43 H630" stroke="#0f766e" stroke-width="3" marker-end="url(#arrow)"/>
+            <rect x="642" y="0" width="270" height="86" rx="8" fill="#fff7ed" stroke="#b45309"/>
+            <text x="777" y="32" text-anchor="middle" font-size="18" font-weight="700" fill="#17212b">读取动作自注意力</text>
+            <text x="777" y="60" text-anchor="middle" font-size="14" fill="#5d6a78">首尾 action sinks + 平台点</text>
+
+            <g transform="translate(20 160)">
+              <text x="0" y="-20" font-size="15" font-weight="700" fill="#17212b">预测动作序列</text>
+              <rect x="0" y="0" width="44" height="44" rx="6" fill="#2563eb"/>
+              <text x="22" y="28" text-anchor="middle" font-size="13" fill="white">a1</text>
+              <rect x="54" y="0" width="44" height="44" rx="6" fill="#60a5fa"/>
+              <text x="76" y="28" text-anchor="middle" font-size="13" fill="#17212b">a2</text>
+              <rect x="108" y="0" width="44" height="44" rx="6" fill="#93c5fd"/>
+              <text x="130" y="28" text-anchor="middle" font-size="13" fill="#17212b">a3</text>
+              <rect x="162" y="0" width="44" height="44" rx="6" fill="#bfdbfe"/>
+              <text x="184" y="28" text-anchor="middle" font-size="13" fill="#17212b">a4</text>
+              <rect x="216" y="0" width="44" height="44" rx="6" fill="#e0f2fe"/>
+              <text x="238" y="28" text-anchor="middle" font-size="13" fill="#17212b">a5</text>
+              <rect x="270" y="0" width="44" height="44" rx="6" fill="#f1f5f9"/>
+              <text x="292" y="28" text-anchor="middle" font-size="13" fill="#17212b">...</text>
+              <rect x="324" y="0" width="44" height="44" rx="6" fill="#f97316"/>
+              <text x="346" y="28" text-anchor="middle" font-size="13" fill="white">ap</text>
+              <path d="M0 72 C72 40, 130 38, 190 68 S320 86, 368 74" fill="none" stroke="#0f766e" stroke-width="4"/>
+              <circle cx="190" cy="68" r="7" fill="#be123c"/>
+              <text x="190" y="104" text-anchor="middle" font-size="14" fill="#be123c">turning point</text>
+            </g>
+
+            <g transform="translate(570 160)">
+              <rect x="0" y="0" width="360" height="120" rx="8" fill="#ffffff" stroke="#d8dee7"/>
+              <text x="24" y="35" font-size="16" font-weight="700" fill="#17212b">AutoHorizon 输出</text>
+              <text x="24" y="66" font-size="14" fill="#5d6a78">只执行可信前缀 N 步，然后重新观测。</text>
+              <text x="24" y="94" font-size="14" fill="#5d6a78">稳定阶段 N 变大；接触/放置阶段 N 变小。</text>
+            </g>
+          </g>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <h2>两个关键发现</h2>
+      <div class="two-col">
+        <div>
+          <h3>1. 同一 chunk 内的动作反复看同一批视觉语言 token</h3>
+          <p>作者观察 cross-attention 后发现，chunk 内不同时刻的动作 token 对视觉和语言 token 的关注高度相似。换句话说，模型虽然输出了一段未来动作，但这段未来动作大多建立在同一个静态感知上下文上。</p>
+          <p>这解释了为什么长 horizon 会出问题：越靠后的动作越可能被旧观测误导，尤其是物体已经移动、夹爪接触状态发生变化、目标位置需要细修时。</p>
+        </div>
+        <div class="callout warn">
+          <strong>我的解读：</strong> 这不是简单的“模型不够强”，而是 action chunking 的结构性问题。chunk 的后半段如果没有新的观测输入，本质上是在开环控制里继续走。
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3>2. 首尾动作 token 形成 radial action sinks</h3>
+          <p>在 action self-attention 里，初始和终止动作 token 获得异常高的注意力。作者把这些边界 token 称为 radial action sinks：它们像潜在中心，组织中间动作形成平滑轨迹。</p>
+          <p>当中间动作仍强烈依赖这些边界 sink 时，说明动作序列仍被稳定锚点支撑；当注意力权重下降并进入平台期，说明后续动作越来越自引用，预测误差更容易累积。</p>
+        </div>
+        <div class="callout">
+          <strong>方法直觉：</strong> 找到“注意力推进停止”的位置，就近似找到了这个 chunk 的可靠执行边界。
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>AutoHorizon 怎么做</h2>
+      <p>AutoHorizon 的流程很轻量，核心不在额外模型，而在读出 VLA 已经算出来的注意力：</p>
+      <ul>
+        <li>从每个采样步中提取 action self-attention。</li>
+        <li>跨 Transformer block 和 attention head 做平均，并对每一行归一化。</li>
+        <li>计算每一行注意力分布的熵，只保留低熵行，因为低熵代表注意力更尖锐，结构信号更可靠。</li>
+        <li>从 chunk 两端启动双向 soft-pointer，估计注意力质量向前或向后覆盖的位置。</li>
+        <li>检测 attention trajectory 的增量变化是否低于阈值，从而找出 plateau 或 turning point。</li>
+        <li>如果前向和后向覆盖足够覆盖整个 chunk，就执行完整预测长度；否则执行前向可靠前缀。</li>
+      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>符号</th>
+            <th>含义</th>
+            <th>解读</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>p</td>
+            <td>prediction horizon</td>
+            <td>模型一次预测多少个低层动作。</td>
+          </tr>
+          <tr>
+            <td>e / N</td>
+            <td>execution horizon</td>
+            <td>本次真正执行多少个动作。AutoHorizon 要动态估计它。</td>
+          </tr>
+          <tr>
+            <td>q</td>
+            <td>entropy quantile</td>
+            <td>筛选低熵注意力行的分位数，论文默认常用 0.9。</td>
+          </tr>
+          <tr>
+            <td>tau</td>
+            <td>plateau threshold</td>
+            <td>判断注意力推进是否停滞的阈值，论文默认常用 0.3。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>实验结果怎么读</h2>
+      <div class="score">
+        <div class="metric">
+          <b>92.1%</b>
+          <span>π0.5 在 LIBERO-10、p=50 上 AutoHorizon 的成功率，高于 Static Oracle+ 的 91.9%。</span>
+        </div>
+        <div class="metric">
+          <b>96.7%</b>
+          <span>GR00T N1.5 在 LIBERO-Spatial 上 AutoHorizon 的成功率，高于最优固定 horizon。</span>
+        </div>
+        <div class="metric">
+          <b>100%</b>
+          <span>RoboTwin Adjust Bottle 上 AutoHorizon 达到 100.0 ± 0.0。</span>
+        </div>
+        <div class="metric">
+          <b>99.0%</b>
+          <span>真实机器人 Cube Bowl 任务中 AutoHorizon 的 solve rate。</span>
+        </div>
+      </div>
+
+      <h3>LIBERO</h3>
+      <p>在 π0.5 上，p=10 时固定 horizon 的最优点常常在边界 e=p，说明短预测长度下模型较擅长短段轨迹。p=50 时趋势更典型：执行太长会显著掉点，例如 LIBERO-Spatial 从 e=0.2p 的 94.9% 掉到 e=1.0p 的 71.5%。AutoHorizon 在 p=50 的四个 LIBERO 子集上分别达到 96.5%、98.0%、94.4%、92.1%，超过 Static Oracle+。</p>
+
+      <h3>GR00T N1.5</h3>
+      <p>作者也在架构和训练流程不同的 GR00T N1.5 上验证，AutoHorizon 在四个 LIBERO 子集均优于最优固定 horizon：96.7%、98.7%、96.0%、92.7%。这支持了“radial action sink 不是 π0.5 特例”的论点。</p>
+
+      <h3>RoboTwin 与真实机器人</h3>
+      <p>RoboTwin 七个任务中，AutoHorizon 通常持平或超过最优固定 horizon，尤其在 Adjust Bottle、Stack Bowls、Place Cup、Open Laptop、Press Stapler 上更高。真实 Franka 机器人上，三类 pick-and-place 任务中 AutoHorizon 分别为 98.0%、92.0%、99.0%，明显优于 Random，也优于或超过 Static Oracle+。</p>
+    </section>
+
+    <section>
+      <h2>这篇论文真正的新意</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>论文贡献</th>
+            <th>我的判断</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>问题定义</td>
+            <td>把 execution horizon 从工程超参提升为影响 VLA 闭环能力的核心变量。</td>
+            <td>很扎实。VLA 论文常谈模型规模和数据，这篇抓住了部署时的控制接口。</td>
+          </tr>
+          <tr>
+            <td>可解释性</td>
+            <td>用 cross-attention 与 self-attention 揭示 chunk 内动作适应性有限、边界 action sink 明显。</td>
+            <td>有启发。尤其是“模型知道自己的预测边界”这个叙事比较强。</td>
+          </tr>
+          <tr>
+            <td>算法设计</td>
+            <td>测试时读取注意力，不需要额外训练，计算开销很低。</td>
+            <td>实用性强。适合做成 VLA 推理 wrapper。</td>
+          </tr>
+          <tr>
+            <td>实验覆盖</td>
+            <td>π0.5、GR00T N1.5、LIBERO、RoboTwin、Franka 真实机器人。</td>
+            <td>覆盖面不错，但真实机器人 trial 数较小，仍需更多场景验证。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>局限与风险</h2>
+      <div class="callout risk">
+        <strong>注意力是否等于可信度，仍然是经验假设。</strong> 论文用实验支持了 action self-attention 可作为 predictive limit 的代理，但这不等于注意力权重天然具备校准意义。换到其他 VLA、其他 action tokenizer 或非 Transformer 控制头时，需要重新验证。
+      </div>
+      <ul>
+        <li><strong>依赖可访问注意力：</strong> 如果模型推理框架不暴露 action self-attention，AutoHorizon 的接入成本会变高。</li>
+        <li><strong>任务失败模式可能不只由 horizon 决定：</strong> 物体遮挡、抓取失败、视觉误检、语言歧义等问题，不一定能靠缩短 horizon 解决。</li>
+        <li><strong>真实实验规模有限：</strong> 真实机器人每个设置十次 trial，能说明趋势，但还不足以覆盖工业级鲁棒性。</li>
+        <li><strong>阈值仍存在默认选择：</strong> q 和 tau 虽然在消融中较稳定，但如果模型注意力分布形态差异很大，仍可能需要校准。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>对后续研究的启发</h2>
+      <ul>
+        <li><strong>把 VLA 的内部信号用于控制层调度：</strong> 不只 horizon，重规划频率、控制速度、置信触发器都可以从内部表征中读出。</li>
+        <li><strong>训练时加入 horizon-aware objective：</strong> 既然 attention sink 能反映预测边界，可以考虑训练模型直接输出 calibrated predictive horizon。</li>
+        <li><strong>与不确定性估计结合：</strong> AutoHorizon 是结构信号，若结合多样本 action variance 或视觉置信度，可能更稳。</li>
+        <li><strong>用于异步推理：</strong> 在大模型推理慢于控制频率时，动态 horizon 可以决定何时复用旧 chunk，何时必须等新预测。</li>
+        <li><strong>诊断 VLA failure：</strong> cross-attention 不变性和语言 token 冗余现象提示，很多 VLA 的语言 grounding 可能已经被视觉 token 吸收，显式语言注意力未必是动作语义来源。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>推荐阅读顺序</h2>
+      <ol>
+        <li>先读 Introduction，理解 execution horizon 为什么不是小超参。</li>
+        <li>读 3.2，看作者如何形式化“短 horizon 与长 horizon 的误差权衡”。</li>
+        <li>重点读 3.3，两类注意力现象是整篇论文的立论核心。</li>
+        <li>再读 3.4，把 soft-pointer 算法对应到前面的注意力现象。</li>
+        <li>最后读表 1 到表 4，以及附录里的 language token 和超参消融。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>资料来源</h2>
+      <ul>
+        <li>论文主页：<a href="https://arxiv.org/abs/2602.21445">arXiv: VLA Knows Its Limits</a></li>
+        <li>论文 PDF：<a href="https://arxiv.org/pdf/2602.21445">https://arxiv.org/pdf/2602.21445</a></li>
+        <li>项目页：<a href="https://hatchetproject.github.io/autohorizon/">AutoHorizon Project Page</a></li>
+        <li>代码仓库：<a href="https://github.com/hatchetProject/AutoHorizon">hatchetProject/AutoHorizon</a></li>
+      </ul>
+      <footer>
+        本 HTML 由论文 PDF、项目页与代码仓库信息综合整理，中文解读部分包含作者原文结论的转述与我的综合判断。
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

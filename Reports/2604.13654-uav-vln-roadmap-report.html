@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文报告：Vision-and-Language Navigation for UAVs</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --paper: #ffffff;
+      --ink: #1d2733;
+      --muted: #647282;
+      --line: #d9e0e7;
+      --blue: #2457a6;
+      --green: #1f7a5a;
+      --amber: #9a6818;
+      --red: #a9473f;
+      --code: #f0f3f6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.68;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+
+    header {
+      padding: 34px 36px 30px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .kicker {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 50px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 18px 0 0;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .meta {
+      min-height: 94px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .meta strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 22px;
+      margin-top: 22px;
+      align-items: start;
+    }
+
+    nav {
+      position: sticky;
+      top: 18px;
+      padding: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    nav h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+    }
+
+    nav a {
+      display: block;
+      padding: 7px 0;
+      color: var(--ink);
+      font-size: 14px;
+      border-top: 1px solid #eef2f5;
+    }
+
+    section {
+      margin-bottom: 18px;
+      padding: 26px 30px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    h2 {
+      margin: 0 0 15px;
+      font-size: 25px;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 13px; }
+
+    ul, ol {
+      margin: 10px 0 16px 22px;
+      padding: 0;
+    }
+
+    li { margin: 6px 0; }
+
+    table {
+      width: 100%;
+      margin: 16px 0;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      border: 1px solid var(--line);
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+
+    .callout {
+      margin: 16px 0;
+      padding: 15px 18px;
+      border-left: 4px solid var(--blue);
+      background: #f4f7fb;
+      border-radius: 4px;
+    }
+
+    .callout.green { border-left-color: var(--green); background: #f2f8f5; }
+    .callout.amber { border-left-color: var(--amber); background: #fbf7ef; }
+    .callout.red { border-left-color: var(--red); background: #fbf2f1; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 10px;
+      color: #173253;
+      background: #edf4ff;
+      border: 1px solid #c8d9f2;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .formula {
+      margin: 14px 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+      background: var(--code);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .mini {
+      padding: 15px;
+      background: #f9fbfc;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .mini h3 { margin-top: 0; }
+
+    .score {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .score div {
+      padding: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .score b {
+      display: block;
+      font-size: 22px;
+      color: var(--blue);
+    }
+
+    footer {
+      margin-top: 22px;
+      padding: 18px 24px;
+      color: var(--muted);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .meta-grid, main, .two-col, .score {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        position: static;
+      }
+
+      header, section {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="kicker">arXiv:2604.13654 论文解读报告</p>
+      <h1>Vision-and-Language Navigation for UAVs:<br>Progress, Challenges, and a Research Roadmap</h1>
+      <p class="subtitle">
+        这是一篇面向 UAV-VLN 的系统综述。它把无人机视觉语言导航从“地面 VLN 的空中变体”重新定义为一个受连续三维运动、户外动态环境、语言歧义、安全约束和机载算力共同制约的具身智能系统问题。
+      </p>
+      <div class="meta-grid">
+        <div class="meta">
+          <span>论文类型</span>
+          <strong>综述 / Roadmap / 方法谱系整理</strong>
+        </div>
+        <div class="meta">
+          <span>提交时间</span>
+          <strong>2026-04-15</strong>
+        </div>
+        <div class="meta">
+          <span>主分类</span>
+          <strong>cs.RO Robotics</strong>
+        </div>
+        <div class="meta">
+          <span>核心关键词</span>
+          <strong>UAV-VLN, VLA, VLM, World Model, Sim-to-Real</strong>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">UAV</span>
+        <span class="tag">视觉语言导航</span>
+        <span class="tag">具身智能</span>
+        <span class="tag">世界模型</span>
+        <span class="tag">VLA</span>
+        <span class="tag">多机协同</span>
+      </div>
+    </header>
+
+    <main>
+      <nav>
+        <h2>目录</h2>
+        <a href="#tl-dr">1. 结论速览</a>
+        <a href="#metadata">2. 论文元信息</a>
+        <a href="#problem">3. 问题定义</a>
+        <a href="#taxonomy">4. 方法谱系</a>
+        <a href="#ecosystem">5. 资源生态</a>
+        <a href="#challenges">6. 核心挑战</a>
+        <a href="#roadmap">7. 路线图</a>
+        <a href="#critique">8. 批判性分析</a>
+        <a href="#research-use">9. 对研究的启发</a>
+        <a href="#sources">10. 来源</a>
+      </nav>
+
+      <div>
+        <section id="tl-dr">
+          <h2>1. 结论速览</h2>
+          <div class="callout">
+            <p><strong>一句话总结：</strong>本文的价值不在于提出一个新的 UAV 导航模型，而在于把 UAV-VLN 这个快速碎片化的方向整理成一张可执行的研究地图：任务形式化、方法演进、仿真与数据生态、评价指标、真实部署瓶颈和未来路线。</p>
+          </div>
+          <p>
+            论文认为，UAV-VLN 的难点不是简单地让无人机“看图听指令飞行”，而是让一个空中智能体在部分可观测、连续三维、动态户外环境中，把自然语言目标映射为安全、可解释、可部署的导航策略。这个视角使它自然连接到当前更大的几个方向：VLM 驱动的语言 grounding、VLA 模型、生成式世界模型、边缘部署和多智能体协作。
+          </p>
+          <div class="score">
+            <div><b>定位</b>系统综述</div>
+            <div><b>贡献</b>框架整理</div>
+            <div><b>短板</b>缺少新实验</div>
+          </div>
+        </section>
+
+        <section id="metadata">
+          <h2>2. 论文元信息</h2>
+          <table>
+            <tr>
+              <th>项目</th>
+              <th>内容</th>
+            </tr>
+            <tr>
+              <td>标题</td>
+              <td>Vision-and-Language Navigation for UAVs: Progress, Challenges, and a Research Roadmap</td>
+            </tr>
+            <tr>
+              <td>作者</td>
+              <td>Hanxuan Chen, Jie Zheng, Siqi Yang, Tianle Zeng, Siwei Feng, Songsheng Cheng, Ruilong Ren, Hanzhong Guo, Shuai Yuan, Xiangyue Wang, Kangli Wang, Ji Pei</td>
+            </tr>
+            <tr>
+              <td>机构</td>
+              <td>本地笔记记录为 Autel Robotics、南京大学、威斯康星大学麦迪逊分校、南方科技大学、香港大学、北京大学等合作单位；具体机构以论文 PDF 首页为准。</td>
+            </tr>
+            <tr>
+              <td>arXiv</td>
+              <td><a href="https://arxiv.org/abs/2604.13654">https://arxiv.org/abs/2604.13654</a></td>
+            </tr>
+            <tr>
+              <td>PDF</td>
+              <td><a href="https://arxiv.org/pdf/2604.13654">https://arxiv.org/pdf/2604.13654</a></td>
+            </tr>
+            <tr>
+              <td>本地 PDF</td>
+              <td><code>2_Research/arxiv-files/pdfs/Vision-and-Language Navigation for UAVs Progress, Challenges, and a Research Roadmap.pdf</code></td>
+            </tr>
+          </table>
+        </section>
+
+        <section id="problem">
+          <h2>3. 问题定义：UAV-VLN 不是地面 VLN 的简单迁移</h2>
+          <p>
+            传统 VLN 通常关注室内或地面机器人：智能体根据自然语言指令，在离散图、网格或有限动作空间中到达目标。UAV-VLN 则把问题推入更开放的物理空间：无人机有高度、偏航、速度、动力学约束、能耗约束和安全边界，且视觉观察常包含俯视、斜视、远距离小目标、强光照变化、风扰动和遮挡。
+          </p>
+          <h3>POMDP 视角</h3>
+          <p>
+            论文将 UAV-VLN 建模为部分可观测马尔可夫决策过程。一个合理抽象是：
+          </p>
+          <div class="formula">
+            state: 真实三维环境与无人机状态；observation: 第一视角/多视角图像、深度、GPS/IMU 等；instruction: 自然语言目标；action: waypoint、速度、姿态或离散控制 token；objective: 在安全约束下完成语言指定目标。
+          </div>
+          <p>
+            这个建模提醒我们：语言理解只是入口，真正困难的是把语言、视觉、历史状态和飞行动作合并为闭环控制策略。
+          </p>
+          <h3>区别于地面 VLN 的关键变量</h3>
+          <ul>
+            <li><strong>连续三维动作：</strong>UAV 的动作空间包含水平位移、高度、偏航、速度和加速度；许多地面 VLN 的离散前进/转向动作无法直接复用。</li>
+            <li><strong>户外感知困难：</strong>目标小、背景复杂、光照剧烈变化，俯视图像还会削弱通用 VLM 的先验。</li>
+            <li><strong>安全约束更硬：</strong>碰撞、失控、越界、低电量、禁飞区和风扰动会直接影响真实部署。</li>
+            <li><strong>机载算力有限：</strong>大模型导航需要在 Jetson、嵌入式 GPU 或专用芯片上做低延迟推理。</li>
+          </ul>
+        </section>
+
+        <section id="taxonomy">
+          <h2>4. 方法谱系：从模块流水线到 VLA + World Model</h2>
+          <p>
+            论文最有用的部分是把 UAV-VLN 的技术路线串成一个演进谱系。这里可以将其概括为六个阶段。
+          </p>
+          <table>
+            <tr>
+              <th>阶段</th>
+              <th>典型思路</th>
+              <th>优势</th>
+              <th>局限</th>
+            </tr>
+            <tr>
+              <td>Classical pipeline</td>
+              <td>感知、定位、地图、规划、控制分模块设计</td>
+              <td>可解释、工程稳定、易插入安全约束</td>
+              <td>开放语言和复杂语义 grounding 弱，跨场景泛化差</td>
+            </tr>
+            <tr>
+              <td>Modular deep learning</td>
+              <td>用 CNN/Transformer/VLM 增强视觉理解或局部决策</td>
+              <td>提升语义感知和目标识别能力</td>
+              <td>模块误差会累积，端到端目标不一致</td>
+            </tr>
+            <tr>
+              <td>VLM explicit world model</td>
+              <td>VLM 用语言/结构化表示构造显式环境理解</td>
+              <td>更强的语义推理和解释能力</td>
+              <td>符号/文本世界模型与低层控制之间仍有鸿沟</td>
+            </tr>
+            <tr>
+              <td>VLA</td>
+              <td>视觉、语言和动作统一到一个策略模型</td>
+              <td>减少手工接口，适合端到端学习</td>
+              <td>安全、长期记忆、真实动力学和 OOD 泛化仍是瓶颈</td>
+            </tr>
+            <tr>
+              <td>Flow / diffusion VLA</td>
+              <td>用 flow matching 或 diffusion action expert 输出连续动作块</td>
+              <td>适合平滑连续控制和多模态动作分布</td>
+              <td>实时性和约束满足需要额外 action shield</td>
+            </tr>
+            <tr>
+              <td>Generative world model + VLA</td>
+              <td>生成未来观察或预测轨迹结果，再辅助规划/控制</td>
+              <td>可支持长视距想象式规划和候选轨迹评估</td>
+              <td>生成质量、几何一致性和控制收益之间仍未完全打通</td>
+            </tr>
+          </table>
+
+          <div class="callout green">
+            <p><strong>重要判断：</strong>UAV-VLN 的下一阶段很可能不是“纯 VLA 取代所有模块”，而是 VLA、世界模型、几何安全层、低层飞控和仿真数据引擎的混合系统。</p>
+          </div>
+        </section>
+
+        <section id="ecosystem">
+          <h2>5. 资源生态：模拟器、数据集与评价指标</h2>
+          <p>
+            论文强调 UAV-VLN 不是单模型问题，还依赖公共资源生态。一个方向能否成熟，取决于是否有可复现的数据、可比较的环境和能揭示真实问题的指标。
+          </p>
+          <h3>模拟器与环境</h3>
+          <ul>
+            <li><strong>AirSim / Unreal / Unity 类平台：</strong>适合构建城市级、室内外混合、可控天气与视觉扰动的闭环环境。</li>
+            <li><strong>3D 重建与可渲染场景：</strong>3D Gaussian Splatting 等方法可把真实场景转为可合成多视角训练数据的环境，对 sim-to-real 很关键。</li>
+            <li><strong>城市级导航环境：</strong>需要支持长距离、开放空间、复杂地标和多目标语言描述。</li>
+          </ul>
+          <h3>数据集类型</h3>
+          <table>
+            <tr>
+              <th>数据类型</th>
+              <th>包含内容</th>
+              <th>适合训练什么</th>
+            </tr>
+            <tr>
+              <td>轨迹演示</td>
+              <td>专家或规划器生成的状态、图像、动作序列</td>
+              <td>行为克隆、导航 SFT、动作 token 学习</td>
+            </tr>
+            <tr>
+              <td>视觉语言标注</td>
+              <td>目标描述、空间关系、问答、caption、grounding</td>
+              <td>VLM/MLLM 的低空视觉语义能力</td>
+            </tr>
+            <tr>
+              <td>世界模型片段</td>
+              <td>历史帧、动作、未来帧或轨迹结果</td>
+              <td>future observation prediction、trajectory ranking</td>
+            </tr>
+            <tr>
+              <td>真实飞行日志</td>
+              <td>真实传感器、控制、环境扰动与失败案例</td>
+              <td>sim-to-real 校准、鲁棒性验证、部署调参</td>
+            </tr>
+          </table>
+          <h3>评价指标</h3>
+          <p>
+            传统导航常用 Success Rate、SPL、路径长度、目标距离等指标。UAV 场景还需要补充安全和部署指标，例如碰撞率、越界率、能耗、推理延迟、帧率、控制平滑性、任务失败原因、语言 grounding 准确性和真实世界可复现性。
+          </p>
+        </section>
+
+        <section id="challenges">
+          <h2>6. 核心挑战</h2>
+          <div class="two-col">
+            <div class="mini">
+              <h3>语言歧义与开放目标</h3>
+              <p>自然语言指令可能包含模糊地标、相对方向、隐含常识和多步约束。UAV 视角又会让地面目标的外观发生强烈变化。</p>
+            </div>
+            <div class="mini">
+              <h3>长程部分可观测</h3>
+              <p>智能体只能看到局部视野，历史记忆和全局定位不可靠时，容易在相似建筑、道路或重复纹理中迷失。</p>
+            </div>
+            <div class="mini">
+              <h3>连续控制与安全</h3>
+              <p>语言策略输出必须转成平滑、动力学可行、避障安全的控制。纯大模型输出很难直接满足硬约束。</p>
+            </div>
+            <div class="mini">
+              <h3>Sim-to-real</h3>
+              <p>仿真环境的纹理、动力学、传感器噪声、风扰动和通信延迟与真实飞行存在差异，容易导致闭环失败。</p>
+            </div>
+            <div class="mini">
+              <h3>机载部署</h3>
+              <p>大模型需要低延迟、低功耗、高可靠推理。量化、蒸馏、缓存、分层控制和边缘芯片适配不可回避。</p>
+            </div>
+            <div class="mini">
+              <h3>评价不足</h3>
+              <p>仅在仿真中报告 SR/SPL 不足以证明系统可靠。需要失败分类、真实飞行、极端天气和安全边界测试。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="roadmap">
+          <h2>7. 研究路线图</h2>
+          <p>
+            本文给出的 roadmap 可以理解为三条主线：能力扩展、系统落地、生态标准化。
+          </p>
+          <h3>路线一：从单机导航到协同具身系统</h3>
+          <ul>
+            <li><strong>多 UAV 协同：</strong>多个无人机共享观察、分工探索、协同定位与任务分配。</li>
+            <li><strong>空地协同：</strong>UAV 与地面机器人、车辆或人类操作员共同完成搜索、巡检、救援等任务。</li>
+            <li><strong>任务级规划：</strong>从单目标寻路扩展到多目标、多阶段、有优先级约束的长期任务。</li>
+          </ul>
+          <h3>路线二：VLA 与世界模型融合</h3>
+          <ul>
+            <li><strong>世界模型做预测：</strong>给定动作候选，生成未来视觉观察、风险或可达性估计。</li>
+            <li><strong>VLA 做决策：</strong>根据语言目标和当前观察生成动作、waypoint 或轨迹。</li>
+            <li><strong>安全层做约束：</strong>用几何、MPC、CBF 或飞控规则过滤不可执行动作。</li>
+          </ul>
+          <h3>路线三：从 benchmark 到真实部署闭环</h3>
+          <ul>
+            <li>构建包含天气、风场、动态障碍、通信延迟和传感器噪声的评测协议。</li>
+            <li>把真实飞行日志纳入训练和测试，使失败案例成为数据闭环的一部分。</li>
+            <li>对模型延迟、功耗和控制频率进行统一报告，让“能飞起来”成为核心指标。</li>
+          </ul>
+        </section>
+
+        <section id="critique">
+          <h2>8. 批判性分析</h2>
+          <div class="callout amber">
+            <p><strong>优点：</strong>论文把 UAV-VLN 从任务定义到未来方向串成完整框架，尤其适合用作新研究方向的入口文献和组会综述材料。</p>
+          </div>
+          <h3>主要贡献</h3>
+          <ul>
+            <li><strong>概念统一：</strong>把 UAV-VLN 放入 POMDP 和具身智能语境中，避免只把它看成视觉语言任务。</li>
+            <li><strong>谱系清晰：</strong>从 classical pipeline 到 VLA/world model 的演进路径能帮助定位不同论文的技术位置。</li>
+            <li><strong>部署导向：</strong>明确强调 sim-to-real、实时推理、安全约束和资源受限平台，而不是只看离线指标。</li>
+          </ul>
+          <h3>不足与潜在风险</h3>
+          <ul>
+            <li><strong>综述而非实证：</strong>论文不提供新 benchmark、新模型或系统实验，因此路线判断需要后续工作验证。</li>
+            <li><strong>优先级不够明确：</strong>多机协同、VLA、world model、轻量化、真实部署都重要，但短中期最该先攻哪一环，论文没有给出足够硬的排序。</li>
+            <li><strong>快速过时风险：</strong>VLA 和生成式世界模型发展很快，2026 年后的新模型可能迅速改变方法谱系。</li>
+            <li><strong>安全评估仍偏框架化：</strong>真实 UAV 的安全认证、法规、失效恢复和人机协同责任边界还需要更工程化的协议。</li>
+          </ul>
+          <div class="callout red">
+            <p><strong>阅读时要注意：</strong>这篇论文适合作为“地图”，不适合作为“某个模型有效”的证据。引用它时最好用于问题定义、领域演进和挑战归纳，而不是支撑具体性能结论。</p>
+          </div>
+        </section>
+
+        <section id="research-use">
+          <h2>9. 对 UAV-VLA / World Model 研究的启发</h2>
+          <h3>如果要做下一篇论文，可以从三类 gap 切入</h3>
+          <ol>
+            <li>
+              <strong>可执行 benchmark：</strong>把论文 roadmap 中的“真实部署挑战”转化为具体评测集，例如风扰动、动态障碍、禁飞区、低电量返航、多机协同等。
+            </li>
+            <li>
+              <strong>VLA + safety shield：</strong>让 VLA 负责语言到动作意图，让几何/MPC/CBF 安全层负责硬约束，系统性评估黑箱动作与安全过滤之间的权衡。
+            </li>
+            <li>
+              <strong>World model for look-ahead：</strong>训练动作条件世界模型生成候选轨迹未来视角，用于长程导航的路线选择、风险预测和语义目标接近度评估。
+            </li>
+          </ol>
+          <h3>与本地研究笔记的关系</h3>
+          <p>
+            本地已有的 UAV foundation models survey 把该论文放在 UAV-VLN / UAV-VLA 导航基座的支撑文献中。它的作用更像“领域框架”，可用于解释 AerialVLA、VLA-AN、ANWM、UAVBench/UAVReason 等工作的相对位置。
+          </p>
+          <table>
+            <tr>
+              <th>本地主题</th>
+              <th>本文可提供的支撑</th>
+            </tr>
+            <tr>
+              <td>导航基座 VLA</td>
+              <td>提供从 VLN 到 VLA 的演进框架，以及 UAV 特有控制和部署约束。</td>
+            </tr>
+            <tr>
+              <td>世界模型导航</td>
+              <td>说明 generative world model 为什么适合作为长程轨迹想象与风险预测模块。</td>
+            </tr>
+            <tr>
+              <td>低空多模态理解</td>
+              <td>强调 UAV-native 视觉语言数据和低空视角 benchmark 的必要性。</td>
+            </tr>
+            <tr>
+              <td>真实机载部署</td>
+              <td>将算力、延迟、安全和 sim-to-real 作为模型设计约束，而不是事后优化。</td>
+            </tr>
+          </table>
+        </section>
+
+        <section id="sources">
+          <h2>10. 来源与可复查材料</h2>
+          <ul>
+            <li>arXiv 摘要页：<a href="https://arxiv.org/abs/2604.13654">https://arxiv.org/abs/2604.13654</a></li>
+            <li>arXiv PDF：<a href="https://arxiv.org/pdf/2604.13654">https://arxiv.org/pdf/2604.13654</a></li>
+            <li>本地速读笔记：<code>2_Research/arxiv-files/Interpretation/arxiv-uav-2026-04-15.md</code></li>
+            <li>本地综述笔记：<code>2_Research/arxiv-files/Interpretation/uav_foundation_models_survey.md</code></li>
+            <li>本地 PDF：<code>2_Research/arxiv-files/pdfs/Vision-and-Language Navigation for UAVs Progress, Challenges, and a Research Roadmap.pdf</code></li>
+          </ul>
+          <p>
+            说明：本报告综合了 arXiv 页面/PDF、工作区已有论文速读和 UAV foundation model 调研笔记。由于 PDF 文本抽取工具在当前沙箱中触发 MiKTeX 首次配置权限问题，正文细节主要依据 arXiv 可访问页面与本地已归档笔记交叉整理；报告未声称复现论文中的完整参考文献表。
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      生成日期：2026-05-28。建议后续如将本报告纳入知识库索引，可在 <code>2_Research/arxiv-files/INDEX.md</code> 或相关 VLA-Navigation 主题 README 中增加链接。
+    </footer>
+  </div>
+</body>
+</html>
